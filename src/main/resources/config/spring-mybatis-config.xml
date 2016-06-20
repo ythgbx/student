@@ -19,11 +19,13 @@
         <setting name="jdbcTypeForNull" value="OTHER"/>
         <setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString"/>
     </settings>
-    <typeAliases>
-        <typeAlias alias="User" type="net.bus.web.model.User"/>
-    </typeAliases>
     <mappers>
-        <mapper resource="mapper/user.xml"/>
+        <mapper resource="mapper/BusMapper.xml"/>
+        <mapper resource="mapper/LineMapper.xml"/>
+        <mapper resource="mapper/LineStationMapper.xml"/>
+        <mapper resource="mapper/StationMapper.xml"/>
+        <mapper resource="mapper/TicketMapper.xml"/>
+        <mapper resource="mapper/UserMapper.xml"/>
     </mappers>
 
 </configuration>

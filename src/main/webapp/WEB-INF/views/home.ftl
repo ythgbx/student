@@ -7,22 +7,22 @@
 <table class="ui table">
     <thead>
     <tr>
-        <th>UserId</th>
-        <th>Name</th>
-        <th>Age</th>
-        <th>Sex</th>
+        <th>姓名</th>
+        <th>电话</th>
+        <th>积分</th>
+        <th>用户类型</th>
     </tr>
     </thead>
     <tbody>
         <#list userList as oneUser>
         <tr>
-            <td>${oneUser.user_id}</td>
             <td>${oneUser.name}</td>
-            <td>${oneUser.age}</td>
-            <#if oneUser.sex==1>
-                <td>女</td>
+            <td>${oneUser.phone}</td>
+            <td>${oneUser.points}</td>
+            <#if oneUser.type==1>
+                <td>管理员</td>
             <#else>
-                <td>男</td>
+                <td>用户</td>
             </#if>
         </tr>
         </#list>

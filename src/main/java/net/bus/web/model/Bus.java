@@ -1,21 +1,19 @@
 package net.bus.web.model;
 
-public class User {
+public class Bus {
     private Long id;
 
     private String name;
 
-    private String password;
+    private Long userId;
 
-    private String phone;
+    private Long lineId;
 
     private Double lat;
 
     private Double lng;
 
-    private Integer points;
-
-    private Integer type;
+    private Integer active;
 
     public Long getId() {
         return id;
@@ -33,20 +31,20 @@ public class User {
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public String getPhone() {
-        return phone;
+    public Long getLineId() {
+        return lineId;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setLineId(Long lineId) {
+        this.lineId = lineId;
     }
 
     public Double getLat() {
@@ -65,19 +63,11 @@ public class User {
         this.lng = lng;
     }
 
-    public Integer getPoints() {
-        return points;
+    public Integer getActive() {
+        return active;
     }
 
-    public void setPoints(Integer points) {
-        this.points = points;
-    }
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
+    public void setActive(Integer active) {
+        this.active = active;
     }
 }
