@@ -43,10 +43,7 @@
     <logger name="CommonLogger">
         <level value="debug" />
         <appender-ref ref="Common" />
-        <!--<appender-ref ref="MQ" />-->
     </logger>
-
-
     <!-- Root Logger -->
     <root>
         <priority value="warn"/>

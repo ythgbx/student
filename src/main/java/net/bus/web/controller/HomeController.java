@@ -1,6 +1,7 @@
 package net.bus.web.controller;
 
 import net.bus.web.model.User;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +17,13 @@ public class HomeController {
     @Autowired
     private UserService service;
 
+    private Logger logger = Logger.getLogger(this.getClass().getName());
+
     @RequestMapping(value="/")
     public ModelAndView index(Model model)
     {
+        logger.info("url:/");
+
         ModelAndView mv =new ModelAndView();
         mv.setViewName("home");
 

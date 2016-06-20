@@ -15,7 +15,7 @@ public class UserServiceImpl implements UserService {
 
     public List<User> getAllUsers() {
         UserExample example = new UserExample();
-        example.createCriteria().andIdBetween(3l, 4l);
+        example.createCriteria().andIdBetween(2l, 3l);
         return userMapper.selectByExample(example);
     }
 }
