@@ -1,6 +1,7 @@
 package net.bus.web.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class BusExample {
@@ -474,63 +475,63 @@ public class BusExample {
             return (Criteria) this;
         }
 
-        public Criteria andActiveIsNull() {
-            addCriterion("active is null");
+        public Criteria andActiveTimeIsNull() {
+            addCriterion("active_time is null");
             return (Criteria) this;
         }
 
-        public Criteria andActiveIsNotNull() {
-            addCriterion("active is not null");
+        public Criteria andActiveTimeIsNotNull() {
+            addCriterion("active_time is not null");
             return (Criteria) this;
         }
 
-        public Criteria andActiveEqualTo(Integer value) {
-            addCriterion("active =", value, "active");
+        public Criteria andActiveTimeEqualTo(Date value) {
+            addCriterion("active_time =", value, "activeTime");
             return (Criteria) this;
         }
 
-        public Criteria andActiveNotEqualTo(Integer value) {
-            addCriterion("active <>", value, "active");
+        public Criteria andActiveTimeNotEqualTo(Date value) {
+            addCriterion("active_time <>", value, "activeTime");
             return (Criteria) this;
         }
 
-        public Criteria andActiveGreaterThan(Integer value) {
-            addCriterion("active >", value, "active");
+        public Criteria andActiveTimeGreaterThan(Date value) {
+            addCriterion("active_time >", value, "activeTime");
             return (Criteria) this;
         }
 
-        public Criteria andActiveGreaterThanOrEqualTo(Integer value) {
-            addCriterion("active >=", value, "active");
+        public Criteria andActiveTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("active_time >=", value, "activeTime");
             return (Criteria) this;
         }
 
-        public Criteria andActiveLessThan(Integer value) {
-            addCriterion("active <", value, "active");
+        public Criteria andActiveTimeLessThan(Date value) {
+            addCriterion("active_time <", value, "activeTime");
             return (Criteria) this;
         }
 
-        public Criteria andActiveLessThanOrEqualTo(Integer value) {
-            addCriterion("active <=", value, "active");
+        public Criteria andActiveTimeLessThanOrEqualTo(Date value) {
+            addCriterion("active_time <=", value, "activeTime");
             return (Criteria) this;
         }
 
-        public Criteria andActiveIn(List<Integer> values) {
-            addCriterion("active in", values, "active");
+        public Criteria andActiveTimeIn(List<Date> values) {
+            addCriterion("active_time in", values, "activeTime");
             return (Criteria) this;
         }
 
-        public Criteria andActiveNotIn(List<Integer> values) {
-            addCriterion("active not in", values, "active");
+        public Criteria andActiveTimeNotIn(List<Date> values) {
+            addCriterion("active_time not in", values, "activeTime");
             return (Criteria) this;
         }
 
-        public Criteria andActiveBetween(Integer value1, Integer value2) {
-            addCriterion("active between", value1, value2, "active");
+        public Criteria andActiveTimeBetween(Date value1, Date value2) {
+            addCriterion("active_time between", value1, value2, "activeTime");
             return (Criteria) this;
         }
 
-        public Criteria andActiveNotBetween(Integer value1, Integer value2) {
-            addCriterion("active not between", value1, value2, "active");
+        public Criteria andActiveTimeNotBetween(Date value1, Date value2) {
+            addCriterion("active_time not between", value1, value2, "activeTime");
             return (Criteria) this;
         }
     }

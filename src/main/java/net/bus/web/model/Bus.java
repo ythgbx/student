@@ -1,5 +1,7 @@
 package net.bus.web.model;
 
+import java.util.Date;
+
 public class Bus {
     private Long id;
 
@@ -13,7 +15,7 @@ public class Bus {
 
     private Double lng;
 
-    private Integer active;
+    private Date activeTime;
 
     public Long getId() {
         return id;
@@ -63,11 +65,11 @@ public class Bus {
         this.lng = lng;
     }
 
-    public Integer getActive() {
-        return active;
+    public Date getActiveTime() {
+        return activeTime;
     }
 
-    public void setActive(Integer active) {
-        this.active = active;
+    public void setActiveTime(Date activeTime) {
+        this.activeTime = activeTime;
     }
 }

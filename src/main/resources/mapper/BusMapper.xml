@@ -8,7 +8,7 @@
     <result column="line_id" property="lineId" jdbcType="BIGINT" />
     <result column="lat" property="lat" jdbcType="DOUBLE" />
     <result column="lng" property="lng" jdbcType="DOUBLE" />
-    <result column="active" property="active" jdbcType="INTEGER" />
+    <result column="active_time" property="activeTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -69,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, user_id, line_id, lat, lng, active
+    id, name, user_id, line_id, lat, lng, active_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="net.bus.web.model.BusExample" >
     select
@@ -103,10 +103,10 @@
   </delete>
   <insert id="insert" parameterType="net.bus.web.model.Bus" >
     insert into bus (id, name, user_id, 
-      line_id, lat, lng, active
+      line_id, lat, lng, active_time
       )
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, 
-      #{lineId,jdbcType=BIGINT}, #{lat,jdbcType=DOUBLE}, #{lng,jdbcType=DOUBLE}, #{active,jdbcType=INTEGER}
+      #{lineId,jdbcType=BIGINT}, #{lat,jdbcType=DOUBLE}, #{lng,jdbcType=DOUBLE}, #{activeTime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="net.bus.web.model.Bus" >
@@ -130,8 +130,8 @@
       <if test="lng != null" >
         lng,
       </if>
-      <if test="active != null" >
-        active,
+      <if test="activeTime != null" >
+        active_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -153,8 +153,8 @@
       <if test="lng != null" >
         #{lng,jdbcType=DOUBLE},
       </if>
-      <if test="active != null" >
-        #{active,jdbcType=INTEGER},
+      <if test="activeTime != null" >
+        #{activeTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -185,8 +185,8 @@
       <if test="record.lng != null" >
         lng = #{record.lng,jdbcType=DOUBLE},
       </if>
-      <if test="record.active != null" >
-        active = #{record.active,jdbcType=INTEGER},
+      <if test="record.activeTime != null" >
+        active_time = #{record.activeTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -201,7 +201,7 @@
       line_id = #{record.lineId,jdbcType=BIGINT},
       lat = #{record.lat,jdbcType=DOUBLE},
       lng = #{record.lng,jdbcType=DOUBLE},
-      active = #{record.active,jdbcType=INTEGER}
+      active_time = #{record.activeTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -224,8 +224,8 @@
       <if test="lng != null" >
         lng = #{lng,jdbcType=DOUBLE},
       </if>
-      <if test="active != null" >
-        active = #{active,jdbcType=INTEGER},
+      <if test="activeTime != null" >
+        active_time = #{activeTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -237,7 +237,7 @@
       line_id = #{lineId,jdbcType=BIGINT},
       lat = #{lat,jdbcType=DOUBLE},
       lng = #{lng,jdbcType=DOUBLE},
-      active = #{active,jdbcType=INTEGER}
+      active_time = #{activeTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
