@@ -24,31 +24,10 @@
 <#macro layoutBody>
 <body>
 
-<div class="wrapper preload">
-    <#include "_sidebar.ftl" >
-    <@sidebar></@sidebar>
-    <#include "_nav.ftl" >
-    <@nav></@nav>
-    <#include "_menu.ftl" >
-    <@menu></@menu>
-    <div class="main-container">
-        <div class="padding-md">
-
+<div class="overflow-hidden light-background">
             <!--main start-->
             <#nested>
             <!--main end-->
-
-        </div><!-- ./padding-md -->
-    </div><!-- /main-container -->
-
-    <footer class="footer">
-				<span class="footer-brand">
-					<strong class="text-danger">追风</strong> 巴士
-				</span>
-        <p class="no-margin">
-            &copy; 2016 <strong>亚投 新能 tech.</strong>. ALL Rights Reserved.
-        </p>
-    </footer>
 </div><!-- /wrapper -->
 
 </#macro>

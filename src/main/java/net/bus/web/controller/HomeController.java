@@ -14,8 +14,6 @@ import java.util.List;
 @Controller
 @RequestMapping("/")
 public class HomeController {
-    @Autowired
-    private UserService service;
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
@@ -24,12 +22,6 @@ public class HomeController {
     {
         logger.info("url:/");
 
-        ModelAndView mv =new ModelAndView();
-        mv.setViewName("home");
-
-        List<User> users= service.getAllUsers();
-        mv.addObject("userList",users);
-
-        return mv;
+        return new ModelAndView("redirect:/user/login");
     }
 }
