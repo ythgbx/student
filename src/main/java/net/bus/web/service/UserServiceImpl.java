@@ -3,6 +3,7 @@ package net.bus.web.service;
 import net.bus.web.mapper.UserMapper;
 import net.bus.web.model.User;
 import net.bus.web.model.UserExample;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +15,8 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     public List<User> getAllUsers() {
+
         UserExample example = new UserExample();
-        example.createCriteria().andIdBetween(2l, 3l);
-        return userMapper.selectByExample(example);
+        return userMapper.selectByExampleWithRowbounds(example, new RowBounds(0, 3));
     }
 }

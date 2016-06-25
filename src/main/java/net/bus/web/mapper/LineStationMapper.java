@@ -4,6 +4,7 @@ import java.util.List;
 import net.bus.web.model.LineStation;
 import net.bus.web.model.LineStationExample;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 
 public interface LineStationMapper {
     int countByExample(LineStationExample example);
@@ -15,6 +16,8 @@ public interface LineStationMapper {
     int insert(LineStation record);
 
     int insertSelective(LineStation record);
+
+    List<LineStation> selectByExampleWithRowbounds(LineStationExample example, RowBounds rowBounds);
 
     List<LineStation> selectByExample(LineStationExample example);
 

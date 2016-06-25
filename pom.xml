@@ -32,6 +32,10 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
@@ -48,6 +52,12 @@
     </pluginRepositories>
 
     <dependencies>
+        <!-- mybatis pagination 相关 -->
+        <dependency>
+            <groupId>com.github.andromedarabbit</groupId>
+            <artifactId>mybatis-pagination</artifactId>
+            <version>0.0.1</version>
+        </dependency>
         <!-- Spring 相关 -->
         <dependency>
             <groupId>org.springframework</groupId>

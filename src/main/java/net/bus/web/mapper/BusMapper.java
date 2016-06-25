@@ -4,6 +4,7 @@ import java.util.List;
 import net.bus.web.model.Bus;
 import net.bus.web.model.BusExample;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 
 public interface BusMapper {
     int countByExample(BusExample example);
@@ -15,6 +16,8 @@ public interface BusMapper {
     int insert(Bus record);
 
     int insertSelective(Bus record);
+
+    List<Bus> selectByExampleWithRowbounds(BusExample example, RowBounds rowBounds);
 
     List<Bus> selectByExample(BusExample example);
 

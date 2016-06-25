@@ -51,12 +51,21 @@
         <beans:property name="removeAbandonedTimeout"
                         value="#{dbConfig['mysql.removeAbandonedTimeout']}"/>
     </beans:bean>
+    <beans:bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <beans:property name="basePackage" value="net.bus.web.mapper"/>
+    </beans:bean>
+    <!-- Pagination -->
+    <beans:bean id="PaginationInterceptor" class="net.andromedarabbit.mybatis.pagination.plugin.PaginationInterceptor"/>
+    <beans:bean id="PaginationResultSetHandler" class="net.andromedarabbit.mybatis.pagination.plugin.PaginationResultSetHandlerInterceptor"/>
     <beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <beans:property name="configLocation" value="classpath:/config/spring-mybatis-config.xml" />
         <beans:property name="dataSource" ref="mysqlSource" />
-    </beans:bean>
-    <beans:bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <beans:property name="basePackage" value="net.bus.web.mapper"/>
+        <beans:property name="plugins">
+            <beans:array>
+                <beans:ref bean="PaginationInterceptor" />
+                <beans:ref bean="PaginationResultSetHandler" />
+            </beans:array>
+        </beans:property>
     </beans:bean>
 
     <!-- freemarker 相关 -->
@@ -102,5 +111,6 @@
             </beans:list>
         </beans:property>
     </beans:bean>
+
 
 </beans:beans>
