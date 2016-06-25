@@ -46,7 +46,7 @@
 					<strong class="text-danger">追风</strong> 巴士
 				</span>
         <p class="no-margin">
-            &copy; 2016 <strong>亚投 新能 tech.</strong>. ALL Rights Reserved.
+            &copy; 2016 <strong> 亚投 新能 </strong>. ALL Rights Reserved.
         </p>
     </footer>
 </div><!-- /wrapper -->
