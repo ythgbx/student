@@ -2,12 +2,12 @@ package net.bus.web.model;
 
 import java.util.Date;
 
-public class Ticket {
+public class UserTicket {
     private Long id;
 
-    private Long lineId;
-
     private Long userId;
+
+    private Long lineId;
 
     private Integer price;
 
@@ -23,20 +23,20 @@ public class Ticket {
         this.id = id;
     }
 
-    public Long getLineId() {
-        return lineId;
-    }
-
-    public void setLineId(Long lineId) {
-        this.lineId = lineId;
-    }
-
     public Long getUserId() {
         return userId;
     }
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public Long getLineId() {
+        return lineId;
+    }
+
+    public void setLineId(Long lineId) {
+        this.lineId = lineId;
     }
 
     public Integer getPrice() {

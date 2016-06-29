@@ -24,8 +24,13 @@
         <mapper resource="mapper/LineMapper.xml"/>
         <mapper resource="mapper/LineStationMapper.xml"/>
         <mapper resource="mapper/StationMapper.xml"/>
-        <mapper resource="mapper/TicketMapper.xml"/>
+        <mapper resource="mapper/NewsMapper.xml"/>
+        <mapper resource="mapper/UserTicketMapper.xml"/>
         <mapper resource="mapper/UserMapper.xml"/>
+        <mapper resource="mapper/UserCouponMapper.xml"/>
+        <mapper resource="mapper/UserLineMapper.xml"/>
+        <mapper resource="mapper/UserLogMapper.xml"/>
+        <mapper resource="mapper/UserNoticeMapper.xml"/>
     </mappers>
 
 </configuration>

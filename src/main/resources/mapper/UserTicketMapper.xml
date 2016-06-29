@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="net.bus.web.mapper.LineMapper" >
-  <resultMap id="BaseResultMap" type="net.bus.web.model.Line" >
+<mapper namespace="net.bus.web.mapper.UserTicketMapper" >
+  <resultMap id="BaseResultMap" type="net.bus.web.model.UserTicket" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="start" property="start" jdbcType="VARCHAR" />
-    <result column="end" property="end" jdbcType="VARCHAR" />
-    <result column="latlng" property="latlng" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="line_id" property="lineId" jdbcType="BIGINT" />
     <result column="price" property="price" jdbcType="INTEGER" />
-    <result column="annotation" property="annotation" jdbcType="VARCHAR" />
-    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
-    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="active_time" property="activeTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -71,15 +68,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, start, end, latlng, price, annotation, start_time, end_time
+    id, user_id, line_id, price, time, active_time
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="net.bus.web.model.LineExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="net.bus.web.model.UserTicketExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from line
+    from user_ticket
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -90,125 +87,96 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from line
+    from user_ticket
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from line
+    delete from user_ticket
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="net.bus.web.model.LineExample" >
-    delete from line
+  <delete id="deleteByExample" parameterType="net.bus.web.model.UserTicketExample" >
+    delete from user_ticket
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="net.bus.web.model.Line" >
-    insert into line (id, name, start, 
-      end, latlng, price, 
-      annotation, start_time, end_time
+  <insert id="insert" parameterType="net.bus.web.model.UserTicket" >
+    insert into user_ticket (id, user_id, line_id, 
+      price, time, active_time
       )
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{start,jdbcType=VARCHAR}, 
-      #{end,jdbcType=VARCHAR}, #{latlng,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, 
-      #{annotation,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{lineId,jdbcType=BIGINT}, 
+      #{price,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, #{activeTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="net.bus.web.model.Line" >
-    insert into line
+  <insert id="insertSelective" parameterType="net.bus.web.model.UserTicket" >
+    insert into user_ticket
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="name != null" >
-        name,
+      <if test="userId != null" >
+        user_id,
       </if>
-      <if test="start != null" >
-        start,
-      </if>
-      <if test="end != null" >
-        end,
-      </if>
-      <if test="latlng != null" >
-        latlng,
+      <if test="lineId != null" >
+        line_id,
       </if>
       <if test="price != null" >
         price,
       </if>
-      <if test="annotation != null" >
-        annotation,
+      <if test="time != null" >
+        time,
       </if>
-      <if test="startTime != null" >
-        start_time,
-      </if>
-      <if test="endTime != null" >
-        end_time,
+      <if test="activeTime != null" >
+        active_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
       </if>
-      <if test="start != null" >
-        #{start,jdbcType=VARCHAR},
-      </if>
-      <if test="end != null" >
-        #{end,jdbcType=VARCHAR},
-      </if>
-      <if test="latlng != null" >
-        #{latlng,jdbcType=VARCHAR},
+      <if test="lineId != null" >
+        #{lineId,jdbcType=BIGINT},
       </if>
       <if test="price != null" >
         #{price,jdbcType=INTEGER},
       </if>
-      <if test="annotation != null" >
-        #{annotation,jdbcType=VARCHAR},
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
       </if>
-      <if test="startTime != null" >
-        #{startTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="endTime != null" >
-        #{endTime,jdbcType=TIMESTAMP},
+      <if test="activeTime != null" >
+        #{activeTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="net.bus.web.model.LineExample" resultType="java.lang.Integer" >
-    select count(*) from line
+  <select id="countByExample" parameterType="net.bus.web.model.UserTicketExample" resultType="java.lang.Integer" >
+    select count(*) from user_ticket
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update line
+    update user_ticket
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.name != null" >
-        name = #{record.name,jdbcType=VARCHAR},
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=BIGINT},
       </if>
-      <if test="record.start != null" >
-        start = #{record.start,jdbcType=VARCHAR},
-      </if>
-      <if test="record.end != null" >
-        end = #{record.end,jdbcType=VARCHAR},
-      </if>
-      <if test="record.latlng != null" >
-        latlng = #{record.latlng,jdbcType=VARCHAR},
+      <if test="record.lineId != null" >
+        line_id = #{record.lineId,jdbcType=BIGINT},
       </if>
       <if test="record.price != null" >
         price = #{record.price,jdbcType=INTEGER},
       </if>
-      <if test="record.annotation != null" >
-        annotation = #{record.annotation,jdbcType=VARCHAR},
+      <if test="record.time != null" >
+        time = #{record.time,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.startTime != null" >
-        start_time = #{record.startTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.endTime != null" >
-        end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      <if test="record.activeTime != null" >
+        active_time = #{record.activeTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -216,69 +184,54 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update line
+    update user_ticket
     set id = #{record.id,jdbcType=BIGINT},
-      name = #{record.name,jdbcType=VARCHAR},
-      start = #{record.start,jdbcType=VARCHAR},
-      end = #{record.end,jdbcType=VARCHAR},
-      latlng = #{record.latlng,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      line_id = #{record.lineId,jdbcType=BIGINT},
       price = #{record.price,jdbcType=INTEGER},
-      annotation = #{record.annotation,jdbcType=VARCHAR},
-      start_time = #{record.startTime,jdbcType=TIMESTAMP},
-      end_time = #{record.endTime,jdbcType=TIMESTAMP}
+      time = #{record.time,jdbcType=TIMESTAMP},
+      active_time = #{record.activeTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="net.bus.web.model.Line" >
-    update line
+  <update id="updateByPrimaryKeySelective" parameterType="net.bus.web.model.UserTicket" >
+    update user_ticket
     <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
       </if>
-      <if test="start != null" >
-        start = #{start,jdbcType=VARCHAR},
-      </if>
-      <if test="end != null" >
-        end = #{end,jdbcType=VARCHAR},
-      </if>
-      <if test="latlng != null" >
-        latlng = #{latlng,jdbcType=VARCHAR},
+      <if test="lineId != null" >
+        line_id = #{lineId,jdbcType=BIGINT},
       </if>
       <if test="price != null" >
         price = #{price,jdbcType=INTEGER},
       </if>
-      <if test="annotation != null" >
-        annotation = #{annotation,jdbcType=VARCHAR},
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
       </if>
-      <if test="startTime != null" >
-        start_time = #{startTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="endTime != null" >
-        end_time = #{endTime,jdbcType=TIMESTAMP},
+      <if test="activeTime != null" >
+        active_time = #{activeTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="net.bus.web.model.Line" >
-    update line
-    set name = #{name,jdbcType=VARCHAR},
-      start = #{start,jdbcType=VARCHAR},
-      end = #{end,jdbcType=VARCHAR},
-      latlng = #{latlng,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="net.bus.web.model.UserTicket" >
+    update user_ticket
+    set user_id = #{userId,jdbcType=BIGINT},
+      line_id = #{lineId,jdbcType=BIGINT},
       price = #{price,jdbcType=INTEGER},
-      annotation = #{annotation,jdbcType=VARCHAR},
-      start_time = #{startTime,jdbcType=TIMESTAMP},
-      end_time = #{endTime,jdbcType=TIMESTAMP}
+      time = #{time,jdbcType=TIMESTAMP},
+      active_time = #{activeTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select resultMap="BaseResultMap" parameterType="net.bus.web.model.LineExample" id="selectByExampleWithRowbounds" >
+  <select resultMap="BaseResultMap" parameterType="net.bus.web.model.UserTicketExample" id="selectByExampleWithRowbounds" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from line
+    from user_ticket
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
