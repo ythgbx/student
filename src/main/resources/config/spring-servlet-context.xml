@@ -5,6 +5,7 @@
              xmlns:beans="http://www.springframework.org/schema/beans"
              xmlns:context="http://www.springframework.org/schema/context"
              xmlns:util="http://www.springframework.org/schema/util"
+             xmlns:aop="http://www.springframework.org/schema/aop"
              xsi:schemaLocation="http://www.springframework.org/schema/mvc
              http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans
@@ -12,7 +13,9 @@
 		http://www.springframework.org/schema/context
 		http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/util
-		http://www.springframework.org/schema/util/spring-util.xsd">
+		http://www.springframework.org/schema/util/spring-util.xsd
+		http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
     <mvc:annotation-driven/>
@@ -27,6 +30,9 @@
 
     <!-- 扫描net.bus.web包里下的所有class文件，配置注解的类全都装入容器中进行管理 -->
     <context:component-scan base-package="net.bus.web"/>
+
+    <!-- AOP -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
 
     <!--mybatis 数据库配置 -->
     <util:properties id="dbConfig" location="classpath:/config/jdbc.properties"/>
@@ -111,6 +117,5 @@
             </beans:list>
         </beans:property>
     </beans:bean>
-
 
 </beans:beans>

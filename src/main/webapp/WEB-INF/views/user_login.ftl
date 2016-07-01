@@ -11,7 +11,7 @@
                 <i class="fa fa-database m-right-xs"></i> 追风 <strong class="text-skin">巴士</strong>
             </div>
 
-            <form id="form" action="/user/list" method="post" data-validate="parsley" novalidate>
+            <form id="form" action="/user/login" method="post" data-validate="parsley" novalidate>
                 <div class="form-group m-bottom-md">
                     <input name="phone" type="text" class="form-control" data-parsley-required="true" placeholder="Phone Number">
                 </div>
