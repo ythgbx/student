@@ -118,4 +118,35 @@
         </beans:property>
     </beans:bean>
 
+    <!-- task -->
+    <!-- 线程执行器配置，用于任务注册 -->
+    <beans:bean id="executor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <beans:property name="corePoolSize" value="10" />
+        <beans:property name="maxPoolSize" value="100" />
+        <beans:property name="queueCapacity" value="500" />
+    </beans:bean>
+    <!-- 业务对象 -->
+    <beans:bean id="bizObject" class="net.bus.web.task.BusTask" />
+    <!-- 调度业务 -->
+    <beans:bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <beans:property name="targetObject" ref="bizObject" />
+        <beans:property name="targetMethod" value="doBiz" />
+    </beans:bean>
+    <!-- 调度触发器 -->
+    <beans:bean id="taskTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+        <beans:property name="jobDetail" ref="jobDetail" />
+        <beans:property name="startDelay" value="1000" />
+        <beans:property name="repeatInterval" value="1000" />
+    </beans:bean>
+    <!-- 设置调度 -->
+    <beans:bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <beans:property name="triggers">
+            <beans:list>
+                <beans:ref bean="taskTrigger" />
+            </beans:list>
+        </beans:property>
+        <beans:property name="taskExecutor" ref="executor" />
+    </beans:bean>
+    <!-- task -->
+
 </beans:beans>
