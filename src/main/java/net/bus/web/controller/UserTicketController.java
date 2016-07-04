@@ -2,6 +2,7 @@ package net.bus.web.controller;
 
 import net.bus.web.aspect.Auth;
 import net.bus.web.context.SessionContext;
+import net.bus.web.controller.jsonobj.TicketDetail;
 import net.bus.web.controller.jsonobj.TicketItem;
 import net.bus.web.model.Line;
 import net.bus.web.model.User;
@@ -67,7 +68,7 @@ public class UserTicketController {
     @RequestMapping(value = "/list/checked", method = RequestMethod.POST)
     public List checkedList(int page)
     {
-        logger.info("ticket check query");
+        logger.info("ticket check list query");
 //        User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
 //        List<UserTicket> ticketList = _userTicketService.getCheckedTickets(currentUser.getId(),page);
 //        List<TicketItem> displayList = getDisplayList(ticketList);
@@ -92,7 +93,7 @@ public class UserTicketController {
     @RequestMapping(value = "/list/done", method = RequestMethod.POST)
     public List doneList(int page)
     {
-        logger.info("ticket done query");
+        logger.info("ticket done list query");
 //        User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
 //        List<UserTicket> ticketList = _userTicketService.getCheckedTickets(currentUser.getId(),page);
 //        List<TicketItem> displayList = getDisplayList(ticketList);
@@ -110,6 +111,36 @@ public class UserTicketController {
             displayList.add(disItem);
         }
         return displayList;
+    }
+
+    @Auth(role = Auth.Role.NONE)
+    @ResponseBody
+    @RequestMapping(value = "/detail", method = RequestMethod.POST)
+    public TicketDetail detail(Long id)
+    {
+        logger.info("ticket detail query");
+        //TODO 处理票据明细查询
+
+        //Mock data for test
+        TicketDetail detail = new TicketDetail();
+        detail.setStart_station("民族大道纺织大学");
+        detail.setEnd_station("珞瑜路武汉大学");
+        detail.setPrice(4);
+        detail.setTime(new Date().getTime());
+        return detail;
+    }
+
+    @Auth(role = Auth.Role.NONE)
+    @ResponseBody
+    @RequestMapping(value = "/checked", method = RequestMethod.POST)
+    public String checked(Long id)
+    {
+        logger.info("ticket checked");
+        //TODO 处理检票操作
+
+        //Mock data for test
+        String result = "success";
+        return result;
     }
 
     private List<TicketItem> getDisplayList(List<UserTicket> ticketList)
