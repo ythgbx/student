@@ -1,8 +1,9 @@
-package net.bus.web.service;
+package net.bus.web.service.impl;
 
 import net.bus.web.mapper.UserMapper;
 import net.bus.web.model.User;
 import net.bus.web.model.UserExample;
+import net.bus.web.service.IUserService;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserService {
+public class UserService  implements IUserService {
     @Autowired
     private UserMapper userMapper;
 

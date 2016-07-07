@@ -1,7 +1,8 @@
-package net.bus.web.service;
+package net.bus.web.service.impl;
 
 import net.bus.web.model.Line;
 import net.bus.web.repository.LineRepository;
+import net.bus.web.service.ILineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ import java.util.List;
  */
 
 @Service
-public class LineService {
+public class LineService implements ILineService {
 
     @Autowired
     private LineRepository _rootRepository;

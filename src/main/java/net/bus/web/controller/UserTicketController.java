@@ -2,13 +2,13 @@ package net.bus.web.controller;
 
 import net.bus.web.aspect.Auth;
 import net.bus.web.context.SessionContext;
-import net.bus.web.controller.jsonobj.TicketDetail;
-import net.bus.web.controller.jsonobj.TicketItem;
+import net.bus.web.controller.dto.TicketDetail;
+import net.bus.web.controller.dto.TicketItem;
 import net.bus.web.model.Line;
 import net.bus.web.model.User;
 import net.bus.web.model.UserTicket;
-import net.bus.web.service.LineService;
-import net.bus.web.service.UserTicketService;
+import net.bus.web.service.IUserTicketService;
+import net.bus.web.service.ILineService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,9 +30,9 @@ import java.util.List;
 public class UserTicketController {
 
     @Autowired
-    private UserTicketService _userTicketService;
+    private IUserTicketService _userTicketService;
     @Autowired
-    private LineService _lineService;
+    private ILineService _lineService;
     @Autowired
     private HttpSession session;
 

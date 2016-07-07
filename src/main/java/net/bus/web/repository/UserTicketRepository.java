@@ -49,4 +49,9 @@ public class UserTicketRepository {
     public UserTicket getItem(Long id) {
         return _mapper.selectByPrimaryKey(id);
     }
+
+    public int updateItem(UserTicket ticket)
+    {
+        return  _mapper.updateByPrimaryKey(ticket);
+    }
 }
