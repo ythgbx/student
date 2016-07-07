@@ -30,6 +30,12 @@ public class LineService implements ILineService {
         return _rootRepository.getAll();
     }
 
+    public List<Line> getStationLines(String station_name,int page)
+    {
+        //TODO Select lines by station name
+        return _rootRepository.getAll();
+    }
+
     public List<Line> getAllLines(int page)
     {
         //TODO Select All Lines

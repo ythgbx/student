@@ -11,7 +11,9 @@ public interface ILineService {
 
     List<Line> getAroundLines(double lat,double lng,int page);
 
-    List<Line> getUserLines(Long userid,int page);
+    List<Line> getUserLines(Long user_id,int page);
+
+    List<Line> getStationLines(String station_name,int page);
 
     List<Line> getAllLines(int page);
 

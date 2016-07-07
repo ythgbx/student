@@ -38,9 +38,9 @@ public class UserTicketController {
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
-    @Auth(role = Auth.Role.NONE)
+    @Auth(role = Auth.Role.USER)
     @ResponseBody
-    @RequestMapping(value = "/list/unchecked", method = RequestMethod.POST)
+    @RequestMapping(value = "/list/unchecked", method = RequestMethod.GET)
     public List uncheckedList(int page)
     {
         logger.info("ticket unchecked query");
@@ -63,9 +63,9 @@ public class UserTicketController {
         return displayList;
     }
 
-    @Auth(role = Auth.Role.NONE)
+    @Auth(role = Auth.Role.USER)
     @ResponseBody
-    @RequestMapping(value = "/list/checked", method = RequestMethod.POST)
+    @RequestMapping(value = "/list/checked", method = RequestMethod.GET)
     public List checkedList(int page)
     {
         logger.info("ticket check list query");
@@ -88,9 +88,9 @@ public class UserTicketController {
         return displayList;
     }
 
-    @Auth(role = Auth.Role.NONE)
+    @Auth(role = Auth.Role.USER)
     @ResponseBody
-    @RequestMapping(value = "/list/done", method = RequestMethod.POST)
+    @RequestMapping(value = "/list/done", method = RequestMethod.GET)
     public List doneList(int page)
     {
         logger.info("ticket done list query");
@@ -113,9 +113,9 @@ public class UserTicketController {
         return displayList;
     }
 
-    @Auth(role = Auth.Role.NONE)
+    @Auth(role = Auth.Role.USER)
     @ResponseBody
-    @RequestMapping(value = "/detail", method = RequestMethod.POST)
+    @RequestMapping(value = "/detail", method = RequestMethod.GET)
     public TicketDetail detail(Long id)
     {
         logger.info("ticket detail query");
@@ -130,7 +130,7 @@ public class UserTicketController {
         return detail;
     }
 
-    @Auth(role = Auth.Role.NONE)
+    @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/checked", method = RequestMethod.POST)
     public String checked(Long id)
