@@ -11,7 +11,7 @@
                 <i class="fa fa-database m-right-xs"></i> 追风 <strong class="text-skin">巴士</strong>
             </div>
 
-            <form id="form" action="/user/login" method="post" data-validate="parsley" novalidate>
+            <form id="form" data-validate="parsley" novalidate>
                 <div class="form-group m-bottom-md">
                     <input name="phone" type="text" class="form-control" data-parsley-required="true" placeholder="Phone Number">
                 </div>
@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="m-top-md p-top-sm">
-                    <a onclick="$('#form').submit()"  class="btn btn-success block">Sign in</a>
+                    <a id="submit"  class="btn btn-success block">Sign in</a>
                 </div>
 
                 <div class="m-top-md p-top-sm">
@@ -59,6 +59,31 @@
                 }
             }
         }});
+        $("#submit").click(function(){
+            $.ajax({
+                url:"/user/login",
+                type:"POST",
+                dataType:"json",
+                data: {
+                    phone:$("input[name=phone]").val(),
+                    password:$("input[name=password]").val()
+                },
+                success:function(data){
+                    if(data.result=="success")
+                    {
+                        window.location.href = '/user/list';
+                    }
+                    else
+                    {
+                        alert(data.result);
+                    }
+                },
+                error:function(err){
+                    alert("登录失败");
+                }
+
+            })
+        })
     </script>
 
 </@layoutFooter>

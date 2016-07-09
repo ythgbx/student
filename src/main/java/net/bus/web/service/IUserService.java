@@ -1,6 +1,7 @@
 package net.bus.web.service;
 
 import net.bus.web.model.User;
+import net.bus.web.repository.ISpecification;
 
 import java.util.List;
 
@@ -10,4 +11,6 @@ import java.util.List;
 public interface IUserService {
 
     List<User> getAllUsers();
+
+    User loginCheck(ISpecification specification);
 }

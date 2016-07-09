@@ -2,7 +2,9 @@ package net.bus.web.controller;
 
 import net.bus.web.aspect.Auth;
 import net.bus.web.context.SessionContext;
+import net.bus.web.controller.dto.Login;
 import net.bus.web.model.User;
+import net.bus.web.repository.specification.UserPhonePasswordSpecification;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import net.bus.web.service.impl.UserService;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/user")
@@ -40,14 +43,23 @@ public class UserController {
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ModelAndView login()
+    public Login login(String phone, String password)
     {
-        session.setAttribute(SessionContext.CURRENT_USER,new Object());//TODO Object is temp use for test,then need add User replace Object
-        session.setAttribute(SessionContext.CURRENT_USER_ROLE, Auth.Role.USER);
+        User user = service.loginCheck(new UserPhonePasswordSpecification(phone,password));
+        Login loginResult = new Login();
 
-        ModelAndView mv =new ModelAndView();
-        mv.setViewName("redirect:list");
-        return mv;
+        if(user!=null) {
+            session.setAttribute(SessionContext.CURRENT_USER, user);
+            session.setAttribute(SessionContext.CURRENT_USER_ROLE, Auth.Role.USER);
+
+            loginResult.setSession_id(session.getId());
+            loginResult.setResult("success");
+        }else{
+            loginResult.setSession_id(null);
+            loginResult.setResult("error");
+        }
+
+        return loginResult;
     }
 
     @Auth(role = Auth.Role.USER)
