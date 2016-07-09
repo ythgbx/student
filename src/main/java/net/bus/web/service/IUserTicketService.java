@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface IUserTicketService {
 
-    List<UserTicket> getUncheckedTickets(Long user_id,int page);
+    List<UserTicket> getUncheckedTickets(long user_id,int page);
 
     List<UserTicket> getCheckedTickets(long user_id,int page);
 

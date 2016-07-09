@@ -26,7 +26,7 @@ public class UserRepository {
 
     public User getUser(ISpecification specification)
     {
-        List<User> list= userMapper.selectByExample(((UserPhonePasswordSpecification)specification).createExample());
+        List<User> list= userMapper.selectByExample((UserExample)specification.createExample());
         if(!list.isEmpty())
         {
             return list.get(0);

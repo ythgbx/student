@@ -19,7 +19,17 @@ public class UserTicketRepository {
     @Autowired
     private UserTicketMapper _mapper;
 
-    public List<UserTicket> getListByActiveTime(Long user_id,int page) {
+    public List<UserTicket> getList(ISpecification specification)
+    {
+        return _mapper.selectByExample((UserTicketExample)specification.createExample());
+    }
+
+    public List<UserTicket> getList(ISpecification specification,int page)
+    {
+        return _mapper.selectByExampleWithRowbounds((UserTicketExample)specification.createExample(), new RowBounds(1, 2)); //分页
+    }
+
+    private List<UserTicket> getListByActiveTime(Long user_id,int page) {
         UserTicketExample example = new UserTicketExample();
         UserTicketExample.Criteria criteriaActiveTime = example.createCriteria();
         criteriaActiveTime.andActiveTimeIsNull();
@@ -28,7 +38,7 @@ public class UserTicketRepository {
         return _mapper.selectByExampleWithRowbounds(example, new RowBounds(1, 2)); //分页
     }
 
-    public List<UserTicket> getListByActiveTimeBeforeDate(Long user_id,Date active_time,int page) {
+    private List<UserTicket> getListByActiveTimeBeforeDate(Long user_id,Date active_time,int page) {
         UserTicketExample example = new UserTicketExample();
         UserTicketExample.Criteria criteriaActiveTime = example.createCriteria();
         criteriaActiveTime.andActiveTimeGreaterThanOrEqualTo(active_time);
@@ -37,7 +47,7 @@ public class UserTicketRepository {
         return _mapper.selectByExampleWithRowbounds(example, new RowBounds(1, 2)); //分页
     }
 
-    public List<UserTicket> getListByActiveTimeAfterDate(Long user_id,Date active_time,int page) {
+    private List<UserTicket> getListByActiveTimeAfterDate(Long user_id,Date active_time,int page) {
         UserTicketExample example = new UserTicketExample();
         UserTicketExample.Criteria criteriaActiveTime = example.createCriteria();
         criteriaActiveTime.andActiveTimeLessThan(active_time);

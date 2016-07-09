@@ -45,7 +45,7 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Login login(String phone, String password)
     {
-        User user = service.loginCheck(new UserPhonePasswordSpecification(phone,password));
+        User user = service.loginCheck(phone,password);
         Login loginResult = new Login();
 
         if(user!=null) {

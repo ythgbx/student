@@ -20,10 +20,8 @@ public class UserPhonePasswordSpecification implements ISpecification<UserExampl
     public UserExample createExample()
     {
         UserExample example = new UserExample();
-        UserExample.Criteria criteriaPhone = example.createCriteria();
-        criteriaPhone.andPhoneEqualTo(_phone);
-        UserExample.Criteria criteriaPassword = example.createCriteria();
-        criteriaPassword.andPasswordEqualTo(_password);
+        UserExample.Criteria criteria = example.createCriteria();
+        criteria.andPhoneEqualTo(_phone).andPasswordEqualTo(_password);
         return example;
     }
 }

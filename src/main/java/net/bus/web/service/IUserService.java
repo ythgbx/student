@@ -12,5 +12,5 @@ public interface IUserService {
 
     List<User> getAllUsers();
 
-    User loginCheck(ISpecification specification);
+    User loginCheck(String phone,String password);
 }

@@ -25,9 +25,9 @@ public class UserService  implements IUserService {
         return _rootRepository.getAllUsers(); //分页
     }
 
-    public User loginCheck(ISpecification specification)
+    public User loginCheck(String phone,String password)
     {
-        return _rootRepository.getUser(specification);
+        return _rootRepository.getUser(new UserPhonePasswordSpecification(phone,password));
     }
 
 }

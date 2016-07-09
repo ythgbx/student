@@ -1,7 +1,9 @@
 package net.bus.web.service.impl;
 
 import net.bus.web.model.UserTicket;
+import net.bus.web.repository.ISpecification;
 import net.bus.web.repository.UserTicketRepository;
+import net.bus.web.repository.specification.UserTickeActiveTimeUserIdSpecification;
 import net.bus.web.service.IUserTicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,25 +21,32 @@ public class UserTicketService implements IUserTicketService {
     @Autowired
     private UserTicketRepository _rootRepository;
 
-    public List<UserTicket> getUncheckedTickets(Long user_id,int page)
+    public List<UserTicket> getUncheckedTickets(long user_id,int page)
     {
-        return _rootRepository.getListByActiveTime(user_id,page);
+        ISpecification specification = new UserTickeActiveTimeUserIdSpecification(
+                user_id,null, UserTickeActiveTimeUserIdSpecification.ActiveTimeOp.IsNull);
+        return _rootRepository.getList(specification,page);
     }
 
     public List<UserTicket> getCheckedTickets(long user_id,int page)
     {
+
         Calendar checkRange = Calendar.getInstance();
         checkRange.setTime(new Date());
         checkRange.add(Calendar.MINUTE, -15);
-        return _rootRepository.getListByActiveTimeAfterDate(user_id, checkRange.getTime(), page);
+        ISpecification specification = new UserTickeActiveTimeUserIdSpecification(
+                user_id,checkRange.getTime(), UserTickeActiveTimeUserIdSpecification.ActiveTimeOp.After);
+        return _rootRepository.getList(specification,page);
     }
 
     public List<UserTicket> getDoneTickets(long user_id,int page)
     {
-        Calendar doneRange = Calendar.getInstance();
-        doneRange.setTime(new Date());
-        doneRange.add(Calendar.MINUTE, -15);
-        return _rootRepository.getListByActiveTimeBeforeDate(user_id, doneRange.getTime(), page);
+        Calendar checkRange = Calendar.getInstance();
+        checkRange.setTime(new Date());
+        checkRange.add(Calendar.MINUTE, -15);
+        ISpecification specification = new UserTickeActiveTimeUserIdSpecification(
+                user_id,checkRange.getTime(), UserTickeActiveTimeUserIdSpecification.ActiveTimeOp.Before);
+        return _rootRepository.getList(specification,page);
     }
 
     public UserTicket getDetail(long id)
