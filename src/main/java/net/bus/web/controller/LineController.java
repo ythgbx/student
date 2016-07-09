@@ -36,10 +36,10 @@ public class LineController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/list/around", method = RequestMethod.GET)
-    public List around(double lat,double lng,int page)
+    public List around(double lat,double lng,int page,int limit)
     {
         logger.info("line around query");
-        List<Line> lineList = _lineService.getAroundLines(lat,lng,page);
+        List<Line> lineList = _lineService.getAroundLines(lat,lng,page,limit);
         List<LineItem> displayList = getDisplayList(lineList);
         return displayList;
     }
@@ -47,11 +47,11 @@ public class LineController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/list/user", method = RequestMethod.GET)
-    public List user(int page)
+    public List user(int page,int limit)
     {
         logger.info("line user query");
         User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
-        List<Line> lineList = _lineService.getUserLines(currentUser.getId(), page);
+        List<Line> lineList = _lineService.getUserLines(currentUser.getId(), page, limit);
         List<LineItem> displayList = getDisplayList(lineList);
         return displayList;
     }
@@ -59,10 +59,10 @@ public class LineController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/list/station", method = RequestMethod.GET)
-    public List station(String station_name,int page)
+    public List station(String station_name,int page,int limit)
     {
         logger.info("line station query");
-        List<Line> lineList = _lineService.getStationLines(station_name, page);
+        List<Line> lineList = _lineService.getStationLines(station_name, page, limit);
         List<LineItem> displayList = getDisplayList(lineList);
         return displayList;
     }
@@ -70,10 +70,10 @@ public class LineController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/list/all", method = RequestMethod.GET)
-    public List all(int page)
+    public List all(int page,int limit)
     {
         logger.info("line all query");
-        List<Line> lineList = _lineService.getAllLines(page);
+        List<Line> lineList = _lineService.getAllLines(page,limit);
         List<LineItem> displayList = getDisplayList(lineList);
         return displayList;
     }

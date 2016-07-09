@@ -18,25 +18,25 @@ public class LineService implements ILineService {
     @Autowired
     private LineRepository _rootRepository;
 
-    public List<Line> getAroundLines(double lat,double lng,int page)
+    public List<Line> getAroundLines(double lat,double lng,int page,int limit)
     {
         //TODO Select Around Lines by lat and lng
         return _rootRepository.getAll();
     }
 
-    public List<Line> getUserLines(Long userid,int page)
+    public List<Line> getUserLines(Long userid,int page,int limit)
     {
         //TODO Select User Lines
         return _rootRepository.getAll();
     }
 
-    public List<Line> getStationLines(String station_name,int page)
+    public List<Line> getStationLines(String station_name,int page,int limit)
     {
         //TODO Select lines by station name
         return _rootRepository.getAll();
     }
 
-    public List<Line> getAllLines(int page)
+    public List<Line> getAllLines(int page,int limit)
     {
         //TODO Select All Lines
         return _rootRepository.getAll();

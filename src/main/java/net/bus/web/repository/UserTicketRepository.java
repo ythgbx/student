@@ -24,40 +24,19 @@ public class UserTicketRepository {
         return _mapper.selectByExample((UserTicketExample)specification.createExample());
     }
 
-    public List<UserTicket> getList(ISpecification specification,int page)
+    public List<UserTicket> getList(ISpecification specification,int page,int limit)
     {
-        return _mapper.selectByExampleWithRowbounds((UserTicketExample)specification.createExample(), new RowBounds(1, 2)); //分页
+        return _mapper.selectByExampleWithRowbounds((UserTicketExample)specification.createExample(), new RowBounds(page, limit)); //分页
     }
 
-    private List<UserTicket> getListByActiveTime(Long user_id,int page) {
-        UserTicketExample example = new UserTicketExample();
-        UserTicketExample.Criteria criteriaActiveTime = example.createCriteria();
-        criteriaActiveTime.andActiveTimeIsNull();
-        UserTicketExample.Criteria criteriaUser = example.createCriteria();
-        criteriaUser.andUserIdEqualTo(user_id);
-        return _mapper.selectByExampleWithRowbounds(example, new RowBounds(1, 2)); //分页
-    }
-
-    private List<UserTicket> getListByActiveTimeBeforeDate(Long user_id,Date active_time,int page) {
-        UserTicketExample example = new UserTicketExample();
-        UserTicketExample.Criteria criteriaActiveTime = example.createCriteria();
-        criteriaActiveTime.andActiveTimeGreaterThanOrEqualTo(active_time);
-        UserTicketExample.Criteria criteriaUser = example.createCriteria();
-        criteriaUser.andUserIdEqualTo(user_id);
-        return _mapper.selectByExampleWithRowbounds(example, new RowBounds(1, 2)); //分页
-    }
-
-    private List<UserTicket> getListByActiveTimeAfterDate(Long user_id,Date active_time,int page) {
-        UserTicketExample example = new UserTicketExample();
-        UserTicketExample.Criteria criteriaActiveTime = example.createCriteria();
-        criteriaActiveTime.andActiveTimeLessThan(active_time);
-        UserTicketExample.Criteria criteriaUser = example.createCriteria();
-        criteriaUser.andUserIdEqualTo(user_id);
-        return _mapper.selectByExampleWithRowbounds(example, new RowBounds(1, 2)); //分页
-    }
-
-    public UserTicket getItem(Long id) {
-        return _mapper.selectByPrimaryKey(id);
+    public UserTicket getItem(ISpecification specification)
+    {
+        List<UserTicket> list= _mapper.selectByExample((UserTicketExample)specification.createExample());
+        if(!list.isEmpty())
+        {
+            return list.get(0);
+        }
+        return null;
     }
 
     public int updateItem(UserTicket ticket)

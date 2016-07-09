@@ -9,13 +9,13 @@ import java.util.List;
  */
 public interface ILineService {
 
-    List<Line> getAroundLines(double lat,double lng,int page);
+    List<Line> getAroundLines(double lat,double lng,int page,int limit);
 
-    List<Line> getUserLines(Long user_id,int page);
+    List<Line> getUserLines(Long user_id,int page,int limit);
 
-    List<Line> getStationLines(String station_name,int page);
+    List<Line> getStationLines(String station_name,int page,int limit);
 
-    List<Line> getAllLines(int page);
+    List<Line> getAllLines(int page,int limit);
 
     Line getLineDetails(Long id);
 }

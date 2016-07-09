@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface IUserService {
 
-    List<User> getAllUsers();
+    List<User> getAllUsers(int page,int limit);
 
     User loginCheck(String phone,String password);
 }

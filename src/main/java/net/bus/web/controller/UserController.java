@@ -71,7 +71,7 @@ public class UserController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("user_list");
 
-        List<User> users= service.getAllUsers();
+        List<User> users= service.getAllUsers(1,10);
         mv.addObject("userList",users);
 
         return mv;

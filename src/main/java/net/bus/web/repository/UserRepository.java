@@ -21,8 +21,14 @@ public class UserRepository {
 
     public List<User> getAllUsers() {
         UserExample example = new UserExample();
-        return userMapper.selectByExampleWithRowbounds(example, new RowBounds(1, 2)); //分页
+        return userMapper.selectByExample(example);
     }
+
+    public List<User> getAllUsers(int page,int limit) {
+        UserExample example = new UserExample();
+        return userMapper.selectByExampleWithRowbounds(example, new RowBounds(page, limit));
+    }
+
 
     public User getUser(ISpecification specification)
     {
