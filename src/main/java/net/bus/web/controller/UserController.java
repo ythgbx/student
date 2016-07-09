@@ -3,27 +3,27 @@ package net.bus.web.controller;
 import net.bus.web.aspect.Auth;
 import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.Login;
+import net.bus.web.controller.dto.Register;
 import net.bus.web.model.User;
-import net.bus.web.repository.specification.UserPhonePasswordSpecification;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import net.bus.web.service.impl.UserService;
+import net.bus.web.service.IUserService;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.UUID;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
     @Autowired
-    private UserService service;
+    private IUserService service;
     @Autowired
     private HttpSession session;
 
@@ -61,6 +61,44 @@ public class UserController {
 
         return loginResult;
     }
+
+    @Auth(role = Auth.Role.USER)
+    @ResponseBody
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    public String logout()
+    {
+        //TODO Remove session
+        return "logout";
+    }
+
+    @Auth(role = Auth.Role.NONE)
+    @ResponseBody
+    @RequestMapping(value = "/register/sms", method = RequestMethod.POST)
+    public String registerSms(@RequestBody Register register)
+    {
+        //TODO Request sms server for send code sms to the phone
+        return "registerSms"+register.getPhone();
+    }
+
+    @Auth(role = Auth.Role.NONE)
+    @ResponseBody
+    @RequestMapping(value = "/register/sms/callback", method = RequestMethod.POST)
+    public String registerSmsCallback(String phone,String code)
+    {
+        //TODO Receive code form sms server prepare for register add to cache(out date?)
+        return "registerSmsCallback:"+ phone;
+    }
+
+    @Auth(role = Auth.Role.NONE)
+    @ResponseBody
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public Register register(@RequestBody Register register)
+    {
+        //TODO Check register.code and then add User
+        //User user = service.register(register.getPhone(),register.getPassword(),register.getName());
+        return register;
+    }
+
 
     @Auth(role = Auth.Role.USER)
     @RequestMapping(value="/list")

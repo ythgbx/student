@@ -13,4 +13,6 @@ public interface IUserService {
     List<User> getAllUsers(int page,int limit);
 
     User loginCheck(String phone,String password);
+
+    User register(String phone,String password,String name);
 }

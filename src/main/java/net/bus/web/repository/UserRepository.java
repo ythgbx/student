@@ -40,4 +40,14 @@ public class UserRepository {
 
         return null;
     }
+
+    public int insertUser(User user)
+    {
+        return userMapper.insert(user);
+    }
+
+    public int updateUser(User user)
+    {
+        return userMapper.updateByPrimaryKey(user);
+    }
 }
