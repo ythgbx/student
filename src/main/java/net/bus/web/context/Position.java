@@ -3,7 +3,7 @@ package net.bus.web.context;
 /**
  * Created by sky on 16/7/9.
  */
-public class Postion {
+public class Position {
 
     private Double lat;
 

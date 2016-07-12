@@ -1,7 +1,7 @@
 package net.bus.web.service;
 
+import net.bus.web.context.Position;
 import net.bus.web.model.User;
-import net.bus.web.repository.ISpecification;
 
 import java.util.List;
 
@@ -15,4 +15,8 @@ public interface IUserService {
     User loginCheck(String phone,String password);
 
     User register(String phone,String password,String name);
+
+    boolean setAccount(User user,String phone,String password);
+
+    boolean setBase(User user,Position pos,String name,String photo);
 }

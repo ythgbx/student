@@ -1,6 +1,7 @@
 package net.bus.web.controller;
 
 import net.bus.web.aspect.Auth;
+import net.bus.web.context.Position;
 import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.*;
 import net.bus.web.model.User;
@@ -56,7 +57,7 @@ public class UserController {
             result.setResult("success");
         }else{
             result.setSession_id(null);
-            result.setResult("帐号或密码错误");
+            result.setResult("failure");
         }
 
         return result;
@@ -76,7 +77,7 @@ public class UserController {
 
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
-    @RequestMapping(value = "/register/sms", method = RequestMethod.POST)
+    @RequestMapping(value = "/sms", method = RequestMethod.POST)
     public BaseResult registerSms(@RequestBody Register register)
     {
         BaseResult result = new BaseResult();
@@ -84,14 +85,14 @@ public class UserController {
             //TODO Request sms server for send code sms to the phone
             result.setResult("success");
         }else{
-            result.setResult("error");
+            result.setResult("failure");
         }
         return result;
     }
 
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
-    @RequestMapping(value = "/register/sms/callback", method = RequestMethod.POST)
+    @RequestMapping(value = "/sms/callback", method = RequestMethod.POST)
     public String registerSmsCallback(String phone,String code)
     {
         //TODO Receive code form sms server prepare for register add to cache(out date?)
@@ -103,18 +104,115 @@ public class UserController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public BaseResult register(@RequestBody Register register)
     {
-        //TODO Check register.code(by key is register.phone) and then add User
-
         BaseResult result = new BaseResult();
+        if(!checkCodeWithPhone(register.getPhone(),register.getCode()))
+        {
+            result.setResult("failure");
+            return result;
+        }
+
         try {
             service.register(register.getPhone(),register.getPassword(),register.getName());
-            result.setResult("注册成功");
+            result.setResult("success");
         }catch (Exception ex){
-            result.setResult("注册失败");
+            result.setResult("error");
+            result.setError(ex.getMessage());
         }
         return result;
     }
 
+    @Auth(role = Auth.Role.USER)
+    @ResponseBody
+    @RequestMapping(value = "/modify/password", method = RequestMethod.PUT)
+    public BaseResult modifyPassword(@RequestBody UserAccount account)
+    {
+        BaseResult result = new BaseResult();
+        try {
+            User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
+            if(account.getPhone().equals(currentUser.getPhone())&& (account.getPassword().equals(currentUser.getPassword()) || checkCodeWithPhone(account.getPhone(),account.getCode()))){
+                service.setAccount(currentUser,currentUser.getPhone(),account.getNew_password());
+
+                currentUser.setPassword(account.getNew_password());
+                session.setAttribute(SessionContext.CURRENT_USER, currentUser);
+
+                result.setResult("success");
+            }
+            else{
+                result.setResult("failure");
+            }
+        }catch (Exception ex){
+            result.setResult("error");
+            result.setError(ex.getMessage());
+        }
+        return result;
+    }
+
+    @Auth(role = Auth.Role.USER)
+    @ResponseBody
+    @RequestMapping(value = "/modify/phone", method = RequestMethod.PUT)
+    public BaseResult modifyAccount(@RequestBody UserAccount account)
+    {
+        BaseResult result = new BaseResult();
+        try {
+            User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
+            if(account.getPhone().equals(currentUser.getPhone()) &&
+                    checkCodeWithPhone(account.getPhone(),account.getCode())){
+                service.setAccount(currentUser,account.getNew_phone(),currentUser.getPassword());
+
+                currentUser.setPhone(account.getNew_phone());
+                session.setAttribute(SessionContext.CURRENT_USER, currentUser);
+
+                result.setResult("success");
+            }
+            else{
+                result.setResult("failure");
+            }
+        }catch (Exception ex){
+            result.setResult("error");
+            result.setError(ex.getMessage());
+        }
+        return result;
+    }
+
+    @Auth(role = Auth.Role.USER)
+    @ResponseBody
+    @RequestMapping(value = "/modify/base", method = RequestMethod.PUT)
+    public BaseResult modifyPos(@RequestBody UserBase base)
+    {
+        BaseResult result = new BaseResult();
+        try {
+            User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
+
+            Position pos = new Position();
+            if(base.getLat()!=null&&base.getLng()!=null){
+                pos.setLat(base.getLat());
+                pos.setLng(base.getLng());
+                currentUser.setLat(base.getLat());
+                currentUser.setLng(base.getLng());
+            }else {
+                pos.setLat(currentUser.getLat());
+                pos.setLng(currentUser.getLng());
+            }
+            if (base.getName()!=null)
+            {
+                currentUser.setName(base.getName());
+            }
+            if( base.getPhoto()!=null)
+            {
+                currentUser.setPhoto(base.getPhoto());
+            }
+
+            service.setBase(currentUser, pos, currentUser.getName(), currentUser.getPhoto());
+
+            session.setAttribute(SessionContext.CURRENT_USER, currentUser);
+
+            result.setResult("success");
+        }catch (Exception ex){
+            result.setResult("error");
+            result.setError(ex.getMessage());
+        }
+        return result;
+    }
 
     @Auth(role = Auth.Role.USER)
     @RequestMapping(value="/list")
@@ -129,5 +227,15 @@ public class UserController {
         mv.addObject("userList",users);
 
         return mv;
+    }
+
+    private boolean checkCodeWithPhone(String phone,String code)
+    {
+        //TODO Check code by key is phone
+        if(code.equals("888"))//TempCode for test
+        {
+            return true;
+        }
+        return false;
     }
 }

@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
  * Created by Edifi_000 on 2016-07-12.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class BaseResult {
+public class BaseResult implements IResult {
 
     private String result;
     private Object content;

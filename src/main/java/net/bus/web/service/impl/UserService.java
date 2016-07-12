@@ -1,6 +1,6 @@
 package net.bus.web.service.impl;
 
-import net.bus.web.context.Postion;
+import net.bus.web.context.Position;
 import net.bus.web.model.User;
 import net.bus.web.repository.UserRepository;
 import net.bus.web.repository.specification.UserPhonePasswordSpecification;
@@ -23,7 +23,7 @@ public class UserService  implements IUserService {
 
     public User loginCheck(String phone,String password)
     {
-        return _rootRepository.getUser(new UserPhonePasswordSpecification(phone,password));
+        return _rootRepository.getUser(new UserPhonePasswordSpecification(phone, password));
     }
 
     public User register(String phone,String password,String name)
@@ -41,25 +41,30 @@ public class UserService  implements IUserService {
         return user;
     }
 
-    public boolean setPostion(User user, Postion pos)
+    public boolean setAccount(User user,String phone,String password)
+    {
+        if(user!=null)
+        {
+            user.setPhone(phone);
+            user.setPassword(password);
+            _rootRepository.updateUser(user);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean setBase(User user,Position pos,String name,String photo)
     {
         if(user!=null)
         {
             user.setLat(pos.getLat());
             user.setLng(pos.getLng());
-        }
-        _rootRepository.updateUser(user);
-        return false;
-    }
-
-    public boolean setPhoto(User user, String photo)
-    {
-        if(user!=null)
-        {
+            user.setName(name);
             user.setPhoto(photo);
+            _rootRepository.updateUser(user);
+            return true;
         }
-        _rootRepository.updateUser(user);
+
         return false;
     }
-
 }
