@@ -6,6 +6,7 @@
              xmlns:context="http://www.springframework.org/schema/context"
              xmlns:util="http://www.springframework.org/schema/util"
              xmlns:aop="http://www.springframework.org/schema/aop"
+             xmlns:cache="http://www.springframework.org/schema/cache"
              xsi:schemaLocation="http://www.springframework.org/schema/mvc
              http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans
@@ -15,7 +16,7 @@
 		http://www.springframework.org/schema/util
 		http://www.springframework.org/schema/util/spring-util.xsd
 		http://www.springframework.org/schema/aop
-        http://www.springframework.org/schema/aop/spring-aop.xsd">
+        http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
 
     <!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
     <mvc:annotation-driven/>
@@ -148,5 +149,16 @@
         <beans:property name="taskExecutor" ref="executor" />
     </beans:bean>
     <!-- task -->
+
+    <!-- ehcache cache -->
+    <beans:bean id="ehcacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <beans:property name="configLocation" value="classpath:/config/ehcache.xml"/>
+        <beans:property name="shared" value="true"></beans:property>
+    </beans:bean>
+
+    <beans:bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+        <beans:property name="cacheManager" ref="ehcacheManager"/>
+        <beans:property name="transactionAware" value="true"/>
+    </beans:bean>
 
 </beans:beans>
