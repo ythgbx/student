@@ -2,9 +2,7 @@ package net.bus.web.controller;
 
 import net.bus.web.aspect.Auth;
 import net.bus.web.context.SessionContext;
-import net.bus.web.controller.dto.Login;
-import net.bus.web.controller.dto.LoginResult;
-import net.bus.web.controller.dto.Register;
+import net.bus.web.controller.dto.*;
 import net.bus.web.model.User;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,38 +45,48 @@ public class UserController {
     public LoginResult login(@RequestBody Login login)
     {
         User user = service.loginCheck(login.getPhone(),login.getPassword());
-        LoginResult loginResult = new LoginResult();
+
+        LoginResult result = new LoginResult();
 
         if(user!=null) {
             session.setAttribute(SessionContext.CURRENT_USER, user);
             session.setAttribute(SessionContext.CURRENT_USER_ROLE, Auth.Role.USER);
 
-            loginResult.setSession_id(session.getId());
-            loginResult.setResult("success");
+            result.setSession_id(session.getId());
+            result.setResult("success");
         }else{
-            loginResult.setSession_id(null);
-            loginResult.setResult("帐号或密码错误");
+            result.setSession_id(null);
+            result.setResult("帐号或密码错误");
         }
 
-        return loginResult;
+        return result;
     }
 
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
-    public String logout()
+    public BaseResult logout()
     {
-        //TODO Remove session
-        return "logout";
+        session.removeAttribute(SessionContext.CURRENT_USER);
+        session.removeAttribute(SessionContext.CURRENT_USER_ROLE);
+        BaseResult result = new BaseResult();
+        result.setResult("logout");
+        return result;
     }
 
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/register/sms", method = RequestMethod.POST)
-    public String registerSms(@RequestBody Register register)
+    public BaseResult registerSms(@RequestBody Register register)
     {
-        //TODO Request sms server for send code sms to the phone
-        return "registerSms"+register.getPhone();
+        BaseResult result = new BaseResult();
+        if(register.getPhone()!=""){
+            //TODO Request sms server for send code sms to the phone
+            result.setResult("success");
+        }else{
+            result.setResult("error");
+        }
+        return result;
     }
 
     @Auth(role = Auth.Role.NONE)
@@ -93,11 +101,18 @@ public class UserController {
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public Register register(@RequestBody Register register)
+    public BaseResult register(@RequestBody Register register)
     {
-        //TODO Check register.code and then add User
-        //User user = service.register(register.getPhone(),register.getPassword(),register.getName());
-        return register;
+        //TODO Check register.code(by key is register.phone) and then add User
+
+        BaseResult result = new BaseResult();
+        try {
+            service.register(register.getPhone(),register.getPassword(),register.getName());
+            result.setResult("注册成功");
+        }catch (Exception ex){
+            result.setResult("注册失败");
+        }
+        return result;
     }
 
 

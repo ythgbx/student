@@ -32,6 +32,11 @@ public class UserService  implements IUserService {
         user.setName(name);
         user.setPhone(phone);
         user.setPassword(password);
+        user.setPhoto("default");
+        user.setLat(0d);
+        user.setLng(0d);
+        user.setPoints(0);
+        user.setType(0);//用户类型：0是普通用户，1是司机，999是管理员
         _rootRepository.insertUser(user);
         return user;
     }
