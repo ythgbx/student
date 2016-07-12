@@ -3,6 +3,7 @@ package net.bus.web.controller;
 import net.bus.web.aspect.Auth;
 import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.Login;
+import net.bus.web.controller.dto.LoginResult;
 import net.bus.web.controller.dto.Register;
 import net.bus.web.model.User;
 import org.apache.log4j.Logger;
@@ -43,10 +44,10 @@ public class UserController {
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Login login(String phone, String password)
+    public LoginResult login(@RequestBody Login login)
     {
-        User user = service.loginCheck(phone,password);
-        Login loginResult = new Login();
+        User user = service.loginCheck(login.getPhone(),login.getPassword());
+        LoginResult loginResult = new LoginResult();
 
         if(user!=null) {
             session.setAttribute(SessionContext.CURRENT_USER, user);
@@ -56,7 +57,7 @@ public class UserController {
             loginResult.setResult("success");
         }else{
             loginResult.setSession_id(null);
-            loginResult.setResult("error");
+            loginResult.setResult("帐号或密码错误");
         }
 
         return loginResult;

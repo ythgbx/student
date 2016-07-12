@@ -1,26 +1,25 @@
 package net.bus.web.controller.dto;
 
 /**
- * Created by sky on 16/7/9.
+ * Created by Edifi_000 on 2016-07-12.
  */
 public class Login {
+    private String phone;
+    private String password;
 
-    private String session_id;
-    private String result;
-
-    public String getSession_id() {
-        return session_id;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setSession_id(String session_id) {
-        this.session_id = session_id;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getResult() {
-        return result;
+    public String getPassword() {
+        return password;
     }
 
-    public void setResult(String result) {
-        this.result = result;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

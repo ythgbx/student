@@ -63,11 +63,14 @@
             $.ajax({
                 url:"/user/login",
                 type:"POST",
+                contentType: "application/json",
                 dataType:"json",
-                data: {
-                    phone:$("input[name=phone]").val(),
-                    password:$("input[name=password]").val()
-                },
+                data:  JSON.stringify(
+                        {
+                            "phone": $("input[name=phone]").val(),
+                            "password": $("input[name=password]").val()
+                        }
+                ),
                 success:function(data){
                     if(data.result=="success")
                     {
