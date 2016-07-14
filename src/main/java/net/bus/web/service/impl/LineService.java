@@ -1,11 +1,22 @@
 package net.bus.web.service.impl;
 
 import net.bus.web.model.Line;
+import net.bus.web.model.LineStation;
+import net.bus.web.model.Station;
+import net.bus.web.model.UserLine;
 import net.bus.web.repository.LineRepository;
+import net.bus.web.repository.LineStationRepository;
+import net.bus.web.repository.StationRepository;
+import net.bus.web.repository.UserLineRepository;
+import net.bus.web.repository.specification.LineIdsSpecification;
+import net.bus.web.repository.specification.LineStationStationIdsSpecification;
+import net.bus.web.repository.specification.StationNameSpecification;
+import net.bus.web.repository.specification.UserLineUserIdSpecification;
 import net.bus.web.service.ILineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +28,12 @@ public class LineService implements ILineService {
 
     @Autowired
     private LineRepository _rootRepository;
+    @Autowired
+    private UserLineRepository _userLineRepository;
+    @Autowired
+    private StationRepository _stationRepository;
+    @Autowired
+    private LineStationRepository _lineStationRepository;
 
     public List<Line> getAroundLines(double lat,double lng,int page,int limit)
     {
@@ -24,22 +41,34 @@ public class LineService implements ILineService {
         return _rootRepository.getAll();
     }
 
-    public List<Line> getUserLines(Long userid,int page,int limit)
+    public List<Line> getUserLines(Long userId,int page,int limit)
     {
-        //TODO Select User Lines
-        return _rootRepository.getAll();
+        List<UserLine> listUserLine =  _userLineRepository.getList(new UserLineUserIdSpecification(userId));
+        List<Long> listLineIds = new ArrayList<Long>();
+        for (UserLine userLine : listUserLine) {
+            listLineIds.add(userLine.getLineId());
+        }
+        return _rootRepository.getList(new LineIdsSpecification(listLineIds),page-1,limit);
     }
 
     public List<Line> getStationLines(String station_name,int page,int limit)
     {
-        //TODO Select lines by station name
-        return _rootRepository.getAll();
+        List<Station> listStation =  _stationRepository.getList(new StationNameSpecification(station_name));
+        List<Long> listStationIds = new ArrayList<Long>();
+        for (Station station : listStation) {
+            listStationIds.add(station.getId());
+        }
+        List<LineStation> listLineStation = _lineStationRepository.getList(new LineStationStationIdsSpecification(listStationIds));
+        List<Long> listLineIds = new ArrayList<Long>();
+        for (LineStation lineStation : listLineStation) {
+            listLineIds.add(lineStation.getLineId());
+        }
+        return _rootRepository.getList(new LineIdsSpecification(listLineIds), page - 1, limit);
     }
 
     public List<Line> getAllLines(int page,int limit)
     {
-        //TODO Select All Lines
-        return _rootRepository.getAll();
+        return _rootRepository.getAll(page-1,limit);
     }
 
     public Line getLineDetails(Long id)

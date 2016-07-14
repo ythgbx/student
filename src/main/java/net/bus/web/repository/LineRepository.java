@@ -20,10 +20,45 @@ public class LineRepository {
 
     public List<Line> getAll() {
         LineExample example = new LineExample();
-        return _mapper.selectByExampleWithRowbounds(example, new RowBounds(1, 2)); //分页
+        return _mapper.selectByExample(example);
+    }
+
+    public List<Line> getAll(int page,int limit) {
+        LineExample example = new LineExample();
+        return _mapper.selectByExampleWithRowbounds(example, new RowBounds(page, limit)); //分页
+    }
+
+    public List<Line> getList(ISpecification specification) {
+        LineExample example = (LineExample)specification.createExample();
+        return _mapper.selectByExample(example);
+    }
+
+    public List<Line> getList(ISpecification specification,int page,int limit) {
+        LineExample example = (LineExample)specification.createExample();
+        return _mapper.selectByExampleWithRowbounds(example, new RowBounds(page, limit)); //分页
+    }
+
+    public Line getItem(ISpecification specification) {
+        List<Line> list= _mapper.selectByExample((LineExample)specification.createExample());
+        if(!list.isEmpty())
+        {
+            return list.get(0);
+        }
+
+        return null;
     }
 
     public Line getItem(Long id) {
         return _mapper.selectByPrimaryKey(id);
+    }
+
+    public int insertItem(Line line)
+    {
+        return _mapper.insert(line);
+    }
+
+    public int updateItem(Line line)
+    {
+        return _mapper.updateByPrimaryKey(line);
     }
 }

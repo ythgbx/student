@@ -4,12 +4,17 @@ package net.bus.web.controller.dto;
  * Created by Edifi_000 on 2016-07-04.
  */
 public class LineItem {
+    private Long id;
     private String start_station;
     private String end_station;
     private Long start_time;
     private Long end_time;
     private Integer price;
     private String bus_img;
+
+    public Long getId(){ return id; }
+
+    public void setId(Long id){ this.id = id; }
 
     public String getStart_station() {
         return start_station;

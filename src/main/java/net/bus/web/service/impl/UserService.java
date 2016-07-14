@@ -2,6 +2,7 @@ package net.bus.web.service.impl;
 
 import net.bus.web.context.Position;
 import net.bus.web.model.User;
+import net.bus.web.repository.UserLineRepository;
 import net.bus.web.repository.UserRepository;
 import net.bus.web.repository.specification.UserPhonePasswordSpecification;
 import net.bus.web.service.IUserService;
@@ -18,7 +19,7 @@ public class UserService  implements IUserService {
 
     public List<User> getAllUsers(int page,int limit) {
 
-        return _rootRepository.getAllUsers(page,limit);
+        return _rootRepository.getAllUsers(page-1,limit);
     }
 
     public User loginCheck(String phone,String password)
