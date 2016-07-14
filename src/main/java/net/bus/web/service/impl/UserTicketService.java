@@ -32,13 +32,12 @@ public class UserTicketService implements IUserTicketService {
 
     public List<UserTicket> getCheckedTickets(long user_id,int page,int limit)
     {
-
         Calendar checkRange = Calendar.getInstance();
         checkRange.setTime(new Date());
         checkRange.add(Calendar.MINUTE, -15);
         ISpecification specification = new UserTickeActiveTimeUserIdSpecification(
                 user_id,checkRange.getTime(), UserTickeActiveTimeUserIdSpecification.ActiveTimeOp.After);
-        return _rootRepository.getList(specification,page,limit);
+        return _rootRepository.getList(specification,page-1,limit);
     }
 
     public List<UserTicket> getDoneTickets(long user_id,int page,int limit)
@@ -48,7 +47,7 @@ public class UserTicketService implements IUserTicketService {
         checkRange.add(Calendar.MINUTE, -15);
         ISpecification specification = new UserTickeActiveTimeUserIdSpecification(
                 user_id,checkRange.getTime(), UserTickeActiveTimeUserIdSpecification.ActiveTimeOp.Before);
-        return _rootRepository.getList(specification,page,limit);
+        return _rootRepository.getList(specification,page-1,limit);
     }
 
     public UserTicket getDetail(long id)
