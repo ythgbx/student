@@ -5,6 +5,7 @@ package net.bus.web.controller.dto;
  */
 public class TicketItem {
     private Long id;
+    private String head;
     private String start_station;
     private String end_station;
     private String bus_img;
@@ -14,6 +15,14 @@ public class TicketItem {
     public Long getId(){ return id; }
 
     public void setId(Long id){ this.id = id; }
+
+    public String getHead() {
+        return head;
+    }
+
+    public void setHead(String head) {
+        this.head = head;
+    }
 
     public String getStart_station() {
         return start_station;

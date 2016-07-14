@@ -41,7 +41,7 @@ public class UserTicketController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/list/unchecked", method = RequestMethod.GET)
-    public List uncheckedList(int page)
+    public List uncheckedList(int page,int limit)
     {
         logger.info("ticket unchecked query");
 //        User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
@@ -53,6 +53,8 @@ public class UserTicketController {
         for (int i=0;i<5;i++)
         {
             TicketItem disItem = new TicketItem();
+            disItem.setId(-1l);
+            disItem.setHead("head/1.png");
             disItem.setStart_station("民族大道中南民族大学");
             disItem.setEnd_station("中北路地铁楚河汉界站");
             disItem.setBus_img("car/1.png");
@@ -66,7 +68,7 @@ public class UserTicketController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/list/checked", method = RequestMethod.GET)
-    public List checkedList(int page)
+    public List checkedList(int page,int limit)
     {
         logger.info("ticket check list query");
 //        User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
@@ -78,6 +80,8 @@ public class UserTicketController {
         for (int i=0;i<5;i++)
         {
             TicketItem disItem = new TicketItem();
+            disItem.setId(-1l);
+            disItem.setHead("head/1.png");
             disItem.setStart_station("民族大道中南民族大学");
             disItem.setEnd_station("中北路地铁楚河汉界站");
             disItem.setBus_img("car/2.png");
@@ -91,7 +95,7 @@ public class UserTicketController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/list/done", method = RequestMethod.GET)
-    public List doneList(int page)
+    public List doneList(int page,int limit)
     {
         logger.info("ticket done list query");
 //        User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
@@ -103,6 +107,8 @@ public class UserTicketController {
         for (int i=0;i<5;i++)
         {
             TicketItem disItem = new TicketItem();
+            disItem.setId(-1l);
+            disItem.setHead("head/1.png");
             disItem.setStart_station("民族大道中南民族大学");
             disItem.setEnd_station("中北路地铁楚河汉界站");
             disItem.setBus_img("car/3.png");
@@ -154,6 +160,7 @@ public class UserTicketController {
             TicketItem disItem = new TicketItem();
             Line line = _lineService.getLineDetails(ticket.getLineId());//TempCode 性能问题
             disItem.setId(ticket.getId());
+            disItem.setHead("head/1.png");//TempCode 暂无该内容
             disItem.setStart_station(line.getStart());
             disItem.setEnd_station(line.getEnd());
             disItem.setBus_img("car/1.png");//TempCode 暂无该内容
