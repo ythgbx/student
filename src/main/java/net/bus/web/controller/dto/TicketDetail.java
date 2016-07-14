@@ -4,10 +4,15 @@ package net.bus.web.controller.dto;
  * Created by Edifi_000 on 2016-07-05.
  */
 public class TicketDetail {
+    private Long id;
     private String start_station;
     private String end_station;
     private Integer price;
     private Long time;
+
+    public Long getId(){ return id; }
+
+    public void setId(Long id){ this.id = id; }
 
     public String getStart_station() {
         return start_station;

@@ -153,6 +153,7 @@ public class UserTicketController {
         for (UserTicket ticket : ticketList) {
             TicketItem disItem = new TicketItem();
             Line line = _lineService.getLineDetails(ticket.getLineId());//TempCode 性能问题
+            disItem.setId(ticket.getId());
             disItem.setStart_station(line.getStart());
             disItem.setEnd_station(line.getEnd());
             disItem.setBus_img("car/1.png");//TempCode 暂无该内容
