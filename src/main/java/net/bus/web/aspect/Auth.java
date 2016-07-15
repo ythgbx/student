@@ -12,7 +12,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface Auth {
-    Role role() default Role.NONE;
+    Role role() default Role.USER;
 
     public enum Role{ NONE, USER, ADMIN};
 }

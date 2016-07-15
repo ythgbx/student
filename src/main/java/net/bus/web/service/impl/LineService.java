@@ -1,5 +1,6 @@
 package net.bus.web.service.impl;
 
+import net.bus.web.context.Position;
 import net.bus.web.model.Line;
 import net.bus.web.model.LineStation;
 import net.bus.web.model.Station;
@@ -13,6 +14,7 @@ import net.bus.web.repository.specification.LineStationStationIdsSpecification;
 import net.bus.web.repository.specification.StationNameSpecification;
 import net.bus.web.repository.specification.UserLineUserIdSpecification;
 import net.bus.web.service.ILineService;
+import net.bus.web.service.ILocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,9 +37,13 @@ public class LineService implements ILineService {
     @Autowired
     private LineStationRepository _lineStationRepository;
 
+    @Autowired
+    private ILocationService _locationService;
+
     public List<Line> getAroundLines(double lat,double lng,int page,int limit)
     {
         //TODO Select Around Lines by lat and lng
+        List<Station> list =_locationService.getAroundStation(new Position(lat, lng));
         return _rootRepository.getAll();
     }
 

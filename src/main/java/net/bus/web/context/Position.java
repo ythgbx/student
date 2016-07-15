@@ -24,4 +24,14 @@ public class Position {
     public void setLng(Double lng) {
         this.lng = lng;
     }
+
+    public Position()
+    {
+
+    }
+    public Position(double lat,double lng)
+    {
+        setLat(lat);
+        setLng(lng);
+    }
 }
