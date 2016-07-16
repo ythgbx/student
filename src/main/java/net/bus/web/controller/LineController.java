@@ -2,14 +2,18 @@ package net.bus.web.controller;
 
 import net.bus.web.aspect.Auth;
 import net.bus.web.context.SessionContext;
+import net.bus.web.controller.dto.BaseRequest;
+import net.bus.web.controller.dto.BaseResult;
 import net.bus.web.controller.dto.LineDetail;
 import net.bus.web.controller.dto.LineItem;
 import net.bus.web.model.Line;
 import net.bus.web.model.User;
 import net.bus.web.service.ILineService;
+import net.bus.web.service.IUserLineService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,6 +32,8 @@ public class LineController {
 
     @Autowired
     private ILineService _lineService;
+    @Autowired
+    private IUserLineService _userLineService;
     @Autowired
     private HttpSession session;
 
@@ -93,11 +99,26 @@ public class LineController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/collection", method = RequestMethod.POST)
-    public boolean collection(long id)
+    public BaseResult collection(@RequestBody BaseRequest request)
     {
-        logger.info("line detail");
-        //TODO Collection line to user
-        return true;
+        logger.info("line collection");
+        BaseResult result = new BaseResult();
+        try {
+            User currentUser = (User) session.getAttribute(SessionContext.CURRENT_USER);
+
+            //TODO Check line id
+            int re = _userLineService.collectionLine(currentUser.getId(), request.getId());
+
+            if(re>0) {
+                result.setResult("success");
+            }else{
+                result.setResult("failure");
+            }
+        }catch (Exception ex){
+            result.setResult("error");
+            result.setError(ex.getMessage());
+        }
+        return result;
     }
 
     private List<LineItem> getDisplayList(List<Line> lineList)
