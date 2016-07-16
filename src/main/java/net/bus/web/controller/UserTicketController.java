@@ -1,6 +1,7 @@
 package net.bus.web.controller;
 
 import net.bus.web.aspect.Auth;
+import net.bus.web.context.MockDataContext;
 import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.TicketDetail;
 import net.bus.web.controller.dto.TicketItem;
@@ -49,20 +50,8 @@ public class UserTicketController {
 //        List<TicketItem> displayList = getDisplayList(ticketList);
 
         //Mock data for test
-        List<TicketItem> displayList = new ArrayList<TicketItem>();
-        for (int i=0;i<5;i++)
-        {
-            TicketItem disItem = new TicketItem();
-            disItem.setId(-1l);
-            disItem.setHead("head/1.png");
-            disItem.setStart_station("民族大道中南民族大学");
-            disItem.setEnd_station("中北路地铁楚河汉界站");
-            disItem.setBus_img("car/1.png");
-            disItem.setTime(new Date().getTime());
-            disItem.setActive_time(new Date().getTime());
-            displayList.add(disItem);
-        }
-        return displayList;
+        return MockDataContext.getInstance().getTicketItemList();
+
     }
 
     @Auth(role = Auth.Role.USER)
@@ -76,20 +65,7 @@ public class UserTicketController {
 //        List<TicketItem> displayList = getDisplayList(ticketList);
 
         //Mock data for test
-        List<TicketItem> displayList = new ArrayList<TicketItem>();
-        for (int i=0;i<5;i++)
-        {
-            TicketItem disItem = new TicketItem();
-            disItem.setId(-1l);
-            disItem.setHead("head/1.png");
-            disItem.setStart_station("民族大道中南民族大学");
-            disItem.setEnd_station("中北路地铁楚河汉界站");
-            disItem.setBus_img("car/2.png");
-            disItem.setTime(new Date().getTime());
-            disItem.setActive_time(new Date().getTime());
-            displayList.add(disItem);
-        }
-        return displayList;
+        return MockDataContext.getInstance().getTicketItemList();
     }
 
     @Auth(role = Auth.Role.USER)
@@ -103,20 +79,7 @@ public class UserTicketController {
 //        List<TicketItem> displayList = getDisplayList(ticketList);
 
         //Mock data for test
-        List<TicketItem> displayList = new ArrayList<TicketItem>();
-        for (int i=0;i<5;i++)
-        {
-            TicketItem disItem = new TicketItem();
-            disItem.setId(-1l);
-            disItem.setHead("head/1.png");
-            disItem.setStart_station("民族大道中南民族大学");
-            disItem.setEnd_station("中北路地铁楚河汉界站");
-            disItem.setBus_img("car/3.png");
-            disItem.setTime(new Date().getTime());
-            disItem.setActive_time(new Date().getTime());
-            displayList.add(disItem);
-        }
-        return displayList;
+        return MockDataContext.getInstance().getTicketItemList();
     }
 
     @Auth(role = Auth.Role.USER)
@@ -128,12 +91,7 @@ public class UserTicketController {
         //TODO 处理票据明细查询
 
         //Mock data for test
-        TicketDetail detail = new TicketDetail();
-        detail.setStart_station("民族大道纺织大学");
-        detail.setEnd_station("珞瑜路武汉大学");
-        detail.setPrice(4);
-        detail.setTime(new Date().getTime());
-        return detail;
+        return MockDataContext.getInstance().getTicketDetail();
     }
 
     @Auth(role = Auth.Role.USER)

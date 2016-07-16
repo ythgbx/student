@@ -9,7 +9,7 @@ public class LineItem {
     private String end_station;
     private Long start_time;
     private Long end_time;
-    private Integer price;
+    private Double price;
     private String bus_img;
 
     public Long getId(){ return id; }
@@ -48,11 +48,11 @@ public class LineItem {
         this.end_time = end_time;
     }
 
-    public Integer getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

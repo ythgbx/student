@@ -1,6 +1,7 @@
 package net.bus.web.controller;
 
 import net.bus.web.aspect.Auth;
+import net.bus.web.context.MockDataContext;
 import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.BaseRequest;
 import net.bus.web.controller.dto.BaseResult;
@@ -45,9 +46,12 @@ public class LineController {
     public List around(double lat,double lng,int page,int limit)
     {
         logger.info("line around query");
-        List<Line> lineList = _lineService.getAroundLines(lat,lng,page,limit);
-        List<LineItem> displayList = getDisplayList(lineList);
-        return displayList;
+//        List<Line> lineList = _lineService.getAroundLines(lat,lng,page,limit);
+//        List<LineItem> displayList = getDisplayList(lineList);
+//        return displayList;
+
+        //Mock data for test
+        return MockDataContext.getInstance().getLineItemList();
     }
 
     @Auth(role = Auth.Role.USER)
@@ -55,11 +59,14 @@ public class LineController {
     @RequestMapping(value = "/list/user", method = RequestMethod.GET)
     public List user(int page,int limit)
     {
-        logger.info("line user query");
-        User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
-        List<Line> lineList = _lineService.getUserLines(currentUser.getId(), page, limit);
-        List<LineItem> displayList = getDisplayList(lineList);
-        return displayList;
+//        logger.info("line user query");
+//        User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
+//        List<Line> lineList = _lineService.getUserLines(currentUser.getId(), page, limit);
+//        List<LineItem> displayList = getDisplayList(lineList);
+//        return displayList;
+
+        //Mock data for test
+        return MockDataContext.getInstance().getLineItemList();
     }
 
     @Auth(role = Auth.Role.USER)
@@ -67,10 +74,13 @@ public class LineController {
     @RequestMapping(value = "/list/station", method = RequestMethod.GET)
     public List station(String station_name,int page,int limit)
     {
-        logger.info("line station query");
-        List<Line> lineList = _lineService.getStationLines(station_name, page, limit);
-        List<LineItem> displayList = getDisplayList(lineList);
-        return displayList;
+//        logger.info("line station query");
+//        List<Line> lineList = _lineService.getStationLines(station_name, page, limit);
+//        List<LineItem> displayList = getDisplayList(lineList);
+//        return displayList;
+
+        //Mock data for test
+        return MockDataContext.getInstance().getLineItemList();
     }
 
     @Auth(role = Auth.Role.USER)
@@ -78,10 +88,13 @@ public class LineController {
     @RequestMapping(value = "/list/all", method = RequestMethod.GET)
     public List all(int page,int limit)
     {
-        logger.info("line all query");
-        List<Line> lineList = _lineService.getAllLines(page,limit);
-        List<LineItem> displayList = getDisplayList(lineList);
-        return displayList;
+//        logger.info("line all query");
+//        List<Line> lineList = _lineService.getAllLines(page,limit);
+//        List<LineItem> displayList = getDisplayList(lineList);
+//        return displayList;
+
+        //Mock data for test
+        return MockDataContext.getInstance().getLineItemList();
     }
 
     @Auth(role = Auth.Role.USER)
@@ -90,10 +103,13 @@ public class LineController {
     public LineDetail detail(long id)
     {
         logger.info("line detail");
-        //TODO Get line detail
-        Line line = _lineService.getLineDetails(id);
-        LineDetail lineDetail = new LineDetail();
-        return lineDetail;
+//        //TODO Get line detail
+//        Line line = _lineService.getLineDetails(id);
+//        LineDetail lineDetail = new LineDetail();
+//        return lineDetail;
+
+        //Mock data for test
+        return MockDataContext.getInstance().getLineDetail();
     }
 
     @Auth(role = Auth.Role.USER)
