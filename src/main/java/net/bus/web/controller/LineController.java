@@ -142,6 +142,13 @@ public class LineController {
         List<LineItem> displayList = new ArrayList<LineItem>();
         for (Line line : lineList) {
             LineItem disItem = new LineItem();
+            disItem.setId(line.getId());
+            disItem.setStart_time(line.getStartTime().getTime());
+            disItem.setEnd_time(line.getEndTime().getTime());
+            disItem.setStart_station(line.getStart());
+            disItem.setEnd_station(line.getEnd());
+            disItem.setBus_img("line/1.png");
+            disItem.setPrice(line.getPrice().doubleValue());
             displayList.add(disItem);
         }
         return displayList;
