@@ -3,6 +3,8 @@ package net.bus.web.controller;
 import net.bus.web.aspect.Auth;
 import net.bus.web.context.MockDataContext;
 import net.bus.web.context.SessionContext;
+import net.bus.web.controller.dto.BaseRequest;
+import net.bus.web.controller.dto.BaseResult;
 import net.bus.web.controller.dto.TicketDetail;
 import net.bus.web.controller.dto.TicketItem;
 import net.bus.web.model.Line;
@@ -13,6 +15,7 @@ import net.bus.web.service.ILineService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -88,7 +91,14 @@ public class UserTicketController {
     public TicketDetail detail(Long id)
     {
         logger.info("ticket detail query");
-        //TODO 处理票据明细查询
+//        UserTicket userTicket =_userTicketService.getDetail(id);
+//        Line userLine = _lineService.getLineDetails(userTicket.getLineId());
+//        TicketDetail ticketDetail = new TicketDetail();
+//        ticketDetail.setId(userTicket.getId());
+//        ticketDetail.setStart_station(userLine.getStart());
+//        ticketDetail.setEnd_station(userLine.getEnd());
+//        ticketDetail.setPrice(userTicket.getPrice());
+//        ticketDetail.setTime(userTicket.getTime().getTime());
 
         //Mock data for test
         return MockDataContext.getInstance().getTicketDetail();
@@ -97,13 +107,21 @@ public class UserTicketController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/checked", method = RequestMethod.POST)
-    public String checked(Long id)
+    public BaseResult checked(@RequestBody BaseRequest request)
     {
         logger.info("ticket checked");
-        //TODO 处理检票操作
+        BaseResult result = new BaseResult();
+//        try {
+//            _userTicketService.checkTicket(request.getId());
+//            result.setResult("success");
+//        }catch (Exception ex){
+//            result.setResult("error");
+//            result.setError(ex.getMessage());
+//        }
 
         //Mock data for test
-        String result = "success";
+        result.setResult("success");
+
         return result;
     }
 
