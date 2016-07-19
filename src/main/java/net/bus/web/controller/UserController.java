@@ -1,6 +1,7 @@
 package net.bus.web.controller;
 
 import net.bus.web.aspect.Auth;
+import net.bus.web.context.PhoneSMSContext;
 import net.bus.web.context.Position;
 import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.*;
@@ -18,6 +19,7 @@ import net.bus.web.service.IUserService;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 @RequestMapping("/user")
@@ -83,6 +85,9 @@ public class UserController {
         BaseResult result = new BaseResult();
         if(register.getPhone()!=""){
             //TODO Request sms server for send code sms to the phone
+            String smsCode = getRandNum(6);
+            PhoneSMSContext.getInstance().savePhonesSmsCode(register.getPhone(),smsCode);
+
             result.setResult("success");
         }else{
             result.setResult("failure");
@@ -129,7 +134,11 @@ public class UserController {
         BaseResult result = new BaseResult();
         try {
             User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
-            if(account.getPhone().equals(currentUser.getPhone())&& (account.getPassword().equals(currentUser.getPassword()) || checkCodeWithPhone(account.getPhone(),account.getCode()))){
+            if(account.getPhone().equals(currentUser.getPhone())&& (
+                    (account.getPassword()!=null&&account.getPassword().equals(currentUser.getPassword()))
+                            || (account.getCode()!=null&&checkCodeWithPhone(account.getPhone(),account.getCode()))
+            )){
+
                 service.setAccount(currentUser,currentUser.getPhone(),account.getNew_password());
 
                 currentUser.setPassword(account.getNew_password());
@@ -236,6 +245,24 @@ public class UserController {
         {
             return true;
         }
+        if( PhoneSMSContext.getInstance().checkPhonesSmsCode(phone,code))
+        {
+            return true;
+        }
         return false;
+    }
+
+    private String getRandNum(int charCount) {
+        String charValue = "";
+        for (int i = 0; i < charCount; i++) {
+            char c = (char) (randomInt(0, 10) + '0');
+            charValue += String.valueOf(c);
+        }
+        return charValue;
+    }
+
+    private int randomInt(int from, int to) {
+        Random r = new Random();
+        return from + r.nextInt(to - from);
     }
 }
