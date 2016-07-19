@@ -117,8 +117,12 @@ public class UserController {
         }
 
         try {
-            service.register(register.getPhone(),register.getPassword(),register.getName());
-            result.setResult("success");
+            if(service.registerCheck(register.getPhone())){
+                service.register(register.getPhone(),register.getPassword(),register.getName());
+                result.setResult("success");
+            }else {
+                result.setResult("failure user had");
+            }
         }catch (Exception ex){
             result.setResult("error");
             result.setError(ex.getMessage());

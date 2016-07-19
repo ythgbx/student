@@ -5,6 +5,7 @@ import net.bus.web.model.User;
 import net.bus.web.repository.UserLineRepository;
 import net.bus.web.repository.UserRepository;
 import net.bus.web.repository.specification.UserPhonePasswordSpecification;
+import net.bus.web.repository.specification.UserPhoneSpecification;
 import net.bus.web.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,15 @@ public class UserService  implements IUserService {
     public List<User> getAllUsers(int page,int limit) {
 
         return _rootRepository.getAllUsers(page-1,limit);
+    }
+
+    public boolean registerCheck(String phone)
+    {
+        User user = _rootRepository.getUser(new UserPhoneSpecification(phone));
+        if(user==null){
+            return true;
+        }
+        return false;
     }
 
     public User loginCheck(String phone,String password)
