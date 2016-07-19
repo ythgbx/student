@@ -54,7 +54,7 @@ public class LineService implements ILineService {
         for (UserLine userLine : listUserLine) {
             listLineIds.add(userLine.getLineId());
         }
-        return _rootRepository.getList(new LineIdsSpecification(listLineIds),page-1,limit);
+        return _rootRepository.getList(new LineIdsSpecification(listLineIds), page - 1, limit);
     }
 
     public List<Line> getStationLines(String station_name,int page,int limit)
@@ -74,12 +74,18 @@ public class LineService implements ILineService {
 
     public List<Line> getAllLines(int page,int limit)
     {
-        return _rootRepository.getAll(page-1,limit);
+        return _rootRepository.getAll(page - 1, limit);
     }
 
     public Line getLineDetails(Long id)
     {
         //TODO Select line by id
         return _rootRepository.getItem(id);
+    }
+
+    public boolean checkLineExist(Long id){
+        List<Long> ids = new ArrayList<Long>();
+        ids.add(id);
+        return  _rootRepository.existItem(new LineIdsSpecification(ids));
     }
 }

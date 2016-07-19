@@ -120,9 +120,19 @@ public class LineController {
         logger.info("line collection");
         BaseResult result = new BaseResult();
         try {
+            //Check line id
+            if(request.getId()==null){
+                result.setResult("failure request no line id");
+                return result;
+            }
+
+            if(!_lineService.checkLineExist(request.getId())){
+                result.setResult("failure no line id exist");
+                return result;
+            }
+
             User currentUser = (User) session.getAttribute(SessionContext.CURRENT_USER);
 
-            //TODO Check line id
             int re = _userLineService.collectionLine(currentUser.getId(), request.getId());
 
             if(re>0) {

@@ -61,4 +61,12 @@ public class LineRepository {
     {
         return _mapper.updateByPrimaryKey(line);
     }
+
+    public boolean existItem(ISpecification specification){
+        int result = _mapper.countByExample((LineExample)specification.createExample());
+        if(result>0)
+            return true;
+
+        return  false;
+    }
 }

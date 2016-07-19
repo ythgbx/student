@@ -18,4 +18,6 @@ public interface ILineService {
     List<Line> getAllLines(int page,int limit);
 
     Line getLineDetails(Long id);
+
+    boolean checkLineExist(Long id);
 }
