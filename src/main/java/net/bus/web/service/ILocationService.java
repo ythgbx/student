@@ -11,4 +11,6 @@ import java.util.List;
 public interface ILocationService {
 
     List<Station> getAroundStation(Position pos);
+
+    List<Station> getAroundStation(Position pos,int hashLength);
 }

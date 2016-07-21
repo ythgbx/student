@@ -23,8 +23,13 @@ public class LocationService implements ILocationService {
 
     public List<Station> getAroundStation(Position pos)
     {
+        return getAroundStation(pos,9);
+    }
+
+    public List<Station> getAroundStation(Position pos,int hashLength)
+    {
         //step1
-        GeoHash geoHash = GeoHash.withCharacterPrecision(pos.getLat(), pos.getLng(), 10);
+        GeoHash geoHash = GeoHash.withCharacterPrecision(pos.getLat(), pos.getLng(), hashLength);
         List<String> listStationAdjacentCode = new ArrayList<String>();
         GeoHash[] adjacent = geoHash.getAdjacent();
         for (GeoHash hash : adjacent) {
