@@ -20,6 +20,7 @@ public class LineDetail {
     private Double wait_time;
     private String list_stations;
     private List<LineBus> list_buses;
+    private Long current_station_id;
 
     public Long getId() {
         return id;
@@ -107,5 +108,13 @@ public class LineDetail {
 
     public void setList_buses(List<LineBus> list_buses) {
         this.list_buses = list_buses;
+    }
+
+    public Long getCurrent_station_id() {
+        return current_station_id;
+    }
+
+    public void setCurrent_station_id(Long current_station_id) {
+        this.current_station_id = current_station_id;
     }
 }

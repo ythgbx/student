@@ -2,22 +2,22 @@ package net.bus.web.controller;
 
 import net.bus.web.aspect.Auth;
 import net.bus.web.context.MockDataContext;
+import net.bus.web.context.Position;
 import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.BaseRequest;
 import net.bus.web.controller.dto.BaseResult;
 import net.bus.web.controller.dto.LineDetail;
 import net.bus.web.controller.dto.LineItem;
 import net.bus.web.model.Line;
+import net.bus.web.model.Station;
 import net.bus.web.model.User;
 import net.bus.web.service.ILineService;
+import net.bus.web.service.ILocationService;
 import net.bus.web.service.IUserLineService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -35,6 +35,8 @@ public class LineController {
     private ILineService _lineService;
     @Autowired
     private IUserLineService _userLineService;
+    @Autowired
+    private ILocationService _locationService;
     @Autowired
     private HttpSession session;
 
@@ -100,16 +102,34 @@ public class LineController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
-    public LineDetail detail(long id)
+    public LineDetail detail(long id, @RequestParam(value = "lat", required = false, defaultValue = "0") double lat, @RequestParam(value = "lng", required = false, defaultValue = "0")double lng)
     {
         logger.info("line detail");
-//        //TODO Get line detail
-//        Line line = _lineService.getLineDetails(id);
-//        LineDetail lineDetail = new LineDetail();
-//        return lineDetail;
+        //TODO Get line detail
+        Line line = _lineService.getLineDetails(id);
+        LineDetail lineDetail = new LineDetail();
+        lineDetail.setId(line.getId());
+        lineDetail.setStart_station(line.getStart());
+        lineDetail.setEnd_station(line.getEnd());
+        lineDetail.setStart_time(line.getStartTime().getTime());
+        lineDetail.setEnd_time(line.getEndTime().getTime());
+        lineDetail.setList_stations(line.getLatlng());
+        lineDetail.setPrice(line.getPrice().doubleValue());
 
-        //Mock data for test
-        return MockDataContext.getInstance().getLineDetail();
+        if(lat!=0&&lng!=0){
+            List<Station> stations = _locationService.getAroundStation(new Position(lat, lng));
+            if(stations.size()>0){
+                Station station = stations.get(0);
+                lineDetail.setCurrent_station_id(station.getId());
+            }
+        }
+
+        //TODO Use IBusService to get bus's tracks in line with direction??
+
+        return lineDetail;
+
+        ////Mock data for test
+        //return MockDataContext.getInstance().getLineDetail();
     }
 
     @Auth(role = Auth.Role.USER)
