@@ -3,10 +3,7 @@ package net.bus.web.controller;
 import net.bus.web.aspect.Auth;
 import net.bus.web.context.MockDataContext;
 import net.bus.web.context.SessionContext;
-import net.bus.web.controller.dto.BaseRequest;
-import net.bus.web.controller.dto.BaseResult;
-import net.bus.web.controller.dto.TicketDetail;
-import net.bus.web.controller.dto.TicketItem;
+import net.bus.web.controller.dto.*;
 import net.bus.web.model.Line;
 import net.bus.web.model.User;
 import net.bus.web.model.UserTicket;
@@ -48,12 +45,13 @@ public class UserTicketController {
     public List uncheckedList(int page,int limit)
     {
         logger.info("ticket unchecked query");
-//        User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
-//        List<UserTicket> ticketList = _userTicketService.getUncheckedTickets(currentUser.getId(),page);
-//        List<TicketItem> displayList = getDisplayList(ticketList);
+        User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
+        List<UserTicket> ticketList = _userTicketService.getUncheckedTickets(currentUser.getId(),page,limit);
+        List<TicketItem> displayList = getDisplayList(ticketList);
+        return displayList;
 
         //Mock data for test
-        return MockDataContext.getInstance().getTicketItemList();
+        //return MockDataContext.getInstance().getTicketItemList();
 
     }
 
@@ -63,12 +61,13 @@ public class UserTicketController {
     public List checkedList(int page,int limit)
     {
         logger.info("ticket check list query");
-//        User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
-//        List<UserTicket> ticketList = _userTicketService.getCheckedTickets(currentUser.getId(),page);
-//        List<TicketItem> displayList = getDisplayList(ticketList);
+        User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
+        List<UserTicket> ticketList = _userTicketService.getCheckedTickets(currentUser.getId(),page,limit);
+        List<TicketItem> displayList = getDisplayList(ticketList);
+        return displayList;
 
         //Mock data for test
-        return MockDataContext.getInstance().getTicketItemList();
+        //return MockDataContext.getInstance().getTicketItemList();
     }
 
     @Auth(role = Auth.Role.USER)
@@ -77,12 +76,13 @@ public class UserTicketController {
     public List doneList(int page,int limit)
     {
         logger.info("ticket done list query");
-//        User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
-//        List<UserTicket> ticketList = _userTicketService.getCheckedTickets(currentUser.getId(),page);
-//        List<TicketItem> displayList = getDisplayList(ticketList);
+        User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
+        List<UserTicket> ticketList = _userTicketService.getDoneTickets(currentUser.getId(), page, limit);
+        List<TicketItem> displayList = getDisplayList(ticketList);
+        return displayList;
 
         //Mock data for test
-        return MockDataContext.getInstance().getTicketItemList();
+        //return MockDataContext.getInstance().getTicketItemList();
     }
 
     @Auth(role = Auth.Role.USER)
@@ -91,17 +91,18 @@ public class UserTicketController {
     public TicketDetail detail(Long id)
     {
         logger.info("ticket detail query");
-//        UserTicket userTicket =_userTicketService.getDetail(id);
-//        Line userLine = _lineService.getLineDetails(userTicket.getLineId());
-//        TicketDetail ticketDetail = new TicketDetail();
-//        ticketDetail.setId(userTicket.getId());
-//        ticketDetail.setStart_station(userLine.getStart());
-//        ticketDetail.setEnd_station(userLine.getEnd());
-//        ticketDetail.setPrice(userTicket.getPrice());
-//        ticketDetail.setTime(userTicket.getTime().getTime());
+        UserTicket userTicket =_userTicketService.getDetail(id);
+        Line userLine = _lineService.getLineDetails(userTicket.getLineId());
+        TicketDetail ticketDetail = new TicketDetail();
+        ticketDetail.setId(userTicket.getId());
+        ticketDetail.setStart_station(userLine.getStart());
+        ticketDetail.setEnd_station(userLine.getEnd());
+        ticketDetail.setPrice(userTicket.getPrice());
+        ticketDetail.setTime(userTicket.getTime().getTime());
+        return ticketDetail;
 
         //Mock data for test
-        return MockDataContext.getInstance().getTicketDetail();
+        //return MockDataContext.getInstance().getTicketDetail();
     }
 
     @Auth(role = Auth.Role.USER)
@@ -111,17 +112,42 @@ public class UserTicketController {
     {
         logger.info("ticket checked");
         BaseResult result = new BaseResult();
-//        try {
-//            _userTicketService.checkTicket(request.getId());
-//            result.setResult("success");
-//        }catch (Exception ex){
-//            result.setResult("error");
-//            result.setError(ex.getMessage());
-//        }
+        try {
+            if(_userTicketService.checkTicket(request.getId())){
+                result.setResult("success");
+            }else{
+                result.setResult("failure");
+            }
+        }catch (Exception ex){
+            result.setResult("error");
+            result.setError(ex.getMessage());
+        }
 
         //Mock data for test
-        result.setResult("success");
+       // result.setResult("success");
 
+        return result;
+    }
+
+    @Auth(role = Auth.Role.USER)
+    @ResponseBody
+    @RequestMapping(value = "/buy", method = RequestMethod.POST)
+    public BaseResult buy(@RequestBody TicketBuy request)
+    {
+        logger.info("ticket buy");
+        BaseResult result = new BaseResult();
+        try {
+            User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
+            if(_userTicketService.buyTicket(request.getLine_id(), currentUser)){
+                session.setAttribute(SessionContext.CURRENT_USER,currentUser);
+                result.setResult("success");
+            }else {
+                result.setResult("failure");
+            }
+        }catch (Exception ex){
+            result.setResult("error");
+            result.setError(ex.getMessage());
+        }
         return result;
     }
 
@@ -141,7 +167,11 @@ public class UserTicketController {
             disItem.setEnd_station(line.getEnd());
             disItem.setBus_img("car/1.png");//TempCode 暂无该内容
             disItem.setTime(ticket.getTime().getTime());
-            disItem.setActive_time(ticket.getActiveTime().getTime());
+            if(ticket.getActiveTime()!=null){
+                disItem.setActive_time(ticket.getActiveTime().getTime());
+            }else{
+                disItem.setActive_time(null);
+            }
             displayList.add(disItem);
         }
         return displayList;

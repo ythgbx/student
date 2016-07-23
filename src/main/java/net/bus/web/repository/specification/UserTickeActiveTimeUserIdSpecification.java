@@ -68,6 +68,8 @@ public class UserTickeActiveTimeUserIdSpecification implements ISpecification<Us
         UserTicketExample example = getUserIdExample();
         UserTicketExample.Criteria criteriaActiveTime = example.getOredCriteria().get(0);
         criteriaActiveTime.andActiveTimeIsNull();
+        example.setOrderByClause("id desc");
+        
         return example;
     }
 
@@ -76,6 +78,7 @@ public class UserTickeActiveTimeUserIdSpecification implements ISpecification<Us
         UserTicketExample example = getUserIdExample();
         UserTicketExample.Criteria criteriaActiveTime = example.getOredCriteria().get(0);
         criteriaActiveTime.andActiveTimeGreaterThanOrEqualTo(_activeTime);
+        example.setOrderByClause("id desc");
 
         return example;
     }
@@ -85,6 +88,7 @@ public class UserTickeActiveTimeUserIdSpecification implements ISpecification<Us
         UserTicketExample example = getUserIdExample();
         UserTicketExample.Criteria criteriaActiveTime = example.getOredCriteria().get(0);
         criteriaActiveTime.andActiveTimeLessThan(_activeTime);
+        example.setOrderByClause("id desc");
 
         return example;
     }

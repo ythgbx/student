@@ -1,5 +1,6 @@
 package net.bus.web.service;
 
+import net.bus.web.model.User;
 import net.bus.web.model.UserTicket;
 
 import java.util.Date;
@@ -18,9 +19,9 @@ public interface IUserTicketService {
 
     UserTicket getDetail(long id);
 
-    Date checkTicket(long id);
+    boolean checkTicket(long id);
 
     UserTicket getTicketByLineId(long line_id);
 
-    UserTicket buyTicket(UserTicket ticket);
+    boolean buyTicket(long line_id,User user);
 }

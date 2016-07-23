@@ -26,7 +26,7 @@ public class UserTicketRepository {
 
     public List<UserTicket> getList(ISpecification specification,int page,int limit)
     {
-        return _mapper.selectByExampleWithRowbounds((UserTicketExample)specification.createExample(), new RowBounds(page, limit)); //分页
+        return _mapper.selectByExampleWithRowbounds((UserTicketExample) specification.createExample(), new RowBounds(page, limit)); //分页
     }
 
     public UserTicket getItem(ISpecification specification)
@@ -42,5 +42,10 @@ public class UserTicketRepository {
     public int updateItem(UserTicket ticket)
     {
         return  _mapper.updateByPrimaryKey(ticket);
+    }
+
+    public int insertItem(UserTicket ticket)
+    {
+        return  _mapper.insert(ticket);
     }
 }
