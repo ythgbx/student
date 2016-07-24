@@ -118,7 +118,7 @@ public class UserController {
 
         try {
             if(service.registerCheck(register.getPhone())){
-                service.register(register.getPhone(),register.getPassword(),register.getName());
+                service.register(register.getPhone(), register.getPassword(), register.getName());
                 result.setResult("success");
             }else {
                 result.setResult("failure user had");
@@ -220,6 +220,27 @@ public class UserController {
             session.setAttribute(SessionContext.CURRENT_USER, currentUser);
 
             result.setResult("success");
+        }catch (Exception ex){
+            result.setResult("error");
+            result.setError(ex.getMessage());
+        }
+        return result;
+    }
+
+    @Auth(role = Auth.Role.USER)
+    @ResponseBody
+    @RequestMapping(value = "/add/point", method = RequestMethod.POST)
+    public BaseResult modifyPoint(@RequestBody UserPointAdd pointAdd)
+    {
+        BaseResult result = new BaseResult();
+        try {
+            User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
+            if(service.addPoint(currentUser,pointAdd.getAddNum())) {
+                session.setAttribute(SessionContext.CURRENT_USER, currentUser);
+                result.setResult("success");
+            }else{
+                result.setResult("failure");
+            }
         }catch (Exception ex){
             result.setResult("error");
             result.setError(ex.getMessage());

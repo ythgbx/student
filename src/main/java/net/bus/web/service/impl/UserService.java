@@ -78,4 +78,18 @@ public class UserService  implements IUserService {
 
         return false;
     }
+
+    public boolean addPoint(User user,Integer addNum)
+    {
+        if(user!=null&&addNum>0)
+        {
+            int point = user.getPoints() + addNum;
+            if(point>=0){
+                user.setPoints(point);
+                _rootRepository.updateUser(user);
+                return true;
+            }
+        }
+        return false;
+    }
 }
