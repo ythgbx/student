@@ -69,7 +69,7 @@ public class UserTickeActiveTimeUserIdSpecification implements ISpecification<Us
         UserTicketExample.Criteria criteriaActiveTime = example.getOredCriteria().get(0);
         criteriaActiveTime.andActiveTimeIsNull();
         example.setOrderByClause("id desc");
-        
+
         return example;
     }
 

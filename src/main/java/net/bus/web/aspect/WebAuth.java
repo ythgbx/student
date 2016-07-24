@@ -1,12 +1,10 @@
 package net.bus.web.aspect;
 
 import net.bus.web.context.SessionContext;
-import org.aspectj.lang.JoinPoint;
+import net.bus.web.controller.dto.BaseResult;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +41,33 @@ public class WebAuth {
                     return point.proceed();
                 } else {
                     return new ModelAndView("redirect:/user/login");
+                }
+            }
+        } else {
+            return point.proceed();
+        }
+    }
+
+    @Around("(execution(java.util.List net.bus.web.controller..*.*(..)) " +
+            "||execution(net.bus.web.controller.dto.* net.bus.web.controller..*.*(..)))"+
+            "&& @annotation(auth)")
+    public Object checkWebResultAuth(ProceedingJoinPoint point, Auth auth) throws Throwable {
+
+        BaseResult result = new BaseResult();
+
+        if (auth.role() != Auth.Role.NONE) {
+            if (session.getAttribute(SessionContext.CURRENT_USER) == null) {
+                result.setResult("error");
+                result.setError("user not login!");
+                return result;
+            } else {
+                Auth.Role role = (Auth.Role) session.getAttribute(SessionContext.CURRENT_USER_ROLE);
+                if (role.ordinal() >= auth.role().ordinal()) {
+                    return point.proceed();
+                } else {
+                    result.setResult("error");
+                    result.setError("user role low!");
+                    return result;
                 }
             }
         } else {

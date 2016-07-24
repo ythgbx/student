@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Edifi_000 on 2016-07-04.
  */
-public class LineDetail {
+public class LineDetail implements IResult{
 
     private Long id;
     private String start_station;
