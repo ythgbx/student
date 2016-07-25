@@ -1,12 +1,13 @@
 package net.bus.web.controller.dto;
 
-import net.bus.web.context.Position;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.List;
 
 /**
  * Created by Edifi_000 on 2016-07-04.
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class LineDetail implements IResult{
 
     private Long id;

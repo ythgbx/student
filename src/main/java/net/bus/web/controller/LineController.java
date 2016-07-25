@@ -4,10 +4,7 @@ import net.bus.web.aspect.Auth;
 import net.bus.web.context.MockDataContext;
 import net.bus.web.context.Position;
 import net.bus.web.context.SessionContext;
-import net.bus.web.controller.dto.BaseRequest;
-import net.bus.web.controller.dto.BaseResult;
-import net.bus.web.controller.dto.LineDetail;
-import net.bus.web.controller.dto.LineItem;
+import net.bus.web.controller.dto.*;
 import net.bus.web.model.Line;
 import net.bus.web.model.Station;
 import net.bus.web.model.User;
@@ -45,7 +42,7 @@ public class LineController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/list/around", method = RequestMethod.GET)
-    public List around(double lat,double lng,int page,int limit)
+    public IResult around(double lat,double lng,int page,int limit)
     {
         logger.info("line around query");
 //        List<Line> lineList = _lineService.getAroundLines(lat,lng,page,limit);
@@ -53,13 +50,16 @@ public class LineController {
 //        return displayList;
 
         //Mock data for test
-        return MockDataContext.getInstance().getLineItemList();
+        LineList lineList = new LineList();
+        lineList.setLines(MockDataContext.getInstance().getLineItemList());
+        lineList.setPage(page);
+        return lineList;
     }
 
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/list/user", method = RequestMethod.GET)
-    public List user(int page,int limit)
+    public IResult user(int page,int limit)
     {
 //        logger.info("line user query");
 //        User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
@@ -68,13 +68,16 @@ public class LineController {
 //        return displayList;
 
         //Mock data for test
-        return MockDataContext.getInstance().getLineItemList();
+        LineList lineList = new LineList();
+        lineList.setLines(MockDataContext.getInstance().getLineItemList());
+        lineList.setPage(page);
+        return lineList;
     }
 
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/list/station", method = RequestMethod.GET)
-    public List station(String station_name,int page,int limit)
+    public IResult station(String station_name,int page,int limit)
     {
 //        logger.info("line station query");
 //        List<Line> lineList = _lineService.getStationLines(station_name, page, limit);
@@ -82,13 +85,16 @@ public class LineController {
 //        return displayList;
 
         //Mock data for test
-        return MockDataContext.getInstance().getLineItemList();
+        LineList lineList = new LineList();
+        lineList.setLines(MockDataContext.getInstance().getLineItemList());
+        lineList.setPage(page);
+        return lineList;
     }
 
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/list/all", method = RequestMethod.GET)
-    public List all(int page,int limit)
+    public IResult all(int page,int limit)
     {
 //        logger.info("line all query");
 //        List<Line> lineList = _lineService.getAllLines(page,limit);
@@ -96,13 +102,16 @@ public class LineController {
 //        return displayList;
 
         //Mock data for test
-        return MockDataContext.getInstance().getLineItemList();
+        LineList lineList = new LineList();
+        lineList.setLines(MockDataContext.getInstance().getLineItemList());
+        lineList.setPage(page);
+        return lineList;
     }
 
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
-    public LineDetail detail(long id, @RequestParam(value = "lat", required = false, defaultValue = "0") double lat, @RequestParam(value = "lng", required = false, defaultValue = "0")double lng)
+    public IResult detail(long id, @RequestParam(value = "lat", required = false, defaultValue = "0") double lat, @RequestParam(value = "lng", required = false, defaultValue = "0")double lng)
     {
         logger.info("line detail");
         //TODO Get line detail
@@ -135,7 +144,7 @@ public class LineController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/collection", method = RequestMethod.POST)
-    public BaseResult collection(@RequestBody BaseRequest request)
+    public IResult collection(@RequestBody BaseRequest request)
     {
         logger.info("line collection");
         BaseResult result = new BaseResult();

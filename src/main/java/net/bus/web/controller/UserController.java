@@ -45,7 +45,7 @@ public class UserController {
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public LoginResult login(@RequestBody Login login)
+    public IResult login(@RequestBody Login login)
     {
         User user = service.loginCheck(login.getPhone(),login.getPassword());
 
@@ -68,7 +68,7 @@ public class UserController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
-    public BaseResult logout()
+    public IResult logout()
     {
         session.removeAttribute(SessionContext.CURRENT_USER);
         session.removeAttribute(SessionContext.CURRENT_USER_ROLE);
@@ -80,7 +80,7 @@ public class UserController {
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/sms", method = RequestMethod.POST)
-    public BaseResult registerSms(@RequestBody Register register)
+    public IResult registerSms(@RequestBody Register register)
     {
         BaseResult result = new BaseResult();
         if(register.getPhone()!=""){
@@ -107,7 +107,7 @@ public class UserController {
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public BaseResult register(@RequestBody Register register)
+    public IResult register(@RequestBody Register register)
     {
         BaseResult result = new BaseResult();
         if(!checkCodeWithPhone(register.getPhone(),register.getCode()))
@@ -133,7 +133,7 @@ public class UserController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/modify/password", method = RequestMethod.PUT)
-    public BaseResult modifyPassword(@RequestBody UserAccount account)
+    public IResult modifyPassword(@RequestBody UserAccount account)
     {
         BaseResult result = new BaseResult();
         try {
@@ -163,7 +163,7 @@ public class UserController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/modify/phone", method = RequestMethod.PUT)
-    public BaseResult modifyAccount(@RequestBody UserAccount account)
+    public IResult modifyAccount(@RequestBody UserAccount account)
     {
         BaseResult result = new BaseResult();
         try {
@@ -190,7 +190,7 @@ public class UserController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/modify/base", method = RequestMethod.PUT)
-    public BaseResult modifyPos(@RequestBody UserBase base)
+    public IResult modifyPos(@RequestBody UserBase base)
     {
         BaseResult result = new BaseResult();
         try {
@@ -230,7 +230,7 @@ public class UserController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/add/point", method = RequestMethod.POST)
-    public BaseResult modifyPoint(@RequestBody UserPointAdd pointAdd)
+    public IResult modifyPoint(@RequestBody UserPointAdd pointAdd)
     {
         BaseResult result = new BaseResult();
         try {

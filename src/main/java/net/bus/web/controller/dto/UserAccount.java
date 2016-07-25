@@ -3,7 +3,7 @@ package net.bus.web.controller.dto;
 /**
  * Created by Edifi_000 on 2016-07-12.
  */
-public class UserAccount implements IResult {
+public class UserAccount extends BaseResult {
 
     private String phone;
     private String new_phone;

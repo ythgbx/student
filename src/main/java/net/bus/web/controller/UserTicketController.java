@@ -42,13 +42,17 @@ public class UserTicketController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/list/unchecked", method = RequestMethod.GET)
-    public List uncheckedList(int page,int limit)
+    public IResult uncheckedList(int page,int limit)
     {
         logger.info("ticket unchecked query");
         User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
         List<UserTicket> ticketList = _userTicketService.getUncheckedTickets(currentUser.getId(),page,limit);
         List<TicketItem> displayList = getDisplayList(ticketList);
-        return displayList;
+
+        TicketList resultTicketList = new TicketList();
+        resultTicketList.setTickets(displayList);
+        resultTicketList.setPage(page);
+        return resultTicketList;
 
         //Mock data for test
         //return MockDataContext.getInstance().getTicketItemList();
@@ -58,13 +62,17 @@ public class UserTicketController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/list/checked", method = RequestMethod.GET)
-    public List checkedList(int page,int limit)
+    public IResult checkedList(int page,int limit)
     {
         logger.info("ticket check list query");
         User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
         List<UserTicket> ticketList = _userTicketService.getCheckedTickets(currentUser.getId(),page,limit);
         List<TicketItem> displayList = getDisplayList(ticketList);
-        return displayList;
+
+        TicketList resultTicketList = new TicketList();
+        resultTicketList.setTickets(displayList);
+        resultTicketList.setPage(page);
+        return resultTicketList;
 
         //Mock data for test
         //return MockDataContext.getInstance().getTicketItemList();
@@ -73,13 +81,17 @@ public class UserTicketController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/list/done", method = RequestMethod.GET)
-    public List doneList(int page,int limit)
+    public IResult doneList(int page,int limit)
     {
         logger.info("ticket done list query");
         User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
         List<UserTicket> ticketList = _userTicketService.getDoneTickets(currentUser.getId(), page, limit);
         List<TicketItem> displayList = getDisplayList(ticketList);
-        return displayList;
+
+        TicketList resultTicketList = new TicketList();
+        resultTicketList.setTickets(displayList);
+        resultTicketList.setPage(page);
+        return resultTicketList;
 
         //Mock data for test
         //return MockDataContext.getInstance().getTicketItemList();
@@ -88,7 +100,7 @@ public class UserTicketController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
-    public TicketDetail detail(Long id)
+    public IResult detail(Long id)
     {
         logger.info("ticket detail query");
         UserTicket userTicket =_userTicketService.getDetail(id);
@@ -108,7 +120,7 @@ public class UserTicketController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/checked", method = RequestMethod.POST)
-    public BaseResult checked(@RequestBody BaseRequest request)
+    public IResult checked(@RequestBody BaseRequest request)
     {
         logger.info("ticket checked");
         BaseResult result = new BaseResult();
@@ -132,7 +144,7 @@ public class UserTicketController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/buy", method = RequestMethod.POST)
-    public BaseResult buy(@RequestBody TicketBuy request)
+    public IResult buy(@RequestBody TicketBuy request)
     {
         logger.info("ticket buy");
         BaseResult result = new BaseResult();

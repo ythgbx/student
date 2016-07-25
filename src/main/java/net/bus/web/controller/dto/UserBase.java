@@ -3,7 +3,7 @@ package net.bus.web.controller.dto;
 /**
  * Created by Edifi_000 on 2016-07-12.
  */
-public class UserBase implements IResult {
+public class UserBase extends BaseResult {
 
     private String name;
     private String photo;

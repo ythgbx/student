@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
  * Created by sky on 16/7/9.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class LoginResult {
+public class LoginResult extends BaseResult {
 
     private String session_id;
     private String result;
