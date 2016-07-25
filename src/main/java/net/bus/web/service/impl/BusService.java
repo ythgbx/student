@@ -1,5 +1,6 @@
 package net.bus.web.service.impl;
 
+import net.bus.web.context.BusTracks;
 import net.bus.web.context.Position;
 import net.bus.web.context.Track;
 import net.bus.web.service.IBusService;
@@ -20,7 +21,7 @@ public class BusService  implements IBusService {
         //TODO Whether arrive the last
     }
 
-    public HashMap<Long,Track> getBusesCurrentTrack(long lineId,Track.Direction direction)
+    public HashMap<Long,Track> getBusesCurrentTrack(long lineId,BusTracks.Direction direction)
     {
         //TODO Get this direction buses in line
 

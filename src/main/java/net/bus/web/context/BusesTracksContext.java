@@ -40,25 +40,26 @@ public class BusesTracksContext {
     public void saveBusTrack(Long busId,Track track)
     {
         String key = _headKey+busId;
-        List<Track> tracks;
+        BusTracks busTracks;
         if(_cache.isElementInMemory(key)){
-            tracks  = (List<Track>)_cache.get(key).getObjectValue();
+            busTracks = (BusTracks)_cache.get(key).getObjectValue();
         }else{
-            tracks = new ArrayList<Track>();
+            busTracks = new BusTracks();
+            busTracks.setTracks(new ArrayList<Track>());
         }
-        if(!tracks.contains(track)){
-            tracks.add(track);
+        if(!busTracks.getTracks().contains(track)){
+            busTracks.getTracks().add(track);
         }
 
-        Element element = new Element(key, tracks);
+        Element element = new Element(key, busTracks);
         _cache.put(element);
     }
 
-    public List<Track> getBusTracks(Long busId)
+    public BusTracks getBusTracks(Long busId)
     {
         String key = _headKey+busId;
         if(_cache.isElementInMemory(key)){
-            return  (List<Track>)_cache.get(key).getObjectValue();
+            return  (BusTracks)_cache.get(key).getObjectValue();
         }
 
         return null;

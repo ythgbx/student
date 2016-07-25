@@ -1,5 +1,6 @@
 package net.bus.web.service;
 
+import net.bus.web.context.BusTracks;
 import net.bus.web.context.Position;
 import net.bus.web.context.Track;
 
@@ -12,5 +13,5 @@ public interface IBusService {
 
     void setBusesLocation(long busId,Position pos);
 
-    HashMap<Long,Track> getBusesCurrentTrack(long lineId,Track.Direction direction);
+    HashMap<Long,Track> getBusesCurrentTrack(long lineId,BusTracks.Direction direction);
 }
