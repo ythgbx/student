@@ -39,7 +39,7 @@ public class LineController {
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
-    @Auth(role = Auth.Role.USER)
+    @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/list/around", method = RequestMethod.GET)
     public IResult around(double lat,double lng,int page,int limit)
@@ -74,7 +74,7 @@ public class LineController {
         return lineList;
     }
 
-    @Auth(role = Auth.Role.USER)
+    @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/list/station", method = RequestMethod.GET)
     public IResult station(String station_name,int page,int limit)
@@ -91,7 +91,7 @@ public class LineController {
         return lineList;
     }
 
-    @Auth(role = Auth.Role.USER)
+    @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/list/all", method = RequestMethod.GET)
     public IResult all(int page,int limit)
