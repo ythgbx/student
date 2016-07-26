@@ -45,15 +45,18 @@ public class LineController {
     public IResult around(double lat,double lng,int page,int limit)
     {
         logger.info("line around query");
-//        List<Line> lineList = _lineService.getAroundLines(lat,lng,page,limit);
-//        List<LineItem> displayList = getDisplayList(lineList);
-//        return displayList;
-
-        //Mock data for test
         LineList lineList = new LineList();
-        lineList.setLines(MockDataContext.getInstance().getLineItemList());
+        List<Line> lines = _lineService.getAroundLines(lat, lng, page, limit);
+        lineList.setLines(getDisplayList(lines));
         lineList.setPage(page);
+        lineList.setTotal_count(_lineService.getAroundLinesCount(lat,lng));
         return lineList;
+
+//        //Mock data for test
+//        LineList lineList = new LineList();
+//        lineList.setLines(MockDataContext.getInstance().getLineItemList());
+//        lineList.setPage(page);
+//        return lineList;
     }
 
     @Auth(role = Auth.Role.USER)
@@ -61,17 +64,20 @@ public class LineController {
     @RequestMapping(value = "/list/user", method = RequestMethod.GET)
     public IResult user(int page,int limit)
     {
-//        logger.info("line user query");
-//        User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
-//        List<Line> lineList = _lineService.getUserLines(currentUser.getId(), page, limit);
-//        List<LineItem> displayList = getDisplayList(lineList);
-//        return displayList;
-
-        //Mock data for test
+        logger.info("line user query");
         LineList lineList = new LineList();
-        lineList.setLines(MockDataContext.getInstance().getLineItemList());
+        User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
+        List<Line> lines = _lineService.getUserLines(currentUser.getId(), page, limit);
+        lineList.setLines(getDisplayList(lines));
         lineList.setPage(page);
+        lineList.setTotal_count(_lineService.getUserLinesCount(currentUser.getId()));
         return lineList;
+
+//        //Mock data for test
+//        LineList lineList = new LineList();
+//        lineList.setLines(MockDataContext.getInstance().getLineItemList());
+//        lineList.setPage(page);
+//        return lineList;
     }
 
     @Auth(role = Auth.Role.NONE)
@@ -79,16 +85,19 @@ public class LineController {
     @RequestMapping(value = "/list/station", method = RequestMethod.GET)
     public IResult station(String station_name,int page,int limit)
     {
-//        logger.info("line station query");
-//        List<Line> lineList = _lineService.getStationLines(station_name, page, limit);
-//        List<LineItem> displayList = getDisplayList(lineList);
-//        return displayList;
-
-        //Mock data for test
+        logger.info("line station query");
         LineList lineList = new LineList();
-        lineList.setLines(MockDataContext.getInstance().getLineItemList());
+        List<Line> lines = _lineService.getStationLines(station_name, page, limit);
+        lineList.setLines(getDisplayList(lines));
         lineList.setPage(page);
+        lineList.setTotal_count(_lineService.getStationLinesCount(station_name));
         return lineList;
+
+//        //Mock data for test
+//        LineList lineList = new LineList();
+//        lineList.setLines(MockDataContext.getInstance().getLineItemList());
+//        lineList.setPage(page);
+//        return lineList;
     }
 
     @Auth(role = Auth.Role.NONE)
@@ -96,16 +105,19 @@ public class LineController {
     @RequestMapping(value = "/list/all", method = RequestMethod.GET)
     public IResult all(int page,int limit)
     {
-//        logger.info("line all query");
-//        List<Line> lineList = _lineService.getAllLines(page,limit);
-//        List<LineItem> displayList = getDisplayList(lineList);
-//        return displayList;
-
-        //Mock data for test
+        logger.info("line all query");
         LineList lineList = new LineList();
-        lineList.setLines(MockDataContext.getInstance().getLineItemList());
+        List<Line> lines = _lineService.getAllLines(page, limit);
+        lineList.setLines(getDisplayList(lines));
         lineList.setPage(page);
+        lineList.setTotal_count(_lineService.getAllLinesCount());
         return lineList;
+
+//        //Mock data for test
+//        LineList lineList = new LineList();
+//        lineList.setLines(MockDataContext.getInstance().getLineItemList());
+//        lineList.setPage(page);
+//        return lineList;
     }
 
     @Auth(role = Auth.Role.USER)

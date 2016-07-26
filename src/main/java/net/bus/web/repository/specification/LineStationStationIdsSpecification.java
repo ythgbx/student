@@ -12,8 +12,8 @@ public class LineStationStationIdsSpecification implements ISpecification<LineSt
 
     protected List<Long> _stationIds;
 
-    public LineStationStationIdsSpecification(List<Long> lineIds){
-        this._stationIds = lineIds;
+    public LineStationStationIdsSpecification(List<Long> stationIds){
+        this._stationIds = stationIds;
     }
 
     public LineStationExample createExample()

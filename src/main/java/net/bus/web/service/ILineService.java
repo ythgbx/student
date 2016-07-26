@@ -20,4 +20,12 @@ public interface ILineService {
     Line getLineDetails(Long id);
 
     boolean checkLineExist(Long id);
+
+    int getAroundLinesCount(double lat,double lng);
+
+    int getUserLinesCount(Long userId);
+
+    int getStationLinesCount(String station_name);
+
+    int getAllLinesCount();
 }

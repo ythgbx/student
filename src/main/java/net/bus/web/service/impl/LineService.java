@@ -42,9 +42,17 @@ public class LineService implements ILineService {
 
     public List<Line> getAroundLines(double lat,double lng,int page,int limit)
     {
-        //TODO Select Around Lines by lat and lng
-        List<Station> list =_locationService.getAroundStation(new Position(lat, lng));
-        return _rootRepository.getAll();
+        List<Station> listStation =  _locationService.getAroundStation(new Position(lat, lng));
+        List<Long> listStationIds = new ArrayList<Long>();
+        for (Station station : listStation) {
+            listStationIds.add(station.getId());
+        }
+        List<LineStation> listLineStation = _lineStationRepository.getList(new LineStationStationIdsSpecification(listStationIds));
+        List<Long> listLineIds = new ArrayList<Long>();
+        for (LineStation lineStation : listLineStation) {
+            listLineIds.add(lineStation.getLineId());
+        }
+        return _rootRepository.getList(new LineIdsSpecification(listLineIds), page - 1, limit);
     }
 
     public List<Line> getUserLines(Long userId,int page,int limit)
@@ -87,5 +95,51 @@ public class LineService implements ILineService {
         List<Long> ids = new ArrayList<Long>();
         ids.add(id);
         return  _rootRepository.existItem(new LineIdsSpecification(ids));
+    }
+
+    public int getAroundLinesCount(double lat,double lng)
+    {
+        List<Station> listStation =  _locationService.getAroundStation(new Position(lat, lng));
+        List<Long> listStationIds = new ArrayList<Long>();
+        for (Station station : listStation) {
+            listStationIds.add(station.getId());
+        }
+        List<LineStation> listLineStation = _lineStationRepository.getList(new LineStationStationIdsSpecification(listStationIds));
+        List<Long> listLineIds = new ArrayList<Long>();
+        for (LineStation lineStation : listLineStation) {
+            listLineIds.add(lineStation.getLineId());
+        }
+
+        return  _rootRepository.count(new LineIdsSpecification(listLineIds));
+    }
+
+    public int getUserLinesCount(Long userId)
+    {
+        List<UserLine> listUserLine =  _userLineRepository.getList(new UserLineUserIdSpecification(userId));
+        List<Long> listLineIds = new ArrayList<Long>();
+        for (UserLine userLine : listUserLine) {
+            listLineIds.add(userLine.getLineId());
+        }
+        return  _rootRepository.count(new LineIdsSpecification(listLineIds));
+    }
+
+    public int getStationLinesCount(String station_name)
+    {
+        List<Station> listStation =  _stationRepository.getList(new StationNameSpecification(station_name));
+        List<Long> listStationIds = new ArrayList<Long>();
+        for (Station station : listStation) {
+            listStationIds.add(station.getId());
+        }
+        List<LineStation> listLineStation = _lineStationRepository.getList(new LineStationStationIdsSpecification(listStationIds));
+        List<Long> listLineIds = new ArrayList<Long>();
+        for (LineStation lineStation : listLineStation) {
+            listLineIds.add(lineStation.getLineId());
+        }
+        return  _rootRepository.count(new LineIdsSpecification(listLineIds));
+    }
+
+    public int getAllLinesCount()
+    {
+        return _rootRepository.count();
     }
 }

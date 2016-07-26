@@ -69,4 +69,15 @@ public class LineRepository {
 
         return  false;
     }
+
+    public int count(ISpecification specification)
+    {
+        LineExample example = (LineExample)specification.createExample();
+        return _mapper.countByExample(example);
+    }
+
+    public int count()
+    {
+        return _mapper.countByExample(null);
+    }
 }
