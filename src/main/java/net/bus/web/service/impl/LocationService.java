@@ -41,6 +41,7 @@ public class LocationService implements ILocationService {
         allStationAdjacent = new ArrayList<Station>();
         for(int i=0;i<10;i++) {
             Station station = new Station();
+            station.setId((i+1)*(1L));
             station.setName("Name"+i);
             station.setLat(pos.getLat() + i * 0.01);
             station.setLng(pos.getLng());

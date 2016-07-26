@@ -10,6 +10,7 @@ public class LineStation {
     private Long id;
     private String name;
     private Position pos;
+    private String annotation;
     private int index;
 
     public Long getId() {
@@ -42,5 +43,13 @@ public class LineStation {
 
     public void setIndex(int index) {
         this.index = index;
+    }
+
+    public String getAnnotation() {
+        return annotation;
+    }
+
+    public void setAnnotation(String annotation) {
+        this.annotation = annotation;
     }
 }

@@ -1,6 +1,7 @@
 package net.bus.web.service;
 
 import net.bus.web.model.Line;
+import net.bus.web.model.Station;
 
 import java.util.List;
 
@@ -28,4 +29,6 @@ public interface ILineService {
     int getStationLinesCount(String station_name);
 
     int getAllLinesCount();
+
+    boolean addLine(Line line,List<Long> stationIds);
 }

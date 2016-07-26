@@ -10,6 +10,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -25,17 +26,26 @@ public class LineRepository {
 
     public List<Line> getAll(int page,int limit) {
         LineExample example = new LineExample();
-        return _mapper.selectByExampleWithRowbounds(example, new RowBounds(page, limit)); //分页
+        if(example!=null) {
+            return _mapper.selectByExampleWithRowbounds(example, new RowBounds(page, limit)); //分页
+        }
+        return new ArrayList<Line>();
     }
 
     public List<Line> getList(ISpecification specification) {
         LineExample example = (LineExample)specification.createExample();
-        return _mapper.selectByExample(example);
+        if(example!=null) {
+            return _mapper.selectByExample(example);
+        }
+        return new ArrayList<Line>();
     }
 
     public List<Line> getList(ISpecification specification,int page,int limit) {
         LineExample example = (LineExample)specification.createExample();
-        return _mapper.selectByExampleWithRowbounds(example, new RowBounds(page, limit)); //分页
+        if(example!=null) {
+            return _mapper.selectByExampleWithRowbounds(example, new RowBounds(page, limit)); //分页
+        }
+        return new ArrayList<Line>();
     }
 
     public Line getItem(ISpecification specification) {
@@ -73,7 +83,10 @@ public class LineRepository {
     public int count(ISpecification specification)
     {
         LineExample example = (LineExample)specification.createExample();
-        return _mapper.countByExample(example);
+        if(example!=null){
+            return _mapper.countByExample(example);
+        }
+        return 0;
     }
 
     public int count()

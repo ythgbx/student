@@ -8,18 +8,18 @@ import net.bus.web.repository.ISpecification;
  */
 public class UserLineUserIdSpecification implements ISpecification<UserLineExample> {
 
-    protected long _id;
+    protected long _userId;
 
-    public UserLineUserIdSpecification(long id)
+    public UserLineUserIdSpecification(long userId)
     {
-        this._id = id;
+        this._userId = userId;
     }
 
     public UserLineExample createExample()
     {
         UserLineExample example = new UserLineExample();
         UserLineExample.Criteria criteriaId = example.createCriteria();
-        criteriaId.andIdEqualTo(_id);
+        criteriaId.andUserIdEqualTo(_userId);
         return example;
     }
 }

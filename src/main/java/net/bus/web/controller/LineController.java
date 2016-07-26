@@ -1,5 +1,6 @@
 package net.bus.web.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import net.bus.web.aspect.Auth;
 import net.bus.web.context.MockDataContext;
 import net.bus.web.context.Position;
@@ -17,8 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Edifi_000 on 2016-07-04.
@@ -155,7 +155,7 @@ public class LineController {
 
     @Auth(role = Auth.Role.USER)
     @ResponseBody
-    @RequestMapping(value = "/collection", method = RequestMethod.POST)
+    @RequestMapping(value = "/collection", method = RequestMethod.PUT)
     public IResult collection(@RequestBody BaseRequest request)
     {
         logger.info("line collection");
@@ -177,6 +177,59 @@ public class LineController {
             int re = _userLineService.collectionLine(currentUser.getId(), request.getId());
 
             if(re>0) {
+                result.setResult("success");
+            }else{
+                result.setResult("failure");
+            }
+        }catch (Exception ex){
+            result.setResult("error");
+            result.setError(ex.getMessage());
+        }
+        return result;
+    }
+
+    @Auth(role = Auth.Role.USER)
+    @ResponseBody
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public IResult add(@RequestBody LineRequest request)
+    {
+        logger.info("line collection");
+        BaseResult result = new BaseResult();
+        try {
+            Line line = new Line();
+            List<LineStation> stations =  request.getList_stations();
+            Collections.sort(stations, new Comparator<LineStation>() {
+                //@Override
+                public int compare(LineStation s1, LineStation s2) {
+                    Integer s1Index = s1.getIndex();
+                    Integer s2Index = s2.getIndex();
+                    return s1Index.compareTo(s2Index);
+                }
+
+            });
+
+            //TODO For check station ids
+            List<Long> lineStationIds = new ArrayList<Long>();
+            for(int i = 0;i<stations.size();i++){
+                lineStationIds.add(stations.get(i).getId());
+            }
+
+            line.setName(request.getName());
+            line.setStart(stations.get(0).getName());
+            line.setEnd(stations.get(stations.size() - 1).getName());
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(request.getStart_time());
+            line.setStartTime(calendar.getTime());
+            calendar.setTimeInMillis(request.getEnd_time());
+            line.setEndTime(calendar.getTime());
+            line.setPrice(request.getPrice().intValue());
+            line.setAnnotation(request.getAnnotation());
+
+            ObjectMapper mapper = new ObjectMapper();
+            line.setLatlng(mapper.writeValueAsString(stations));
+
+            boolean re =  _lineService.addLine(line,lineStationIds);
+            if(re) {
                 result.setResult("success");
             }else{
                 result.setResult("failure");

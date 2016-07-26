@@ -18,6 +18,9 @@ public class LineIdsSpecification implements ISpecification<LineExample> {
 
     public LineExample createExample()
     {
+        if(_ids.isEmpty())
+            return null;
+
         LineExample example = new LineExample();
         LineExample.Criteria criteriaId = example.createCriteria();
         criteriaId.andIdIn(_ids);

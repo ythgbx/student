@@ -62,6 +62,7 @@ public class LineService implements ILineService {
         for (UserLine userLine : listUserLine) {
             listLineIds.add(userLine.getLineId());
         }
+
         return _rootRepository.getList(new LineIdsSpecification(listLineIds), page - 1, limit);
     }
 
@@ -141,5 +142,14 @@ public class LineService implements ILineService {
     public int getAllLinesCount()
     {
         return _rootRepository.count();
+    }
+
+    public boolean addLine(Line line,List<Long> stationIds)
+    {
+        int result = _rootRepository.insertItem(line);
+        if(result>0){
+            return true;
+        }
+        return false;
     }
 }
