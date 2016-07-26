@@ -8,7 +8,7 @@ import java.util.List;
  * Created by Edifi_000 on 2016-07-04.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class LineDetail implements IResult{
+public class LineDetail extends BaseResult{
 
     private Long id;
     private String start_station;
