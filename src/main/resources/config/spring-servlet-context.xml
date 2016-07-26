@@ -6,8 +6,7 @@
              xmlns:context="http://www.springframework.org/schema/context"
              xmlns:util="http://www.springframework.org/schema/util"
              xmlns:aop="http://www.springframework.org/schema/aop"
-             xmlns:cache="http://www.springframework.org/schema/cache"
-             xsi:schemaLocation="http://www.springframework.org/schema/mvc
+             xmlns:cache="http://www.springframework.org/schema/cache"             xsi:schemaLocation="http://www.springframework.org/schema/mvc
              http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -16,7 +15,9 @@
 		http://www.springframework.org/schema/util
 		http://www.springframework.org/schema/util/spring-util.xsd
 		http://www.springframework.org/schema/aop
-        http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+		http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/cache
+		http://www.springframework.org/schema/cache/spring-cache.xsd">
 
     <!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
     <mvc:annotation-driven/>
@@ -36,9 +37,28 @@
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 
     <!--mybatis 数据库配置 -->
-    <util:properties id="dbConfig" location="classpath:/config/jdbc.properties"/>
+    <util:properties id="dbConfig" location="/WEB-INF/classes/config/jdbc.properties"/>
 
     <!-- mybatis bean 相关 -->
+    <!-- <beans:bean id="mysqlSource" class="org.apache.commons.dbcp.BasicDataSource" lazy-init="default"
+                 autowire="default">
+         <beans:property name="driverClassName" value="#{dbConfig['mysql.driver']}" />
+         <beans:property name="url" value="#{dbConfig['mysql.url']}"/>
+         <beans:property name="username" value="#{dbConfig['mysql.user']}"/>
+         <beans:property name="password" value="#{dbConfig['mysql.password']}"/>
+         <beans:property name="maxActive" value="#{dbConfig['mysql.maxActive']}"/>
+         <beans:property name="maxIdle" value="#{dbConfig['mysql.maxIdle']}"/>
+         <beans:property name="maxWait" value="#{dbConfig['mysql.maxWait']}"/>
+         <beans:property name="timeBetweenEvictionRunsMillis"
+                         value="#{dbConfig['mysql.timeBetweenEvictionRunsMillis']}"/>
+         <beans:property name="testWhileIdle" value="#{dbConfig['mysql.testWhileIdle']}"/>
+         <beans:property name="validationQuery">
+             <beans:value>select 1 from DUAL</beans:value>
+         </beans:property>
+         <beans:property name="removeAbandoned" value="#{dbConfig['mysql.removeAbandoned']}"/>
+         <beans:property name="removeAbandonedTimeout"
+                         value="#{dbConfig['mysql.removeAbandonedTimeout']}"/>
+     </beans:bean>-->
     <beans:bean id="mysqlSource" class="org.apache.commons.dbcp.BasicDataSource" lazy-init="default"
                 autowire="default">
         <beans:property name="driverClassName" value="#{dbConfig['mysql.driver']}" />
@@ -65,7 +85,7 @@
     <beans:bean id="PaginationInterceptor" class="net.andromedarabbit.mybatis.pagination.plugin.PaginationInterceptor"/>
     <beans:bean id="PaginationResultSetHandler" class="net.andromedarabbit.mybatis.pagination.plugin.PaginationResultSetHandlerInterceptor"/>
     <beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <beans:property name="configLocation" value="classpath:/config/spring-mybatis-config.xml" />
+        <beans:property name="configLocation" value="/WEB-INF/classes/config/spring-mybatis-config.xml" />
         <beans:property name="dataSource" ref="mysqlSource" />
         <beans:property name="plugins">
             <beans:array>
@@ -152,7 +172,7 @@
 
     <!-- ehcache cache -->
     <beans:bean id="ehcacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
-        <beans:property name="configLocation" value="classpath:/config/ehcache.xml"/>
+        <beans:property name="configLocation" value="/WEB-INF/classes/config/ehcache.xml"/>
         <beans:property name="shared" value="true"></beans:property>
     </beans:bean>
 
@@ -160,5 +180,4 @@
         <beans:property name="cacheManager" ref="ehcacheManager"/>
         <beans:property name="transactionAware" value="true"/>
     </beans:bean>
-
 </beans:beans>
