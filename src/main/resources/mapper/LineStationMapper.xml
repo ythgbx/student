@@ -5,7 +5,7 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="line_id" property="lineId" jdbcType="BIGINT" />
     <result column="station_id" property="stationId" jdbcType="BIGINT" />
-    <result column="index" property="index" jdbcType="INTEGER" />
+    <result column="'index'" property="index" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -66,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, line_id, station_id, index
+    id, line_id, station_id, 'index'
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="net.bus.web.model.LineStationExample" >
     select
@@ -100,9 +100,9 @@
   </delete>
   <insert id="insert" parameterType="net.bus.web.model.LineStation" >
     insert into line_station (id, line_id, station_id, 
-      index)
+      'index')
     values (#{id,jdbcType=BIGINT}, #{lineId,jdbcType=BIGINT}, #{stationId,jdbcType=BIGINT}, 
-      #{index,jdbcType=INTEGER})
+      #{'index',jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="net.bus.web.model.LineStation" >
     insert into line_station
@@ -116,8 +116,8 @@
       <if test="stationId != null" >
         station_id,
       </if>
-      <if test="index != null" >
-        index,
+      <if test="'index' != null" >
+        'index',
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -130,8 +130,8 @@
       <if test="stationId != null" >
         #{stationId,jdbcType=BIGINT},
       </if>
-      <if test="index != null" >
-        #{index,jdbcType=INTEGER},
+      <if test="'index' != null" >
+        #{'index',jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -153,8 +153,8 @@
       <if test="record.stationId != null" >
         station_id = #{record.stationId,jdbcType=BIGINT},
       </if>
-      <if test="record.index != null" >
-        index = #{record.index,jdbcType=INTEGER},
+      <if test="record.'index' != null" >
+        'index' = #{record.'index',jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -166,7 +166,7 @@
     set id = #{record.id,jdbcType=BIGINT},
       line_id = #{record.lineId,jdbcType=BIGINT},
       station_id = #{record.stationId,jdbcType=BIGINT},
-      index = #{record.index,jdbcType=INTEGER}
+      'index' = #{record.'index',jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -180,8 +180,8 @@
       <if test="stationId != null" >
         station_id = #{stationId,jdbcType=BIGINT},
       </if>
-      <if test="index != null" >
-        index = #{index,jdbcType=INTEGER},
+      <if test="'index' != null" >
+        'index' = #{'index',jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -190,7 +190,7 @@
     update line_station
     set line_id = #{lineId,jdbcType=BIGINT},
       station_id = #{stationId,jdbcType=BIGINT},
-      index = #{index,jdbcType=INTEGER}
+      'index' = #{'index',jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <select resultMap="BaseResultMap" parameterType="net.bus.web.model.LineStationExample" id="selectByExampleWithRowbounds" >
