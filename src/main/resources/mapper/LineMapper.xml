@@ -103,7 +103,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="net.bus.web.model.Line" >
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="net.bus.web.model.Line" >
     insert into line (id, name, start, 
       end, latlng, price, 
       annotation, start_time, end_time
