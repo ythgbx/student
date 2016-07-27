@@ -1,7 +1,5 @@
 package net.bus.web.controller.dto;
 
-import net.bus.web.context.Position;
-
 /**
  * Created by sky on 16/7/16.
  */
