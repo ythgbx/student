@@ -193,7 +193,7 @@ public class LineController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public IResult add(@RequestBody LineRequest request)
     {
-        logger.info("line collection");
+        logger.info("line add");
         BaseResult result = new BaseResult();
         try {
             Line line = new Line();
