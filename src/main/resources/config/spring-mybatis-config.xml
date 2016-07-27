@@ -31,6 +31,9 @@
         <mapper resource="mapper/UserLineMapper.xml"/>
         <mapper resource="mapper/UserLogMapper.xml"/>
         <mapper resource="mapper/UserNoticeMapper.xml"/>
+        <mapper resource="mapper/SignMapper.xml"/>
+        <mapper resource="mapper/PointRecordMapper.xml"/>
+
     </mappers>
 
 </configuration>

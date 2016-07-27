@@ -127,5 +127,22 @@
                enableCountByExample="true"
                enableUpdateByExample="true">
         </table>
+        <table tableName="sign" domainObjectName="Sign"  enableSelectByPrimaryKey="true"
+            enableUpdateByPrimaryKey="true"
+            enableDeleteByPrimaryKey="true"
+            enableSelectByExample="true"
+            enableDeleteByExample="true"
+            enableCountByExample="true"
+            enableUpdateByExample="true">
+        </table>
+        <table tableName="point_record" domainObjectName="PointRecord"  enableSelectByPrimaryKey="true"
+            enableUpdateByPrimaryKey="true"
+            enableDeleteByPrimaryKey="true"
+            enableSelectByExample="true"
+            enableDeleteByExample="true"
+            enableCountByExample="true"
+            enableUpdateByExample="true">
+        </table>
+
     </context>
 </generatorConfiguration>
