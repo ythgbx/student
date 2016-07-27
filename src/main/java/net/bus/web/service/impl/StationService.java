@@ -17,6 +17,11 @@ public class StationService implements IStationService {
     @Autowired
     private StationRepository _rootRepository;
 
+    public List<Station> getAllStations()
+    {
+        return  _rootRepository.getAll();
+    }
+
     public List<Station> getAllStations(int page,int limit)
     {
         return  _rootRepository.getAll(page-1,limit);
@@ -30,6 +35,7 @@ public class StationService implements IStationService {
     public boolean addStation(Station station)
     {
         int result = _rootRepository.insertItem(station);
+
         if(result>0){
             return true;
         }

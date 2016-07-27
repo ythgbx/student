@@ -147,6 +147,16 @@ public class LineService implements ILineService {
     public boolean addLine(Line line,List<Long> stationIds)
     {
         int result = _rootRepository.insertItem(line);
+
+        for(int i=0;i<stationIds.size();i++)
+        {
+            LineStation lineStation = new LineStation();
+            lineStation.setLineId(line.getId());
+            lineStation.setStationId(stationIds.get(i));
+            lineStation.setIndex(i);
+            _lineStationRepository.insertItem(lineStation);
+        }
+
         if(result>0){
             return true;
         }

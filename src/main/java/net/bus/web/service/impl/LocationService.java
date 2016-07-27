@@ -7,6 +7,7 @@ import net.bus.web.context.Position;
 import net.bus.web.context.StationsLocationContext;
 import net.bus.web.model.Station;
 import net.bus.web.service.ILocationService;
+import net.bus.web.service.IStationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,9 @@ import java.util.List;
 @Service
 public class LocationService implements ILocationService {
 
+    @Autowired
+    private IStationService _stationService;
+
     public List<Station> getAroundStation(Position pos)
     {
         return getAroundStation(pos,9);
@@ -32,21 +36,22 @@ public class LocationService implements ILocationService {
         GeoHash geoHash = GeoHash.withCharacterPrecision(pos.getLat(), pos.getLng(), hashLength);
         List<String> listStationAdjacentCode = new ArrayList<String>();
         GeoHash[] adjacent = geoHash.getAdjacent();
+        listStationAdjacentCode.add(geoHash.toBase32());
         for (GeoHash hash : adjacent) {
             listStationAdjacentCode.add(hash.toBase32());
         }
-        List<Station> allStationAdjacent = StationsLocationContext.getInstance().getStationsByGeoHashCode(listStationAdjacentCode);
+        List<Station> allStationAdjacent = StationsLocationContext.getInstance(_stationService).getStationsByGeoHashCode(listStationAdjacentCode);
 
-        //TODO MockDataTest need remove when db has data
-        allStationAdjacent = new ArrayList<Station>();
-        for(int i=0;i<10;i++) {
-            Station station = new Station();
-            station.setId((i+1)*(1L));
-            station.setName("Name"+i);
-            station.setLat(pos.getLat() + i * 0.01);
-            station.setLng(pos.getLng());
-            allStationAdjacent.add(station);
-        }
+//        //TODO MockDataTest need remove when db has data
+//        allStationAdjacent = new ArrayList<Station>();
+//        for(int i=0;i<10;i++) {
+//            Station station = new Station();
+//            station.setId((i+1)*(1L));
+//            station.setName("Name"+i);
+//            station.setLat(pos.getLat() + i * 0.01);
+//            station.setLng(pos.getLng());
+//            allStationAdjacent.add(station);
+//        }
 
         //step2
         if(allStationAdjacent!=null) {

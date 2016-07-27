@@ -18,6 +18,9 @@ public class LineStationStationIdsSpecification implements ISpecification<LineSt
 
     public LineStationExample createExample()
     {
+        if(_stationIds.isEmpty())
+            return null;
+
         LineStationExample example = new LineStationExample();
         LineStationExample.Criteria criteriaLineId = example.createCriteria();
         criteriaLineId.andStationIdIn(_stationIds);

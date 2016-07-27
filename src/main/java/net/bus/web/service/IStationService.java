@@ -9,6 +9,8 @@ import java.util.List;
  */
 public interface IStationService {
 
+    List<Station> getAllStations();
+
     List<Station> getAllStations(int page,int limit);
 
     int getAllStationsCount();
