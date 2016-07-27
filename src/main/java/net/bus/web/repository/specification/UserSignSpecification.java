@@ -9,14 +9,10 @@ import java.util.Date;
  * Created by sky on 16/7/26.
  */
 public class UserSignSpecification implements ISpecification<SignExample> {
-    public static enum Method{
-        GETSIGNBYUSER,
-        PUTSIGN,
-    }
+
     protected long _userId;
     protected Date _date;
     protected int _succession;
-    protected Method _method;
 
 
     public UserSignSpecification(long userId)

@@ -5,7 +5,9 @@ import net.bus.web.context.PhoneSMSContext;
 import net.bus.web.context.Position;
 import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.*;
+import net.bus.web.model.PointRecord;
 import net.bus.web.model.User;
+import net.bus.web.service.IPointRecordService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +30,9 @@ public class UserController {
     private IUserService service;
     @Autowired
     private HttpSession session;
+
+    @Autowired
+    private IPointRecordService pointRecordService;
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
@@ -94,7 +99,27 @@ public class UserController {
         userBase.setPoints(user.getPoints());
         return userBase;
     }
-    
+
+    /**
+     * 获得用户签到记录
+     * @return 用户签到记录
+     */
+    @Auth(role = Auth.Role.USER)
+    @ResponseBody
+    @RequestMapping(value = "/getsignrecord", method = RequestMethod.GET)
+    public SignRecordList getSignRecord(int page,int limit){
+        User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
+        List<PointRecord> records = pointRecordService.getSignRecord(user,page,limit);
+        int totoal_count = pointRecordService.getSignRecordCount(user);
+        SignRecordList signRecordList = new SignRecordList();
+        for (PointRecord key:records) {
+            signRecordList.getList().add(new SignRecordItem(key.getRecordTime(),key.getAccount()));
+        }
+        signRecordList.setPage(page);
+        signRecordList.setTotal_count(totoal_count);
+        return signRecordList;
+    }
+
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/logout", method = RequestMethod.POST)

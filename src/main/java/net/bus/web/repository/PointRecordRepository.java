@@ -49,4 +49,8 @@ public class PointRecordRepository {
     {
         return _mapper.updateByPrimaryKey(pointRecord);
     }
+    public int getCount(ISpecification specification){
+        PointRecordExample example = (PointRecordExample) specification.createExample();
+        return _mapper.countByExample(example);
+    }
 }

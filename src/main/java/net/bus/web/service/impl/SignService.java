@@ -3,6 +3,7 @@ package net.bus.web.service.impl;
 import net.bus.web.model.Sign;
 import net.bus.web.model.User;
 import net.bus.web.model.type.PointRecordType;
+import net.bus.web.model.type.PointSourceType;
 import net.bus.web.repository.SignRespository;
 import net.bus.web.repository.UserRepository;
 import net.bus.web.repository.specification.UserSignSpecification;
@@ -57,7 +58,7 @@ public class SignService implements ISignService {
         }
         int point = sign.getSuccession()>7?40:sign.getSuccession()*5;//1天5个每天加5个7天封顶40个断掉重来
         user.setPoints(user.getPoints()+point);
-        _pointRecordService.recordPoint(user.getId(), PointRecordType.Income,"签到",point,"");
+        _pointRecordService.recordPoint(user.getId(), PointRecordType.Income, PointSourceType.SIGN,point,"");
         _respository.insertItem(sign);
         _userRepository.updateUser(user);
         return true;
