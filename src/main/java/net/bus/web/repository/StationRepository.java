@@ -61,4 +61,18 @@ public class StationRepository {
     {
         return _mapper.updateByPrimaryKey(station);
     }
+
+    public int count(ISpecification specification)
+    {
+        StationExample example = (StationExample)specification.createExample();
+        if(example!=null){
+            return _mapper.countByExample(example);
+        }
+        return 0;
+    }
+
+    public int count()
+    {
+        return _mapper.countByExample(null);
+    }
 }
