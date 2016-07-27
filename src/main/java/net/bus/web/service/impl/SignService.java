@@ -71,4 +71,5 @@ public class SignService implements ISignService {
     public Sign getSignLast(long userId) {
         return _respository.getItem(new UserSignSpecification(userId));
     }
+
 }

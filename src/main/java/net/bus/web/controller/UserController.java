@@ -65,6 +65,36 @@ public class UserController {
         return result;
     }
 
+    /**
+     * 获取用户信息
+     * @return 用户信息result
+     */
+    @Auth(role = Auth.Role.USER)
+    @ResponseBody
+    @RequestMapping(value = "/getinfo", method = RequestMethod.GET)
+    public UserBase getInfo(){
+        User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
+        UserBase userBase = new UserBase();
+        userBase.setPoints(user.getPoints());
+        user.setPhone(user.getPhone());
+        user.setPhoto(user.getPhoto());
+        return userBase;
+    }
+
+    /**
+     * 获得用户积分
+     * @return 用户积分result
+     */
+    @Auth(role = Auth.Role.USER)
+    @ResponseBody
+    @RequestMapping(value = "/getPoints", method = RequestMethod.GET)
+    public UserBase getPoints(){
+        User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
+        UserBase userBase = new UserBase();
+        userBase.setPoints(user.getPoints());
+        return userBase;
+    }
+    
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
@@ -76,6 +106,7 @@ public class UserController {
         result.setResult("logout");
         return result;
     }
+
 
     @Auth(role = Auth.Role.NONE)
     @ResponseBody

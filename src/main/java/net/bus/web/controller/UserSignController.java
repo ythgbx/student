@@ -27,7 +27,7 @@ public class UserSignController {
     private Logger logger = Logger.getLogger(this.getClass().getName());
     @Auth(role = Auth.Role.USER)
     @ResponseBody
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.POST)
     public IResult uncheckedList()
     {
         User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
@@ -39,5 +39,7 @@ public class UserSignController {
         }
         return result;
     }
+
+
 
 }
