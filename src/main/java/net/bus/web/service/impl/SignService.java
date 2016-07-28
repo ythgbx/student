@@ -1,5 +1,6 @@
 package net.bus.web.service.impl;
 
+import net.bus.web.model.Pojo.SignRecordPojo;
 import net.bus.web.model.Sign;
 import net.bus.web.model.User;
 import net.bus.web.model.type.PointRecordType;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 /**
  * Created by sky on 16/7/26.
@@ -71,6 +73,10 @@ public class SignService implements ISignService {
      */
     public Sign getSignLast(long userId) {
         return _respository.getItem(new UserSignSpecification(userId));
+    }
+
+    public List<SignRecordPojo> getSignRecordByUserId(long userId,int page,int limit) {
+        return _respository.getSignRecordByUserId(userId,page,limit);
     }
 
 }

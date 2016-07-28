@@ -5,21 +5,27 @@ import java.util.Date;
 /**
  * Created by sky on 16/7/27.
  */
+
 public class SignRecordItem {
-    public SignRecordItem(Date day,int points){
+    /**
+     * 构造函数
+     * @param day 连续签到天数
+     * @param points 积分值
+     */
+    public SignRecordItem(int day,int points){
         this.day = day;
         this.points = points;
     }
-    private Date day;
-    private int points;
 
-    public Date getDay() {
+    public int getDay() {
         return day;
     }
 
-    public void setDay(Date day) {
+    public void setDay(int day) {
         this.day = day;
     }
+
+    private int day;
 
     public int getPoints() {
         return points;
@@ -28,4 +34,8 @@ public class SignRecordItem {
     public void setPoints(int points) {
         this.points = points;
     }
+
+    private int points;
+
+
 }

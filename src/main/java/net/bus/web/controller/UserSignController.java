@@ -32,13 +32,14 @@ public class UserSignController {
      */
     @Auth(role = Auth.Role.USER)
     @ResponseBody
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.GET)
     public IResult sign()
     {
         User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
         SignResult result = new SignResult();
-        result.setPoints(_signService.sign(user,new Date()));
-        if(result.getPoints()!=0){
+        int points = _signService.sign(user,new Date());
+        if(points!=0){
+            result.setPoints(points);
             result.setResult("success");
         }else{
             result.setResult("failure");

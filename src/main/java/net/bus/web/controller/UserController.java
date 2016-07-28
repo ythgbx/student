@@ -6,7 +6,9 @@ import net.bus.web.context.Position;
 import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.*;
 import net.bus.web.model.PointRecord;
+import net.bus.web.model.Pojo.SignRecordPojo;
 import net.bus.web.model.User;
+import net.bus.web.repository.SignRespository;
 import net.bus.web.service.IPointRecordService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +36,11 @@ public class UserController {
     @Autowired
     private IPointRecordService pointRecordService;
 
+    @Autowired
+    private SignRespository signRespository;
+
     private Logger logger = Logger.getLogger(this.getClass().getName());
+
 
     @RequestMapping(value="/login")
     public ModelAndView index(Model model)
@@ -109,11 +115,11 @@ public class UserController {
     @RequestMapping(value = "/getsignrecord", method = RequestMethod.GET)
     public IResult getSignRecord(int page,int limit){
         User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
-        List<PointRecord> records = pointRecordService.getSignRecord(user,page,limit);
+        List<SignRecordPojo> records = signRespository.getSignRecordByUserId(user.getId(),page,limit);
         int totoal_count = pointRecordService.getSignRecordCount(user);
         SignRecordList signRecordList = new SignRecordList();
-        for (PointRecord key:records) {
-            signRecordList.getList().add(new SignRecordItem(key.getRecordTime(),key.getAccount()));
+        for (SignRecordPojo item : records){
+            signRecordList.getList().add(new SignRecordItem(item.getSuccession(),item.getAccount()));
         }
         signRecordList.setPage(page);
         signRecordList.setTotal_count(totoal_count);

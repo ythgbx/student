@@ -1,195 +1,227 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="net.bus.web.mapper.SignMapper" >
-  <resultMap id="BaseResultMap" type="net.bus.web.model.Sign" >
-    <id column="userId" property="userid" jdbcType="BIGINT" />
-    <id column="sign_date" property="signDate" jdbcType="TIMESTAMP" />
-    <result column="succession" property="succession" jdbcType="INTEGER" />
-  </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+<mapper namespace="net.bus.web.mapper.SignMapper">
+    <resultMap id="BaseResultMap" type="net.bus.web.model.Sign">
+        <id column="userId" property="userid" jdbcType="BIGINT"/>
+        <id column="sign_date" property="signDate" jdbcType="TIMESTAMP"/>
+        <result column="succession" property="succession" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
     userId, sign_date, succession
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="net.bus.web.model.SignExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from sign
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="net.bus.web.model.SignKey" >
-    select 
-    <include refid="Base_Column_List" />
-    from sign
-    where userId = #{userid,jdbcType=BIGINT}
-      and sign_date = #{signDate,jdbcType=TIMESTAMP}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="net.bus.web.model.SignKey" >
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="net.bus.web.model.SignExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from sign
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="net.bus.web.model.SignKey">
+        select
+        <include refid="Base_Column_List"/>
+        from sign
+        where userId = #{userid,jdbcType=BIGINT}
+        and sign_date = #{signDate,jdbcType=TIMESTAMP}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="net.bus.web.model.SignKey">
     delete from sign
     where userId = #{userid,jdbcType=BIGINT}
       and sign_date = #{signDate,jdbcType=TIMESTAMP}
   </delete>
-  <delete id="deleteByExample" parameterType="net.bus.web.model.SignExample" >
-    delete from sign
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="net.bus.web.model.Sign" >
+    <delete id="deleteByExample" parameterType="net.bus.web.model.SignExample">
+        delete from sign
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="net.bus.web.model.Sign">
     insert into sign (userId, sign_date, succession
       )
     values (#{userid,jdbcType=BIGINT}, #{signDate,jdbcType=TIMESTAMP}, #{succession,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="net.bus.web.model.Sign" >
-    insert into sign
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="userid != null" >
-        userId,
-      </if>
-      <if test="signDate != null" >
-        sign_date,
-      </if>
-      <if test="succession != null" >
-        succession,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="userid != null" >
-        #{userid,jdbcType=BIGINT},
-      </if>
-      <if test="signDate != null" >
-        #{signDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="succession != null" >
-        #{succession,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="net.bus.web.model.SignExample" resultType="java.lang.Integer" >
-    select count(*) from sign
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update sign
-    <set >
-      <if test="record.userid != null" >
-        userId = #{record.userid,jdbcType=BIGINT},
-      </if>
-      <if test="record.signDate != null" >
+    <insert id="insertSelective" parameterType="net.bus.web.model.Sign">
+        insert into sign
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userid != null">
+                userId,
+            </if>
+            <if test="signDate != null">
+                sign_date,
+            </if>
+            <if test="succession != null">
+                succession,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userid != null">
+                #{userid,jdbcType=BIGINT},
+            </if>
+            <if test="signDate != null">
+                #{signDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="succession != null">
+                #{succession,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="net.bus.web.model.SignExample" resultType="java.lang.Integer">
+        select count(*) from sign
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update sign
+        <set>
+            <if test="       .userid != null">
+                userId = #{record.userid,jdbcType=BIGINT},
+            </if>
+            <if test="record.signDate != null">
+                sign_date = #{record.signDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.succession != null">
+                succession = #{record.succession,jdbcType=INTEGER},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update sign
+        set userId = #{record.userid,jdbcType=BIGINT},
         sign_date = #{record.signDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.succession != null" >
-        succession = #{record.succession,jdbcType=INTEGER},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update sign
-    set userId = #{record.userid,jdbcType=BIGINT},
-      sign_date = #{record.signDate,jdbcType=TIMESTAMP},
-      succession = #{record.succession,jdbcType=INTEGER}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="net.bus.web.model.Sign" >
-    update sign
-    <set >
-      <if test="succession != null" >
-        succession = #{succession,jdbcType=INTEGER},
-      </if>
-    </set>
-    where userId = #{userid,jdbcType=BIGINT}
-      and sign_date = #{signDate,jdbcType=TIMESTAMP}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="net.bus.web.model.Sign" >
+        succession = #{record.succession,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="net.bus.web.model.Sign">
+        update sign
+        <set>
+            <if test="succession != null">
+                succession = #{succession,jdbcType=INTEGER},
+            </if>
+        </set>
+        where userId = #{userid,jdbcType=BIGINT}
+        and sign_date = #{signDate,jdbcType=TIMESTAMP}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="net.bus.web.model.Sign">
     update sign
     set succession = #{succession,jdbcType=INTEGER}
     where userId = #{userid,jdbcType=BIGINT}
       and sign_date = #{signDate,jdbcType=TIMESTAMP}
   </update>
-  <select resultMap="BaseResultMap" parameterType="net.bus.web.model.SignExample" id="selectByExampleWithRowbounds" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from sign
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
+    <select resultMap="BaseResultMap" parameterType="net.bus.web.model.SignExample" id="selectByExampleWithRowbounds">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from sign
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <!--获得签到的积分记录-->
+    <resultMap id="SignRecord" type="net.bus.web.model.Pojo.SignRecordPojo">
+        <result property="userId" column="userId"></result>
+        <result property="type" column="type"></result>
+        <result property="source" column="source"></result>
+        <result property="account" column="account"></result>
+        <result property="remark" column="remark"></result>
+        <result property="record_time" column="record_time"></result>
+        <result property="succession" column="succession"></result>
+    </resultMap>
+    <select id="selectSignRecordByUserId" resultMap="SignRecord">
+    select `point_record`.`userId` AS `userId`,
+      `point_record`.`type` AS `type`,
+      `point_record`.`source` AS `source`,
+      `point_record`.`account` AS `account`,
+      `point_record`.`remark` AS `remark`,
+      `point_record`.`record_time` AS `record_time`,
+      `sign`.`succession` AS `succession`
+    from
+      (
+        `point_record` right join
+        `sign` on(
+          (
+            (`point_record`.`userId` = `sign`.`userId`) and
+            (`point_record`.`record_time` = `sign`.`sign_date`) and
+            (`point_record`.`userId` = #{id,jdbcType=BIGINT})
+          )
+        )
+      )
   </select>
 </mapper>

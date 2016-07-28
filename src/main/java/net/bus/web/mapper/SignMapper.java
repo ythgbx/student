@@ -1,6 +1,8 @@
 package net.bus.web.mapper;
 
 import java.util.List;
+
+import net.bus.web.model.Pojo.SignRecordPojo;
 import net.bus.web.model.Sign;
 import net.bus.web.model.SignExample;
 import net.bus.web.model.SignKey;
@@ -31,4 +33,6 @@ public interface SignMapper {
     int updateByPrimaryKeySelective(Sign record);
 
     int updateByPrimaryKey(Sign record);
+
+    List<SignRecordPojo> selectSignRecordByUserId(long userId,RowBounds rowBounds);
 }
