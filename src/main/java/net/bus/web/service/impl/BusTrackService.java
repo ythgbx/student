@@ -10,17 +10,22 @@ import net.bus.web.model.LineStation;
 import net.bus.web.model.Station;
 import net.bus.web.service.IBusTrackService;
 import net.bus.web.service.ILineService;
+import net.bus.web.service.ILocationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Created by Edifi_000 on 2016-07-23.
  */
+@Service
 public class BusTrackService implements IBusTrackService {
 
     @Autowired
     private ILineService _lineService;
+    @Autowired
+    private ILocationService _locationService;
 
     public void HandlerBusPosition(Bus bus,Position position)
     {
@@ -48,6 +53,10 @@ public class BusTrackService implements IBusTrackService {
 
     private Station getBusAroundStation(Bus bus,Position position)
     {
+        List<Station> aroundStations = _locationService.getAroundStation(position);
+        if(aroundStations.size()>0){
+            return aroundStations.get(0);
+        }
         return null;
     }
 
