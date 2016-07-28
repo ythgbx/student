@@ -85,7 +85,6 @@ public class LineService implements ILineService {
 
     public Line getLineDetails(Long id)
     {
-        //TODO Select line by id
         return _rootRepository.getItem(id);
     }
 

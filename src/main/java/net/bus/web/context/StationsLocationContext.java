@@ -44,7 +44,7 @@ public class StationsLocationContext {
     }
     public void InitStationsLocation()
     {
-        //TODO Add stations location to ehcache 1.key is GeoHash value 2.value is List of Station
+        //Add stations location to ehcache 1.key is GeoHash value 2.value is List of Station
         List<Station> stationList = _stationService.getAllStations();
         int hashLength = 9;
         String key;
@@ -67,7 +67,7 @@ public class StationsLocationContext {
 
     public List<Station> getStationsByGeoHashCode(List<String> geoHashCodes)
     {
-        //TODO Get Station list collection which the key is geoHashCode(base32Code) that in List
+        //Get Station list collection which the key is geoHashCode(base32Code) that in List
         List<Station> stationList = new ArrayList<Station>();
         for(String geoCode:geoHashCodes){
             if(_cache.isElementInMemory(geoCode)){
