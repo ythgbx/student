@@ -28,7 +28,7 @@ public class UserSignController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(method = RequestMethod.POST)
-    public IResult uncheckedList()
+    public IResult sign()
     {
         User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
         BaseResult result = new BaseResult();
