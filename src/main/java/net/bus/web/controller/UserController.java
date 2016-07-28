@@ -77,7 +77,7 @@ public class UserController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/getinfo", method = RequestMethod.GET)
-    public UserBase getInfo(){
+    public IResult getInfo(){
         User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
         UserBase userBase = new UserBase();
         userBase.setPoints(user.getPoints());
@@ -93,7 +93,7 @@ public class UserController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/getPoints", method = RequestMethod.GET)
-    public UserBase getPoints(){
+    public IResult getPoints(){
         User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
         UserBase userBase = new UserBase();
         userBase.setPoints(user.getPoints());
@@ -107,7 +107,7 @@ public class UserController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/getsignrecord", method = RequestMethod.GET)
-    public SignRecordList getSignRecord(int page,int limit){
+    public IResult getSignRecord(int page,int limit){
         User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
         List<PointRecord> records = pointRecordService.getSignRecord(user,page,limit);
         int totoal_count = pointRecordService.getSignRecordCount(user);

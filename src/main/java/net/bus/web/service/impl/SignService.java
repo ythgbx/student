@@ -32,7 +32,7 @@ public class SignService implements ISignService {
      * @param date 时间
      * @return
      */
-    public boolean sign(User user, Date date) {
+    public int sign(User user, Date date) {
         //此处也需要来一波事物
         Sign lastSign = this.getSignLast(user.getId());
         Sign sign = new Sign();
@@ -47,7 +47,7 @@ public class SignService implements ISignService {
             calendar.setTime(date);
             if(calendar.get(1) == calendarOld.get(1) && calendar.get(2) == calendarOld.get(2)&&
                     calendar.get(5) == calendarOld.get(5)){
-                return false;//同一天只能签到一次
+                return 0;//同一天只能签到一次
             }
             calendar.add(5,-1);
             //比较年月日
@@ -61,7 +61,7 @@ public class SignService implements ISignService {
         _pointRecordService.recordPoint(user.getId(), PointRecordType.Income, PointSourceType.SIGN,point,"");
         _respository.insertItem(sign);
         _userRepository.updateUser(user);
-        return true;
+        return point;
     }
 
     /**

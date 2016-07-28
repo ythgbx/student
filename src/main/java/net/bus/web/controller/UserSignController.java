@@ -25,21 +25,24 @@ public class UserSignController {
     private HttpSession session;
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
+
+    /**
+     * 每日签到
+     * @return 返回当日签到所得的积分数
+     */
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(method = RequestMethod.POST)
     public IResult sign()
     {
         User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
-        BaseResult result = new BaseResult();
-        if(_signService.sign(user,new Date())){
-            result.setResult("sign success!");
+        SignResult result = new SignResult();
+        result.setPoints(_signService.sign(user,new Date()));
+        if(result.getPoints()!=0){
+            result.setResult("success");
         }else{
-            result.setResult("repeat sign!");
+            result.setResult("failure");
         }
         return result;
     }
-
-
-
 }

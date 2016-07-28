@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by sky on 16/7/27.
  */
-public class SignRecordList implements IResult {
+public class SignRecordList extends BaseResult {
     public SignRecordList(){
         this.list = new ArrayList<SignRecordItem>();
     }
