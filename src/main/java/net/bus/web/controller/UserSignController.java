@@ -32,7 +32,7 @@ public class UserSignController {
      */
     @Auth(role = Auth.Role.USER)
     @ResponseBody
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.POST)
     public IResult sign()
     {
         User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
