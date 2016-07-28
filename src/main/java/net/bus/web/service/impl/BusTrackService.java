@@ -6,14 +6,21 @@ import net.bus.web.context.Position;
 import net.bus.web.context.Track;
 import net.bus.web.model.Bus;
 import net.bus.web.model.Line;
+import net.bus.web.model.LineStation;
 import net.bus.web.model.Station;
 import net.bus.web.service.IBusTrackService;
+import net.bus.web.service.ILineService;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.List;
 
 /**
  * Created by Edifi_000 on 2016-07-23.
  */
 public class BusTrackService implements IBusTrackService {
+
+    @Autowired
+    private ILineService _lineService;
 
     public void HandlerBusPosition(Bus bus,Position position)
     {
@@ -98,8 +105,23 @@ public class BusTrackService implements IBusTrackService {
 
     private boolean checkLineEnd(Bus bus,Track track)
     {
-        //TODO 取线路方向 联合当前track站点与line,判断是否为结束点
-        return false;
+        //联合当前track站点与line,判断是否为结束点
+        BusTracks busTracks = BusesTracksContext.getInstance().getBusTracks(bus.getId());
+        //TODO 由于频繁调用获取getLineStations需要进行缓存
+        List<LineStation> lineStations =  _lineService.getLineStations(bus.getLineId());
+        Long lineEndStationId;
+        if(busTracks.getDirection().equals(BusTracks.Direction.Forward)){
+            lineEndStationId = lineStations.get(0).getStationId();
+        }else{
+            lineEndStationId = lineStations.get(lineStations.size()-1).getStationId();
+
+        }
+
+        if(lineEndStationId.equals(track.getStation())){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     private boolean clearTracks(Bus bus,Track track)
@@ -123,7 +145,24 @@ public class BusTrackService implements IBusTrackService {
 
     private BusTracks.Direction getBusTracksDirection(Bus bus,Track startTrack,Track currentTrack)
     {
-        //TODO 取线路方向 联合当前track站点与line,判断是否为结束点
-        return  BusTracks.Direction.Forward;
+        //TODO 由于频繁调用获取getLineStations需要进行缓存
+        List<LineStation> lineStations =  _lineService.getLineStations(bus.getLineId());
+        int startIndex = -1;
+        int currentIndex = -1;
+        for(LineStation lineStation:lineStations){
+            if(lineStation.getStationId().equals(startTrack.getStation())){
+                startIndex = lineStation.getIndex();
+            }
+
+            if(lineStation.getStationId().equals(currentTrack.getStation())){
+                currentIndex = lineStation.getIndex();
+            }
+        }
+
+        if(startIndex<currentIndex){
+            return  BusTracks.Direction.Forward;
+        }else{
+            return  BusTracks.Direction.Reverse;
+        }
     }
 }

@@ -9,10 +9,7 @@ import net.bus.web.repository.LineRepository;
 import net.bus.web.repository.LineStationRepository;
 import net.bus.web.repository.StationRepository;
 import net.bus.web.repository.UserLineRepository;
-import net.bus.web.repository.specification.LineIdsSpecification;
-import net.bus.web.repository.specification.LineStationStationIdsSpecification;
-import net.bus.web.repository.specification.StationNameSpecification;
-import net.bus.web.repository.specification.UserLineUserIdSpecification;
+import net.bus.web.repository.specification.*;
 import net.bus.web.service.ILineService;
 import net.bus.web.service.ILocationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,6 +87,14 @@ public class LineService implements ILineService {
     {
         //TODO Select line by id
         return _rootRepository.getItem(id);
+    }
+
+    public List<LineStation> getLineStations(Long id)
+    {
+        List<Long> lineIds = new ArrayList<Long>();
+        lineIds.add(id);
+        List<LineStation> listLineStation = _lineStationRepository.getList(new LineStationLineIdsSpecification(lineIds));
+        return listLineStation;
     }
 
     public boolean checkLineExist(Long id){

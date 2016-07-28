@@ -1,6 +1,7 @@
 package net.bus.web.service;
 
 import net.bus.web.model.Line;
+import net.bus.web.model.LineStation;
 import net.bus.web.model.Station;
 
 import java.util.List;
@@ -19,6 +20,8 @@ public interface ILineService {
     List<Line> getAllLines(int page,int limit);
 
     Line getLineDetails(Long id);
+
+    List<LineStation> getLineStations(Long id);
 
     boolean checkLineExist(Long id);
 
