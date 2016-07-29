@@ -10,6 +10,7 @@ import net.bus.web.model.Pojo.SignRecordPojo;
 import net.bus.web.model.User;
 import net.bus.web.repository.SignRespository;
 import net.bus.web.service.IPointRecordService;
+import net.bus.web.service.impl.SignService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,9 +38,10 @@ public class UserController {
     private IPointRecordService pointRecordService;
 
     @Autowired
-    private SignRespository signRespository;
+    private SignService signService;
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
+
 
 
     @RequestMapping(value="/login")
@@ -115,7 +117,7 @@ public class UserController {
     @RequestMapping(value = "/getsignrecord", method = RequestMethod.GET)
     public IResult getSignRecord(int page,int limit){
         User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
-        List<SignRecordPojo> records = signRespository.getSignRecordByUserId(user.getId(),page,limit);
+        List<SignRecordPojo> records = signService.getSignRecordByUserId(user.getId(),page,limit);
         int totoal_count = pointRecordService.getSignRecordCount(user);
         SignRecordList signRecordList = new SignRecordList();
         for (SignRecordPojo item : records){
