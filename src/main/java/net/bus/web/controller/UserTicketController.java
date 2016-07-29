@@ -110,7 +110,8 @@ public class UserTicketController {
         ticketDetail.setStart_station(userLine.getStart());
         ticketDetail.setEnd_station(userLine.getEnd());
         ticketDetail.setPrice(userTicket.getPrice());
-        ticketDetail.setTime(userTicket.getTime().getTime());
+        ticketDetail.setTime(userTicket.getTime());
+        ticketDetail.setActive_time(userTicket.getActiveTime());
         return ticketDetail;
 
         //Mock data for test

@@ -63,7 +63,7 @@ public class MockDataContext {
         detail.setStart_station("民族大道纺织大学");
         detail.setEnd_station("珞瑜路武汉大学");
         detail.setPrice(4);
-        detail.setTime(new Date().getTime());
+        detail.setTime(new Date());
         return detail;
     }
 
