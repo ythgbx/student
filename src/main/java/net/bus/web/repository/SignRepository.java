@@ -14,7 +14,7 @@ import java.util.List;
  * Created by sky on 16/7/26.
  */
 @Repository
-public class SignRespository {
+public class SignRepository {
     @Autowired
     private SignMapper _mapper;
 

@@ -5,7 +5,7 @@ import net.bus.web.model.Sign;
 import net.bus.web.model.User;
 import net.bus.web.model.type.PointRecordType;
 import net.bus.web.model.type.PointSourceType;
-import net.bus.web.repository.SignRespository;
+import net.bus.web.repository.SignRepository;
 import net.bus.web.repository.UserRepository;
 import net.bus.web.repository.specification.UserSignSpecification;
 import net.bus.web.service.ISignService;
@@ -22,7 +22,7 @@ import java.util.List;
 @Service
 public class SignService implements ISignService {
     @Autowired
-    private SignRespository _respository;
+    private SignRepository _respository;
     @Autowired
     private UserRepository _userRepository;
     @Autowired
