@@ -2,6 +2,7 @@ package net.bus.web.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.bus.web.aspect.Auth;
+import net.bus.web.context.BusTracks;
 import net.bus.web.context.MockDataContext;
 import net.bus.web.context.Position;
 import net.bus.web.context.SessionContext;
@@ -9,6 +10,7 @@ import net.bus.web.controller.dto.*;
 import net.bus.web.model.Line;
 import net.bus.web.model.Station;
 import net.bus.web.model.User;
+import net.bus.web.service.IBusService;
 import net.bus.web.service.ILineService;
 import net.bus.web.service.ILocationService;
 import net.bus.web.service.IUserLineService;
@@ -34,6 +36,8 @@ public class LineController {
     private IUserLineService _userLineService;
     @Autowired
     private ILocationService _locationService;
+    @Autowired
+    private IBusService _busService;
     @Autowired
     private HttpSession session;
 
@@ -123,7 +127,7 @@ public class LineController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
-    public IResult detail(long id, @RequestParam(value = "lat", required = false, defaultValue = "0") double lat, @RequestParam(value = "lng", required = false, defaultValue = "0")double lng)
+    public IResult detail(long id, boolean forward,@RequestParam(value = "lat", required = false, defaultValue = "0") double lat, @RequestParam(value = "lng", required = false, defaultValue = "0")double lng)
     {
         logger.info("line detail");
         //TODO Get line detail
@@ -146,6 +150,20 @@ public class LineController {
         }
 
         //TODO Use IBusService to get bus's tracks in line with direction??
+        BusTracks.Direction direction = forward?BusTracks.Direction.Forward:BusTracks.Direction.Reverse;
+        HashMap<Long,Integer> busesPosInLine = _busService.getBusesCurrentTrack(line.getId(), direction);
+        Iterator it = busesPosInLine.keySet().iterator();
+        List<LineBus> lineBuses = new ArrayList<LineBus>();
+        while(it.hasNext()) {
+            LineBus lineBus = new LineBus();
+            Long key = (Long)it.next();
+            lineBus.setId(key);
+            lineBus.setPos(null);//暂时无用
+            lineBus.setImg("car/1.png");
+            lineBus.setPos_in_line(busesPosInLine.get(key));
+            lineBuses.add(lineBus);
+        }
+        lineDetail.setList_buses(lineBuses);
 
         return lineDetail;
 

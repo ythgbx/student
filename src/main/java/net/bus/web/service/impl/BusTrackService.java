@@ -32,7 +32,7 @@ public class BusTrackService implements IBusTrackService {
         Track track = new Track();
         track.setPos(position);
 
-        Station aroundStation = getBusAroundStation(bus,position);
+        Station aroundStation = getBusAroundStation(bus, position);
         if(aroundStation!=null){
             track.setStation(aroundStation.getId());
         }else {
@@ -49,6 +49,49 @@ public class BusTrackService implements IBusTrackService {
         clearTracks(bus,track);
 
         End(bus,track);
+    }
+
+    public int getBusPosInLine(Bus bus,BusTracks.Direction direction)
+    {
+        BusTracks busTracks = BusesTracksContext.getInstance().getBusTracks(bus.getId());
+        //轨迹存在检查(是否运行)
+        if(busTracks==null)
+            return -1;
+        //运行方向检查
+        if(!busTracks.getDirection().equals(direction))
+            return -1;
+        //轨迹记录检查(是否运行)
+        if(busTracks.getTracks()==null||busTracks.getTracks().isEmpty())
+            return -1;
+
+        Track lastTrack = busTracks.getTracks().get(busTracks.getTracks().size() - 1);
+        //最后点状态为起点或结束点不进行显示
+        if(lastTrack.getStatus().equals(Track.Status.Start)||lastTrack.getStatus().equals(Track.Status.End))
+            return -1;
+
+        Long lastStationId;
+        if(lastTrack.getStation()!=null){
+            lastStationId = lastTrack.getStation();
+        }else{
+            lastStationId = busTracks.getTracks().get(busTracks.getTracks().size() - 2).getStation();
+        }
+        int posInLine = 0;
+        List<LineStation> lineStations =  _lineService.getLineStations(bus.getLineId());
+        if(busTracks.getDirection().equals(BusTracks.Direction.Forward)){
+            for(int i=0;i<lineStations.size();i++){
+                if(lineStations.get(i).getStationId().equals(lastStationId)){
+                    posInLine = (i + 1) * 2 - 1;
+                }
+            }
+        }else{
+            posInLine = (lineStations.size() * 2 - posInLine);
+        }
+
+        if(lastTrack.getStatus().equals(Track.Status.Goto)){
+            posInLine = posInLine + 1;
+        }
+
+        return posInLine;
     }
 
     private Station getBusAroundStation(Bus bus,Position position)

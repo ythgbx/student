@@ -13,5 +13,5 @@ public interface IBusService {
 
     void setBusesLocation(long busId,Position pos);
 
-    HashMap<Long,Track> getBusesCurrentTrack(long lineId,BusTracks.Direction direction);
+    HashMap<Long,Integer> getBusesCurrentTrack(long lineId,BusTracks.Direction direction);
 }

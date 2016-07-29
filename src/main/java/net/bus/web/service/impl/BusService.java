@@ -5,12 +5,14 @@ import net.bus.web.context.Position;
 import net.bus.web.context.Track;
 import net.bus.web.model.Bus;
 import net.bus.web.repository.BusRepository;
+import net.bus.web.repository.specification.BusLineIdSpecification;
 import net.bus.web.service.IBusService;
 import net.bus.web.service.IBusTrackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Edifi_000 on 2016-07-21.
@@ -32,11 +34,20 @@ public class BusService  implements IBusService {
         }
     }
 
-    public HashMap<Long,Track> getBusesCurrentTrack(long lineId,BusTracks.Direction direction)
+    public HashMap<Long,Integer> getBusesCurrentTrack(long lineId,BusTracks.Direction direction)
     {
-        //TODO Get this direction buses in line
+        //TODO 获取线路下有效运行车辆,在线路中位置(中间间隔算1)
+        //获取线路下车辆
+        List<Bus> buses = _rootRepository.getList(new BusLineIdSpecification(lineId));
 
-        //TODO Get their track
-        return null;
+        HashMap<Long,Integer> result = new HashMap<Long,Integer>();
+        for(Bus bus:buses){
+            Integer posInLine = _busTrackService.getBusPosInLine(bus,direction);
+            if(posInLine.equals(-1))
+                continue;
+
+            result.put(bus.getId(), posInLine);
+        }
+        return result;
     }
 }
