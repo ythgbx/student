@@ -3,8 +3,10 @@ package net.bus.web.service.impl;
 import ch.hsr.geohash.GeoHash;
 import com.spatial4j.core.context.SpatialContext;
 import com.spatial4j.core.distance.DistanceUtils;
+import net.bus.web.context.BusesTracksContext;
 import net.bus.web.context.Position;
 import net.bus.web.context.StationsLocationContext;
+import net.bus.web.model.Bus;
 import net.bus.web.model.Station;
 import net.bus.web.service.ILocationService;
 import net.bus.web.service.IStationService;
@@ -57,6 +59,26 @@ public class LocationService implements ILocationService {
         }
 
         return allStationAdjacent;
+    }
+
+    public List<Bus> getAroundBuses(Position pos)
+    {
+        return getAroundBuses(pos,9);
+    }
+
+    public List<Bus> getAroundBuses(Position pos, int hashLength)
+    {
+        //step1
+        GeoHash geoHash = GeoHash.withCharacterPrecision(pos.getLat(), pos.getLng(), hashLength);
+        List<String> listStationAdjacentCode = new ArrayList<String>();
+        GeoHash[] adjacent = geoHash.getAdjacent();
+        listStationAdjacentCode.add(geoHash.toBase32());
+        for (GeoHash hash : adjacent) {
+            listStationAdjacentCode.add(hash.toBase32());
+        }
+
+        return null;
+
     }
 
     private Double getDistance(Position posA,Position posB)
