@@ -11,15 +11,9 @@ import java.util.List;
  */
 public interface IUserTicketService {
 
-    List<UserTicket> getUncheckedTickets(long user_id,int page,int limit);
-
-    List<UserTicket> getCheckedTickets(long user_id,int page,int limit);
-
-    List<UserTicket> getDoneTickets(long user_id,int page,int limit);
+    List<UserTicket> getTickets(long user_id,int page,int limit);
 
     UserTicket getDetail(long id);
-
-    boolean checkTicket(long id);
 
     UserTicket getTicketByLineId(long line_id);
 

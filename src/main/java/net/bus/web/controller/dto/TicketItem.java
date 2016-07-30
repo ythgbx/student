@@ -9,7 +9,6 @@ public class TicketItem {
     private String start_station;
     private String end_station;
     private String bus_img;
-    private Long active_time;
     private Long time;
 
     public Long getId(){ return id; }
@@ -46,14 +45,6 @@ public class TicketItem {
 
     public void setBus_img(String bus_img) {
         this.bus_img = bus_img;
-    }
-
-    public Long getActive_time() {
-        return active_time;
-    }
-
-    public void setActive_time(Long active_time) {
-        this.active_time = active_time;
     }
 
     public Long getTime() {

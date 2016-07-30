@@ -7,7 +7,6 @@
     <result column="line_id" property="lineId" jdbcType="BIGINT" />
     <result column="price" property="price" jdbcType="INTEGER" />
     <result column="time" property="time" jdbcType="TIMESTAMP" />
-    <result column="active_time" property="activeTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, user_id, line_id, price, time, active_time
+    id, user_id, line_id, price, time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="net.bus.web.model.UserTicketExample" >
     select
@@ -102,11 +101,9 @@
   </delete>
   <insert id="insert" parameterType="net.bus.web.model.UserTicket" >
     insert into user_ticket (id, user_id, line_id, 
-      price, time, active_time
-      )
+      price, time)
     values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{lineId,jdbcType=BIGINT}, 
-      #{price,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, #{activeTime,jdbcType=TIMESTAMP}
-      )
+      #{price,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="net.bus.web.model.UserTicket" >
     insert into user_ticket
@@ -126,9 +123,6 @@
       <if test="time != null" >
         time,
       </if>
-      <if test="activeTime != null" >
-        active_time,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -145,9 +139,6 @@
       </if>
       <if test="time != null" >
         #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="activeTime != null" >
-        #{activeTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -175,9 +166,6 @@
       <if test="record.time != null" >
         time = #{record.time,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.activeTime != null" >
-        active_time = #{record.activeTime,jdbcType=TIMESTAMP},
-      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -189,8 +177,7 @@
       user_id = #{record.userId,jdbcType=BIGINT},
       line_id = #{record.lineId,jdbcType=BIGINT},
       price = #{record.price,jdbcType=INTEGER},
-      time = #{record.time,jdbcType=TIMESTAMP},
-      active_time = #{record.activeTime,jdbcType=TIMESTAMP}
+      time = #{record.time,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -210,9 +197,6 @@
       <if test="time != null" >
         time = #{time,jdbcType=TIMESTAMP},
       </if>
-      <if test="activeTime != null" >
-        active_time = #{activeTime,jdbcType=TIMESTAMP},
-      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -221,8 +205,7 @@
     set user_id = #{userId,jdbcType=BIGINT},
       line_id = #{lineId,jdbcType=BIGINT},
       price = #{price,jdbcType=INTEGER},
-      time = #{time,jdbcType=TIMESTAMP},
-      active_time = #{activeTime,jdbcType=TIMESTAMP}
+      time = #{time,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <select resultMap="BaseResultMap" parameterType="net.bus.web.model.UserTicketExample" id="selectByExampleWithRowbounds" >

@@ -404,66 +404,6 @@ public class UserTicketExample {
             addCriterion("time not between", value1, value2, "time");
             return (Criteria) this;
         }
-
-        public Criteria andActiveTimeIsNull() {
-            addCriterion("active_time is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andActiveTimeIsNotNull() {
-            addCriterion("active_time is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andActiveTimeEqualTo(Date value) {
-            addCriterion("active_time =", value, "activeTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andActiveTimeNotEqualTo(Date value) {
-            addCriterion("active_time <>", value, "activeTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andActiveTimeGreaterThan(Date value) {
-            addCriterion("active_time >", value, "activeTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andActiveTimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("active_time >=", value, "activeTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andActiveTimeLessThan(Date value) {
-            addCriterion("active_time <", value, "activeTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andActiveTimeLessThanOrEqualTo(Date value) {
-            addCriterion("active_time <=", value, "activeTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andActiveTimeIn(List<Date> values) {
-            addCriterion("active_time in", values, "activeTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andActiveTimeNotIn(List<Date> values) {
-            addCriterion("active_time not in", values, "activeTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andActiveTimeBetween(Date value1, Date value2) {
-            addCriterion("active_time between", value1, value2, "activeTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andActiveTimeNotBetween(Date value1, Date value2) {
-            addCriterion("active_time not between", value1, value2, "activeTime");
-            return (Criteria) this;
-        }
     }
 
     public static class Criteria extends GeneratedCriteria {
