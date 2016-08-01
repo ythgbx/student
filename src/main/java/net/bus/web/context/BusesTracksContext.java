@@ -1,5 +1,7 @@
 package net.bus.web.context;
 
+import ch.hsr.geohash.GeoHash;
+import net.bus.web.model.Bus;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
@@ -16,8 +18,10 @@ public class BusesTracksContext {
 
     private static BusesTracksContext _instance;
 
-    private Cache _cache = null;;
+    private Cache _cache = null;
     private CacheManager _cacheManager = null;
+
+    private final int HASH_LENGTH = 9;
 
     public static BusesTracksContext getInstance() {
 
@@ -37,9 +41,9 @@ public class BusesTracksContext {
         _cache=_cacheManager.getCache("busCache");
     }
 
-    public void saveBusTrack(Long busId,Track track)
+    public void saveBusTrack(Bus bus,Track track)
     {
-        String key = _headKey+busId;
+        String key = _headKey+bus.getId();
         BusTracks busTracks;
         if(_cache.isElementInMemory(key)){
             busTracks = (BusTracks)_cache.get(key).getObjectValue();
@@ -50,6 +54,12 @@ public class BusesTracksContext {
         if(!busTracks.getTracks().contains(track)){
             busTracks.getTracks().add(track);
         }
+
+        GeoHash geoHash = GeoHash.withCharacterPrecision(track.getPos().getLat(), track.getPos().getLng(), HASH_LENGTH);
+        busTracks.setLastGeoHashCodes(geoHash.toBase32());
+        bus.setLat(track.getPos().getLat());
+        bus.setLng(track.getPos().getLng());
+        busTracks.setBus(bus);
 
         Element element = new Element(key, busTracks);
         _cache.put(element);
@@ -63,5 +73,21 @@ public class BusesTracksContext {
         }
 
         return null;
+    }
+
+    public List<Bus> getBusesByGeoHashCodes(List<String> geoHashCodes)
+    {
+        List<Bus> result = new ArrayList<Bus>();
+        List keys =_cache.getKeys();
+        for(Object key:keys){
+            BusTracks busTracks = (BusTracks)_cache.get(key).getObjectValue();
+            for(String geoCode:geoHashCodes){
+                if(busTracks.getLastGeoHashCodes().startsWith(geoCode)){
+                    result.add(busTracks.getBus());
+                }
+            }
+        }
+
+        return result;
     }
 }

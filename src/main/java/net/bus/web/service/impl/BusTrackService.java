@@ -152,7 +152,7 @@ public class BusTrackService implements IBusTrackService {
 
     private void End(Bus bus,Track track)
     {
-        BusesTracksContext.getInstance().saveBusTrack(bus.getId(),track);
+        BusesTracksContext.getInstance().saveBusTrack(bus,track);
     }
 
     private boolean checkLineEnd(Bus bus,Track track)

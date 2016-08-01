@@ -1,5 +1,7 @@
 package net.bus.web.context;
 
+import net.bus.web.model.Bus;
+
 import java.util.List;
 
 /**
@@ -31,10 +33,19 @@ public class BusTracks {
         this.lastGeoHashCodes = lastGeoHashCodes;
     }
 
+    public Bus getBus() {
+        return bus;
+    }
+
+    public void setBus(Bus bus) {
+        this.bus = bus;
+    }
+
     public enum Direction {
         Forward, Reverse
     }
 
+    private Bus bus;
     private List<Track> tracks;
     private Direction direction;
     private String lastGeoHashCodes;

@@ -68,13 +68,24 @@ public class StationsLocationContext {
     public List<Station> getStationsByGeoHashCode(List<String> geoHashCodes)
     {
         //Get Station list collection which the key is geoHashCode(base32Code) that in List
-        List<Station> stationList = new ArrayList<Station>();
-        for(String geoCode:geoHashCodes){
-            if(_cache.isElementInMemory(geoCode)){
-                List<Station> meList = (List<Station>) _cache.get(geoCode).getObjectValue();
-                stationList.addAll(meList);
+//        List<Station> stationList = new ArrayList<Station>();
+//        for(String geoCode:geoHashCodes){
+//            if(_cache.isElementInMemory(geoCode)){
+//                List<Station> meList = (List<Station>) _cache.get(geoCode).getObjectValue();
+//                stationList.addAll(meList);
+//            }
+//        }
+
+        List<Station> result = new ArrayList<Station>();
+        List keys =_cache.getKeys();
+        for(Object key:keys){
+            for(String geoCode:geoHashCodes){
+                if(key.toString().startsWith(geoCode)){
+                    List<Station> meList = (List<Station>) _cache.get(key).getObjectValue();
+                    result.addAll(meList);
+                }
             }
         }
-        return stationList;
+        return result;
     }
 }

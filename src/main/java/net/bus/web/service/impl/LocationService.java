@@ -70,14 +70,29 @@ public class LocationService implements ILocationService {
     {
         //step1
         GeoHash geoHash = GeoHash.withCharacterPrecision(pos.getLat(), pos.getLng(), hashLength);
-        List<String> listStationAdjacentCode = new ArrayList<String>();
+        List<String> listBusesAdjacentCode = new ArrayList<String>();
         GeoHash[] adjacent = geoHash.getAdjacent();
-        listStationAdjacentCode.add(geoHash.toBase32());
+        listBusesAdjacentCode.add(geoHash.toBase32());
         for (GeoHash hash : adjacent) {
-            listStationAdjacentCode.add(hash.toBase32());
+            listBusesAdjacentCode.add(hash.toBase32());
+        }
+        List<Bus> allBusesAdjacent = BusesTracksContext.getInstance().getBusesByGeoHashCodes(listBusesAdjacentCode);
+
+        //step2
+        if(allBusesAdjacent!=null) {
+            final Position currentPos = pos;
+            Collections.sort(allBusesAdjacent, new Comparator<Bus>() {
+                //@Override
+                public int compare(Bus s1, Bus s2) {
+                    Double distanceS1 = getDistance(currentPos, new Position(s1.getLat(), s1.getLng()));
+                    Double distanceS2 = getDistance(currentPos, new Position(s2.getLat(), s2.getLng()));
+                    return distanceS1.compareTo(distanceS2);
+                }
+
+            });
         }
 
-        return null;
+        return allBusesAdjacent;
 
     }
 
