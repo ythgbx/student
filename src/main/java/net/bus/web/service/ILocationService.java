@@ -1,6 +1,7 @@
 package net.bus.web.service;
 
 import net.bus.web.context.Position;
+import net.bus.web.model.Bus;
 import net.bus.web.model.Station;
 
 import java.util.List;
@@ -13,4 +14,8 @@ public interface ILocationService {
     List<Station> getAroundStation(Position pos);
 
     List<Station> getAroundStation(Position pos,int hashLength);
+
+    List<Bus> getAroundBuses(Position pos);
+
+    List<Bus> getAroundBuses(Position pos,int hashLength);
 }

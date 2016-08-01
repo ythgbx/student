@@ -41,51 +41,12 @@ public class UserTicketController {
 
     @Auth(role = Auth.Role.USER)
     @ResponseBody
-    @RequestMapping(value = "/list/unchecked", method = RequestMethod.GET)
-    public IResult uncheckedList(int page,int limit)
-    {
-        logger.info("ticket unchecked query");
-        User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
-        List<UserTicket> ticketList = _userTicketService.getUncheckedTickets(currentUser.getId(),page,limit);
-        List<TicketItem> displayList = getDisplayList(ticketList);
-
-        TicketList resultTicketList = new TicketList();
-        resultTicketList.setTickets(displayList);
-        resultTicketList.setPage(page);
-        return resultTicketList;
-
-        //Mock data for test
-        //return MockDataContext.getInstance().getTicketItemList();
-
-    }
-
-    @Auth(role = Auth.Role.USER)
-    @ResponseBody
-    @RequestMapping(value = "/list/checked", method = RequestMethod.GET)
-    public IResult checkedList(int page,int limit)
-    {
-        logger.info("ticket check list query");
-        User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
-        List<UserTicket> ticketList = _userTicketService.getCheckedTickets(currentUser.getId(),page,limit);
-        List<TicketItem> displayList = getDisplayList(ticketList);
-
-        TicketList resultTicketList = new TicketList();
-        resultTicketList.setTickets(displayList);
-        resultTicketList.setPage(page);
-        return resultTicketList;
-
-        //Mock data for test
-        //return MockDataContext.getInstance().getTicketItemList();
-    }
-
-    @Auth(role = Auth.Role.USER)
-    @ResponseBody
-    @RequestMapping(value = "/list/done", method = RequestMethod.GET)
-    public IResult doneList(int page,int limit)
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public IResult list(int page,int limit)
     {
         logger.info("ticket done list query");
         User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
-        List<UserTicket> ticketList = _userTicketService.getDoneTickets(currentUser.getId(), page, limit);
+        List<UserTicket> ticketList = _userTicketService.getTickets(currentUser.getId(), page, limit);
         List<TicketItem> displayList = getDisplayList(ticketList);
 
         TicketList resultTicketList = new TicketList();
@@ -97,7 +58,7 @@ public class UserTicketController {
         //return MockDataContext.getInstance().getTicketItemList();
     }
 
-    @Auth(role = Auth.Role.USER)
+    @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
     public IResult detail(Long id)
@@ -111,36 +72,12 @@ public class UserTicketController {
         ticketDetail.setEnd_station(userLine.getEnd());
         ticketDetail.setPrice(userTicket.getPrice());
         ticketDetail.setTime(userTicket.getTime());
-        ticketDetail.setActive_time(userTicket.getActiveTime());
         return ticketDetail;
 
         //Mock data for test
         //return MockDataContext.getInstance().getTicketDetail();
     }
 
-    @Auth(role = Auth.Role.USER)
-    @ResponseBody
-    @RequestMapping(value = "/checked", method = RequestMethod.POST)
-    public IResult checked(@RequestBody BaseRequest request)
-    {
-        logger.info("ticket checked");
-        BaseResult result = new BaseResult();
-        try {
-            if(_userTicketService.checkTicket(request.getId())){
-                result.setResult("success");
-            }else{
-                result.setResult("failure");
-            }
-        }catch (Exception ex){
-            result.setResult("error");
-            result.setError(ex.getMessage());
-        }
-
-        //Mock data for test
-       // result.setResult("success");
-
-        return result;
-    }
 
     @Auth(role = Auth.Role.USER)
     @ResponseBody
@@ -180,11 +117,6 @@ public class UserTicketController {
             disItem.setEnd_station(line.getEnd());
             disItem.setBus_img("car/1.png");//TempCode 暂无该内容
             disItem.setTime(ticket.getTime().getTime());
-            if(ticket.getActiveTime()!=null){
-                disItem.setActive_time(ticket.getActiveTime().getTime());
-            }else{
-                disItem.setActive_time(null);
-            }
             displayList.add(disItem);
         }
         return displayList;

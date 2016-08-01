@@ -5,21 +5,21 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import java.util.List;
 
 /**
- * Created by Edifi_000 on 2016-07-27.
+ * Created by sky on 16/7/30.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class StationList extends BaseResult  {
+public class BusList extends BaseResult {
 
-    private List<StationItem> stations;
+    private List<BusItem> buses;
     private Integer page;
     private Integer total_count;
 
-    public List<StationItem> getStations() {
-        return stations;
+    public List<BusItem> getBuses() {
+        return buses;
     }
 
-    public void setStations(List<StationItem> stations) {
-        this.stations = stations;
+    public void setBuses(List<BusItem> buses) {
+        this.buses = buses;
     }
 
     public Integer getPage() {

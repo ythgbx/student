@@ -51,7 +51,6 @@ public class MockDataContext {
             disItem.setEnd_station("中北路地铁楚河汉界站");
             disItem.setBus_img("car/1.png");
             disItem.setTime(new Date().getTime());
-            disItem.setActive_time(new Date().getTime());
             displayList.add(disItem);
         }
         return displayList;

@@ -13,8 +13,6 @@ public class UserTicket {
 
     private Date time;
 
-    private Date activeTime;
-
     public Long getId() {
         return id;
     }
@@ -53,13 +51,5 @@ public class UserTicket {
 
     public void setTime(Date time) {
         this.time = time;
-    }
-
-    public Date getActiveTime() {
-        return activeTime;
-    }
-
-    public void setActiveTime(Date activeTime) {
-        this.activeTime = activeTime;
     }
 }
