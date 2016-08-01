@@ -10,6 +10,15 @@ public class UserBase extends BaseResult {
     private Double lat;
     private Double lng;
     private Integer points;
+    private String phone;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     public String getName() {
         return name;
@@ -50,4 +59,6 @@ public class UserBase extends BaseResult {
     public void setPoints(Integer points) {
         this.points = points;
     }
+
+
 }

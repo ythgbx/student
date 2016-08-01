@@ -87,8 +87,8 @@ public class UserController {
         User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
         UserBase userBase = new UserBase();
         userBase.setPoints(user.getPoints());
-        user.setPhone(user.getPhone());
-        user.setPhoto(user.getPhoto());
+        userBase.setPhone(user.getPhone());
+        userBase.setPhoto(user.getPhoto());
         return userBase;
     }
 
