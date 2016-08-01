@@ -14,5 +14,5 @@ import java.lang.annotation.*;
 public @interface Auth {
     Role role() default Role.NONE;
 
-    public enum Role{ NONE, USER, ADMIN};
+    public enum Role{ NONE, USER,BUS, ADMIN};
 }

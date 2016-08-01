@@ -7,6 +7,7 @@ import net.bus.web.controller.dto.*;
 import net.bus.web.model.Line;
 import net.bus.web.model.User;
 import net.bus.web.model.UserTicket;
+import net.bus.web.service.IUserService;
 import net.bus.web.service.IUserTicketService;
 import net.bus.web.service.ILineService;
 import org.apache.log4j.Logger;
@@ -34,6 +35,8 @@ public class UserTicketController {
     private IUserTicketService _userTicketService;
     @Autowired
     private ILineService _lineService;
+    @Autowired
+    private IUserService _userService;
     @Autowired
     private HttpSession session;
 
@@ -79,7 +82,7 @@ public class UserTicketController {
     }
 
 
-    @Auth(role = Auth.Role.USER)
+    @Auth(role = Auth.Role.BUS)
     @ResponseBody
     @RequestMapping(value = "/buy", method = RequestMethod.POST)
     public IResult buy(@RequestBody TicketBuy request)
@@ -87,9 +90,8 @@ public class UserTicketController {
         logger.info("ticket buy");
         BaseResult result = new BaseResult();
         try {
-            User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
-            if(_userTicketService.buyTicket(request.getLine_id(), currentUser)){
-                session.setAttribute(SessionContext.CURRENT_USER,currentUser);
+            User user = _userService.getUser(request.getUser_id());
+            if(_userTicketService.buyTicket(request.getLine_id(), user)){
                 result.setResult("success");
             }else {
                 result.setResult("failure");

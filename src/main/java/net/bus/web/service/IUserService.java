@@ -12,6 +12,8 @@ public interface IUserService {
 
     List<User> getAllUsers(int page,int limit);
 
+    User getUser(Long id);
+
     boolean registerCheck(String phone);
 
     User loginCheck(String phone,String password);

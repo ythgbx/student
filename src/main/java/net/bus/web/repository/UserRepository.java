@@ -41,6 +41,10 @@ public class UserRepository {
         return null;
     }
 
+    public User getUser(Long id) {
+        return userMapper.selectByPrimaryKey(id);
+    }
+
     public int insertUser(User user)
     {
         return userMapper.insert(user);

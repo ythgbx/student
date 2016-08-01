@@ -85,6 +85,8 @@ public class UserController {
     @RequestMapping(value = "/getinfo", method = RequestMethod.GET)
     public IResult getInfo(){
         User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
+        user = service.getUser(user.getId());
+        session.setAttribute(SessionContext.CURRENT_USER,user);
         UserBase userBase = new UserBase();
         userBase.setPoints(user.getPoints());
         userBase.setPhone(user.getPhone());
@@ -101,6 +103,8 @@ public class UserController {
     @RequestMapping(value = "/getPoints", method = RequestMethod.GET)
     public IResult getPoints(){
         User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
+        user = service.getUser(user.getId());
+        session.setAttribute(SessionContext.CURRENT_USER,user);
         UserBase userBase = new UserBase();
         userBase.setPoints(user.getPoints());
         return userBase;

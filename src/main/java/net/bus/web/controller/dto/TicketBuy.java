@@ -5,7 +5,17 @@ package net.bus.web.controller.dto;
  */
 public class TicketBuy {
 
+    private Long user_id;
+
     private Long line_id;
+
+    public Long getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Long user_id) {
+        this.user_id = user_id;
+    }
 
     public Long getLine_id() {
         return line_id;

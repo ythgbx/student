@@ -23,6 +23,11 @@ public class UserService  implements IUserService {
         return _rootRepository.getAllUsers(page-1,limit);
     }
 
+    public User getUser(Long id)
+    {
+        return _rootRepository.getUser(id);
+    }
+
     public boolean registerCheck(String phone)
     {
         User user = _rootRepository.getUser(new UserPhoneSpecification(phone));
