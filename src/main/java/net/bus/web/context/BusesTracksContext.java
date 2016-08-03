@@ -45,7 +45,7 @@ public class BusesTracksContext {
     {
         String key = _headKey+bus.getId();
         BusTracks busTracks;
-        if(_cache.isElementInMemory(key)){
+        if(_cache.isElementInMemory(key)&& _cache.get(key)!=null){
             busTracks = (BusTracks)_cache.get(key).getObjectValue();
         }else{
             busTracks = new BusTracks();

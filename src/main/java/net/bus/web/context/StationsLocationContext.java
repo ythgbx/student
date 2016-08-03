@@ -53,7 +53,7 @@ public class StationsLocationContext {
         for(Station station:stationList){
             geoHash = GeoHash.withCharacterPrecision(station.getLat(), station.getLng(), hashLength);
             key = geoHash.toBase32();
-            if(_cache.isElementInMemory(key)){
+            if(_cache.isElementInMemory(key)&& _cache.get(key)!=null){
                 meList = (List<Station>) _cache.get(key).getObjectValue();
 
             }else{
