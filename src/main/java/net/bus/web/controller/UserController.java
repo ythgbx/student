@@ -228,16 +228,36 @@ public class UserController {
         BaseResult result = new BaseResult();
         try {
             User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
-            if(account.getPhone().equals(currentUser.getPhone())&& (
-                    (account.getPassword()!=null&&account.getPassword().equals(currentUser.getPassword()))
-                            || (account.getCode()!=null&&checkCodeWithPhone(account.getPhone(), account.getCode()))
-            )){
+            if(account.getPhone().equals(currentUser.getPhone())&&account.getNew_password()!=null&&(
+                    (account.getPassword()!=null&&account.getPassword().equals(currentUser.getPassword())))){
 
                 service.setAccount(currentUser,currentUser.getPhone(),account.getNew_password());
 
                 currentUser.setPassword(account.getNew_password());
                 session.setAttribute(SessionContext.CURRENT_USER, currentUser);
 
+                result.setResult("success");
+            }
+            else{
+                result.setResult("failure");
+            }
+        }catch (Exception ex){
+            result.setResult("error");
+            result.setError(ex.getMessage());
+        }
+        return result;
+    }
+
+    @Auth(role = Auth.Role.NONE)
+    @ResponseBody
+    @RequestMapping(value = "/retrieve/password", method = RequestMethod.PUT)
+    public IResult retrievePassword(@RequestBody UserAccount account)
+    {
+        BaseResult result = new BaseResult();
+        try {
+            if(account.getCode()!=null&&account.getNew_password()!=null&&checkCodeWithPhone(account.getPhone(), account.getCode())){
+                User retrieveUser = service.getUser(account.getPhone());
+                service.setAccount(retrieveUser,retrieveUser.getPhone(),account.getNew_password());
                 result.setResult("success");
             }
             else{

@@ -28,6 +28,11 @@ public class UserService  implements IUserService {
         return _rootRepository.getUser(id);
     }
 
+    public User getUser(String phone)
+    {
+        return  _rootRepository.getUser(new UserPhoneSpecification(phone));
+    }
+
     public boolean registerCheck(String phone)
     {
         User user = _rootRepository.getUser(new UserPhoneSpecification(phone));

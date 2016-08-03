@@ -14,6 +14,8 @@ public interface IUserService {
 
     User getUser(Long id);
 
+    User getUser(String phone);
+
     boolean registerCheck(String phone);
 
     User loginCheck(String phone,String password);
