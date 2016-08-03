@@ -57,10 +57,12 @@ public class UserTicketService implements IUserTicketService {
         Line line = _lineRepository.getItem(line_id);
         if(line!=null){
 
-            //当不够积分支付时,返回
-            if(user.getPoints()<line.getPrice()){
-                return false;
-            }
+            //TODO 负值是否仍需范围内限定,可设置于sys.properties内
+//            //由于弱联网检票需要废弃该代码 允许少量负值 20160803
+//            //当不够积分支付时,返回
+//            if(user.getPoints()<line.getPrice()){
+//                return false;
+//            }
 
             UserTicket userTicket = new UserTicket();
             userTicket.setLineId(line_id);
