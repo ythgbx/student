@@ -11,6 +11,7 @@ public class PhoneSMSContext {
 
     private static PhoneSMSContext _instance;
 
+    private String _head = "phonesms-";
     private Cache _cache = null;;
     private CacheManager _cacheManager = null;
 
@@ -32,20 +33,31 @@ public class PhoneSMSContext {
         _cache=_cacheManager.getCache("smsCache");
     }
 
+    public boolean checkPhone(String phone)
+    {
+        String key = _head + phone;
+
+        if(_cache.isElementInMemory(key)&&_cache.get(key)!=null){
+                return true;
+        }else{
+            return false;
+        }
+    }
+
     public void savePhonesSmsCode(String phone,String code)
     {
-        String key = "phonesms-"+phone;
+        String key = _head + phone;
         Element element = new Element(key, code);
         _cache.put(element);
     }
 
     public boolean checkPhonesSmsCode(String phone,String code)
     {
-        String key = "phonesms-"+phone;
+        String key = _head + phone;
         if(_cache.isElementInMemory(key))
         {
             String smsCode = _cache.get(key).getObjectValue().toString();
-            if(smsCode.equals(code))
+            if(smsCode!=null&&smsCode.equals(code))
             {
                 return true;
             }

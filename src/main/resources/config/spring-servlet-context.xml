@@ -180,4 +180,16 @@
         <beans:property name="cacheManager" ref="ehcacheManager"/>
         <beans:property name="transactionAware" value="true"/>
     </beans:bean>
+
+    <!-- sys config -->
+    <beans:bean id="sysProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <beans:property name="locations">
+            <beans:list>
+                <beans:value>/WEB-INF/classes/config/sys.properties</beans:value>
+            </beans:list>
+        </beans:property>
+    </beans:bean>
+    <beans:bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+        <beans:property name="properties" ref="sysProperties"/>
+    </beans:bean>
 </beans:beans>

@@ -26,9 +26,9 @@
            maxEntriesLocalHeap="1000"
            overflowToDisk="false"
            diskPersistent="false"
-           timeToIdleSeconds="60"
+           timeToIdleSeconds="120"
            statistics="true"
-           timeToLiveSeconds="60"/>
+           timeToLiveSeconds="120"/>
 
     <cache name="busCache"
            eternal="true"

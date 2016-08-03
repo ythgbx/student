@@ -1,5 +1,10 @@
 package net.bus.web.controller;
 
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
+import com.sun.jersey.core.util.MultivaluedMapImpl;
 import net.bus.web.aspect.Auth;
 import net.bus.web.context.PhoneSMSContext;
 import net.bus.web.context.Position;
@@ -11,6 +16,7 @@ import net.bus.web.service.IPointRecordService;
 import net.bus.web.service.impl.SignService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import net.bus.web.service.IUserService;
 
 import javax.servlet.http.HttpSession;
+import javax.ws.rs.core.MediaType;
 import java.util.List;
 import java.util.Random;
 
@@ -40,7 +47,10 @@ public class UserController {
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
-
+    @Value("#{sysProperties['smsDebug']}")
+    private boolean _smsDebug;
+    @Value("#{sysProperties['smsDebugCode']}")
+    private String _smsDebugCode;
 
     @RequestMapping(value="/login")
     public ModelAndView index(Model model)
@@ -104,7 +114,7 @@ public class UserController {
     public IResult getPoints(){
         User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
         user = service.getUser(user.getId());
-        session.setAttribute(SessionContext.CURRENT_USER,user);
+        session.setAttribute(SessionContext.CURRENT_USER, user);
         UserBase userBase = new UserBase();
         userBase.setPoints(user.getPoints());
         return userBase;
@@ -142,7 +152,6 @@ public class UserController {
         return result;
     }
 
-
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/sms", method = RequestMethod.POST)
@@ -150,11 +159,26 @@ public class UserController {
     {
         BaseResult result = new BaseResult();
         if(register.getPhone()!=""){
-            //TODO Request sms server for send code sms to the phone
-            String smsCode = getRandNum(6);
-            PhoneSMSContext.getInstance().savePhonesSmsCode(register.getPhone(),smsCode);
 
-            result.setResult("success");
+            //避免接口被大量重复调用造成费用损失
+            if(PhoneSMSContext.getInstance().checkPhone(register.getPhone())){
+                result.setResult("failure");
+                return result;
+            }
+
+            String smsCode = getRandNum(6);
+            PhoneSMSContext.getInstance().savePhonesSmsCode(register.getPhone(), smsCode);
+
+            if(!_smsDebug){
+                if(smsCodeSend(register.getPhone(),smsCode)){
+                    result.setResult("success");
+                }else{
+                    result.setResult("failure");
+                }
+            }else{
+                result.setResult("success");
+                result.setContent(new String(smsCode));
+            }
         }else{
             result.setResult("failure");
         }
@@ -206,7 +230,7 @@ public class UserController {
             User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
             if(account.getPhone().equals(currentUser.getPhone())&& (
                     (account.getPassword()!=null&&account.getPassword().equals(currentUser.getPassword()))
-                            || (account.getCode()!=null&&checkCodeWithPhone(account.getPhone(),account.getCode()))
+                            || (account.getCode()!=null&&checkCodeWithPhone(account.getPhone(), account.getCode()))
             )){
 
                 service.setAccount(currentUser,currentUser.getPhone(),account.getNew_password());
@@ -331,11 +355,14 @@ public class UserController {
 
     private boolean checkCodeWithPhone(String phone,String code)
     {
-        //TODO Check code by key is phone
-        if(code.equals("888"))//TempCode for test
-        {
-            return true;
+        if(_smsDebug){
+            //TempCode for sms debug
+            if(code.equals(_smsDebugCode))
+            {
+                return true;
+            }
         }
+
         if( PhoneSMSContext.getInstance().checkPhonesSmsCode(phone,code))
         {
             return true;
@@ -355,5 +382,21 @@ public class UserController {
     private int randomInt(int from, int to) {
         Random r = new Random();
         return from + r.nextInt(to - from);
+    }
+
+    private boolean smsCodeSend(String phone,String code){
+        Client client = Client.create();
+        client.addFilter(new HTTPBasicAuthFilter(
+                "api","key-4d8e068e8d8b5084ada9a49ff8621333"));//螺丝帽 sms api key
+        WebResource webResource = client.resource(
+                "http://sms-api.luosimao.com/v1/send.json");
+        MultivaluedMapImpl formData = new MultivaluedMapImpl();
+        formData.add("mobile", phone);
+        formData.add("message", "验证码："+code+"【铁壳测试】");//TODO 待提交签名审核后修改为追风巴士
+        ClientResponse response =  webResource.type( MediaType.APPLICATION_FORM_URLENCODED).
+                post(ClientResponse.class, formData);
+
+        int status = response.getStatus();
+        return (status==200);
     }
 }
