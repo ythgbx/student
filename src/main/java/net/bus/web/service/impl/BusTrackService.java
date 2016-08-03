@@ -118,7 +118,11 @@ public class BusTrackService implements IBusTrackService {
 
             //根据line与轨迹开始点与当前track,设置方向
             Track startTrack = tracks.get(0);
-            busTracks.setDirection(getBusTracksDirection(bus,startTrack,track));
+            busTracks.setDirection(getBusTracksDirection(bus, startTrack, track));
+
+            //根据当前轨迹与最后记录轨迹计算车辆角度
+            Track lastTracks = tracks.get(tracks.size()-1);
+            busTracks.setAngle(getBusTracksAngle(lastTracks,track));
         }
     }
 
@@ -216,5 +220,25 @@ public class BusTrackService implements IBusTrackService {
         }else{
             return  BusTracks.Direction.Reverse;
         }
+    }
+
+    private Double getBusTracksAngle(Track lastTrack,Track currentTrack)
+    {
+        double dRotateAngle = Math.atan2(Math.abs(lastTrack.getPos().getLat() - currentTrack.getPos().getLat()), Math.abs(lastTrack.getPos().getLng() - currentTrack.getPos().getLng()));
+        if (currentTrack.getPos().getLat() >= lastTrack.getPos().getLat())
+        {
+            if (currentTrack.getPos().getLng() >= lastTrack.getPos().getLng()){
+            }else{
+                dRotateAngle = Math.PI - dRotateAngle;
+            }
+        }else{
+            if (currentTrack.getPos().getLng() >= lastTrack.getPos().getLng()){
+                dRotateAngle = 2 * Math.PI - dRotateAngle;
+            }else{
+                dRotateAngle = Math.PI + dRotateAngle;
+            }
+        }
+        dRotateAngle = dRotateAngle * 180 / Math.PI;
+        return dRotateAngle;
     }
 }

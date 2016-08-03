@@ -41,6 +41,14 @@ public class BusTracks {
         this.bus = bus;
     }
 
+    public Double getAngle() {
+        return angle;
+    }
+
+    public void setAngle(Double angle) {
+        this.angle = angle;
+    }
+
     public enum Direction {
         Forward, Reverse
     }
@@ -49,4 +57,5 @@ public class BusTracks {
     private List<Track> tracks;
     private Direction direction;
     private String lastGeoHashCodes;
+    private Double angle;
 }
