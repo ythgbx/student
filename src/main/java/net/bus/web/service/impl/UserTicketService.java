@@ -9,7 +9,7 @@ import net.bus.web.repository.UserRepository;
 import net.bus.web.repository.UserTicketRepository;
 import net.bus.web.repository.specification.UserTicketIdSpecification;
 import net.bus.web.repository.specification.UserTicketLineIdSpecification;
-import net.bus.web.repository.specification.UserUserIdSpecification;
+import net.bus.web.repository.specification.UserTicketUserIdSpecification;
 import net.bus.web.service.IUserTicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,7 +36,7 @@ public class UserTicketService implements IUserTicketService {
         Calendar checkRange = Calendar.getInstance();
         checkRange.setTime(new Date());
         checkRange.add(Calendar.MINUTE, -15);
-        ISpecification specification = new UserUserIdSpecification(user_id);
+        ISpecification specification = new UserTicketUserIdSpecification(user_id);
         return _rootRepository.getList(specification, page - 1, limit);
     }
 

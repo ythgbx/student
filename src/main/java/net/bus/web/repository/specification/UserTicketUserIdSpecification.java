@@ -9,12 +9,12 @@ import java.util.Date;
 /**
  * Created by sky on 16/7/9.
  */
-public class UserUserIdSpecification implements ISpecification<UserTicketExample> {
+public class UserTicketUserIdSpecification implements ISpecification<UserTicketExample> {
 
 
     protected long _userId;
 
-    public UserUserIdSpecification(long userId)
+    public UserTicketUserIdSpecification(long userId)
     {
         this._userId = userId;
     }
