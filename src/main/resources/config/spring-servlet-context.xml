@@ -147,23 +147,34 @@
         <beans:property name="queueCapacity" value="500" />
     </beans:bean>
     <!-- 业务对象 -->
-    <beans:bean id="bizObject" class="net.bus.web.task.BusTask" />
+    <beans:bean id="bizBusObject" class="net.bus.web.task.BusTask" />
+    <beans:bean id="bizUserObject" class="net.bus.web.task.UserTask" />
     <!-- 调度业务 -->
-    <beans:bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-        <beans:property name="targetObject" ref="bizObject" />
+    <beans:bean id="busJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <beans:property name="targetObject" ref="bizBusObject" />
+        <beans:property name="targetMethod" value="doBiz" />
+    </beans:bean>
+    <beans:bean id="userJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <beans:property name="targetObject" ref="bizUserObject" />
         <beans:property name="targetMethod" value="doBiz" />
     </beans:bean>
     <!-- 调度触发器 -->
-    <beans:bean id="taskTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
-        <beans:property name="jobDetail" ref="jobDetail" />
+    <beans:bean id="busTaskTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+        <beans:property name="jobDetail" ref="busJobDetail" />
         <beans:property name="startDelay" value="1000" />
         <beans:property name="repeatInterval" value="1000" />
+    </beans:bean>
+    <beans:bean id="userTaskTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+        <beans:property name="jobDetail" ref="userJobDetail" />
+        <beans:property name="startDelay" value="1000" />
+        <beans:property name="repeatInterval" value="5000" />
     </beans:bean>
     <!-- 设置调度 -->
     <beans:bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <beans:property name="triggers">
             <beans:list>
-                <beans:ref bean="taskTrigger" />
+                <beans:ref bean="busTaskTrigger" />
+                <beans:ref bean="userTaskTrigger" />
             </beans:list>
         </beans:property>
         <beans:property name="taskExecutor" ref="executor" />
