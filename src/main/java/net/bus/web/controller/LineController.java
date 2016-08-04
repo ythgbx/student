@@ -49,8 +49,10 @@ public class LineController {
     @ResponseBody
     @RequestMapping(value = "/list/around", method = RequestMethod.GET)
     @ApiOperation(value = "根据用户位置获取用户附近线路", httpMethod = "GET", response = LineList.class, notes = "根据用户位置获取用户附近线路")
-    public IResult around(@ApiParam(required = true, name = "lat", value = "纬度")double lat,@ApiParam(required = true, name = "lng", value = "经度")double lng,
-                          @ApiParam(required = true, name = "page", value = "页")int page,@ApiParam(required = true, name = "limit", value = "数量")int limit)
+    public IResult around(@ApiParam(required = true, name = "lat", value = "纬度")@RequestParam(value = "lat", required = true, defaultValue = "0")double lat,
+                          @ApiParam(required = true, name = "lng", value = "经度")@RequestParam(value = "lng", required = true, defaultValue = "0")double lng,
+                          @ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "1")int page,
+                          @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "5")int limit)
     {
         logger.info("line around query");
         LineList lineList = new LineList();
@@ -71,7 +73,8 @@ public class LineController {
     @ResponseBody
     @RequestMapping(value = "/list/user", method = RequestMethod.GET)
     @ApiOperation(value = "根据用户获取用户收藏线路", httpMethod = "GET", response = LineList.class, notes = "根据用户获取用户收藏线路")
-    public IResult user(@ApiParam(required = true, name = "page", value = "页")int page,@ApiParam(required = true, name = "limit", value = "数量")int limit)
+    public IResult user(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "1")int page,
+                        @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "5")int limit)
     {
         logger.info("line user query");
         LineList lineList = new LineList();
@@ -93,7 +96,9 @@ public class LineController {
     @ResponseBody
     @RequestMapping(value = "/list/station", method = RequestMethod.GET)
     @ApiOperation(value = "根据站点名称获取线路", httpMethod = "GET", response = LineList.class, notes = "根据用户获取用户收藏线路")
-    public IResult station(@ApiParam(required = true, name = "station_name", value = "站点名称")String station_name, @ApiParam(required = true, name = "page", value = "页")int page,@ApiParam(required = true, name = "limit", value = "数量")int limit)
+    public IResult station(@ApiParam(required = true, name = "station_name", value = "站点名称")String station_name,
+                           @ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "1")int page,
+                           @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "5")int limit)
     {
         logger.info("line station query");
         LineList lineList = new LineList();
@@ -114,7 +119,8 @@ public class LineController {
     @ResponseBody
     @RequestMapping(value = "/list/all", method = RequestMethod.GET)
     @ApiOperation(value = "获取全部线路", httpMethod = "GET", response = LineList.class, notes = "获取全部线路")
-    public IResult all(@ApiParam(required = true, name = "page", value = "页")int page,@ApiParam(required = true, name = "limit", value = "数量")int limit)
+    public IResult all(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "1")int page,
+                       @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "5")int limit)
     {
         logger.info("line all query");
         LineList lineList = new LineList();
@@ -135,7 +141,8 @@ public class LineController {
     @ResponseBody
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
     @ApiOperation(value = "获取线路详细", httpMethod = "GET", response = LineDetail.class, notes = "获取线路详细")
-    public IResult detail(@ApiParam(required = true, name = "id", value = "id")long id, @ApiParam(required = true, name = "forward", value = "正向")boolean forward,
+    public IResult detail(@ApiParam(required = true, name = "id", value = "id")@RequestParam(value = "id", required = true, defaultValue = "0")long id,
+                          @ApiParam(required = true, name = "forward", value = "正向")@RequestParam(value = "forward", required = true, defaultValue = "true")boolean forward,
                           @ApiParam(required = false, name = "lat", value = "纬度")@RequestParam(value = "lat", required = false, defaultValue = "0") double lat,
                           @ApiParam(required = false, name = "lng", value = "精度")@RequestParam(value = "lng", required = false, defaultValue = "0")double lng)
     {
@@ -185,7 +192,7 @@ public class LineController {
     @ResponseBody
     @RequestMapping(value = "/collection", method = RequestMethod.PUT)
     @ApiOperation(value = "用户线路收藏", httpMethod = "PUT", response = BaseResult.class, notes = "用户线路收藏")
-    public IResult collection(@ApiParam(required = true, name = "request", value = "基本请求")@RequestBody BaseRequest request)
+    public IResult collection(@ApiParam(required = true, name = "request", value = "基本请求")@RequestParam(value = "request", required = true)@RequestBody BaseRequest request)
     {
         logger.info("line collection");
         BaseResult result = new BaseResult();
@@ -221,7 +228,7 @@ public class LineController {
     @ResponseBody
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ApiOperation(value = "线路添加", httpMethod = "POST", response = BaseResult.class, notes = "线路添加")
-    public IResult add(@ApiParam(required = true, name = "request", value = "线路请求")@RequestBody LineRequest request)
+    public IResult add(@ApiParam(required = true, name = "request", value = "线路请求")@RequestParam(value = "request", required = true)@RequestBody LineRequest request)
     {
         logger.info("line add");
         BaseResult result = new BaseResult();
