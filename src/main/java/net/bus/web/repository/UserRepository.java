@@ -8,6 +8,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,6 +28,20 @@ public class UserRepository {
     public List<User> getAllUsers(int page,int limit) {
         UserExample example = new UserExample();
         return userMapper.selectByExampleWithRowbounds(example, new RowBounds(page, limit));
+    }
+
+    public List<User> getItems(ISpecification specification) {
+        UserExample example = (UserExample)specification.createExample();
+        if(example==null)
+            return new ArrayList<User>();
+
+        List<User> list= userMapper.selectByExample(example);
+        if(!list.isEmpty())
+        {
+            return list;
+        }
+
+        return new ArrayList<User>();
     }
 
 

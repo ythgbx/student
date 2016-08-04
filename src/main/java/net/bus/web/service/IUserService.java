@@ -12,6 +12,8 @@ public interface IUserService {
 
     List<User> getAllUsers(int page,int limit);
 
+    List<User> getUsers(List<Long> ids);
+
     User getUser(Long id);
 
     User getUser(String phone);

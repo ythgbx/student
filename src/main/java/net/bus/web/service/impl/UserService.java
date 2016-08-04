@@ -4,6 +4,7 @@ import net.bus.web.context.Position;
 import net.bus.web.model.User;
 import net.bus.web.repository.UserLineRepository;
 import net.bus.web.repository.UserRepository;
+import net.bus.web.repository.specification.UserIdsSpecification;
 import net.bus.web.repository.specification.UserPhonePasswordSpecification;
 import net.bus.web.repository.specification.UserPhoneSpecification;
 import net.bus.web.service.IUserService;
@@ -21,6 +22,11 @@ public class UserService  implements IUserService {
     public List<User> getAllUsers(int page,int limit) {
 
         return _rootRepository.getAllUsers(page-1,limit);
+    }
+
+    public List<User> getUsers(List<Long> ids)
+    {
+        return _rootRepository.getItems(new UserIdsSpecification(ids));
     }
 
     public User getUser(Long id)
@@ -94,11 +100,9 @@ public class UserService  implements IUserService {
         if(user!=null&&addNum>0)
         {
             int point = user.getPoints() + addNum;
-            if(point>=0){
-                user.setPoints(point);
-                _rootRepository.updateUser(user);
-                return true;
-            }
+            user.setPoints(point);
+            _rootRepository.updateUser(user);
+            return true;
         }
         return false;
     }

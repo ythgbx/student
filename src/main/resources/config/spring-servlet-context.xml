@@ -164,10 +164,11 @@
         <beans:property name="startDelay" value="1000" />
         <beans:property name="repeatInterval" value="1000" />
     </beans:bean>
-    <beans:bean id="userTaskTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+    <beans:bean id="userTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <beans:property name="jobDetail" ref="userJobDetail" />
-        <beans:property name="startDelay" value="1000" />
-        <beans:property name="repeatInterval" value="5000" />
+        <beans:property name="cronExpression">
+            <beans:value>0 0 1 * * ?</beans:value>
+        </beans:property>
     </beans:bean>
     <!-- 设置调度 -->
     <beans:bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
