@@ -29,6 +29,7 @@
     <mvc:resources mapping="/fonts/**" location="/resources/fonts/"/>
     <mvc:resources mapping="/bootstrap/**" location="/resources/bootstrap/"/>
     <mvc:resources mapping="/images/**" location="/resources/images/"/>
+    <mvc:resources mapping="/swagger/**" location="/WEB-INF/swagger/"/>
 
     <!-- 扫描net.bus.web包里下的所有class文件，配置注解的类全都装入容器中进行管理 -->
     <context:component-scan base-package="net.bus.web"/>
@@ -204,4 +205,7 @@
     <beans:bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
         <beans:property name="properties" ref="sysProperties"/>
     </beans:bean>
+
+    <!-- Swagger -->
+    <beans:bean class="com.mangofactory.swagger.configuration.SpringSwaggerConfig" />
 </beans:beans>
