@@ -53,11 +53,15 @@ public class TerminalController {
     public IResult check(@RequestBody CheckData data){
         BaseResult result = new BaseResult();
         try {
-            String code = data.getCode();
-            code = AES.getAesInstance().Decrypt(code);
-            code = code.substring(0,code.length()-13);//13位UTF时间。毫秒数 e.g.1470209966047 去掉时间剩下的就是用户
+            String temp = "";
+            for (String code : data.getCode()){
+                code = AES.getAesInstance().Decrypt(code);
+                code = code.substring(0,code.length()-13);//13位UTF时间。毫秒数 e.g.1470209966047 去掉时间剩下的就是用户
+                temp+=code+";";
+            }
+            temp = temp.substring(0,temp.length()-1);
             result.setResult("success");//暂时都成功逻辑以后再写
-            result.setContent(code);
+            result.setContent(temp);
         } catch (Exception e) {
             e.printStackTrace();
             result.setResult("error");

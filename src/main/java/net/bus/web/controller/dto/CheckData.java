@@ -1,10 +1,12 @@
 package net.bus.web.controller.dto;
 
+import java.util.List;
+
 /**
  * Created by sky on 16/8/3.
  */
 public class CheckData {
-    private String code;
+    private List<String> code;
 
     public String getName() {
         return name;
@@ -16,11 +18,11 @@ public class CheckData {
 
     private String name;
 
-    public String getCode() {
+    public List<String>  getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(List<String>  code) {
         this.code = code;
     }
 }
