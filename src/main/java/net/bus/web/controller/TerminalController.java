@@ -3,10 +3,12 @@ package net.bus.web.controller;
 import net.bus.web.aspect.Auth;
 import net.bus.web.common.AES;
 import net.bus.web.controller.dto.BaseResult;
+import net.bus.web.controller.dto.CheckData;
 import net.bus.web.controller.dto.IResult;
 import net.bus.web.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,7 +21,7 @@ import java.util.Date;
 
 @Controller
 @RequestMapping(value = "/terminal")
-public class TerminalContorller {
+public class TerminalController {
 
     @Autowired
     private UserService userService;
@@ -27,7 +29,7 @@ public class TerminalContorller {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/scanner", method = RequestMethod.POST)
-    public IResult CheckQrcode(long code){
+    public IResult checkQrcode(long code){
         BaseResult result = new BaseResult();
         result.setResult("success");
         result.setContent(code);
@@ -47,17 +49,21 @@ public class TerminalContorller {
 
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
-    @RequestMapping(value = "/check", method = RequestMethod.GET)
-    public IResult check(String code){
+    @RequestMapping(value = "/check", method = RequestMethod.POST)
+    public IResult check(@RequestBody CheckData data){
+        BaseResult result = new BaseResult();
         try {
+            String code = data.getCode();
             code = AES.getAesInstance().Decrypt(code);
-            code.substring(code.length()-13);//13位UTF时间。毫秒数 e.g.1470209966047
-            BaseResult result = new BaseResult();
+            code = code.substring(0,code.length()-13);//13位UTF时间。毫秒数 e.g.1470209966047 去掉时间剩下的就是用户
             result.setResult("success");//暂时都成功逻辑以后再写
             result.setContent(code);
         } catch (Exception e) {
             e.printStackTrace();
+            result.setResult("error");
+            result.setError(e.getMessage());
         }
+        return result;
     }
 
 }
