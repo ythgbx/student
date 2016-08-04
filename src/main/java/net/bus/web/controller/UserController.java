@@ -52,7 +52,7 @@ public class UserController {
     @Value("#{sysProperties['smsDebugCode']}")
     private String _smsDebugCode;
 
-    @RequestMapping(value="/login")
+    @RequestMapping(value="/login" , method = RequestMethod.GET)
     public ModelAndView index(Model model)
     {
         logger.info("url:/user");
@@ -359,7 +359,7 @@ public class UserController {
     }
 
     @Auth(role = Auth.Role.USER)
-    @RequestMapping(value="/list")
+    @RequestMapping(value="/list", method = RequestMethod.GET)
     public ModelAndView list(Model model)
     {
         logger.info("url:/user/list");
