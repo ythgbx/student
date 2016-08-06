@@ -144,7 +144,7 @@ public class LineController {
     public IResult detail(@ApiParam(required = true, name = "id", value = "id")@RequestParam(value = "id", required = true, defaultValue = "0")long id,
                           @ApiParam(required = true, name = "forward", value = "正向")@RequestParam(value = "forward", required = true, defaultValue = "true")boolean forward,
                           @ApiParam(required = false, name = "lat", value = "纬度")@RequestParam(value = "lat", required = false, defaultValue = "0") double lat,
-                          @ApiParam(required = false, name = "lng", value = "精度")@RequestParam(value = "lng", required = false, defaultValue = "0")double lng)
+                          @ApiParam(required = false, name = "lng", value = "经度")@RequestParam(value = "lng", required = false, defaultValue = "0")double lng)
     {
         logger.info("line detail");
         //TODO Get line detail
