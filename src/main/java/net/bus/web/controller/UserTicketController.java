@@ -1,5 +1,7 @@
 package net.bus.web.controller;
 
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiParam;
 import net.bus.web.aspect.Auth;
 import net.bus.web.context.MockDataContext;
 import net.bus.web.context.SessionContext;
@@ -13,10 +15,7 @@ import net.bus.web.service.ILineService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -45,7 +44,9 @@ public class UserTicketController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public IResult list(int page,int limit)
+    @ApiOperation(value = "获取当前用户车票", httpMethod = "GET", response = TicketList.class, notes = "获取用户车票")
+    public IResult list(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "1")int page,
+                        @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "5")int limit)
     {
         logger.info("ticket done list query");
         User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
@@ -64,7 +65,8 @@ public class UserTicketController {
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
-    public IResult detail(Long id)
+    @ApiOperation(value = "获取车票详细", httpMethod = "GET", response = TicketList.class, notes = "获取车票详细")
+    public IResult detail(@ApiParam(required = true, name = "id", value = "id")@RequestParam(value = "id", required = true)Long id)
     {
         logger.info("ticket detail query");
         UserTicket userTicket =_userTicketService.getDetail(id);
@@ -85,7 +87,8 @@ public class UserTicketController {
     @Auth(role = Auth.Role.BUS)
     @ResponseBody
     @RequestMapping(value = "/buy", method = RequestMethod.POST)
-    public IResult buy(@RequestBody TicketBuy request)
+    @ApiOperation(value = "购票", httpMethod = "POST", response = TicketList.class, notes = "购票")
+    public IResult buy(@ApiParam(required = true, name = "request", value = "购票请求")@RequestBody TicketBuy request)
     {
         logger.info("ticket buy");
         BaseResult result = new BaseResult();

@@ -192,7 +192,7 @@ public class LineController {
     @ResponseBody
     @RequestMapping(value = "/collection", method = RequestMethod.PUT)
     @ApiOperation(value = "用户线路收藏", httpMethod = "PUT", response = BaseResult.class, notes = "用户线路收藏")
-    public IResult collection(@ApiParam(required = true, name = "request", value = "基本请求")@RequestParam(value = "request", required = true)@RequestBody BaseRequest request)
+    public IResult collection(@ApiParam(required = true, name = "request", value = "基本请求")@RequestBody BaseRequest request)
     {
         logger.info("line collection");
         BaseResult result = new BaseResult();
@@ -228,7 +228,7 @@ public class LineController {
     @ResponseBody
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ApiOperation(value = "线路添加", httpMethod = "POST", response = BaseResult.class, notes = "线路添加")
-    public IResult add(@ApiParam(required = true, name = "request", value = "线路请求")@RequestParam(value = "request", required = true)@RequestBody LineRequest request)
+    public IResult add(@ApiParam(required = true, name = "request", value = "线路请求")@RequestBody LineRequest request)
     {
         logger.info("line add");
         BaseResult result = new BaseResult();

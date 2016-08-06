@@ -1,5 +1,7 @@
 package net.bus.web.controller;
 
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiParam;
 import net.bus.web.aspect.Auth;
 import net.bus.web.context.Position;
 import net.bus.web.controller.dto.*;
@@ -29,7 +31,10 @@ public class LocationController {
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/around/stations", method = RequestMethod.GET)
-    public IResult aroundStations(double lat,double lng,@RequestParam(value = "degree", required = false, defaultValue = "8")int degree)
+    @ApiOperation(value = "附近站点", httpMethod = "GET", response = StationList.class, notes = "附近站点")
+    public IResult aroundStations(@ApiParam(required = false, name = "lat", value = "纬度")@RequestParam(value = "lat", required = false, defaultValue = "0") double lat,
+                                  @ApiParam(required = false, name = "lng", value = "经度")@RequestParam(value = "lng", required = false, defaultValue = "0")double lng,
+                                  @ApiParam(required = false, name = "degree", value = "范围")@RequestParam(value = "degree", required = false, defaultValue = "8")int degree)
     {
         StationList result = new StationList();
         List<StationItem> stationItems = new ArrayList<StationItem>();
@@ -51,7 +56,10 @@ public class LocationController {
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/around/buses", method = RequestMethod.GET)
-    public IResult aroundBuses(double lat,double lng,@RequestParam(value = "degree", required = false, defaultValue = "8")int degree)
+    @ApiOperation(value = "附近车辆", httpMethod = "GET", response = StationList.class, notes = "附近车辆")
+    public IResult aroundBuses(@ApiParam(required = false, name = "lat", value = "纬度")@RequestParam(value = "lat", required = false, defaultValue = "0") double lat,
+                               @ApiParam(required = false, name = "lng", value = "经度")@RequestParam(value = "lng", required = false, defaultValue = "0")double lng,
+                               @ApiParam(required = false, name = "degree", value = "范围")@RequestParam(value = "degree", required = false, defaultValue = "8")int degree)
     {
         BusList result = new BusList();
         List<BusItem> busItems = new ArrayList<BusItem>();

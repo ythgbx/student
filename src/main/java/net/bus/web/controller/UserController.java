@@ -5,6 +5,8 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiParam;
 import net.bus.web.aspect.Auth;
 import net.bus.web.context.PhoneSMSContext;
 import net.bus.web.context.Position;
@@ -19,10 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import net.bus.web.service.IUserService;
 
@@ -53,6 +52,7 @@ public class UserController {
     private String _smsDebugCode;
 
     @RequestMapping(value="/login" , method = RequestMethod.GET)
+    @ApiOperation(value = "登陆页面", httpMethod = "GET", response = ModelAndView.class, notes = "登陆页面")
     public ModelAndView index(Model model)
     {
         logger.info("url:/user");
@@ -66,7 +66,8 @@ public class UserController {
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public IResult login(@RequestBody Login login)
+    @ApiOperation(value = "用户登录", httpMethod = "POST", response = LoginResult.class, notes = "用户登录")
+    public IResult login(@ApiParam(name = "login", value = "登陆登录")@RequestBody Login login)
     {
         User user = service.loginCheck(login.getPhone(),login.getPassword());
 
@@ -143,6 +144,7 @@ public class UserController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    @ApiOperation(value = "用户登出", httpMethod = "POST", response = BaseResult.class, notes = "用户登出")
     public IResult logout()
     {
         session.removeAttribute(SessionContext.CURRENT_USER);
@@ -155,7 +157,8 @@ public class UserController {
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/sms", method = RequestMethod.POST)
-    public IResult registerSms(@RequestBody Register register)
+    @ApiOperation(value = "发送短信验证码", httpMethod = "POST", response = BaseResult.class, notes = "发送短信验证码")
+    public IResult registerSms(@ApiParam(required = true, name = "register", value = "注册-手机号")@RequestBody Register register)
     {
         BaseResult result = new BaseResult();
         if(register.getPhone()!=""){
@@ -188,6 +191,7 @@ public class UserController {
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/sms/callback", method = RequestMethod.POST)
+    @ApiOperation(value = "[弃]短信平台回调", httpMethod = "POST", response = BaseResult.class, notes = "[弃]短信平台回调")
     public String registerSmsCallback(String phone,String code)
     {
         //TODO Receive code form sms server prepare for register add to cache(out date?)
@@ -197,7 +201,8 @@ public class UserController {
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public IResult register(@RequestBody Register register)
+    @ApiOperation(value = "注册", httpMethod = "POST", response = BaseResult.class, notes = "注册")
+    public IResult register(@ApiParam(required = true, name = "register", value = "注册请求")@RequestBody Register register)
     {
         BaseResult result = new BaseResult();
         if(!checkCodeWithPhone(register.getPhone(),register.getCode()))
@@ -223,7 +228,8 @@ public class UserController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/modify/password", method = RequestMethod.PUT)
-    public IResult modifyPassword(@RequestBody UserAccount account)
+    @ApiOperation(value = "密码修改", httpMethod = "POST", response = BaseResult.class, notes = "密码修改")
+    public IResult modifyPassword(@ApiParam(required = true, name = "account", value = "用户账户请求-手机号+原密码+新密码")@RequestBody UserAccount account)
     {
         BaseResult result = new BaseResult();
         try {
@@ -251,7 +257,8 @@ public class UserController {
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/retrieve/password", method = RequestMethod.PUT)
-    public IResult retrievePassword(@RequestBody UserAccount account)
+    @ApiOperation(value = "密码找回", httpMethod = "PUT", response = BaseResult.class, notes = "密码找回")
+    public IResult retrievePassword(@ApiParam(required = true, name = "account", value = "用户账户请求-手机号+短信验证码+新密码")@RequestBody UserAccount account)
     {
         BaseResult result = new BaseResult();
         try {
@@ -273,7 +280,8 @@ public class UserController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/modify/phone", method = RequestMethod.PUT)
-    public IResult modifyAccount(@RequestBody UserAccount account)
+    @ApiOperation(value = "手机号修改", httpMethod = "PUT", response = BaseResult.class, notes = "手机号修改")
+    public IResult modifyAccount(@ApiParam(required = true, name = "account", value = "用户账户请求-手机号+短信验证码+新手机号")@RequestBody UserAccount account)
     {
         BaseResult result = new BaseResult();
         try {
@@ -300,7 +308,8 @@ public class UserController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/modify/base", method = RequestMethod.PUT)
-    public IResult modifyPos(@RequestBody UserBase base)
+    @ApiOperation(value = "基本信息修改", httpMethod = "PUT", response = BaseResult.class, notes = "基本信息修改")
+    public IResult modifyBase(@ApiParam(required = true, name = "base", value = "用户基本信息请求-位置|名称|头像")@RequestBody UserBase base)
     {
         BaseResult result = new BaseResult();
         try {
@@ -340,7 +349,8 @@ public class UserController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/add/point", method = RequestMethod.POST)
-    public IResult modifyPoint(@RequestBody UserPointAdd pointAdd)
+    @ApiOperation(value = "积分增加", httpMethod = "PUT", response = BaseResult.class, notes = "积分增加")
+    public IResult addPoint(@ApiParam(required = true, name = "pointAdd", value = "用户积分增加请求")@RequestBody UserPointAdd pointAdd)
     {
         BaseResult result = new BaseResult();
         try {
@@ -360,6 +370,7 @@ public class UserController {
 
     @Auth(role = Auth.Role.USER)
     @RequestMapping(value="/list", method = RequestMethod.GET)
+    @ApiOperation(value = "用户列表页面", httpMethod = "GET", response = ModelAndView.class, notes = "用户列表页面")
     public ModelAndView list(Model model)
     {
         logger.info("url:/user/list");
