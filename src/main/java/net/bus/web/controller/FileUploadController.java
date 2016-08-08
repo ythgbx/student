@@ -1,5 +1,7 @@
 package net.bus.web.controller;
 
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiParam;
 import net.bus.web.aspect.Auth;
 import net.bus.web.controller.dto.BaseResult;
 import net.bus.web.controller.dto.IResult;
@@ -30,7 +32,8 @@ public class FileUploadController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public IResult upload(@RequestParam("file") MultipartFile file) {
+    @ApiOperation(value = "文件上传", httpMethod = "POST", response = BaseResult.class, notes = "文件上传（文件查看路径为 your-website/upload/abc.png）")
+    public IResult upload(@ApiParam(required = true, name = "file", value = "文件")@RequestParam("file") MultipartFile file) {
         BaseResult result = new BaseResult();
         if(!file.isEmpty()){
             String dir = _request.getSession().getServletContext().getRealPath("/resources/upload");//设定文件保存的目录
