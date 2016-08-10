@@ -13,11 +13,15 @@ public interface ILineService {
 
     List<Line> getAroundLines(double lat,double lng,int page,int limit);
 
-    List<Line> getUserLines(Long user_id,int page,int limit);
+    List<Line> getUserLines(Long userId,int page,int limit);
+
+    List<Line> getUserLines(Long userId,String cityName,int page,int limit);
 
     List<Line> getStationLines(String station_name,int page,int limit);
 
     List<Line> getAllLines(int page,int limit);
+
+    List<Line> getCityLines(String cityName, int page,int limit);
 
     Line getLineDetails(Long id);
 
@@ -29,9 +33,13 @@ public interface ILineService {
 
     int getUserLinesCount(Long userId);
 
-    int getStationLinesCount(String station_name);
+    int getUserLinesCount(Long userId,String cityName);
+
+    int getStationLinesCount(String stationName);
 
     int getAllLinesCount();
+
+    int getCityLinesCount(String cityName);
 
     boolean addLine(Line line,List<Long> stationIds);
 }

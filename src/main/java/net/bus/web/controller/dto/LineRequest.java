@@ -14,6 +14,7 @@ public class LineRequest extends BaseResult {
     private Double cost_time;
     private List<LineStation> list_stations;
     private String annotation;
+    private String city_name;
 
     public Long getStart_time() {
         return start_time;
@@ -69,5 +70,13 @@ public class LineRequest extends BaseResult {
 
     public void setAnnotation(String annotation) {
         this.annotation = annotation;
+    }
+
+    public String getCity_name() {
+        return city_name;
+    }
+
+    public void setCity_name(String city_name) {
+        this.city_name = city_name;
     }
 }

@@ -73,16 +73,24 @@ public class LineController {
     @ResponseBody
     @RequestMapping(value = "/list/user", method = RequestMethod.GET)
     @ApiOperation(value = "根据用户获取用户收藏线路", httpMethod = "GET", response = LineList.class, notes = "根据用户获取用户收藏线路")
-    public IResult user(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "1")int page,
+    public IResult user(@ApiParam(required = false, name = "city_name", value = "城市名称")@RequestParam(value = "city_name", required = false,defaultValue = "")String city_name,
+                        @ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "1")int page,
                         @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "5")int limit)
     {
         logger.info("line user query");
         LineList lineList = new LineList();
         User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
-        List<Line> lines = _lineService.getUserLines(currentUser.getId(), page, limit);
-        lineList.setLines(getDisplayList(lines));
-        lineList.setPage(page);
-        lineList.setTotal_count(_lineService.getUserLinesCount(currentUser.getId()));
+        if(city_name.equals("")){
+            List<Line> lines = _lineService.getUserLines(currentUser.getId(), page, limit);
+            lineList.setLines(getDisplayList(lines));
+            lineList.setPage(page);
+            lineList.setTotal_count(_lineService.getUserLinesCount(currentUser.getId()));
+        }else{
+            List<Line> lines = _lineService.getUserLines(currentUser.getId(),city_name, page, limit);
+            lineList.setLines(getDisplayList(lines));
+            lineList.setPage(page);
+            lineList.setTotal_count(_lineService.getUserLinesCount(currentUser.getId(),city_name));
+        }
         return lineList;
 
 //        //Mock data for test
@@ -128,6 +136,29 @@ public class LineController {
         lineList.setLines(getDisplayList(lines));
         lineList.setPage(page);
         lineList.setTotal_count(_lineService.getAllLinesCount());
+        return lineList;
+
+//        //Mock data for test
+//        LineList lineList = new LineList();
+//        lineList.setLines(MockDataContext.getInstance().getLineItemList());
+//        lineList.setPage(page);
+//        return lineList;
+    }
+
+    @Auth(role = Auth.Role.NONE)
+    @ResponseBody
+    @RequestMapping(value = "/list/city", method = RequestMethod.GET)
+    @ApiOperation(value = "获取城市全部线路", httpMethod = "GET", response = LineList.class, notes = "获取城市全部线路")
+    public IResult city(@ApiParam(required = true, name = "city_name", value = "城市名称")@RequestParam(value = "city_name", required = true)String city_name,
+                        @ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "1")int page,
+                        @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "5")int limit)
+    {
+        logger.info("line city query");
+        LineList lineList = new LineList();
+        List<Line> lines = _lineService.getCityLines(city_name,page, limit);
+        lineList.setLines(getDisplayList(lines));
+        lineList.setPage(page);
+        lineList.setTotal_count(_lineService.getCityLinesCount(city_name));
         return lineList;
 
 //        //Mock data for test
@@ -199,12 +230,14 @@ public class LineController {
         try {
             //Check line id
             if(request.getId()==null){
-                result.setResult("failure request no line id");
+                result.setResult("failure");
+                result.setContent("request no line id");
                 return result;
             }
 
             if(!_lineService.checkLineExist(request.getId())){
-                result.setResult("failure no line id exist");
+                result.setResult("failure");
+                result.setContent("no line id exist");
                 return result;
             }
 
@@ -261,6 +294,7 @@ public class LineController {
             line.setEndTime(calendar.getTime());
             line.setPrice(request.getPrice().intValue());
             line.setAnnotation(request.getAnnotation());
+            line.setCityName(request.getCity_name());
 
             ObjectMapper mapper = new ObjectMapper();
             line.setLatlng(mapper.writeValueAsString(stations));

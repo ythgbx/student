@@ -63,6 +63,17 @@ public class LineService implements ILineService {
         return _rootRepository.getList(new LineIdsSpecification(listLineIds), page - 1, limit);
     }
 
+    public List<Line> getUserLines(Long userId,String cityName,int page,int limit)
+    {
+        List<UserLine> listUserLine =  _userLineRepository.getList(new UserLineUserIdSpecification(userId));
+        List<Long> listLineIds = new ArrayList<Long>();
+        for (UserLine userLine : listUserLine) {
+            listLineIds.add(userLine.getLineId());
+        }
+
+        return _rootRepository.getList(new LineIdsCityNameSpecification(listLineIds,cityName), page - 1, limit);
+    }
+
     public List<Line> getStationLines(String station_name,int page,int limit)
     {
         List<Station> listStation =  _stationRepository.getList(new StationNameSpecification(station_name));
@@ -81,6 +92,13 @@ public class LineService implements ILineService {
     public List<Line> getAllLines(int page,int limit)
     {
         return _rootRepository.getAll(page - 1, limit);
+    }
+
+    public List<Line> getCityLines(String city_name, int page,int limit)
+    {
+        List<String> listCityNames = new ArrayList<String>();
+        listCityNames.add(city_name);
+        return _rootRepository.getList(new LineCityNamesSpecification(listCityNames), page, limit);
     }
 
     public Line getLineDetails(Long id)
@@ -128,6 +146,16 @@ public class LineService implements ILineService {
         return  _rootRepository.count(new LineIdsSpecification(listLineIds));
     }
 
+    public int getUserLinesCount(Long userId,String cityName)
+    {
+        List<UserLine> listUserLine =  _userLineRepository.getList(new UserLineUserIdSpecification(userId));
+        List<Long> listLineIds = new ArrayList<Long>();
+        for (UserLine userLine : listUserLine) {
+            listLineIds.add(userLine.getLineId());
+        }
+        return  _rootRepository.count(new LineIdsCityNameSpecification(listLineIds,cityName));
+    }
+
     public int getStationLinesCount(String station_name)
     {
         List<Station> listStation =  _stationRepository.getList(new StationNameSpecification(station_name));
@@ -146,6 +174,13 @@ public class LineService implements ILineService {
     public int getAllLinesCount()
     {
         return _rootRepository.count();
+    }
+
+    public int getCityLinesCount(String city_name)
+    {
+        List<String> listCityNames = new ArrayList<String>();
+        listCityNames.add(city_name);
+        return  _rootRepository.count(new LineCityNamesSpecification(listCityNames));
     }
 
     public boolean addLine(Line line,List<Long> stationIds)
