@@ -9,6 +9,7 @@
     <result column="latlng" property="latlng" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="INTEGER" />
     <result column="annotation" property="annotation" jdbcType="VARCHAR" />
+    <result column="city_name" property="cityName" jdbcType="VARCHAR" />
     <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
     <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -71,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, start, end, latlng, price, annotation, start_time, end_time
+    id, name, start, end, latlng, price, annotation, city_name, start_time, end_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="net.bus.web.model.LineExample" >
     select
@@ -88,7 +89,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from line
     where id = #{id,jdbcType=BIGINT}
@@ -103,15 +104,15 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="net.bus.web.model.Line" >
-    insert into line (id, name, start, 
-      end, latlng, price, 
-      annotation, start_time, end_time
-      )
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{start,jdbcType=VARCHAR}, 
-      #{end,jdbcType=VARCHAR}, #{latlng,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, 
-      #{annotation,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}
-      )
+  <insert id="insert" parameterType="net.bus.web.model.Line" >
+    insert into line (id, name, start,
+    end, latlng, price,
+    annotation, city_name, start_time,
+    end_time)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{start,jdbcType=VARCHAR},
+    #{end,jdbcType=VARCHAR}, #{latlng,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER},
+    #{annotation,jdbcType=VARCHAR}, #{cityName,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP},
+    #{endTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="net.bus.web.model.Line" >
     insert into line
@@ -136,6 +137,9 @@
       </if>
       <if test="annotation != null" >
         annotation,
+      </if>
+      <if test="cityName != null" >
+        city_name,
       </if>
       <if test="startTime != null" >
         start_time,
@@ -165,6 +169,9 @@
       </if>
       <if test="annotation != null" >
         #{annotation,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null" >
+        #{cityName,jdbcType=VARCHAR},
       </if>
       <if test="startTime != null" >
         #{startTime,jdbcType=TIMESTAMP},
@@ -204,6 +211,9 @@
       <if test="record.annotation != null" >
         annotation = #{record.annotation,jdbcType=VARCHAR},
       </if>
+      <if test="record.cityName != null" >
+        city_name = #{record.cityName,jdbcType=VARCHAR},
+      </if>
       <if test="record.startTime != null" >
         start_time = #{record.startTime,jdbcType=TIMESTAMP},
       </if>
@@ -218,14 +228,15 @@
   <update id="updateByExample" parameterType="map" >
     update line
     set id = #{record.id,jdbcType=BIGINT},
-      name = #{record.name,jdbcType=VARCHAR},
-      start = #{record.start,jdbcType=VARCHAR},
-      end = #{record.end,jdbcType=VARCHAR},
-      latlng = #{record.latlng,jdbcType=VARCHAR},
-      price = #{record.price,jdbcType=INTEGER},
-      annotation = #{record.annotation,jdbcType=VARCHAR},
-      start_time = #{record.startTime,jdbcType=TIMESTAMP},
-      end_time = #{record.endTime,jdbcType=TIMESTAMP}
+    name = #{record.name,jdbcType=VARCHAR},
+    start = #{record.start,jdbcType=VARCHAR},
+    end = #{record.end,jdbcType=VARCHAR},
+    latlng = #{record.latlng,jdbcType=VARCHAR},
+    price = #{record.price,jdbcType=INTEGER},
+    annotation = #{record.annotation,jdbcType=VARCHAR},
+    city_name = #{record.cityName,jdbcType=VARCHAR},
+    start_time = #{record.startTime,jdbcType=TIMESTAMP},
+    end_time = #{record.endTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -251,6 +262,9 @@
       <if test="annotation != null" >
         annotation = #{annotation,jdbcType=VARCHAR},
       </if>
+      <if test="cityName != null" >
+        city_name = #{cityName,jdbcType=VARCHAR},
+      </if>
       <if test="startTime != null" >
         start_time = #{startTime,jdbcType=TIMESTAMP},
       </if>
@@ -263,13 +277,14 @@
   <update id="updateByPrimaryKey" parameterType="net.bus.web.model.Line" >
     update line
     set name = #{name,jdbcType=VARCHAR},
-      start = #{start,jdbcType=VARCHAR},
-      end = #{end,jdbcType=VARCHAR},
-      latlng = #{latlng,jdbcType=VARCHAR},
-      price = #{price,jdbcType=INTEGER},
-      annotation = #{annotation,jdbcType=VARCHAR},
-      start_time = #{startTime,jdbcType=TIMESTAMP},
-      end_time = #{endTime,jdbcType=TIMESTAMP}
+    start = #{start,jdbcType=VARCHAR},
+    end = #{end,jdbcType=VARCHAR},
+    latlng = #{latlng,jdbcType=VARCHAR},
+    price = #{price,jdbcType=INTEGER},
+    annotation = #{annotation,jdbcType=VARCHAR},
+    city_name = #{cityName,jdbcType=VARCHAR},
+    start_time = #{startTime,jdbcType=TIMESTAMP},
+    end_time = #{endTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <select resultMap="BaseResultMap" parameterType="net.bus.web.model.LineExample" id="selectByExampleWithRowbounds" >

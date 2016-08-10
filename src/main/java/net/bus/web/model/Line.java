@@ -17,6 +17,8 @@ public class Line {
 
     private String annotation;
 
+    private String cityName;
+
     private Date startTime;
 
     private Date endTime;
@@ -75,6 +77,14 @@ public class Line {
 
     public void setAnnotation(String annotation) {
         this.annotation = annotation;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 
     public Date getStartTime() {
