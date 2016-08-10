@@ -575,6 +575,76 @@ public class LineExample {
             return (Criteria) this;
         }
 
+        public Criteria andCityNameIsNull() {
+            addCriterion("city_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCityNameIsNotNull() {
+            addCriterion("city_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCityNameEqualTo(String value) {
+            addCriterion("city_name =", value, "cityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCityNameNotEqualTo(String value) {
+            addCriterion("city_name <>", value, "cityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCityNameGreaterThan(String value) {
+            addCriterion("city_name >", value, "cityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCityNameGreaterThanOrEqualTo(String value) {
+            addCriterion("city_name >=", value, "cityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCityNameLessThan(String value) {
+            addCriterion("city_name <", value, "cityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCityNameLessThanOrEqualTo(String value) {
+            addCriterion("city_name <=", value, "cityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCityNameLike(String value) {
+            addCriterion("city_name like", value, "cityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCityNameNotLike(String value) {
+            addCriterion("city_name not like", value, "cityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCityNameIn(List<String> values) {
+            addCriterion("city_name in", values, "cityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCityNameNotIn(List<String> values) {
+            addCriterion("city_name not in", values, "cityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCityNameBetween(String value1, String value2) {
+            addCriterion("city_name between", value1, value2, "cityName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCityNameNotBetween(String value1, String value2) {
+            addCriterion("city_name not between", value1, value2, "cityName");
+            return (Criteria) this;
+        }
+
         public Criteria andStartTimeIsNull() {
             addCriterion("start_time is null");
             return (Criteria) this;
