@@ -2,6 +2,7 @@ package net.bus.web.common;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -13,11 +14,8 @@ import java.util.Map;
  */
 public class BaiduMap {
 
-    public class BaiduMapEntity{
-
-    }
-
-    private static final String BAIDU_KEY = "Lgv9LkGS96Z06OI4E61zErKZDDPh2l7T";
+    @Value("#{sysProperties['baidukey']}")
+    private static String BAIDU_KEY;
 
     public static  Map<String, String> getCityInfo(Double lat,Double lng)
     {
@@ -37,7 +35,7 @@ public class BaiduMap {
             JsonNode provinceNode = addressComponentNode.path("province");
             Map<String, String> result = new HashMap<String, String>();
             result.put("city",cityNode.textValue());
-            result.put("province",provinceNode.textValue());
+            result.put("province", provinceNode.textValue());
             return result;
         } catch (IOException e) {
             e.printStackTrace();
