@@ -23,7 +23,7 @@ public class LineStationLineIdsSpecification implements ISpecification<LineStati
 
         LineStationExample example = new LineStationExample();
         LineStationExample.Criteria criteriaLineId = example.createCriteria();
-        criteriaLineId.andStationIdIn(_lineIds);
+        criteriaLineId.andLineIdIn(_lineIds);
         return example;
     }
 }
