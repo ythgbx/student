@@ -2,7 +2,6 @@ package net.bus.web.common;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -14,17 +13,14 @@ import java.util.Map;
  */
 public class BaiduMap {
 
-    @Value("#{sysProperties['baidukey']}")
-    private static String BAIDU_KEY;
-
-    public static  Map<String, String> getCityInfo(Double lat,Double lng)
+    public static  Map<String, String> getCityInfo(Double lat,Double lng,String baiduKey)
     {
         RestTemplate restTemplate = new RestTemplate();
         Map<String, String> vars = new HashMap<String, String>();
         vars.put("lat", lat.toString());//"30.990998"
         vars.put("lng", lng.toString());//"103.645966"
-        vars.put("baidu_key",BAIDU_KEY);
-        String resultJson = restTemplate.getForObject("http://api.map.baidu.com/geocoder?location={lat},{lng}&output=json&key={baidu_key}", String.class, vars);
+        vars.put("baidu_key",baiduKey);//"Lgv9LkGS96Z06OI4E61zErKZDDPh2l7T"
+        String resultJson = restTemplate.getForObject("http://api.map.baidu.com/geocoder/v2/?ak={baidu_key}&location={lat},{lng}&output=json&pois=0", String.class, vars);
         try {
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(resultJson);
