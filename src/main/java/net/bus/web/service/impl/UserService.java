@@ -106,4 +106,16 @@ public class UserService  implements IUserService {
         }
         return false;
     }
+
+    public boolean setPhoto(User user, String photo) {
+        if(user!=null&&photo.trim()!="")
+        {
+            user.setPhoto(photo);
+            _rootRepository.updateUser(user);
+            return true;
+        }
+        return false;
+    }
+
+
 }

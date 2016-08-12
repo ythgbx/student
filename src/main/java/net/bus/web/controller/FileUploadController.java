@@ -38,20 +38,34 @@ public class FileUploadController {
         if(!file.isEmpty()){
             String dir = _request.getSession().getServletContext().getRealPath("/resources/upload");//设定文件保存的目录
             String fileName = file.getOriginalFilename();//得到上传时的文件名
-            String fileExt = fileName.substring(fileName.lastIndexOf("."),fileName.length());// 获得文件后缀名
-            fileName = UUID.randomUUID().toString()+fileExt;
-            try {
-                FileUtils.writeByteArrayToFile(new File(dir, fileName), file.getBytes());
-            } catch (IOException ex) {
-                result.setResult("error");
-                result.setError(ex.getMessage());
+            if(checkExt(fileName)){
+                String fileExt = fileName.substring(fileName.lastIndexOf("."),fileName.length());// 获得文件后缀名
+                fileName = UUID.randomUUID().toString()+fileExt;
+                try {
+                    FileUtils.writeByteArrayToFile(new File(dir, fileName), file.getBytes());
+                } catch (IOException ex) {
+                    result.setResult("error");
+                    result.setError(ex.getMessage());
+                }
+                System.out.println("upload over. " + fileName);
+                result.setResult("success");
+                result.setContent(fileName);
             }
-            System.out.println("upload over. " + fileName);
-            result.setResult("success");
-            result.setContent(fileName);
         }else{
             result.setResult("failed");
         }
         return result;
+    }
+
+    private  boolean checkExt(String fileName){
+        boolean flag=false;
+        String suffixList="xls,xlsx,jpg,gif,png,ico,bmp,jpeg";
+        //获取文件后缀
+        String suffix=fileName.substring(fileName.lastIndexOf(".")+1, fileName.length());
+
+        if(suffixList.contains(suffix.trim().toLowerCase())){
+            flag=true;
+        }
+        return flag;
     }
 }

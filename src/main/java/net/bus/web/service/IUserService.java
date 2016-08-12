@@ -29,4 +29,6 @@ public interface IUserService {
     boolean setBase(User user,Position pos,String name,String photo);
 
     boolean addPoint(User user,Integer addNum);
+
+    boolean setPhoto(User user,String photo);
 }

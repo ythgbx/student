@@ -16,19 +16,25 @@ import net.bus.web.model.Pojo.SignRecordPojo;
 import net.bus.web.model.User;
 import net.bus.web.service.IPointRecordService;
 import net.bus.web.service.impl.SignService;
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import net.bus.web.service.IUserService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.MediaType;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/user")
@@ -40,6 +46,8 @@ public class UserController {
 
     @Autowired
     private IPointRecordService pointRecordService;
+    @Autowired
+    private HttpServletRequest _request;
 
     @Autowired
     private SignService signService;
@@ -50,6 +58,8 @@ public class UserController {
     private boolean _smsDebug;
     @Value("#{sysProperties['smsDebugCode']}")
     private String _smsDebugCode;
+    @Autowired
+    private FileUploadController fileUploadController;
 
     @RequestMapping(value="/login" , method = RequestMethod.GET)
     @ApiOperation(value = "登陆页面", httpMethod = "GET", response = ModelAndView.class, notes = "登陆页面")
@@ -382,6 +392,27 @@ public class UserController {
         mv.addObject("userList",users);
 
         return mv;
+    }
+
+
+
+    @Auth(role = Auth.Role.USER)
+    @ResponseBody
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    @ApiOperation(value = "修改头像", httpMethod = "POST", response = BaseResult.class, notes = "文件上传（文件查看路径为 your-website/upload/abc.png）")
+    public IResult photo(@ApiParam(required = true, name = "file", value = "文件")@RequestParam("file") MultipartFile file) {
+        BaseResult result = new BaseResult();
+        BaseResult temp;
+        temp = (BaseResult) fileUploadController.upload(file);
+        User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
+        result.setResult("failed");
+        if(temp.getResult() == "success"){
+            if(service.setPhoto(user,temp.getContent().toString())){
+                result.setResult("success");
+                result.setContent(temp.getContent());
+            }
+        }
+        return result;
     }
 
     private boolean checkCodeWithPhone(String phone,String code)
