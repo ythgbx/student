@@ -8,6 +8,7 @@ import com.sun.jersey.core.util.MultivaluedMapImpl;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 import net.bus.web.aspect.Auth;
+import net.bus.web.common.config.RString;
 import net.bus.web.context.PhoneSMSContext;
 import net.bus.web.context.Position;
 import net.bus.web.context.SessionContext;
@@ -89,9 +90,11 @@ public class UserController {
 
             result.setSession_id(session.getId());
             result.setResult("success");
+            result.setContent(RString.LOGIN_SUCCESS);
         }else{
             result.setSession_id(null);
             result.setResult("failure");
+            result.setContent(RString.LOGIN_FAILED);
         }
 
         return result;
