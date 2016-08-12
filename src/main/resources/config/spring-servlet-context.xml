@@ -6,7 +6,8 @@
              xmlns:context="http://www.springframework.org/schema/context"
              xmlns:util="http://www.springframework.org/schema/util"
              xmlns:aop="http://www.springframework.org/schema/aop"
-             xmlns:cache="http://www.springframework.org/schema/cache"             xsi:schemaLocation="http://www.springframework.org/schema/mvc
+             xmlns:cache="http://www.springframework.org/schema/cache"
+             xmlns:tx="http://www.springframework.org/schema/tx" xsi:schemaLocation="http://www.springframework.org/schema/mvc
              http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -17,7 +18,9 @@
 		http://www.springframework.org/schema/aop
 		http://www.springframework.org/schema/aop/spring-aop.xsd
 		http://www.springframework.org/schema/cache
-		http://www.springframework.org/schema/cache/spring-cache.xsd">
+		http://www.springframework.org/schema/cache/spring-cache.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
     <mvc:annotation-driven/>
@@ -95,6 +98,13 @@
             </beans:array>
         </beans:property>
     </beans:bean>
+
+    <!-- transaction manager, use DataSourceTransactionManager -->
+    <beans:bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <beans:property name="dataSource" ref="mysqlSource" />
+    </beans:bean>
+    <tx:annotation-driven transaction-manager="transactionManager" />
 
     <!-- freemarker 相关 -->
     <beans:bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">

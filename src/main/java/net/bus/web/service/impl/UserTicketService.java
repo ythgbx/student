@@ -13,6 +13,7 @@ import net.bus.web.repository.specification.UserTicketUserIdSpecification;
 import net.bus.web.service.IUserTicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -51,8 +52,8 @@ public class UserTicketService implements IUserTicketService {
         return  ticket;
     }
 
-    public boolean buyTicket(long line_id,User user)
-    {
+    @Transactional
+    public boolean buyTicket(long line_id,User user) throws RuntimeException {
         //TODO 需要新增事务控制购票过程
         Line line = _lineRepository.getItem(line_id);
         if(line!=null){
@@ -69,7 +70,7 @@ public class UserTicketService implements IUserTicketService {
             userTicket.setUserId(user.getId());
             userTicket.setPrice(line.getPrice());
 
-            user.setPoints(user.getPoints()-line.getPrice());
+            user.setPoints(user.getPoints() - line.getPrice());
 
             _rootRepository.insertItem(userTicket);
             _userRepository.updateUser(user);

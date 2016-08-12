@@ -10,6 +10,7 @@ import net.bus.web.model.Bus;
 import net.bus.web.model.Station;
 import net.bus.web.service.ILocationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,6 +30,9 @@ public class LocationController {
 
     @Autowired
     private ILocationService _locationService;
+
+    @Value("#{sysProperties['baidukey']}")
+    public String BAIDU_KEY;
 
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
@@ -91,7 +95,7 @@ public class LocationController {
             return result;
         }
 
-        Map<String,String> cityInfo = BaiduMap.getCityInfo(lat, lng);
+        Map<String,String> cityInfo = BaiduMap.getCityInfo(lat, lng,BAIDU_KEY);
         if(result!=null){
             result.setResult("success");
             result.setProvince(cityInfo.get("province"));
