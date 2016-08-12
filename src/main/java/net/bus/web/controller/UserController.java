@@ -238,18 +238,17 @@ public class UserController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/modify/password", method = RequestMethod.PUT)
-    @ApiOperation(value = "密码修改", httpMethod = "POST", response = BaseResult.class, notes = "密码修改")
+    @ApiOperation(value = "密码修改", httpMethod = "PUT", response = BaseResult.class, notes = "密码修改")
     public IResult modifyPassword(@ApiParam(required = true, name = "account", value = "用户账户请求-手机号+原密码+新密码")@RequestBody UserAccount account)
     {
         BaseResult result = new BaseResult();
         try {
             User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
             if(account.getPhone().equals(currentUser.getPhone())&&account.getNew_password()!=null&&(
-                    (account.getPassword()!=null&&account.getPassword().equals(currentUser.getPassword())))){
+                    (account.getPassword()!=null&&service.checkPassword(currentUser, account.getPassword())))){
 
-                service.setAccount(currentUser,currentUser.getPhone(),account.getNew_password());
+                service.setAccount(currentUser, currentUser.getPhone(), account.getNew_password());
 
-                currentUser.setPassword(account.getNew_password());
                 session.setAttribute(SessionContext.CURRENT_USER, currentUser);
 
                 result.setResult("success");

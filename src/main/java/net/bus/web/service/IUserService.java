@@ -31,4 +31,6 @@ public interface IUserService {
     boolean addPoint(User user,Integer addNum);
 
     boolean setPhoto(User user,String photo);
+
+    boolean checkPassword(User user,String password);
 }

@@ -1,5 +1,6 @@
 package net.bus.web.service.impl;
 
+import net.bus.web.common.MD5;
 import net.bus.web.context.Position;
 import net.bus.web.model.User;
 import net.bus.web.repository.UserLineRepository;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class UserService  implements IUserService {
@@ -21,7 +23,7 @@ public class UserService  implements IUserService {
 
     public List<User> getAllUsers(int page,int limit) {
 
-        return _rootRepository.getAllUsers(page-1,limit);
+        return _rootRepository.getAllUsers(page - 1, limit);
     }
 
     public List<User> getUsers(List<Long> ids)
@@ -50,7 +52,16 @@ public class UserService  implements IUserService {
 
     public User loginCheck(String phone,String password)
     {
-        return _rootRepository.getUser(new UserPhonePasswordSpecification(phone, password));
+        User user = _rootRepository.getUser(new UserPhoneSpecification(phone));
+
+        if(user==null){
+            return null;
+        }
+
+        if(user.getPassword().equals(getUserPasswordMd5(user.getSalt(),password))){
+            return user;
+        }
+        return null;
     }
 
     public User register(String phone,String password,String name)
@@ -58,12 +69,13 @@ public class UserService  implements IUserService {
         User user = new User();
         user.setName(name);
         user.setPhone(phone);
-        user.setPassword(password);
         user.setPhoto("default");
         user.setLat(0d);
         user.setLng(0d);
         user.setPoints(0);
         user.setType(0);//用户类型：0是普通用户，1是司机，999是管理员
+        user.setSalt(getRandomString(6));
+        user.setPassword(getUserPasswordMd5(user.getSalt(),password));
         _rootRepository.insertUser(user);
         return user;
     }
@@ -73,7 +85,7 @@ public class UserService  implements IUserService {
         if(user!=null)
         {
             user.setPhone(phone);
-            user.setPassword(password);
+            user.setPassword(getUserPasswordMd5(user.getSalt(), password));
             _rootRepository.updateUser(user);
             return true;
         }
@@ -117,5 +129,28 @@ public class UserService  implements IUserService {
         return false;
     }
 
+    public boolean checkPassword(User user,String password)
+    {
+        return user.getPassword().equals(getUserPasswordMd5(user.getSalt(),password));
+    }
+
+    private String getUserPasswordMd5(String salt,String password){
+        //兼容原有账号(对salt为null进行直接判断)
+        if(salt.equals(null)||salt.equals("")){
+            return password;
+        }
+        return (MD5.GetMD5Code(salt + password));
+    }
+
+    private String getRandomString(int length) { //length表示生成字符串的长度
+        String base = "abcdefghijklmnopqrstuvwxyz0123456789";
+        Random random = new Random();
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < length; i++) {
+            int number = random.nextInt(base.length());
+            sb.append(base.charAt(number));
+        }
+        return sb.toString();
+    }
 
 }
