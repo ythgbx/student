@@ -221,6 +221,7 @@ public class UserController {
         if(!checkCodeWithPhone(register.getPhone(),register.getCode()))
         {
             result.setResult("failure");
+            result.setResult(RString.REGISTER_FAILED_SMS_CODE);
             return result;
         }
 

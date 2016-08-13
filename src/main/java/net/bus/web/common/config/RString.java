@@ -9,6 +9,7 @@ public class RString {
     public static String LOGIN_FAILED;
 
     public static String REGISTER_FAILED_USER_HAD;
+    public static String REGISTER_FAILED_SMS_CODE;
 
 
     public void setLOGIN_SUCCESS(String LOGIN_SUCCESS) {
@@ -21,5 +22,9 @@ public class RString {
 
     public void setREGISTER_FAILED_USER_HAD(String REGISTER_FAILED_USER_HAD) {
         RString.REGISTER_FAILED_USER_HAD = REGISTER_FAILED_USER_HAD;
+    }
+
+    public void setREGISTER_FAILED_SMS_CODE(String REGISTER_FAILED_SMS_CODE) {
+        RString.REGISTER_FAILED_SMS_CODE = REGISTER_FAILED_SMS_CODE;
     }
 }
