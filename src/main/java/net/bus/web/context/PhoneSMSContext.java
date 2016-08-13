@@ -56,8 +56,8 @@ public class PhoneSMSContext {
         String key = _head + phone;
         if(_cache.isElementInMemory(key))
         {
-            String smsCode = _cache.get(key).getObjectValue().toString();
-            if(smsCode!=null&&smsCode.equals(code))
+            Object smsCode = _cache.get(key).getObjectValue();
+            if(smsCode!=null&&smsCode.toString().equals(code))
             {
                 return true;
             }
