@@ -21,8 +21,13 @@
         <property name="SMS_FAILED_REPEAT_SEND" value="慢一点获取验证码吧"/>
         <property name="SMS_FAILED_SEND" value="验证码发送失败"/>
 
-        <!-- User Password -->
+        <!-- User Account -->
         <property name="MODIFY_PASSWORD_FAILED" value="新密码为空或原密码不正确"/>
         <property name="RETRIEVE_PASSWORD_FAILED" value="新密码为空或验证码不正确"/>
+        <property name="MODIFY_PHONE_FAILED" value="新手机号为空或验证码不正确"/>
+
+        <!-- User Base -->
+        <property name="ADD_POINT_FAILED" value="增加积分失败"/>
+        <property name="UPLOAD_PHOTO_FAILED" value="头像上传失败"/>
     </bean>
 </beans>

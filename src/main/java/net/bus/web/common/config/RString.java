@@ -18,7 +18,11 @@ public class RString {
 
     public static String MODIFY_PASSWORD_FAILED;
     public static String RETRIEVE_PASSWORD_FAILED;
+    public static String MODIFY_PHONE_FAILED;
 
+    public static String ADD_POINT_FAILED;
+
+    public static String UPLOAD_PHOTO_FAILED;
 
     public void setLOGIN_SUCCESS(String LOGIN_SUCCESS) {
         RString.LOGIN_SUCCESS = LOGIN_SUCCESS;
@@ -55,4 +59,17 @@ public class RString {
     public void setRETRIEVE_PASSWORD_FAILED(String RETRIEVE_PASSWORD_FAILED) {
         RString.RETRIEVE_PASSWORD_FAILED = RETRIEVE_PASSWORD_FAILED;
     }
+
+    public void setMODIFY_PHONE_FAILED(String MODIFY_PHONE_FAILED) {
+        RString.MODIFY_PHONE_FAILED = MODIFY_PHONE_FAILED;
+    }
+
+    public void setADD_POINT_FAILED(String ADD_POINT_FAILED) {
+        RString.ADD_POINT_FAILED = ADD_POINT_FAILED;
+    }
+
+    public void setUPLOAD_PHOTO_FAILED(String UPLOAD_PHOTO_FAILED) {
+        RString.UPLOAD_PHOTO_FAILED = UPLOAD_PHOTO_FAILED;
+    }
+
 }

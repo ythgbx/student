@@ -332,6 +332,7 @@ public class UserController {
             }
             else{
                 result.setResult("failure");
+                result.setContent(RString.MODIFY_PHONE_FAILED);
             }
         }catch (Exception ex){
             result.setResult("error");
@@ -395,6 +396,7 @@ public class UserController {
                 result.setResult("success");
             }else{
                 result.setResult("failure");
+                result.setContent(RString.ADD_POINT_FAILED);
             }
         }catch (Exception ex){
             result.setResult("error");
@@ -431,6 +433,7 @@ public class UserController {
         temp = (BaseResult) fileUploadController.upload(file);
         User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
         result.setResult("failed");
+        result.setContent(RString.UPLOAD_PHOTO_FAILED);
         if(temp.getResult() == "success"){
             if(service.setPhoto(user,temp.getContent().toString())){
                 result.setResult("success");
