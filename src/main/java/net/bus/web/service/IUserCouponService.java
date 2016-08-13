@@ -11,5 +11,7 @@ public interface IUserCouponService {
 
     List<Long> getMonthlyTicketUserIdList();
 
+    List<Long> getYearlyTicketUserIdList();
+
     UserCoupon getUserTimePeriodTicketCoupon(long userId);
 }

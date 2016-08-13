@@ -24,12 +24,16 @@ public class UserTask {
 
     @Value("#{sysProperties['monthlyTicketUserAddPoint']}")
     private Integer _monthlyTicketUserAddPoint;
+
+    @Value("#{sysProperties['yearlyTicketUserAddPoint']}")
+    private Integer _yearlyTicketUserAddPoint;
     /**
      * 定期任务处理
      */
     public void doBiz() {
         logger.info("do user task");
         MonthlyTicketUserHandle();
+        YearlyTicketUserHandle();
     }
 
     private void MonthlyTicketUserHandle()
@@ -38,6 +42,15 @@ public class UserTask {
         List<User> list = service.getUsers(userIds);
         for(User user:list){
             service.addPoint(user,_monthlyTicketUserAddPoint);//设置月卡补充积分数量
+        }
+    }
+
+    private void YearlyTicketUserHandle()
+    {
+        List<Long> userIds = couponService.getYearlyTicketUserIdList();
+        List<User> list = service.getUsers(userIds);
+        for(User user:list){
+            service.addPoint(user,_yearlyTicketUserAddPoint);//设置年卡补充积分数量
         }
     }
 }

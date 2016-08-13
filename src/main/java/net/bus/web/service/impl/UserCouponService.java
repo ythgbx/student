@@ -49,6 +49,23 @@ public class UserCouponService implements IUserCouponService {
         return resultList;
     }
 
+    public List<Long> getYearlyTicketUserIdList()
+    {
+        ISpecification specification = new UserCouponTypeInStartAndEndTimeSpecification(UserCouponType.YearlyTicket,new Date());
+
+        List<UserCoupon> userCouponList = _rootRepository.getList(specification);
+        List<Long> resultList = new ArrayList<Long>();
+        if(userCouponList!=null){
+            for (UserCoupon coupon:userCouponList){
+                if(!resultList.contains(coupon.getUserId())){
+                    resultList.add(coupon.getUserId());
+                }
+            }
+        }
+
+        return resultList;
+    }
+
 
     public UserCoupon getUserTimePeriodTicketCoupon(long userId)
     {
