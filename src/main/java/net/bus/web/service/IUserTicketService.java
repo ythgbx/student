@@ -18,4 +18,6 @@ public interface IUserTicketService {
     UserTicket getTicketByLineId(long line_id);
 
     boolean buyTicket(long line_id,User user);
+
+    int getTicketsCount(long user_id);
 }

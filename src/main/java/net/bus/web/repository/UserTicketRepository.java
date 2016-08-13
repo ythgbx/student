@@ -48,4 +48,14 @@ public class UserTicketRepository {
     {
         return  _mapper.insert(ticket);
     }
+
+
+    public int count(ISpecification specification)
+    {
+        UserTicketExample example = (UserTicketExample)specification.createExample();
+        if(example!=null){
+            return _mapper.countByExample(example);
+        }
+        return 0;
+    }
 }

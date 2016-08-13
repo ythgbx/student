@@ -56,6 +56,7 @@ public class UserTicketController {
         TicketList resultTicketList = new TicketList();
         resultTicketList.setTickets(displayList);
         resultTicketList.setPage(page);
+        resultTicketList.setTotal_count(_userTicketService.getTicketsCount(currentUser.getId()));
         return resultTicketList;
 
         //Mock data for test

@@ -79,4 +79,10 @@ public class UserTicketService implements IUserTicketService {
         }
         return  false;
     }
+
+    public int getTicketsCount(long user_id)
+    {
+        ISpecification specification = new UserTicketUserIdSpecification(user_id);
+        return _rootRepository.count(specification);
+    }
 }
