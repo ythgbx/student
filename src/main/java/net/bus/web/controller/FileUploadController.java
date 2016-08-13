@@ -3,6 +3,7 @@ package net.bus.web.controller;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 import net.bus.web.aspect.Auth;
+import net.bus.web.common.config.RString;
 import net.bus.web.controller.dto.BaseResult;
 import net.bus.web.controller.dto.IResult;
 import org.apache.commons.io.FileUtils;
@@ -50,9 +51,13 @@ public class FileUploadController {
                 System.out.println("upload over. " + fileName);
                 result.setResult("success");
                 result.setContent(fileName);
+            }else{
+                result.setResult("failed");
+                result.setContent(RString.FILE_UPLOAD_FAILED_EXT);
             }
         }else{
             result.setResult("failed");
+            result.setContent(RString.FILE_UPLOAD_FAILED_EMPTY_FILE);
         }
         return result;
     }

@@ -24,6 +24,9 @@ public class RString {
 
     public static String UPLOAD_PHOTO_FAILED;
 
+    public static String FILE_UPLOAD_FAILED_EMPTY_FILE;
+    public static String FILE_UPLOAD_FAILED_EXT;
+
     public void setLOGIN_SUCCESS(String LOGIN_SUCCESS) {
         RString.LOGIN_SUCCESS = LOGIN_SUCCESS;
     }
@@ -72,4 +75,11 @@ public class RString {
         RString.UPLOAD_PHOTO_FAILED = UPLOAD_PHOTO_FAILED;
     }
 
+    public void setFILE_UPLOAD_FAILED_EMPTY_FILE(String FILE_UPLOAD_FAILED_EMPTY_FILE) {
+        RString.FILE_UPLOAD_FAILED_EMPTY_FILE = FILE_UPLOAD_FAILED_EMPTY_FILE;
+    }
+
+    public void setFILE_UPLOAD_FAILED_EXT(String FILE_UPLOAD_FAILED_EXT) {
+        RString.FILE_UPLOAD_FAILED_EXT = FILE_UPLOAD_FAILED_EXT;
+    }
 }
