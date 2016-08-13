@@ -43,6 +43,7 @@ public class UserSignController {
             result.setResult("success");
         }else{
             result.setResult("failure");
+            result.setContent("今日已签到");
         }
         return result;
     }
