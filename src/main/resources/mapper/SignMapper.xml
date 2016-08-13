@@ -214,7 +214,7 @@
       `sign`.`succession` AS `succession`
     from
       (
-        `point_record` right join
+        `point_record` inner join
         `sign` on(
           (
             (`point_record`.`userId` = `sign`.`userId`) and
