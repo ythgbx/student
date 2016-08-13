@@ -174,11 +174,12 @@ public class UserController {
     public IResult registerSms(@ApiParam(required = true, name = "register", value = "注册-手机号")@RequestBody Register register)
     {
         BaseResult result = new BaseResult();
-        if(register.getPhone()!=""){
+        if(register.getPhone()!=null&&register.getPhone()!=""){
 
             //避免接口被大量重复调用造成费用损失
             if(PhoneSMSContext.getInstance().checkPhone(register.getPhone())){
                 result.setResult("failure");
+                result.setContent(RString.SMS_FAILED_REPEAT_SEND);
                 return result;
             }
 
@@ -190,6 +191,7 @@ public class UserController {
                     result.setResult("success");
                 }else{
                     result.setResult("failure");
+                    result.setContent(RString.SMS_FAILED_SEND);
                 }
             }else{
                 result.setResult("success");
@@ -197,6 +199,7 @@ public class UserController {
             }
         }else{
             result.setResult("failure");
+            result.setContent(RString.SMS_FAILED_NO_PHONE);
         }
         return result;
     }

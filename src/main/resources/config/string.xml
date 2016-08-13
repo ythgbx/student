@@ -15,5 +15,10 @@
         <!-- Register -->
         <property name="REGISTER_FAILED_USER_HAD" value="手机已注册"/>
         <property name="REGISTER_FAILED_SMS_CODE" value="验证码不正确"/>
+
+        <!-- Sms -->
+        <property name="SMS_FAILED_NO_PHONE" value="手机号为空"/>
+        <property name="SMS_FAILED_REPEAT_SEND" value="慢一点获取验证码吧"/>
+        <property name="SMS_FAILED_SEND" value="验证码发送失败"/>
     </bean>
 </beans>

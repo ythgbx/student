@@ -11,6 +11,10 @@ public class RString {
     public static String REGISTER_FAILED_USER_HAD;
     public static String REGISTER_FAILED_SMS_CODE;
 
+    public static String SMS_FAILED_NO_PHONE;
+    public static String SMS_FAILED_REPEAT_SEND;
+    public static String SMS_FAILED_SEND;
+
 
     public void setLOGIN_SUCCESS(String LOGIN_SUCCESS) {
         RString.LOGIN_SUCCESS = LOGIN_SUCCESS;
@@ -22,6 +26,18 @@ public class RString {
 
     public void setREGISTER_FAILED_USER_HAD(String REGISTER_FAILED_USER_HAD) {
         RString.REGISTER_FAILED_USER_HAD = REGISTER_FAILED_USER_HAD;
+    }
+
+    public void setSMS_FAILED_NO_PHONE(String SMS_FAILED_NO_PHONE) {
+        RString.SMS_FAILED_NO_PHONE = SMS_FAILED_NO_PHONE;
+    }
+
+    public void setSMS_FAILED_REPEAT_SEND(String SMS_FAILED_REPEAT_SEND) {
+        RString.SMS_FAILED_REPEAT_SEND = SMS_FAILED_REPEAT_SEND;
+    }
+
+    public void setSMS_FAILED_SEND(String SMS_FAILED_SEND) {
+        RString.SMS_FAILED_SEND = SMS_FAILED_SEND;
     }
 
     public void setREGISTER_FAILED_SMS_CODE(String REGISTER_FAILED_SMS_CODE) {
