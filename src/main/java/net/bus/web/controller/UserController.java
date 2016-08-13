@@ -487,7 +487,7 @@ public class UserController {
                 "http://sms-api.luosimao.com/v1/send.json");
         MultivaluedMapImpl formData = new MultivaluedMapImpl();
         formData.add("mobile", phone);
-        formData.add("message", "验证码："+code+"【铁壳测试】");//TODO 待提交签名审核后修改为追风巴士
+        formData.add("message", "验证码："+code+"【追风巴士】");
         ClientResponse response =  webResource.type( MediaType.APPLICATION_FORM_URLENCODED).
                 post(ClientResponse.class, formData);
 
