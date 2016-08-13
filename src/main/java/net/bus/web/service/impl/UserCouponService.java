@@ -5,10 +5,10 @@ import net.bus.web.model.type.UserCouponType;
 import net.bus.web.repository.ISpecification;
 import net.bus.web.repository.UserCouponRepository;
 import net.bus.web.repository.specification.UserCouponTypeInStartAndEndTimeSpecification;
+import net.bus.web.repository.specification.UserCouponUserIdInStartAndEndTimeSpecification;
 import net.bus.web.service.IUserCouponService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sun.dc.pr.PRError;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,5 +47,30 @@ public class UserCouponService implements IUserCouponService {
         }
 
         return resultList;
+    }
+
+
+    public UserCoupon getUserTimePeriodTicketCoupon(long userId)
+    {
+        ISpecification specification = new UserCouponUserIdInStartAndEndTimeSpecification(userId,new Date());
+        List<UserCoupon> userCouponList = _rootRepository.getList(specification);
+        UserCoupon yearTicketCoupon = null;
+        UserCoupon monthlyTicket = null;
+
+        for(UserCoupon coupon:userCouponList){
+            if(coupon.getType().equals(UserCouponType.MonthlyTicket.ordinal())){
+                monthlyTicket = coupon;
+            }
+
+            if(coupon.getType().equals(UserCouponType.YearlyTicket.ordinal())){
+                yearTicketCoupon = coupon;
+            }
+        }
+
+        if(yearTicketCoupon!=null){
+            return yearTicketCoupon;
+        }
+
+        return monthlyTicket;
     }
 }

@@ -1,5 +1,7 @@
 package net.bus.web.service;
 
+import net.bus.web.model.UserCoupon;
+
 import java.util.List;
 
 /**
@@ -8,4 +10,6 @@ import java.util.List;
 public interface IUserCouponService {
 
     List<Long> getMonthlyTicketUserIdList();
+
+    UserCoupon getUserTimePeriodTicketCoupon(long userId);
 }

@@ -11,6 +11,8 @@ public class UserBase extends BaseResult {
     private Double lng;
     private Integer points;
     private String phone;
+    private String vip_type;
+    private Long expiry_date;
 
     public String getPhone() {
         return phone;
@@ -61,4 +63,19 @@ public class UserBase extends BaseResult {
     }
 
 
+    public String getVip_type() {
+        return vip_type;
+    }
+
+    public void setVip_type(String vip_type) {
+        this.vip_type = vip_type;
+    }
+
+    public Long getExpiry_date() {
+        return expiry_date;
+    }
+
+    public void setExpiry_date(Long expiry_date) {
+        this.expiry_date = expiry_date;
+    }
 }

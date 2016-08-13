@@ -15,9 +15,11 @@ import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.*;
 import net.bus.web.model.Pojo.SignRecordPojo;
 import net.bus.web.model.User;
+import net.bus.web.model.UserCoupon;
+import net.bus.web.model.type.UserCouponType;
 import net.bus.web.service.IPointRecordService;
+import net.bus.web.service.IUserCouponService;
 import net.bus.web.service.impl.SignService;
-import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,11 +33,8 @@ import net.bus.web.service.IUserService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.MediaType;
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 
 @Controller
 @RequestMapping("/user")
@@ -52,6 +51,9 @@ public class UserController {
 
     @Autowired
     private SignService signService;
+
+    @Autowired
+    private IUserCouponService _userCouponService;
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
@@ -115,6 +117,20 @@ public class UserController {
         userBase.setPoints(user.getPoints());
         userBase.setPhone(user.getPhone());
         userBase.setPhoto(user.getPhoto());
+
+        UserCoupon userCoupon = _userCouponService.getUserTimePeriodTicketCoupon(user.getId());
+        userBase.setVip_type("common");//普通会员(不拥有时段优惠券用户)
+        if(userCoupon!=null){
+
+            if(userCoupon.getType().equals(UserCouponType.YearlyTicket.ordinal())){
+                userBase.setVip_type("year");
+            }else{
+                userBase.setVip_type("month");
+            }
+
+            userBase.setExpiry_date(userCoupon.getEndTime().getTime());
+        }
+
         return userBase;
     }
 
