@@ -16,6 +16,10 @@ public class RString {
     public static String SMS_FAILED_SEND;
 
 
+    public static String MODIFY_PASSWORD_FAILED;
+    public static String RETRIEVE_PASSWORD_FAILED;
+
+
     public void setLOGIN_SUCCESS(String LOGIN_SUCCESS) {
         RString.LOGIN_SUCCESS = LOGIN_SUCCESS;
     }
@@ -42,5 +46,13 @@ public class RString {
 
     public void setREGISTER_FAILED_SMS_CODE(String REGISTER_FAILED_SMS_CODE) {
         RString.REGISTER_FAILED_SMS_CODE = REGISTER_FAILED_SMS_CODE;
+    }
+
+    public void setMODIFY_PASSWORD_FAILED(String MODIFY_PASSWORD_FAILED) {
+        RString.MODIFY_PASSWORD_FAILED = MODIFY_PASSWORD_FAILED;
+    }
+
+    public void setRETRIEVE_PASSWORD_FAILED(String RETRIEVE_PASSWORD_FAILED) {
+        RString.RETRIEVE_PASSWORD_FAILED = RETRIEVE_PASSWORD_FAILED;
     }
 }

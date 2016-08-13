@@ -279,6 +279,7 @@ public class UserController {
             }
             else{
                 result.setResult("failure");
+                result.setContent(RString.MODIFY_PASSWORD_FAILED);
             }
         }catch (Exception ex){
             result.setResult("error");
@@ -302,6 +303,7 @@ public class UserController {
             }
             else{
                 result.setResult("failure");
+                result.setContent(RString.RETRIEVE_PASSWORD_FAILED);
             }
         }catch (Exception ex){
             result.setResult("error");

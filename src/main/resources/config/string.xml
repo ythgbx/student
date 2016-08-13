@@ -20,5 +20,9 @@
         <property name="SMS_FAILED_NO_PHONE" value="手机号为空"/>
         <property name="SMS_FAILED_REPEAT_SEND" value="慢一点获取验证码吧"/>
         <property name="SMS_FAILED_SEND" value="验证码发送失败"/>
+
+        <!-- User Password -->
+        <property name="MODIFY_PASSWORD_FAILED" value="新密码为空或原密码不正确"/>
+        <property name="RETRIEVE_PASSWORD_FAILED" value="新密码为空或验证码不正确"/>
     </bean>
 </beans>
