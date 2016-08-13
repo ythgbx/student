@@ -98,7 +98,7 @@ public class LineService implements ILineService {
     {
         List<String> listCityNames = new ArrayList<String>();
         listCityNames.add(city_name);
-        return _rootRepository.getList(new LineCityNamesSpecification(listCityNames), page, limit);
+        return _rootRepository.getList(new LineCityNamesSpecification(listCityNames), page - 1, limit);
     }
 
     public Line getLineDetails(Long id)
