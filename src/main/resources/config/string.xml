@@ -11,5 +11,8 @@
         <!-- Login -->
         <property name="LOGIN_SUCCESS" value="登录成功"/>
         <property name="LOGIN_FAILED" value="手机或密码错误"/>
+
+        <!-- Register -->
+        <property name="REGISTER_FAILED_USER_HAD" value="手机已注册"/>
     </bean>
 </beans>

@@ -229,7 +229,8 @@ public class UserController {
                 service.register(register.getPhone(), register.getPassword(), register.getName());
                 result.setResult("success");
             }else {
-                result.setResult("failure user had");
+                result.setResult("failure");
+                result.setContent(RString.REGISTER_FAILED_USER_HAD);
             }
         }catch (Exception ex){
             result.setResult("error");
