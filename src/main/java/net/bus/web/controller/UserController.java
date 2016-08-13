@@ -323,12 +323,17 @@ public class UserController {
             User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
             if(account.getPhone().equals(currentUser.getPhone()) &&
                     checkCodeWithPhone(account.getPhone(),account.getCode())){
-                service.setAccount(currentUser,account.getNew_phone(),currentUser.getPassword());
+                if(service.registerCheck(account.getNew_phone())) {
+                    service.setAccount(currentUser,account.getNew_phone(),currentUser.getPassword());
 
-                currentUser.setPhone(account.getNew_phone());
-                session.setAttribute(SessionContext.CURRENT_USER, currentUser);
+                    currentUser.setPhone(account.getNew_phone());
+                    session.setAttribute(SessionContext.CURRENT_USER, currentUser);
 
-                result.setResult("success");
+                    result.setResult("success");
+                }else{
+                    result.setResult("failure");
+                    result.setContent(RString.REGISTER_FAILED_USER_HAD);
+                }
             }
             else{
                 result.setResult("failure");
