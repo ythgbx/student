@@ -168,7 +168,7 @@ public class LineController {
 //        return lineList;
     }
 
-    @Auth(role = Auth.Role.USER)
+    @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
     @ApiOperation(value = "获取线路详细", httpMethod = "GET", response = LineDetail.class, notes = "获取线路详细")
