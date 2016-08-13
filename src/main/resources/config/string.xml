@@ -14,5 +14,6 @@
 
         <!-- Register -->
         <property name="REGISTER_FAILED_USER_HAD" value="手机已注册"/>
+        <property name="REGISTER_FAILED_SMS_CODE" value="验证码不正确"/>
     </bean>
 </beans>
