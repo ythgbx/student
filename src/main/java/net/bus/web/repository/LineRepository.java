@@ -27,7 +27,7 @@ public class LineRepository {
     public List<Line> getAll(int page,int limit) {
         LineExample example = new LineExample();
         if(example!=null) {
-            return _mapper.selectByExampleWithRowbounds(example, new RowBounds(page, limit)); //分页
+            return _mapper.selectByExampleWithRowbounds(example, new RowBounds(page*limit, limit)); //分页
         }
         return new ArrayList<Line>();
     }
@@ -43,7 +43,7 @@ public class LineRepository {
     public List<Line> getList(ISpecification specification,int page,int limit) {
         LineExample example = (LineExample)specification.createExample();
         if(example!=null) {
-            return _mapper.selectByExampleWithRowbounds(example, new RowBounds(page, limit)); //分页
+            return _mapper.selectByExampleWithRowbounds(example, new RowBounds(page*limit, limit)); //分页
         }
         return new ArrayList<Line>();
     }

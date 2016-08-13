@@ -27,7 +27,7 @@ public class UserRepository {
 
     public List<User> getAllUsers(int page,int limit) {
         UserExample example = new UserExample();
-        return userMapper.selectByExampleWithRowbounds(example, new RowBounds(page, limit));
+        return userMapper.selectByExampleWithRowbounds(example, new RowBounds(page*limit, limit));
     }
 
     public List<User> getItems(ISpecification specification) {

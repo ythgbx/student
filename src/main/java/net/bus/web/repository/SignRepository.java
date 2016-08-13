@@ -25,7 +25,7 @@ public class SignRepository {
 
     public List<Sign> getAll(int page, int limit) {
         SignExample example = new SignExample();
-        return _mapper.selectByExampleWithRowbounds(example, new RowBounds(page, limit)); //分页
+        return _mapper.selectByExampleWithRowbounds(example, new RowBounds(page*limit, limit)); //分页
     }
 
     public List<Sign> getList(ISpecification specification) {
@@ -35,7 +35,7 @@ public class SignRepository {
 
     public List<Sign> getList(ISpecification specification, int page, int limit) {
         SignExample example = (SignExample) specification.createExample();
-        return _mapper.selectByExampleWithRowbounds(example, new RowBounds(page, limit)); //分页
+        return _mapper.selectByExampleWithRowbounds(example, new RowBounds(page*limit, limit)); //分页
     }
 
     public Sign getItem(ISpecification specification) {
@@ -53,6 +53,6 @@ public class SignRepository {
     }
 
     public List<SignRecordPojo> getSignRecordByUserId(long userId, int page, int limit) {
-        return _mapper.selectSignRecordByUserId(userId, new RowBounds(page - 1, limit));
+        return _mapper.selectSignRecordByUserId(userId, new RowBounds((page - 1)*limit, limit));
     }
 }

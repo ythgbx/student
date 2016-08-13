@@ -25,7 +25,7 @@ public class StationRepository {
 
     public List<Station> getAll(int page,int limit) {
         StationExample example = new StationExample();
-        return _mapper.selectByExampleWithRowbounds(example, new RowBounds(page, limit)); //分页
+        return _mapper.selectByExampleWithRowbounds(example, new RowBounds(page*limit, limit)); //分页
     }
 
     public List<Station> getList(ISpecification specification) {
@@ -35,7 +35,7 @@ public class StationRepository {
 
     public List<Station> getList(ISpecification specification,int page,int limit) {
         StationExample example = (StationExample)specification.createExample();
-        return _mapper.selectByExampleWithRowbounds(example, new RowBounds(page, limit)); //分页
+        return _mapper.selectByExampleWithRowbounds(example, new RowBounds(page*limit, limit)); //分页
     }
 
     public Station getItem(ISpecification specification) {

@@ -25,7 +25,7 @@ public class UserCouponRepository {
 
     public List<UserCoupon> getList(ISpecification specification,int page,int limit)
     {
-        return _mapper.selectByExampleWithRowbounds((UserCouponExample) specification.createExample(), new RowBounds(page, limit)); //分页
+        return _mapper.selectByExampleWithRowbounds((UserCouponExample) specification.createExample(), new RowBounds(page*limit, limit)); //分页
     }
 
     public UserCoupon getItem(ISpecification specification)

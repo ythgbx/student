@@ -24,7 +24,7 @@ public class PointRecordRepository {
     }
     public List<PointRecord> getAll(int page, int limit) {
         PointRecordExample example = new PointRecordExample();
-        return _mapper.selectByExampleWithRowbounds(example, new RowBounds(page, limit)); //分页
+        return _mapper.selectByExampleWithRowbounds(example, new RowBounds(page*limit, limit)); //分页
     }
 
     public List<PointRecord> getList(ISpecification specification){
@@ -34,7 +34,7 @@ public class PointRecordRepository {
     }
     public List<PointRecord> getList(ISpecification specification,int page,int limit){
         PointRecordExample example = (PointRecordExample) specification.createExample();
-        return _mapper.selectByExampleWithRowbounds(example,new RowBounds(page,limit)); //分页
+        return _mapper.selectByExampleWithRowbounds(example,new RowBounds(page*limit,limit)); //分页
     }
 
     public PointRecord getItem(PointRecordKey key){

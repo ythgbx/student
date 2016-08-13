@@ -25,7 +25,7 @@ public class UserLineRepository {
 
     public List<UserLine> getAll(int page,int limit) {
         UserLineExample example = new UserLineExample();
-        return _mapper.selectByExampleWithRowbounds(example, new RowBounds(page, limit)); //分页
+        return _mapper.selectByExampleWithRowbounds(example, new RowBounds(page*limit, limit)); //分页
     }
 
     public List<UserLine> getList(ISpecification specification) {
@@ -35,7 +35,7 @@ public class UserLineRepository {
 
     public List<UserLine> getList(ISpecification specification,int page,int limit) {
         UserLineExample example = (UserLineExample)specification.createExample();
-        return _mapper.selectByExampleWithRowbounds(example, new RowBounds(page, limit)); //分页
+        return _mapper.selectByExampleWithRowbounds(example, new RowBounds(page*limit, limit)); //分页
     }
 
     public UserLine getItem(ISpecification specification) {

@@ -27,7 +27,7 @@ public class BusRepository {
     public List<Bus> getAll(int page,int limit) {
         BusExample example = new BusExample();
         if(example!=null) {
-            return _mapper.selectByExampleWithRowbounds(example, new RowBounds(page, limit)); //分页
+            return _mapper.selectByExampleWithRowbounds(example, new RowBounds(page*limit, limit)); //分页
         }
         return new ArrayList<Bus>();
     }
@@ -43,7 +43,7 @@ public class BusRepository {
     public List<Bus> getList(ISpecification specification,int page,int limit) {
         BusExample example = (BusExample)specification.createExample();
         if(example!=null) {
-            return _mapper.selectByExampleWithRowbounds(example, new RowBounds(page, limit)); //分页
+            return _mapper.selectByExampleWithRowbounds(example, new RowBounds(page*limit, limit)); //分页
         }
         return new ArrayList<Bus>();
     }
