@@ -9,9 +9,8 @@ import net.bus.web.context.MockDataContext;
 import net.bus.web.context.Position;
 import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.*;
-import net.bus.web.model.Line;
-import net.bus.web.model.Station;
-import net.bus.web.model.User;
+import net.bus.web.controller.dto.LineStation;
+import net.bus.web.model.*;
 import net.bus.web.service.IBusService;
 import net.bus.web.service.ILineService;
 import net.bus.web.service.ILocationService;
@@ -180,14 +179,38 @@ public class LineController {
         logger.info("line detail");
         //TODO Get line detail
         Line line = _lineService.getLineDetails(id);
+        if(line==null){
+            BaseResult errResult = new BaseResult();
+            errResult.setResult("failure");
+            return errResult;
+        }
+
         LineDetail lineDetail = new LineDetail();
         lineDetail.setId(line.getId());
         lineDetail.setStart_station(line.getStart());
         lineDetail.setEnd_station(line.getEnd());
         lineDetail.setStart_time(line.getStartTime().getTime());
         lineDetail.setEnd_time(line.getEndTime().getTime());
-        lineDetail.setList_stations(line.getLatlng());
         lineDetail.setPrice(line.getPrice().doubleValue());
+
+        List<Station> lineStations = _lineService.getStationList(line.getId());
+        List<LineStation> lineStationList = new ArrayList<LineStation>();
+        if(lineStations!=null){
+            int stationIndex = 0;
+            for(Station station:lineStations){
+                LineStation lineStation = new LineStation();
+                lineStation.setId(station.getId());
+                lineStation.setName(station.getName());
+                lineStation.setAnnotation(station.getAnnotation());
+                lineStation.setPos(new net.bus.web.controller.dto.Position(station.getLat(), station.getLng()));
+                lineStation.setIndex(stationIndex);
+
+                lineStationList.add(lineStation);
+                stationIndex++;
+            }
+        }
+        lineDetail.setList_stations(lineStationList);
+
 
         if(lat!=0&&lng!=0){
             List<Station> stations = _locationService.getAroundStation(new Position(lat, lng));

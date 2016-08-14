@@ -7,6 +7,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,17 +26,23 @@ public class StationRepository {
 
     public List<Station> getAll(int page,int limit) {
         StationExample example = new StationExample();
-        return _mapper.selectByExampleWithRowbounds(example, new RowBounds(page*limit, limit)); //分页
+        return _mapper.selectByExampleWithRowbounds(example, new RowBounds(page * limit, limit)); //分页
     }
 
     public List<Station> getList(ISpecification specification) {
         StationExample example = (StationExample)specification.createExample();
-        return _mapper.selectByExample(example);
+        if(example!=null) {
+            return _mapper.selectByExample(example);
+        }
+        return new ArrayList<Station>();
     }
 
     public List<Station> getList(ISpecification specification,int page,int limit) {
         StationExample example = (StationExample)specification.createExample();
-        return _mapper.selectByExampleWithRowbounds(example, new RowBounds(page*limit, limit)); //分页
+        if(example!=null) {
+            return _mapper.selectByExampleWithRowbounds(example, new RowBounds(page * limit, limit)); //分页
+        }
+        return new ArrayList<Station>();
     }
 
     public Station getItem(ISpecification specification) {

@@ -1,6 +1,7 @@
 package net.bus.web.controller.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import net.bus.web.model.*;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class LineDetail extends BaseResult{
     private Double cost_time;
     private Integer separated_station;
     private Double wait_time;
-    private String list_stations;
+    private List<LineStation> list_stations;
     private List<LineBus> list_buses;
     private Long current_station_id;
 
@@ -95,11 +96,11 @@ public class LineDetail extends BaseResult{
         this.wait_time = wait_time;
     }
 
-    public String getList_stations() {
+    public List<LineStation> getList_stations() {
         return list_stations;
     }
 
-    public void setList_stations(String list_stations) {
+    public void setList_stations(List<LineStation> list_stations) {
         this.list_stations = list_stations;
     }
 

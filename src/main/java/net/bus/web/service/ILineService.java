@@ -27,6 +27,8 @@ public interface ILineService {
 
     List<LineStation> getLineStations(Long id);
 
+    List<Station> getStationList(Long id);
+
     boolean checkLineExist(Long id);
 
     int getAroundLinesCount(double lat,double lng);

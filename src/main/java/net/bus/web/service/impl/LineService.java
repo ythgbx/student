@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -114,6 +116,25 @@ public class LineService implements ILineService {
         return listLineStation;
     }
 
+    public List<Station> getStationList(Long id)
+    {
+        final List<LineStation> listLineStation = getLineStations(id);
+        List<Long> stationIds = new ArrayList<Long>();
+        for(LineStation lineStation:listLineStation){
+            stationIds.add(lineStation.getStationId());
+        }
+        List<Station> stationList = _stationRepository.getList(new StationIdsSpecification(stationIds));
+        Collections.sort(stationList, new Comparator<Station>() {
+            //@Override
+            public int compare(Station s1, Station s2) {
+                Integer indexS1 = getLineStationIndex(listLineStation, s1);
+                Integer indexS2 = getLineStationIndex(listLineStation, s2);
+                return indexS1.compareTo(indexS2);
+            }
+        });
+        return stationList;
+    }
+
     public boolean checkLineExist(Long id){
         List<Long> ids = new ArrayList<Long>();
         ids.add(id);
@@ -200,5 +221,15 @@ public class LineService implements ILineService {
             return true;
         }
         return false;
+    }
+
+    private int getLineStationIndex(List<LineStation> lineStations,Station station)
+    {
+        for(LineStation lineStation:lineStations){
+            if(lineStation.getStationId().equals(station.getId())){
+                return lineStation.getIndex();
+            }
+        }
+        return 999;
     }
 }

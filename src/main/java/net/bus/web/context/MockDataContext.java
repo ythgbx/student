@@ -120,15 +120,7 @@ public class MockDataContext {
             station.setPos(new Position(lat+i*0.01,lng+i*0.01));
             listStations.add(station);
         }
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            String listStation = objectMapper.writeValueAsString(listStations);
-            lineDetail.setList_stations(listStation);
-
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+        lineDetail.setList_stations(listStations);
 
         List<LineBus> listBuses = new ArrayList<LineBus>();
         for (int i=0;i<3;i++)
