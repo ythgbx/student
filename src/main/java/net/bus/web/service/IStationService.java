@@ -13,6 +13,8 @@ public interface IStationService {
 
     List<Station> getAllStations(int page,int limit);
 
+    List<Station> getStations(List<Long> ids);
+
     int getAllStationsCount();
 
     boolean addStation(Station station);

@@ -42,7 +42,7 @@ public class StationsLocationContext {
         _cache=_cacheManager.getCache("stationCache");
         InitStationsLocation();
     }
-    public void InitStationsLocation()
+    private void InitStationsLocation()
     {
         //Add stations location to ehcache 1.key is GeoHash value 2.value is List of Station
         List<Station> stationList = _stationService.getAllStations();
@@ -56,6 +56,48 @@ public class StationsLocationContext {
             if(_cache.isElementInMemory(key)&& _cache.get(key)!=null){
                 meList = (List<Station>) _cache.get(key).getObjectValue();
 
+            }else{
+                meList = new ArrayList<Station>();
+            }
+            meList.add(station);
+            Element element = new Element(key, meList);
+            _cache.put(element);
+        }
+    }
+
+    public void refreshAll()
+    {
+        List<Station> stationList = _stationService.getAllStations();
+        refreshStationList(stationList);
+    }
+
+    public void refreshIncrement(List<Long> ids)
+    {
+        List<Station> stationList = _stationService.getStations(ids);
+        refreshStationList(stationList);
+    }
+
+    private void refreshStationList(List<Station> stationList)
+    {
+        int hashLength = 9;
+        String key;
+        GeoHash geoHash;
+        List<Station> meList;
+        for(Station station:stationList){
+            geoHash = GeoHash.withCharacterPrecision(station.getLat(), station.getLng(), hashLength);
+            key = geoHash.toBase32();
+            if(_cache.isElementInMemory(key)&& _cache.get(key)!=null){
+                meList = (List<Station>) _cache.get(key).getObjectValue();
+                Station needReplaceStation = null;
+                for(Station inStation: meList){
+                    if(inStation.getId().equals(station.getId())){
+                        needReplaceStation = inStation;
+                        break;
+                    }
+                }
+                if(needReplaceStation!=null){
+                    meList.remove(needReplaceStation);
+                }
             }else{
                 meList = new ArrayList<Station>();
             }

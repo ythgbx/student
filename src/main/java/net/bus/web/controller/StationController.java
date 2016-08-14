@@ -3,6 +3,7 @@ package net.bus.web.controller;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 import net.bus.web.aspect.Auth;
+import net.bus.web.context.StationsLocationContext;
 import net.bus.web.controller.dto.*;
 import net.bus.web.model.Station;
 import net.bus.web.service.IStationService;
@@ -61,6 +62,25 @@ public class StationController {
             }else{
                 result.setResult("failed");
             }
+        }catch (Exception ex){
+            result.setResult("error");
+            result.setError(ex.getMessage());
+        }
+        return result;
+    }
+
+    @Auth(role = Auth.Role.NONE)//TODO 待完成admin用户登录后,切换到admin用户
+    @ResponseBody
+    @RequestMapping(value = "/cache/all", method = RequestMethod.POST)
+    @ApiOperation(value = "缓存全量刷新", httpMethod = "POST", response = BaseResult.class, notes = "缓存全量刷新")
+    public IResult cacheAllRefresh(@ApiParam(required = true, name = "request", value = "全量刷新请求")@RequestBody BaseRequest request)
+    {
+        logger.info("station cache refresh all");
+        BaseResult result = new BaseResult();
+        try{
+            StationsLocationContext.getInstance(_stationService).refreshAll();
+            result.setResult("success");
+
         }catch (Exception ex){
             result.setResult("error");
             result.setError(ex.getMessage());

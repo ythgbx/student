@@ -2,6 +2,7 @@ package net.bus.web.service.impl;
 
 import net.bus.web.model.Station;
 import net.bus.web.repository.StationRepository;
+import net.bus.web.repository.specification.StationIdsSpecification;
 import net.bus.web.service.IStationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,11 @@ public class StationService implements IStationService {
     public List<Station> getAllStations(int page,int limit)
     {
         return  _rootRepository.getAll(page-1,limit);
+    }
+
+    public List<Station> getStations(List<Long> ids)
+    {
+        return  _rootRepository.getList(new StationIdsSpecification(ids));
     }
 
     public int getAllStationsCount()
