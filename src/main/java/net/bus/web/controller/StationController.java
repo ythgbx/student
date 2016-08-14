@@ -59,6 +59,7 @@ public class StationController {
             station.setAnnotation(request.getAnnotation());
             if(_stationService.addStation(station)){
                 result.setResult("success");
+                result.setContent(station.getId());
             }else{
                 result.setResult("failed");
             }

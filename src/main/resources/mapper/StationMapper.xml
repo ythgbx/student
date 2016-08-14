@@ -99,10 +99,10 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="net.bus.web.model.Station" >
-    insert into station (id, name, lat, 
+  <insert id="insert" parameterType="net.bus.web.model.Station"  useGeneratedKeys="true" keyProperty="id"  >
+    insert into station (id, name, lat,
       lng, annotation)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{lat,jdbcType=DOUBLE}, 
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{lat,jdbcType=DOUBLE},
       #{lng,jdbcType=DOUBLE}, #{annotation,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="net.bus.web.model.Station" >

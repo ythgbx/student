@@ -308,8 +308,8 @@ public class LineController {
             }
 
             line.setName(request.getName());
-            line.setStart(stations.get(0).getName());
-            line.setEnd(stations.get(stations.size() - 1).getName());
+            line.setStart(request.getStart());
+            line.setEnd(request.getEnd());
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(request.getStart_time());
             line.setStartTime(calendar.getTime());
@@ -318,13 +318,12 @@ public class LineController {
             line.setPrice(request.getPrice().intValue());
             line.setAnnotation(request.getAnnotation());
             line.setCityName(request.getCity_name());
-
-            ObjectMapper mapper = new ObjectMapper();
-            line.setLatlng(mapper.writeValueAsString(stations));
+            line.setLatlng("");
 
             boolean re =  _lineService.addLine(line,lineStationIds);
             if(re) {
                 result.setResult("success");
+                result.setContent(line.getId());
             }else{
                 result.setResult("failure");
             }

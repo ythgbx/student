@@ -8,6 +8,8 @@ import java.util.List;
 public class LineRequest extends BaseRequest {
 
     private String name;
+    private String start;
+    private String end;
     private Long start_time;
     private Long end_time;
     private Double price;
@@ -78,5 +80,21 @@ public class LineRequest extends BaseRequest {
 
     public void setCity_name(String city_name) {
         this.city_name = city_name;
+    }
+
+    public String getStart() {
+        return start;
+    }
+
+    public void setStart(String start) {
+        this.start = start;
+    }
+
+    public String getEnd() {
+        return end;
+    }
+
+    public void setEnd(String end) {
+        this.end = end;
     }
 }

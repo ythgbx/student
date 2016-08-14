@@ -14,6 +14,7 @@ import net.bus.web.service.ILineService;
 import net.bus.web.service.ILocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -73,7 +74,7 @@ public class LineService implements ILineService {
             listLineIds.add(userLine.getLineId());
         }
 
-        return _rootRepository.getList(new LineIdsCityNameSpecification(listLineIds,cityName), page - 1, limit);
+        return _rootRepository.getList(new LineIdsCityNameSpecification(listLineIds, cityName), page - 1, limit);
     }
 
     public List<Line> getStationLines(String station_name,int page,int limit)
@@ -204,6 +205,7 @@ public class LineService implements ILineService {
         return  _rootRepository.count(new LineCityNamesSpecification(listCityNames));
     }
 
+    @Transactional
     public boolean addLine(Line line,List<Long> stationIds)
     {
         int result = _rootRepository.insertItem(line);
