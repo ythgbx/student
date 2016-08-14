@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by Edifi_000 on 2016-07-26.
  */
-public class LineRequest extends BaseResult {
+public class LineRequest extends BaseRequest {
 
     private String name;
     private Long start_time;
