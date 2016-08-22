@@ -2,12 +2,13 @@ package net.bus.web.context;
 
 import net.bus.web.model.Bus;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Edifi_000 on 2016-07-25.
  */
-public class BusTracks {
+public class BusTracks implements Serializable {
 
     public List<Track> getTracks() {
         return tracks;
