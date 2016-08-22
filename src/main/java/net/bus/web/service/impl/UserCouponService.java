@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Date;
 
@@ -89,5 +90,48 @@ public class UserCouponService implements IUserCouponService {
         }
 
         return monthlyTicket;
+    }
+
+
+    public boolean addMonthlyTicket(long userId,Date start,String image,String content)
+    {
+        UserCoupon coupon = new UserCoupon();
+        coupon.setUserId(userId);
+        coupon.setType(UserCouponType.MonthlyTicket.ordinal());
+        coupon.setStartTime(start);
+
+        Calendar startDate = Calendar.getInstance();
+        startDate.setTime(start);
+        startDate.add(startDate.MONTH, 1);
+        coupon.setEndTime(startDate.getTime());
+        coupon.setImage(image);
+        coupon.setContent(content);
+        int res = _rootRepository.insertItem(coupon);
+        if(res>0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public boolean addYearlyTicketTicket(long userId,Date start,String image,String content)
+    {
+        UserCoupon coupon = new UserCoupon();
+        coupon.setUserId(userId);
+        coupon.setType(UserCouponType.YearlyTicket.ordinal());
+        coupon.setStartTime(start);
+
+        Calendar startDate = Calendar.getInstance();
+        startDate.setTime(start);
+        startDate.add(startDate.YEAR, 1);
+        coupon.setEndTime(startDate.getTime());
+        coupon.setImage(image);
+        coupon.setContent(content);
+        int res = _rootRepository.insertItem(coupon);
+        if(res>0){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

@@ -1,7 +1,9 @@
 package net.bus.web.service;
 
 import net.bus.web.model.UserCoupon;
+import net.bus.web.model.type.UserCouponType;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -14,4 +16,8 @@ public interface IUserCouponService {
     List<Long> getYearlyTicketUserIdList();
 
     UserCoupon getUserTimePeriodTicketCoupon(long userId);
+
+    boolean addMonthlyTicket(long userId,Date start,String image,String content);
+
+    boolean addYearlyTicketTicket(long userId,Date start,String image,String content);
 }
