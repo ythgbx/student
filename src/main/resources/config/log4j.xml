@@ -30,7 +30,7 @@
     </appender>
     <appender name="Common"
               class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="file" value="web.log" />
+        <param name="file" value="/web.log" />
         <param name="DatePattern" value="'.'yyyy-MM-dd.HH" />
         <!-- 设置是否在重新启动服务时，在原有日志的基础添加新日志 -->
         <param name="Append" value="true" />
@@ -40,6 +40,18 @@
             <param name="ConversionPattern" value="[%-25d{ISO8601}] %-5p %x %C{1} -- %m\n" />
         </layout>
     </appender>
+    <appender name="Device"
+              class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="logs//device.log" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd.HH" />
+        <!-- 设置是否在重新启动服务时，在原有日志的基础添加新日志 -->
+        <param name="Append" value="true" />
+        <param name="encoding" value="utf-8" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%-25d{ISO8601}] %-5p %x %C{1} -- %m\n" />
+        </layout>
+    </appender>
+
     <logger name="CommonLogger">
         <level value="debug" />
         <appender-ref ref="Common" />
@@ -49,5 +61,11 @@
         <priority value="warn"/>
         <appender-ref ref="console"/>
     </root>
+
+    <logger name="net.bus.web.controller.LoggerController" additivity="false">
+        <level value="ALL" />
+        <appender-ref ref="console" />
+        <appender-ref ref="Device" />
+    </logger>
 
 </log4j:configuration>
