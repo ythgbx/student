@@ -1,9 +1,9 @@
 package net.bus.web.service;
 
+import net.bus.web.controller.dto.TicketBuyItem;
 import net.bus.web.model.User;
 import net.bus.web.model.UserTicket;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,6 +18,8 @@ public interface IUserTicketService {
     UserTicket getTicketByLineId(long line_id);
 
     boolean buyTicket(long line_id,User user);
+
+    boolean buyTickets(String device,List<TicketBuyItem> userTickets);
 
     int getTicketsCount(long user_id);
 }

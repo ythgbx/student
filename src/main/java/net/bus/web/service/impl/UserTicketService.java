@@ -1,16 +1,17 @@
 package net.bus.web.service.impl;
 
+import net.bus.web.controller.dto.TicketBuyItem;
+import net.bus.web.model.Bus;
 import net.bus.web.model.Line;
 import net.bus.web.model.User;
 import net.bus.web.model.UserTicket;
-import net.bus.web.repository.ISpecification;
-import net.bus.web.repository.LineRepository;
-import net.bus.web.repository.UserRepository;
-import net.bus.web.repository.UserTicketRepository;
+import net.bus.web.repository.*;
+import net.bus.web.repository.specification.BusDeviceSpecification;
 import net.bus.web.repository.specification.UserTicketIdSpecification;
 import net.bus.web.repository.specification.UserTicketLineIdSpecification;
 import net.bus.web.repository.specification.UserTicketUserIdSpecification;
 import net.bus.web.service.IUserTicketService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Edifi_000 on 2016-07-04.
@@ -31,6 +33,8 @@ public class UserTicketService implements IUserTicketService {
     private LineRepository _lineRepository;
     @Autowired
     private UserRepository _userRepository;
+    @Autowired
+    private BusRepository _busRepository;
 
     public List<UserTicket> getTickets(long user_id,int page,int limit)
     {
@@ -78,6 +82,39 @@ public class UserTicketService implements IUserTicketService {
             return true;
         }
         return  false;
+    }
+
+    @Transactional
+    public boolean buyTickets(String device,List<TicketBuyItem> userTickets) throws RuntimeException
+    {
+        if(!StringUtils.isBlank(device)){
+            Bus bus = _busRepository.getItem(new BusDeviceSpecification(device));
+            if(bus!=null){
+                if(bus.getLineId()>0){
+                    Line line = _lineRepository.getItem(bus.getLineId());
+                    if(line!=null){
+                        for(TicketBuyItem ticketBuyItem:userTickets){
+                            User user = _userRepository.getUser(ticketBuyItem.getUser_id());
+                            if(user!=null){
+                                UserTicket userTicket = new UserTicket();
+                                userTicket.setLineId(line.getId());
+                                userTicket.setUserId(user.getId());
+                                userTicket.setPrice(line.getPrice());
+                                userTicket.setTime(new Date(ticketBuyItem.getCheck_date()));
+
+                                user.setPoints(user.getPoints() - line.getPrice());
+
+                                _rootRepository.insertItem(userTicket);
+                                _userRepository.updateUser(user);
+                            }
+                        }
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 
     public int getTicketsCount(long user_id)

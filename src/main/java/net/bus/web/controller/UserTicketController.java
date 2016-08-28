@@ -85,7 +85,7 @@ public class UserTicketController {
     }
 
 
-    @Auth(role = Auth.Role.BUS)
+    @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/buy", method = RequestMethod.POST)
     @ApiOperation(value = "购票", httpMethod = "POST", response = TicketList.class, notes = "购票")
@@ -94,8 +94,7 @@ public class UserTicketController {
         logger.info("ticket buy");
         BaseResult result = new BaseResult();
         try {
-            User user = _userService.getUser(request.getUser_id());
-            if(_userTicketService.buyTicket(request.getLine_id(), user)){
+            if(_userTicketService.buyTickets(request.getDevice(), request.getTicket_buy_items())){
                 result.setResult("success");
             }else {
                 result.setResult("failure");

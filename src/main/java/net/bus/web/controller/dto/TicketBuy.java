@@ -1,27 +1,29 @@
 package net.bus.web.controller.dto;
 
+import java.util.List;
+
 /**
  * Created by Edifi_000 on 2016-07-23.
  */
 public class TicketBuy {
 
-    private Long user_id;
+    private List<TicketBuyItem> ticket_buy_items;
 
-    private Long line_id;
+    private String device;
 
-    public Long getUser_id() {
-        return user_id;
+    public String getDevice() {
+        return device;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setDevice(String device) {
+        this.device = device;
     }
 
-    public Long getLine_id() {
-        return line_id;
+    public List<TicketBuyItem> getTicket_buy_items() {
+        return ticket_buy_items;
     }
 
-    public void setLine_id(Long line_id) {
-        this.line_id = line_id;
+    public void setTicket_buy_items(List<TicketBuyItem> ticket_buy_items) {
+        this.ticket_buy_items = ticket_buy_items;
     }
 }
