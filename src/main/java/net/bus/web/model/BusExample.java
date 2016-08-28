@@ -534,6 +534,76 @@ public class BusExample {
             addCriterion("active_time not between", value1, value2, "activeTime");
             return (Criteria) this;
         }
+
+        public Criteria andDeviceIsNull() {
+            addCriterion("device is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeviceIsNotNull() {
+            addCriterion("device is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeviceEqualTo(String value) {
+            addCriterion("device =", value, "device");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeviceNotEqualTo(String value) {
+            addCriterion("device <>", value, "device");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeviceGreaterThan(String value) {
+            addCriterion("device >", value, "device");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeviceGreaterThanOrEqualTo(String value) {
+            addCriterion("device >=", value, "device");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeviceLessThan(String value) {
+            addCriterion("device <", value, "device");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeviceLessThanOrEqualTo(String value) {
+            addCriterion("device <=", value, "device");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeviceLike(String value) {
+            addCriterion("device like", value, "device");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeviceNotLike(String value) {
+            addCriterion("device not like", value, "device");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeviceIn(List<String> values) {
+            addCriterion("device in", values, "device");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeviceNotIn(List<String> values) {
+            addCriterion("device not in", values, "device");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeviceBetween(String value1, String value2) {
+            addCriterion("device between", value1, value2, "device");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeviceNotBetween(String value1, String value2) {
+            addCriterion("device not between", value1, value2, "device");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

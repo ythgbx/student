@@ -9,6 +9,7 @@
     <result column="lat" property="lat" jdbcType="DOUBLE" />
     <result column="lng" property="lng" jdbcType="DOUBLE" />
     <result column="active_time" property="activeTime" jdbcType="TIMESTAMP" />
+    <result column="device" property="device" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, user_id, line_id, lat, lng, active_time
+    id, name, user_id, line_id, lat, lng, active_time, device
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="net.bus.web.model.BusExample" >
     select
@@ -86,7 +87,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from bus
     where id = #{id,jdbcType=BIGINT}
@@ -102,12 +103,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="net.bus.web.model.Bus" >
-    insert into bus (id, name, user_id, 
-      line_id, lat, lng, active_time
-      )
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, 
-      #{lineId,jdbcType=BIGINT}, #{lat,jdbcType=DOUBLE}, #{lng,jdbcType=DOUBLE}, #{activeTime,jdbcType=TIMESTAMP}
-      )
+    insert into bus (id, name, user_id,
+    line_id, lat, lng, active_time,
+    device)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT},
+    #{lineId,jdbcType=BIGINT}, #{lat,jdbcType=DOUBLE}, #{lng,jdbcType=DOUBLE}, #{activeTime,jdbcType=TIMESTAMP},
+    #{device,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="net.bus.web.model.Bus" >
     insert into bus
@@ -133,6 +134,9 @@
       <if test="activeTime != null" >
         active_time,
       </if>
+      <if test="device != null" >
+        device,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -155,6 +159,9 @@
       </if>
       <if test="activeTime != null" >
         #{activeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="device != null" >
+        #{device,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -188,6 +195,9 @@
       <if test="record.activeTime != null" >
         active_time = #{record.activeTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.device != null" >
+        device = #{record.device,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -196,12 +206,13 @@
   <update id="updateByExample" parameterType="map" >
     update bus
     set id = #{record.id,jdbcType=BIGINT},
-      name = #{record.name,jdbcType=VARCHAR},
-      user_id = #{record.userId,jdbcType=BIGINT},
-      line_id = #{record.lineId,jdbcType=BIGINT},
-      lat = #{record.lat,jdbcType=DOUBLE},
-      lng = #{record.lng,jdbcType=DOUBLE},
-      active_time = #{record.activeTime,jdbcType=TIMESTAMP}
+    name = #{record.name,jdbcType=VARCHAR},
+    user_id = #{record.userId,jdbcType=BIGINT},
+    line_id = #{record.lineId,jdbcType=BIGINT},
+    lat = #{record.lat,jdbcType=DOUBLE},
+    lng = #{record.lng,jdbcType=DOUBLE},
+    active_time = #{record.activeTime,jdbcType=TIMESTAMP},
+    device = #{record.device,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -227,6 +238,9 @@
       <if test="activeTime != null" >
         active_time = #{activeTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="device != null" >
+        device = #{device,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -237,7 +251,8 @@
       line_id = #{lineId,jdbcType=BIGINT},
       lat = #{lat,jdbcType=DOUBLE},
       lng = #{lng,jdbcType=DOUBLE},
-      active_time = #{activeTime,jdbcType=TIMESTAMP}
+      active_time = #{activeTime,jdbcType=TIMESTAMP},
+      device = #{device,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <select resultMap="BaseResultMap" parameterType="net.bus.web.model.BusExample" id="selectByExampleWithRowbounds" >

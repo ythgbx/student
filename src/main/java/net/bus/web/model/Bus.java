@@ -17,6 +17,8 @@ public class Bus {
 
     private Date activeTime;
 
+    private String device;
+
     public Long getId() {
         return id;
     }
@@ -71,5 +73,13 @@ public class Bus {
 
     public void setActiveTime(Date activeTime) {
         this.activeTime = activeTime;
+    }
+
+    public String getDevice() {
+        return device;
+    }
+
+    public void setDevice(String device) {
+        this.device = device;
     }
 }
