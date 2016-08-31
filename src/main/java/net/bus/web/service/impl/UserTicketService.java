@@ -94,13 +94,17 @@ public class UserTicketService implements IUserTicketService {
                     Line line = _lineRepository.getItem(bus.getLineId());
                     if(line!=null){
                         for(TicketBuyItem ticketBuyItem:userTickets){
-                            User user = _userRepository.getUser(ticketBuyItem.getUser_id());
+                            //TODO 解密user_check获取user_id与check_date
+                            ticketBuyItem.getUser_check();
+                            Long userId = 0L;
+                            Long checkDate = 0L;
+                            User user = _userRepository.getUser(userId);
                             if(user!=null){
                                 UserTicket userTicket = new UserTicket();
                                 userTicket.setLineId(line.getId());
                                 userTicket.setUserId(user.getId());
                                 userTicket.setPrice(line.getPrice());
-                                userTicket.setTime(new Date(ticketBuyItem.getCheck_date()));
+                                userTicket.setTime(new Date(checkDate));
 
                                 user.setPoints(user.getPoints() - line.getPrice());
 

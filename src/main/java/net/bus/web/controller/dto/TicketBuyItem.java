@@ -5,23 +5,13 @@ package net.bus.web.controller.dto;
  */
 public class TicketBuyItem {
 
-    private Long user_id;
+    private String user_check;
 
-    private Long check_date;
-
-    public Long getUser_id() {
-        return user_id;
+    public String getUser_check() {
+        return user_check;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
-    }
-
-    public Long getCheck_date() {
-        return check_date;
-    }
-
-    public void setCheck_date(Long check_date) {
-        this.check_date = check_date;
+    public void setUser_check(String user_check) {
+        this.user_check = user_check;
     }
 }
