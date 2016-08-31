@@ -111,4 +111,18 @@ public class BusService  implements IBusService {
 
         return false;
     }
+
+    public Bus getBus(String name,String device)
+    {
+        Bus bus = null;
+        if(!StringUtils.isBlank(name)){
+            bus = _rootRepository.getItem(new BusNameSpecification(name));
+        }
+
+        if(bus==null&&!StringUtils.isBlank(device)){
+            bus = _rootRepository.getItem(new BusDeviceSpecification(device));
+        }
+
+        return bus;
+    }
 }

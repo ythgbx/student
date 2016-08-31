@@ -19,4 +19,6 @@ public interface IBusService {
     boolean addBus(Bus bus);
 
     boolean bindBus(Long busId,String name,Long userId,Long lineId,String device);
+
+    Bus getBus(String name,String device);
 }
