@@ -31,7 +31,7 @@ public class CommodityController {
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/list/all", method = RequestMethod.GET)
-    @ApiOperation(value = "获取全部商品", httpMethod = "GET", response = CommodityList.class, notes = "获取全部商品")
+    @ApiOperation(value = "获取商品列表", httpMethod = "GET", response = CommodityList.class, notes = "获取商品列表")
     public IResult all(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "1")int page,
                        @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "5")int limit)
     {
