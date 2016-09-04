@@ -5,6 +5,7 @@ import net.bus.web.model.CommodityOrder;
 import net.bus.web.model.CommodityOrderExample;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 /**
  * Created by Edifi_000 on 2016-09-03.
  */
+@Repository
 public class CommodityOrderRepository {
     @Autowired
     private CommodityOrderMapper _mapper;
