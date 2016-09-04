@@ -5,16 +5,20 @@ import net.bus.web.model.Bus;
 import net.bus.web.model.Line;
 import net.bus.web.model.User;
 import net.bus.web.model.UserTicket;
+import net.bus.web.model.type.PointRecordType;
+import net.bus.web.model.type.PointSourceType;
 import net.bus.web.repository.*;
 import net.bus.web.repository.specification.BusDeviceSpecification;
 import net.bus.web.repository.specification.UserTicketIdSpecification;
 import net.bus.web.repository.specification.UserTicketLineIdSpecification;
 import net.bus.web.repository.specification.UserTicketUserIdSpecification;
+import net.bus.web.service.IPointRecordService;
 import net.bus.web.service.IUserTicketService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sun.dc.pr.PRError;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -35,6 +39,8 @@ public class UserTicketService implements IUserTicketService {
     private UserRepository _userRepository;
     @Autowired
     private BusRepository _busRepository;
+    @Autowired
+    private IPointRecordService _pointRecordService;
 
     public List<UserTicket> getTickets(long user_id,int page,int limit)
     {
@@ -110,6 +116,7 @@ public class UserTicketService implements IUserTicketService {
 
                                 _rootRepository.insertItem(userTicket);
                                 _userRepository.updateUser(user);
+                                _pointRecordService.recordPoint(user.getId(), PointRecordType.Expend, PointSourceType.TICKET, line.getPrice(), line.getName());
                             }
                         }
                         return true;

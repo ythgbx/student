@@ -5,5 +5,5 @@ package net.bus.web.model.type;
  */
 public enum PointRecordType {
     Income,
-    expend
+    Expend
 }

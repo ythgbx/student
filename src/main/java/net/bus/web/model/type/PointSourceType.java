@@ -5,5 +5,6 @@ package net.bus.web.model.type;
  */
 public enum  PointSourceType {
     SIGN,
-    COMMODITY
+    COMMODITY,
+    TICKET
 }
