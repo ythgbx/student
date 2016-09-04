@@ -6,9 +6,11 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="DECIMAL" />
     <result column="amount" property="amount" jdbcType="INTEGER" />
+    <result column="img" property="img" jdbcType="VARCHAR" />
+    <result column="point" property="point" jdbcType="INTEGER" />
     <result column="type_id" property="typeId" jdbcType="BIGINT" />
-    <result column="flag" property="flag" jdbcType="INTEGER" />
     <result column="active_time" property="activeTime" jdbcType="TIMESTAMP" />
+    <result column="flag" property="flag" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="net.bus.web.model.Commodity" extends="BaseResultMap" >
     <result column="depict" property="depict" jdbcType="LONGVARCHAR" />
@@ -72,7 +74,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, price, amount, type_id, flag, active_time
+    id, name, price, amount, img, point, type_id, active_time, flag
   </sql>
   <sql id="Blob_Column_List" >
     depict
@@ -108,7 +110,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
-    select 
+    select
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
@@ -126,12 +128,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="net.bus.web.model.Commodity" >
-    insert into commodity (id, name, price, 
-      amount, type_id, flag, 
-      active_time, depict)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
-      #{amount,jdbcType=INTEGER}, #{typeId,jdbcType=BIGINT}, #{flag,jdbcType=INTEGER}, 
-      #{activeTime,jdbcType=TIMESTAMP}, #{depict,jdbcType=LONGVARCHAR})
+    insert into commodity (id, name, price,
+    amount, img, point,
+    type_id, active_time, flag,
+    depict)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL},
+    #{amount,jdbcType=INTEGER}, #{img,jdbcType=VARCHAR}, #{point,jdbcType=INTEGER},
+    #{typeId,jdbcType=BIGINT}, #{activeTime,jdbcType=TIMESTAMP}, #{flag,jdbcType=INTEGER},
+    #{depict,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="net.bus.web.model.Commodity" >
     insert into commodity
@@ -148,14 +152,20 @@
       <if test="amount != null" >
         amount,
       </if>
+      <if test="img != null" >
+        img,
+      </if>
+      <if test="point != null" >
+        point,
+      </if>
       <if test="typeId != null" >
         type_id,
       </if>
-      <if test="flag != null" >
-        flag,
-      </if>
       <if test="activeTime != null" >
         active_time,
+      </if>
+      <if test="flag != null" >
+        flag,
       </if>
       <if test="depict != null" >
         depict,
@@ -174,14 +184,20 @@
       <if test="amount != null" >
         #{amount,jdbcType=INTEGER},
       </if>
+      <if test="img != null" >
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="point != null" >
+        #{point,jdbcType=INTEGER},
+      </if>
       <if test="typeId != null" >
         #{typeId,jdbcType=BIGINT},
       </if>
-      <if test="flag != null" >
-        #{flag,jdbcType=INTEGER},
-      </if>
       <if test="activeTime != null" >
         #{activeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=INTEGER},
       </if>
       <if test="depict != null" >
         #{depict,jdbcType=LONGVARCHAR},
@@ -209,14 +225,20 @@
       <if test="record.amount != null" >
         amount = #{record.amount,jdbcType=INTEGER},
       </if>
+      <if test="record.img != null" >
+        img = #{record.img,jdbcType=VARCHAR},
+      </if>
+      <if test="record.point != null" >
+        point = #{record.point,jdbcType=INTEGER},
+      </if>
       <if test="record.typeId != null" >
         type_id = #{record.typeId,jdbcType=BIGINT},
       </if>
-      <if test="record.flag != null" >
-        flag = #{record.flag,jdbcType=INTEGER},
-      </if>
       <if test="record.activeTime != null" >
         active_time = #{record.activeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.flag != null" >
+        flag = #{record.flag,jdbcType=INTEGER},
       </if>
       <if test="record.depict != null" >
         depict = #{record.depict,jdbcType=LONGVARCHAR},
@@ -229,13 +251,15 @@
   <update id="updateByExampleWithBLOBs" parameterType="map" >
     update commodity
     set id = #{record.id,jdbcType=BIGINT},
-      name = #{record.name,jdbcType=VARCHAR},
-      price = #{record.price,jdbcType=DECIMAL},
-      amount = #{record.amount,jdbcType=INTEGER},
-      type_id = #{record.typeId,jdbcType=BIGINT},
-      flag = #{record.flag,jdbcType=INTEGER},
-      active_time = #{record.activeTime,jdbcType=TIMESTAMP},
-      depict = #{record.depict,jdbcType=LONGVARCHAR}
+    name = #{record.name,jdbcType=VARCHAR},
+    price = #{record.price,jdbcType=DECIMAL},
+    amount = #{record.amount,jdbcType=INTEGER},
+    img = #{record.img,jdbcType=VARCHAR},
+    point = #{record.point,jdbcType=INTEGER},
+    type_id = #{record.typeId,jdbcType=BIGINT},
+    active_time = #{record.activeTime,jdbcType=TIMESTAMP},
+    flag = #{record.flag,jdbcType=INTEGER},
+    depict = #{record.depict,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -243,12 +267,14 @@
   <update id="updateByExample" parameterType="map" >
     update commodity
     set id = #{record.id,jdbcType=BIGINT},
-      name = #{record.name,jdbcType=VARCHAR},
-      price = #{record.price,jdbcType=DECIMAL},
-      amount = #{record.amount,jdbcType=INTEGER},
-      type_id = #{record.typeId,jdbcType=BIGINT},
-      flag = #{record.flag,jdbcType=INTEGER},
-      active_time = #{record.activeTime,jdbcType=TIMESTAMP}
+    name = #{record.name,jdbcType=VARCHAR},
+    price = #{record.price,jdbcType=DECIMAL},
+    amount = #{record.amount,jdbcType=INTEGER},
+    img = #{record.img,jdbcType=VARCHAR},
+    point = #{record.point,jdbcType=INTEGER},
+    type_id = #{record.typeId,jdbcType=BIGINT},
+    active_time = #{record.activeTime,jdbcType=TIMESTAMP},
+    flag = #{record.flag,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -265,14 +291,20 @@
       <if test="amount != null" >
         amount = #{amount,jdbcType=INTEGER},
       </if>
+      <if test="img != null" >
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="point != null" >
+        point = #{point,jdbcType=INTEGER},
+      </if>
       <if test="typeId != null" >
         type_id = #{typeId,jdbcType=BIGINT},
       </if>
-      <if test="flag != null" >
-        flag = #{flag,jdbcType=INTEGER},
-      </if>
       <if test="activeTime != null" >
         active_time = #{activeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=INTEGER},
       </if>
       <if test="depict != null" >
         depict = #{depict,jdbcType=LONGVARCHAR},
@@ -283,12 +315,14 @@
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="net.bus.web.model.Commodity" >
     update commodity
     set name = #{name,jdbcType=VARCHAR},
-      price = #{price,jdbcType=DECIMAL},
-      amount = #{amount,jdbcType=INTEGER},
-      type_id = #{typeId,jdbcType=BIGINT},
-      flag = #{flag,jdbcType=INTEGER},
-      active_time = #{activeTime,jdbcType=TIMESTAMP},
-      depict = #{depict,jdbcType=LONGVARCHAR}
+    price = #{price,jdbcType=DECIMAL},
+    amount = #{amount,jdbcType=INTEGER},
+    img = #{img,jdbcType=VARCHAR},
+    point = #{point,jdbcType=INTEGER},
+    type_id = #{typeId,jdbcType=BIGINT},
+    active_time = #{activeTime,jdbcType=TIMESTAMP},
+    flag = #{flag,jdbcType=INTEGER},
+    depict = #{depict,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="net.bus.web.model.Commodity" >
@@ -296,9 +330,11 @@
     set name = #{name,jdbcType=VARCHAR},
       price = #{price,jdbcType=DECIMAL},
       amount = #{amount,jdbcType=INTEGER},
+      img = #{img,jdbcType=VARCHAR},
+      point = #{point,jdbcType=INTEGER},
       type_id = #{typeId,jdbcType=BIGINT},
-      flag = #{flag,jdbcType=INTEGER},
-      active_time = #{activeTime,jdbcType=TIMESTAMP}
+      active_time = #{activeTime,jdbcType=TIMESTAMP},
+      flag = #{flag,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <select resultMap="ResultMapWithBLOBs" parameterType="net.bus.web.model.CommodityExample" id="selectByExampleWithBLOBsWithRowbounds" >

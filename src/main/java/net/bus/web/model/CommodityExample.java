@@ -356,6 +356,136 @@ public class CommodityExample {
             return (Criteria) this;
         }
 
+        public Criteria andImgIsNull() {
+            addCriterion("img is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgIsNotNull() {
+            addCriterion("img is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgEqualTo(String value) {
+            addCriterion("img =", value, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgNotEqualTo(String value) {
+            addCriterion("img <>", value, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgGreaterThan(String value) {
+            addCriterion("img >", value, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgGreaterThanOrEqualTo(String value) {
+            addCriterion("img >=", value, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgLessThan(String value) {
+            addCriterion("img <", value, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgLessThanOrEqualTo(String value) {
+            addCriterion("img <=", value, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgLike(String value) {
+            addCriterion("img like", value, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgNotLike(String value) {
+            addCriterion("img not like", value, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgIn(List<String> values) {
+            addCriterion("img in", values, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgNotIn(List<String> values) {
+            addCriterion("img not in", values, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgBetween(String value1, String value2) {
+            addCriterion("img between", value1, value2, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgNotBetween(String value1, String value2) {
+            addCriterion("img not between", value1, value2, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andPointIsNull() {
+            addCriterion("point is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPointIsNotNull() {
+            addCriterion("point is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPointEqualTo(Integer value) {
+            addCriterion("point =", value, "point");
+            return (Criteria) this;
+        }
+
+        public Criteria andPointNotEqualTo(Integer value) {
+            addCriterion("point <>", value, "point");
+            return (Criteria) this;
+        }
+
+        public Criteria andPointGreaterThan(Integer value) {
+            addCriterion("point >", value, "point");
+            return (Criteria) this;
+        }
+
+        public Criteria andPointGreaterThanOrEqualTo(Integer value) {
+            addCriterion("point >=", value, "point");
+            return (Criteria) this;
+        }
+
+        public Criteria andPointLessThan(Integer value) {
+            addCriterion("point <", value, "point");
+            return (Criteria) this;
+        }
+
+        public Criteria andPointLessThanOrEqualTo(Integer value) {
+            addCriterion("point <=", value, "point");
+            return (Criteria) this;
+        }
+
+        public Criteria andPointIn(List<Integer> values) {
+            addCriterion("point in", values, "point");
+            return (Criteria) this;
+        }
+
+        public Criteria andPointNotIn(List<Integer> values) {
+            addCriterion("point not in", values, "point");
+            return (Criteria) this;
+        }
+
+        public Criteria andPointBetween(Integer value1, Integer value2) {
+            addCriterion("point between", value1, value2, "point");
+            return (Criteria) this;
+        }
+
+        public Criteria andPointNotBetween(Integer value1, Integer value2) {
+            addCriterion("point not between", value1, value2, "point");
+            return (Criteria) this;
+        }
+
         public Criteria andTypeIdIsNull() {
             addCriterion("type_id is null");
             return (Criteria) this;
@@ -416,66 +546,6 @@ public class CommodityExample {
             return (Criteria) this;
         }
 
-        public Criteria andFlagIsNull() {
-            addCriterion("flag is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagIsNotNull() {
-            addCriterion("flag is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagEqualTo(Integer value) {
-            addCriterion("flag =", value, "flag");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagNotEqualTo(Integer value) {
-            addCriterion("flag <>", value, "flag");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagGreaterThan(Integer value) {
-            addCriterion("flag >", value, "flag");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagGreaterThanOrEqualTo(Integer value) {
-            addCriterion("flag >=", value, "flag");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagLessThan(Integer value) {
-            addCriterion("flag <", value, "flag");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagLessThanOrEqualTo(Integer value) {
-            addCriterion("flag <=", value, "flag");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagIn(List<Integer> values) {
-            addCriterion("flag in", values, "flag");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagNotIn(List<Integer> values) {
-            addCriterion("flag not in", values, "flag");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagBetween(Integer value1, Integer value2) {
-            addCriterion("flag between", value1, value2, "flag");
-            return (Criteria) this;
-        }
-
-        public Criteria andFlagNotBetween(Integer value1, Integer value2) {
-            addCriterion("flag not between", value1, value2, "flag");
-            return (Criteria) this;
-        }
-
         public Criteria andActiveTimeIsNull() {
             addCriterion("active_time is null");
             return (Criteria) this;
@@ -533,6 +603,66 @@ public class CommodityExample {
 
         public Criteria andActiveTimeNotBetween(Date value1, Date value2) {
             addCriterion("active_time not between", value1, value2, "activeTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagIsNull() {
+            addCriterion("flag is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagIsNotNull() {
+            addCriterion("flag is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagEqualTo(Integer value) {
+            addCriterion("flag =", value, "flag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagNotEqualTo(Integer value) {
+            addCriterion("flag <>", value, "flag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagGreaterThan(Integer value) {
+            addCriterion("flag >", value, "flag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagGreaterThanOrEqualTo(Integer value) {
+            addCriterion("flag >=", value, "flag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagLessThan(Integer value) {
+            addCriterion("flag <", value, "flag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagLessThanOrEqualTo(Integer value) {
+            addCriterion("flag <=", value, "flag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagIn(List<Integer> values) {
+            addCriterion("flag in", values, "flag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagNotIn(List<Integer> values) {
+            addCriterion("flag not in", values, "flag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagBetween(Integer value1, Integer value2) {
+            addCriterion("flag between", value1, value2, "flag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagNotBetween(Integer value1, Integer value2) {
+            addCriterion("flag not between", value1, value2, "flag");
             return (Criteria) this;
         }
     }

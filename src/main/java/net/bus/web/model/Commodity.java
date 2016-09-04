@@ -12,11 +12,15 @@ public class Commodity {
 
     private Integer amount;
 
+    private String img;
+
+    private Integer point;
+
     private Long typeId;
 
-    private Integer flag;
-
     private Date activeTime;
+
+    private Integer flag;
 
     private String depict;
 
@@ -52,6 +56,22 @@ public class Commodity {
         this.amount = amount;
     }
 
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public Integer getPoint() {
+        return point;
+    }
+
+    public void setPoint(Integer point) {
+        this.point = point;
+    }
+
     public Long getTypeId() {
         return typeId;
     }
@@ -60,20 +80,20 @@ public class Commodity {
         this.typeId = typeId;
     }
 
-    public Integer getFlag() {
-        return flag;
-    }
-
-    public void setFlag(Integer flag) {
-        this.flag = flag;
-    }
-
     public Date getActiveTime() {
         return activeTime;
     }
 
     public void setActiveTime(Date activeTime) {
         this.activeTime = activeTime;
+    }
+
+    public Integer getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Integer flag) {
+        this.flag = flag;
     }
 
     public String getDepict() {
