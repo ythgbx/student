@@ -3,19 +3,16 @@ package net.bus.web.controller;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 import net.bus.web.aspect.Auth;
-import net.bus.web.controller.dto.CommodityDetail;
-import net.bus.web.controller.dto.CommodityItem;
-import net.bus.web.controller.dto.CommodityList;
-import net.bus.web.controller.dto.IResult;
+import net.bus.web.context.SessionContext;
+import net.bus.web.controller.dto.*;
 import net.bus.web.model.Commodity;
+import net.bus.web.model.User;
 import net.bus.web.service.ICommodityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +25,8 @@ public class CommodityController {
 
     @Autowired
     private ICommodityService _commodityService;
+    @Autowired
+    private HttpSession session;
 
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
@@ -59,6 +58,24 @@ public class CommodityController {
         commodityDetail.setImg(commodity.getImg());
         commodityDetail.setPrice(commodity.getPrice());
         return commodityDetail;
+    }
+
+    @Auth(role = Auth.Role.USER)
+    @ResponseBody
+    @RequestMapping(value = "/buy", method = RequestMethod.POST)
+    @ApiOperation(value = "购买商品", httpMethod = "POST", response = BaseResult.class, notes = "购买商品")
+    public IResult detail(@ApiParam(required = true, name = "request", value = "购买商品请求")@RequestBody CommodityBuy request)
+    {
+        BaseResult result = new BaseResult();
+        User currentUser = (User) session.getAttribute(SessionContext.CURRENT_USER);
+        if(_commodityService.buy(request.getId(),currentUser)){
+            session.setAttribute(SessionContext.CURRENT_USER, currentUser);
+            result.setResult("success");
+
+        }else{
+            result.setResult("failure");
+        }
+        return result;
     }
 
 
