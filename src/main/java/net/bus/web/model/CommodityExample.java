@@ -236,6 +236,76 @@ public class CommodityExample {
             return (Criteria) this;
         }
 
+        public Criteria andDepictIsNull() {
+            addCriterion("depict is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepictIsNotNull() {
+            addCriterion("depict is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepictEqualTo(String value) {
+            addCriterion("depict =", value, "depict");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepictNotEqualTo(String value) {
+            addCriterion("depict <>", value, "depict");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepictGreaterThan(String value) {
+            addCriterion("depict >", value, "depict");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepictGreaterThanOrEqualTo(String value) {
+            addCriterion("depict >=", value, "depict");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepictLessThan(String value) {
+            addCriterion("depict <", value, "depict");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepictLessThanOrEqualTo(String value) {
+            addCriterion("depict <=", value, "depict");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepictLike(String value) {
+            addCriterion("depict like", value, "depict");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepictNotLike(String value) {
+            addCriterion("depict not like", value, "depict");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepictIn(List<String> values) {
+            addCriterion("depict in", values, "depict");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepictNotIn(List<String> values) {
+            addCriterion("depict not in", values, "depict");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepictBetween(String value1, String value2) {
+            addCriterion("depict between", value1, value2, "depict");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepictNotBetween(String value1, String value2) {
+            addCriterion("depict not between", value1, value2, "depict");
+            return (Criteria) this;
+        }
+
         public Criteria andPriceIsNull() {
             addCriterion("price is null");
             return (Criteria) this;
@@ -483,6 +553,66 @@ public class CommodityExample {
 
         public Criteria andPointNotBetween(Integer value1, Integer value2) {
             addCriterion("point not between", value1, value2, "point");
+            return (Criteria) this;
+        }
+
+        public Criteria andCouponTypeIsNull() {
+            addCriterion("coupon_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCouponTypeIsNotNull() {
+            addCriterion("coupon_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCouponTypeEqualTo(Integer value) {
+            addCriterion("coupon_type =", value, "couponType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCouponTypeNotEqualTo(Integer value) {
+            addCriterion("coupon_type <>", value, "couponType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCouponTypeGreaterThan(Integer value) {
+            addCriterion("coupon_type >", value, "couponType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCouponTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("coupon_type >=", value, "couponType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCouponTypeLessThan(Integer value) {
+            addCriterion("coupon_type <", value, "couponType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCouponTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("coupon_type <=", value, "couponType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCouponTypeIn(List<Integer> values) {
+            addCriterion("coupon_type in", values, "couponType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCouponTypeNotIn(List<Integer> values) {
+            addCriterion("coupon_type not in", values, "couponType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCouponTypeBetween(Integer value1, Integer value2) {
+            addCriterion("coupon_type between", value1, value2, "couponType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCouponTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("coupon_type not between", value1, value2, "couponType");
             return (Criteria) this;
         }
 

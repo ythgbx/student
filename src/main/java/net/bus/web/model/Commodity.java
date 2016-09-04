@@ -8,6 +8,8 @@ public class Commodity {
 
     private String name;
 
+    private String depict;
+
     private BigDecimal price;
 
     private Integer amount;
@@ -16,13 +18,13 @@ public class Commodity {
 
     private Integer point;
 
+    private Integer couponType;
+
     private Long typeId;
 
     private Date activeTime;
 
     private Integer flag;
-
-    private String depict;
 
     public Long getId() {
         return id;
@@ -38,6 +40,14 @@ public class Commodity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDepict() {
+        return depict;
+    }
+
+    public void setDepict(String depict) {
+        this.depict = depict;
     }
 
     public BigDecimal getPrice() {
@@ -72,6 +82,14 @@ public class Commodity {
         this.point = point;
     }
 
+    public Integer getCouponType() {
+        return couponType;
+    }
+
+    public void setCouponType(Integer couponType) {
+        this.couponType = couponType;
+    }
+
     public Long getTypeId() {
         return typeId;
     }
@@ -94,13 +112,5 @@ public class Commodity {
 
     public void setFlag(Integer flag) {
         this.flag = flag;
-    }
-
-    public String getDepict() {
-        return depict;
-    }
-
-    public void setDepict(String depict) {
-        this.depict = depict;
     }
 }

@@ -33,7 +33,9 @@
         <mapper resource="mapper/UserNoticeMapper.xml"/>
         <mapper resource="mapper/SignMapper.xml"/>
         <mapper resource="mapper/PointRecordMapper.xml"/>
-
+        <mapper resource="mapper/CommodityMapper.xml"/>
+        <mapper resource="mapper/CommodityOrderMapper.xml"/>
+        <mapper resource="mapper/CommodityTypeMapper.xml"/>
     </mappers>
 
 </configuration>

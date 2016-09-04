@@ -1,5 +1,6 @@
 package net.bus.web.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class CommodityOrder {
@@ -10,6 +11,10 @@ public class CommodityOrder {
     private Long commodityId;
 
     private Integer amount;
+
+    private BigDecimal price;
+
+    private BigDecimal pay;
 
     private Date time;
 
@@ -43,6 +48,22 @@ public class CommodityOrder {
 
     public void setAmount(Integer amount) {
         this.amount = amount;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public BigDecimal getPay() {
+        return pay;
+    }
+
+    public void setPay(BigDecimal pay) {
+        this.pay = pay;
     }
 
     public Date getTime() {

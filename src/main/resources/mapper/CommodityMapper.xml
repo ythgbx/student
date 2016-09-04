@@ -4,16 +4,15 @@
   <resultMap id="BaseResultMap" type="net.bus.web.model.Commodity" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="depict" property="depict" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="DECIMAL" />
     <result column="amount" property="amount" jdbcType="INTEGER" />
     <result column="img" property="img" jdbcType="VARCHAR" />
     <result column="point" property="point" jdbcType="INTEGER" />
+    <result column="coupon_type" property="couponType" jdbcType="INTEGER" />
     <result column="type_id" property="typeId" jdbcType="BIGINT" />
     <result column="active_time" property="activeTime" jdbcType="TIMESTAMP" />
     <result column="flag" property="flag" jdbcType="INTEGER" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="net.bus.web.model.Commodity" extends="BaseResultMap" >
-    <result column="depict" property="depict" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -74,27 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, price, amount, img, point, type_id, active_time, flag
+    id, name, depict, price, amount, img, point, coupon_type, type_id, active_time, flag
   </sql>
-  <sql id="Blob_Column_List" >
-    depict
-  </sql>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="net.bus.web.model.CommodityExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from commodity
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="net.bus.web.model.CommodityExample" >
     select
     <if test="distinct" >
@@ -109,11 +89,9 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from commodity
     where id = #{id,jdbcType=BIGINT}
   </select>
@@ -128,14 +106,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="net.bus.web.model.Commodity" >
-    insert into commodity (id, name, price,
-    amount, img, point,
-    type_id, active_time, flag,
-    depict)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL},
-    #{amount,jdbcType=INTEGER}, #{img,jdbcType=VARCHAR}, #{point,jdbcType=INTEGER},
-    #{typeId,jdbcType=BIGINT}, #{activeTime,jdbcType=TIMESTAMP}, #{flag,jdbcType=INTEGER},
-    #{depict,jdbcType=LONGVARCHAR})
+    insert into commodity (id, name, depict,
+    price, amount, img,
+    point, coupon_type, type_id,
+    active_time, flag)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{depict,jdbcType=VARCHAR},
+    #{price,jdbcType=DECIMAL}, #{amount,jdbcType=INTEGER}, #{img,jdbcType=VARCHAR},
+    #{point,jdbcType=INTEGER}, #{couponType,jdbcType=INTEGER}, #{typeId,jdbcType=BIGINT},
+    #{activeTime,jdbcType=TIMESTAMP}, #{flag,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="net.bus.web.model.Commodity" >
     insert into commodity
@@ -145,6 +123,9 @@
       </if>
       <if test="name != null" >
         name,
+      </if>
+      <if test="depict != null" >
+        depict,
       </if>
       <if test="price != null" >
         price,
@@ -158,6 +139,9 @@
       <if test="point != null" >
         point,
       </if>
+      <if test="couponType != null" >
+        coupon_type,
+      </if>
       <if test="typeId != null" >
         type_id,
       </if>
@@ -167,9 +151,6 @@
       <if test="flag != null" >
         flag,
       </if>
-      <if test="depict != null" >
-        depict,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -177,6 +158,9 @@
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="depict != null" >
+        #{depict,jdbcType=VARCHAR},
       </if>
       <if test="price != null" >
         #{price,jdbcType=DECIMAL},
@@ -190,6 +174,9 @@
       <if test="point != null" >
         #{point,jdbcType=INTEGER},
       </if>
+      <if test="couponType != null" >
+        #{couponType,jdbcType=INTEGER},
+      </if>
       <if test="typeId != null" >
         #{typeId,jdbcType=BIGINT},
       </if>
@@ -198,9 +185,6 @@
       </if>
       <if test="flag != null" >
         #{flag,jdbcType=INTEGER},
-      </if>
-      <if test="depict != null" >
-        #{depict,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -219,6 +203,9 @@
       <if test="record.name != null" >
         name = #{record.name,jdbcType=VARCHAR},
       </if>
+      <if test="record.depict != null" >
+        depict = #{record.depict,jdbcType=VARCHAR},
+      </if>
       <if test="record.price != null" >
         price = #{record.price,jdbcType=DECIMAL},
       </if>
@@ -231,6 +218,9 @@
       <if test="record.point != null" >
         point = #{record.point,jdbcType=INTEGER},
       </if>
+      <if test="record.couponType != null" >
+        coupon_type = #{record.couponType,jdbcType=INTEGER},
+      </if>
       <if test="record.typeId != null" >
         type_id = #{record.typeId,jdbcType=BIGINT},
       </if>
@@ -240,26 +230,7 @@
       <if test="record.flag != null" >
         flag = #{record.flag,jdbcType=INTEGER},
       </if>
-      <if test="record.depict != null" >
-        depict = #{record.depict,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map" >
-    update commodity
-    set id = #{record.id,jdbcType=BIGINT},
-    name = #{record.name,jdbcType=VARCHAR},
-    price = #{record.price,jdbcType=DECIMAL},
-    amount = #{record.amount,jdbcType=INTEGER},
-    img = #{record.img,jdbcType=VARCHAR},
-    point = #{record.point,jdbcType=INTEGER},
-    type_id = #{record.typeId,jdbcType=BIGINT},
-    active_time = #{record.activeTime,jdbcType=TIMESTAMP},
-    flag = #{record.flag,jdbcType=INTEGER},
-    depict = #{record.depict,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -268,10 +239,12 @@
     update commodity
     set id = #{record.id,jdbcType=BIGINT},
     name = #{record.name,jdbcType=VARCHAR},
+    depict = #{record.depict,jdbcType=VARCHAR},
     price = #{record.price,jdbcType=DECIMAL},
     amount = #{record.amount,jdbcType=INTEGER},
     img = #{record.img,jdbcType=VARCHAR},
     point = #{record.point,jdbcType=INTEGER},
+    coupon_type = #{record.couponType,jdbcType=INTEGER},
     type_id = #{record.typeId,jdbcType=BIGINT},
     active_time = #{record.activeTime,jdbcType=TIMESTAMP},
     flag = #{record.flag,jdbcType=INTEGER}
@@ -285,6 +258,9 @@
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
+      <if test="depict != null" >
+        depict = #{depict,jdbcType=VARCHAR},
+      </if>
       <if test="price != null" >
         price = #{price,jdbcType=DECIMAL},
       </if>
@@ -297,6 +273,9 @@
       <if test="point != null" >
         point = #{point,jdbcType=INTEGER},
       </if>
+      <if test="couponType != null" >
+        coupon_type = #{couponType,jdbcType=INTEGER},
+      </if>
       <if test="typeId != null" >
         type_id = #{typeId,jdbcType=BIGINT},
       </if>
@@ -306,53 +285,23 @@
       <if test="flag != null" >
         flag = #{flag,jdbcType=INTEGER},
       </if>
-      <if test="depict != null" >
-        depict = #{depict,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="net.bus.web.model.Commodity" >
-    update commodity
-    set name = #{name,jdbcType=VARCHAR},
-    price = #{price,jdbcType=DECIMAL},
-    amount = #{amount,jdbcType=INTEGER},
-    img = #{img,jdbcType=VARCHAR},
-    point = #{point,jdbcType=INTEGER},
-    type_id = #{typeId,jdbcType=BIGINT},
-    active_time = #{activeTime,jdbcType=TIMESTAMP},
-    flag = #{flag,jdbcType=INTEGER},
-    depict = #{depict,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="net.bus.web.model.Commodity" >
     update commodity
     set name = #{name,jdbcType=VARCHAR},
+      depict = #{depict,jdbcType=VARCHAR},
       price = #{price,jdbcType=DECIMAL},
       amount = #{amount,jdbcType=INTEGER},
       img = #{img,jdbcType=VARCHAR},
       point = #{point,jdbcType=INTEGER},
+      coupon_type = #{couponType,jdbcType=INTEGER},
       type_id = #{typeId,jdbcType=BIGINT},
       active_time = #{activeTime,jdbcType=TIMESTAMP},
       flag = #{flag,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select resultMap="ResultMapWithBLOBs" parameterType="net.bus.web.model.CommodityExample" id="selectByExampleWithBLOBsWithRowbounds" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from commodity
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
   <select resultMap="BaseResultMap" parameterType="net.bus.web.model.CommodityExample" id="selectByExampleWithRowbounds" >
     select
     <if test="distinct" >

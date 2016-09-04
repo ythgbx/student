@@ -6,6 +6,8 @@
     <result column="user_id" property="userId" jdbcType="BIGINT" />
     <result column="commodity_id" property="commodityId" jdbcType="BIGINT" />
     <result column="amount" property="amount" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="pay" property="pay" jdbcType="DECIMAL" />
     <result column="time" property="time" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -67,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, user_id, commodity_id, amount, time
+    id, user_id, commodity_id, amount, price, pay, time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="net.bus.web.model.CommodityOrderExample" >
     select
@@ -84,7 +86,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from commodity_order
     where id = #{id,jdbcType=BIGINT}
@@ -100,10 +102,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="net.bus.web.model.CommodityOrder" >
-    insert into commodity_order (id, user_id, commodity_id, 
-      amount, time)
-    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{commodityId,jdbcType=BIGINT}, 
-      #{amount,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP})
+    insert into commodity_order (id, user_id, commodity_id,
+    amount, price, pay,
+    time)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{commodityId,jdbcType=BIGINT},
+    #{amount,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{pay,jdbcType=DECIMAL},
+    #{time,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="net.bus.web.model.CommodityOrder" >
     insert into commodity_order
@@ -119,6 +123,12 @@
       </if>
       <if test="amount != null" >
         amount,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="pay != null" >
+        pay,
       </if>
       <if test="time != null" >
         time,
@@ -136,6 +146,12 @@
       </if>
       <if test="amount != null" >
         #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="pay != null" >
+        #{pay,jdbcType=DECIMAL},
       </if>
       <if test="time != null" >
         #{time,jdbcType=TIMESTAMP},
@@ -163,6 +179,12 @@
       <if test="record.amount != null" >
         amount = #{record.amount,jdbcType=INTEGER},
       </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DECIMAL},
+      </if>
+      <if test="record.pay != null" >
+        pay = #{record.pay,jdbcType=DECIMAL},
+      </if>
       <if test="record.time != null" >
         time = #{record.time,jdbcType=TIMESTAMP},
       </if>
@@ -174,10 +196,12 @@
   <update id="updateByExample" parameterType="map" >
     update commodity_order
     set id = #{record.id,jdbcType=BIGINT},
-      user_id = #{record.userId,jdbcType=BIGINT},
-      commodity_id = #{record.commodityId,jdbcType=BIGINT},
-      amount = #{record.amount,jdbcType=INTEGER},
-      time = #{record.time,jdbcType=TIMESTAMP}
+    user_id = #{record.userId,jdbcType=BIGINT},
+    commodity_id = #{record.commodityId,jdbcType=BIGINT},
+    amount = #{record.amount,jdbcType=INTEGER},
+    price = #{record.price,jdbcType=DECIMAL},
+    pay = #{record.pay,jdbcType=DECIMAL},
+    time = #{record.time,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -194,6 +218,12 @@
       <if test="amount != null" >
         amount = #{amount,jdbcType=INTEGER},
       </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="pay != null" >
+        pay = #{pay,jdbcType=DECIMAL},
+      </if>
       <if test="time != null" >
         time = #{time,jdbcType=TIMESTAMP},
       </if>
@@ -205,6 +235,8 @@
     set user_id = #{userId,jdbcType=BIGINT},
       commodity_id = #{commodityId,jdbcType=BIGINT},
       amount = #{amount,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      pay = #{pay,jdbcType=DECIMAL},
       time = #{time,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
