@@ -88,7 +88,7 @@ public class UserTicketController {
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/buy", method = RequestMethod.POST)
-    @ApiOperation(value = "购票", httpMethod = "POST", response = TicketList.class, notes = "购票")
+    @ApiOperation(value = "购票", httpMethod = "POST", response = BaseResult.class, notes = "购票")
     public IResult buy(@ApiParam(required = true, name = "request", value = "购票请求")@RequestBody TicketBuy request)
     {
         logger.info("ticket buy");
