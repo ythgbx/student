@@ -7,6 +7,7 @@
     <result column="depict" property="depict" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="DECIMAL" />
     <result column="amount" property="amount" jdbcType="INTEGER" />
+    <result column="item_img" property="itemImg" jdbcType="VARCHAR" />
     <result column="img" property="img" jdbcType="VARCHAR" />
     <result column="point" property="point" jdbcType="INTEGER" />
     <result column="coupon_type" property="couponType" jdbcType="INTEGER" />
@@ -73,7 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, depict, price, amount, img, point, coupon_type, type_id, active_time, flag
+    id, name, depict, price, amount, item_img, img, point, coupon_type, type_id, active_time,
+    flag
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="net.bus.web.model.CommodityExample" >
     select
@@ -107,13 +109,15 @@
   </delete>
   <insert id="insert" parameterType="net.bus.web.model.Commodity" >
     insert into commodity (id, name, depict,
-    price, amount, img,
-    point, coupon_type, type_id,
-    active_time, flag)
+    price, amount, item_img,
+    img, point, coupon_type,
+    type_id, active_time, flag
+    )
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{depict,jdbcType=VARCHAR},
-    #{price,jdbcType=DECIMAL}, #{amount,jdbcType=INTEGER}, #{img,jdbcType=VARCHAR},
-    #{point,jdbcType=INTEGER}, #{couponType,jdbcType=INTEGER}, #{typeId,jdbcType=BIGINT},
-    #{activeTime,jdbcType=TIMESTAMP}, #{flag,jdbcType=INTEGER})
+    #{price,jdbcType=DECIMAL}, #{amount,jdbcType=INTEGER}, #{itemImg,jdbcType=VARCHAR},
+    #{img,jdbcType=VARCHAR}, #{point,jdbcType=INTEGER}, #{couponType,jdbcType=INTEGER},
+    #{typeId,jdbcType=BIGINT}, #{activeTime,jdbcType=TIMESTAMP}, #{flag,jdbcType=INTEGER}
+    )
   </insert>
   <insert id="insertSelective" parameterType="net.bus.web.model.Commodity" >
     insert into commodity
@@ -132,6 +136,9 @@
       </if>
       <if test="amount != null" >
         amount,
+      </if>
+      <if test="itemImg != null" >
+        item_img,
       </if>
       <if test="img != null" >
         img,
@@ -167,6 +174,9 @@
       </if>
       <if test="amount != null" >
         #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="itemImg != null" >
+        #{itemImg,jdbcType=VARCHAR},
       </if>
       <if test="img != null" >
         #{img,jdbcType=VARCHAR},
@@ -212,6 +222,9 @@
       <if test="record.amount != null" >
         amount = #{record.amount,jdbcType=INTEGER},
       </if>
+      <if test="record.itemImg != null" >
+        item_img = #{record.itemImg,jdbcType=VARCHAR},
+      </if>
       <if test="record.img != null" >
         img = #{record.img,jdbcType=VARCHAR},
       </if>
@@ -242,6 +255,7 @@
     depict = #{record.depict,jdbcType=VARCHAR},
     price = #{record.price,jdbcType=DECIMAL},
     amount = #{record.amount,jdbcType=INTEGER},
+    item_img = #{record.itemImg,jdbcType=VARCHAR},
     img = #{record.img,jdbcType=VARCHAR},
     point = #{record.point,jdbcType=INTEGER},
     coupon_type = #{record.couponType,jdbcType=INTEGER},
@@ -266,6 +280,9 @@
       </if>
       <if test="amount != null" >
         amount = #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="itemImg != null" >
+        item_img = #{itemImg,jdbcType=VARCHAR},
       </if>
       <if test="img != null" >
         img = #{img,jdbcType=VARCHAR},
@@ -294,6 +311,7 @@
       depict = #{depict,jdbcType=VARCHAR},
       price = #{price,jdbcType=DECIMAL},
       amount = #{amount,jdbcType=INTEGER},
+      item_img = #{itemImg,jdbcType=VARCHAR},
       img = #{img,jdbcType=VARCHAR},
       point = #{point,jdbcType=INTEGER},
       coupon_type = #{couponType,jdbcType=INTEGER},

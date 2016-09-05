@@ -14,6 +14,8 @@ public class Commodity {
 
     private Integer amount;
 
+    private String itemImg;
+
     private String img;
 
     private Integer point;
@@ -64,6 +66,14 @@ public class Commodity {
 
     public void setAmount(Integer amount) {
         this.amount = amount;
+    }
+
+    public String getItemImg() {
+        return itemImg;
+    }
+
+    public void setItemImg(String itemImg) {
+        this.itemImg = itemImg;
     }
 
     public String getImg() {
