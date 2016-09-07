@@ -212,8 +212,18 @@
             </beans:list>
         </beans:property>
     </beans:bean>
+    <beans:bean id="versionProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <beans:property name="locations">
+            <beans:list>
+                <beans:value>/WEB-INF/classes/config/version.properties</beans:value>
+            </beans:list>
+        </beans:property>
+    </beans:bean>
     <beans:bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
         <beans:property name="properties" ref="sysProperties"/>
+    </beans:bean>
+    <beans:bean id="versionConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+        <beans:property name="properties" ref="versionProperties"/>
     </beans:bean>
 
     <!-- Swagger -->
