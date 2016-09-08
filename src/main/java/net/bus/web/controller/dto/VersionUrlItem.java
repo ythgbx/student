@@ -1,8 +1,11 @@
 package net.bus.web.controller.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 /**
  * Created by Edifi_000 on 2016-09-07.
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class VersionUrlItem {
     private String version;
     private String full_url;

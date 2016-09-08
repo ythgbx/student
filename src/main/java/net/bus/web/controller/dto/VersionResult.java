@@ -1,17 +1,19 @@
 package net.bus.web.controller.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.util.List;
 
 /**
  * Created by Edifi_000 on 2016-09-07.
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class VersionResult extends BaseResult{
 
     private String minimum_version;
     private String current_version;
     private String back_version;
     private List<String> off_versions;
-    private boolean forced_update;
     private List<VersionUrlItem> update_urls;
 
     public String getMinimum_version() {
@@ -36,14 +38,6 @@ public class VersionResult extends BaseResult{
 
     public void setBack_version(String back_version) {
         this.back_version = back_version;
-    }
-
-    public boolean isForced_update() {
-        return forced_update;
-    }
-
-    public void setForced_update(boolean forced_update) {
-        this.forced_update = forced_update;
     }
 
     public List<VersionUrlItem> getUpdate_urls() {
