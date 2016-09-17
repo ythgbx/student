@@ -5,6 +5,7 @@ import com.alipay.api.AlipayApiException;
 import com.alipay.api.internal.util.AlipaySignature;
 import net.bus.web.context.AlipayCallBack;
 import net.bus.web.service.IAlipayService;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -36,9 +37,11 @@ public class AlipayService implements IAlipayService{
     private static String PARTNER ="2088421421805384";
     private static String SELLER ="2687137048@qq.com";
 
-    private static String NOTIFY_URL ="http://notify.msp.hk/notify.htm";//TODO 修改为自己的网站地址
+    private static String NOTIFY_URL ="http://service.zfbus.net/alipay/async";//TODO 修改为自己的网站地址
 
     private static String CHARSET = "utf-8";
+
+    private Logger logger = Logger.getLogger("CommonLogger");
 
     public String sign(String subject, String body, String price)
     {
@@ -81,12 +84,13 @@ public class AlipayService implements IAlipayService{
                 if(callBack.getTradeStatus().equals("TRADE_FINISHED") || callBack.getTradeStatus().equals("TRADE_SUCCESS")) {
 
                     //要写的逻辑。自己按自己的要求写
-
+                    logger.info("async sign verified success");
                     //封装交易信息实体，存入数据库之类的
                     System.out.println(">>>>>异步返回:" + callBack.getTradeNo());
                 }
                 return true;
             }else{//验证失败
+                logger.info("async sign verified failed");
                 return false;
             }
         } catch (AlipayApiException e) {
