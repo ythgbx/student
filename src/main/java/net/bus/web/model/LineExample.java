@@ -645,6 +645,76 @@ public class LineExample {
             return (Criteria) this;
         }
 
+        public Criteria andPropNameIsNull() {
+            addCriterion("prop_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPropNameIsNotNull() {
+            addCriterion("prop_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPropNameEqualTo(String value) {
+            addCriterion("prop_name =", value, "propName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPropNameNotEqualTo(String value) {
+            addCriterion("prop_name <>", value, "propName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPropNameGreaterThan(String value) {
+            addCriterion("prop_name >", value, "propName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPropNameGreaterThanOrEqualTo(String value) {
+            addCriterion("prop_name >=", value, "propName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPropNameLessThan(String value) {
+            addCriterion("prop_name <", value, "propName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPropNameLessThanOrEqualTo(String value) {
+            addCriterion("prop_name <=", value, "propName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPropNameLike(String value) {
+            addCriterion("prop_name like", value, "propName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPropNameNotLike(String value) {
+            addCriterion("prop_name not like", value, "propName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPropNameIn(List<String> values) {
+            addCriterion("prop_name in", values, "propName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPropNameNotIn(List<String> values) {
+            addCriterion("prop_name not in", values, "propName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPropNameBetween(String value1, String value2) {
+            addCriterion("prop_name between", value1, value2, "propName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPropNameNotBetween(String value1, String value2) {
+            addCriterion("prop_name not between", value1, value2, "propName");
+            return (Criteria) this;
+        }
+
         public Criteria andStartTimeIsNull() {
             addCriterion("start_time is null");
             return (Criteria) this;

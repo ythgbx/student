@@ -10,6 +10,7 @@
     <result column="price" property="price" jdbcType="INTEGER" />
     <result column="annotation" property="annotation" jdbcType="VARCHAR" />
     <result column="city_name" property="cityName" jdbcType="VARCHAR" />
+    <result column="prop_name" property="propName" jdbcType="VARCHAR" />
     <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
     <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -72,7 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, start, end, latlng, price, annotation, city_name, start_time, end_time
+    id, name, start, end, latlng, price, annotation, city_name, prop_name, start_time,
+    end_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="net.bus.web.model.LineExample" >
     select
@@ -107,12 +109,12 @@
   <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="net.bus.web.model.Line" >
     insert into line (id, name, start,
     end, latlng, price,
-    annotation, city_name, start_time,
-    end_time)
+    annotation, city_name, prop_name,
+    start_time, end_time)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{start,jdbcType=VARCHAR},
     #{end,jdbcType=VARCHAR}, #{latlng,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER},
-    #{annotation,jdbcType=VARCHAR}, #{cityName,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP},
-    #{endTime,jdbcType=TIMESTAMP})
+    #{annotation,jdbcType=VARCHAR}, #{cityName,jdbcType=VARCHAR}, #{propName,jdbcType=VARCHAR},
+    #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="net.bus.web.model.Line" >
     insert into line
@@ -140,6 +142,9 @@
       </if>
       <if test="cityName != null" >
         city_name,
+      </if>
+      <if test="propName != null" >
+        prop_name,
       </if>
       <if test="startTime != null" >
         start_time,
@@ -172,6 +177,9 @@
       </if>
       <if test="cityName != null" >
         #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="propName != null" >
+        #{propName,jdbcType=VARCHAR},
       </if>
       <if test="startTime != null" >
         #{startTime,jdbcType=TIMESTAMP},
@@ -214,6 +222,9 @@
       <if test="record.cityName != null" >
         city_name = #{record.cityName,jdbcType=VARCHAR},
       </if>
+      <if test="record.propName != null" >
+        prop_name = #{record.propName,jdbcType=VARCHAR},
+      </if>
       <if test="record.startTime != null" >
         start_time = #{record.startTime,jdbcType=TIMESTAMP},
       </if>
@@ -235,6 +246,7 @@
     price = #{record.price,jdbcType=INTEGER},
     annotation = #{record.annotation,jdbcType=VARCHAR},
     city_name = #{record.cityName,jdbcType=VARCHAR},
+    prop_name = #{record.propName,jdbcType=VARCHAR},
     start_time = #{record.startTime,jdbcType=TIMESTAMP},
     end_time = #{record.endTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
@@ -265,6 +277,9 @@
       <if test="cityName != null" >
         city_name = #{cityName,jdbcType=VARCHAR},
       </if>
+      <if test="propName != null" >
+        prop_name = #{propName,jdbcType=VARCHAR},
+      </if>
       <if test="startTime != null" >
         start_time = #{startTime,jdbcType=TIMESTAMP},
       </if>
@@ -283,6 +298,7 @@
     price = #{price,jdbcType=INTEGER},
     annotation = #{annotation,jdbcType=VARCHAR},
     city_name = #{cityName,jdbcType=VARCHAR},
+    prop_name = #{propName,jdbcType=VARCHAR},
     start_time = #{startTime,jdbcType=TIMESTAMP},
     end_time = #{endTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}

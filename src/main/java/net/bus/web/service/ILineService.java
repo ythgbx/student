@@ -23,6 +23,8 @@ public interface ILineService {
 
     List<Line> getCityLines(String cityName, int page,int limit);
 
+    List<Line> getPropLines(String cityName, int page,int limit);
+
     Line getLineDetails(Long id);
 
     List<LineStation> getLineStations(Long id);
@@ -42,6 +44,8 @@ public interface ILineService {
     int getAllLinesCount();
 
     int getCityLinesCount(String cityName);
+
+    int getPropLinesCount(String propName);
 
     boolean addLine(Line line,List<Long> stationIds);
 }

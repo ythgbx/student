@@ -104,6 +104,13 @@ public class LineService implements ILineService {
         return _rootRepository.getList(new LineCityNamesSpecification(listCityNames), page - 1, limit);
     }
 
+    public List<Line> getPropLines(String prop_name, int page,int limit)
+    {
+        List<String> listPropNames = new ArrayList<String>();
+        listPropNames.add(prop_name);
+        return _rootRepository.getList(new LinePropNamesSpecification(listPropNames), page - 1, limit);
+    }
+
     public Line getLineDetails(Long id)
     {
         return _rootRepository.getItem(id);
@@ -203,6 +210,13 @@ public class LineService implements ILineService {
         List<String> listCityNames = new ArrayList<String>();
         listCityNames.add(city_name);
         return  _rootRepository.count(new LineCityNamesSpecification(listCityNames));
+    }
+
+    public int getPropLinesCount(String prop_name)
+    {
+        List<String> listPropNames = new ArrayList<String>();
+        listPropNames.add(prop_name);
+        return  _rootRepository.count(new LinePropNamesSpecification(listPropNames));
     }
 
     @Transactional

@@ -19,6 +19,8 @@ public class Line {
 
     private String cityName;
 
+    private String propName;
+
     private Date startTime;
 
     private Date endTime;
@@ -85,6 +87,14 @@ public class Line {
 
     public void setCityName(String cityName) {
         this.cityName = cityName;
+    }
+
+    public String getPropName() {
+        return propName;
+    }
+
+    public void setPropName(String propName) {
+        this.propName = propName;
     }
 
     public Date getStartTime() {

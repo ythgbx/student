@@ -154,10 +154,33 @@ public class LineController {
     {
         logger.info("line city query");
         LineList lineList = new LineList();
-        List<Line> lines = _lineService.getCityLines(city_name,page, limit);
+        List<Line> lines = _lineService.getCityLines(city_name, page, limit);
         lineList.setLines(getDisplayList(lines));
         lineList.setPage(page);
         lineList.setTotal_count(_lineService.getCityLinesCount(city_name));
+        return lineList;
+
+//        //Mock data for test
+//        LineList lineList = new LineList();
+//        lineList.setLines(MockDataContext.getInstance().getLineItemList());
+//        lineList.setPage(page);
+//        return lineList;
+    }
+
+    @Auth(role = Auth.Role.NONE)
+    @ResponseBody
+    @RequestMapping(value = "/list/prop", method = RequestMethod.GET)
+    @ApiOperation(value = "获取属性全部线路", httpMethod = "GET", response = LineList.class, notes = "获取属性全部线路")
+    public IResult prop(@ApiParam(required = true, name = "prop_name", value = "属性名称")@RequestParam(value = "prop_name", required = true)String prop_name,
+                        @ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "1")int page,
+                        @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "5")int limit)
+    {
+        logger.info("line prop query");
+        LineList lineList = new LineList();
+        List<Line> lines = _lineService.getPropLines(prop_name, page, limit);
+        lineList.setLines(getDisplayList(lines));
+        lineList.setPage(page);
+        lineList.setTotal_count(_lineService.getPropLinesCount(prop_name));
         return lineList;
 
 //        //Mock data for test
