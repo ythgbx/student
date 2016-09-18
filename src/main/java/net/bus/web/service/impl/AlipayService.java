@@ -1,13 +1,20 @@
 package net.bus.web.service.impl;
 
 
-import com.alipay.api.AlipayApiException;
-import com.alipay.api.internal.util.AlipaySignature;
+//import com.alipay.api.AlipayApiException;
+//import com.alipay.api.internal.util.AlipaySignature;
+import net.bus.web.common.alipay.config.AlipayConfig;
+import net.bus.web.common.alipay.sign.RSA;
+import net.bus.web.common.alipay.util.AlipayCore;
+import net.bus.web.common.alipay.util.AlipayNotify;
 import net.bus.web.context.AlipayCallBack;
 import net.bus.web.service.IAlipayService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -32,7 +39,7 @@ public class AlipayService implements IAlipayService{
             "WxGH85if8QK2SSGxy0X1G2wI1kIE/XJ1+PoyIm8gfUbabFsE2Qp9cGq5AkEAsSeB" +
             "ArVUPzIfBcwU6XbXnnIrBEZcieYxgL681kKchxZ9W4VOY0SSAA9h9upRcoiYx1mh" +
             "PdkrgRTXGc/zeRP8dw==";
-    private static String ALIPAY_PUBLIC_KEY ="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCnxj/9qwVfgoUh/y2W89L6BkRAFljhNhgPdyPuBV64bfQNN1PjbCzkIM6qRdKBoLPXmKKMiFYnkd6rAoprih3/PrQEB/VsW8OoM8fxn67UDYuyBTqA23MML9q1+ilIZwBC2AQ2UBVOrFXfFl75p6/B5KsiNG9zpgmLCUYuLkxpLQIDAQAB\n";
+    private static String ALIPAY_PUBLIC_KEY ="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCnxj/9qwVfgoUh/y2W89L6BkRAFljhNhgPdyPuBV64bfQNN1PjbCzkIM6qRdKBoLPXmKKMiFYnkd6rAoprih3/PrQEB/VsW8OoM8fxn67UDYuyBTqA23MML9q1+ilIZwBC2AQ2UBVOrFXfFl75p6/B5KsiNG9zpgmLCUYuLkxpLQIDAQAB";
 
     private static String PARTNER ="2088421421805384";
     private static String SELLER ="2687137048@qq.com";
@@ -45,13 +52,7 @@ public class AlipayService implements IAlipayService{
 
     public String sign(String subject, String body, String price)
     {
-        try {
-            return AlipaySignature.rsa256Sign(getOrderInfo(subject,body,price),APP_PRIVATE_KEY,"utf-8");
-        } catch (AlipayApiException e) {
-            e.printStackTrace();
-        }
-
-        return null;
+        return getOrderInfo(subject,body,price);
     }
 
     public boolean async(Map<String, String> params)
@@ -71,29 +72,32 @@ public class AlipayService implements IAlipayService{
         callBack.setSellerId(params.get("seller_id"));//商户id
         callBack.setAppId(params.get("app_id"));//商户应用id
 
+        //sign
+        String sign=params.get("sign");
+
         //TODO 检验1 2 3 4
         //TODO 1 outTradeNo 是否存在
         //TODO 2 outTradeNo 对应的 amount 是否匹配
         //TODO 3 outTradeNo 对应的 seller_id 是否匹配
         //TODO 4 outTradeNo 对应的 app_id 是否匹配
 
-        boolean signVerified = false;
         try {
-            signVerified = AlipaySignature.rsaCheckV1(params, ALIPAY_PUBLIC_KEY, CHARSET);
-            if(signVerified){//验证成功
-                if(callBack.getTradeStatus().equals("TRADE_FINISHED") || callBack.getTradeStatus().equals("TRADE_SUCCESS")) {
+            if(AlipayNotify.verifyResponse(callBack.getNotifyId()).equals("true")){
+                if(AlipayNotify.getSignVeryfy(params, sign)){
+                    if(callBack.getTradeStatus().equals("TRADE_FINISHED") || callBack.getTradeStatus().equals("TRADE_SUCCESS")) {
 
-                    //要写的逻辑。自己按自己的要求写
-                    logger.info("async sign verified success");
-                    //封装交易信息实体，存入数据库之类的
-                    System.out.println(">>>>>异步返回:" + callBack.getTradeNo());
+                        //要写的逻辑。自己按自己的要求写
+                        logger.info("async sign verified success");
+                        //封装交易信息实体，存入数据库之类的
+                        System.out.println(">>>>>异步返回:" + callBack.getTradeNo());
+                    }
+                    return true;
+                }else{
+                    logger.info("async sign verified failed");
+                    return false;
                 }
-                return true;
-            }else{//验证失败
-                logger.info("async sign verified failed");
-                return false;
             }
-        } catch (AlipayApiException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
@@ -101,27 +105,38 @@ public class AlipayService implements IAlipayService{
 
     private String getOrderInfo(String subject, String body, String price) {
 
-        // 签约合作者身份ID
-        String orderInfo = "partner=" + "\"" + PARTNER + "\"";
-        // 签约卖家支付宝账号
-        orderInfo += "&seller_id=" + "\"" + SELLER + "\"";
-        // 商户网站唯一订单号
-        orderInfo += "&out_trade_no=" + "\"" + getOutTradeNo() + "\"";
-        // 商品名称
-        orderInfo += "&subject=" + "\"" + subject + "\"";
-        // 商品详情
-        orderInfo += "&body=" + "\"" + body + "\"";
-        // 商品金额
-        orderInfo += "&total_fee=" + "\"" + price + "\"";
-        // 服务器异步通知页面路径
-        orderInfo += "&notify_url=" + "\"" + NOTIFY_URL + "\"";
+        Map<String,String> params = new HashMap<String,String>();
+        params.put("service",AlipayConfig.service);
+        params.put("partner", AlipayConfig.partner);
+        params.put("_input_charset",AlipayConfig.input_charset);
+        params.put("notify_url",AlipayConfig.notify_url);
 
-        return orderInfo;
+        params.put("out_trade_no",getOutTradeNo());
+        params.put("subject",subject);
+        params.put("payment_type","1");
+        params.put("seller_id",AlipayConfig.seller_id);
+        params.put("total_fee",price);
+        params.put("body",body);
+
+        String data=AlipayCore.createLinkString(params);
+
+        //将待签名字符串使用私钥签名。
+        String rsa_sign= null;
+        try {
+            rsa_sign = URLEncoder.encode(RSA.sign(data, AlipayConfig.private_key, AlipayConfig.input_charset), AlipayConfig.input_charset);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        //把签名得到的sign和签名类型sign_type拼接在待签名字符串后面。
+        data=data+"&sign=\""+rsa_sign+"\"&sign_type=\""+AlipayConfig.sign_type+"\"";
+
+        return data;
     }
 
     private String getOutTradeNo()
     {
         //TODO 生成订单编号
-        return UUID.randomUUID().toString();
+        return UUID.randomUUID().toString().replace("-","");
     }
 }
