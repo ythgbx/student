@@ -18,7 +18,9 @@ public class RString {
 
     public static String MODIFY_PASSWORD_FAILED;
     public static String RETRIEVE_PASSWORD_FAILED;
-    public static String MODIFY_PHONE_FAILED;
+    public static String MODIFY_PHONE_FAILED_PHONE;
+    public static String MODIFY_PHONE_FAILED_CODE_OUT_DATE;
+    public static String MODIFY_PHONE_FAILED_CODE_ERROR;
 
     public static String ADD_POINT_FAILED;
 
@@ -63,8 +65,16 @@ public class RString {
         RString.RETRIEVE_PASSWORD_FAILED = RETRIEVE_PASSWORD_FAILED;
     }
 
-    public void setMODIFY_PHONE_FAILED(String MODIFY_PHONE_FAILED) {
-        RString.MODIFY_PHONE_FAILED = MODIFY_PHONE_FAILED;
+    public void setMODIFY_PHONE_FAILED_PHONE(String MODIFY_PHONE_FAILED_PHONE) {
+        RString.MODIFY_PHONE_FAILED_PHONE = MODIFY_PHONE_FAILED_PHONE;
+    }
+
+    public void setMODIFY_PHONE_FAILED_CODE_OUT_DATE(String MODIFY_PHONE_FAILED_CODE_OUT_DATE) {
+        RString.MODIFY_PHONE_FAILED_CODE_OUT_DATE = MODIFY_PHONE_FAILED_CODE_OUT_DATE;
+    }
+
+    public void setMODIFY_PHONE_FAILED_CODE_ERROR(String MODIFY_PHONE_FAILED_CODE_ERROR) {
+        RString.MODIFY_PHONE_FAILED_CODE_ERROR = MODIFY_PHONE_FAILED_CODE_ERROR;
     }
 
     public void setADD_POINT_FAILED(String ADD_POINT_FAILED) {

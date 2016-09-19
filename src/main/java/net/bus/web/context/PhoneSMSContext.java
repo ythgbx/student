@@ -51,17 +51,27 @@ public class PhoneSMSContext {
         _cache.put(element);
     }
 
-    public boolean checkPhonesSmsCode(String phone,String code)
+    public SmsCheckResult checkPhonesSmsCode(String phone,String code)
     {
         String key = _head + phone;
         if(_cache.isElementInMemory(key))
         {
-            Object smsCode = _cache.get(key).getObjectValue();
-            if(smsCode!=null&&smsCode.toString().equals(code))
-            {
-                return true;
+            Element smsCodeElement = _cache.get(key);
+            if(smsCodeElement!=null){
+                Object smsCode = smsCodeElement.getObjectValue();
+                if(smsCode.toString().equals(code)){
+                    return SmsCheckResult.Success;
+                }else{
+                    return SmsCheckResult.CodeError;
+                }
+            }else{
+                return SmsCheckResult.OutDate;
             }
         }
-        return false;
+        return SmsCheckResult.NoPhone;
+    }
+
+    public enum SmsCheckResult {
+        Success,NoPhone, OutDate,CodeError
     }
 }

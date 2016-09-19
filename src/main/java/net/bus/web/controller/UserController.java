@@ -237,7 +237,7 @@ public class UserController {
     public IResult register(@ApiParam(required = true, name = "register", value = "注册请求")@RequestBody Register register)
     {
         BaseResult result = new BaseResult();
-        if(!checkCodeWithPhone(register.getPhone(),register.getCode()))
+        if(!checkCodeWithPhone(register.getPhone(),register.getCode()).equals(PhoneSMSContext.SmsCheckResult.Success))
         {
             result.setResult("failure");
             result.setContent(RString.REGISTER_FAILED_SMS_CODE);
@@ -296,7 +296,7 @@ public class UserController {
     {
         BaseResult result = new BaseResult();
         try {
-            if(account.getCode()!=null&&account.getNew_password()!=null&&checkCodeWithPhone(account.getPhone(), account.getCode())){
+            if(account.getCode()!=null&&account.getNew_password()!=null&&checkCodeWithPhone(account.getPhone(), account.getCode()).equals(PhoneSMSContext.SmsCheckResult.Success)){
                 User retrieveUser = service.getUser(account.getPhone());
                 service.setAccount(retrieveUser,retrieveUser.getPhone(),account.getNew_password());
                 result.setResult("success");
@@ -321,23 +321,33 @@ public class UserController {
         BaseResult result = new BaseResult();
         try {
             User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
-            if(account.getPhone().equals(currentUser.getPhone()) &&
-                    checkCodeWithPhone(account.getPhone(),account.getCode())){
-                if(service.registerCheck(account.getNew_phone())) {
-                    service.setAccount(currentUser,account.getNew_phone(),currentUser.getPassword());
+            //if(account.getPhone().equals(currentUser.getPhone()) && checkCodeWithPhone(account.getPhone(),account.getCode()))
+            if(account.getPhone().equals(currentUser.getPhone())){
 
-                    currentUser.setPhone(account.getNew_phone());
-                    session.setAttribute(SessionContext.CURRENT_USER, currentUser);
+                PhoneSMSContext.SmsCheckResult checkResult = checkCodeWithPhone(account.getPhone(), account.getCode());
+                if(checkResult.equals(PhoneSMSContext.SmsCheckResult.Success)){
+                    if(service.registerCheck(account.getNew_phone())) {
+                        service.setAccount(currentUser,account.getNew_phone(),currentUser.getPassword());
 
-                    result.setResult("success");
-                }else{
+                        currentUser.setPhone(account.getNew_phone());
+                        session.setAttribute(SessionContext.CURRENT_USER, currentUser);
+
+                        result.setResult("success");
+                    }else{
+                        result.setResult("failure");
+                        result.setContent(RString.REGISTER_FAILED_USER_HAD);
+                    }
+                }else if(checkResult.equals(PhoneSMSContext.SmsCheckResult.OutDate)){
                     result.setResult("failure");
-                    result.setContent(RString.REGISTER_FAILED_USER_HAD);
+                    result.setContent(RString.MODIFY_PHONE_FAILED_CODE_OUT_DATE);
+                }else if(checkResult.equals(PhoneSMSContext.SmsCheckResult.CodeError)){
+                    result.setResult("failure");
+                    result.setContent(RString.MODIFY_PHONE_FAILED_CODE_ERROR);
                 }
             }
             else{
                 result.setResult("failure");
-                result.setContent(RString.MODIFY_PHONE_FAILED);
+                result.setContent(RString.MODIFY_PHONE_FAILED_PHONE);
             }
         }catch (Exception ex){
             result.setResult("error");
@@ -448,21 +458,17 @@ public class UserController {
         return result;
     }
 
-    private boolean checkCodeWithPhone(String phone,String code)
+    private PhoneSMSContext.SmsCheckResult checkCodeWithPhone(String phone,String code)
     {
         if(_smsDebug){
             //TempCode for sms debug
             if(code.equals(_smsDebugCode))
             {
-                return true;
+                return PhoneSMSContext.SmsCheckResult.Success;
             }
         }
 
-        if( PhoneSMSContext.getInstance().checkPhonesSmsCode(phone,code))
-        {
-            return true;
-        }
-        return false;
+        return PhoneSMSContext.getInstance().checkPhonesSmsCode(phone,code);
     }
 
     private String getRandNum(int charCount) {

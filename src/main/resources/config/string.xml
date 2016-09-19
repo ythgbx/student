@@ -24,7 +24,9 @@
         <!-- User Account -->
         <property name="MODIFY_PASSWORD_FAILED" value="新密码为空或原密码不正确"/>
         <property name="RETRIEVE_PASSWORD_FAILED" value="新密码为空或验证码不正确"/>
-        <property name="MODIFY_PHONE_FAILED" value="新手机号不正确或验证码不正确"/>
+        <property name="MODIFY_PHONE_FAILED_PHONE" value="原手机号不正确"/>
+        <property name="MODIFY_PHONE_FAILED_CODE_OUT_DATE" value="验证码失效"/>
+        <property name="MODIFY_PHONE_FAILED_CODE_ERROR" value="验证码不正确"/>
 
         <!-- User Base -->
         <property name="ADD_POINT_FAILED" value="增加积分失败"/>
