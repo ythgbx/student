@@ -24,30 +24,6 @@ import java.util.UUID;
 @Service
 public class AlipayService implements IAlipayService{
 
-    private static String APP_ID ="2016083101827187";
-    private static String APP_PRIVATE_KEY ="MIICeQIBADANBgkqhkiG9w0BAQEFAASCAmMwggJfAgEAAoGBAMWimByhTal6fT13" +
-            "6BQvxJDH27tOukbGiW39OHwlb9mCYCTC6jo0HMCZXyewCAkhdfQ2RUU5q+yBF5st" +
-            "Lvw3L4jDjDWR+JItNvqYVI8Vqea5LTC0p3rLA/+d/VUXWVoG0pmb++xj21m0SiSo" +
-            "siH8eTcysj7SgW8Re7i1GvTA5nlTAgMBAAECgYEAvIG/sN8yIksRFgY+uLJvPOFE" +
-            "dr468rL/9ocmz1MuAjtW1PmNTALUwegIWOSQZZUi2tLA86x0jdr71ykbvbotfQdQ" +
-            "nMqMYakP5+Tlwk/ZkbtVO2pPDhCDEdbiATryyWMv1hOrJncEBBILcWgl1TqLrGpZ" +
-            "kqj5bVXHi6Qe/nIwumECQQD9chDiTGmM9Ml5/akyWcGRF/5a8erpUF/zKQxQck8g" +
-            "NPKwMKHvtzLRvSg0H2FHPw0oeqJnzx/a7YAwtamNl1u7AkEAx6CHCx/7fUk9eZfk" +
-            "9K+eFqH3jSUTpaSTcm3E5yhJygAwZUgVaPvIomtsRr3Dvr/Q4lhSCwdmtydp4kIl" +
-            "KoxjSQJBAKuJuZ3BBCuwPnF/2zXGBDo1GCXr2QgjK14D6V7Fj4KH876GnAQIZbAJ" +
-            "rB1jI886AKjmH+fNC4189CeDvQelayMCQQCMKaMH5aHPmuAGAudoAfKO05Qbzx+X" +
-            "WxGH85if8QK2SSGxy0X1G2wI1kIE/XJ1+PoyIm8gfUbabFsE2Qp9cGq5AkEAsSeB" +
-            "ArVUPzIfBcwU6XbXnnIrBEZcieYxgL681kKchxZ9W4VOY0SSAA9h9upRcoiYx1mh" +
-            "PdkrgRTXGc/zeRP8dw==";
-    private static String ALIPAY_PUBLIC_KEY ="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCnxj/9qwVfgoUh/y2W89L6BkRAFljhNhgPdyPuBV64bfQNN1PjbCzkIM6qRdKBoLPXmKKMiFYnkd6rAoprih3/PrQEB/VsW8OoM8fxn67UDYuyBTqA23MML9q1+ilIZwBC2AQ2UBVOrFXfFl75p6/B5KsiNG9zpgmLCUYuLkxpLQIDAQAB";
-
-    private static String PARTNER ="2088421421805384";
-    private static String SELLER ="2687137048@qq.com";
-
-    private static String NOTIFY_URL ="http://service.zfbus.net/alipay/async";//TODO 修改为自己的网站地址
-
-    private static String CHARSET = "utf-8";
-
     private Logger logger = Logger.getLogger("CommonLogger");
 
     public String sign(String subject, String body, String price)
