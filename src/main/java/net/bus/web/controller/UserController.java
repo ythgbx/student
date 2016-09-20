@@ -324,7 +324,7 @@ public class UserController {
             //if(account.getPhone().equals(currentUser.getPhone()) && checkCodeWithPhone(account.getPhone(),account.getCode()))
             if(account.getPhone().equals(currentUser.getPhone())){
 
-                PhoneSMSContext.SmsCheckResult checkResult = checkCodeWithPhone(account.getPhone(), account.getCode());
+                PhoneSMSContext.SmsCheckResult checkResult = checkCodeWithPhone(account.getNew_phone(), account.getCode());
                 if(checkResult.equals(PhoneSMSContext.SmsCheckResult.Success)){
                     if(service.registerCheck(account.getNew_phone())) {
                         service.setAccount(currentUser,account.getNew_phone(),currentUser.getPassword());
