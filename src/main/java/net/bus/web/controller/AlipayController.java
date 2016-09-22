@@ -59,6 +59,11 @@ public class AlipayController {
             for (int i = 0; i < values.length; i++) {
                 valueStr = (i == values.length - 1) ? valueStr + values[i]: valueStr + values[i] + ",";
             }
+            try {
+                valueStr=URLDecoder.decode(valueStr,"utf-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
             params.put(name, valueStr);
         }
 
