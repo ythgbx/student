@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -60,21 +62,47 @@ public class AlipayController {
             params.put(name, valueStr);
         }
 
-//        AlipayCallBack callBack = new AlipayCallBack();
-//        callBack.setOrderTitle(request.getParameter("subject"));//订单名称
-//        callBack.setPayType(request.getParameter("payment_type"));//支付类型
-//        callBack.setOutTradeNo(request.getParameter("out_trade_no"));//订单号
-//        callBack.setTradeNo(request.getParameter("trade_no"));//支付宝交易号
-//        callBack.setNotifyId(request.getParameter("notify_id"));//支付校验id
-//        callBack.setAmount(request.getParameter("total_fee"));//交易金额
-//        callBack.setNotifyTime(request.getParameter("notify_time"));//通知时间
-//        callBack.setTradeStatus(request.getParameter("trade_status"));//交易状态
-//        callBack.setReturnId(request.getParameter("extra_common_param"));//项目id
-//        callBack.setPayer(request.getParameter("buyer_email"));//支付者账号
-//        callBack.setSellerId(request.getParameter("seller_id"));//商户id
-//        callBack.setAppId(request.getParameter("app_id"));//商户应用id
-
         if(_alipayService.async(params)){
+            return "success";
+        }else{
+            return "failed";
+        }
+    }
+
+    @Auth(role = Auth.Role.NONE)
+    @ResponseBody
+    @RequestMapping(value = "/ret", method = RequestMethod.POST)
+    @ApiOperation(value = "支付同步校验测试", httpMethod = "POST", response = String.class, notes = "支付同步校验测试")
+    public String ret(@ApiParam(required = true, name = "request", value = "支付同步校验测试请求") HttpServletRequest request)
+    {
+        Map params = new HashMap();
+        Map requestParams = request.getParameterMap();
+        String prestr = "";
+        for (Iterator iter = requestParams.keySet().iterator(); iter.hasNext();) {
+            String name = (String) iter.next();
+            String[] values = (String[]) requestParams.get(name);
+            String valueStr = "";
+            for (int i = 0; i < values.length; i++) {
+                valueStr = (i == values.length - 1) ? valueStr + values[i]: valueStr + values[i] + ",";
+            }
+
+            try {
+                valueStr=URLDecoder.decode(valueStr,"utf-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+
+            params.put(name, valueStr);
+
+            if(name.equals("sign") || name.equals("sign_type")){
+                continue;
+            }else{
+                prestr = prestr + name + "=" + valueStr + "&";
+            }
+        }
+        prestr=prestr.substring(0,prestr.length()-1);//去掉最后一个&符号。
+
+        if(_alipayService.ret(prestr,params)){
             return "success";
         }else{
             return "failed";
