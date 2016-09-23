@@ -19,7 +19,7 @@ public interface IUserTicketService {
 
     boolean buyTicket(long line_id,User user);
 
-    boolean buyTickets(String device,List<TicketBuyItem> userTickets);
+    boolean buyTickets(String device,List<TicketBuyItem> userTickets) throws Exception;
 
     int getTicketsCount(long user_id);
 }

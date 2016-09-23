@@ -117,6 +117,7 @@ public class UserController {
         userBase.setPoints(user.getPoints());
         userBase.setPhone(user.getPhone());
         userBase.setPhoto(user.getPhoto());
+        userBase.setId(user.getId());
 
         UserCoupon userCoupon = _userCouponService.getUserTimePeriodTicketCoupon(user.getId());
         userBase.setVip_type("common");//普通会员(不拥有时段优惠券用户)

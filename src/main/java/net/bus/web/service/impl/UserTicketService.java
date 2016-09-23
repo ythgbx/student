@@ -1,8 +1,10 @@
 package net.bus.web.service.impl;
 
+import net.bus.web.common.AES;
 import net.bus.web.controller.dto.TicketBuyItem;
 import net.bus.web.model.Bus;
 import net.bus.web.model.Line;
+import net.bus.web.model.Pojo.UserCheckPojo;
 import net.bus.web.model.User;
 import net.bus.web.model.UserTicket;
 import net.bus.web.model.type.PointRecordType;
@@ -91,7 +93,7 @@ public class UserTicketService implements IUserTicketService {
     }
 
     @Transactional
-    public boolean buyTickets(String device,List<TicketBuyItem> userTickets) throws RuntimeException
+    public boolean buyTickets(String device,List<TicketBuyItem> userTickets) throws Exception
     {
         if(!StringUtils.isBlank(device)){
             Bus bus = _busRepository.getItem(new BusDeviceSpecification(device));
@@ -101,16 +103,15 @@ public class UserTicketService implements IUserTicketService {
                     if(line!=null){
                         for(TicketBuyItem ticketBuyItem:userTickets){
                             //TODO 解密user_check获取user_id与check_date
-                            ticketBuyItem.getUser_check();
-                            Long userId = 0L;
-                            Long checkDate = 0L;
-                            User user = _userRepository.getUser(userId);
+                            String check = ticketBuyItem.getUser_check();
+                            UserCheckPojo checkPojo = getUserCheckPojo(ticketBuyItem.getUser_check());
+                            User user = _userRepository.getUser(checkPojo.getId());
                             if(user!=null){
                                 UserTicket userTicket = new UserTicket();
                                 userTicket.setLineId(line.getId());
                                 userTicket.setUserId(user.getId());
                                 userTicket.setPrice(line.getPrice());
-                                userTicket.setTime(new Date(checkDate));
+                                userTicket.setTime(new Date(checkPojo.getTimestamp()));
 
                                 user.setPoints(user.getPoints() - line.getPrice());
 
@@ -126,6 +127,21 @@ public class UserTicketService implements IUserTicketService {
         }
 
         return false;
+    }
+
+    /**
+     * convert encode string to UserCheckPojo
+     * @param userCheck encode string
+     * @return UserCheckPojo
+     * @throws Exception some AES decode or encode error
+     */
+    public UserCheckPojo getUserCheckPojo(String userCheck) throws Exception {
+        String check = AES.getAesInstance().Decrypt(userCheck);    //decode string and get username&timestamp
+        String [] infoArr = check.split("&");
+        UserCheckPojo checkPojo = new UserCheckPojo();
+        checkPojo.setId(Long.parseLong(infoArr[0]));
+        checkPojo.setTimestamp(Long.parseLong(infoArr[1]));
+        return checkPojo;
     }
 
     public int getTicketsCount(long user_id)

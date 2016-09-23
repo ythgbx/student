@@ -1,10 +1,15 @@
 package net.bus.web.common;
 
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
+
+import java.io.IOException;
+
 /**
  * Created by sky on 16/8/3.
  */
@@ -56,7 +61,10 @@ public class AES {
                 byte[] original = cipher.doFinal(encrypted1);
                 String originalString = new String(original);
                 return originalString;
-            } catch (Exception e) {
+            } catch (IllegalBlockSizeException e) {
+                System.out.println(e.toString());
+                return null;
+            } catch (BadPaddingException e){
                 System.out.println(e.toString());
                 return null;
             }

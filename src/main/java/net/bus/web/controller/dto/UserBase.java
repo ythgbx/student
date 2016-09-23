@@ -5,6 +5,7 @@ package net.bus.web.controller.dto;
  */
 public class UserBase extends BaseResult {
 
+    private Long id;
     private String name;
     private String photo;
     private Double lat;
@@ -13,6 +14,14 @@ public class UserBase extends BaseResult {
     private String phone;
     private String vip_type;
     private Long expiry_date;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getPhone() {
         return phone;
