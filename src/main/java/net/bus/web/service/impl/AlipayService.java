@@ -115,17 +115,16 @@ public class AlipayService implements IAlipayService{
     private String getOrderInfo(String subject, String body, String price) {
 
         Map<String,String> params = new HashMap<String,String>();
-        params.put("service", AlipayConfig.service);
-        params.put("partner", AlipayConfig.partner);
-        params.put("_input_charset", AlipayConfig.input_charset);
-        params.put("notify_url", AlipayConfig.notify_url);
-
-        params.put("out_trade_no", getOutTradeNo());
-        params.put("subject", subject);
-        params.put("payment_type", "1");
-        params.put("seller_id", AlipayConfig.seller_id);
-        params.put("total_fee",price);
-        params.put("body",body);
+        params.put("service","\""+ AlipayConfig.service+"\"");
+        params.put("partner", "\""+AlipayConfig.partner+"\"");
+        params.put("_input_charset", "\""+AlipayConfig.input_charset+"\"");
+        params.put("notify_url", "\""+AlipayConfig.notify_url+"\"");
+        params.put("out_trade_no", "\""+getOutTradeNo()+"\"");
+        params.put("subject", "\""+subject+"\"");
+        params.put("payment_type", "\"1\"");
+        params.put("seller_id", "\""+AlipayConfig.seller_id+"\"");
+        params.put("total_fee","\""+price+"\"");
+        params.put("body","\""+body+"\"");
 
         String data=AlipayCore.createLinkString(params);
 
