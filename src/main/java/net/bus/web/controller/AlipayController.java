@@ -77,9 +77,10 @@ public class AlipayController {
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/ret", method = RequestMethod.POST)
-    @ApiOperation(value = "支付同步校验测试", httpMethod = "POST", response = String.class, notes = "支付同步校验测试")
-    public String ret(@ApiParam(required = true, name = "request", value = "支付同步校验测试请求") HttpServletRequest request)
+    @ApiOperation(value = "支付同步校验测试", httpMethod = "POST",  response = BaseResult.class, notes = "支付同步校验测试")
+    public IResult ret(@ApiParam(required = true, name = "request", value = "支付同步校验测试请求") HttpServletRequest request)
     {
+        BaseResult result = new BaseResult();
         Map params = new HashMap();
         Map requestParams = request.getParameterMap();
         String prestr = "";
@@ -108,9 +109,10 @@ public class AlipayController {
         prestr=prestr.substring(0,prestr.length()-1);//去掉最后一个&符号。
 
         if(_alipayService.ret(prestr,params)){
-            return "success";
+            result.setResult("success");
         }else{
-            return "failed";
+            result.setResult("failed");
         }
+        return result;
     }
 }
