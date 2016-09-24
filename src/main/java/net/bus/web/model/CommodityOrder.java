@@ -6,6 +6,8 @@ import java.util.Date;
 public class CommodityOrder {
     private Long id;
 
+    private String tradeNo;
+
     private Long userId;
 
     private Long commodityId;
@@ -16,7 +18,9 @@ public class CommodityOrder {
 
     private BigDecimal pay;
 
-    private Date time;
+    private Date createTime;
+
+    private Date payTime;
 
     public Long getId() {
         return id;
@@ -24,6 +28,14 @@ public class CommodityOrder {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getTradeNo() {
+        return tradeNo;
+    }
+
+    public void setTradeNo(String tradeNo) {
+        this.tradeNo = tradeNo;
     }
 
     public Long getUserId() {
@@ -66,11 +78,19 @@ public class CommodityOrder {
         this.pay = pay;
     }
 
-    public Date getTime() {
-        return time;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setTime(Date time) {
-        this.time = time;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getPayTime() {
+        return payTime;
+    }
+
+    public void setPayTime(Date payTime) {
+        this.payTime = payTime;
     }
 }

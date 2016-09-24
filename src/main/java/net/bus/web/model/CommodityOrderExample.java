@@ -166,6 +166,76 @@ public class CommodityOrderExample {
             return (Criteria) this;
         }
 
+        public Criteria andTradeNoIsNull() {
+            addCriterion("trade_no is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTradeNoIsNotNull() {
+            addCriterion("trade_no is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTradeNoEqualTo(String value) {
+            addCriterion("trade_no =", value, "tradeNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andTradeNoNotEqualTo(String value) {
+            addCriterion("trade_no <>", value, "tradeNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andTradeNoGreaterThan(String value) {
+            addCriterion("trade_no >", value, "tradeNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andTradeNoGreaterThanOrEqualTo(String value) {
+            addCriterion("trade_no >=", value, "tradeNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andTradeNoLessThan(String value) {
+            addCriterion("trade_no <", value, "tradeNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andTradeNoLessThanOrEqualTo(String value) {
+            addCriterion("trade_no <=", value, "tradeNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andTradeNoLike(String value) {
+            addCriterion("trade_no like", value, "tradeNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andTradeNoNotLike(String value) {
+            addCriterion("trade_no not like", value, "tradeNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andTradeNoIn(List<String> values) {
+            addCriterion("trade_no in", values, "tradeNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andTradeNoNotIn(List<String> values) {
+            addCriterion("trade_no not in", values, "tradeNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andTradeNoBetween(String value1, String value2) {
+            addCriterion("trade_no between", value1, value2, "tradeNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andTradeNoNotBetween(String value1, String value2) {
+            addCriterion("trade_no not between", value1, value2, "tradeNo");
+            return (Criteria) this;
+        }
+
         public Criteria andUserIdIsNull() {
             addCriterion("user_id is null");
             return (Criteria) this;
@@ -466,63 +536,123 @@ public class CommodityOrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andTimeIsNull() {
-            addCriterion("time is null");
+        public Criteria andCreateTimeIsNull() {
+            addCriterion("create_time is null");
             return (Criteria) this;
         }
 
-        public Criteria andTimeIsNotNull() {
-            addCriterion("time is not null");
+        public Criteria andCreateTimeIsNotNull() {
+            addCriterion("create_time is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTimeEqualTo(Date value) {
-            addCriterion("time =", value, "time");
+        public Criteria andCreateTimeEqualTo(Date value) {
+            addCriterion("create_time =", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andTimeNotEqualTo(Date value) {
-            addCriterion("time <>", value, "time");
+        public Criteria andCreateTimeNotEqualTo(Date value) {
+            addCriterion("create_time <>", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andTimeGreaterThan(Date value) {
-            addCriterion("time >", value, "time");
+        public Criteria andCreateTimeGreaterThan(Date value) {
+            addCriterion("create_time >", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andTimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("time >=", value, "time");
+        public Criteria andCreateTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("create_time >=", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andTimeLessThan(Date value) {
-            addCriterion("time <", value, "time");
+        public Criteria andCreateTimeLessThan(Date value) {
+            addCriterion("create_time <", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andTimeLessThanOrEqualTo(Date value) {
-            addCriterion("time <=", value, "time");
+        public Criteria andCreateTimeLessThanOrEqualTo(Date value) {
+            addCriterion("create_time <=", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andTimeIn(List<Date> values) {
-            addCriterion("time in", values, "time");
+        public Criteria andCreateTimeIn(List<Date> values) {
+            addCriterion("create_time in", values, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andTimeNotIn(List<Date> values) {
-            addCriterion("time not in", values, "time");
+        public Criteria andCreateTimeNotIn(List<Date> values) {
+            addCriterion("create_time not in", values, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andTimeBetween(Date value1, Date value2) {
-            addCriterion("time between", value1, value2, "time");
+        public Criteria andCreateTimeBetween(Date value1, Date value2) {
+            addCriterion("create_time between", value1, value2, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andTimeNotBetween(Date value1, Date value2) {
-            addCriterion("time not between", value1, value2, "time");
+        public Criteria andCreateTimeNotBetween(Date value1, Date value2) {
+            addCriterion("create_time not between", value1, value2, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeIsNull() {
+            addCriterion("pay_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeIsNotNull() {
+            addCriterion("pay_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeEqualTo(Date value) {
+            addCriterion("pay_time =", value, "payTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeNotEqualTo(Date value) {
+            addCriterion("pay_time <>", value, "payTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeGreaterThan(Date value) {
+            addCriterion("pay_time >", value, "payTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("pay_time >=", value, "payTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeLessThan(Date value) {
+            addCriterion("pay_time <", value, "payTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeLessThanOrEqualTo(Date value) {
+            addCriterion("pay_time <=", value, "payTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeIn(List<Date> values) {
+            addCriterion("pay_time in", values, "payTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeNotIn(List<Date> values) {
+            addCriterion("pay_time not in", values, "payTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeBetween(Date value1, Date value2) {
+            addCriterion("pay_time between", value1, value2, "payTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeNotBetween(Date value1, Date value2) {
+            addCriterion("pay_time not between", value1, value2, "payTime");
             return (Criteria) this;
         }
     }

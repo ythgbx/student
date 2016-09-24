@@ -9,9 +9,11 @@ import java.util.Map;
  */
 public interface IAlipayService {
 
-    String sign(String subject, String body, String price);
+    String sign(String tradeNo, String subject, String body, String price);
 
     boolean async(Map<String, String> params);
 
     boolean ret(String prestr,Map<String, String> params);
+
+
 }

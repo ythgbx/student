@@ -40,7 +40,7 @@ public class AlipayController {
     {
         BaseResult result = new BaseResult();
         result.setResult("success");
-        result.setContent(_alipayService.sign("测试商品1","商品介绍12345","0.01"));
+        result.setContent(_alipayService.sign("t123456789","测试商品1","商品介绍12345","0.01"));
         return result;
     }
 

@@ -8,6 +8,7 @@ import net.bus.web.controller.dto.*;
 import net.bus.web.model.Commodity;
 import net.bus.web.model.User;
 import net.bus.web.service.ICommodityService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -68,8 +69,9 @@ public class CommodityController {
     {
         BaseResult result = new BaseResult();
         User currentUser = (User) session.getAttribute(SessionContext.CURRENT_USER);
-        if(_commodityService.buy(request.getId(),currentUser)){
-            session.setAttribute(SessionContext.CURRENT_USER, currentUser);
+        String sign = _commodityService.buy(request.getId(),currentUser);
+        if(!StringUtils.isBlank(sign)){
+            result.setContent(sign);
             result.setResult("success");
 
         }else{

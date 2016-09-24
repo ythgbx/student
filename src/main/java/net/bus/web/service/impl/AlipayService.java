@@ -1,22 +1,21 @@
 package net.bus.web.service.impl;
 
 
-//import com.alipay.api.AlipayApiException;
-//import com.alipay.api.internal.util.AlipaySignature;
 import net.bus.web.common.alipay.config.AlipayConfig;
 import net.bus.web.common.alipay.sign.RSA;
 import net.bus.web.common.alipay.util.AlipayCore;
 import net.bus.web.common.alipay.util.AlipayNotify;
 import net.bus.web.context.AlipayCallBack;
 import net.bus.web.service.IAlipayService;
+import net.bus.web.service.ICommodityService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * Created by Edifi_000 on 2016-09-08.
@@ -24,11 +23,14 @@ import java.util.UUID;
 @Service
 public class AlipayService implements IAlipayService{
 
+    @Autowired
+    private ICommodityService _commodityService;
+
     private Logger logger = Logger.getLogger("CommonLogger");
 
-    public String sign(String subject, String body, String price)
+    public String sign(String tradeNo, String subject, String body, String price)
     {
-        return getOrderInfo(subject,body,price);
+        return getOrderInfo(tradeNo,subject,body,price);
     }
 
     public boolean async(Map<String, String> params)
@@ -46,14 +48,18 @@ public class AlipayService implements IAlipayService{
         //TODO 4 outTradeNo 对应的 app_id 是否匹配
 
         try {
-            if(true||AlipayNotify.verifyResponse(callBack.getNotifyId()).equals("true")){
+            if(AlipayNotify.verifyResponse(callBack.getNotifyId()).equals("true")){
                 if(AlipayNotify.getSignVeryfy(params, sign)){
                     if(callBack.getTradeStatus().equals("TRADE_FINISHED") || callBack.getTradeStatus().equals("TRADE_SUCCESS")) {
 
-                        //要写的逻辑。自己按自己的要求写
-                        logger.info("async sign verified success");
-                        //封装交易信息实体，存入数据库之类的
-                        System.out.println(">>>>>异步返回:" + callBack.getTradeNo());
+                        logger.info("async sign verified success:"+callBack.getOutTradeNo());
+
+                        if(_commodityService.buyComplete(callBack)){
+                            logger.info("buy complete:"+callBack.getOutTradeNo());
+                        }else{
+                            logger.info("buy failed:"+callBack.getOutTradeNo());
+                            return false;
+                        }
                     }
                     return true;
                 }else{
@@ -112,19 +118,19 @@ public class AlipayService implements IAlipayService{
         return false;
     }
 
-    private String getOrderInfo(String subject, String body, String price) {
+    private String getOrderInfo(String tradeNo,String subject, String body, String price) {
 
         Map<String,String> params = new HashMap<String,String>();
         params.put("service","\""+ AlipayConfig.service+"\"");
         params.put("partner", "\""+AlipayConfig.partner+"\"");
         params.put("_input_charset", "\""+AlipayConfig.input_charset+"\"");
-        params.put("notify_url", "\""+AlipayConfig.notify_url+"\"");
-        params.put("out_trade_no", "\""+getOutTradeNo()+"\"");
-        params.put("subject", "\""+subject+"\"");
+        params.put("notify_url", "\"" + AlipayConfig.notify_url+"\"");
+        params.put("out_trade_no", "\"" + tradeNo+"\"");
+        params.put("subject", "\"" + subject+"\"");
         params.put("payment_type", "\"1\"");
-        params.put("seller_id", "\""+AlipayConfig.seller_id+"\"");
-        params.put("total_fee","\""+price+"\"");
-        params.put("body","\""+body+"\"");
+        params.put("seller_id", "\"" + AlipayConfig.seller_id+"\"");
+        params.put("total_fee", "\"" + price+"\"");
+        params.put("body", "\"" + body+"\"");
 
         String data=AlipayCore.createLinkString(params);
 
@@ -160,12 +166,6 @@ public class AlipayService implements IAlipayService{
         callBack.setAppId(handleFormStr(params.get("app_id")));//商户应用id
 
         return callBack;
-    }
-
-    private String getOutTradeNo()
-    {
-        //TODO 生成订单编号
-        return UUID.randomUUID().toString().replace("-","");
     }
 
     private String handleFormStr(String param)
