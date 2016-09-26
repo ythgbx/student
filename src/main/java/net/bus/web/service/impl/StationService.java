@@ -1,12 +1,17 @@
 package net.bus.web.service.impl;
 
+import net.bus.web.controller.dto.LineStation;
+import net.bus.web.model.Line;
 import net.bus.web.model.Station;
+import net.bus.web.repository.LineStationRepository;
 import net.bus.web.repository.StationRepository;
 import net.bus.web.repository.specification.StationIdsSpecification;
+import net.bus.web.service.ILineService;
 import net.bus.web.service.IStationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +22,10 @@ public class StationService implements IStationService {
 
     @Autowired
     private StationRepository _rootRepository;
+    @Autowired
+    private ILineService _lineService;
+    @Autowired
+    private LineStationRepository _lineStationRepository;
 
     public List<Station> getAllStations()
     {
@@ -25,7 +34,19 @@ public class StationService implements IStationService {
 
     public List<Station> getAllStations(int page,int limit)
     {
-        return  _rootRepository.getAll(page-1,limit);
+        return  _rootRepository.getAll(page - 1, limit);
+    }
+
+    public List<Station> getPropStations(String propName)
+    {
+        List<Line> lines = _lineService.getPropLines(propName, 0, _lineService.getPropLinesCount(propName));
+        List<Long> stationIds = new ArrayList<Long>();
+        for (Line line : lines) {
+            for(net.bus.web.model.LineStation lineStation:_lineService.getLineStations(line.getId())){
+                stationIds.add(lineStation.getId());
+            }
+        }
+        return  _rootRepository.getList(new StationIdsSpecification(stationIds));
     }
 
     public List<Station> getStations(List<Long> ids)

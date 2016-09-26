@@ -5,7 +5,9 @@ import com.wordnik.swagger.annotations.ApiParam;
 import net.bus.web.aspect.Auth;
 import net.bus.web.context.StationsLocationContext;
 import net.bus.web.controller.dto.*;
+import net.bus.web.model.Line;
 import net.bus.web.model.Station;
+import net.bus.web.service.ILineService;
 import net.bus.web.service.IStationService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,19 +29,33 @@ public class StationController {
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
-    @Auth(role = Auth.Role.USER)
+    @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/list/all", method = RequestMethod.GET)
     @ApiOperation(value = "获取全部站点", httpMethod = "GET", response = StationList.class, notes = "获取全部站点")
     public IResult all(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "1")int page,
                        @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "5")int limit)
     {
-        logger.info("line all query");
+        logger.info("station all query");
         StationList stationList = new StationList();
         List<Station> lines = _stationService.getAllStations(page, limit);
         stationList.setStations(getDisplayList(lines));
         stationList.setPage(page);
         stationList.setTotal_count(_stationService.getAllStationsCount());
+        return stationList;
+    }
+
+    @Auth(role = Auth.Role.NONE)
+    @ResponseBody
+    @RequestMapping(value = "/list/prop", method = RequestMethod.GET)
+    @ApiOperation(value = "获取属性的全部站点", httpMethod = "GET", response = StationList.class, notes = "获取属性的全部站点")
+    public IResult prop(@ApiParam(required = true, name = "prop_name", value = "属性名称")@RequestParam(value = "prop_name", required = true)String prop_name)
+    {
+        logger.info("station prop query");
+        StationList stationList = new StationList();
+        List<Station> stations = _stationService.getPropStations(prop_name);
+        stationList.setStations(getDisplayList(stations));
+        stationList.setTotal_count(stations.size());
         return stationList;
     }
 
