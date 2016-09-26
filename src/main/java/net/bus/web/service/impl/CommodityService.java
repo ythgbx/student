@@ -73,7 +73,7 @@ public class CommodityService implements ICommodityService{
                 }
                 order.setPay(BigDecimal.valueOf(0));
 
-                sign = _alipayService.sign(order.getTradeNo(),commodity.getName(),commodity.getDepict(),commodity.getPrice().toString());
+                sign = _alipayService.sign(order.getTradeNo(),commodity.getName(),commodity.getDepict(),order.getPrice().toString());
                 _commodityOrderRepository.insertItem(order);
             }
         }
