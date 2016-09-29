@@ -5,6 +5,7 @@ import net.bus.web.model.type.UserCouponType;
 import net.bus.web.repository.ISpecification;
 import net.bus.web.repository.UserCouponRepository;
 import net.bus.web.repository.specification.UserCouponTypeInStartAndEndTimeSpecification;
+import net.bus.web.repository.specification.UserCouponUserIdSpecification;
 import net.bus.web.repository.specification.UserCouponUserIdInStartAndEndTimeSpecification;
 import net.bus.web.service.IUserCouponService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,9 +93,20 @@ public class UserCouponService implements IUserCouponService {
         return monthlyTicket;
     }
 
-
     public boolean addMonthlyTicket(long userId,Date start,String image,String content)
     {
+        List<UserCoupon>  userCoupons = getUserTimePeriodTicketCoupons(userId);
+        if(userCoupons!=null){
+            for (UserCoupon userCoupon:userCoupons){
+                if(userCoupon.getType().equals(UserCouponType.MonthlyTicket.ordinal())&&userCoupon.getEndTime().after(start)){
+                    Calendar endDate = Calendar.getInstance();
+                    endDate.setTime(userCoupon.getEndTime());
+                    endDate.add(endDate.DAY_OF_MONTH,1);
+                    start = endDate.getTime();
+                }
+            }
+        }
+
         UserCoupon coupon = new UserCoupon();
         coupon.setUserId(userId);
         coupon.setType(UserCouponType.MonthlyTicket.ordinal());
@@ -116,6 +128,18 @@ public class UserCouponService implements IUserCouponService {
 
     public boolean addYearlyTicketTicket(long userId,Date start,String image,String content)
     {
+        List<UserCoupon>  userCoupons = getUserTimePeriodTicketCoupons(userId);
+        if(userCoupons!=null){
+            for (UserCoupon userCoupon:userCoupons){
+                if(userCoupon.getType().equals(UserCouponType.YearlyTicket.ordinal())&&userCoupon.getEndTime().after(start)){
+                    Calendar endDate = Calendar.getInstance();
+                    endDate.setTime(userCoupon.getEndTime());
+                    endDate.add(endDate.DAY_OF_YEAR,1);
+                    start = endDate.getTime();
+                }
+            }
+        }
+
         UserCoupon coupon = new UserCoupon();
         coupon.setUserId(userId);
         coupon.setType(UserCouponType.YearlyTicket.ordinal());
@@ -133,5 +157,13 @@ public class UserCouponService implements IUserCouponService {
         }else{
             return false;
         }
+    }
+
+
+    private List<UserCoupon> getUserTimePeriodTicketCoupons(long userId)
+    {
+        ISpecification specification = new UserCouponUserIdSpecification(userId);
+        List<UserCoupon> userCouponList = _rootRepository.getList(specification);
+        return userCouponList;
     }
 }
