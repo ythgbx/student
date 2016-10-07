@@ -58,7 +58,7 @@ public class WeiXinController {
             if(StringUtils.isNoneBlank(unionId)){
                 User user = _userService.getUserByWx(unionId);
                 if(user==null){
-                    user = _userService.registerByWx(unionId,info.get("nickname"));
+                    user = _userService.registerByWx(unionId,info.get("nickname"),info.get("headimgurl"));
                 }
 
                 _session.setAttribute(SessionContext.CURRENT_USER, user);
