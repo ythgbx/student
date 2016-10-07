@@ -71,18 +71,23 @@ public class UserCouponService implements IUserCouponService {
 
     public UserCoupon getUserTimePeriodTicketCoupon(long userId)
     {
-        ISpecification specification = new UserCouponUserIdInStartAndEndTimeSpecification(userId,new Date());
-        List<UserCoupon> userCouponList = _rootRepository.getList(specification);
+//        ISpecification specification = new UserCouponUserIdInStartAndEndTimeSpecification(userId,new Date());
+//        List<UserCoupon> userCouponList = _rootRepository.getList(specification);
+        List<UserCoupon> userCouponList = getUserTimePeriodTicketCoupons(userId);
         UserCoupon yearTicketCoupon = null;
         UserCoupon monthlyTicket = null;
 
         for(UserCoupon coupon:userCouponList){
             if(coupon.getType().equals(UserCouponType.MonthlyTicket.ordinal())){
-                monthlyTicket = coupon;
+                if(monthlyTicket==null||monthlyTicket.getEndTime().before(coupon.getEndTime())){
+                    monthlyTicket = coupon;
+                }
             }
 
             if(coupon.getType().equals(UserCouponType.YearlyTicket.ordinal())){
-                yearTicketCoupon = coupon;
+                if(yearTicketCoupon==null||yearTicketCoupon.getEndTime().before(coupon.getEndTime())){
+                    yearTicketCoupon = coupon;
+                }
             }
         }
 
