@@ -25,14 +25,13 @@ public class WeiXinCore {
         String openId =  accessInfo.get("openid");
         if(StringUtils.isBlank(accessToken)||StringUtils.isBlank(openId)){
 
-            //return null;
-
-            //TODO test
-            Map<String, String> result = new HashMap<String, String>();
-            result.put("unionid","o6_bmasdasdsad6_2sgVt7hMZOPfL");
-            result.put("headimgurl", "wx/123321xas");
-            result.put("nickname", "wxwx");
-            return result;
+            return null;
+//            //TODO test
+//            Map<String, String> result = new HashMap<String, String>();
+//            result.put("unionid","o6_bmasdasdsad6_2sgVt7hMZOPfL");
+//            result.put("headimgurl", "wx/123321xas");
+//            result.put("nickname", "wxwx");
+//            return result;
         }
 
         vars.put("access_token", accessToken);
