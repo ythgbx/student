@@ -8,6 +8,7 @@
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="salt" property="salt" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="wx_union_id" property="wxUnionId" jdbcType="VARCHAR" />
     <result column="lat" property="lat" jdbcType="DOUBLE" />
     <result column="lng" property="lng" jdbcType="DOUBLE" />
     <result column="points" property="points" jdbcType="INTEGER" />
@@ -72,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, photo, password, salt, phone, lat, lng, points, type
+    id, name, photo, password, salt, phone, wx_union_id, lat, lng, points, type
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="net.bus.web.model.UserExample" >
     select
@@ -107,12 +108,12 @@
   <insert id="insert" parameterType="net.bus.web.model.User" >
     insert into user (id, name, photo,
     password, salt, phone,
-    lat, lng, points, type
-    )
+    wx_union_id, lat, lng,
+    points, type)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR},
     #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
-    #{lat,jdbcType=DOUBLE}, #{lng,jdbcType=DOUBLE}, #{points,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}
-    )
+    #{wxUnionId,jdbcType=VARCHAR}, #{lat,jdbcType=DOUBLE}, #{lng,jdbcType=DOUBLE},
+    #{points,jdbcType=INTEGER}, #{type,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="net.bus.web.model.User" >
     insert into user
@@ -134,6 +135,9 @@
       </if>
       <if test="phone != null" >
         phone,
+      </if>
+      <if test="wxUnionId != null" >
+        wx_union_id,
       </if>
       <if test="lat != null" >
         lat,
@@ -166,6 +170,9 @@
       </if>
       <if test="phone != null" >
         #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="wxUnionId != null" >
+        #{wxUnionId,jdbcType=VARCHAR},
       </if>
       <if test="lat != null" >
         #{lat,jdbcType=DOUBLE},
@@ -208,6 +215,9 @@
       <if test="record.phone != null" >
         phone = #{record.phone,jdbcType=VARCHAR},
       </if>
+      <if test="record.wxUnionId != null" >
+        wx_union_id = #{record.wxUnionId,jdbcType=VARCHAR},
+      </if>
       <if test="record.lat != null" >
         lat = #{record.lat,jdbcType=DOUBLE},
       </if>
@@ -233,6 +243,7 @@
     password = #{record.password,jdbcType=VARCHAR},
     salt = #{record.salt,jdbcType=VARCHAR},
     phone = #{record.phone,jdbcType=VARCHAR},
+    wx_union_id = #{record.wxUnionId,jdbcType=VARCHAR},
     lat = #{record.lat,jdbcType=DOUBLE},
     lng = #{record.lng,jdbcType=DOUBLE},
     points = #{record.points,jdbcType=INTEGER},
@@ -259,6 +270,9 @@
       <if test="phone != null" >
         phone = #{phone,jdbcType=VARCHAR},
       </if>
+      <if test="wxUnionId != null" >
+        wx_union_id = #{wxUnionId,jdbcType=VARCHAR},
+      </if>
       <if test="lat != null" >
         lat = #{lat,jdbcType=DOUBLE},
       </if>
@@ -277,14 +291,15 @@
   <update id="updateByPrimaryKey" parameterType="net.bus.web.model.User" >
     update user
     set name = #{name,jdbcType=VARCHAR},
-    photo = #{photo,jdbcType=VARCHAR},
-    password = #{password,jdbcType=VARCHAR},
-    salt = #{salt,jdbcType=VARCHAR},
-    phone = #{phone,jdbcType=VARCHAR},
-    lat = #{lat,jdbcType=DOUBLE},
-    lng = #{lng,jdbcType=DOUBLE},
-    points = #{points,jdbcType=INTEGER},
-    type = #{type,jdbcType=INTEGER}
+      photo = #{photo,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      wx_union_id = #{wxUnionId,jdbcType=VARCHAR},
+      lat = #{lat,jdbcType=DOUBLE},
+      lng = #{lng,jdbcType=DOUBLE},
+      points = #{points,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <select resultMap="BaseResultMap" parameterType="net.bus.web.model.UserExample" id="selectByExampleWithRowbounds" >

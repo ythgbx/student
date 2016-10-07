@@ -13,6 +13,8 @@ public class User {
 
     private String phone;
 
+    private String wxUnionId;
+
     private Double lat;
 
     private Double lng;
@@ -67,6 +69,14 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getWxUnionId() {
+        return wxUnionId;
+    }
+
+    public void setWxUnionId(String wxUnionId) {
+        this.wxUnionId = wxUnionId;
     }
 
     public Double getLat() {

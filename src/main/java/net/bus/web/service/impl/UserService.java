@@ -8,6 +8,7 @@ import net.bus.web.repository.UserRepository;
 import net.bus.web.repository.specification.UserIdsSpecification;
 import net.bus.web.repository.specification.UserPhonePasswordSpecification;
 import net.bus.web.repository.specification.UserPhoneSpecification;
+import net.bus.web.repository.specification.UserWxUnionIdSpecification;
 import net.bus.web.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,8 +43,7 @@ public class UserService  implements IUserService {
     }
 
     public User getUserByWx(String wxUnionId){
-        //TODO get user by WxUnionId
-        return null;
+        return  _rootRepository.getUser(new UserWxUnionIdSpecification(wxUnionId));
     }
 
     public boolean registerCheck(String phone)
@@ -87,7 +87,18 @@ public class UserService  implements IUserService {
 
     public User registerByWx(String wxUnionId,String name,String photo)
     {
-        //TODO register user by WxUnionId
+        User user = new User();
+        user.setName(name);
+        user.setPhone("");
+        user.setWxUnionId(wxUnionId);
+        user.setPhoto(photo);
+        user.setLat(0d);
+        user.setLng(0d);
+        user.setPoints(0);
+        user.setType(0);//用户类型：0是普通用户，1是司机，999是管理员
+        user.setSalt("");
+        user.setPassword("");
+        _rootRepository.insertUser(user);
         return null;
     }
 
