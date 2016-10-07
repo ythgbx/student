@@ -18,11 +18,15 @@ public interface IUserService {
 
     User getUser(String phone);
 
+    User getUserByWx(String wxUnionId);
+
     boolean registerCheck(String phone);
 
     User loginCheck(String phone,String password);
 
     User register(String phone,String password,String name);
+
+    User registerByWx(String wxUnionId,String name,String photo);
 
     boolean setAccount(User user,String phone,String password);
 

@@ -41,6 +41,11 @@ public class UserService  implements IUserService {
         return  _rootRepository.getUser(new UserPhoneSpecification(phone));
     }
 
+    public User getUserByWx(String wxUnionId){
+        //TODO get user by WxUnionId
+        return null;
+    }
+
     public boolean registerCheck(String phone)
     {
         User user = _rootRepository.getUser(new UserPhoneSpecification(phone));
@@ -78,6 +83,12 @@ public class UserService  implements IUserService {
         user.setPassword(getUserPasswordMd5(user.getSalt(),password));
         _rootRepository.insertUser(user);
         return user;
+    }
+
+    public User registerByWx(String wxUnionId,String name,String photo)
+    {
+        //TODO register user by WxUnionId
+        return null;
     }
 
     public boolean setAccount(User user,String phone,String password)
