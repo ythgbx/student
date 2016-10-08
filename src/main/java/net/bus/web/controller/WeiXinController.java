@@ -54,7 +54,7 @@ public class WeiXinController {
         if(StringUtils.isNoneBlank(request.getCode())){
 
             Map<String,String> info = WeiXinCore.getInfo(request.getCode());
-            String unionId = info.get("unionid");
+            String unionId = (info!=null&&info.containsKey("unionid"))?info.get("unionid"):null;
             if(StringUtils.isNoneBlank(unionId)){
                 User user = _userService.getUserByWx(unionId);
                 if(user==null){
