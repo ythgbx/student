@@ -5,6 +5,7 @@ package net.bus.web.controller.dto;
  */
 public class LineItem {
     private Long id;
+    private String name;
     private String start_station;
     private String end_station;
     private Long start_time;
@@ -15,6 +16,10 @@ public class LineItem {
     public Long getId(){ return id; }
 
     public void setId(Long id){ this.id = id; }
+
+    public String getName(){ return name; }
+
+    public void setName(String name){ this.name = name; }
 
     public String getStart_station() {
         return start_station;

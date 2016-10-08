@@ -363,6 +363,7 @@ public class LineController {
         for (Line line : lineList) {
             LineItem disItem = new LineItem();
             disItem.setId(line.getId());
+            disItem.setName(line.getName());
             disItem.setStart_time(line.getStartTime().getTime());
             disItem.setEnd_time(line.getEndTime().getTime());
             disItem.setStart_station(line.getStart());
