@@ -4,10 +4,14 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.bus.web.common.weixin.config.WeiXinConfig;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,6 +24,7 @@ public class WeiXinCore {
         Map<String, String> accessInfo = getAccessToken(code);
 
         RestTemplate restTemplate = new RestTemplate();
+        reInitMessageConverter(restTemplate);
         Map<String, String> vars = new HashMap<String, String>();
         String accessToken = accessInfo.get("access_token");
         String openId =  accessInfo.get("openid");
@@ -41,11 +46,10 @@ public class WeiXinCore {
         try {
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(resultJson);
-
             Map<String, String> result = new HashMap<String, String>();
             result.put("unionid",root.path("unionid").textValue());
             result.put("headimgurl", root.path("headimgurl").textValue());//用户头像，最后一个数值代表正方形头像大小（有0、46、64、96、132数值可选，0代表640*640正方形头像），用户没有头像时该项为空
-            result.put("nickname", root.path("nickname").textValue());
+            result.put("nickname", new String(root.path("nickname").textValue().getBytes(), "utf-8"));
 
             return result;
         } catch (IOException e) {
@@ -80,5 +84,28 @@ public class WeiXinCore {
         }
 
         return null;
+    }
+
+    /*
+        *初始化RestTemplate，RestTemplate会默认添加HttpMessageConverter
+        * 添加的StringHttpMessageConverter非UTF-8
+        * 所以先要移除原有的StringHttpMessageConverter，
+        * 再添加一个字符集为UTF-8的StringHttpMessageConvert
+        * */
+    private static void reInitMessageConverter(RestTemplate restTemplate){
+        List<HttpMessageConverter<?>> converterList=restTemplate.getMessageConverters();
+        HttpMessageConverter<?> converterTarget = null;
+        for (HttpMessageConverter<?> item : converterList) {
+            if (item.getClass() == StringHttpMessageConverter.class) {
+                converterTarget = item;
+                break;
+            }
+        }
+
+        if (converterTarget != null) {
+            converterList.remove(converterTarget);
+        }
+        HttpMessageConverter<?> converter = new StringHttpMessageConverter(StandardCharsets.UTF_8);
+        converterList.add(converter);
     }
 }
