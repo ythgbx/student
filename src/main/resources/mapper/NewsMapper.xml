@@ -6,6 +6,8 @@
     <result column="image" property="image" jdbcType="VARCHAR" />
     <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
     <result column="time" property="time" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -67,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, image, title, content, time
+    id, image, title, content, type, author, time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="net.bus.web.model.NewsExample" >
     select
@@ -84,7 +86,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from news
     where id = #{id,jdbcType=BIGINT}
@@ -100,10 +102,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="net.bus.web.model.News" >
-    insert into news (id, image, title, 
-      content, time)
-    values (#{id,jdbcType=BIGINT}, #{image,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
-      #{content,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP})
+    insert into news (id, image, title,
+    content, type, author,
+    time)
+    values (#{id,jdbcType=BIGINT}, #{image,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
+    #{content,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR},
+    #{time,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="net.bus.web.model.News" >
     insert into news
@@ -119,6 +123,12 @@
       </if>
       <if test="content != null" >
         content,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="author != null" >
+        author,
       </if>
       <if test="time != null" >
         time,
@@ -136,6 +146,12 @@
       </if>
       <if test="content != null" >
         #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
       </if>
       <if test="time != null" >
         #{time,jdbcType=TIMESTAMP},
@@ -163,6 +179,12 @@
       <if test="record.content != null" >
         content = #{record.content,jdbcType=VARCHAR},
       </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.author != null" >
+        author = #{record.author,jdbcType=VARCHAR},
+      </if>
       <if test="record.time != null" >
         time = #{record.time,jdbcType=TIMESTAMP},
       </if>
@@ -174,10 +196,12 @@
   <update id="updateByExample" parameterType="map" >
     update news
     set id = #{record.id,jdbcType=BIGINT},
-      image = #{record.image,jdbcType=VARCHAR},
-      title = #{record.title,jdbcType=VARCHAR},
-      content = #{record.content,jdbcType=VARCHAR},
-      time = #{record.time,jdbcType=TIMESTAMP}
+    image = #{record.image,jdbcType=VARCHAR},
+    title = #{record.title,jdbcType=VARCHAR},
+    content = #{record.content,jdbcType=VARCHAR},
+    type = #{record.type,jdbcType=VARCHAR},
+    author = #{record.author,jdbcType=VARCHAR},
+    time = #{record.time,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -194,6 +218,12 @@
       <if test="content != null" >
         content = #{content,jdbcType=VARCHAR},
       </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        author = #{author,jdbcType=VARCHAR},
+      </if>
       <if test="time != null" >
         time = #{time,jdbcType=TIMESTAMP},
       </if>
@@ -205,6 +235,8 @@
     set image = #{image,jdbcType=VARCHAR},
       title = #{title,jdbcType=VARCHAR},
       content = #{content,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
       time = #{time,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>

@@ -11,6 +11,10 @@ public class News {
 
     private String content;
 
+    private String type;
+
+    private String author;
+
     private Date time;
 
     public Long getId() {
@@ -43,6 +47,22 @@ public class News {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public Date getTime() {
