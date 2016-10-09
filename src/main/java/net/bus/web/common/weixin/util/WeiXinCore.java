@@ -36,7 +36,7 @@ public class WeiXinCore {
 
         vars.put("access_token", accessToken);
         vars.put("openid",openId);
-        String resultJson = restTemplate.getForObject(" http://api.weixin.qq.com/sns/userinfo?access_token={access_token}&openid={openid}", String.class, vars);
+        String resultJson = restTemplate.getForObject("https://api.weixin.qq.com/sns/userinfo?access_token={access_token}&openid={openid}", String.class, vars);
 
         try {
             ObjectMapper mapper = new ObjectMapper();
@@ -61,7 +61,7 @@ public class WeiXinCore {
         vars.put("app_id", WeiXinConfig.app_id);
         vars.put("secret", WeiXinConfig.secret);
         vars.put("code",code);
-        String resultJson = restTemplate.getForObject("http://api.weixin.qq.com/sns/oauth2/access_token?appid={app_id}&secret={secret}&code={code}&grant_type=authorization_code", String.class, vars);
+        String resultJson = restTemplate.getForObject("https://api.weixin.qq.com/sns/oauth2/access_token?appid={app_id}&secret={secret}&code={code}&grant_type=authorization_code", String.class, vars);
 
         try {
             ObjectMapper mapper = new ObjectMapper();
