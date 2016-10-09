@@ -4,10 +4,14 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.bus.web.common.weixin.config.WeiXinConfig;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,6 +24,7 @@ public class WeiXinCore {
         Map<String, String> accessInfo = getAccessToken(code);
 
         RestTemplate restTemplate = new RestTemplate();
+        reInitMessageConverter(restTemplate);
         Map<String, String> vars = new HashMap<String, String>();
         String accessToken = accessInfo.get("access_token");
         String openId =  accessInfo.get("openid");
@@ -80,5 +85,28 @@ public class WeiXinCore {
         }
 
         return null;
+    }
+
+    /*
+        *初始化RestTemplate，RestTemplate会默认添加HttpMessageConverter
+        * 添加的StringHttpMessageConverter非UTF-8
+        * 所以先要移除原有的StringHttpMessageConverter，
+        * 再添加一个字符集为UTF-8的StringHttpMessageConvert
+        * */
+    private static void reInitMessageConverter(RestTemplate restTemplate){
+        List<HttpMessageConverter<?>> converterList=restTemplate.getMessageConverters();
+        HttpMessageConverter<?> converterTarget = null;
+        for (HttpMessageConverter<?> item : converterList) {
+            if (item.getClass() == StringHttpMessageConverter.class) {
+                converterTarget = item;
+                break;
+            }
+        }
+
+        if (converterTarget != null) {
+            converterList.remove(converterTarget);
+        }
+        HttpMessageConverter<?> converter = new StringHttpMessageConverter(StandardCharsets.UTF_8);
+        converterList.add(converter);
     }
 }
