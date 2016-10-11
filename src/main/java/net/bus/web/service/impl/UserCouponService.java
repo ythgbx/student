@@ -103,7 +103,8 @@ public class UserCouponService implements IUserCouponService {
         List<UserCoupon>  userCoupons = getUserTimePeriodTicketCoupons(userId);
         if(userCoupons!=null){
             for (UserCoupon userCoupon:userCoupons){
-                if(userCoupon.getType().equals(UserCouponType.MonthlyTicket.ordinal())&&userCoupon.getEndTime().after(start)){
+                //if(userCoupon.getType().equals(UserCouponType.MonthlyTicket.ordinal())&&userCoupon.getEndTime().after(start)){
+                if(userCoupon.getEndTime().after(start)){
                     Calendar endDate = Calendar.getInstance();
                     endDate.setTime(userCoupon.getEndTime());
                     endDate.add(endDate.DAY_OF_MONTH,1);
@@ -136,7 +137,8 @@ public class UserCouponService implements IUserCouponService {
         List<UserCoupon>  userCoupons = getUserTimePeriodTicketCoupons(userId);
         if(userCoupons!=null){
             for (UserCoupon userCoupon:userCoupons){
-                if(userCoupon.getType().equals(UserCouponType.YearlyTicket.ordinal())&&userCoupon.getEndTime().after(start)){
+                //if(userCoupon.getType().equals(UserCouponType.YearlyTicket.ordinal())&&userCoupon.getEndTime().after(start)){
+                if(userCoupon.getEndTime().after(start)){
                     Calendar endDate = Calendar.getInstance();
                     endDate.setTime(userCoupon.getEndTime());
                     endDate.add(endDate.DAY_OF_YEAR,1);
