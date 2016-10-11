@@ -9,7 +9,9 @@ import net.bus.web.model.type.PointSourceType;
 import net.bus.web.model.type.UserCouponType;
 import net.bus.web.repository.CommodityOrderRepository;
 import net.bus.web.repository.CommodityRepository;
+import net.bus.web.repository.specification.CommodityIdsSpecification;
 import net.bus.web.repository.specification.CommodityOrderTradeNoSpecification;
+import net.bus.web.repository.specification.CommodityOrderUserIdAndPaied;
 import net.bus.web.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -125,9 +127,21 @@ public class CommodityService implements ICommodityService{
         return _rootRepository.count();
     }
 
+    public List<Commodity> getList(List<Long> ids){
+        return _rootRepository.getList(new CommodityIdsSpecification(ids));
+    }
+
     public String getOutTradeNo()
     {
         //TODO 生成订单编号
         return UUID.randomUUID().toString().replace("-", "");
+    }
+
+    public List<CommodityOrder> getUserOrders(long userId,int page,int limit){
+        return _commodityOrderRepository.getList(new CommodityOrderUserIdAndPaied(userId), page - 1, limit);
+    }
+
+    public int getUserOrdersCount(long userId){
+        return _commodityOrderRepository.count(new CommodityOrderUserIdAndPaied(userId));
     }
 }

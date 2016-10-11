@@ -2,6 +2,7 @@ package net.bus.web.service;
 
 import net.bus.web.context.AlipayCallBack;
 import net.bus.web.model.Commodity;
+import net.bus.web.model.CommodityOrder;
 import net.bus.web.model.User;
 
 import java.util.List;
@@ -20,4 +21,10 @@ public interface ICommodityService {
     boolean buyComplete(AlipayCallBack callBack);
 
     int getAllCount();
+
+    List<Commodity> getList(List<Long> ids);
+
+    List<CommodityOrder> getUserOrders(long userId,int page,int limit);
+
+    int getUserOrdersCount(long userId);
 }
