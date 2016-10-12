@@ -167,6 +167,14 @@
                enableCountByExample="true"
                enableUpdateByExample="true">
         </table>
+        <table tableName="my_message" domainObjectName="MyMessage"  enableSelectByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true"
+               enableDeleteByPrimaryKey="true"
+               enableSelectByExample="true"
+               enableDeleteByExample="true"
+               enableCountByExample="true"
+               enableUpdateByExample="true">
+        </table>
 
     </context>
 </generatorConfiguration>

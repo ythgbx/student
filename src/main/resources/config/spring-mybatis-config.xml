@@ -36,6 +36,8 @@
         <mapper resource="mapper/CommodityMapper.xml"/>
         <mapper resource="mapper/CommodityOrderMapper.xml"/>
         <mapper resource="mapper/CommodityTypeMapper.xml"/>
+        <mapper resource="mapper/CommodityTypeMapper.xml"/>
+        <mapper resource="mapper/MyMessageMapper.xml"/>
     </mappers>
 
 </configuration>
