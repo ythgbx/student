@@ -40,7 +40,7 @@ public class MyMessageController {
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    @ApiOperation(value = "获取全部消息", httpMethod = "GET", response = MyMessageList.class, notes = "获取全部消息")
+    @ApiOperation(value = "获取用户消息", httpMethod = "GET", response = MyMessageList.class, notes = "获取用户消息")
     public IResult all(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "1")int page,
                        @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "5")int limit)
     {
