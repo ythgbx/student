@@ -4,6 +4,7 @@ import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 import net.bus.web.aspect.Auth;
 import net.bus.web.common.config.RString;
+import net.bus.web.common.weixin.util.ImgUtil;
 import net.bus.web.common.weixin.util.WeiXinCore;
 import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.*;
@@ -17,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by Edifi_000 on 2016-10-07.
@@ -31,6 +34,8 @@ public class WeiXinController {
     private IUserService _userService;
     @Autowired
     private HttpSession _session;
+    @Autowired
+    private HttpServletRequest _request;
 
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
@@ -58,7 +63,17 @@ public class WeiXinController {
             if(StringUtils.isNoneBlank(unionId)){
                 User user = _userService.getUserByWx(unionId);
                 if(user==null){
-                    user = _userService.registerByWx(unionId,info.get("nickname"),info.get("headimgurl"));
+                    String headUrl = info.get("headimgurl");
+                    try{
+                        String dir = _request.getSession().getServletContext().getRealPath("/resources/upload");//设定文件保存的目录
+                        String fileExt = ".jpg";
+                        String fileName = UUID.randomUUID().toString()+fileExt;
+                        ImgUtil.SaveUrlImg(info.get("headimgurl"), dir+"/"+fileName);
+                        headUrl = fileName;
+                    }catch (Exception e){
+                        //ignore
+                    }
+                    user = _userService.registerByWx(unionId,info.get("nickname"),headUrl);
                 }
 
                 _session.setAttribute(SessionContext.CURRENT_USER, user);
@@ -78,6 +93,25 @@ public class WeiXinController {
             result.setResult("failure");
         }
 
+        return result;
+    }
+
+    @Auth(role = Auth.Role.NONE)
+    @ResponseBody
+    @RequestMapping(value = "/headsavetest", method = RequestMethod.GET)
+    @ApiOperation(value = "微信用户头像保存测试", httpMethod = "GET", response = BaseResult.class, notes = "微信用户头像保存测试")
+    public IResult headSaveTest()
+    {
+        BaseResult result = new BaseResult();
+        String dir = _request.getSession().getServletContext().getRealPath("/resources/upload");//设定文件保存的目录
+        String fileName = UUID.randomUUID().toString();
+        try{
+            ImgUtil.SaveUrlImg("http://wx.qlogo.cn/mmopen/DJIYS2iaJCw3bM1oXIPcwiaIPUXWnicThAia1fsOEM29lJfBakwtJsaCKpKX2KcrjSHHlMPo8TzvaDkO8u8ar4vvf6gBAX4rbXC0/0",
+                    dir+"/"+fileName+".jpg");
+            result.setResult("success");
+        }catch (Exception e){
+            result.setResult("failed");
+        }
         return result;
     }
 }
