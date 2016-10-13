@@ -38,6 +38,7 @@
         <mapper resource="mapper/CommodityTypeMapper.xml"/>
         <mapper resource="mapper/CommodityTypeMapper.xml"/>
         <mapper resource="mapper/MyMessageMapper.xml"/>
+        <mapper resource="mapper/ActivityMapper.xml" />
     </mappers>
 
 </configuration>

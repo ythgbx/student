@@ -176,5 +176,14 @@
                enableUpdateByExample="true">
         </table>
 
+        <table tableName="activity" domainObjectName="Activity"  enableSelectByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true"
+               enableDeleteByPrimaryKey="true"
+               enableSelectByExample="true"
+               enableDeleteByExample="true"
+               enableCountByExample="true"
+               enableUpdateByExample="true">
+        </table>
+
     </context>
 </generatorConfiguration>
