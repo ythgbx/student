@@ -105,7 +105,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" useGeneratedKeys="true" parameterType="net.bus.web.model.User" >
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id"  parameterType="net.bus.web.model.User" >
     insert into user (id, name, photo,
     password, salt, phone,
     wx_union_id, lat, lng,
