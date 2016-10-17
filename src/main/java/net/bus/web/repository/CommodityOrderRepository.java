@@ -22,7 +22,6 @@ public class CommodityOrderRepository {
         CommodityOrderExample example = new CommodityOrderExample();
         return _mapper.selectByExample(example);
     }
-
     public List<CommodityOrder> getAll(int page,int limit) {
         CommodityOrderExample example = new CommodityOrderExample();
         if(example!=null) {

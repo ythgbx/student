@@ -13,6 +13,8 @@
     <result column="lng" property="lng" jdbcType="DOUBLE" />
     <result column="points" property="points" jdbcType="INTEGER" />
     <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="id_card" property="idCard" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -73,7 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, photo, password, salt, phone, wx_union_id, lat, lng, points, type
+    id, name, photo, password, salt, phone, wx_union_id, lat, lng, points, type, real_name, 
+    id_card
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="net.bus.web.model.UserExample" >
     select
@@ -90,7 +93,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select
+    select 
     <include refid="Base_Column_List" />
     from user
     where id = #{id,jdbcType=BIGINT}
@@ -106,14 +109,16 @@
     </if>
   </delete>
   <insert id="insert" parameterType="net.bus.web.model.User" >
-    insert into user (id, name, photo,
-    password, salt, phone,
-    wx_union_id, lat, lng,
-    points, type)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR},
-    #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
-    #{wxUnionId,jdbcType=VARCHAR}, #{lat,jdbcType=DOUBLE}, #{lng,jdbcType=DOUBLE},
-    #{points,jdbcType=INTEGER}, #{type,jdbcType=INTEGER})
+    insert into user (id, name, photo, 
+      password, salt, phone, 
+      wx_union_id, lat, lng, 
+      points, type, real_name, 
+      id_card)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{wxUnionId,jdbcType=VARCHAR}, #{lat,jdbcType=DOUBLE}, #{lng,jdbcType=DOUBLE}, 
+      #{points,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{realName,jdbcType=VARCHAR}, 
+      #{idCard,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="net.bus.web.model.User" >
     insert into user
@@ -151,6 +156,12 @@
       <if test="type != null" >
         type,
       </if>
+      <if test="realName != null" >
+        real_name,
+      </if>
+      <if test="idCard != null" >
+        id_card,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -185,6 +196,12 @@
       </if>
       <if test="type != null" >
         #{type,jdbcType=INTEGER},
+      </if>
+      <if test="realName != null" >
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        #{idCard,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -230,6 +247,12 @@
       <if test="record.type != null" >
         type = #{record.type,jdbcType=INTEGER},
       </if>
+      <if test="record.realName != null" >
+        real_name = #{record.realName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCard != null" >
+        id_card = #{record.idCard,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -238,16 +261,18 @@
   <update id="updateByExample" parameterType="map" >
     update user
     set id = #{record.id,jdbcType=BIGINT},
-    name = #{record.name,jdbcType=VARCHAR},
-    photo = #{record.photo,jdbcType=VARCHAR},
-    password = #{record.password,jdbcType=VARCHAR},
-    salt = #{record.salt,jdbcType=VARCHAR},
-    phone = #{record.phone,jdbcType=VARCHAR},
-    wx_union_id = #{record.wxUnionId,jdbcType=VARCHAR},
-    lat = #{record.lat,jdbcType=DOUBLE},
-    lng = #{record.lng,jdbcType=DOUBLE},
-    points = #{record.points,jdbcType=INTEGER},
-    type = #{record.type,jdbcType=INTEGER}
+      name = #{record.name,jdbcType=VARCHAR},
+      photo = #{record.photo,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      salt = #{record.salt,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      wx_union_id = #{record.wxUnionId,jdbcType=VARCHAR},
+      lat = #{record.lat,jdbcType=DOUBLE},
+      lng = #{record.lng,jdbcType=DOUBLE},
+      points = #{record.points,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=INTEGER},
+      real_name = #{record.realName,jdbcType=VARCHAR},
+      id_card = #{record.idCard,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -285,6 +310,12 @@
       <if test="type != null" >
         type = #{type,jdbcType=INTEGER},
       </if>
+      <if test="realName != null" >
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        id_card = #{idCard,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -299,7 +330,9 @@
       lat = #{lat,jdbcType=DOUBLE},
       lng = #{lng,jdbcType=DOUBLE},
       points = #{points,jdbcType=INTEGER},
-      type = #{type,jdbcType=INTEGER}
+      type = #{type,jdbcType=INTEGER},
+      real_name = #{realName,jdbcType=VARCHAR},
+      id_card = #{idCard,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <select resultMap="BaseResultMap" parameterType="net.bus.web.model.UserExample" id="selectByExampleWithRowbounds" >

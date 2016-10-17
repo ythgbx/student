@@ -18,6 +18,7 @@
         <setting name="localCacheScope" value="SESSION"/>
         <setting name="jdbcTypeForNull" value="OTHER"/>
         <setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString"/>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
     </settings>
     <mappers>
         <mapper resource="mapper/BusMapper.xml"/>
@@ -38,6 +39,7 @@
         <mapper resource="mapper/CommodityTypeMapper.xml"/>
         <mapper resource="mapper/CommodityTypeMapper.xml"/>
         <mapper resource="mapper/MyMessageMapper.xml"/>
+        <mapper resource="mapper/FeedbackMapper.xml"/>
     </mappers>
 
 </configuration>

@@ -37,4 +37,6 @@ public interface IUserService {
     boolean setPhoto(User user,String photo);
 
     boolean checkPassword(User user,String password);
+
+    boolean userCertification(User user,String realName,String id_card);
 }

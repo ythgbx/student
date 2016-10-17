@@ -1,5 +1,7 @@
 package net.bus.web.controller.dto;
 
+import net.bus.web.model.User;
+
 /**
  * Created by Edifi_000 on 2016-07-12.
  */
@@ -14,6 +16,7 @@ public class UserBase extends BaseResult {
     private String phone;
     private String vip_type;
     private Long expiry_date;
+    private Boolean isCertification;
 
     public Long getId() {
         return id;
@@ -86,5 +89,19 @@ public class UserBase extends BaseResult {
 
     public void setExpiry_date(Long expiry_date) {
         this.expiry_date = expiry_date;
+    }
+
+    public Boolean getCertification() {
+        return isCertification;
+    }
+
+    public void setCertification(User user,String realName,String id_card) {
+        if (user!=null&&realName.equals("")||id_card.equals("")){
+            isCertification = false;
+        }
+        else {
+            isCertification = true;
+        }
+
     }
 }

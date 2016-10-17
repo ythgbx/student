@@ -23,6 +23,10 @@ public class User {
 
     private Integer type;
 
+    private String realName;
+
+    private String idCard;
+
     public Long getId() {
         return id;
     }
@@ -109,5 +113,21 @@ public class User {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
+    public String getIdCard() {
+        return idCard;
+    }
+
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
     }
 }

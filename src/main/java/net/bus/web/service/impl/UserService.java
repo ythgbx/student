@@ -3,10 +3,8 @@ package net.bus.web.service.impl;
 import net.bus.web.common.MD5;
 import net.bus.web.context.Position;
 import net.bus.web.model.User;
-import net.bus.web.repository.UserLineRepository;
 import net.bus.web.repository.UserRepository;
 import net.bus.web.repository.specification.UserIdsSpecification;
-import net.bus.web.repository.specification.UserPhonePasswordSpecification;
 import net.bus.web.repository.specification.UserPhoneSpecification;
 import net.bus.web.repository.specification.UserWxUnionIdSpecification;
 import net.bus.web.service.IUserService;
@@ -154,6 +152,16 @@ public class UserService  implements IUserService {
     public boolean checkPassword(User user,String password)
     {
         return user.getPassword().equals(getUserPasswordMd5(user.getSalt(),password));
+    }
+
+    public boolean userCertification(User user, String realName, String id_card) {
+        if(user!=null&&user.getRealName().equals("")&&user.getIdCard().equals("")){
+            user.setRealName(realName);
+            user.setIdCard(id_card);
+            _rootRepository.updateUser(user);
+            return true;
+        }
+        return false;
     }
 
     private String getUserPasswordMd5(String salt,String password){

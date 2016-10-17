@@ -17,8 +17,7 @@ import net.bus.web.model.Pojo.SignRecordPojo;
 import net.bus.web.model.User;
 import net.bus.web.model.UserCoupon;
 import net.bus.web.model.type.UserCouponType;
-import net.bus.web.service.IPointRecordService;
-import net.bus.web.service.IUserCouponService;
+import net.bus.web.service.*;
 import net.bus.web.service.impl.SignService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import net.bus.web.service.IUserService;
+import net.bus.web.controller.dto.BaseResult;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -54,6 +53,9 @@ public class UserController {
 
     @Autowired
     private IUserCouponService _userCouponService;
+
+    @Autowired
+    private IFeedbackService _feedbackService;
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
@@ -118,6 +120,7 @@ public class UserController {
         userBase.setPhone(user.getPhone());
         userBase.setPhoto(user.getPhoto());
         userBase.setId(user.getId());
+        userBase.setCertification(user,user.getRealName(),user.getIdCard());
 
         UserCoupon userCoupon = _userCouponService.getUserTimePeriodTicketCoupon(user.getId());
         userBase.setVip_type("common");//普通会员(不拥有时段优惠券用户)
@@ -264,7 +267,8 @@ public class UserController {
     @ResponseBody
     @RequestMapping(value = "/modify/password", method = RequestMethod.PUT)
     @ApiOperation(value = "密码修改", httpMethod = "PUT", response = BaseResult.class, notes = "密码修改")
-    public IResult modifyPassword(@ApiParam(required = true, name = "account", value = "用户账户请求-手机号+原密码+新密码")@RequestBody UserAccount account)
+    public IResult modifyPassword(@ApiParam(required = true, name = "account",
+            value = "用户账户请求-手机号+原密码+新密码")@RequestBody UserAccount account)
     {
         BaseResult result = new BaseResult();
         try {
@@ -421,6 +425,39 @@ public class UserController {
         return result;
     }
 
+
+    @Auth(role = Auth.Role.USER)
+    @ResponseBody
+    @RequestMapping(value = "/feedback", method = RequestMethod.POST)
+    @ApiOperation(value = "提交反馈", httpMethod = "POST", response = BaseResult.class, notes = "提交反馈")
+    public IResult help(@ApiParam(name = "FeedbackResult", value = "帮助与反馈")@RequestBody FeedbackResult feedbackResult)
+    {
+        BaseResult result = new BaseResult();
+        User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
+        _feedbackService.setUserFeedback(feedbackResult.getContent(),user.getId());
+        result.setResult("success");
+        return result;
+    }
+
+
+    @Auth(role = Auth.Role.USER)
+    @ResponseBody
+    @RequestMapping(value = "/certification", method = RequestMethod.POST)
+    @ApiOperation(value = "实名认证", httpMethod = "POST", response = BaseResult.class, notes = "实名认证")
+
+    public IResult certification(@ApiParam(name = "certificationResult", value = "实名认证")@RequestBody CertificationResult certificationResult){
+        BaseResult result = new BaseResult();
+        User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
+        if(service.userCertification(user,certificationResult.getRealName(),certificationResult.getIdCard()))
+        {
+            result.setResult("success");
+        }else{
+            result.setResult("failure");
+        }
+        return result;
+    }
+
+
     @Auth(role = Auth.Role.USER)
     @RequestMapping(value="/list", method = RequestMethod.GET)
     @ApiOperation(value = "用户列表页面", httpMethod = "GET", response = ModelAndView.class, notes = "用户列表页面")
@@ -436,7 +473,6 @@ public class UserController {
 
         return mv;
     }
-
 
 
     @Auth(role = Auth.Role.USER)
@@ -501,4 +537,6 @@ public class UserController {
         int status = response.getStatus();
         return (status==200);
     }
+
+
 }
