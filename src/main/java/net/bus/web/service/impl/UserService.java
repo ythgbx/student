@@ -97,7 +97,7 @@ public class UserService  implements IUserService {
         user.setSalt("");
         user.setPassword("");
         _rootRepository.insertUser(user);
-        return null;
+        return user;
     }
 
     public boolean setAccount(User user,String phone,String password)
