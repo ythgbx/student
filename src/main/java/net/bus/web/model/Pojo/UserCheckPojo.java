@@ -6,7 +6,6 @@ package net.bus.web.model.Pojo;
 public class UserCheckPojo {
     private Long id;
     private Long timestamp;
-    private String mac;
 
     public Long getId() {
         return id;

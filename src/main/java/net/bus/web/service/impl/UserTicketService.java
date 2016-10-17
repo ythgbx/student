@@ -103,7 +103,6 @@ public class UserTicketService implements IUserTicketService {
                     if(line!=null){
                         for(TicketBuyItem ticketBuyItem:userTickets){
                             //TODO 解密user_check获取user_id与check_date
-                            String check = ticketBuyItem.getUser_check();
                             UserCheckPojo checkPojo = getUserCheckPojo(ticketBuyItem.getUser_check());
                             User user = _userRepository.getUser(checkPojo.getId());
                             if(user!=null){
@@ -111,7 +110,7 @@ public class UserTicketService implements IUserTicketService {
                                 userTicket.setLineId(line.getId());
                                 userTicket.setUserId(user.getId());
                                 userTicket.setPrice(line.getPrice());
-                                userTicket.setTime(new Date(checkPojo.getTimestamp()));
+                                userTicket.setTime(new Date(checkPojo.getTimestamp()*1000));
 
                                 user.setPoints(user.getPoints() - line.getPrice());
 
