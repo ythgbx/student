@@ -14,7 +14,7 @@
 
         <!--数据库连接 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://123.206.201.54:3306/bus_dev"
+                        connectionURL="jdbc:mysql://123.206.201.54:3306/bus"
                         userId="root"
                         password="ibus2016">
         </jdbcConnection>
