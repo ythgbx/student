@@ -122,6 +122,7 @@ public class UserTicketController {
             disItem.setEnd_station(line.getEnd());
             disItem.setBus_img("car/1.png");//TempCode 暂无该内容
             disItem.setTime(ticket.getTime().getTime());
+            disItem.setPrice(ticket.getPrice());
             displayList.add(disItem);
         }
         return displayList;
