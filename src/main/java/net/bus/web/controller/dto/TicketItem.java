@@ -10,6 +10,15 @@ public class TicketItem {
     private String end_station;
     private String bus_img;
     private Long time;
+    private Integer price;
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
 
     public Long getId(){ return id; }
 
