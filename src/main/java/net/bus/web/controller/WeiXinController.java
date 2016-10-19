@@ -10,6 +10,7 @@ import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.*;
 import net.bus.web.model.User;
 import net.bus.web.service.IUserService;
+import net.bus.web.service.IWxpayService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,6 +37,8 @@ public class WeiXinController {
     private HttpSession _session;
     @Autowired
     private HttpServletRequest _request;
+    @Autowired
+    private IWxpayService _wxpayService;
 
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
@@ -112,6 +115,18 @@ public class WeiXinController {
         }catch (Exception e){
             result.setResult("failed");
         }
+        return result;
+    }
+
+    @Auth(role = Auth.Role.NONE)
+    @ResponseBody
+    @RequestMapping(value = "/paytest", method = RequestMethod.POST)
+    @ApiOperation(value = "支付测试", httpMethod = "POST", response = LoginResult.class, notes = "支付测试")
+    public IResult paytest(@ApiParam(required = true, name = "request", value = "支付测试请求")@RequestBody BaseRequest request)
+    {
+        BaseResult result = new BaseResult();
+        result.setResult("success");
+        Map<String,String> re = _wxpayService.prepay(1L);
         return result;
     }
 }
