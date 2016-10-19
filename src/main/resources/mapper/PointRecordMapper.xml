@@ -2,12 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="net.bus.web.mapper.PointRecordMapper" >
   <resultMap id="BaseResultMap" type="net.bus.web.model.PointRecord" >
-    <id column="userId" property="userid" jdbcType="BIGINT" />
-    <id column="record_time" property="recordTime" jdbcType="TIMESTAMP" />
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="userId" property="userid" jdbcType="BIGINT" />
     <result column="type" property="type" jdbcType="VARCHAR" />
     <result column="source" property="source" jdbcType="VARCHAR" />
     <result column="account" property="account" jdbcType="INTEGER" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="record_time" property="recordTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    userId, record_time, type, source, account, remark
+    id, userId, type, source, account, remark, record_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="net.bus.web.model.PointRecordExample" >
     select
@@ -84,17 +85,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="net.bus.web.model.PointRecordKey" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from point_record
-    where userId = #{userid,jdbcType=BIGINT}
-      and record_time = #{recordTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="net.bus.web.model.PointRecordKey" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from point_record
-    where userId = #{userid,jdbcType=BIGINT}
-      and record_time = #{recordTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="net.bus.web.model.PointRecordExample" >
     delete from point_record
@@ -103,21 +102,21 @@
     </if>
   </delete>
   <insert id="insert" parameterType="net.bus.web.model.PointRecord" >
-    insert into point_record (userId, record_time, type, 
-      source, account, remark
-      )
-    values (#{userid,jdbcType=BIGINT}, #{recordTime,jdbcType=TIMESTAMP}, #{type,jdbcType=VARCHAR}, 
-      #{source,jdbcType=VARCHAR}, #{account,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}
-      )
+    insert into point_record (id, userId, type, 
+      source, account, remark, 
+      record_time)
+    values (#{id,jdbcType=BIGINT}, #{userid,jdbcType=BIGINT}, #{type,jdbcType=VARCHAR}, 
+      #{source,jdbcType=VARCHAR}, #{account,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{recordTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="net.bus.web.model.PointRecord" >
     insert into point_record
     <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
       <if test="userid != null" >
         userId,
-      </if>
-      <if test="recordTime != null" >
-        record_time,
       </if>
       <if test="type != null" >
         type,
@@ -131,13 +130,16 @@
       <if test="remark != null" >
         remark,
       </if>
+      <if test="recordTime != null" >
+        record_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
       <if test="userid != null" >
         #{userid,jdbcType=BIGINT},
-      </if>
-      <if test="recordTime != null" >
-        #{recordTime,jdbcType=TIMESTAMP},
       </if>
       <if test="type != null" >
         #{type,jdbcType=VARCHAR},
@@ -151,6 +153,9 @@
       <if test="remark != null" >
         #{remark,jdbcType=VARCHAR},
       </if>
+      <if test="recordTime != null" >
+        #{recordTime,jdbcType=TIMESTAMP},
+      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="net.bus.web.model.PointRecordExample" resultType="java.lang.Integer" >
@@ -162,11 +167,11 @@
   <update id="updateByExampleSelective" parameterType="map" >
     update point_record
     <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
       <if test="record.userid != null" >
         userId = #{record.userid,jdbcType=BIGINT},
-      </if>
-      <if test="record.recordTime != null" >
-        record_time = #{record.recordTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.type != null" >
         type = #{record.type,jdbcType=VARCHAR},
@@ -180,6 +185,9 @@
       <if test="record.remark != null" >
         remark = #{record.remark,jdbcType=VARCHAR},
       </if>
+      <if test="record.recordTime != null" >
+        record_time = #{record.recordTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -187,12 +195,13 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update point_record
-    set userId = #{record.userid,jdbcType=BIGINT},
-      record_time = #{record.recordTime,jdbcType=TIMESTAMP},
+    set id = #{record.id,jdbcType=BIGINT},
+      userId = #{record.userid,jdbcType=BIGINT},
       type = #{record.type,jdbcType=VARCHAR},
       source = #{record.source,jdbcType=VARCHAR},
       account = #{record.account,jdbcType=INTEGER},
-      remark = #{record.remark,jdbcType=VARCHAR}
+      remark = #{record.remark,jdbcType=VARCHAR},
+      record_time = #{record.recordTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -200,6 +209,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="net.bus.web.model.PointRecord" >
     update point_record
     <set >
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=BIGINT},
+      </if>
       <if test="type != null" >
         type = #{type,jdbcType=VARCHAR},
       </if>
@@ -212,18 +224,21 @@
       <if test="remark != null" >
         remark = #{remark,jdbcType=VARCHAR},
       </if>
+      <if test="recordTime != null" >
+        record_time = #{recordTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
-    where userId = #{userid,jdbcType=BIGINT}
-      and record_time = #{recordTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="net.bus.web.model.PointRecord" >
     update point_record
-    set type = #{type,jdbcType=VARCHAR},
+    set userId = #{userid,jdbcType=BIGINT},
+      type = #{type,jdbcType=VARCHAR},
       source = #{source,jdbcType=VARCHAR},
       account = #{account,jdbcType=INTEGER},
-      remark = #{remark,jdbcType=VARCHAR}
-    where userId = #{userid,jdbcType=BIGINT}
-      and record_time = #{recordTime,jdbcType=TIMESTAMP}
+      remark = #{remark,jdbcType=VARCHAR},
+      record_time = #{recordTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
   </update>
   <select resultMap="BaseResultMap" parameterType="net.bus.web.model.PointRecordExample" id="selectByExampleWithRowbounds" >
     select

@@ -1,6 +1,12 @@
 package net.bus.web.model;
 
-public class PointRecord extends PointRecordKey {
+import java.util.Date;
+
+public class PointRecord {
+    private Long id;
+
+    private Long userid;
+
     private String type;
 
     private String source;
@@ -8,6 +14,24 @@ public class PointRecord extends PointRecordKey {
     private Integer account;
 
     private String remark;
+
+    private Date recordTime;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getUserid() {
+        return userid;
+    }
+
+    public void setUserid(Long userid) {
+        this.userid = userid;
+    }
 
     public String getType() {
         return type;
@@ -39,5 +63,13 @@ public class PointRecord extends PointRecordKey {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public Date getRecordTime() {
+        return recordTime;
+    }
+
+    public void setRecordTime(Date recordTime) {
+        this.recordTime = recordTime;
     }
 }

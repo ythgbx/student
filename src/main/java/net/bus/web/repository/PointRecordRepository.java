@@ -37,7 +37,7 @@ public class PointRecordRepository {
         return _mapper.selectByExampleWithRowbounds(example,new RowBounds(page*limit,limit)); //分页
     }
 
-    public PointRecord getItem(PointRecordKey key){
+    public PointRecord getItem(Long key){
         return _mapper.selectByPrimaryKey(key);
     }
     public int insertItem(PointRecord pointRecord)

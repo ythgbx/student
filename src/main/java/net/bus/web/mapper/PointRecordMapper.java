@@ -3,7 +3,6 @@ package net.bus.web.mapper;
 import java.util.List;
 import net.bus.web.model.PointRecord;
 import net.bus.web.model.PointRecordExample;
-import net.bus.web.model.PointRecordKey;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
@@ -12,7 +11,7 @@ public interface PointRecordMapper {
 
     int deleteByExample(PointRecordExample example);
 
-    int deleteByPrimaryKey(PointRecordKey key);
+    int deleteByPrimaryKey(Long id);
 
     int insert(PointRecord record);
 
@@ -22,7 +21,7 @@ public interface PointRecordMapper {
 
     List<PointRecord> selectByExample(PointRecordExample example);
 
-    PointRecord selectByPrimaryKey(PointRecordKey key);
+    PointRecord selectByPrimaryKey(Long id);
 
     int updateByExampleSelective(@Param("record") PointRecord record, @Param("example") PointRecordExample example);
 

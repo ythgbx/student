@@ -105,6 +105,66 @@ public class PointRecordExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
+        public Criteria andIdIsNull() {
+            addCriterion("id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdIsNotNull() {
+            addCriterion("id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdEqualTo(Long value) {
+            addCriterion("id =", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNotEqualTo(Long value) {
+            addCriterion("id <>", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdGreaterThan(Long value) {
+            addCriterion("id >", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("id >=", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdLessThan(Long value) {
+            addCriterion("id <", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdLessThanOrEqualTo(Long value) {
+            addCriterion("id <=", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdIn(List<Long> values) {
+            addCriterion("id in", values, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNotIn(List<Long> values) {
+            addCriterion("id not in", values, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdBetween(Long value1, Long value2) {
+            addCriterion("id between", value1, value2, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNotBetween(Long value1, Long value2) {
+            addCriterion("id not between", value1, value2, "id");
+            return (Criteria) this;
+        }
+
         public Criteria andUseridIsNull() {
             addCriterion("userId is null");
             return (Criteria) this;
@@ -162,66 +222,6 @@ public class PointRecordExample {
 
         public Criteria andUseridNotBetween(Long value1, Long value2) {
             addCriterion("userId not between", value1, value2, "userid");
-            return (Criteria) this;
-        }
-
-        public Criteria andRecordTimeIsNull() {
-            addCriterion("record_time is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andRecordTimeIsNotNull() {
-            addCriterion("record_time is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andRecordTimeEqualTo(Date value) {
-            addCriterion("record_time =", value, "recordTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andRecordTimeNotEqualTo(Date value) {
-            addCriterion("record_time <>", value, "recordTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andRecordTimeGreaterThan(Date value) {
-            addCriterion("record_time >", value, "recordTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andRecordTimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("record_time >=", value, "recordTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andRecordTimeLessThan(Date value) {
-            addCriterion("record_time <", value, "recordTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andRecordTimeLessThanOrEqualTo(Date value) {
-            addCriterion("record_time <=", value, "recordTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andRecordTimeIn(List<Date> values) {
-            addCriterion("record_time in", values, "recordTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andRecordTimeNotIn(List<Date> values) {
-            addCriterion("record_time not in", values, "recordTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andRecordTimeBetween(Date value1, Date value2) {
-            addCriterion("record_time between", value1, value2, "recordTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andRecordTimeNotBetween(Date value1, Date value2) {
-            addCriterion("record_time not between", value1, value2, "recordTime");
             return (Criteria) this;
         }
 
@@ -492,6 +492,66 @@ public class PointRecordExample {
 
         public Criteria andRemarkNotBetween(String value1, String value2) {
             addCriterion("remark not between", value1, value2, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecordTimeIsNull() {
+            addCriterion("record_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecordTimeIsNotNull() {
+            addCriterion("record_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecordTimeEqualTo(Date value) {
+            addCriterion("record_time =", value, "recordTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecordTimeNotEqualTo(Date value) {
+            addCriterion("record_time <>", value, "recordTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecordTimeGreaterThan(Date value) {
+            addCriterion("record_time >", value, "recordTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecordTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("record_time >=", value, "recordTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecordTimeLessThan(Date value) {
+            addCriterion("record_time <", value, "recordTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecordTimeLessThanOrEqualTo(Date value) {
+            addCriterion("record_time <=", value, "recordTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecordTimeIn(List<Date> values) {
+            addCriterion("record_time in", values, "recordTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecordTimeNotIn(List<Date> values) {
+            addCriterion("record_time not in", values, "recordTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecordTimeBetween(Date value1, Date value2) {
+            addCriterion("record_time between", value1, value2, "recordTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecordTimeNotBetween(Date value1, Date value2) {
+            addCriterion("record_time not between", value1, value2, "recordTime");
             return (Criteria) this;
         }
     }

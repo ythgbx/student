@@ -5,7 +5,6 @@ import java.util.List;
 import net.bus.web.model.Pojo.SignRecordPojo;
 import net.bus.web.model.Sign;
 import net.bus.web.model.SignExample;
-import net.bus.web.model.SignKey;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
@@ -14,7 +13,7 @@ public interface SignMapper {
 
     int deleteByExample(SignExample example);
 
-    int deleteByPrimaryKey(SignKey key);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(Sign record);
 
@@ -24,7 +23,7 @@ public interface SignMapper {
 
     List<Sign> selectByExample(SignExample example);
 
-    Sign selectByPrimaryKey(SignKey key);
+    Sign selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Sign record, @Param("example") SignExample example);
 
@@ -33,6 +32,6 @@ public interface SignMapper {
     int updateByPrimaryKeySelective(Sign record);
 
     int updateByPrimaryKey(Sign record);
-
-    List<SignRecordPojo> selectSignRecordByUserId(long userId,RowBounds rowBounds);
+    /*2016年10月19日13:56:15 author: sakura*/
+    List<SignRecordPojo> selectSignRecordByUserId(long userId, RowBounds rowBounds);
 }
