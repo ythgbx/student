@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
 
@@ -124,9 +125,26 @@ public class WeiXinController {
     @ApiOperation(value = "支付测试", httpMethod = "POST", response = LoginResult.class, notes = "支付测试")
     public IResult paytest(@ApiParam(required = true, name = "request", value = "支付测试请求")@RequestBody BaseRequest request)
     {
-        BaseResult result = new BaseResult();
-        result.setResult("success");
-        Map<String,String> re = _wxpayService.prepay(1L);
+        WeiXinPrepay result = new WeiXinPrepay();
+        try{
+            Map<String,String> prepayInfoMap = _wxpayService.prepay(1L);
+            if(prepayInfoMap.get("return_code").equals("SUCCESS")&&prepayInfoMap.containsKey("prepay_id")){
+                result.setPartnerId(prepayInfoMap.get("mch_id"));
+                result.setPrepayId(prepayInfoMap.get("prepay_id"));
+                result.setNonceStr(prepayInfoMap.get("nonce_str"));
+                result.setTimeStamp(new Date().getTime() / 1000);
+                result.setWxPackage("Sign=WXPay");
+                result.setSign(prepayInfoMap.get("sign"));
+                result.setResult("success");
+            }else{
+                result.setResult("failed");
+                result.setContent(prepayInfoMap.get("return_msg"));
+            }
+        }catch (Exception e){
+            result.setResult("error");
+        }
+
+
         return result;
     }
 }
