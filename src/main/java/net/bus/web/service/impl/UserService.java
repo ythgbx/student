@@ -79,6 +79,8 @@ public class UserService  implements IUserService {
         user.setType(0);//用户类型：0是普通用户，1是司机，999是管理员
         user.setSalt(getRandomString(6));
         user.setPassword(getUserPasswordMd5(user.getSalt(),password));
+        user.setRealName("");
+        user.setIdCard("");
         _rootRepository.insertUser(user);
         return user;
     }
@@ -96,6 +98,8 @@ public class UserService  implements IUserService {
         user.setType(0);//用户类型：0是普通用户，1是司机，999是管理员
         user.setSalt("");
         user.setPassword("");
+        user.setRealName("");
+        user.setIdCard("");
         _rootRepository.insertUser(user);
         return user;
     }
