@@ -3,7 +3,6 @@ package net.bus.web.repository;
 import net.bus.web.mapper.PointRecordMapper;
 import net.bus.web.model.PointRecord;
 import net.bus.web.model.PointRecordExample;
-import net.bus.web.model.PointRecordKey;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
