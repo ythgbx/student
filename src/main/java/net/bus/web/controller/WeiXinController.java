@@ -67,17 +67,22 @@ public class WeiXinController {
             if(StringUtils.isNoneBlank(unionId)){
                 User user = _userService.getUserByWx(unionId);
                 if(user==null){
-                    String headUrl = info.get("headimgurl");
-                    try{
-                        String dir = _request.getSession().getServletContext().getRealPath("/resources/upload");//设定文件保存的目录
-                        String fileExt = ".jpg";
-                        String fileName = UUID.randomUUID().toString()+fileExt;
-                        ImgUtil.SaveUrlImg(info.get("headimgurl"), dir+"/"+fileName);
-                        headUrl = fileName;
-                    }catch (Exception e){
-                        //ignore
-                    }
-                    user = _userService.registerByWx(unionId,info.get("nickname"),headUrl);
+                    result.setSession_id(null);
+                    result.setResult("failure");
+                    return result;
+
+//                    //取消自动注册逻辑
+//                    String headUrl = info.get("headimgurl");
+//                    try{
+//                        String dir = _request.getSession().getServletContext().getRealPath("/resources/upload");//设定文件保存的目录
+//                        String fileExt = ".jpg";
+//                        String fileName = UUID.randomUUID().toString()+fileExt;
+//                        ImgUtil.SaveUrlImg(info.get("headimgurl"), dir+"/"+fileName);
+//                        headUrl = fileName;
+//                    }catch (Exception e){
+//                        //ignore
+//                    }
+//                    user = _userService.registerByWx(unionId,info.get("nickname"),headUrl);
                 }
 
                 _session.setAttribute(SessionContext.CURRENT_USER, user);
@@ -94,6 +99,47 @@ public class WeiXinController {
         }else{
             //TODO code is null
             result.setSession_id(null);
+            result.setResult("failure");
+        }
+
+        return result;
+    }
+
+    @Auth(role = Auth.Role.USER)
+    @ResponseBody
+    @RequestMapping(value = "/bind", method = RequestMethod.POST)
+    @ApiOperation(value = "微信绑定", httpMethod = "POST", response = LoginResult.class, notes = "微信绑定")
+    public IResult bind(@ApiParam(required = true, name = "request", value = "微信绑定请求")@RequestBody WeiXinLogin request)
+    {
+        BaseResult result = new BaseResult();
+        if(StringUtils.isNoneBlank(request.getCode())){
+
+            Map<String,String> info = WeiXinCore.getInfo(request.getCode());
+            String unionId = (info!=null&&info.containsKey("unionid"))?info.get("unionid"):null;
+            if(StringUtils.isNoneBlank(unionId)){
+                User user = (User) _session.getAttribute(SessionContext.CURRENT_USER);
+                String headUrl = user.getPhoto();
+
+                try{
+                    String dir = _request.getSession().getServletContext().getRealPath("/resources/upload");//设定文件保存的目录
+                    String fileExt = ".jpg";
+                    String fileName = UUID.randomUUID().toString()+fileExt;
+                    ImgUtil.SaveUrlImg(info.get("headimgurl"), dir+"/"+fileName);
+                    headUrl = fileName;
+                }catch (Exception e){
+                    //ignore
+                }
+
+                user = _userService.bindWx(user,unionId, info.get("nickname"), headUrl);
+
+                _session.setAttribute(SessionContext.CURRENT_USER, user);
+                _session.setAttribute(SessionContext.CURRENT_USER_ROLE, Auth.Role.USER);
+
+                result.setResult("success");
+            }else {
+                result.setResult("failure");
+            }
+        }else{
             result.setResult("failure");
         }
 

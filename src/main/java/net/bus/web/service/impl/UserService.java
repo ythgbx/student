@@ -104,6 +104,15 @@ public class UserService  implements IUserService {
         return user;
     }
 
+    public User bindWx(User user,String wxUnionId,String name,String photo)
+    {
+        user.setName(name);
+        user.setWxUnionId(wxUnionId);
+        user.setPhoto(photo);
+        _rootRepository.updateUser(user);
+        return user;
+    }
+
     public boolean setAccount(User user,String phone,String password)
     {
         if(user!=null)

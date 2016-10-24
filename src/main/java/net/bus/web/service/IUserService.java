@@ -28,6 +28,8 @@ public interface IUserService {
 
     User registerByWx(String wxUnionId,String name,String photo);
 
+    User bindWx(User user,String wxUnionId,String name,String photo);
+
     boolean setAccount(User user,String phone,String password);
 
     boolean setBase(User user,Position pos,String name,String photo);
