@@ -17,6 +17,8 @@ public class UserBase extends BaseResult {
     private String vip_type;
     private Long expiry_date;
     private Boolean isCertification;
+    private Boolean isWxBind;
+
 
     public Long getId() {
         return id;
@@ -104,4 +106,18 @@ public class UserBase extends BaseResult {
         }
 
     }
+
+    public Boolean getWxBind() {
+        return isWxBind;
+    }
+
+    public void setWxBind(User user,String WxUnionId) {
+        if (user!=null&&WxUnionId.equals("[Null]")){
+            isWxBind = false;
+        }
+        else {
+            isWxBind = true;
+        }
+    }
+
 }

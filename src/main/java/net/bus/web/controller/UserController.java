@@ -121,6 +121,7 @@ public class UserController {
         userBase.setPhoto(user.getPhoto());
         userBase.setId(user.getId());
         userBase.setCertification(user,user.getRealName(),user.getIdCard());
+        userBase.setWxBind(user,user.getWxUnionId());
 
         UserCoupon userCoupon = _userCouponService.getUserTimePeriodTicketCoupon(user.getId());
         userBase.setVip_type("common");//普通会员(不拥有时段优惠券用户)
