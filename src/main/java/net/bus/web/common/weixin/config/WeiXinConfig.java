@@ -14,9 +14,9 @@ public class WeiXinConfig {
     public final static String SIGN_TYPE = "MD5";//签名加密方式
     public final static String CERT_PATH = "";//微信支付证书存放路径地址
     //微信支付统一接口的回调action
-    public final static String NOTIFY_URL = "";
+    public final static String NOTIFY_URL = "http://service.zfbus.net/weixin/async";
     //微信支付成功支付后跳转的地址
-    public final static String SUCCESS_URL = "http://www.xiaoshuaishuai.com";
+    public final static String SUCCESS_URL = "";
     //oauth2授权时回调action
     public final static String REDIRECT_URI = "";
     /**

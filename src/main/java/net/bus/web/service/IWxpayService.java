@@ -7,5 +7,7 @@ import java.util.Map;
  */
 public interface IWxpayService {
 
-    public Map<String,String> prepay(Long id);
+    Map<String,String> prepay(Long id);
+
+    boolean async(Map<String, String> params);
 }
