@@ -9,8 +9,8 @@ public class WeiXinConfig {
 
     //应用对应的密钥
     public final static String TOKEN = "weixinCourse";//服务号的配置token
-    public final static String MCH_ID = "1381641802";//商户号
-    public final static String API_KEY = "V1MV3r4A6WL5UbvY8BcxH50xGNyIt5Cz";//API密钥
+    public final static String MCH_ID = "1395698302";//商户号
+    public final static String API_KEY = "C51802222614C1502862952a47385F04";//API密钥
     public final static String SIGN_TYPE = "MD5";//签名加密方式
     public final static String CERT_PATH = "";//微信支付证书存放路径地址
     //微信支付统一接口的回调action

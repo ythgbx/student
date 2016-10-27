@@ -21,7 +21,7 @@ public class WxpayService implements IWxpayService{
     {
         Map<String,String> prepayInfo = null;
         try {
-            prepayInfo =  PayCommonUtil.getPrepayId("0.01", "192.168.1.110", "123456789","测试商品","");
+            prepayInfo =  PayCommonUtil.getPrepayId("1", "192.168.1.110", "123456789","测试商品","");
         } catch (Exception e) {
             e.printStackTrace();
         }
