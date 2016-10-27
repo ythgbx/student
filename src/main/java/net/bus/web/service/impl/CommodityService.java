@@ -1,6 +1,7 @@
 package net.bus.web.service.impl;
 
 import net.bus.web.context.AlipayCallBack;
+import net.bus.web.enums.OrderTypeEnum;
 import net.bus.web.model.Commodity;
 import net.bus.web.model.CommodityOrder;
 import net.bus.web.model.User;
@@ -14,6 +15,7 @@ import net.bus.web.repository.specification.CommodityOrderTradeNoSpecification;
 import net.bus.web.repository.specification.CommodityOrderUserIdAndPaied;
 import net.bus.web.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,8 +28,8 @@ import java.util.UUID;
 /**
  * Created by Edifi_000 on 2016-09-04.
  */
-@Service
-public class CommodityService implements ICommodityService{
+@Service("commodityService")
+public class CommodityService implements ICommodityService,IPayService{
 
     @Autowired
     private CommodityRepository _rootRepository;
@@ -134,7 +136,7 @@ public class CommodityService implements ICommodityService{
     public String getOutTradeNo()
     {
         //TODO 生成订单编号
-        return UUID.randomUUID().toString().replace("-", "");
+        return OrderTypeEnum.COMMODITY.getIndex() + UUID.randomUUID().toString().replace("-", "");
     }
 
     public List<CommodityOrder> getUserOrders(long userId,int page,int limit){

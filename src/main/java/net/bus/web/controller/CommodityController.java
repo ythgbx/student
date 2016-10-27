@@ -11,9 +11,11 @@ import net.bus.web.model.User;
 import net.bus.web.service.ICommodityService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,7 +28,9 @@ import java.util.List;
 @RequestMapping("/commodity")
 public class CommodityController {
 
-    @Autowired
+    //@Autowired
+    //@Qualifier("commodityService")
+    @Resource(name = "commodityService")
     private ICommodityService _commodityService;
     @Autowired
     private HttpSession session;

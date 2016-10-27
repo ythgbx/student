@@ -193,5 +193,14 @@
                enableCountByExample="true"
                enableUpdateByExample="true">
         </table>
+	
+	<!--<table tableName="activity_order" domainObjectName="ActivityOrder"  enableSelectByPrimaryKey="true"-->
+               <!--enableUpdateByPrimaryKey="true"-->
+               <!--enableDeleteByPrimaryKey="true"-->
+               <!--enableSelectByExample="true"-->
+               <!--enableDeleteByExample="true"-->
+               <!--enableCountByExample="true"-->
+               <!--enableUpdateByExample="true">-->
+        <!--</table>-->
     </context>
 </generatorConfiguration>

@@ -6,8 +6,10 @@ import net.bus.web.common.alipay.sign.RSA;
 import net.bus.web.common.alipay.util.AlipayCore;
 import net.bus.web.common.alipay.util.AlipayNotify;
 import net.bus.web.context.AlipayCallBack;
+import net.bus.web.enums.OrderTypeEnum;
 import net.bus.web.service.IAlipayService;
 import net.bus.web.service.ICommodityService;
+import net.bus.web.service.IPayService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,8 +25,7 @@ import java.util.Map;
 @Service
 public class AlipayService implements IAlipayService{
 
-    @Autowired
-    private ICommodityService _commodityService;
+
 
     private Logger logger = Logger.getLogger("CommonLogger");
 
@@ -54,8 +55,8 @@ public class AlipayService implements IAlipayService{
                     if(callBack.getTradeStatus().equals("TRADE_FINISHED") || callBack.getTradeStatus().equals("TRADE_SUCCESS")) {
 
                         logger.info("async sign verified success:"+callBack.getOutTradeNo());
-
-                        if(_commodityService.buyComplete(callBack)){
+                        IPayService payService = OrderTypeEnum.get(Integer.parseInt(callBack.getOutTradeNo().substring(0,1))).getService();
+                        if(payService.buyComplete(callBack)){
                             logger.info("buy complete:"+callBack.getOutTradeNo());
                         }else{
                             logger.info("buy failed:"+callBack.getOutTradeNo());

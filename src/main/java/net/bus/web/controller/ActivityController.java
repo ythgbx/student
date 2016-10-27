@@ -4,20 +4,25 @@ package net.bus.web.controller;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 import net.bus.web.aspect.Auth;
-import net.bus.web.controller.dto.IResult;
-import net.bus.web.controller.dto.ActivityDetail;
-import net.bus.web.controller.dto.ActivityItem;
-import net.bus.web.controller.dto.ActivityList;
+import net.bus.web.context.SessionContext;
+import net.bus.web.controller.dto.*;
 import net.bus.web.model.Activity;
+import net.bus.web.model.User;
 import net.bus.web.service.IActivityService;
+import net.bus.web.service.exception.ActivityException;
+import net.bus.web.service.exception.OutOfStockException;
+import net.bus.web.service.exception.RepeatApplyException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,10 +35,15 @@ import java.util.List;
 @RequestMapping("/activity")
 public class ActivityController {
 
-    @Autowired
+    //@Autowired
+    @Resource(name = "activityService")
     private IActivityService _activityService;
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
+
+
+    @Autowired
+    private HttpSession session;
 
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
@@ -54,17 +64,19 @@ public class ActivityController {
     @ResponseBody
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
     @ApiOperation(value = "获取活动详细", httpMethod = "GET", response = ActivityDetail.class, notes = "获取活动详细")
-    public IResult detail(@ApiParam(required = true, name = "id", value = "id")@RequestParam(value = "id", required = true, defaultValue = "0")long id)
+    public IResult detail(
+            @ApiParam(required = true, name = "id", value = "id")
+            @RequestParam(value = "id", required = true, defaultValue = "0")long id
+    )
     {
         logger.info("activity detail");
         ActivityDetail activityDetail = new ActivityDetail();
         Activity activity = _activityService.getActivityDetails(id);
         activityDetail.setId(activity.getId());
-        activityDetail.setContent(activity.getContent());
         activityDetail.setImg(activity.getImage());
-        activityDetail.setTime(activity.getTime().getTime());
-        activityDetail.setIntroduction(activity.getIntroduction());
-        activityDetail.setScope(activity.getScope());
+        activityDetail.setStartTime(activity.getStartime().getTime());
+        activityDetail.setEndTime(activity.getEndtime().getTime());
+        activityDetail.setPrice(activityDetail.getPrice());
         return activityDetail;
     }
 
@@ -80,4 +92,36 @@ public class ActivityController {
         }
         return displayList;
     }
+
+    @Auth(role = Auth.Role.USER)
+    @RequestMapping(value = "/join",method = RequestMethod.POST)
+    @ApiOperation(value = "参加活动", httpMethod = "POST", response = ActivityDetail.class, notes = "获取活动详细")
+    @ResponseBody
+    public IResult join(@ApiParam(required = true, name = "活动id", value = "id")
+                             @RequestParam(value = "id", required = true, defaultValue = "0")long id){
+        //TODO 参加活动逻辑
+        BaseResult result = new BaseResult();
+        User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
+        try {
+            _activityService.join(id,user);
+            result.setResult("success");
+            result.setContent("您已成功报名参加本次活动");
+        } catch (OutOfStockException e) {
+            //商品已售完
+            result.setResult("failed");
+            result.setContent(e.getMessage());
+        } catch (RepeatApplyException e) {
+            //重复下单
+            result.setResult("error");
+            result.setError(e.getMessage());
+
+        }catch (ActivityException e){
+            //活动时间错误
+            result.setResult("error");
+            result.setError(e.getMessage());
+        }
+        return result;
+    }
+
+
 }

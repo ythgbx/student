@@ -1,6 +1,9 @@
 package net.bus.web.service;
 
 import net.bus.web.model.Activity;
+import net.bus.web.model.User;
+import net.bus.web.service.exception.OutOfStockException;
+import net.bus.web.service.exception.RepeatApplyException;
 
 import java.util.List;
 
@@ -17,4 +20,5 @@ public interface IActivityService {
 
     boolean addActivity(Activity activity);
 
+    String join(Long id, User user) throws OutOfStockException, RepeatApplyException;
 }
