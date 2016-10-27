@@ -4,6 +4,7 @@ import net.bus.web.common.weixin.config.WeiXinConfig;
 import net.bus.web.common.weixin.util.PayCommonUtil;
 import net.bus.web.context.WxCallBack;
 import net.bus.web.service.IWxpayService;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -17,6 +18,8 @@ import java.util.TreeMap;
 @Service
 public class WxpayService implements IWxpayService{
 
+    private Logger logger = Logger.getLogger("CommonLogger");
+
     public Map<String,String> prepay(Long id)
     {
         Map<String,String> prepayInfo = null;
@@ -29,6 +32,7 @@ public class WxpayService implements IWxpayService{
     }
 
     public boolean async(Map<String, String> params){
+        logger.info("async info print:"+params.toString());
         WxCallBack callBack = getCallBack(params);
 
         if(callBack.getResultCode().equals("SUCCESS")){
@@ -52,8 +56,10 @@ public class WxpayService implements IWxpayService{
             parameters.put("transaction_id", callBack.getTransactionId());
 
             String sign = PayCommonUtil.createSign("UTF-8", parameters);
+            logger.info("async check sign:"+sign+" callback.sign:"+callBack.getSign());
             if(callBack.getSign().equals(sign)){
                 //TODO 判断支付并执行后续处理
+                logger.info("async sign verified success:"+callBack.getOutTradeNo());
             }
         }
 
