@@ -25,6 +25,18 @@ public class WxpayService implements IWxpayService{
         Map<String,String> prepayInfo = null;
         try {
             prepayInfo =  PayCommonUtil.getPrepayId("1", "192.168.1.110", "123456789","测试商品","");
+			prepayInfo.put("time_stamp",(new Date().getTime() / 1000)+"");
+			prepayInfo.put("package","Sign=WXPay")
+			SortedMap<Object,Object> parameters = new TreeMap<Object,Object>();
+			parameters.put("appid", WeiXinConfig.app_id);
+			parameters.put("partnerid", WeiXinConfig.mch_id);
+			parameters.put("prepayid", prepayInfo.get("prepay_id"));
+			parameters.put("package", prepayInfo.get("package"));
+			parameters.put("noncestr",prepayInfo.get("nonce_str"));
+			parameters.put("timestamp", prepayInfo.get("time_stamp"));
+			String sign = PayCommonUtil.createSign("UTF-8", parameters);
+			prepayInfo.put("sign",sign);
+
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -184,8 +184,8 @@ public class WeiXinController {
                 result.setPartnerId(prepayInfoMap.get("mch_id"));
                 result.setPrepayId(prepayInfoMap.get("prepay_id"));
                 result.setNonceStr(prepayInfoMap.get("nonce_str"));
-                result.setTimeStamp(new Date().getTime() / 1000);
-                result.setWxPackage("Sign=WXPay");
+                result.setTimeStamp(Long.parseLong(prepayInfoMap.get("time_stamp")));
+                result.setWxPackage(prepayInfoMap.get("package"));
                 result.setSign(prepayInfoMap.get("sign"));
                 result.setResult("success");
             }else{
