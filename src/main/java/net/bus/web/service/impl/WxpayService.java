@@ -8,9 +8,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.Map;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * Created by Edifi_000 on 2016-10-19.
@@ -20,16 +18,22 @@ public class WxpayService implements IWxpayService{
 
     private Logger logger = Logger.getLogger("CommonLogger");
 
+    public String getOutTradeNo()
+    {
+        //TODO 生成订单编号
+        return UUID.randomUUID().toString().replace("-", "");
+    }
+
     public Map<String,String> prepay(Long id)
     {
         Map<String,String> prepayInfo = null;
         try {
-            prepayInfo =  PayCommonUtil.getPrepayId("1", "192.168.1.110", "123456789","测试商品","");
+            prepayInfo =  PayCommonUtil.getPrepayId("1", "192.168.1.110",getOutTradeNo(),"测试商品","");
 			prepayInfo.put("time_stamp",(new Date().getTime() / 1000)+"");
-			prepayInfo.put("package","Sign=WXPay")
+			prepayInfo.put("package","Sign=WXPay");
 			SortedMap<Object,Object> parameters = new TreeMap<Object,Object>();
 			parameters.put("appid", WeiXinConfig.app_id);
-			parameters.put("partnerid", WeiXinConfig.mch_id);
+			parameters.put("partnerid", WeiXinConfig.MCH_ID);
 			parameters.put("prepayid", prepayInfo.get("prepay_id"));
 			parameters.put("package", prepayInfo.get("package"));
 			parameters.put("noncestr",prepayInfo.get("nonce_str"));
