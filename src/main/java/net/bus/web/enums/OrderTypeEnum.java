@@ -1,23 +1,14 @@
 package net.bus.web.enums;
 
-import net.bus.web.context.ApplicationContextProvider;
-import net.bus.web.service.IPayService;
-import net.bus.web.service.impl.ActivityService;
-import net.bus.web.service.impl.CommodityService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-
 /**
- * Created by sky on 16/10/26.
+ * Created by Edifi_000 on 2016-10-31.
  */
-public enum OrderTypeEnum {
-    COMMODITY(1,"商品",(IPayService) ApplicationContextProvider.getApplicationContext().getBean(CommodityService.class)),
-    ACTIVITY(2,"活动",(IPayService)  ApplicationContextProvider.getApplicationContext().getBean(ActivityService.class));
-
+public enum  OrderTypeEnum {
+    ALIPAY (1,"支付宝"),
+    WXPAY (2,"微信");
 
     private int index;
     private String name;
-    private IPayService service;
 
     public int getIndex() {
         return index;
@@ -35,20 +26,9 @@ public enum OrderTypeEnum {
         this.name = name;
     }
 
-    public IPayService getService() {
-        return service;
-    }
-
-    public void setService(IPayService service) {
-        this.service = service;
-    }
-
-
-
-    OrderTypeEnum(int i, String name,IPayService service) {
+    OrderTypeEnum(int i, String name) {
         this.index = i;
         this.name = name;
-        this.service = service;
     }
 
     public static OrderTypeEnum get(int index){

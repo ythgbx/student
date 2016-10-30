@@ -1,7 +1,7 @@
 package net.bus.web.service.impl;
 
 import net.bus.web.context.AlipayCallBack;
-import net.bus.web.enums.OrderTypeEnum;
+import net.bus.web.enums.ProducedTypeEnum;
 import net.bus.web.model.Activity;
 import net.bus.web.model.ActivityOrder;
 import net.bus.web.model.User;
@@ -14,12 +14,10 @@ import net.bus.web.service.IPayService;
 import net.bus.web.service.exception.ActivityException;
 import net.bus.web.service.exception.OutOfStockException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -124,7 +122,7 @@ public class ActivityService implements IActivityService,IPayService {
 
 
     public String getOutTradeNo() {
-        return OrderTypeEnum.ACTIVITY.getIndex() + UUID.randomUUID().toString().replace("-", "");
+        return ProducedTypeEnum.ACTIVITY.getIndex() + UUID.randomUUID().toString().replace("-", "");
     }
 
     @Transactional
