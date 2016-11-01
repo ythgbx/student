@@ -1,6 +1,7 @@
 package net.bus.web.controller;
 
 
+import com.sun.org.apache.regexp.internal.RE;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 import net.bus.web.aspect.Auth;
@@ -12,18 +13,22 @@ import net.bus.web.service.IActivityService;
 import net.bus.web.service.exception.ActivityException;
 import net.bus.web.service.exception.OutOfStockException;
 import net.bus.web.service.exception.RepeatApplyException;
+import org.apache.ibatis.annotations.Param;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -123,5 +128,58 @@ public class ActivityController {
         return result;
     }
 
+
+    @Auth(role = Auth.Role.USER)
+    @RequestMapping(value="/list", method = RequestMethod.GET)
+    @ApiOperation(value = "活动列表页面", httpMethod = "GET", response = ModelAndView.class, notes = "活动列表页面")
+    @ResponseBody
+    public ModelAndView list(Model model)
+    {
+        logger.info("url:/activity/list");
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("activity");
+        List<Activity> activities = _activityService.getAllActivity(1,10);
+        mv.addObject("activityList",activities);
+        return mv;
+    }
+
+    @Auth(role=Auth.Role.USER)
+    @RequestMapping(value = "/addactivity",method = RequestMethod.POST)
+    @ApiOperation(value = "添加活动",httpMethod = "POST",response = BaseResult.class,notes = "添加活动")
+    @ResponseBody
+    public  ModelAndView AddActivity(@ApiParam(required = true, name = "addactivity", value = "添加活动请求")
+                               @Param("title") String title,
+                               @Param("detail") String detail,
+                               @Param("amount") Integer amount,
+                               @Param("price") BigDecimal price,
+                               @Param("startime") String startime,
+                               @Param("endtime") String endtime
+
+
+
+    ) throws ParseException {
+        logger.info("url:/activity/addactivity");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date startime2 = dateFormat.parse(startime);
+        Date endtime2 = dateFormat.parse(endtime);
+        Activity activity=new Activity();
+        activity.setTitle(title);
+        activity.setDetail(detail);
+        activity.setAmount(amount);
+        activity.setPrice(price);
+        activity.setStartime(startime2);
+        activity.setEndtime(endtime2);
+        activity.setImage("");
+        if (title != null) {
+            if (_activityService.addActivity(activity)) {
+                return new ModelAndView("redirect:/activity/list");
+            }
+            return new ModelAndView("redirect:/activity/list");
+        }
+        return new ModelAndView("redirect:/activity/list");
+
+
+    }
 
 }

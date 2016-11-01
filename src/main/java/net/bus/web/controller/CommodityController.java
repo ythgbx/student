@@ -7,7 +7,6 @@ import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.*;
 import net.bus.web.model.Commodity;
 import net.bus.web.model.CommodityOrder;
-import net.bus.web.model.CommodityOrderExample;
 import net.bus.web.model.Pojo.PagePojo;
 import net.bus.web.model.User;
 import net.bus.web.service.ICommodityService;

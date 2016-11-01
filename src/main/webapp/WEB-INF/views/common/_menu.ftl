@@ -108,7 +108,7 @@
                     <a href="#">
 									<span class="menu-content block">
 										<span class="menu-icon"><i class="block fa fa-gift fa-lg"></i></span>
-										<span class="text m-left-sm">Extra Pages</span>
+										<span class="text m-left-sm">临时界面</span>
 										<span class="submenu-icon"></span>
 									</span>
 									<span class="menu-content-hover block">
@@ -127,6 +127,7 @@
                         <li><a href="invoice.html"><span class="submenu-label">Invoice</span></a></li>
                         <li><a href="error404.html"><span class="submenu-label">Error404</span></a></li>
                         <li><a href="blank.html"><span class="submenu-label">Blank</span></a></li>
+                        <li><a href="/activity/list"><span class="submenu-label">活动中心</span></a></li>
                     </ul>
                 </li>
                 <li class="openable bg-palette4">

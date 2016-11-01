@@ -57,6 +57,10 @@ public class ActivityService implements IActivityService,IPayService {
     }
 
     public boolean addActivity(Activity activity){
+        if(activityRepository.insertItem(activity)>0){
+            return  true;
+        }
+
         return false;
     }
 
