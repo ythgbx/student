@@ -2,27 +2,24 @@ package net.bus.web.service;
 
 import net.bus.web.enums.OrderTypeEnum;
 import net.bus.web.enums.ProducedTypeEnum;
-import net.bus.web.model.Order;
-import net.bus.web.model.Pojo.IOrderCallBack;
-
-import java.math.BigDecimal;
+import net.bus.web.model.Orders;
+import net.bus.web.model.Pojo.OrderCallBack;
+import net.bus.web.model.Pojo.Product;
 
 /**
  * Created by Edifi_000 on 2016-10-30.
  */
 public interface IOrderService {
 
-    String createTradeNo(OrderTypeEnum orderTypeEnum,ProducedTypeEnum producedType,int limitLength);
+    String createTradeNo(OrderTypeEnum orderTypeEnum,ProducedTypeEnum producedType);
 
-    Order create(Long userId,OrderTypeEnum orderTypeEnum,Long productId,ProducedTypeEnum producedType,int amount,BigDecimal price);
+    OrderCallBack submit(Long userId,OrderTypeEnum orderTypeEnum,Product product,int amount);
 
-    IOrderCallBack submit(Order order);
+    Orders query(String tradeNo);
 
-    Order query(String tradeNo);
+    void confirm(Orders order);
 
-    void confirm(Order order);
+    void refund(Orders order);
 
-    void refund(Order order);
-
-    void refundConfirm(Order order);
+    void refundConfirm(Orders order);
 }

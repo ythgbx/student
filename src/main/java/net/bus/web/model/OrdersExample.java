@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class OrderExample {
+public class OrdersExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public OrderExample() {
+    public OrdersExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -233,6 +233,66 @@ public class OrderExample {
 
         public Criteria andTradeNoNotBetween(String value1, String value2) {
             addCriterion("trade_no not between", value1, value2, "tradeNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andTradeTypeIsNull() {
+            addCriterion("trade_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTradeTypeIsNotNull() {
+            addCriterion("trade_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTradeTypeEqualTo(Integer value) {
+            addCriterion("trade_type =", value, "tradeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andTradeTypeNotEqualTo(Integer value) {
+            addCriterion("trade_type <>", value, "tradeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andTradeTypeGreaterThan(Integer value) {
+            addCriterion("trade_type >", value, "tradeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andTradeTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("trade_type >=", value, "tradeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andTradeTypeLessThan(Integer value) {
+            addCriterion("trade_type <", value, "tradeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andTradeTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("trade_type <=", value, "tradeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andTradeTypeIn(List<Integer> values) {
+            addCriterion("trade_type in", values, "tradeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andTradeTypeNotIn(List<Integer> values) {
+            addCriterion("trade_type not in", values, "tradeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andTradeTypeBetween(Integer value1, Integer value2) {
+            addCriterion("trade_type between", value1, value2, "tradeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andTradeTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("trade_type not between", value1, value2, "tradeType");
             return (Criteria) this;
         }
 
@@ -596,63 +656,63 @@ public class OrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andStatueIsNull() {
-            addCriterion("statue is null");
+        public Criteria andStateIsNull() {
+            addCriterion("state is null");
             return (Criteria) this;
         }
 
-        public Criteria andStatueIsNotNull() {
-            addCriterion("statue is not null");
+        public Criteria andStateIsNotNull() {
+            addCriterion("state is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStatueEqualTo(Integer value) {
-            addCriterion("statue =", value, "statue");
+        public Criteria andStateEqualTo(Integer value) {
+            addCriterion("state =", value, "state");
             return (Criteria) this;
         }
 
-        public Criteria andStatueNotEqualTo(Integer value) {
-            addCriterion("statue <>", value, "statue");
+        public Criteria andStateNotEqualTo(Integer value) {
+            addCriterion("state <>", value, "state");
             return (Criteria) this;
         }
 
-        public Criteria andStatueGreaterThan(Integer value) {
-            addCriterion("statue >", value, "statue");
+        public Criteria andStateGreaterThan(Integer value) {
+            addCriterion("state >", value, "state");
             return (Criteria) this;
         }
 
-        public Criteria andStatueGreaterThanOrEqualTo(Integer value) {
-            addCriterion("statue >=", value, "statue");
+        public Criteria andStateGreaterThanOrEqualTo(Integer value) {
+            addCriterion("state >=", value, "state");
             return (Criteria) this;
         }
 
-        public Criteria andStatueLessThan(Integer value) {
-            addCriterion("statue <", value, "statue");
+        public Criteria andStateLessThan(Integer value) {
+            addCriterion("state <", value, "state");
             return (Criteria) this;
         }
 
-        public Criteria andStatueLessThanOrEqualTo(Integer value) {
-            addCriterion("statue <=", value, "statue");
+        public Criteria andStateLessThanOrEqualTo(Integer value) {
+            addCriterion("state <=", value, "state");
             return (Criteria) this;
         }
 
-        public Criteria andStatueIn(List<Integer> values) {
-            addCriterion("statue in", values, "statue");
+        public Criteria andStateIn(List<Integer> values) {
+            addCriterion("state in", values, "state");
             return (Criteria) this;
         }
 
-        public Criteria andStatueNotIn(List<Integer> values) {
-            addCriterion("statue not in", values, "statue");
+        public Criteria andStateNotIn(List<Integer> values) {
+            addCriterion("state not in", values, "state");
             return (Criteria) this;
         }
 
-        public Criteria andStatueBetween(Integer value1, Integer value2) {
-            addCriterion("statue between", value1, value2, "statue");
+        public Criteria andStateBetween(Integer value1, Integer value2) {
+            addCriterion("state between", value1, value2, "state");
             return (Criteria) this;
         }
 
-        public Criteria andStatueNotBetween(Integer value1, Integer value2) {
-            addCriterion("statue not between", value1, value2, "statue");
+        public Criteria andStateNotBetween(Integer value1, Integer value2) {
+            addCriterion("state not between", value1, value2, "state");
             return (Criteria) this;
         }
 

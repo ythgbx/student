@@ -10,7 +10,12 @@ import net.bus.web.common.weixin.util.WeiXinCore;
 import net.bus.web.common.weixin.util.XMLUtil;
 import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.*;
+import net.bus.web.enums.OrderTypeEnum;
+import net.bus.web.enums.ProducedTypeEnum;
+import net.bus.web.model.Pojo.Product;
+import net.bus.web.model.Pojo.WxOrderCallBack;
 import net.bus.web.model.User;
+import net.bus.web.service.IOrderService;
 import net.bus.web.service.IUserService;
 import net.bus.web.service.IWxpayService;
 import org.apache.commons.lang3.StringUtils;
@@ -28,6 +33,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.net.URLDecoder;
 import java.util.*;
 
@@ -46,6 +52,8 @@ public class WeiXinController {
     private HttpServletRequest _request;
     @Autowired
     private IWxpayService _wxpayService;
+    @Autowired
+    private IOrderService _orderService;
 
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
@@ -179,21 +187,33 @@ public class WeiXinController {
     {
         WeiXinPrepay result = new WeiXinPrepay();
         try{
-            Map<String,String> prepayInfoMap = _wxpayService.prepay(1L);
-            if(prepayInfoMap.get("return_code").equals("SUCCESS")&&prepayInfoMap.containsKey("prepay_id")){
-                result.setPartnerId(prepayInfoMap.get("mch_id"));
-                result.setPrepayId(prepayInfoMap.get("prepay_id"));
-                result.setNonceStr(prepayInfoMap.get("nonce_str"));
-                result.setTimeStamp(Long.parseLong(prepayInfoMap.get("time_stamp")));
-                result.setWxPackage(prepayInfoMap.get("package"));
-                result.setSign(prepayInfoMap.get("sign"));
+            Product product = new Product();
+            product.setId(1L);
+            product.setSubject("测试商品");
+            product.setBody("测试商品描述");
+            product.setPrice(BigDecimal.valueOf(0.01));
+            product.setType(ProducedTypeEnum.COMMODITY);
+
+//            String tradeNo = UUID.randomUUID().toString().replace("-", "");
+
+
+            WxOrderCallBack orderCallBack = (WxOrderCallBack)_orderService.submit(8L, OrderTypeEnum.WXPAY,product,1);
+
+            if(orderCallBack!=null&&StringUtils.isBlank(orderCallBack.getFailed())){
+                result.setPartnerId(orderCallBack.getPartnerId());
+                result.setPrepayId(orderCallBack.getPrepayId());
+                result.setNonceStr(orderCallBack.getNonceStr());
+                result.setTimeStamp(orderCallBack.getTimeStamp());
+                result.setWxPackage(orderCallBack.getWxPackage());
+                result.setSign(orderCallBack.getSign());
                 result.setResult("success");
             }else{
                 result.setResult("failed");
-                result.setContent(prepayInfoMap.get("return_msg"));
+                result.setContent(orderCallBack.getFailed());
             }
         }catch (Exception e){
             result.setResult("error");
+            result.setContent(e.getMessage());
         }
 
 

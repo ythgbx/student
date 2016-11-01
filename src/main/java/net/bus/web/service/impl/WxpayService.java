@@ -3,6 +3,8 @@ package net.bus.web.service.impl;
 import net.bus.web.common.weixin.config.WeiXinConfig;
 import net.bus.web.common.weixin.util.PayCommonUtil;
 import net.bus.web.context.WxCallBack;
+import net.bus.web.model.Pojo.Product;
+import net.bus.web.model.Pojo.WxOrderCallBack;
 import net.bus.web.service.IWxpayService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
@@ -24,11 +26,13 @@ public class WxpayService implements IWxpayService{
         return UUID.randomUUID().toString().replace("-", "");
     }
 
-    public Map<String,String> prepay(Long id)
+    public WxOrderCallBack prepay(Product product,String tradeNo)
     {
         Map<String,String> prepayInfo = null;
         try {
-            prepayInfo =  PayCommonUtil.getPrepayId("1", "192.168.1.110",getOutTradeNo(),"测试商品","");
+            String totalFee = Integer.valueOf((product.getPrice().multiply(BigDecimal.valueOf(100d))).intValue()).toString();//以分为计费单位
+            String body = "追风巴士-"+product.getSubject();
+            prepayInfo =  PayCommonUtil.getPrepayId(totalFee, "192.168.1.110",tradeNo,body,"");
 			prepayInfo.put("time_stamp",(new Date().getTime() / 1000)+"");
 			prepayInfo.put("package","Sign=WXPay");
 			SortedMap<Object,Object> parameters = new TreeMap<Object,Object>();
@@ -44,7 +48,7 @@ public class WxpayService implements IWxpayService{
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return prepayInfo;
+        return getOrderCallBack(prepayInfo);
     }
 
     public boolean async(Map<String, String> params){
@@ -80,6 +84,22 @@ public class WxpayService implements IWxpayService{
         }
 
         return false;
+    }
+
+    private WxOrderCallBack getOrderCallBack(Map<String,String> prepayInfo){
+
+        WxOrderCallBack orderCallBack = null;
+        if(prepayInfo.get("return_code").equals("SUCCESS")&&prepayInfo.containsKey("prepay_id")){
+            orderCallBack = new WxOrderCallBack();
+            orderCallBack.setPartnerId(prepayInfo.get("mch_id"));
+            orderCallBack.setPrepayId(prepayInfo.get("prepay_id"));
+            orderCallBack.setNonceStr(prepayInfo.get("nonce_str"));
+            orderCallBack.setTimeStamp(Long.parseLong(prepayInfo.get("time_stamp")));
+            orderCallBack.setWxPackage(prepayInfo.get("package"));
+            orderCallBack.setSign(prepayInfo.get("sign"));
+        }
+
+        return orderCallBack;
     }
 
     private WxCallBack getCallBack(Map<String, String> params)
