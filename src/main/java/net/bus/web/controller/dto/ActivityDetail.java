@@ -12,12 +12,14 @@ import java.math.BigDecimal;
 public class ActivityDetail extends BaseResult{
     private Long id;
     private String img;
+    private String title;
+    private String detail;
     private Long startTime;
     private Long endTime;
     private Long createTime;
     private BigDecimal price;
     private BigDecimal pay;
-    private Long amount;
+    private Integer amount;
 
     public Long getId() {
         return id;
@@ -33,6 +35,22 @@ public class ActivityDetail extends BaseResult{
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
 
     public Long getStartTime() {
@@ -75,11 +93,11 @@ public class ActivityDetail extends BaseResult{
         this.pay = pay;
     }
 
-    public Long getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(Long amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 }

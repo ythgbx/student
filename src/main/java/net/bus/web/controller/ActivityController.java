@@ -76,7 +76,10 @@ public class ActivityController {
         activityDetail.setImg(activity.getImage());
         activityDetail.setStartTime(activity.getStartime().getTime());
         activityDetail.setEndTime(activity.getEndtime().getTime());
-        activityDetail.setPrice(activityDetail.getPrice());
+        activityDetail.setPrice(activity.getPrice());
+        activityDetail.setTitle(activity.getTitle());
+        activityDetail.setDetail(activity.getDetail());
+        activityDetail.setAmount(activity.getAmount());
         return activityDetail;
     }
 
