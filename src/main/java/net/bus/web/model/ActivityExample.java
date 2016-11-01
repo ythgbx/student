@@ -376,63 +376,123 @@ public class ActivityExample {
             return (Criteria) this;
         }
 
-        public Criteria andAmountIsNull() {
-            addCriterion("amount is null");
+        public Criteria andLowerLimitIsNull() {
+            addCriterion("lower_limit is null");
             return (Criteria) this;
         }
 
-        public Criteria andAmountIsNotNull() {
-            addCriterion("amount is not null");
+        public Criteria andLowerLimitIsNotNull() {
+            addCriterion("lower_limit is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAmountEqualTo(Integer value) {
-            addCriterion("amount =", value, "amount");
+        public Criteria andLowerLimitEqualTo(Integer value) {
+            addCriterion("lower_limit =", value, "lowerLimit");
             return (Criteria) this;
         }
 
-        public Criteria andAmountNotEqualTo(Integer value) {
-            addCriterion("amount <>", value, "amount");
+        public Criteria andLowerLimitNotEqualTo(Integer value) {
+            addCriterion("lower_limit <>", value, "lowerLimit");
             return (Criteria) this;
         }
 
-        public Criteria andAmountGreaterThan(Integer value) {
-            addCriterion("amount >", value, "amount");
+        public Criteria andLowerLimitGreaterThan(Integer value) {
+            addCriterion("lower_limit >", value, "lowerLimit");
             return (Criteria) this;
         }
 
-        public Criteria andAmountGreaterThanOrEqualTo(Integer value) {
-            addCriterion("amount >=", value, "amount");
+        public Criteria andLowerLimitGreaterThanOrEqualTo(Integer value) {
+            addCriterion("lower_limit >=", value, "lowerLimit");
             return (Criteria) this;
         }
 
-        public Criteria andAmountLessThan(Integer value) {
-            addCriterion("amount <", value, "amount");
+        public Criteria andLowerLimitLessThan(Integer value) {
+            addCriterion("lower_limit <", value, "lowerLimit");
             return (Criteria) this;
         }
 
-        public Criteria andAmountLessThanOrEqualTo(Integer value) {
-            addCriterion("amount <=", value, "amount");
+        public Criteria andLowerLimitLessThanOrEqualTo(Integer value) {
+            addCriterion("lower_limit <=", value, "lowerLimit");
             return (Criteria) this;
         }
 
-        public Criteria andAmountIn(List<Integer> values) {
-            addCriterion("amount in", values, "amount");
+        public Criteria andLowerLimitIn(List<Integer> values) {
+            addCriterion("lower_limit in", values, "lowerLimit");
             return (Criteria) this;
         }
 
-        public Criteria andAmountNotIn(List<Integer> values) {
-            addCriterion("amount not in", values, "amount");
+        public Criteria andLowerLimitNotIn(List<Integer> values) {
+            addCriterion("lower_limit not in", values, "lowerLimit");
             return (Criteria) this;
         }
 
-        public Criteria andAmountBetween(Integer value1, Integer value2) {
-            addCriterion("amount between", value1, value2, "amount");
+        public Criteria andLowerLimitBetween(Integer value1, Integer value2) {
+            addCriterion("lower_limit between", value1, value2, "lowerLimit");
             return (Criteria) this;
         }
 
-        public Criteria andAmountNotBetween(Integer value1, Integer value2) {
-            addCriterion("amount not between", value1, value2, "amount");
+        public Criteria andLowerLimitNotBetween(Integer value1, Integer value2) {
+            addCriterion("lower_limit not between", value1, value2, "lowerLimit");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpperLimitIsNull() {
+            addCriterion("upper_limit is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpperLimitIsNotNull() {
+            addCriterion("upper_limit is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpperLimitEqualTo(Integer value) {
+            addCriterion("upper_limit =", value, "upperLimit");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpperLimitNotEqualTo(Integer value) {
+            addCriterion("upper_limit <>", value, "upperLimit");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpperLimitGreaterThan(Integer value) {
+            addCriterion("upper_limit >", value, "upperLimit");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpperLimitGreaterThanOrEqualTo(Integer value) {
+            addCriterion("upper_limit >=", value, "upperLimit");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpperLimitLessThan(Integer value) {
+            addCriterion("upper_limit <", value, "upperLimit");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpperLimitLessThanOrEqualTo(Integer value) {
+            addCriterion("upper_limit <=", value, "upperLimit");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpperLimitIn(List<Integer> values) {
+            addCriterion("upper_limit in", values, "upperLimit");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpperLimitNotIn(List<Integer> values) {
+            addCriterion("upper_limit not in", values, "upperLimit");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpperLimitBetween(Integer value1, Integer value2) {
+            addCriterion("upper_limit between", value1, value2, "upperLimit");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpperLimitNotBetween(Integer value1, Integer value2) {
+            addCriterion("upper_limit not between", value1, value2, "upperLimit");
             return (Criteria) this;
         }
 
@@ -613,6 +673,66 @@ public class ActivityExample {
 
         public Criteria andEndtimeNotBetween(Date value1, Date value2) {
             addCriterion("endtime not between", value1, value2, "endtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberOfPeopleIsNull() {
+            addCriterion("number_of_people is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberOfPeopleIsNotNull() {
+            addCriterion("number_of_people is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberOfPeopleEqualTo(Integer value) {
+            addCriterion("number_of_people =", value, "numberOfPeople");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberOfPeopleNotEqualTo(Integer value) {
+            addCriterion("number_of_people <>", value, "numberOfPeople");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberOfPeopleGreaterThan(Integer value) {
+            addCriterion("number_of_people >", value, "numberOfPeople");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberOfPeopleGreaterThanOrEqualTo(Integer value) {
+            addCriterion("number_of_people >=", value, "numberOfPeople");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberOfPeopleLessThan(Integer value) {
+            addCriterion("number_of_people <", value, "numberOfPeople");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberOfPeopleLessThanOrEqualTo(Integer value) {
+            addCriterion("number_of_people <=", value, "numberOfPeople");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberOfPeopleIn(List<Integer> values) {
+            addCriterion("number_of_people in", values, "numberOfPeople");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberOfPeopleNotIn(List<Integer> values) {
+            addCriterion("number_of_people not in", values, "numberOfPeople");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberOfPeopleBetween(Integer value1, Integer value2) {
+            addCriterion("number_of_people between", value1, value2, "numberOfPeople");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumberOfPeopleNotBetween(Integer value1, Integer value2) {
+            addCriterion("number_of_people not between", value1, value2, "numberOfPeople");
             return (Criteria) this;
         }
     }

@@ -4,6 +4,7 @@ package net.bus.web.controller;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 import net.bus.web.aspect.Auth;
+import net.bus.web.common.Util;
 import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.*;
 import net.bus.web.model.Activity;
@@ -12,6 +13,7 @@ import net.bus.web.service.IActivityService;
 import net.bus.web.service.exception.ActivityException;
 import net.bus.web.service.exception.OutOfStockException;
 import net.bus.web.service.exception.RepeatApplyException;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -63,21 +66,27 @@ public class ActivityController {
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
-    @ApiOperation(value = "获取活动详细", httpMethod = "GET", response = ActivityDetail.class, notes = "获取活动详细")
+    @ApiOperation(value = "获取活动详细", httpMethod = "GET", response = ActivityItem.class, notes = "获取活动详细")
     public IResult detail(
             @ApiParam(required = true, name = "id", value = "id")
             @RequestParam(value = "id", required = true, defaultValue = "0")long id
     )
     {
         logger.info("activity detail");
-        ActivityDetail activityDetail = new ActivityDetail();
+        ActivityItem disItem = new ActivityItem();
         Activity activity = _activityService.getActivityDetails(id);
-        activityDetail.setId(activity.getId());
-        activityDetail.setImg(activity.getImage());
-        activityDetail.setStartTime(activity.getStartime().getTime());
-        activityDetail.setEndTime(activity.getEndtime().getTime());
-        activityDetail.setPrice(activityDetail.getPrice());
-        return activityDetail;
+        disItem.setId(activity.getId());
+        disItem.setImg(activity.getImage());
+        disItem.setTitle(activity.getTitle());
+        disItem.setDetial(activity.getDetail());
+        disItem.setPrice(activity.getPrice());
+        disItem.setStart_time(activity.getStartime());
+        disItem.setEnd_time(activity.getEndtime());
+        disItem.setLower_limit(activity.getLowerLimit());
+        disItem.setUpper_limit(activity.getUpperLimit());
+        disItem.setRemain(Util.daysBetween(new Date(),activity.getStartime()));  //剩余时间
+        disItem.setNumber_of_people(activity.getNumberOfPeople());
+        return disItem;
     }
 
 
@@ -88,6 +97,15 @@ public class ActivityController {
             ActivityItem disItem = new ActivityItem();
             disItem.setId(activity.getId());
             disItem.setImg(activity.getImage());
+            disItem.setTitle(activity.getTitle());
+            disItem.setDetial(activity.getDetail());
+            disItem.setPrice(activity.getPrice());
+            disItem.setStart_time(activity.getStartime());
+            disItem.setEnd_time(activity.getEndtime());
+            disItem.setLower_limit(activity.getLowerLimit());
+            disItem.setUpper_limit(activity.getUpperLimit());
+            disItem.setRemain(Util.daysBetween(new Date(),activity.getStartime()));  //剩余时间
+            disItem.setNumber_of_people(activity.getNumberOfPeople());
             displayList.add(disItem);
         }
         return displayList;
@@ -95,7 +113,7 @@ public class ActivityController {
 
     @Auth(role = Auth.Role.USER)
     @RequestMapping(value = "/join",method = RequestMethod.POST)
-    @ApiOperation(value = "参加活动", httpMethod = "POST", response = ActivityDetail.class, notes = "获取活动详细")
+    @ApiOperation(value = "参加活动", httpMethod = "POST", response = BaseResult.class, notes = "获取活动详细")
     @ResponseBody
     public IResult join(@ApiParam(required = true, name = "活动id", value = "id")
                              @RequestParam(value = "id", required = true, defaultValue = "0")long id){
@@ -103,9 +121,15 @@ public class ActivityController {
         BaseResult result = new BaseResult();
         User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
         try {
-            _activityService.join(id,user);
-            result.setResult("success");
-            result.setContent("您已成功报名参加本次活动");
+            String sign = _activityService.join(id,user);
+            if(!StringUtils.isBlank(sign)){
+                result.setContent(sign);
+                result.setResult("success");
+
+            }else{
+                result.setResult("failure");
+            }
+            return result;
         } catch (OutOfStockException e) {
             //商品已售完
             result.setResult("failed");

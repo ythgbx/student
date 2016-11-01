@@ -14,6 +14,7 @@ public class ActivityList extends BaseResult{
     private Integer page;
     private Integer total_count;
 
+
     public List<ActivityItem> getActivity() {
         return activity;
     }
