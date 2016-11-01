@@ -127,6 +127,8 @@ public class CommodityService implements ICommodityService{
         return _rootRepository.count();
     }
 
+    public int getAllOrderCount(){ return _commodityOrderRepository.count();}
+
     public List<Commodity> getList(List<Long> ids){
         return _rootRepository.getList(new CommodityIdsSpecification(ids));
     }
@@ -139,6 +141,10 @@ public class CommodityService implements ICommodityService{
 
     public List<CommodityOrder> getUserOrders(long userId,int page,int limit){
         return _commodityOrderRepository.getList(new CommodityOrderUserIdAndPaied(userId), page - 1, limit);
+    }
+
+    public List<CommodityOrder> getAllOrers(int page,int limit) {
+        return _commodityOrderRepository.getAll(page,limit);
     }
 
     public int getUserOrdersCount(long userId){

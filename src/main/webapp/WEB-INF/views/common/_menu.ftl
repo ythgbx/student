@@ -7,10 +7,10 @@
                     Main Menu
                 </li>
                 <li class="bg-palette1">
-                    <a href="index.html">
+                    <a href="/user/list">
 									<span class="menu-content block">
 										<span class="menu-icon"><i class="block fa fa-home fa-lg"></i></span>
-										<span class="text m-left-sm">Dashboard</span>
+										<span class="text m-left-sm">用户管理</span>
 									</span>
 									<span class="menu-content-hover block">
 										Home
@@ -32,7 +32,7 @@
                     <a href="#">
 									<span class="menu-content block">
 										<span class="menu-icon"><i class="block fa fa-list fa-lg"></i></span>
-										<span class="text m-left-sm">Form Elements</span>
+										<span class="text m-left-sm">商品管理</span>
 										<span class="submenu-icon"></span>
 									</span>
 									<span class="menu-content-hover block">
@@ -40,10 +40,10 @@
 									</span>
                     </a>
                     <ul class="submenu bg-palette4">
-                        <li><a href="form_element.html"><span class="submenu-label">Form Element</span></a></li>
-                        <li><a href="form_validation.html"><span class="submenu-label">Form Validation</span></a></li>
-                        <li><a href="form_wizard.html"><span class="submenu-label">Form Wizard</span></a></li>
-                        <li><a href="dropzone.html"><span class="submenu-label">Dropzone</span></a></li>
+                        <li><a href="/commodity/list"><span class="submenu-label">商品管理</span></a></li>
+                        <li><a href="/commodity/orderList"><span class="submenu-label">用户订单查询</span></a></li>
+                        <#--<li><a href="form_wizard.html"><span class="submenu-label">Form Wizard</span></a></li>-->
+                        <#--<li><a href="dropzone.html"><span class="submenu-label">Dropzone</span></a></li>-->
                     </ul>
                 </li>
                 <li class="openable bg-palette4">

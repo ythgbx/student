@@ -86,6 +86,7 @@
         <beans:property name="basePackage" value="net.bus.web.mapper"/>
     </beans:bean>
     <!-- Pagination -->
+
     <beans:bean id="PaginationInterceptor" class="net.andromedarabbit.mybatis.pagination.plugin.PaginationInterceptor"/>
     <beans:bean id="PaginationResultSetHandler" class="net.andromedarabbit.mybatis.pagination.plugin.PaginationResultSetHandlerInterceptor"/>
     <beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

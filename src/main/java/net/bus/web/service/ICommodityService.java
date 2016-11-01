@@ -22,9 +22,13 @@ public interface ICommodityService {
 
     int getAllCount();
 
+    int getAllOrderCount();
+
     List<Commodity> getList(List<Long> ids);
 
     List<CommodityOrder> getUserOrders(long userId,int page,int limit);
+
+    List<CommodityOrder> getAllOrers(int page,int limit);
 
     int getUserOrdersCount(long userId);
 }

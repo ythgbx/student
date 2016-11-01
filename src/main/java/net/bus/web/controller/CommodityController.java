@@ -7,15 +7,23 @@ import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.*;
 import net.bus.web.model.Commodity;
 import net.bus.web.model.CommodityOrder;
+import net.bus.web.model.CommodityOrderExample;
+import net.bus.web.model.Pojo.PagePojo;
 import net.bus.web.model.User;
 import net.bus.web.service.ICommodityService;
 import org.apache.commons.lang.StringUtils;
+import org.apache.ibatis.annotations.Param;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -30,6 +38,34 @@ public class CommodityController {
     private ICommodityService _commodityService;
     @Autowired
     private HttpSession session;
+
+    private Logger logger = Logger.getLogger(this.getClass().getName());
+
+
+    /**
+     * 商品信息查询
+     * @param model
+     * @return
+     */
+    @Auth(role = Auth.Role.USER)
+    @RequestMapping(value="/list", method = RequestMethod.GET)
+    @ApiOperation(value = "商品列表页面", httpMethod = "GET", response = ModelAndView.class, notes = "商品列表页面")
+    public ModelAndView list(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "0")int page,
+                             @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "10")int limit,
+                             HttpServletRequest request, Model model)
+    {
+        logger.info("url:/commodity/list");
+        HttpSession session = request.getSession();
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("commodity_list");
+
+        List<Commodity> commodityList= _commodityService.getAll(page, limit);
+        PagePojo pagePojo = new PagePojo(_commodityService.getAllCount(),limit,page);
+        mv.addObject("commodityLists",commodityList);
+        session.setAttribute("pagePojo",pagePojo);
+        return mv;
+    }
+
 
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
@@ -80,6 +116,33 @@ public class CommodityController {
             result.setResult("failure");
         }
         return result;
+    }
+
+
+    /**
+
+     * 用户订单查询界面
+     * @param model
+     * @return
+     */
+    @Auth(role = Auth.Role.USER)
+    @RequestMapping(value="/orderList", method = RequestMethod.GET)
+    @ApiOperation(value = "用户订单列表页面", httpMethod = "GET", response = ModelAndView.class, notes = "用户订单列表页面")
+    public ModelAndView orderList(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "0")int page,
+                                  @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "10")int limit,
+            HttpServletRequest request,Model model)
+    {
+        logger.info("url:/commodity/orderList");
+        System.out.println(page+"aaa");
+        HttpSession session = request.getSession();
+        ModelAndView mv = new ModelAndView();
+
+        List<CommodityOrder> commodityOrders= _commodityService.getAllOrers(page,limit);
+        mv.addObject("commodityOrders",commodityOrders);
+        PagePojo pagePojo = new PagePojo(_commodityService.getAllOrderCount(),limit,page);
+        session.setAttribute("pagePojo",pagePojo);
+        mv.setViewName("user_orderList");
+        return mv;
     }
 
     @Auth(role = Auth.Role.USER)

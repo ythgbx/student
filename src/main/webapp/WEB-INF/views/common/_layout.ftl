@@ -15,6 +15,10 @@
 <link href="/css/ionicons.min.css" rel="stylesheet">
 <!-- Simplify -->
 <link href="/css/simplify.min.css" rel="stylesheet">
+    <!-- admin -->
+    <link href="/css/admin.css" rel="stylesheet">
+    <!-- pintuer -->
+    <link href="/css/pintuer.css" rel="stylesheet">
 
 <#nested>
 
@@ -72,6 +76,8 @@
 <script src='/js/modernizr.min.js'></script>
 <!-- Simplify -->
 <script src="/js/simplify/simplify.js"></script>
+<!-- pintuer -->
+<script src="/js/pintuer.js"></script>
 
 <#nested>
 

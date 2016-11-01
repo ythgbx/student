@@ -69,4 +69,8 @@ public class UserRepository {
     {
         return userMapper.updateByPrimaryKey(user);
     }
+
+    public int Count(){
+        return userMapper.countByExample(null);
+    }
 }
