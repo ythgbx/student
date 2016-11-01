@@ -38,7 +38,7 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <!--对应数据库表 mysql可以加入主键自增 字段命名 忽略某字段等-->
+        <!--&lt;!&ndash;对应数据库表 mysql可以加入主键自增 字段命名 忽略某字段等&ndash;&gt;
         <table tableName="bus" domainObjectName="Bus"  enableSelectByPrimaryKey="true"
                enableUpdateByPrimaryKey="true"
                enableDeleteByPrimaryKey="true"
@@ -201,7 +201,7 @@
                enableDeleteByExample="true"
                enableCountByExample="true"
                enableUpdateByExample="true">
-        </table>
+        </table>-->
 	
 	<!--<table tableName="activity_order" domainObjectName="ActivityOrder"  enableSelectByPrimaryKey="true"-->
                <!--enableUpdateByPrimaryKey="true"-->
@@ -211,5 +211,13 @@
                <!--enableCountByExample="true"-->
                <!--enableUpdateByExample="true">-->
         <!--</table>-->
+        <table tableName="activity" domainObjectName="Activity"  enableSelectByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true"
+               enableDeleteByPrimaryKey="true"
+               enableSelectByExample="true"
+               enableDeleteByExample="true"
+               enableCountByExample="true"
+               enableUpdateByExample="true">
+        </table>
     </context>
 </generatorConfiguration>
