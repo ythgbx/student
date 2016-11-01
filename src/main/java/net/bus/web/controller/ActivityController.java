@@ -79,6 +79,7 @@ public class ActivityController {
         disItem.setImg(activity.getImage());
         disItem.setTitle(activity.getTitle());
         disItem.setDetial(activity.getDetail());
+        disItem.setPrice(activity.getPrice());
         disItem.setStart_time(activity.getStartime());
         disItem.setEnd_time(activity.getEndtime());
         disItem.setLower_limit(activity.getLowerLimit());
@@ -98,6 +99,7 @@ public class ActivityController {
             disItem.setImg(activity.getImage());
             disItem.setTitle(activity.getTitle());
             disItem.setDetial(activity.getDetail());
+            disItem.setPrice(activity.getPrice());
             disItem.setStart_time(activity.getStartime());
             disItem.setEnd_time(activity.getEndtime());
             disItem.setLower_limit(activity.getLowerLimit());
