@@ -5,13 +5,16 @@ import com.wordnik.swagger.annotations.ApiParam;
 import net.bus.web.aspect.Auth;
 import net.bus.web.common.config.RString;
 import net.bus.web.common.weixin.util.ImgUtil;
+import net.bus.web.common.weixin.util.PayCommonUtil;
 import net.bus.web.common.weixin.util.WeiXinCore;
+import net.bus.web.common.weixin.util.XMLUtil;
 import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.*;
 import net.bus.web.model.User;
 import net.bus.web.service.IUserService;
 import net.bus.web.service.IWxpayService;
 import org.apache.commons.lang3.StringUtils;
+import org.jdom.JDOMException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,9 +24,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Date;
-import java.util.Map;
-import java.util.UUID;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.*;
 
 /**
  * Created by Edifi_000 on 2016-10-07.
@@ -178,8 +184,8 @@ public class WeiXinController {
                 result.setPartnerId(prepayInfoMap.get("mch_id"));
                 result.setPrepayId(prepayInfoMap.get("prepay_id"));
                 result.setNonceStr(prepayInfoMap.get("nonce_str"));
-                result.setTimeStamp(new Date().getTime() / 1000);
-                result.setWxPackage("Sign=WXPay");
+                result.setTimeStamp(Long.parseLong(prepayInfoMap.get("time_stamp")));
+                result.setWxPackage(prepayInfoMap.get("package"));
                 result.setSign(prepayInfoMap.get("sign"));
                 result.setResult("success");
             }else{
@@ -192,5 +198,33 @@ public class WeiXinController {
 
 
         return result;
+    }
+
+    @Auth(role = Auth.Role.NONE)
+    @ResponseBody
+    @RequestMapping(value = "/async", method = RequestMethod.POST)
+    @ApiOperation(value = "支付异步校验测试", httpMethod = "POST", response = String.class, notes = "支付异步校验测试")
+    public String async(@ApiParam(required = true, name = "request", value = "支付异步校验测试请求") HttpServletRequest request)
+    {
+        try{
+            InputStream in=request.getInputStream();
+            ByteArrayOutputStream out=new ByteArrayOutputStream();
+            byte[] buffer =new byte[1024];
+            int len;
+            while((len=in.read(buffer))!=-1){
+                out.write(buffer, 0, len);
+            }
+            out.close();
+            in.close();
+            String msgXml=new String(out.toByteArray(),"utf-8");//xml数据
+            Map params = XMLUtil.doXMLParse(msgXml);
+            if(_wxpayService.async(params)){
+                return PayCommonUtil.setXML("SUCCESS", "OK");
+            } else{
+                return PayCommonUtil.setXML("FAIL", "FAIL");
+            }
+        }catch (Exception e){
+            return PayCommonUtil.setXML("FAIL", "ERROR");
+        }
     }
 }

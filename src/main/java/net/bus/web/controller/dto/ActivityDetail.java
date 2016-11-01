@@ -2,6 +2,8 @@ package net.bus.web.controller.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import java.math.BigDecimal;
+
 /**
  * Created by sky on 16/10/13.
  */
@@ -10,10 +12,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 public class ActivityDetail extends BaseResult{
     private Long id;
     private String img;
-    private String introduction;
-    private String content;
-    private String scope;
-    private Long time;
+    private Long startTime;
+    private Long endTime;
+    private Long createTime;
+    private BigDecimal price;
+    private BigDecimal pay;
+    private Long amount;
 
     public Long getId() {
         return id;
@@ -31,35 +35,51 @@ public class ActivityDetail extends BaseResult{
         this.img = img;
     }
 
-    public String getIntroduction() {
-        return introduction;
+    public Long getStartTime() {
+        return startTime;
     }
 
-    public void setIntroduction(String introduction) {
-        this.introduction = introduction;
+    public void setStartTime(Long startTime) {
+        this.startTime = startTime;
     }
 
-    public String getContent() {
-        return content;
+    public Long getEndTime() {
+        return endTime;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setEndTime(Long endTime) {
+        this.endTime = endTime;
     }
 
-    public String getScope() {
-        return scope;
+    public Long getCreateTime() {
+        return createTime;
     }
 
-    public void setScope(String scope) {
-        this.scope = scope;
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
     }
 
-    public Long getTime() {
-        return time;
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setTime(Long time) {
-        this.time = time;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public BigDecimal getPay() {
+        return pay;
+    }
+
+    public void setPay(BigDecimal pay) {
+        this.pay = pay;
+    }
+
+    public Long getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Long amount) {
+        this.amount = amount;
     }
 }

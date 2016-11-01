@@ -111,13 +111,13 @@ public class UserBase extends BaseResult {
         return isWxBind;
     }
 
-    public void setWxBind(User user,Object WxUnionId) {
 
-        if (user!=null&&WxUnionId==null&&WxUnionId.equals("")){
-            isWxBind = false;
+    public void setWxBind(User user,String WxUnionId) {
+        if (user!=null && WxUnionId != null){
+            isWxBind = true;
         }
         else {
-            isWxBind = true;
+            isWxBind = false;
         }
     }
 

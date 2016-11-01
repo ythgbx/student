@@ -237,5 +237,8 @@
 
     <!-- string配置文件导入 -->
     <beans:import resource="string.xml"/>
+    <!--context提供-->
+    <beans:bean id="applicationContextProvder"
+          class="net.bus.web.context.ApplicationContextProvider"/>
 
 </beans:beans>

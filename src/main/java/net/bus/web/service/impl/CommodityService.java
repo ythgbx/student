@@ -1,6 +1,7 @@
 package net.bus.web.service.impl;
 
 import net.bus.web.context.AlipayCallBack;
+import net.bus.web.enums.ProducedTypeEnum;
 import net.bus.web.model.Commodity;
 import net.bus.web.model.CommodityOrder;
 import net.bus.web.model.User;
@@ -26,8 +27,8 @@ import java.util.UUID;
 /**
  * Created by Edifi_000 on 2016-09-04.
  */
-@Service
-public class CommodityService implements ICommodityService{
+@Service("commodityService")
+public class CommodityService implements ICommodityService,IPayService{
 
     @Autowired
     private CommodityRepository _rootRepository;
@@ -136,7 +137,7 @@ public class CommodityService implements ICommodityService{
     public String getOutTradeNo()
     {
         //TODO 生成订单编号
-        return UUID.randomUUID().toString().replace("-", "");
+        return ProducedTypeEnum.COMMODITY.getIndex() + UUID.randomUUID().toString().replace("-", "");
     }
 
     public List<CommodityOrder> getUserOrders(long userId,int page,int limit){

@@ -14,7 +14,7 @@
 
         <!--数据库连接 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://123.206.201.54:3306/bus"
+                        connectionURL="jdbc:mysql://123.206.201.54:3306/bus_dev"
                         userId="root"
                         password="ibus2016">
         </jdbcConnection>
@@ -193,5 +193,23 @@
                enableCountByExample="true"
                enableUpdateByExample="true">
         </table>
+
+        <table tableName="order" domainObjectName="Order"  enableSelectByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true"
+               enableDeleteByPrimaryKey="true"
+               enableSelectByExample="true"
+               enableDeleteByExample="true"
+               enableCountByExample="true"
+               enableUpdateByExample="true">
+        </table>
+	
+	<!--<table tableName="activity_order" domainObjectName="ActivityOrder"  enableSelectByPrimaryKey="true"-->
+               <!--enableUpdateByPrimaryKey="true"-->
+               <!--enableDeleteByPrimaryKey="true"-->
+               <!--enableSelectByExample="true"-->
+               <!--enableDeleteByExample="true"-->
+               <!--enableCountByExample="true"-->
+               <!--enableUpdateByExample="true">-->
+        <!--</table>-->
     </context>
 </generatorConfiguration>

@@ -18,7 +18,7 @@ public interface ICommodityService {
 
     String buy(long commodityId,User user);
 
-    boolean buyComplete(AlipayCallBack callBack);
+    //boolean buyComplete(AlipayCallBack callBack);
 
     int getAllCount();
 

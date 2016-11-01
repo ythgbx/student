@@ -30,4 +30,6 @@ public interface ActivityMapper {
     int updateByPrimaryKeySelective(Activity record);
 
     int updateByPrimaryKey(Activity record);
+
+    int reduceAmount(Long id);
 }

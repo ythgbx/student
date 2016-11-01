@@ -12,18 +12,16 @@ import net.bus.web.model.Pojo.PagePojo;
 import net.bus.web.model.User;
 import net.bus.web.service.ICommodityService;
 import org.apache.commons.lang.StringUtils;
-import org.apache.ibatis.annotations.Param;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -34,7 +32,9 @@ import java.util.List;
 @RequestMapping("/commodity")
 public class CommodityController {
 
-    @Autowired
+    //@Autowired
+    //@Qualifier("commodityService")
+    @Resource(name = "commodityService")
     private ICommodityService _commodityService;
     @Autowired
     private HttpSession session;
