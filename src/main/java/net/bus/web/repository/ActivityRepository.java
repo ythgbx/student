@@ -95,6 +95,5 @@ public class ActivityRepository {
         return _mapper.countByExample(null);
     }
 
-    public int reduceAmount(Long id){return _mapper.reduceAmount(id);}
 }
 

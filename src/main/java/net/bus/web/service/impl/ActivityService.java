@@ -7,6 +7,7 @@ import net.bus.web.model.ActivityOrder;
 import net.bus.web.model.User;
 import net.bus.web.repository.ActivityOrderRepository;
 import net.bus.web.repository.ActivityRepository;
+import net.bus.web.repository.ISpecification;
 import net.bus.web.repository.specification.ActivityOrderSpecification;
 import net.bus.web.service.IActivityService;
 import net.bus.web.service.IAlipayService;
@@ -63,10 +64,10 @@ public class ActivityService implements IActivityService,IPayService {
 
     public String join(Long id, User user) {
         Activity activity= activityRepository.getItem(id);
-
+        int count = activityOrderRepository.count(new ActivityOrderSpecification(id));
         String sign = null;
         if(activity!=null){
-            if(activity.getAmount()>0){
+            if(count < activity.getUpperLimit()){
                 ActivityOrder order = new ActivityOrder();
                 order.setAmount(1); //目前就一个人参加活动
                 order.setTradeNo(getOutTradeNo());
@@ -85,27 +86,6 @@ public class ActivityService implements IActivityService,IPayService {
             }
         }
         return sign;
-
-//        Activity activity= activityRepository.getItem(id);
-//        if(isActivityStart(activity)){
-//            int result = activityRepository.reduceAmount(id);
-//            if (result>0){
-//                ActivityOrder activityOrder = new ActivityOrder();
-//                activityOrder.setUserId(user.getId());
-//                activityOrder.setActivityId(id);
-//
-//                result = activityOrderRepository.insertItem(activityOrder);
-//                if(result > 0){
-//                    return true;
-//                }else{
-//                    throw new RepeatApplyException("重复下单");
-//                }
-//            }else{
-//                throw new OutOfStockException("商品已售完");
-//            }
-//        }else{
-//            throw new ActivityException("活动没开始或已经结束");
-//        }
     }
 
     public boolean isActivityStart(Long id){
@@ -132,18 +112,20 @@ public class ActivityService implements IActivityService,IPayService {
 
             Activity activity = activityRepository.getItem(order.getActivityId());
             User user = _userService.getUser(order.getUserId());
+            int count = activityOrderRepository.count(new ActivityOrderSpecification(order.getActivityId()));
 
             //判断商品与用户是否存在合法
             if(activity!=null&&user!=null){
-                //TODO 根据是否需要减少库存(暂时补进行库存处理,均为虚拟商品) 判断库存后进行操作
-                if(activity.getAmount()>0){
+                //TODO 订单完成后更新活动参与人数
+                if(count > activity.getUpperLimit()){
                     order.setPay(BigDecimal.valueOf(Double.valueOf(callBack.getAmount())));
                     order.setPayTime(new Date());
+                    activity.setNumberOfPeople(activity.getNumberOfPeople()+1);
                     int result = activityOrderRepository.updateItem(order);
                     if(result>0){
                         throw new ActivityException("更新订单异常");
                     }
-                    result = activityRepository.reduceAmount(order.getId());
+                    result = activityRepository.updateItem(activity);
                     if(result>0){
                         throw new ActivityException("更新库存异常");
                     }

@@ -4,6 +4,7 @@ package net.bus.web.controller;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 import net.bus.web.aspect.Auth;
+import net.bus.web.common.Util;
 import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.*;
 import net.bus.web.model.Activity;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -63,21 +65,25 @@ public class ActivityController {
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
-    @ApiOperation(value = "获取活动详细", httpMethod = "GET", response = ActivityDetail.class, notes = "获取活动详细")
+    @ApiOperation(value = "获取活动详细", httpMethod = "GET", response = ActivityItem.class, notes = "获取活动详细")
     public IResult detail(
             @ApiParam(required = true, name = "id", value = "id")
             @RequestParam(value = "id", required = true, defaultValue = "0")long id
     )
     {
         logger.info("activity detail");
-        ActivityDetail activityDetail = new ActivityDetail();
+        ActivityItem disItem = new ActivityItem();
         Activity activity = _activityService.getActivityDetails(id);
-        activityDetail.setId(activity.getId());
-        activityDetail.setImg(activity.getImage());
-        activityDetail.setStartTime(activity.getStartime().getTime());
-        activityDetail.setEndTime(activity.getEndtime().getTime());
-        activityDetail.setPrice(activityDetail.getPrice());
-        return activityDetail;
+        disItem.setId(activity.getId());
+        disItem.setImg(activity.getImage());
+        disItem.setDetial(activity.getDetail());
+        disItem.setStart_time(activity.getStartime());
+        disItem.setEnd_time(activity.getEndtime());
+        disItem.setLower_limit(activity.getLowerLimit());
+        disItem.setUpper_limit(activity.getUpperLimit());
+        disItem.setRemain(Util.daysBetween(new Date(),activity.getStartime()));  //剩余时间
+        disItem.setNumber_of_people(activity.getNumberOfPeople());
+        return disItem;
     }
 
 
@@ -88,6 +94,13 @@ public class ActivityController {
             ActivityItem disItem = new ActivityItem();
             disItem.setId(activity.getId());
             disItem.setImg(activity.getImage());
+            disItem.setDetial(activity.getDetail());
+            disItem.setStart_time(activity.getStartime());
+            disItem.setEnd_time(activity.getEndtime());
+            disItem.setLower_limit(activity.getLowerLimit());
+            disItem.setUpper_limit(activity.getUpperLimit());
+            disItem.setRemain(Util.daysBetween(new Date(),activity.getStartime()));  //剩余时间
+            disItem.setNumber_of_people(activity.getNumberOfPeople());
             displayList.add(disItem);
         }
         return displayList;
@@ -95,7 +108,7 @@ public class ActivityController {
 
     @Auth(role = Auth.Role.USER)
     @RequestMapping(value = "/join",method = RequestMethod.POST)
-    @ApiOperation(value = "参加活动", httpMethod = "POST", response = ActivityDetail.class, notes = "获取活动详细")
+    @ApiOperation(value = "参加活动", httpMethod = "POST", response = BaseResult.class, notes = "获取活动详细")
     @ResponseBody
     public IResult join(@ApiParam(required = true, name = "活动id", value = "id")
                              @RequestParam(value = "id", required = true, defaultValue = "0")long id){

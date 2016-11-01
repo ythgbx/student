@@ -12,13 +12,17 @@ public class Activity {
 
     private String detail;
 
-    private Integer amount;
+    private Integer lowerLimit;
+
+    private Integer upperLimit;
 
     private BigDecimal price;
 
     private Date startime;
 
     private Date endtime;
+
+    private Integer numberOfPeople;
 
     public Long getId() {
         return id;
@@ -52,12 +56,20 @@ public class Activity {
         this.detail = detail;
     }
 
-    public Integer getAmount() {
-        return amount;
+    public Integer getLowerLimit() {
+        return lowerLimit;
     }
 
-    public void setAmount(Integer amount) {
-        this.amount = amount;
+    public void setLowerLimit(Integer lowerLimit) {
+        this.lowerLimit = lowerLimit;
+    }
+
+    public Integer getUpperLimit() {
+        return upperLimit;
+    }
+
+    public void setUpperLimit(Integer upperLimit) {
+        this.upperLimit = upperLimit;
     }
 
     public BigDecimal getPrice() {
@@ -82,5 +94,13 @@ public class Activity {
 
     public void setEndtime(Date endtime) {
         this.endtime = endtime;
+    }
+
+    public Integer getNumberOfPeople() {
+        return numberOfPeople;
+    }
+
+    public void setNumberOfPeople(Integer numberOfPeople) {
+        this.numberOfPeople = numberOfPeople;
     }
 }
