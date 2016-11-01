@@ -15,6 +15,7 @@ import net.bus.web.service.exception.ActivityException;
 import net.bus.web.service.exception.OutOfStockException;
 import net.bus.web.service.exception.RepeatApplyException;
 import org.apache.ibatis.annotations.Param;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -80,6 +81,7 @@ public class ActivityController {
         Activity activity = _activityService.getActivityDetails(id);
         disItem.setId(activity.getId());
         disItem.setImg(activity.getImage());
+        disItem.setTitle(activity.getTitle());
         disItem.setDetial(activity.getDetail());
         disItem.setStart_time(activity.getStartime());
         disItem.setEnd_time(activity.getEndtime());
@@ -98,6 +100,7 @@ public class ActivityController {
             ActivityItem disItem = new ActivityItem();
             disItem.setId(activity.getId());
             disItem.setImg(activity.getImage());
+            disItem.setTitle(activity.getTitle());
             disItem.setDetial(activity.getDetail());
             disItem.setStart_time(activity.getStartime());
             disItem.setEnd_time(activity.getEndtime());
@@ -120,9 +123,15 @@ public class ActivityController {
         BaseResult result = new BaseResult();
         User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
         try {
-            _activityService.join(id,user);
-            result.setResult("success");
-            result.setContent("您已成功报名参加本次活动");
+            String sign = _activityService.join(id,user);
+            if(!StringUtils.isBlank(sign)){
+                result.setContent(sign);
+                result.setResult("success");
+
+            }else{
+                result.setResult("failure");
+            }
+            return result;
         } catch (OutOfStockException e) {
             //商品已售完
             result.setResult("failed");

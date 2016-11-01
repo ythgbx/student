@@ -13,7 +13,7 @@ public class Util {
      * @param from 时间（较大值）
      * @return 天数（int）
      */
-    public static int daysBetween(Date to, Date from) {
-        return (int) ((to.getTime() - from.getTime())/(1000 * 60 * 60 * 24));
+    public static int daysBetween(Date from, Date to) {
+        return (int) Math.ceil((double)(to.getTime() - from.getTime())/(1000 * 60 * 60 * 24));
     }
 }
