@@ -18,6 +18,8 @@ public interface IUserService {
 
     User getUser(String phone);
 
+    int getAllCount();
+
     User getUserByWx(String wxUnionId);
 
     boolean registerCheck(String phone);

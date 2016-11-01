@@ -11,13 +11,14 @@
 </ul>
 <div class="smart-widget">
     <div class="smart-widget-header">
-        Hover rows
+        用户列表
     </div>
     <div class="smart-widget-inner">
         <div class="smart-widget-body">
             <table class="table table-hover">
                 <thead>
                 <tr>
+                    <th><input type="checkbox" name="全选""></th>
                     <th>姓名</th>
                     <th>电话</th>
                     <th>积分</th>
@@ -27,6 +28,7 @@
                 <tbody>
                     <#list userList as oneUser>
                     <tr>
+                        <th><input type="checkbox" name="${oneUser.id} value="1""></th>
                         <td>${oneUser.name}</td>
                         <td>${oneUser.phone}</td>
                         <td>${oneUser.points}</td>
@@ -37,6 +39,19 @@
                         </#if>
                     </tr>
                     </#list>
+                </tbody>
+                <tbody>
+                <tr>
+                    <ul class="pagination">
+                        <li><a href="/user/list?page=${pagePojo.homePage}">首页</a></li>
+                        <li><a href="/user/list?page=${pagePojo.getPreviousPage()}">上一页</a></li>
+                        <li><a href="#">当前第${pagePojo.getCurrentPage()+1}页</a></li>
+                        <li><a href="#">共${pagePojo.countPage}页</a></li>
+                        <li><a href="#">总${pagePojo.amount}条数据</a></li>
+                        <li><a href="/user/list?page=${pagePojo.getNextPage()}">下一页</a></li>
+                        <li><a href="/user/list?page=${pagePojo.trailerPage-1}">尾页</a></li>
+                    </ul>
+                </tr>
                 </tbody>
             </table>
         </div>

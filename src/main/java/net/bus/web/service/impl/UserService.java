@@ -40,6 +40,10 @@ public class UserService  implements IUserService {
         return  _rootRepository.getUser(new UserPhoneSpecification(phone));
     }
 
+    public int getAllCount() {
+        return _rootRepository.Count();
+    }
+
     public User getUserByWx(String wxUnionId){
         return  _rootRepository.getUser(new UserWxUnionIdSpecification(wxUnionId));
     }
