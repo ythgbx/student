@@ -117,16 +117,16 @@ public class ActivityService implements IActivityService,IPayService {
             //判断商品与用户是否存在合法
             if(activity!=null&&user!=null){
                 //TODO 订单完成后更新活动参与人数
-                if(count > activity.getUpperLimit()){
+                if(count < activity.getUpperLimit()){
                     order.setPay(BigDecimal.valueOf(Double.valueOf(callBack.getAmount())));
                     order.setPayTime(new Date());
                     activity.setNumberOfPeople(activity.getNumberOfPeople()+1);
                     int result = activityOrderRepository.updateItem(order);
-                    if(result>0){
+                    if(result < 1){
                         throw new ActivityException("更新订单异常");
                     }
                     result = activityRepository.updateItem(activity);
-                    if(result>0){
+                    if(result < 1){
                         throw new ActivityException("更新库存异常");
                     }
                     return true;
