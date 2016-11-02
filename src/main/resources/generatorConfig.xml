@@ -194,7 +194,7 @@
                enableUpdateByExample="true">
         </table>
 
-        <table tableName="order" domainObjectName="Order"  enableSelectByPrimaryKey="true"
+        <table tableName="orders" domainObjectName="Orders"  enableSelectByPrimaryKey="true"
                enableUpdateByPrimaryKey="true"
                enableDeleteByPrimaryKey="true"
                enableSelectByExample="true"
@@ -203,15 +203,7 @@
                enableUpdateByExample="true">
         </table>-->
 	
-	<!--<table tableName="activity_order" domainObjectName="ActivityOrder"  enableSelectByPrimaryKey="true"-->
-               <!--enableUpdateByPrimaryKey="true"-->
-               <!--enableDeleteByPrimaryKey="true"-->
-               <!--enableSelectByExample="true"-->
-               <!--enableDeleteByExample="true"-->
-               <!--enableCountByExample="true"-->
-               <!--enableUpdateByExample="true">-->
-        <!--</table>-->
-        <table tableName="activity" domainObjectName="Activity"  enableSelectByPrimaryKey="true"
+        <table tableName="activity_order" domainObjectName="ActivityOrder"  enableSelectByPrimaryKey="true"
                enableUpdateByPrimaryKey="true"
                enableDeleteByPrimaryKey="true"
                enableSelectByExample="true"

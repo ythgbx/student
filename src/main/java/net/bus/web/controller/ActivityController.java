@@ -23,6 +23,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -83,6 +85,7 @@ public class ActivityController {
         disItem.setImg(activity.getImage());
         disItem.setTitle(activity.getTitle());
         disItem.setDetial(activity.getDetail());
+        disItem.setPrice(activity.getPrice());
         disItem.setStart_time(activity.getStartime());
         disItem.setEnd_time(activity.getEndtime());
         disItem.setLower_limit(activity.getLowerLimit());
@@ -102,6 +105,7 @@ public class ActivityController {
             disItem.setImg(activity.getImage());
             disItem.setTitle(activity.getTitle());
             disItem.setDetial(activity.getDetail());
+            disItem.setPrice(activity.getPrice());
             disItem.setStart_time(activity.getStartime());
             disItem.setEnd_time(activity.getEndtime());
             disItem.setLower_limit(activity.getLowerLimit());
@@ -117,13 +121,13 @@ public class ActivityController {
     @RequestMapping(value = "/join",method = RequestMethod.POST)
     @ApiOperation(value = "参加活动", httpMethod = "POST", response = BaseResult.class, notes = "获取活动详细")
     @ResponseBody
-    public IResult join(@ApiParam(required = true, name = "活动id", value = "id")
-                             @RequestParam(value = "id", required = true, defaultValue = "0")long id){
+    public IResult join(@ApiParam(required = true, name = "id", value = "id")
+                             @RequestBody(required = true) Acitvityjoin request){
         //TODO 参加活动逻辑
         BaseResult result = new BaseResult();
         User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
         try {
-            String sign = _activityService.join(id,user);
+            String sign = _activityService.join(request.getId(),user);
             if(!StringUtils.isBlank(sign)){
                 result.setContent(sign);
                 result.setResult("success");

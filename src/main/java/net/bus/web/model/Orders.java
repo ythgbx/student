@@ -3,10 +3,12 @@ package net.bus.web.model;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Order {
+public class Orders {
     private Long id;
 
     private String tradeNo;
+
+    private Integer tradeType;
 
     private Long userId;
 
@@ -20,7 +22,7 @@ public class Order {
 
     private BigDecimal pay;
 
-    private Integer statue;
+    private Integer state;
 
     private Date createTime;
 
@@ -42,6 +44,14 @@ public class Order {
 
     public void setTradeNo(String tradeNo) {
         this.tradeNo = tradeNo;
+    }
+
+    public Integer getTradeType() {
+        return tradeType;
+    }
+
+    public void setTradeType(Integer tradeType) {
+        this.tradeType = tradeType;
     }
 
     public Long getUserId() {
@@ -92,12 +102,12 @@ public class Order {
         this.pay = pay;
     }
 
-    public Integer getStatue() {
-        return statue;
+    public Integer getState() {
+        return state;
     }
 
-    public void setStatue(Integer statue) {
-        this.statue = statue;
+    public void setState(Integer state) {
+        this.state = state;
     }
 
     public Date getCreateTime() {

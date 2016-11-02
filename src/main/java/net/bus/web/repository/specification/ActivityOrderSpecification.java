@@ -23,7 +23,7 @@ public class ActivityOrderSpecification implements ISpecification {
         if(this._tradeNo!=null){
             criteria.andTradeNoEqualTo(this._tradeNo);
         }
-        if(this.activity_id != null && this.activity_id!=0){
+        if(this.activity_id != null && this.activity_id !=0 ){
             criteria.andActivityIdEqualTo(this.activity_id);
         }
         return example;

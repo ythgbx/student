@@ -2,6 +2,7 @@ package net.bus.web.controller.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -19,7 +20,7 @@ public class ActivityItem extends BaseResult{
     private Date end_time;
     private Integer lower_limit;   //人数下限
     private Integer upper_limit;   //人数上限
-
+    private BigDecimal price;
     public Long getId() {
         return id;
     }
@@ -100,4 +101,11 @@ public class ActivityItem extends BaseResult{
         this.upper_limit = upper_limit;
     }
 
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 }

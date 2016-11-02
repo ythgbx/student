@@ -9,13 +9,14 @@ import net.bus.web.service.impl.CommodityService;
  * Created by sky on 16/10/26.
  */
 public enum ProducedTypeEnum {
-    COMMODITY(1,"商品",(IPayService) ApplicationContextProvider.getApplicationContext().getBean(CommodityService.class)),
-    ACTIVITY(2,"活动",(IPayService)  ApplicationContextProvider.getApplicationContext().getBean(ActivityService.class));
+    COMMODITY(1,"商品",(IPayService) ApplicationContextProvider.getApplicationContext().getBean(CommodityService.class),'C'),
+    ACTIVITY(2,"活动",(IPayService)  ApplicationContextProvider.getApplicationContext().getBean(ActivityService.class),'A');
 
 
     private int index;
     private String name;
     private IPayService service;
+    private char pre;
 
     public int getIndex() {
         return index;
@@ -41,12 +42,19 @@ public enum ProducedTypeEnum {
         this.service = service;
     }
 
+    public char getPre() {
+        return pre;
+    }
 
+    public void setPre(char pre) {
+        this.pre = pre;
+    }
 
-    ProducedTypeEnum(int i, String name, IPayService service) {
+    ProducedTypeEnum(int i, String name, IPayService service,char pre) {
         this.index = i;
         this.name = name;
         this.service = service;
+        this.pre = pre;
     }
 
     public static ProducedTypeEnum get(int index){

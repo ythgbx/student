@@ -7,6 +7,8 @@ import net.bus.web.common.alipay.util.AlipayCore;
 import net.bus.web.common.alipay.util.AlipayNotify;
 import net.bus.web.context.AlipayCallBack;
 import net.bus.web.enums.ProducedTypeEnum;
+import net.bus.web.model.Pojo.AlipayOrderCallBack;
+import net.bus.web.model.Pojo.Product;
 import net.bus.web.service.IAlipayService;
 import net.bus.web.service.IPayService;
 import org.apache.log4j.Logger;
@@ -30,6 +32,18 @@ public class AlipayService implements IAlipayService{
     public String sign(String tradeNo, String subject, String body, String price)
     {
         return getOrderInfo(tradeNo,subject,body,price);
+    }
+
+    public AlipayOrderCallBack sign(Product product,String tradeNo){
+        AlipayOrderCallBack orderCallBack = null;
+        try {
+            String sign = getOrderInfo(tradeNo, product.getSubject(), product.getBody(), product.getPrice().toString());
+            orderCallBack = new AlipayOrderCallBack();
+            orderCallBack.setSign(sign);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return orderCallBack;
     }
 
     public boolean async(Map<String, String> params)
