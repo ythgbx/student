@@ -194,7 +194,7 @@
                enableUpdateByExample="true">
         </table>
 
-        <table tableName="order" domainObjectName="Order"  enableSelectByPrimaryKey="true"
+        <table tableName="orders" domainObjectName="Orders"  enableSelectByPrimaryKey="true"
                enableUpdateByPrimaryKey="true"
                enableDeleteByPrimaryKey="true"
                enableSelectByExample="true"

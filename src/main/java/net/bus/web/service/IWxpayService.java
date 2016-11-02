@@ -1,5 +1,8 @@
 package net.bus.web.service;
 
+import net.bus.web.model.Pojo.Product;
+import net.bus.web.model.Pojo.WxOrderCallBack;
+
 import java.util.Map;
 
 /**
@@ -7,7 +10,7 @@ import java.util.Map;
  */
 public interface IWxpayService {
 
-    Map<String,String> prepay(Long id);
+    WxOrderCallBack prepay(Product product,String tradeNo);
 
     boolean async(Map<String, String> params);
 }

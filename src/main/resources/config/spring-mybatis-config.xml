@@ -42,7 +42,7 @@
         <mapper resource="mapper/ActivityMapper.xml" />
         <mapper resource="mapper/ActivityOrderMapper.xml" />
         <mapper resource="mapper/FeedbackMapper.xml"/>
-        <mapper resource="mapper/OrderMapper.xml"/>
+        <mapper resource="mapper/OrdersMapper.xml"/>
     </mappers>
 
 </configuration>

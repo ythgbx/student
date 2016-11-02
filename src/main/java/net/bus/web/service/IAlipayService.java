@@ -1,6 +1,7 @@
 package net.bus.web.service;
 
-import net.bus.web.context.AlipayCallBack;
+import net.bus.web.model.Pojo.AlipayOrderCallBack;
+import net.bus.web.model.Pojo.Product;
 
 import java.util.Map;
 
@@ -10,6 +11,8 @@ import java.util.Map;
 public interface IAlipayService {
 
     String sign(String tradeNo, String subject, String body, String price);
+
+    AlipayOrderCallBack sign(Product product,String tradeNo);
 
     boolean async(Map<String, String> params);
 
