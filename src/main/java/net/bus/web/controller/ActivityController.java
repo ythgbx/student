@@ -18,10 +18,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -116,12 +113,12 @@ public class ActivityController {
     @ApiOperation(value = "参加活动", httpMethod = "POST", response = BaseResult.class, notes = "获取活动详细")
     @ResponseBody
     public IResult join(@ApiParam(required = true, name = "id", value = "id")
-                             @RequestParam(value = "id", required = true, defaultValue = "0")long id){
+                             @RequestBody(required = true) Acitvityjoin request){
         //TODO 参加活动逻辑
         BaseResult result = new BaseResult();
         User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
         try {
-            String sign = _activityService.join(id,user);
+            String sign = _activityService.join(request.getId(),user);
             if(!StringUtils.isBlank(sign)){
                 result.setContent(sign);
                 result.setResult("success");
