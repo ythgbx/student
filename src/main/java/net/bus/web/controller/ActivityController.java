@@ -115,7 +115,7 @@ public class ActivityController {
     @RequestMapping(value = "/join",method = RequestMethod.POST)
     @ApiOperation(value = "参加活动", httpMethod = "POST", response = BaseResult.class, notes = "获取活动详细")
     @ResponseBody
-    public IResult join(@ApiParam(required = true, name = "活动id", value = "id")
+    public IResult join(@ApiParam(required = true, name = "id", value = "id")
                              @RequestParam(value = "id", required = true, defaultValue = "0")long id){
         //TODO 参加活动逻辑
         BaseResult result = new BaseResult();
