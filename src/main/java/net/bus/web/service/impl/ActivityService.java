@@ -46,7 +46,7 @@ public class ActivityService implements IActivityService,IPayService {
     private Boolean _payDebug;
 
     public List<Activity> getAllActivity(int page,int limit){
-        return activityRepository.getAll(page-1,limit);
+        return activityRepository.getAll(page,limit);
     }
 
     public int getAllActivityCount(){
@@ -62,6 +62,13 @@ public class ActivityService implements IActivityService,IPayService {
             return  true;
         }
 
+        return false;
+    }
+
+    public boolean deleteActivity(Long id) {
+        if(activityRepository.deleteByPrimaryKey(id)>0){
+            return  true;
+        }
         return false;
     }
 
@@ -90,6 +97,13 @@ public class ActivityService implements IActivityService,IPayService {
             }
         }
         return sign;
+    }
+
+    public boolean updateActivity(Activity activity) {
+        if(activityRepository.updateItem(activity)>0){
+            return  true;
+        }
+        return false;
     }
 
     public boolean isActivityStart(Long id){

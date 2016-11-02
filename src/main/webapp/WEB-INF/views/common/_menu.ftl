@@ -128,6 +128,7 @@
                         <li><a href="error404.html"><span class="submenu-label">Error404</span></a></li>
                         <li><a href="blank.html"><span class="submenu-label">Blank</span></a></li>
                         <li><a href="/activity/list"><span class="submenu-label">活动中心</span></a></li>
+                        <li><a href="/news/list"><span class="submenu-label">新闻中心</span></a></li>
                     </ul>
                 </li>
                 <li class="openable bg-palette4">

@@ -7,17 +7,27 @@ import net.bus.web.controller.dto.IResult;
 import net.bus.web.controller.dto.NewsDetail;
 import net.bus.web.controller.dto.NewsItem;
 import net.bus.web.controller.dto.NewsList;
+import net.bus.web.model.Activity;
 import net.bus.web.model.News;
+import net.bus.web.model.Pojo.PagePojo;
 import net.bus.web.service.INewsService;
+import org.apache.ibatis.annotations.Param;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -78,5 +88,52 @@ public class NewsController {
             displayList.add(disItem);
         }
         return displayList;
+    }
+
+    @Auth(role = Auth.Role.NONE)
+    @RequestMapping(value="/list", method = RequestMethod.GET)
+    @ApiOperation(value = "新闻列表页面", httpMethod = "GET", response = ModelAndView.class, notes = "新闻列表页面")
+    @ResponseBody
+    public ModelAndView list(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "0")int page,
+                             @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "10")int limit,
+                             HttpServletRequest request, Model model)
+    {
+        logger.info("url:/news/list");
+       HttpSession session=request.getSession();
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("news_list");
+        List<News> newsList=_newsService.getAllNews(page,limit);
+        PagePojo pagePojo = new PagePojo(_newsService.getAllNewsCount(),limit,page);
+        mv.addObject("newsList",newsList);
+        session.setAttribute("pagePojo",pagePojo);
+        return mv;
+    }
+
+    @Auth(role = Auth.Role.NONE)
+    @RequestMapping(value="/addnews", method = RequestMethod.POST)
+    @ApiOperation(value = "添加新闻",httpMethod = "POST",response = ModelAndView.class,notes="添加新闻")
+    @ResponseBody
+    public ModelAndView AddNews (@ApiParam(required = true,name = "addnews",value = "添加新闻")
+                                 @Param("title") String title,
+                                 @Param("content") String  content,
+                                 @Param("type") String type,
+                                 @Param("author") String author,
+                                 @Param("time") String time
+
+    ) throws ParseException {
+        logger.info("url:/news/addnews");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date time2 = dateFormat.parse(time);
+        News news=new News();
+        news.setTitle(title);
+        news.setContent(content);
+        news.setType(type);
+        news.setAuthor(author);
+        news.setTime(time2);
+        news.setImage("default");
+        if(_newsService.addNews(news)){
+            return new ModelAndView("redirect:/news/list");
+        }
+        return new ModelAndView("redirect:/news/list");
     }
 }

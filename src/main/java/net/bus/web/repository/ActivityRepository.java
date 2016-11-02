@@ -67,6 +67,7 @@ public class ActivityRepository {
     {
         return _mapper.insert(line);
     }
+    public int deleteByPrimaryKey(Long id){ return _mapper.deleteByPrimaryKey(id);}
 
     public int updateItem(Activity line)
     {

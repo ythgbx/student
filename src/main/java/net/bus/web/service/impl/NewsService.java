@@ -32,6 +32,9 @@ public class NewsService implements INewsService{
     }
 
     public boolean addNews(News news){
+       if(_rootRepository.insertItem(news)>0){
+           return true;
+       }
         return false;
     }
 }

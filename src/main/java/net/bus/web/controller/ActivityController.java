@@ -1,7 +1,6 @@
 package net.bus.web.controller;
 
 
-import com.sun.org.apache.regexp.internal.RE;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 import net.bus.web.aspect.Auth;
@@ -9,6 +8,7 @@ import net.bus.web.common.Util;
 import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.*;
 import net.bus.web.model.Activity;
+import net.bus.web.model.Pojo.PagePojo;
 import net.bus.web.model.User;
 import net.bus.web.service.IActivityService;
 import net.bus.web.service.exception.ActivityException;
@@ -18,13 +18,13 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.text.ParseException;
@@ -56,7 +56,7 @@ public class ActivityController {
     @ResponseBody
     @RequestMapping(value = "/list/all",method = RequestMethod.GET)
     @ApiOperation(value = "获取全部活动", httpMethod = "GET", response = ActivityList.class, notes="获取全部活动")
-    public IResult all(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "1")int page,
+    public IResult all(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "0")int page,
                        @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "5")int limit)
     {
         logger.info("activity all query");
@@ -154,14 +154,18 @@ public class ActivityController {
     @RequestMapping(value="/list", method = RequestMethod.GET)
     @ApiOperation(value = "活动列表页面", httpMethod = "GET", response = ModelAndView.class, notes = "活动列表页面")
     @ResponseBody
-    public ModelAndView list(Model model)
+    public ModelAndView list(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "0")int page,
+                             @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "10")int limit,
+                             HttpServletRequest request, Model model)
     {
         logger.info("url:/activity/list");
-
+        HttpSession session=request.getSession();
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("activity");
-        List<Activity> activities = _activityService.getAllActivity(1,10);
+        mv.setViewName("activity_list");
+        List<Activity> activities = _activityService.getAllActivity(page,limit);
+        PagePojo pagePojo = new PagePojo(_activityService.getAllActivityCount(),limit,page);
         mv.addObject("activityList",activities);
+        session.setAttribute("pagePojo",pagePojo);
         return mv;
     }
 
@@ -172,35 +176,87 @@ public class ActivityController {
     public  ModelAndView AddActivity(@ApiParam(required = true, name = "addactivity", value = "添加活动请求")
                                @Param("title") String title,
                                @Param("detail") String detail,
-                               @Param("amount") Integer amount,
+                               @Param("numberOfPeople") Integer numberOfPeople,
                                @Param("price") BigDecimal price,
                                @Param("startime") String startime,
                                @Param("endtime") String endtime
 
 
-
     ) throws ParseException {
         logger.info("url:/activity/addactivity");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd ");
         Date startime2 = dateFormat.parse(startime);
         Date endtime2 = dateFormat.parse(endtime);
         Activity activity=new Activity();
         activity.setTitle(title);
         activity.setDetail(detail);
-        activity.setAmount(amount);
         activity.setPrice(price);
         activity.setStartime(startime2);
         activity.setEndtime(endtime2);
         activity.setImage("");
-        if (title != null) {
+        activity.setNumberOfPeople(numberOfPeople);
+        activity.setLowerLimit(0);
+        activity.setUpperLimit(50);
             if (_activityService.addActivity(activity)) {
                 return new ModelAndView("redirect:/activity/list");
             }
             return new ModelAndView("redirect:/activity/list");
-        }
-        return new ModelAndView("redirect:/activity/list");
 
 
     }
 
+    @Auth(role=Auth.Role.USER)
+    @RequestMapping(value = "/deleteactivity",method = RequestMethod.GET)
+    @ApiOperation(value = "删除活动",httpMethod = "GET",response = BaseResult.class,notes = "删除活动")
+    @ResponseBody
+    public ModelAndView DeleteActivity(@ApiParam(required = true, name = "deleteactivity", value = "删除活动请求") @Param("id") Long id){
+        logger.info("url:/activity/deleteactivity");
+        if(id !=null){
+            if(_activityService.deleteActivity(id)){
+
+
+                return new ModelAndView("redirect:/activity/list");
+            }
+            return new ModelAndView("redirect:/activity/list");
+        }
+
+        return new ModelAndView("redirect:/activity/list");
+    }
+
+
+
+    @Auth(role=Auth.Role.USER)
+    @RequestMapping(value = "/updateactivity",method = RequestMethod.POST)
+    @ApiOperation(value = "修改活动",httpMethod = "POST",response = BaseResult.class,notes = "修改活动")
+    @ResponseBody
+    public ModelAndView UpdateActivity(@ApiParam(required = true, name = "updateactivity", value = "修改活动请求")
+                                       @Param("id")  Long id,
+                                       @Param("title") String title,
+                                       @Param("detail") String detail,
+                                       @Param("numberOfPeople") Integer numberOfPeople,
+                                       @Param("price") BigDecimal price,
+                                       @Param("startime") String startime,
+                                       @Param("endtime") String endtime
+    ) throws ParseException {
+        logger.info("url:/activity/updateactivity");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date startime2 = dateFormat.parse(startime);
+        Date endtime2 = dateFormat.parse(endtime);
+        Activity activity=new Activity();
+        activity.setId(id);
+        activity.setTitle(title);
+        activity.setDetail(detail);
+        activity.setPrice(price);
+        activity.setStartime(startime2);
+        activity.setEndtime(endtime2);
+        activity.setImage("");
+        activity.setNumberOfPeople(numberOfPeople);
+        activity.setLowerLimit(0);
+        activity.setUpperLimit(50);
+         if(_activityService.updateActivity(activity)){
+                return new ModelAndView("redirect:/activity/list");
+            }
+            return new ModelAndView("redirect:/activity/list");
+
+    }
 }
