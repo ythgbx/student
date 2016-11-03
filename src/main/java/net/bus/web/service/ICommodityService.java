@@ -1,6 +1,5 @@
 package net.bus.web.service;
 
-import net.bus.web.context.AlipayCallBack;
 import net.bus.web.model.Commodity;
 import net.bus.web.model.CommodityOrder;
 import net.bus.web.model.User;
@@ -18,7 +17,7 @@ public interface ICommodityService {
 
     String buy(long commodityId,User user);
 
-    //boolean buyComplete(AlipayCallBack callBack);
+    //boolean buyComplete(AlipayAsyncCallBack callBack);
 
     int getAllCount();
 

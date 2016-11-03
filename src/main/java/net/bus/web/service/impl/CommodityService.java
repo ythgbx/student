@@ -1,6 +1,6 @@
 package net.bus.web.service.impl;
 
-import net.bus.web.context.AlipayCallBack;
+import net.bus.web.model.Pojo.AlipayAsyncCallBack;
 import net.bus.web.enums.ProducedTypeEnum;
 import net.bus.web.model.Commodity;
 import net.bus.web.model.CommodityOrder;
@@ -85,7 +85,7 @@ public class CommodityService implements ICommodityService,IPayService{
     }
 
     @Transactional
-    public boolean buyComplete(AlipayCallBack callBack) throws RuntimeException
+    public boolean buyComplete(AlipayAsyncCallBack callBack) throws RuntimeException
     {
         CommodityOrder commodityOrder = _commodityOrderRepository.getItem(new CommodityOrderTradeNoSpecification(callBack.getOutTradeNo()));
         if(commodityOrder!=null&&commodityOrder.getPayTime()==null){

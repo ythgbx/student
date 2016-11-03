@@ -2,7 +2,7 @@ package net.bus.web.service.impl;
 
 import net.bus.web.common.weixin.config.WeiXinConfig;
 import net.bus.web.common.weixin.util.PayCommonUtil;
-import net.bus.web.context.WxCallBack;
+import net.bus.web.model.Pojo.WxAsyncCallBack;
 import net.bus.web.model.Pojo.Product;
 import net.bus.web.model.Pojo.WxOrderCallBack;
 import net.bus.web.service.IWxpayService;
@@ -51,9 +51,9 @@ public class WxpayService implements IWxpayService{
         return getOrderCallBack(prepayInfo);
     }
 
-    public boolean async(Map<String, String> params){
+    public WxAsyncCallBack async(Map<String, String> params){
         logger.info("async info print:"+params.toString());
-        WxCallBack callBack = getCallBack(params);
+        WxAsyncCallBack callBack = getCallBack(params);
 
         if(callBack.getResultCode().equals("SUCCESS")){
             SortedMap<Object,Object> parameters = new TreeMap<Object,Object>();
@@ -80,10 +80,11 @@ public class WxpayService implements IWxpayService{
             if(callBack.getSign().equals(sign)){
                 //TODO 判断支付并执行后续处理
                 logger.info("async sign verified success:"+callBack.getOutTradeNo());
+                return callBack;
             }
         }
 
-        return false;
+        return null;
     }
 
     private WxOrderCallBack getOrderCallBack(Map<String,String> prepayInfo){
@@ -102,10 +103,10 @@ public class WxpayService implements IWxpayService{
         return orderCallBack;
     }
 
-    private WxCallBack getCallBack(Map<String, String> params)
+    private WxAsyncCallBack getCallBack(Map<String, String> params)
     {
         //获取返回数据
-        WxCallBack callBack = new WxCallBack();
+        WxAsyncCallBack callBack = new WxAsyncCallBack();
         callBack.setAppid(handleFormStr(params.get("appid")));//应用ID
         callBack.setAttach(handleFormStr(params.get("attach")));//商家数据包
         callBack.setBankType(handleFormStr(params.get("bank_type")));//付款银行

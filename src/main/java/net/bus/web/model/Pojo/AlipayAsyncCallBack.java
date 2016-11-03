@@ -1,9 +1,11 @@
-package net.bus.web.context;
+package net.bus.web.model.Pojo;
+
+import java.math.BigDecimal;
 
 /**
  * Created by Edifi_000 on 2016-09-12.
  */
-public class AlipayCallBack {
+public class AlipayAsyncCallBack extends AsyncCallBack{
     private String orderTitle;//订单名称
     private String payType;//支付类型
     private String outTradeNo;//订单号
@@ -41,6 +43,7 @@ public class AlipayCallBack {
         this.outTradeNo = outTradeNo;
     }
 
+    @Override
     public String getTradeNo() {
         return tradeNo;
     }
@@ -111,5 +114,10 @@ public class AlipayCallBack {
 
     public void setAppId(String appId) {
         this.appId = appId;
+    }
+
+    @Override
+    public BigDecimal getPay(){
+        return BigDecimal.valueOf(Long.valueOf(getAmount()));
     }
 }

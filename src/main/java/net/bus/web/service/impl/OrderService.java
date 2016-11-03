@@ -5,18 +5,22 @@ import net.bus.web.enums.OrderState;
 import net.bus.web.enums.OrderTypeEnum;
 import net.bus.web.enums.ProducedTypeEnum;
 import net.bus.web.model.Orders;
+import net.bus.web.model.Pojo.AsyncCallBack;
 import net.bus.web.model.Pojo.OrderCallBack;
 import net.bus.web.model.Pojo.Product;
+import net.bus.web.model.Pojo.WxAsyncCallBack;
 import net.bus.web.repository.OrdersRepository;
 import net.bus.web.repository.specification.OrdersTradeNoSpecification;
 import net.bus.web.service.IAlipayService;
 import net.bus.web.service.IOrderService;
 import net.bus.web.service.IWxpayService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * Created by Edifi_000 on 2016-10-31.
@@ -79,8 +83,33 @@ public class OrderService implements IOrderService{
         return  _rootRepository.getItem(new OrdersTradeNoSpecification(tradeNo));
     }
 
-    public void confirm(Orders order){
+    public void confirm(OrderTypeEnum orderTypeEnum,Map<String, String> params){
+        AsyncCallBack asyncCallBack;
+        switch (orderTypeEnum){
+            case ALIPAY:
+            {
+                asyncCallBack = _alipayService.async(params);
+                break;
+            }
+            case WXPAY:
+            {
+                asyncCallBack = _wxpayService.async(params);
+                break;
+            }
+            default:
+                throw new RuntimeException("unknown order type");
+        }
 
+        if(asyncCallBack!=null&&!StringUtils.isBlank(asyncCallBack.getFailed())){
+            if(!StringUtils.isBlank(asyncCallBack.getTradeNo())){
+                Orders orders = query(asyncCallBack.getTradeNo());
+                orders.setPay(asyncCallBack.getPay());
+                orders.setPayTime(new Date());
+                _rootRepository.updateItem(orders);
+            }
+        }
+
+        //TODO 根据ProducedTypeEnum进行相应处理操作
     }
 
     public void refund(Orders order){
