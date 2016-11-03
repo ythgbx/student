@@ -121,7 +121,7 @@ public class WxpayService implements IWxpayService{
         callBack.setSign(handleFormStr(params.get("sign")));//签名
         callBack.setSubMchId(handleFormStr(params.get("sub_mch_id")));//商户应用id
         callBack.setTimeEnd(handleFormStr(params.get("time_end")));//支付完成时间
-        callBack.setTotalFee(BigDecimal.valueOf(Double.parseDouble(handleFormStr(params.get("total_fee")))));//总金额
+        callBack.setTotalFee(Integer.parseInt(handleFormStr(params.get("total_fee"))));//总金额
         callBack.setTradeType(handleFormStr(params.get("trade_type")));//交易类型
         callBack.setTransactionId(handleFormStr(params.get("transaction_id")));//微信支付订单号
 

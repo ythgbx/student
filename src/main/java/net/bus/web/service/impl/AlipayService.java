@@ -88,6 +88,7 @@ public class AlipayService implements IAlipayService{
             }
         } catch (Exception e) {
             e.printStackTrace();
+            callBack = null;
         }
         return callBack;
     }
