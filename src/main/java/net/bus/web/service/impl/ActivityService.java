@@ -9,6 +9,7 @@ import net.bus.web.repository.ActivityOrderRepository;
 import net.bus.web.repository.ActivityRepository;
 import net.bus.web.repository.ISpecification;
 import net.bus.web.repository.specification.ActivityOrderSpecification;
+import net.bus.web.repository.specification.ActivitySpecification;
 import net.bus.web.service.IActivityService;
 import net.bus.web.service.IAlipayService;
 import net.bus.web.service.IPayService;
@@ -68,6 +69,20 @@ public class ActivityService implements IActivityService,IPayService {
     public boolean deleteActivity(Long id) {
         if(activityRepository.deleteByPrimaryKey(id)>0){
             return  true;
+        }
+        return false;
+    }
+
+    public boolean delete(List<Long> ids) {
+        ActivitySpecification activitySpecification=new ActivitySpecification(ids);
+        int result;
+        if(ids.size()==1){
+            result=activityRepository.deleteByPrimaryKey(ids.get(0));
+        }else{
+        result = activityRepository.deleteByExample( activitySpecification);
+        }
+        if(result>0){
+            return true;
         }
         return false;
     }

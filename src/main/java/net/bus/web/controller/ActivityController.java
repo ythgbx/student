@@ -14,6 +14,7 @@ import net.bus.web.service.IActivityService;
 import net.bus.web.service.exception.ActivityException;
 import net.bus.web.service.exception.OutOfStockException;
 import net.bus.web.service.exception.RepeatApplyException;
+import net.bus.web.service.impl.ActivityService;
 import org.apache.ibatis.annotations.Param;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -177,54 +178,42 @@ public class ActivityController {
     @RequestMapping(value = "/addactivity",method = RequestMethod.POST)
     @ApiOperation(value = "添加活动",httpMethod = "POST",response = BaseResult.class,notes = "添加活动")
     @ResponseBody
-    public  ModelAndView AddActivity(@ApiParam(required = true, name = "addactivity", value = "添加活动请求")
-                               @Param("title") String title,
-                               @Param("detail") String detail,
-                               @Param("numberOfPeople") Integer numberOfPeople,
-                               @Param("price") BigDecimal price,
-                               @Param("startime") String startime,
-                               @Param("endtime") String endtime
-
+    public  BaseResult AddActivity(@ApiParam(required = true, name = "addactivity", value = "添加活动请求")
+                                     @RequestBody   Activity activity
 
     ) throws ParseException {
         logger.info("url:/activity/addactivity");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd ");
-        Date startime2 = dateFormat.parse(startime);
-        Date endtime2 = dateFormat.parse(endtime);
-        Activity activity=new Activity();
-        activity.setTitle(title);
-        activity.setDetail(detail);
-        activity.setPrice(price);
-        activity.setStartime(startime2);
-        activity.setEndtime(endtime2);
-        activity.setImage("");
-        activity.setNumberOfPeople(numberOfPeople);
-        activity.setLowerLimit(0);
-        activity.setUpperLimit(50);
-            if (_activityService.addActivity(activity)) {
-                return new ModelAndView("redirect:/activity/list");
-            }
-            return new ModelAndView("redirect:/activity/list");
+        BaseResult result=new BaseResult();
+        if(_activityService.addActivity(activity)){
+            result.setResult("success");
+            result.setContent("添加成功!");
+        }else{
+            result.setResult("failure");
+            result.setContent("添加失败!");
+        }
+
+           return result;
 
 
     }
 
     @Auth(role=Auth.Role.USER)
-    @RequestMapping(value = "/deleteactivity",method = RequestMethod.GET)
-    @ApiOperation(value = "删除活动",httpMethod = "GET",response = BaseResult.class,notes = "删除活动")
+    @RequestMapping(value = "/del",method = RequestMethod.DELETE)
+    @ApiOperation(value = "批量删除活动",httpMethod = "POST",response = BaseResult.class,notes = "批量删除活动")
     @ResponseBody
-    public ModelAndView DeleteActivity(@ApiParam(required = true, name = "deleteactivity", value = "删除活动请求") @Param("id") Long id){
-        logger.info("url:/activity/deleteactivity");
-        if(id !=null){
-            if(_activityService.deleteActivity(id)){
-
-
-                return new ModelAndView("redirect:/activity/list");
-            }
-            return new ModelAndView("redirect:/activity/list");
+    public BaseResult Del(@ApiParam(required = true, name = "del", value = "批量删除活动") @RequestBody BaseRequest request)
+    {
+        logger.info("url:/activity/del");
+        BaseResult result=new BaseResult();
+        List<Long> ids =request.getIds();
+        if(_activityService.delete(ids)){
+            result.setResult("success");
+            result.setContent("删除成功");
+        }else{
+            result.setResult("failure");
+            result.setContent("删除失败");
         }
-
-        return new ModelAndView("redirect:/activity/list");
+        return result;
     }
 
 

@@ -3,6 +3,7 @@ package net.bus.web.repository;
 import net.bus.web.mapper.ActivityMapper;
 import net.bus.web.model.Activity;
 import net.bus.web.model.ActivityExample;
+import net.bus.web.repository.specification.ActivitySpecification;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +69,10 @@ public class ActivityRepository {
         return _mapper.insert(line);
     }
     public int deleteByPrimaryKey(Long id){ return _mapper.deleteByPrimaryKey(id);}
+
+    public int deleteByExample(ISpecification specification) {
+        return _mapper.deleteByExample((ActivityExample) specification);
+    }
 
     public int updateItem(Activity line)
     {

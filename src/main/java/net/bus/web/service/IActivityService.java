@@ -22,6 +22,8 @@ public interface IActivityService {
 
     boolean deleteActivity(Long id);
 
+    boolean delete(List<Long> ids);
+
     String join(Long id, User user) throws OutOfStockException, RepeatApplyException;
 
     boolean updateActivity(Activity activity);
