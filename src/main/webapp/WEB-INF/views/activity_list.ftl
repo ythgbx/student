@@ -55,7 +55,7 @@
                         </td>
                         <td>${oneActivity.id}</td>
                         <td>${oneActivity.title}</td>
-                        <td >${oneActivity.detail}</td>
+                        <td width="200">${oneActivity.detail}</td>
                         <td>${oneActivity.numberOfPeople}</td>
                         <td>${oneActivity.price}</td>
                         <td>${oneActivity.lowerLimit}</td>
@@ -65,10 +65,14 @@
                         <td>
                             <a href=""
                                data-toggle="modal"
-                               data-target="#myModal2">
+                               data-target="#myModal2"
+                               onclick="getTableContent(this)"
+                            >
                                 <i class="fa fa-bars"></i>
                             </a>      <!--修改活动 -->
-                            <a href="/activity/del">
+                            <a href=""
+                               onclick="mulit_del(this)"
+                            >
                                 <i class="fa fa-times"></i>
                             </a>
                         </td><!--删除活动 -->
@@ -178,7 +182,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="exampleInputEmail1">活动名称</label>
-                        <input type="text" class="form-control" id="text1" name="title">
+                        <input type="text" class="form-control" id="text1" name="title" >
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">活动简介</label>
@@ -253,17 +257,26 @@
 </script>
 <!-- Parsley -->
 <script type="text/javascript">
-    function mulit_del() {// 全选
+    function mulit_del(node) {// 全选
         //判断至少写了一项
-        var obj = document.getElementsByName("choose");
         var ids = new Array();
-        if (obj == 0) {
-            alert("请至少选择一项!");
-        } else if (confirm("确定删除所选项目?")) {
-            for (var i in obj) {
-                if (obj[i].checked) {
-                    ids.push(obj[i].value)
+        var object=event.srcElement;
+        if(object.className=="button border-red"){
+            var obj = document.getElementsByName("choose");
+            var ids = new Array();
+            if (obj == 0) {
+                alert("请至少选择一项!");
+            } else if (confirm("确定删除所选项目?")) {
+                for (var i in obj) {
+                    if (obj[i].checked) {
+                        ids.push(obj[i].value)
+                    }
                 }
+            }
+        }else if(object.className=="fa fa-times"){
+            var tr1 = node.parentNode.parentNode;
+            if(confirm("确定删除所选项目?")){
+                ids.push(tr1.cells[1].innerText);
             }
         }
         $.ajax({
@@ -395,5 +408,8 @@ window.bus = new Bus();
             });
         });
     });
+</script>
+<script>
+
 </script>
 </@layoutFooter>

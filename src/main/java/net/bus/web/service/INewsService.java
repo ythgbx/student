@@ -16,4 +16,8 @@ public interface INewsService {
     News getNewsDetails(Long id);
 
     boolean addNews(News news);
+
+    boolean delete(List<Long> ids);
+
+    boolean delete(Long id);
 }
