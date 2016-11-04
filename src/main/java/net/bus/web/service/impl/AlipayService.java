@@ -5,7 +5,7 @@ import net.bus.web.common.alipay.config.AlipayConfig;
 import net.bus.web.common.alipay.sign.RSA;
 import net.bus.web.common.alipay.util.AlipayCore;
 import net.bus.web.common.alipay.util.AlipayNotify;
-import net.bus.web.context.AlipayCallBack;
+import net.bus.web.model.Pojo.AlipayAsyncCallBack;
 import net.bus.web.enums.ProducedTypeEnum;
 import net.bus.web.model.Pojo.AlipayOrderCallBack;
 import net.bus.web.model.Pojo.Product;
@@ -46,10 +46,10 @@ public class AlipayService implements IAlipayService{
         return orderCallBack;
     }
 
-    public boolean async(Map<String, String> params)
+    public AlipayAsyncCallBack async(Map<String, String> params)
     {
         //获取返回数据
-        AlipayCallBack callBack = getCallBack(params);
+        AlipayAsyncCallBack callBack = getCallBack(params);
 
         //sign
         String sign = handleFormStr(params.get("sign").replace(" ","+"));//客户端请求可能导致,"+"号字符变成空格
@@ -72,21 +72,25 @@ public class AlipayService implements IAlipayService{
                             logger.info("buy complete:"+callBack.getOutTradeNo());
                         }else{
                             logger.info("buy failed:"+callBack.getOutTradeNo());
-                            return false;
+                            callBack.setFailed("buy failed:"+callBack.getOutTradeNo());
                         }
+                    }else{
+                        logger.info("trade not finished or success");
+                        callBack.setFailed("trade not finished or success");
                     }
-                    return true;
                 }else{
                     logger.info("async sign verified failed");
-                    return false;
+                    callBack.setFailed("async sign verified failed");
                 }
             }else{
                 logger.info("async sign verifyResponse failed");
+                callBack.setFailed("async sign verifyResponse failed");
             }
         } catch (Exception e) {
             e.printStackTrace();
+            callBack = null;
         }
-        return false;
+        return callBack;
     }
 
     public boolean ret(String prestr,Map<String, String> params)
@@ -162,10 +166,10 @@ public class AlipayService implements IAlipayService{
         return data;
     }
 
-    private AlipayCallBack getCallBack(Map<String, String> params)
+    private AlipayAsyncCallBack getCallBack(Map<String, String> params)
     {
         //获取返回数据
-        AlipayCallBack callBack = new AlipayCallBack();
+        AlipayAsyncCallBack callBack = new AlipayAsyncCallBack();
         callBack.setOrderTitle(handleFormStr(params.get("subject")));//订单名称
         callBack.setPayType(handleFormStr(params.get("payment_type")));//支付类型
         callBack.setOutTradeNo(handleFormStr(params.get("out_trade_no")));//订单号

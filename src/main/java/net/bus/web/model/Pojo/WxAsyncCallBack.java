@@ -1,11 +1,11 @@
-package net.bus.web.context;
+package net.bus.web.model.Pojo;
 
 import java.math.BigDecimal;
 
 /**
  * Created by Edifi_000 on 2016-10-26.
  */
-public class WxCallBack {
+public class WxAsyncCallBack extends AsyncCallBack{
     private String appid;
     private String attach;
     private String bankType;
@@ -20,7 +20,7 @@ public class WxCallBack {
     private String sign;
     private String subMchId;
     private String timeEnd;
-    private BigDecimal totalFee;
+    private Integer totalFee;
     private String tradeType;
     private String transactionId;
 
@@ -144,11 +144,11 @@ public class WxCallBack {
         this.timeEnd = timeEnd;
     }
 
-    public BigDecimal getTotalFee() {
+    public Integer getTotalFee() {
         return totalFee;
     }
 
-    public void setTotalFee(BigDecimal totalFee) {
+    public void setTotalFee(Integer totalFee) {
         this.totalFee = totalFee;
     }
 
@@ -158,5 +158,15 @@ public class WxCallBack {
 
     public void setTransactionId(String transactionId) {
         this.transactionId = transactionId;
+    }
+
+    @Override
+    public String getTradeNo(){
+        return getOutTradeNo();
+    }
+
+    @Override
+    public BigDecimal getPay(){
+        return BigDecimal.valueOf(Long.valueOf(getTotalFee())/1000);
     }
 }

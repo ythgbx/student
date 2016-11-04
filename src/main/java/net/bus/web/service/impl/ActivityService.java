@@ -1,13 +1,12 @@
 package net.bus.web.service.impl;
 
-import net.bus.web.context.AlipayCallBack;
+import net.bus.web.model.Pojo.AlipayAsyncCallBack;
 import net.bus.web.enums.ProducedTypeEnum;
 import net.bus.web.model.Activity;
 import net.bus.web.model.ActivityOrder;
 import net.bus.web.model.User;
 import net.bus.web.repository.ActivityOrderRepository;
 import net.bus.web.repository.ActivityRepository;
-import net.bus.web.repository.ISpecification;
 import net.bus.web.repository.specification.ActivityOrderSpecification;
 import net.bus.web.repository.specification.ActivitySpecification;
 import net.bus.web.service.IActivityService;
@@ -139,7 +138,7 @@ public class ActivityService implements IActivityService,IPayService {
     }
 
     @Transactional
-    public boolean buyComplete(AlipayCallBack callBack) {
+    public boolean buyComplete(AlipayAsyncCallBack callBack) {
         ActivityOrder order = activityOrderRepository.getItem(new ActivityOrderSpecification(callBack.getOutTradeNo()));
         if(order!=null&&order.getPayTime()==null){
 

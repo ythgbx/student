@@ -6,6 +6,8 @@ import net.bus.web.model.Orders;
 import net.bus.web.model.Pojo.OrderCallBack;
 import net.bus.web.model.Pojo.Product;
 
+import java.util.Map;
+
 /**
  * Created by Edifi_000 on 2016-10-30.
  */
@@ -17,7 +19,7 @@ public interface IOrderService {
 
     Orders query(String tradeNo);
 
-    void confirm(Orders order);
+    void confirm(OrderTypeEnum orderTypeEnum,Map<String, String> params);
 
     void refund(Orders order);
 

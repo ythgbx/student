@@ -65,4 +65,13 @@ public enum ProducedTypeEnum {
         }
         return null;
     }
+
+    public static ProducedTypeEnum get(char pre){
+        for (ProducedTypeEnum state : values()) {
+            if (state.getPre() == pre) {
+                return state;
+            }
+        }
+        return null;
+    }
 }

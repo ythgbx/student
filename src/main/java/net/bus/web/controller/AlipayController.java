@@ -3,11 +3,12 @@ package net.bus.web.controller;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 import net.bus.web.aspect.Auth;
-import net.bus.web.context.AlipayCallBack;
 import net.bus.web.controller.dto.BaseResult;
 import net.bus.web.controller.dto.BaseRequest;
 import net.bus.web.controller.dto.IResult;
+import net.bus.web.model.Pojo.AlipayAsyncCallBack;
 import net.bus.web.service.IAlipayService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -67,7 +68,8 @@ public class AlipayController {
             params.put(name, valueStr);
         }
 
-        if(_alipayService.async(params)){
+        AlipayAsyncCallBack callBack = _alipayService.async(params);
+        if(callBack!=null&& !StringUtils.isBlank(callBack.getFailed())){
             return "success";
         }else{
             return "failed";
