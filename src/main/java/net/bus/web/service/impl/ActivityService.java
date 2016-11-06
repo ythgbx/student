@@ -1,9 +1,9 @@
 package net.bus.web.service.impl;
 
-import net.bus.web.model.Pojo.AlipayAsyncCallBack;
 import net.bus.web.enums.ProducedTypeEnum;
 import net.bus.web.model.Activity;
 import net.bus.web.model.ActivityOrder;
+import net.bus.web.model.Pojo.AsyncCallBack;
 import net.bus.web.model.User;
 import net.bus.web.repository.ActivityOrderRepository;
 import net.bus.web.repository.ActivityRepository;
@@ -138,8 +138,8 @@ public class ActivityService implements IActivityService,IPayService {
     }
 
     @Transactional
-    public boolean buyComplete(AlipayAsyncCallBack callBack) {
-        ActivityOrder order = activityOrderRepository.getItem(new ActivityOrderSpecification(callBack.getOutTradeNo()));
+    public boolean buyComplete(AsyncCallBack callBack) {
+        ActivityOrder order = activityOrderRepository.getItem(new ActivityOrderSpecification(callBack.getTradeNo()));
         if(order!=null&&order.getPayTime()==null){
 
             Activity activity = activityRepository.getItem(order.getActivityId());
@@ -150,7 +150,7 @@ public class ActivityService implements IActivityService,IPayService {
             if(activity!=null&&user!=null){
                 //TODO 订单完成后更新活动参与人数
                 if(count < activity.getUpperLimit()){
-                    order.setPay(BigDecimal.valueOf(Double.valueOf(callBack.getAmount())));
+                    order.setPay(callBack.getPay());
                     order.setPayTime(new Date());
                     activity.setNumberOfPeople(activity.getNumberOfPeople()+1);
                     int result = activityOrderRepository.updateItem(order);

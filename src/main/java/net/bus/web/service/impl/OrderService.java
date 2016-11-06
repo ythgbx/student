@@ -41,6 +41,10 @@ public class OrderService implements IOrderService{
         return String.valueOf(orderTypeEnum.getPre())+String.valueOf(producedType.getPre())+UUIDUtil.getNew();
     }
 
+    public String createRefundTradeNo(OrderTypeEnum orderTypeEnum,ProducedTypeEnum producedType){
+        return "Re"+createTradeNo(orderTypeEnum,producedType);
+    }
+
     private Orders create(Long userId,OrderTypeEnum orderTypeEnum,Product product,int amount){
         Orders order = new Orders();
         order.setUserId(userId);
@@ -60,7 +64,6 @@ public class OrderService implements IOrderService{
 
         Orders order = create(userId,orderTypeEnum,product,amount);
 
-        //TODO
         OrderCallBack orderCallBack;
         switch (orderTypeEnum){
             case ALIPAY:
@@ -120,8 +123,26 @@ public class OrderService implements IOrderService{
         return false;
     }
 
-    public void refund(Orders order){
-
+    public void refund(String tradeNo,String userId){
+        Orders orders = query(tradeNo);
+        if(orders!=null&&orders.getState().equals(2)){
+            switch (OrderTypeEnum.get(orders.getTradeType())){
+                case ALIPAY:
+                {
+                    //TODO 微信退款
+                    throw new RuntimeException("alipay refund not impl");
+                }
+                case WXPAY:
+                {
+                    _wxpayService.refund(orders,
+                            createRefundTradeNo(OrderTypeEnum.get(orders.getTradeType()),ProducedTypeEnum.get(orders.getProductType())),
+                            userId);
+                    break;
+                }
+                default:
+                    throw new RuntimeException("unknown order type");
+            }
+        }
     }
 
     public void refundConfirm(Orders order){

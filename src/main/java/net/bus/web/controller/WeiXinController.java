@@ -251,4 +251,15 @@ public class WeiXinController {
             return PayCommonUtil.setXML("FAIL", "ERROR");
         }
     }
+
+    @Auth(role = Auth.Role.USER)//TODO 测试完成需更改为ADMIN
+    @ResponseBody
+    @RequestMapping(value = "/refund", method = RequestMethod.POST)
+    @ApiOperation(value = "退款", httpMethod = "POST", response = String.class, notes = "退款")
+    public String refund(@ApiParam(required = true, name = "request", value = "退款请求") HttpServletRequest request)
+    {
+        User user = (User) _session.getAttribute(SessionContext.CURRENT_USER);
+        _orderService.refund("WCj2IepcakX4O7TvjiQdQ",user.getId().toString());
+        return PayCommonUtil.setXML("FAIL", "FAIL");
+    }
 }

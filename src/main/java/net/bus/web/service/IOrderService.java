@@ -21,7 +21,7 @@ public interface IOrderService {
 
     boolean confirm(OrderTypeEnum orderTypeEnum,Map<String, String> params);
 
-    void refund(Orders order);
+    void refund(String tradeNo,String userId);
 
     void refundConfirm(Orders order);
 }

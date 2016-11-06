@@ -1,5 +1,6 @@
 package net.bus.web.service;
 
+import net.bus.web.model.Pojo.AlipayAsyncCallBack;
 import net.bus.web.model.Pojo.AsyncCallBack;
 
 /**
