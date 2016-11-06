@@ -11,7 +11,7 @@ import net.bus.web.repository.specification.ActivityOrderSpecification;
 import net.bus.web.repository.specification.ActivitySpecification;
 import net.bus.web.service.IActivityService;
 import net.bus.web.service.IAlipayService;
-import net.bus.web.service.IPayService;
+import net.bus.web.service.IProductService;
 import net.bus.web.service.exception.ActivityException;
 import net.bus.web.service.exception.OutOfStockException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ import java.util.UUID;
  */
 
 @Service("activityService")
-public class ActivityService implements IActivityService,IPayService {
+public class ActivityService implements IActivityService,IProductService {
     @Autowired
     private ActivityRepository activityRepository;
 

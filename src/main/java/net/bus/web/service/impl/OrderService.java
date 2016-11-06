@@ -8,12 +8,11 @@ import net.bus.web.model.Orders;
 import net.bus.web.model.Pojo.AsyncCallBack;
 import net.bus.web.model.Pojo.OrderCallBack;
 import net.bus.web.model.Pojo.Product;
-import net.bus.web.model.Pojo.WxAsyncCallBack;
 import net.bus.web.repository.OrdersRepository;
 import net.bus.web.repository.specification.OrdersTradeNoSpecification;
 import net.bus.web.service.IAlipayService;
 import net.bus.web.service.IOrderService;
-import net.bus.web.service.IPayService;
+import net.bus.web.service.IProductService;
 import net.bus.web.service.IWxpayService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,7 +108,7 @@ public class OrderService implements IOrderService{
 
                 Orders orders = query(asyncCallBack.getTradeNo());
                 if(orders!=null){
-                    IPayService payService = ProducedTypeEnum.get(orders.getProductType()).getService();
+                    IProductService payService = ProducedTypeEnum.get(orders.getProductType()).getService();
                     if(payService.buyComplete(asyncCallBack)){
                         orders.setPay(asyncCallBack.getPay());
                         orders.setPayTime(new Date());

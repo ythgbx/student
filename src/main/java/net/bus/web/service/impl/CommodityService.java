@@ -28,7 +28,7 @@ import java.util.UUID;
  * Created by Edifi_000 on 2016-09-04.
  */
 @Service("commodityService")
-public class CommodityService implements ICommodityService,IPayService{
+public class CommodityService implements ICommodityService,IProductService {
 
     @Autowired
     private CommodityRepository _rootRepository;
