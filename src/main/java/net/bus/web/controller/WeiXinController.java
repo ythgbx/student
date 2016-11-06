@@ -13,6 +13,7 @@ import net.bus.web.controller.dto.*;
 import net.bus.web.enums.OrderTypeEnum;
 import net.bus.web.enums.ProducedTypeEnum;
 import net.bus.web.model.Pojo.Product;
+import net.bus.web.model.Pojo.WxAsyncCallBack;
 import net.bus.web.model.Pojo.WxOrderCallBack;
 import net.bus.web.model.User;
 import net.bus.web.service.IOrderService;
@@ -238,9 +239,11 @@ public class WeiXinController {
             in.close();
             String msgXml=new String(out.toByteArray(),"utf-8");//xml数据
             Map params = XMLUtil.doXMLParse(msgXml);
-            if(_wxpayService.async(params)){
+            WxAsyncCallBack callBack = _wxpayService.async(params);
+            if(callBack!=null&& !StringUtils.isBlank(callBack.getFailed())){
                 return PayCommonUtil.setXML("SUCCESS", "OK");
-            } else{
+            }
+            else{
                 return PayCommonUtil.setXML("FAIL", "FAIL");
             }
         }catch (Exception e){
