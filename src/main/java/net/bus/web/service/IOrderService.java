@@ -19,7 +19,7 @@ public interface IOrderService {
 
     Orders query(String tradeNo);
 
-    void confirm(OrderTypeEnum orderTypeEnum,Map<String, String> params);
+    boolean confirm(OrderTypeEnum orderTypeEnum,Map<String, String> params);
 
     void refund(Orders order);
 

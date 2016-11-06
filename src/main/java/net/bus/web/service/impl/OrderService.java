@@ -13,6 +13,7 @@ import net.bus.web.repository.OrdersRepository;
 import net.bus.web.repository.specification.OrdersTradeNoSpecification;
 import net.bus.web.service.IAlipayService;
 import net.bus.web.service.IOrderService;
+import net.bus.web.service.IPayService;
 import net.bus.web.service.IWxpayService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,7 +84,7 @@ public class OrderService implements IOrderService{
         return  _rootRepository.getItem(new OrdersTradeNoSpecification(tradeNo));
     }
 
-    public void confirm(OrderTypeEnum orderTypeEnum,Map<String, String> params){
+    public boolean confirm(OrderTypeEnum orderTypeEnum,Map<String, String> params){
         AsyncCallBack asyncCallBack;
         switch (orderTypeEnum){
             case ALIPAY:
@@ -102,14 +103,21 @@ public class OrderService implements IOrderService{
 
         if(asyncCallBack!=null&&!StringUtils.isBlank(asyncCallBack.getFailed())){
             if(!StringUtils.isBlank(asyncCallBack.getTradeNo())){
+
                 Orders orders = query(asyncCallBack.getTradeNo());
-                orders.setPay(asyncCallBack.getPay());
-                orders.setPayTime(new Date());
-                _rootRepository.updateItem(orders);
+                if(orders!=null){
+                    IPayService payService = ProducedTypeEnum.get(orders.getProductType()).getService();
+                    if(payService.buyComplete(asyncCallBack)){
+                        orders.setPay(asyncCallBack.getPay());
+                        orders.setPayTime(new Date());
+                        _rootRepository.updateItem(orders);
+
+                        return true;
+                    }
+                }
             }
         }
-
-        //TODO 根据ProducedTypeEnum进行相应处理操作
+        return false;
     }
 
     public void refund(Orders order){
