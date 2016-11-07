@@ -196,8 +196,14 @@ public class CommodityController {
         for(CommodityOrder commodityOrder:commodityOrderList){
             CommodityOrderItem commodityOrderItem = new CommodityOrderItem();
             commodityOrderItem.setId(commodityOrder.getId());
-            commodityOrderItem.setName(commodityMaps.get(commodityOrder.getCommodityId()).getName());
-            commodityOrderItem.setImg(commodityMaps.get(commodityOrder.getCommodityId()).getItemImg());
+            if(commodityMaps.containsKey((commodityOrder.getCommodityId()))){
+                commodityOrderItem.setName(commodityMaps.get(commodityOrder.getCommodityId()).getName());
+                commodityOrderItem.setImg(commodityMaps.get(commodityOrder.getCommodityId()).getItemImg());
+            }else{
+                commodityOrderItem.setName("商品已经消失在了宇宙");
+                commodityOrderItem.setImg("");
+            }
+
             commodityOrderItem.setTotal(commodityOrder.getPay());
             commodityOrderItem.setCreateTime(commodityOrder.getCreateTime().getTime());
             commodityOrderItem.setPayTime(commodityOrder.getPayTime().getTime());
