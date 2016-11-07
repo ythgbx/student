@@ -3,6 +3,7 @@ package net.bus.web.controller;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 import net.bus.web.aspect.Auth;
+import net.bus.web.common.config.RString;
 import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.*;
 import net.bus.web.model.Commodity;
@@ -200,7 +201,7 @@ public class CommodityController {
                 commodityOrderItem.setName(commodityMaps.get(commodityOrder.getCommodityId()).getName());
                 commodityOrderItem.setImg(commodityMaps.get(commodityOrder.getCommodityId()).getItemImg());
             }else{
-                commodityOrderItem.setName("商品已经消失在了宇宙");
+                commodityOrderItem.setName(RString.COMMODITY_NOT_FOUND);
                 commodityOrderItem.setImg("");
             }
 

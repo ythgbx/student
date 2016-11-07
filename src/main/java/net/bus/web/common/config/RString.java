@@ -29,6 +29,8 @@ public class RString {
     public static String FILE_UPLOAD_FAILED_EMPTY_FILE;
     public static String FILE_UPLOAD_FAILED_EXT;
 
+    public static String COMMODITY_NOT_FOUND;
+
     public void setLOGIN_SUCCESS(String LOGIN_SUCCESS) {
         RString.LOGIN_SUCCESS = LOGIN_SUCCESS;
     }
@@ -91,5 +93,9 @@ public class RString {
 
     public void setFILE_UPLOAD_FAILED_EXT(String FILE_UPLOAD_FAILED_EXT) {
         RString.FILE_UPLOAD_FAILED_EXT = FILE_UPLOAD_FAILED_EXT;
+    }
+
+    public void setCOMMODITY_NOT_FOUND(String COMMODITY_NOT_FOUND) {
+        RString.COMMODITY_NOT_FOUND = COMMODITY_NOT_FOUND;
     }
 }
