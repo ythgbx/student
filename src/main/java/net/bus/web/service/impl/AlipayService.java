@@ -23,7 +23,7 @@ import java.util.Map;
  * Created by Edifi_000 on 2016-09-08.
  */
 @Service
-public class AlipayService implements IAlipayService{
+public class AlipayService implements IAlipayService ,IPayService{
 
 
 

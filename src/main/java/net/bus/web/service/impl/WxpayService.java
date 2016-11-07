@@ -17,7 +17,7 @@ import java.util.*;
  * Created by Edifi_000 on 2016-10-19.
  */
 @Service
-public class WxpayService implements IWxpayService{
+public class WxpayService implements IWxpayService ,IPayService{
 
     private Logger logger = Logger.getLogger("CommonLogger");
 
@@ -92,6 +92,9 @@ public class WxpayService implements IWxpayService{
 
         try {
             Map<String,String> parameters = PayCommonUtil.refundWeiXinOrder(orders.getTradeNo(),refundTradeNo,orders.getAmount().toString(),orders.getAmount().toString(),userId);
+            if(parameters.containsKey("result_code")&&parameters.get("result_code").equals("SUCCESS")){
+                return true;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
