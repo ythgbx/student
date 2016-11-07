@@ -2,6 +2,7 @@ package net.bus.web.service.impl;
 
 import net.bus.web.common.weixin.config.WeiXinConfig;
 import net.bus.web.common.weixin.util.PayCommonUtil;
+import net.bus.web.model.Orders;
 import net.bus.web.model.Pojo.WxAsyncCallBack;
 import net.bus.web.model.Pojo.Product;
 import net.bus.web.model.Pojo.WxOrderCallBack;
@@ -85,6 +86,16 @@ public class WxpayService implements IWxpayService{
         }
 
         return null;
+    }
+
+    public boolean refund(Orders orders,String refundTradeNo,String userId){
+
+        try {
+            Map<String,String> parameters = PayCommonUtil.refundWeiXinOrder(orders.getTradeNo(),refundTradeNo,orders.getAmount().toString(),orders.getAmount().toString(),userId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     private WxOrderCallBack getOrderCallBack(Map<String,String> prepayInfo){

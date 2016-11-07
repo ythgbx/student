@@ -181,7 +181,7 @@ public class ActivityController {
     public  BaseResult AddActivity(@ApiParam(required = true, name = "addactivity", value = "添加活动请求")
                                      @RequestBody   Activity activity
 
-    ) throws ParseException {
+    )  {
         logger.info("url:/activity/addactivity");
         BaseResult result=new BaseResult();
         if(_activityService.addActivity(activity)){

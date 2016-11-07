@@ -1,9 +1,9 @@
 package net.bus.web.service.impl;
 
-import net.bus.web.model.Pojo.AlipayAsyncCallBack;
 import net.bus.web.enums.ProducedTypeEnum;
 import net.bus.web.model.Commodity;
 import net.bus.web.model.CommodityOrder;
+import net.bus.web.model.Pojo.AsyncCallBack;
 import net.bus.web.model.User;
 import net.bus.web.model.type.PointRecordType;
 import net.bus.web.model.type.PointSourceType;
@@ -28,7 +28,7 @@ import java.util.UUID;
  * Created by Edifi_000 on 2016-09-04.
  */
 @Service("commodityService")
-public class CommodityService implements ICommodityService,IPayService{
+public class CommodityService implements ICommodityService,IProductService {
 
     @Autowired
     private CommodityRepository _rootRepository;
@@ -85,9 +85,9 @@ public class CommodityService implements ICommodityService,IPayService{
     }
 
     @Transactional
-    public boolean buyComplete(AlipayAsyncCallBack callBack) throws RuntimeException
+    public boolean buyComplete(AsyncCallBack callBack) throws RuntimeException
     {
-        CommodityOrder commodityOrder = _commodityOrderRepository.getItem(new CommodityOrderTradeNoSpecification(callBack.getOutTradeNo()));
+        CommodityOrder commodityOrder = _commodityOrderRepository.getItem(new CommodityOrderTradeNoSpecification(callBack.getTradeNo()));
         if(commodityOrder!=null&&commodityOrder.getPayTime()==null){
 
             Commodity commodity = getDetails(commodityOrder.getCommodityId());
@@ -97,7 +97,7 @@ public class CommodityService implements ICommodityService,IPayService{
             if(commodity!=null&&user!=null){
                 //TODO 根据是否需要减少库存(暂时补进行库存处理,均为虚拟商品) 判断库存后进行操作
                 if(commodity.getAmount()>0){
-                    commodityOrder.setPay(BigDecimal.valueOf(Double.valueOf(callBack.getAmount())));
+                    commodityOrder.setPay(callBack.getPay());
                     commodityOrder.setPayTime(new Date());
                     _commodityOrderRepository.updateItem(commodityOrder);
 

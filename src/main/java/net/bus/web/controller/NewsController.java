@@ -3,10 +3,7 @@ package net.bus.web.controller;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 import net.bus.web.aspect.Auth;
-import net.bus.web.controller.dto.IResult;
-import net.bus.web.controller.dto.NewsDetail;
-import net.bus.web.controller.dto.NewsItem;
-import net.bus.web.controller.dto.NewsList;
+import net.bus.web.controller.dto.*;
 import net.bus.web.model.Activity;
 import net.bus.web.model.News;
 import net.bus.web.model.Pojo.PagePojo;
@@ -16,14 +13,12 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.ws.rs.DELETE;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -113,27 +108,39 @@ public class NewsController {
     @RequestMapping(value="/addnews", method = RequestMethod.POST)
     @ApiOperation(value = "添加新闻",httpMethod = "POST",response = ModelAndView.class,notes="添加新闻")
     @ResponseBody
-    public ModelAndView AddNews (@ApiParam(required = true,name = "addnews",value = "添加新闻")
-                                 @Param("title") String title,
-                                 @Param("content") String  content,
-                                 @Param("type") String type,
-                                 @Param("author") String author,
-                                 @Param("time") String time
+    public BaseResult AddNews (@ApiParam(required = true,name = "addnews",value = "添加新闻")
+                                 @RequestBody News news
 
-    ) throws ParseException {
+    )  {
         logger.info("url:/news/addnews");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date time2 = dateFormat.parse(time);
-        News news=new News();
-        news.setTitle(title);
-        news.setContent(content);
-        news.setType(type);
-        news.setAuthor(author);
-        news.setTime(time2);
-        news.setImage("default");
+        BaseResult result=new BaseResult();
         if(_newsService.addNews(news)){
-            return new ModelAndView("redirect:/news/list");
+            result.setResult("success");
+            result.setContent("添加成功!");
+        }else{
+            result.setResult("failure");
+            result.setContent("添加失败!");
         }
-        return new ModelAndView("redirect:/news/list");
+       return result;
+    }
+
+    @Auth(role= Auth.Role.USER)
+    @RequestMapping(value = "/del" ,method = RequestMethod.DELETE)
+    @ApiOperation(value = "批量删除新闻",httpMethod = "POST",response = BaseResult.class,notes = "批量删除新闻")
+    @ResponseBody
+    public BaseResult Del(@ApiParam(required = true, name = "del", value = "批量删除活动") @RequestBody BaseRequest request)
+    {
+        logger.info("url:/news/del");
+        BaseResult result=new BaseResult();
+        List<Long> ids =request.getIds();
+        if(_newsService.delete(ids)){
+            result.setResult("success");
+            result.setContent("删除成功!");
+        }else{
+            result.setResult("failure");
+            result.setContent("删除失败!");
+        }
+
+        return result;
     }
 }

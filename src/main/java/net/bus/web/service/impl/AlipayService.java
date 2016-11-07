@@ -10,7 +10,7 @@ import net.bus.web.enums.ProducedTypeEnum;
 import net.bus.web.model.Pojo.AlipayOrderCallBack;
 import net.bus.web.model.Pojo.Product;
 import net.bus.web.service.IAlipayService;
-import net.bus.web.service.IPayService;
+import net.bus.web.service.IProductService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
@@ -67,7 +67,7 @@ public class AlipayService implements IAlipayService{
                     if(callBack.getTradeStatus().equals("TRADE_FINISHED") || callBack.getTradeStatus().equals("TRADE_SUCCESS")) {
 
                         logger.info("async sign verified success:"+callBack.getOutTradeNo());
-                        IPayService payService = ProducedTypeEnum.get(Integer.parseInt(callBack.getOutTradeNo().substring(0, 1))).getService();
+                        IProductService payService = ProducedTypeEnum.get(Integer.parseInt(callBack.getOutTradeNo().substring(0, 1))).getService();
                         if(payService.buyComplete(callBack)){
                             logger.info("buy complete:"+callBack.getOutTradeNo());
                         }else{

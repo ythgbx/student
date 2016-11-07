@@ -40,6 +40,13 @@ public class NewsRepository {
         return new ArrayList<News>();
     }
 
+    public int delete(Long id){return  _mapper.deleteByPrimaryKey(id);}
+
+    public int delete(ISpecification specification){
+        return _mapper.deleteByExample((NewsExample) specification);
+    }
+
+
     public List<News> getList(ISpecification specification,int page,int limit) {
         NewsExample example = (NewsExample)specification.createExample();
         if(example!=null) {
