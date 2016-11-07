@@ -116,6 +116,24 @@ public class PayCommonUtil {
         return map;
     }
 
+    public static Map<String, String>  refundWeiXinOrder(String orderNumber,String refundOrderNumber,String totalFee,String refundFee,String opUserId) throws Exception{
+        SortedMap<Object,Object> parameters = new TreeMap<Object,Object>();
+        parameters.put("appid", WeiXinConfig.app_id);
+        parameters.put("mch_id", WeiXinConfig.MCH_ID);
+        parameters.put("nonce_str", CreateNoncestr());
+        parameters.put("out_trade_no", orderNumber);
+        parameters.put("out_refund_no",refundOrderNumber);
+        parameters.put("total_fee",totalFee);
+        parameters.put("refund_fee",refundFee);
+        parameters.put("op_user_id",opUserId);
+        String sign = PayCommonUtil.createSign("UTF-8", parameters);
+        parameters.put("sign", sign);
+        String requestXML = PayCommonUtil.getRequestXml(parameters);
+        String result =CommonUtil.postRequest(WeiXinConfig.REFUND_URL, requestXML);
+        Map<String, String> map = XMLUtil.doXMLParse(result);//解析微信返回的信息，以Map形式存储便于取值
+        return map;
+    }
+
 
 
     public static String createPackageValue(String prepay_id) throws Exception{

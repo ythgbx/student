@@ -269,6 +269,28 @@ public class LineController {
         //return MockDataContext.getInstance().getLineDetail();
     }
 
+    @Auth(role = Auth.Role.NONE)
+    @ResponseBody
+    @RequestMapping(value = "/bus", method = RequestMethod.GET)
+    @ApiOperation(value = "根据设备mac地址或车牌号获得线路", httpMethod = "GET", response = LineDetail.class, notes = "根据设备mac地址或车牌号获得线路")
+    public IResult bus(@ApiParam(required = false, name = "name", value = "name",defaultValue = "鄂A12345")
+                           @RequestParam(value = "name",required = false,defaultValue = "")String name,
+                       @ApiParam(required = false, name = "device", value = "device",defaultValue = "b8:27:eb:6e:c5:84")
+                       @RequestParam(value = "device",required = false,defaultValue = "")String device
+                       )
+    {
+        IResult result = new BaseResult();
+        Bus bus = _busService.getBus(name,device);
+        if(bus!= null){
+            result = this.detail(bus.getLineId(),true,0,0);
+        }else{
+            ((BaseResult)result).setResult("failure");
+            ((BaseResult)result).setContent("bus is not bind");
+
+        }
+        return result;
+    }
+
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/collection", method = RequestMethod.PUT)

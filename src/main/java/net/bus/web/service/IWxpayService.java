@@ -1,5 +1,6 @@
 package net.bus.web.service;
 
+import net.bus.web.model.Orders;
 import net.bus.web.model.Pojo.Product;
 import net.bus.web.model.Pojo.WxAsyncCallBack;
 import net.bus.web.model.Pojo.WxOrderCallBack;
@@ -14,4 +15,6 @@ public interface IWxpayService {
     WxOrderCallBack prepay(Product product,String tradeNo);
 
     WxAsyncCallBack async(Map<String, String> params);
+
+    boolean refund(Orders orders,String refundTradeNo,String userId);
 }
