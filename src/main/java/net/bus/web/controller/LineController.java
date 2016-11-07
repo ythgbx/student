@@ -11,6 +11,7 @@ import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.*;
 import net.bus.web.controller.dto.LineStation;
 import net.bus.web.model.*;
+import net.bus.web.model.Pojo.PagePojo;
 import net.bus.web.service.IBusService;
 import net.bus.web.service.ILineService;
 import net.bus.web.service.ILocationService;
@@ -18,8 +19,11 @@ import net.bus.web.service.IUserLineService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.*;
 
@@ -373,5 +377,42 @@ public class LineController {
             displayList.add(disItem);
         }
         return displayList;
+    }
+
+
+    @Auth(role = Auth.Role.USER)
+    @RequestMapping(value="/list", method = RequestMethod.GET)
+    @ApiOperation(value = "线路列表页面", httpMethod = "GET", response = ModelAndView.class, notes = "线路列表页面")
+    @ResponseBody
+    public ModelAndView list(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "0")int page,
+                             @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "10")int limit,
+                             HttpServletRequest request, Model model)
+    {
+        logger.info("url:/line/list");
+        HttpSession session=request.getSession();
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("line_list");
+        List<Line> lines = _lineService.getAllLines(page,limit);
+        PagePojo pagePojo = new PagePojo(_lineService.getAllLinesCount(),limit,page);
+        mv.addObject("lineList",lines);
+        session.setAttribute("pagePojo",pagePojo);
+        return mv;
+    }
+
+    @Auth(role=Auth.Role.USER)
+    @RequestMapping(value = "/addline",method = RequestMethod.POST)
+    @ApiOperation(value = "添加线路",httpMethod = "POST",response = BaseResult.class,notes = "添加线路")
+    @ResponseBody
+    public  BaseResult AddActivity(@ApiParam(required = true, name = "addline", value = "添加线路请求")
+                                   @RequestBody   Line line
+
+    )  {
+        logger.info("url:/line/addline");
+        BaseResult result=new BaseResult();
+
+
+        return result;
+
+
     }
 }

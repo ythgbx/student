@@ -12,9 +12,9 @@
 <div class="smart-widget clearfix">
     <div class="smart-widget-header ">
          新闻中心
-        <button type="submit" onclick="mulit_del()" class="button border-red"><span class="icon-trash-o"></span> 批量删除
+        <button type="button" onclick="mulit_del()" class="button border-red"><span class="icon-trash-o"></span> 批量删除
         </button>
-        <button class="btn btn-success btn-xs smart-widget-option" data-toggle="modal" data-target="#myModal1">添加新闻</button>
+        <button class="btn btn-success  smart-widget-option" data-toggle="modal" data-target="#myModal1">添加新闻</button>
     </div>
     <div class="smart-widget-inner">
         <div class="smart-widget-body">
@@ -55,13 +55,15 @@
                         <td>
                             <a href=""
                                data-toggle="modal"
-                               data-target="#myModal2">
+                               data-target="#myModal2"
+                               onclick="getContent(this)"
+                            >
                                 <i class="fa fa-bars"></i>
-                            </a>      <!--修改活动 -->
+                            </a>      <!--修改新闻 -->
                             <a href="" onclick="mulit_del(this)">
                                 <i class="fa fa-times"></i>
                             </a>
-                        </td><!--删除活动 -->
+                        </td><!--删除新闻 -->
                     </tr>
                     </#list>
                 </tbody>
@@ -79,7 +81,7 @@
         </div>
     </div><!-- ./smart-widget-inner -->
 </div><!-- ./smart-widget -->
-<form role="form" enctype="multipart/form-data" id="form1">
+    <!--添加新闻 -->
     <div class="modal fade" id="myModal1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -87,7 +89,7 @@
                     <button type="button" class="close" data-dismiss="modal" ><span class="sr-only">Close</span></button>
                     <h4 class="modal-title">添加新闻</h4>
                 </div>
-
+                <form role="form" enctype="multipart/form-data" id="form1">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="exampleInputEmail1">新闻标题</label>
@@ -121,15 +123,69 @@
                      </div>-->
 
                 </div>
+                </form>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="submit" class="btn btn-primary" id="submit">提交</button>
+                    <button type="button" class="btn btn-primary" id="add" onclick="operate()">提交</button>
                 </div>
 
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-</form>
+
+<!--修改新闻 -->
+<div class="modal fade" id="myModal2">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" ><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">修改新闻</h4>
+            </div>
+            <form role="form" enctype="multipart/form-data" id="form2">
+                <div class="modal-body">
+                    <input type="hidden" name="id">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">新闻标题</label>
+                        <input type="text" class="form-control" id="text1" name="title">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">新闻内容</label>
+                        <input type="text" class="form-control" id="text2" name="content">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">新闻类型</label>
+                        <input type="text" class="form-control" id="text2" name="type">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">作者</label>
+                        <input type="text" class="form-control" id="text3" name="author" >
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">发布时间</label>
+                        <input type="date" class="form-control" id="text4" name="time">
+                    </div>
+                    <label for="exampleInputEmail1">新闻图片</label>
+                    <div class="bus-upload text-center form-auto">
+                        <img width="360" src="http://temp.im/360x120/FF9500/000" alt="" id="img">
+                        <input name="image" type="hidden" value="">
+                    </div>
+
+                    <!--<div class="form-group">
+                         <label for="exampleInputFile">图片上传</label>
+                         <input type="file" id="file1" name="image">
+                     </div>-->
+
+                </div>
+            </form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="update"  onclick="operate()">提交</button>
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 
 
 </@layoutBody>
@@ -288,36 +344,81 @@ var Bus = ((function () {
 })());
 window.bus = new Bus();
 </script>
-<script type="text/javascript">
-    $(function () {
-        $('#submit').click(function () {
-            var d = {};
+<script>
+    function operate() {
+        var d = {};
+        var url = "";
+        if(event.srcElement.id=="add"){
+            url="/news/addnews";
             var t = $('#form1').serializeArray();
+            $.each(t, function () {
+                console.log("aaa");
+                d[this.name] = this.value;
+            });
+        }else if(event.srcElement.id=="update"){
+            url="/news/updatenews";
+            var t = $('#form2').serializeArray();
+            console.log("bbb");
             $.each(t, function () {
                 d[this.name] = this.value;
             });
-            console.log(d);
-
-            $.ajax({
-                url: "/news/addnews",
-                data: JSON.stringify(d),
-                type: "POST",
-                dataType: "json",
-                contentType: "application/json;charset=UTF-8",
-                success: function (data) {
-                    console.log(data)
-                    if (data.result == "success") {
-                        alert("添加成功");
-                    }
-                    if (data.result == "failure") {
-                        alert(data.content)
-                    }
-                },
-                error: function (data) {
-                    console.log(data)
-                }
-            });
+        };
+        $.ajax({
+            url: url,
+            data: JSON.stringify(d),
+            type: "POST",
+            dataType: "json",
+            contentType: "application/json;charset=UTF-8",
+            success: function (data) {
+                alert(data.content);
+            },
+            failure:function (data) {
+                alert(data.content)
+            }
         });
-    });
+        window.location.reload();
+
+    }
+</script>
+<script>
+    function getContent(node) {
+        var tr1 = node.parentNode.parentNode;
+        var id = tr1.cells[1].innerText;
+        console.log(id)
+        $.ajax({
+            url: "/news/detail?id="+id,
+            type: "GET",
+            contentType: "application/json;charset=UTF-8",
+            success:function (data) {
+                console.log(data)
+                if (data != null) {
+                    var img = document.getElementById("img");
+                    $("[name=id]").val(data.id);
+                    $("[name=title]").val(data.title);
+                    $("[name=author]").val(data.author);
+                    $("[name=type]").val(data.type);
+                    $("[name=content]").val(data.content);
+                    var date=new Date(data.time);
+                    var year=date.getFullYear();
+                    var mouth=date.getMonth()+1;
+                    var day=date.getDate();
+                    if(mouth<10){
+                        mouth="0"+mouth;
+                    }
+                    if(day<10){
+                        day="0"+day;
+                    }
+                    var time = year+"-"+mouth+"-"+day;
+                    $("[name=time]").val(time);
+                    $("[name=image]").val(data.img);
+                    img.src="/upload/"+data.img;
+
+                }
+            },
+            error:function (data) {
+                console.log(data)
+            }
+        })
+    }
 </script>
 </@layoutFooter>

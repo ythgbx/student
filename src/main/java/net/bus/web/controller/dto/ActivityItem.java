@@ -14,7 +14,7 @@ public class ActivityItem extends BaseResult{
     private String img;
     private String title;
     private Integer remain;    //活动剩余时间
-    private String detial; //活动详情
+    private String detail; //活动详情
     private Integer number_of_people;    //参加活动人数
     private Date start_time;    //活动开始时间
     private Date end_time;
@@ -53,12 +53,12 @@ public class ActivityItem extends BaseResult{
         this.remain = remain;
     }
 
-    public String getDetial() {
-        return detial;
+    public String getDetail() {
+        return detail;
     }
 
-    public void setDetial(String detial) {
-        this.detial = detial;
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
 
     public Integer getNumber_of_people() {
