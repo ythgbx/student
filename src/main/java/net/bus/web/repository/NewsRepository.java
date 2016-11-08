@@ -43,7 +43,8 @@ public class NewsRepository {
     public int delete(Long id){return  _mapper.deleteByPrimaryKey(id);}
 
     public int delete(ISpecification specification){
-        return _mapper.deleteByExample((NewsExample) specification);
+        return _mapper.deleteByExample(
+                (NewsExample) specification.createExample());
     }
 
 

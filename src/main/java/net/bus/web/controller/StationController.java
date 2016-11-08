@@ -114,6 +114,7 @@ public class StationController {
             stationItem.setName(station.getName());
             stationItem.setPos(new Position(station.getLat(), station.getLng()));
             stationItem.setAnnotation(station.getAnnotation());
+            stationItem.setPrice(station.getPrice());
             displayList.add(stationItem);
         }
         return displayList;

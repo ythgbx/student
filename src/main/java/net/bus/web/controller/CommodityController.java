@@ -3,6 +3,7 @@ package net.bus.web.controller;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 import net.bus.web.aspect.Auth;
+import net.bus.web.common.config.RString;
 import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.*;
 import net.bus.web.model.Commodity;
@@ -196,8 +197,14 @@ public class CommodityController {
         for(CommodityOrder commodityOrder:commodityOrderList){
             CommodityOrderItem commodityOrderItem = new CommodityOrderItem();
             commodityOrderItem.setId(commodityOrder.getId());
-            commodityOrderItem.setName(commodityMaps.get(commodityOrder.getCommodityId()).getName());
-            commodityOrderItem.setImg(commodityMaps.get(commodityOrder.getCommodityId()).getItemImg());
+            if(commodityMaps.containsKey((commodityOrder.getCommodityId()))){
+                commodityOrderItem.setName(commodityMaps.get(commodityOrder.getCommodityId()).getName());
+                commodityOrderItem.setImg(commodityMaps.get(commodityOrder.getCommodityId()).getItemImg());
+            }else{
+                commodityOrderItem.setName(RString.COMMODITY_NOT_FOUND);
+                commodityOrderItem.setImg("");
+            }
+
             commodityOrderItem.setTotal(commodityOrder.getPay());
             commodityOrderItem.setCreateTime(commodityOrder.getCreateTime().getTime());
             commodityOrderItem.setPayTime(commodityOrder.getPayTime().getTime());

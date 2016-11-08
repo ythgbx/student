@@ -85,7 +85,7 @@ public class ActivityController {
         disItem.setId(activity.getId());
         disItem.setImg(activity.getImage());
         disItem.setTitle(activity.getTitle());
-        disItem.setDetial(activity.getDetail());
+        disItem.setDetail(activity.getDetail());
         disItem.setPrice(activity.getPrice());
         disItem.setStart_time(activity.getStartime());
         disItem.setEnd_time(activity.getEndtime());
@@ -105,7 +105,7 @@ public class ActivityController {
             disItem.setId(activity.getId());
             disItem.setImg(activity.getImage());
             disItem.setTitle(activity.getTitle());
-            disItem.setDetial(activity.getDetail());
+            disItem.setDetail(activity.getDetail());
             disItem.setPrice(activity.getPrice());
             disItem.setStart_time(activity.getStartime());
             disItem.setEnd_time(activity.getEndtime());
@@ -222,34 +222,23 @@ public class ActivityController {
     @RequestMapping(value = "/updateactivity",method = RequestMethod.POST)
     @ApiOperation(value = "修改活动",httpMethod = "POST",response = BaseResult.class,notes = "修改活动")
     @ResponseBody
-    public ModelAndView UpdateActivity(@ApiParam(required = true, name = "updateactivity", value = "修改活动请求")
-                                       @Param("id")  Long id,
-                                       @Param("title") String title,
-                                       @Param("detail") String detail,
-                                       @Param("numberOfPeople") Integer numberOfPeople,
-                                       @Param("price") BigDecimal price,
-                                       @Param("startime") String startime,
-                                       @Param("endtime") String endtime
-    ) throws ParseException {
-        logger.info("url:/activity/updateactivity");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date startime2 = dateFormat.parse(startime);
-        Date endtime2 = dateFormat.parse(endtime);
-        Activity activity=new Activity();
-        activity.setId(id);
-        activity.setTitle(title);
-        activity.setDetail(detail);
-        activity.setPrice(price);
-        activity.setStartime(startime2);
-        activity.setEndtime(endtime2);
-        activity.setImage("");
-        activity.setNumberOfPeople(numberOfPeople);
-        activity.setLowerLimit(0);
-        activity.setUpperLimit(50);
-         if(_activityService.updateActivity(activity)){
-                return new ModelAndView("redirect:/activity/list");
-            }
-            return new ModelAndView("redirect:/activity/list");
+    public BaseResult UpdateActivity(@ApiParam(required = true, name = "updateactivity", value = "修改活动请求")
+                                           @RequestBody Activity activity
 
+    ) {
+        logger.info("url:/activity/updateactivity");
+        BaseResult result=new BaseResult();
+        if(_activityService.updateActivity(activity)){
+            result.setResult("success");
+            result.setContent("修改成功!");
+        }else {
+            result.setResult("failure");
+            result.setContent("修改失败!");
+        }
+        return result;
     }
+
+
+
+
 }

@@ -87,6 +87,7 @@ public class OrderService implements IOrderService{
     }
 
     public boolean confirm(OrderTypeEnum orderTypeEnum,Map<String, String> params){
+
         AsyncCallBack asyncCallBack;
         switch (orderTypeEnum){
             case ALIPAY:
@@ -146,5 +147,24 @@ public class OrderService implements IOrderService{
 
     public void refundConfirm(Orders order){
 
+    }
+
+    private IPayService getPayService(OrderTypeEnum orderTypeEnum){
+        IPayService payService;
+        switch (orderTypeEnum){
+            case ALIPAY:
+            {
+                payService = (IPayService)_alipayService;
+                break;
+            }
+            case WXPAY:
+            {
+                payService = (IPayService)_wxpayService;
+                break;
+            }
+            default:
+                throw new RuntimeException("unknown order type");
+        }
+        return payService;
     }
 }

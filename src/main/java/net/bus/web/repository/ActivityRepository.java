@@ -71,7 +71,7 @@ public class ActivityRepository {
     public int deleteByPrimaryKey(Long id){ return _mapper.deleteByPrimaryKey(id);}
 
     public int deleteByExample(ISpecification specification) {
-        return _mapper.deleteByExample((ActivityExample) specification);
+        return _mapper.deleteByExample((ActivityExample) specification.createExample());
     }
 
     public int updateItem(Activity line)

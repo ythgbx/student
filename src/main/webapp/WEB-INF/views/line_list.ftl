@@ -12,10 +12,10 @@
 
 <div class="smart-widget clearfix">
     <div class="smart-widget-header ">
-        活动中心
+        线路列表
         <button type="button" onclick="mulit_del()" class="button border-red"><span class="icon-trash-o"></span> 批量删除
         </button>
-        <button class="btn btn-success  smart-widget-option" data-toggle="modal" data-target="#myModal">添加活动
+        <button class="btn btn-success  smart-widget-option" data-toggle="modal" data-target="#myModal">添加线路
         </button>
     </div>
 
@@ -31,37 +31,39 @@
                             <label for="chkAll"></label>
                         </div>
                     </th>
-                    <th>活动ID</th>
-                    <th>活动名称</th>
-                    <th>活动简介</th>
-                    <th>当前报名人数</th>
-                    <th>活动价格</th>
-                    <th>最少人数</th>
-                    <th>最多人数</th>
-                    <th>活动开始时间</th>
-                    <th>活动结束时间</th>
+                    <th>线路ID</th>
+                    <th>线路名称</th>
+                    <th>起始站点</th>
+                    <th>结束站点</th>
+                    <th>票价</th>
+                    <th>站点注释</th>
+                    <th>所在城市</th>
+                    <th>专线属性</th>
+                    <th>起始时间</th>
+                    <th>结束时间</th>
                     <th>操作</th>
                 </tr>
                 </thead>
                 <tbody>
-                    <#list activityList as oneActivity>
+                    <#list lineList as oneLine>
                     <tr class="active">
                         <td class="text-center">
                             <div class="custom-checkbox">
-                                <input type="checkbox" id="chk${oneActivity.id}" name="choose" class="inbox-check"
-                                       value="${oneActivity.id}">
-                                <label for="chk${oneActivity.id}"></label>
+                                <input type="checkbox" id="chk${oneLine.id}" name="choose" class="inbox-check"
+                                       value="${oneLine.id}">
+                                <label for="chk${oneLine.id}"></label>
                             </div>
                         </td>
-                        <td>${oneActivity.id}</td>
-                        <td>${oneActivity.title}</td>
-                        <td width="200">${oneActivity.detail}</td>
-                        <td>${oneActivity.numberOfPeople}</td>
-                        <td>${oneActivity.price}</td>
-                        <td>${oneActivity.lowerLimit}</td>
-                        <td>${oneActivity.upperLimit}</td>
-                        <td>${oneActivity.startime?string('yyyy.MM.dd HH:mm:ss')}</td>
-                        <td>${oneActivity.endtime?string('yyyy.MM.dd HH:mm:ss')}</td>
+                        <td>${oneLine.id}</td>
+                        <td>${oneLine.name}</td>
+                        <td >${oneLine.start}</td>
+                        <td>${oneLine.end}</td>
+                        <td>${oneLine.price}</td>
+                        <td>${oneLine.annotation}</td>
+                        <td>${oneLine.cityName}</td>
+                        <td>${oneLine.propName}</td>
+                        <td>${oneLine.startTime?string('yyyy.MM.dd HH:mm:ss')}</td>
+                        <td>${oneLine.endTime?string('yyyy.MM.dd HH:mm:ss')}</td>
                         <td>
                             <a href=""
                                data-toggle="modal"
@@ -69,13 +71,13 @@
                                onclick="getContent(this)"
                             >
                                 <i class="fa fa-bars"></i>
-                            </a>      <!--修改活动 -->
+                            </a>      <!--修改线路 -->
                             <a href=""
                                onclick="mulit_del(this)"
                             >
                                 <i class="fa fa-times"></i>
                             </a>
-                        </td><!--删除活动 -->
+                        </td><!--删除线路 -->
                     </tr>
                     </#list>
 
@@ -115,48 +117,46 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">添加活动</h4>
+                    <h4 class="modal-title">添加线路</h4>
                 </div>
 
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">活动名称</label>
-                        <input type="text" class="form-control" id="text1" name="title">
+                        <label for="exampleInputEmail1">线路名称</label>
+                        <input type="text" class="form-control" id="text1" name="name">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">活动简介</label>
-                        <input type="text" class="form-control" id="text2" name="detail">
+                        <label for="exampleInputPassword1">起始站点</label>
+                        <input type="text" class="form-control" id="text2" name="start">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">当前报名人数</label>
-                        <input type="text" class="form-control" id="text2" name="numberOfPeople">
+                        <label for="exampleInputPassword1">结束站点</label>
+                        <input type="text" class="form-control" id="text2" name="end">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">活动价格</label>
+                        <label for="exampleInputPassword1">票价</label>
                         <input type="text" class="form-control" id="text3" name="price">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">最少人数</label>
-                        <input type="text" class="form-control" id="text6" name="lowerLimit">
+                        <label for="exampleInputPassword1">站点注释</label>
+                        <input type="text" class="form-control" id="text6" name="annotation">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">最多人数</label>
-                        <input type="text" class="form-control" id="text7" name="upperLimit">
+                        <label for="exampleInputPassword1">所在城市</label>
+                        <input type="text" class="form-control" id="text7" name="cityName">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">活动开始时间</label>
-                        <input type="date" class="form-control" id="text4" name="startime">
+                        <label for="exampleInputPassword1">专线属性</label>
+                        <input type="text" class="form-control" id="text4" name="propName">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">活动结束时间</label>
-                        <input type="date" class="form-control" id="text5" name="endtime">
+                        <label for="exampleInputPassword1">起始时间</label>
+                        <input type="date" class="form-control" id="text5" name="startTime">
                     </div>
-                    <label for="exampleInputEmail1">活动图片</label>
-                    <div class="bus-upload text-center form-auto">
-                        <img width="360" src="http://temp.im/360x120/FF9500/000" alt="">
-                        <input name="image" type="hidden" value="">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">结束时间</label>
+                        <input type="date" class="form-control" id="text5" name="endTime">
                     </div>
-
 
                 </div>
                 <div class="modal-footer">
@@ -175,48 +175,47 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">修改活动</h4>
+                <h4 class="modal-title">修改线路</h4>
             </div>
 
             <form role="form" enctype="multipart/form-data" id="form2">
                 <div class="modal-body">
                     <input type="hidden" name="id" id="updateid">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">活动名称</label>
-                        <input type="text" class="form-control" id="text1" name="title">
+                        <label for="exampleInputEmail1">线路名称</label>
+                        <input type="text" class="form-control" id="text1" name="name">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">活动简介</label>
-                        <input type="text" class="form-control" id="text2" name="detail">
+                        <label for="exampleInputPassword1">起始站点</label>
+                        <input type="text" class="form-control" id="text2" name="start">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">当前报名人数</label>
-                        <input type="text" class="form-control" id="text2" name="numberOfPeople">
+                        <label for="exampleInputPassword1">结束站点</label>
+                        <input type="text" class="form-control" id="text2" name="end">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">活动价格</label>
+                        <label for="exampleInputPassword1">票价</label>
                         <input type="text" class="form-control" id="text3" name="price">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">最少人数</label>
-                        <input type="text" class="form-control" id="text6" name="lowerLimit">
+                        <label for="exampleInputPassword1">站点注释</label>
+                        <input type="text" class="form-control" id="text6" name="annotation">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">最多人数</label>
-                        <input type="text" class="form-control" id="text7" name="upperLimit">
+                        <label for="exampleInputPassword1">所在城市</label>
+                        <input type="text" class="form-control" id="text7" name="cityName">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">活动开始时间</label>
-                        <input type="date" class="form-control" id="text4" name="startime">
+                        <label for="exampleInputPassword1">专线属性</label>
+                        <input type="text" class="form-control" id="text4" name="propName">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">活动结束时间</label>
-                        <input type="date" class="form-control" id="text5" name="endtime">
+                        <label for="exampleInputPassword1">起始时间</label>
+                        <input type="date" class="form-control" id="text5" name="startTime">
                     </div>
-                    <label for="exampleInputEmail1">活动图片</label>
-                    <div class="bus-upload text-center form-auto">
-                        <img width="360" src="http://temp.im/360x120/FF9500/000" alt="" id="img">
-                        <input name="image" type="hidden" value="">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">结束时间</label>
+                        <input type="date" class="form-control" id="text5" name="endTime">
                     </div>
 
                 </div>
@@ -308,97 +307,19 @@
 
 
 </script>
-<script type="text/javascript">//上传图片
-var Bus = ((function () {
-    function Bus() {
-        this.upload()
-    }
-
-    Bus.prototype.upload = function () {
-        var self = this
-        $(".bus-upload").each(function (i, v) {
-            $(v).children("img").click(function (e) {
-                var img = this
-                var file = $("<input type='file' accept='image/gif,image/png,image/jpeg'/>");
-                file.click().change(function (e) {
-                    self.sendFile(
-                            file[0].files[0],
-                            function (data) {
-                                //回调
-                                var json = JSON.parse(data);
-                                img.src = "/upload/" + json.content;
-                                $(v).children("input:hidden").val(json.content)
-                                console.log(img.src)
-                            },
-                            function (err) {
-                                //错误
-                                console.log(err)
-                            },
-                            function (e) {
-                                if (e.lengthComputable) {
-                                    var percentage = Math.round((e.loaded * 100) / e.total);
-                                    console.log(percentage)
-                                }
-                            }
-                    )
-                })
-            })
-        })
-    }
-    /**
-     * 上传文件
-     * @param file 文件
-     * @param process 进度回调
-     * @param callback 回调函数
-     * @param error 错误回调
-     */
-    Bus.prototype.sendFile = function (file, callback, error, process) {
-        var uri = "/file/upload";
-        var xhr = new XMLHttpRequest();
-        var fd = new FormData();
-        xhr.open("POST", uri, true);
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                // Handle response.
-                try {
-                    if (callback != null && typeof(callback) === "function") {
-                        callback(xhr.responseText)
-                    } else {
-                        console.log(xhr.responseText)
-                    }
-                } catch (e) {
-                    if (error != null && typeof(callback) === "function") {
-                        error(e)
-                    } else {
-                        console.log(e)
-                    }
-                }
-            }
-        }
-        if (process != null && typeof(process) === "function") {
-            xhr.upload.addEventListener("progress", process, false)
-        }
-        fd.append('file', file);
-        // Initiate a multipart/form-data upload
-        xhr.send(fd);
-    }
-    return Bus;
-})());
-window.bus = new Bus();
-</script>
 <script>
     function operate() {
         var d = {};
         var url = "";
         if(event.srcElement.id=="add"){
-            url="/activity/addactivity";
+            url="/line/addline";
             var t = $('#form1').serializeArray();
             $.each(t, function () {
                 console.log("aaa");
                 d[this.name] = this.value;
             });
         }else if(event.srcElement.id=="update"){
-            url="/activity/updateactivity";
+            url="/line/updateline";
             var t = $('#form2').serializeArray();
             console.log("bbb");
             $.each(t, function () {
@@ -412,7 +333,7 @@ window.bus = new Bus();
             dataType: "json",
             contentType: "application/json;charset=UTF-8",
             success: function (data) {
-                    alert(data.content);
+                alert(data.content);
             },
             failure:function (data) {
                 alert(data.content)
@@ -430,12 +351,11 @@ window.bus = new Bus();
             url: "/activity/detail?id="+id,
             type: "GET",
             contentType: "application/json;charset=UTF-8",
-             success:function (data) {
-               console.log(data)
+            success:function (data) {
+                console.log(data)
                 if (data != null) {
-                    var img = document.getElementById("img");
                     $("[name=id]").val(data.id);
-                   $("[name=title]").val(data.title);
+                    $("[name=title]").val(data.title);
                     $("[name=detail]").val(data.detail);
                     $("[name=lowerLimit]").val(data.lower_limit);
                     $("[name=upperLimit]").val(data.upper_limit);
@@ -469,7 +389,7 @@ window.bus = new Bus();
                     img.src="/upload/"+data.img;
 
                 }
-           },
+            },
             error:function (data) {
                 console.log(data)
             }

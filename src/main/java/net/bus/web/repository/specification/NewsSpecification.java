@@ -16,7 +16,7 @@ public class NewsSpecification implements ISpecification<NewsExample>{
     }
     public NewsExample createExample() {
         NewsExample newsExample=new NewsExample();
-        if(_ids!=null&&_ids.isEmpty()){
+        if(_ids!=null&&!_ids.isEmpty()){
             NewsExample.Criteria criteria=newsExample.createCriteria();
             criteria.andIdIn(_ids);
         }

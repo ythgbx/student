@@ -59,4 +59,11 @@ public class NewsService implements INewsService{
         }
         return false;
     }
+
+    public boolean update(News news) {
+        if(_rootRepository.updateItem(news)>0){
+            return  true;
+        }
+        return false;
+    }
 }

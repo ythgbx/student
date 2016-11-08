@@ -129,7 +129,7 @@ public class PayCommonUtil {
         String sign = PayCommonUtil.createSign("UTF-8", parameters);
         parameters.put("sign", sign);
         String requestXML = PayCommonUtil.getRequestXml(parameters);
-        String result =CommonUtil.postRequest(WeiXinConfig.REFUND_URL, requestXML);
+        String result =ClientCustomSSL.postRequest(WeiXinConfig.MCH_ID,WeiXinConfig.REFUND_URL, requestXML);
         Map<String, String> map = XMLUtil.doXMLParse(result);//解析微信返回的信息，以Map形式存储便于取值
         return map;
     }

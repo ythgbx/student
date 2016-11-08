@@ -20,4 +20,6 @@ public interface INewsService {
     boolean delete(List<Long> ids);
 
     boolean delete(Long id);
+
+    boolean update(News news);
 }

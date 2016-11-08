@@ -143,4 +143,24 @@ public class NewsController {
 
         return result;
     }
+
+    @Auth(role = Auth.Role.NONE)
+    @RequestMapping(value="/updatenews", method = RequestMethod.POST)
+    @ApiOperation(value = "修改新闻",httpMethod = "POST",response = ModelAndView.class,notes="添加新闻")
+    @ResponseBody
+    public BaseResult UpdateNews (@ApiParam(required = true,name = "updatenews",value = "添加新闻")
+                               @RequestBody News news
+
+    )  {
+        logger.info("url:/news/updatenews");
+        BaseResult result=new BaseResult();
+        if(_newsService.update(news)){
+            result.setResult("success");
+            result.setContent("修改成功!");
+        }else{
+            result.setResult("failure");
+            result.setContent("修改失败!");
+        }
+        return result;
+    }
 }
