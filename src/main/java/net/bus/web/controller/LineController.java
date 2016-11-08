@@ -431,10 +431,28 @@ public class LineController {
     )  {
         logger.info("url:/line/addline");
         BaseResult result=new BaseResult();
-
+        if(_lineService.addLine(line)){
+            result.setResult("success");
+            result.setContent("添加成功!");
+        } else{
+            result.setResult("failure");
+            result.setContent("添加失败!");
+        }
 
         return result;
 
+    }
 
+    @Auth(role=Auth.Role.USER)
+    @RequestMapping(value = "/del",method = RequestMethod.DELETE)
+    @ApiOperation(value = "批量删除线路",httpMethod = "POST",response = BaseResult.class,notes = "批量删除线路")
+    @ResponseBody
+    public BaseResult Del(@ApiParam(required = true, name = "del", value = "批量删除线路") @RequestBody BaseRequest request)
+    {
+        logger.info("url:/line/del");
+        BaseResult result=new BaseResult();
+        List<Long> ids =request.getIds();
+
+        return result;
     }
 }

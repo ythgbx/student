@@ -93,4 +93,12 @@ public class LineRepository {
     {
         return _mapper.countByExample(null);
     }
+
+    public int del(Long id){return _mapper.deleteByPrimaryKey(id);}
+
+    public int del(ISpecification specification){
+        return _mapper.deleteByExample((LineExample) specification.createExample());
+    }
+
+
 }

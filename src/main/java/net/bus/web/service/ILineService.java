@@ -48,4 +48,10 @@ public interface ILineService {
     int getPropLinesCount(String propName);
 
     boolean addLine(Line line,List<Long> stationIds);
+
+    boolean addLine(Line line);
+
+    boolean del(Long id);
+
+    boolean del(List<Long> ids);
 }

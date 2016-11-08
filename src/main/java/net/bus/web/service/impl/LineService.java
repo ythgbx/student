@@ -5,10 +5,7 @@ import net.bus.web.model.Line;
 import net.bus.web.model.LineStation;
 import net.bus.web.model.Station;
 import net.bus.web.model.UserLine;
-import net.bus.web.repository.LineRepository;
-import net.bus.web.repository.LineStationRepository;
-import net.bus.web.repository.StationRepository;
-import net.bus.web.repository.UserLineRepository;
+import net.bus.web.repository.*;
 import net.bus.web.repository.specification.*;
 import net.bus.web.service.ILineService;
 import net.bus.web.service.ILocationService;
@@ -238,6 +235,25 @@ public class LineService implements ILineService {
         }
         return false;
     }
+
+    public boolean addLine(Line line){
+        if(_rootRepository.insertItem(line)>0){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean del(Long id) {
+        if(_rootRepository.del(id)>0){
+
+        }
+        return false;
+    }
+
+    public boolean del(List<Long> ids) {
+        return false;
+    }
+
 
     private int getLineStationIndex(List<LineStation> lineStations,Station station)
     {

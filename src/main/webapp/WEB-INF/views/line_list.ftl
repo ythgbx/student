@@ -13,7 +13,7 @@
 <div class="smart-widget clearfix">
     <div class="smart-widget-header ">
         线路列表
-        <button type="button" onclick="mulit_del()" class="button border-red"><span class="icon-trash-o"></span> 批量删除
+        <button type="button" onclick="mulit_del()" class="button border-red" id="button1"><span class="icon-trash-o"></span> 批量删除
         </button>
         <button class="btn btn-success  smart-widget-option" data-toggle="modal" data-target="#myModal">添加线路
         </button>
@@ -75,7 +75,7 @@
                             <a href=""
                                onclick="mulit_del(this)"
                             >
-                                <i class="fa fa-times"></i>
+                                <i class="fa fa-times" id="button2"></i>
                             </a>
                         </td><!--删除线路 -->
                     </tr>
@@ -269,23 +269,25 @@
         //判断至少写了一项
         var ids = new Array();
         var object = event.srcElement;
-        if (object.className == "button border-red") {
+        if (object.id == "button1") {
             var obj = document.getElementsByName("choose");
-            var ids = new Array();
-            if (obj == 0) {
-                alert("请至少选择一项!");
-            } else if (confirm("确定删除所选项目?")) {
-                for (var i in obj) {
-                    if (obj[i].checked) {
-                        ids.push(obj[i].value)
-                    }
+            for (var i in obj) {
+                if (obj[i].checked) {
+                    ids.push(obj[i].value)
                 }
             }
-        } else if (object.className == "fa fa-times") {
+            if (ids == "") {
+                alert("请至少选择一项!");
+                return ;
+            } else if (confirm("确定删除所选项目?")) {
+                console.log(ids)
+            }
+        } else if (object.id == "button2") {
             var tr1 = node.parentNode.parentNode;
             if (confirm("确定删除所选项目?")) {
                 ids.push(tr1.cells[1].innerText);
             }
+            return ;
         }
         $.ajax({
             url: "/activity/del",
