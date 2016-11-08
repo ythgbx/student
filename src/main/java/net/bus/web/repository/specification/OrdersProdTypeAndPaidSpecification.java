@@ -7,11 +7,11 @@ import net.bus.web.repository.ISpecification;
 /**
  * Created by Edifi_000 on 2016-11-08.
  */
-public class OrdersProdTypeSpecification implements ISpecification<OrdersExample> {
+public class OrdersProdTypeAndPaidSpecification implements ISpecification<OrdersExample> {
 
     private ProducedTypeEnum _producedTypeEnum;
 
-    public OrdersProdTypeSpecification(ProducedTypeEnum producedTypeEnum)
+    public OrdersProdTypeAndPaidSpecification(ProducedTypeEnum producedTypeEnum)
     {
         this._producedTypeEnum = producedTypeEnum;
     }
@@ -20,7 +20,7 @@ public class OrdersProdTypeSpecification implements ISpecification<OrdersExample
     {
         OrdersExample example = new OrdersExample();
         OrdersExample.Criteria criteria= example.createCriteria();
-        criteria.andProductTypeEqualTo(_producedTypeEnum.getIndex());
+        criteria.andProductTypeEqualTo(_producedTypeEnum.getIndex()).andPayTimeIsNotNull();
         return example;
     }
 }

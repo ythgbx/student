@@ -6,9 +6,12 @@ import net.bus.web.aspect.Auth;
 import net.bus.web.common.config.RString;
 import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.*;
+import net.bus.web.enums.OrderTypeEnum;
 import net.bus.web.model.Commodity;
 import net.bus.web.model.Orders;
+import net.bus.web.model.Pojo.AlipayOrderCallBack;
 import net.bus.web.model.Pojo.PagePojo;
+import net.bus.web.model.Pojo.WxOrderCallBack;
 import net.bus.web.model.User;
 import net.bus.web.service.ICommodityService;
 import org.apache.commons.lang.StringUtils;
@@ -107,7 +110,9 @@ public class CommodityController {
     {
         BaseResult result = new BaseResult();
         User currentUser = (User) session.getAttribute(SessionContext.CURRENT_USER);
-        String sign = _commodityService.buy(request.getId(),currentUser);
+        OrderTypeEnum orderType = request.getOrder_type()==0?OrderTypeEnum.ALIPAY:OrderTypeEnum.get(request.getOrder_type());
+        //TODO 暂时根据支付宝请求返回结果,后跟前端协调修改dto后支持微信支付
+        String sign = ((AlipayOrderCallBack)_commodityService.buy(orderType,request.getId(),currentUser)).getSign();
         if(!StringUtils.isBlank(sign)){
             result.setContent(sign);
             result.setResult("success");

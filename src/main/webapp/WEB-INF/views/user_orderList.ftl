@@ -29,7 +29,7 @@
                 <tbody>
                     <#--<tr><button type="button"  class="button border-green" id="checkall"><span class="icon-check"></span> 全选</button>-->
                         <#--<button type="submit" class="button border-red"><span class="icon-trash-o"></span> 批量删除</button></tr>-->
-                    <#list commodityOrders as Orders>
+                    <#list commodityOrders as commodityOrder>
                     <tr>
                         <th><input type="checkbox" name="${commodityOrder.userId} value="1""></th>
                         <td>${commodityOrder.userId}</td>
@@ -41,8 +41,8 @@
                     <#--<td>优惠卡</td>-->
                     <#--</#if>-->
                         <td>${commodityOrder.amount}</td>
+                        <td>${commodityOrder.payTime!?string('yyyy.MM.dd HH:mm:ss')}</td>
 
-                        <td>${commodityOrder.payTime?string('yyyy.MM.dd HH:mm:ss')}</td>
                     <#--<td><a href="#"><button type="button" value="管理">管理</button> </a></td>-->
                     </tr>
                     </#list>

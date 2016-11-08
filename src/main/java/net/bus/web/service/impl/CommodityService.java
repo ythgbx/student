@@ -6,6 +6,7 @@ import net.bus.web.model.Commodity;
 import net.bus.web.model.Orders;
 import net.bus.web.model.Pojo.AlipayOrderCallBack;
 import net.bus.web.model.Pojo.AsyncCallBack;
+import net.bus.web.model.Pojo.OrderCallBack;
 import net.bus.web.model.Pojo.Product;
 import net.bus.web.model.User;
 import net.bus.web.model.type.PointRecordType;
@@ -54,9 +55,8 @@ public class CommodityService implements ICommodityService,IProductService {
     }
 
     @Transactional
-    public String buy(long commodityId,User user) throws RuntimeException
+    public OrderCallBack buy(OrderTypeEnum orderType,long commodityId,User user) throws RuntimeException
     {
-        String sign = null;
         Commodity commodity = getDetails(commodityId);
         if(commodity!=null){
             if(commodity.getAmount()>0){
@@ -73,11 +73,11 @@ public class CommodityService implements ICommodityService,IProductService {
                     product.setPrice(commodity.getPrice());
                 }
 
-                sign = ((AlipayOrderCallBack)_orderService.submit(user.getId(), OrderTypeEnum.ALIPAY,product,1)).getSign();
+                return _orderService.submit(user.getId(),orderType,product,1);
             }
         }
 
-        return sign;
+        return null;
     }
 
     public boolean buyComplete(AsyncCallBack callBack) throws RuntimeException

@@ -1,7 +1,9 @@
 package net.bus.web.service;
 
+import net.bus.web.enums.OrderTypeEnum;
 import net.bus.web.model.Commodity;
 import net.bus.web.model.Orders;
+import net.bus.web.model.Pojo.OrderCallBack;
 import net.bus.web.model.User;
 
 import java.util.List;
@@ -15,7 +17,7 @@ public interface ICommodityService {
 
     Commodity getDetails(Long id);
 
-    String buy(long commodityId,User user);
+    OrderCallBack buy(OrderTypeEnum orderType, long commodityId,User user);
 
     //boolean buyComplete(AlipayAsyncCallBack callBack);
 

@@ -41,7 +41,7 @@
                     </a>
                     <ul class="submenu bg-palette4">
                         <li><a href="/commodity/list"><span class="submenu-label">商品管理</span></a></li>
-                        <li><a href="/commodity/orderList"><span class="submenu-label">用户订单查询</span></a></li>
+                        <li><a href="/commodity/order/list"><span class="submenu-label">用户订单查询</span></a></li>
                         <#--<li><a href="form_wizard.html"><span class="submenu-label">Form Wizard</span></a></li>-->
                         <#--<li><a href="dropzone.html"><span class="submenu-label">Dropzone</span></a></li>-->
                     </ul>

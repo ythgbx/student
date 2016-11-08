@@ -9,7 +9,7 @@ import net.bus.web.model.Pojo.AsyncCallBack;
 import net.bus.web.model.Pojo.OrderCallBack;
 import net.bus.web.model.Pojo.Product;
 import net.bus.web.repository.OrdersRepository;
-import net.bus.web.repository.specification.OrdersProdTypeSpecification;
+import net.bus.web.repository.specification.OrdersProdTypeAndPaidSpecification;
 import net.bus.web.repository.specification.OrdersTradeNoSpecification;
 import net.bus.web.repository.specification.OrdersUserIdProdTypeAndPaidSpecification;
 import net.bus.web.service.IAlipayService;
@@ -185,11 +185,11 @@ public class OrderService implements IOrderService{
 
 
     public List<Orders> getAllOrders(ProducedTypeEnum prodType,int page,int limit){
-         return  _rootRepository.getList(new OrdersProdTypeSpecification(prodType), page - 1, limit);
+         return  _rootRepository.getList(new OrdersProdTypeAndPaidSpecification(prodType), page - 1, limit);
     }
 
     public int getAllOrdersCount(ProducedTypeEnum prodType){
-        return  _rootRepository.count(new OrdersProdTypeSpecification(prodType));
+        return  _rootRepository.count(new OrdersProdTypeAndPaidSpecification(prodType));
     }
 
     public List<Orders> getUserOrders(long userId,ProducedTypeEnum prodType,int page,int limit){

@@ -1,7 +1,5 @@
 package net.bus.web.enums;
 
-import javafx.scene.chart.Chart;
-
 /**
  * Created by Edifi_000 on 2016-10-31.
  */
