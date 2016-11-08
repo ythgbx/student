@@ -231,7 +231,7 @@ public class LineController {
                 lineStation.setAnnotation(station.getAnnotation());
                 lineStation.setPos(new net.bus.web.controller.dto.Position(station.getLat(), station.getLng()));
                 lineStation.setIndex(stationIndex);
-
+                lineStation.setPrice(station.getPrice());
                 lineStationList.add(lineStation);
                 stationIndex++;
             }
@@ -283,6 +283,7 @@ public class LineController {
         Bus bus = _busService.getBus(name,device);
         if(bus!= null){
             result = this.detail(bus.getLineId(),true,0,0);
+            ((BaseResult)result).setResult("success");
         }else{
             ((BaseResult)result).setResult("failure");
             ((BaseResult)result).setContent("bus is not bind");

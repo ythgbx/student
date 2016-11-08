@@ -1,5 +1,7 @@
 package net.bus.web.controller.dto;
 
+import java.math.BigDecimal;
+
 /**
  * Created by sky on 16/7/16.
  */
@@ -10,6 +12,8 @@ public class LineStation {
     private Position pos;
     private String annotation;
     private int index;
+    private BigDecimal price;
+
 
     public Long getId() {
         return id;
@@ -49,5 +53,13 @@ public class LineStation {
 
     public void setAnnotation(String annotation) {
         this.annotation = annotation;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 }

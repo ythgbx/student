@@ -1,8 +1,8 @@
 package net.bus.web.model;
 
-import java.io.Serializable;
+import java.math.BigDecimal;
 
-public class Station implements Serializable {
+public class Station {
     private Long id;
 
     private String name;
@@ -12,6 +12,8 @@ public class Station implements Serializable {
     private Double lng;
 
     private String annotation;
+
+    private BigDecimal price;
 
     public Long getId() {
         return id;
@@ -51,5 +53,13 @@ public class Station implements Serializable {
 
     public void setAnnotation(String annotation) {
         this.annotation = annotation;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 }

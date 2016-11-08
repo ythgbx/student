@@ -51,6 +51,7 @@ public class LocationController {
             item.setName(station.getName());
             item.setAnnotation(station.getAnnotation());
             item.setPos(new net.bus.web.controller.dto.Position(station.getLat(),station.getLng()));
+            item.setPrice(station.getPrice());
             stationItems.add(item);
         }
 
