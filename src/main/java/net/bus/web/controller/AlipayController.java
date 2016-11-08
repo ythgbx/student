@@ -6,8 +6,10 @@ import net.bus.web.aspect.Auth;
 import net.bus.web.controller.dto.BaseResult;
 import net.bus.web.controller.dto.BaseRequest;
 import net.bus.web.controller.dto.IResult;
+import net.bus.web.enums.OrderTypeEnum;
 import net.bus.web.model.Pojo.AlipayAsyncCallBack;
 import net.bus.web.service.IAlipayService;
+import net.bus.web.service.IOrderService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +35,9 @@ public class AlipayController {
     @Autowired
     private IAlipayService _alipayService;
 
+    @Autowired
+    private IOrderService _orderService;
+
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/sign", method = RequestMethod.POST)
@@ -48,8 +53,8 @@ public class AlipayController {
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/async", method = RequestMethod.POST)
-    @ApiOperation(value = "支付异步校验测试", httpMethod = "POST", response = String.class, notes = "支付异步校验测试")
-    public String async(@ApiParam(required = true, name = "request", value = "支付异步校验测试请求") HttpServletRequest request)
+    @ApiOperation(value = "支付异步校验", httpMethod = "POST", response = String.class, notes = "支付异步校验")
+    public String async(@ApiParam(required = true, name = "request", value = "支付异步校验请求") HttpServletRequest request)
     {
         Map params = new HashMap();
         Map requestParams = request.getParameterMap();
@@ -68,8 +73,7 @@ public class AlipayController {
             params.put(name, valueStr);
         }
 
-        AlipayAsyncCallBack callBack = _alipayService.async(params);
-        if(callBack!=null&& !StringUtils.isBlank(callBack.getFailed())){
+        if(_orderService.confirm(OrderTypeEnum.ALIPAY,params)){
             return "success";
         }else{
             return "failed";

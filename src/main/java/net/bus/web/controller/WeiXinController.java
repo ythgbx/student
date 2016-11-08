@@ -259,7 +259,7 @@ public class WeiXinController {
     public String refund(@ApiParam(required = true, name = "request", value = "退款请求") HttpServletRequest request)
     {
         User user = (User) _session.getAttribute(SessionContext.CURRENT_USER);
-        _orderService.refund("WCj2IepcakX4O7TvjiQdQ",user.getId().toString());
+        _orderService.refund("WCM3sambQdcyvzLdM5Aqp",user.getId().toString());
         return PayCommonUtil.setXML("FAIL", "FAIL");
     }
 }

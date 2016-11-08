@@ -9,7 +9,9 @@ import net.bus.web.model.Pojo.AsyncCallBack;
 import net.bus.web.model.Pojo.OrderCallBack;
 import net.bus.web.model.Pojo.Product;
 import net.bus.web.repository.OrdersRepository;
+import net.bus.web.repository.specification.OrdersProdTypeSpecification;
 import net.bus.web.repository.specification.OrdersTradeNoSpecification;
+import net.bus.web.repository.specification.OrdersUserIdProdTypeAndPaidSpecification;
 import net.bus.web.service.IAlipayService;
 import net.bus.web.service.IOrderService;
 import net.bus.web.service.IProductService;
@@ -17,9 +19,11 @@ import net.bus.web.service.IWxpayService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -59,7 +63,8 @@ public class OrderService implements IOrderService{
         return order;
     }
 
-    public OrderCallBack submit(Long userId,OrderTypeEnum orderTypeEnum,Product product,int amount){
+    @Transactional
+    public OrderCallBack submit(Long userId,OrderTypeEnum orderTypeEnum,Product product,int amount) throws RuntimeException{
 
         Orders order = create(userId,orderTypeEnum,product,amount);
 
@@ -86,7 +91,8 @@ public class OrderService implements IOrderService{
         return  _rootRepository.getItem(new OrdersTradeNoSpecification(tradeNo));
     }
 
-    public boolean confirm(OrderTypeEnum orderTypeEnum,Map<String, String> params){
+    @Transactional
+    public boolean confirm(OrderTypeEnum orderTypeEnum,Map<String, String> params) throws RuntimeException{
 
         AsyncCallBack asyncCallBack;
         switch (orderTypeEnum){
@@ -123,24 +129,33 @@ public class OrderService implements IOrderService{
         return false;
     }
 
-    public void refund(String tradeNo,String userId){
+    @Transactional
+    public void refund(String tradeNo,String userId) throws RuntimeException{
         Orders orders = query(tradeNo);
-        if(orders!=null&&orders.getState().equals(2)){
+        boolean isRefund;
+        if(orders!=null&&orders.getState().equals(1)){
             switch (OrderTypeEnum.get(orders.getTradeType())){
                 case ALIPAY:
                 {
                     //TODO 微信退款
+                    isRefund = false;
                     throw new RuntimeException("alipay refund not impl");
                 }
                 case WXPAY:
                 {
-                    _wxpayService.refund(orders,
-                            createRefundTradeNo(OrderTypeEnum.get(orders.getTradeType()),ProducedTypeEnum.get(orders.getProductType())),
+                    isRefund = _wxpayService.refund(orders,
+                            createRefundTradeNo(OrderTypeEnum.get(orders.getTradeType()), ProducedTypeEnum.get(orders.getProductType())),
                             userId);
                     break;
                 }
                 default:
                     throw new RuntimeException("unknown order type");
+            }
+
+            if(isRefund){
+                orders.setModifyTime(new Date());
+                orders.setState(2);
+                _rootRepository.updateItem(orders);
             }
         }
     }
@@ -166,5 +181,22 @@ public class OrderService implements IOrderService{
                 throw new RuntimeException("unknown order type");
         }
         return payService;
+    }
+
+
+    public List<Orders> getAllOrders(ProducedTypeEnum prodType,int page,int limit){
+         return  _rootRepository.getList(new OrdersProdTypeSpecification(prodType), page - 1, limit);
+    }
+
+    public int getAllOrdersCount(ProducedTypeEnum prodType){
+        return  _rootRepository.count(new OrdersProdTypeSpecification(prodType));
+    }
+
+    public List<Orders> getUserOrders(long userId,ProducedTypeEnum prodType,int page,int limit){
+        return _rootRepository.getList(new OrdersUserIdProdTypeAndPaidSpecification(userId,prodType), page - 1, limit);
+    }
+
+    public int getUserOrdersCount(long userId,ProducedTypeEnum prodType){
+        return _rootRepository.count(new OrdersUserIdProdTypeAndPaidSpecification(userId,prodType));
     }
 }

@@ -29,11 +29,11 @@
                 <tbody>
                     <#--<tr><button type="button"  class="button border-green" id="checkall"><span class="icon-check"></span> 全选</button>-->
                         <#--<button type="submit" class="button border-red"><span class="icon-trash-o"></span> 批量删除</button></tr>-->
-                    <#list commodityOrders as commodityOrder>
+                    <#list commodityOrders as Orders>
                     <tr>
                         <th><input type="checkbox" name="${commodityOrder.userId} value="1""></th>
                         <td>${commodityOrder.userId}</td>
-                        <td>${commodityOrder.commodityId}</td>
+                        <td>${commodityOrder.productId}</td>
                         <td>${commodityOrder.tradeNo}</td>
                     <#--<#if Commodity.typeId==1>-->
                     <#--<td>积分</td>-->
@@ -50,13 +50,13 @@
                 <tbody>
                 <tr>
                     <ul class="pagination">
-                        <li><a href="/commodity/orderList?page=${pagePojo.homePage}">首页</a></li>
-                        <li><a href="/commodity/orderList?page=${pagePojo.getPreviousPage()}">上一页</a></li>
+                        <li><a href="/commodity/order/list?page=${pagePojo.homePage}">首页</a></li>
+                        <li><a href="/commodity/order/list?page=${pagePojo.getPreviousPage()}">上一页</a></li>
                         <li><a href="#">当前第${pagePojo.getCurrentPage()+1}页</a></li>
                         <li><a href="#">共${pagePojo.countPage}页</a></li>
                         <li><a href="#">总${pagePojo.amount}条数据</a></li>
-                        <li><a href="/commodity/orderList?page=${pagePojo.getNextPage()}">下一页</a></li>
-                        <li><a href="/commodity/orderList?page=${pagePojo.trailerPage-1}">尾页</a></li>
+                        <li><a href="/commodity/order/list?page=${pagePojo.getNextPage()}">下一页</a></li>
+                        <li><a href="/commodity/order/list?page=${pagePojo.trailerPage-1}">尾页</a></li>
                     </ul>
                 </tr>
                 </tbody>

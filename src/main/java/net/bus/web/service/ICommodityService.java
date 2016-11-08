@@ -1,7 +1,7 @@
 package net.bus.web.service;
 
 import net.bus.web.model.Commodity;
-import net.bus.web.model.CommodityOrder;
+import net.bus.web.model.Orders;
 import net.bus.web.model.User;
 
 import java.util.List;
@@ -21,13 +21,13 @@ public interface ICommodityService {
 
     int getAllCount();
 
-    int getAllOrderCount();
-
     List<Commodity> getList(List<Long> ids);
 
-    List<CommodityOrder> getUserOrders(long userId,int page,int limit);
+    List<Orders> getAllOrders(int page,int limit);
 
-    List<CommodityOrder> getAllOrers(int page,int limit);
+    int getAllOrderCount();
+
+    List<Orders> getUserOrders(long userId,int page,int limit);
 
     int getUserOrdersCount(long userId);
 }

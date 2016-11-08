@@ -6,6 +6,7 @@ import net.bus.web.model.Orders;
 import net.bus.web.model.Pojo.OrderCallBack;
 import net.bus.web.model.Pojo.Product;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,4 +25,12 @@ public interface IOrderService {
     void refund(String tradeNo,String userId);
 
     void refundConfirm(Orders order);
+
+    List<Orders> getAllOrders(ProducedTypeEnum prodType,int page,int limit);
+
+    int getAllOrdersCount(ProducedTypeEnum prodType);
+
+    List<Orders> getUserOrders(long userId,ProducedTypeEnum prodType,int page,int limit);
+
+    int getUserOrdersCount(long userId,ProducedTypeEnum prodType);
 }

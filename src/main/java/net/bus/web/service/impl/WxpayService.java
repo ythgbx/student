@@ -91,7 +91,8 @@ public class WxpayService implements IWxpayService ,IPayService{
     public boolean refund(Orders orders,String refundTradeNo,String userId){
 
         try {
-            Map<String,String> parameters = PayCommonUtil.refundWeiXinOrder(orders.getTradeNo(),refundTradeNo,orders.getAmount().toString(),orders.getAmount().toString(),userId);
+            String totalFee = Integer.valueOf( orders.getPay().multiply(BigDecimal.valueOf(100)).intValue()).toString();
+            Map<String,String> parameters = PayCommonUtil.refundWeiXinOrder(orders.getTradeNo(),refundTradeNo,totalFee,totalFee,userId);
             if(parameters.containsKey("result_code")&&parameters.get("result_code").equals("SUCCESS")){
                 return true;
             }

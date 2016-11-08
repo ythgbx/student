@@ -7,7 +7,7 @@ import net.bus.web.common.config.RString;
 import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.*;
 import net.bus.web.model.Commodity;
-import net.bus.web.model.CommodityOrder;
+import net.bus.web.model.Orders;
 import net.bus.web.model.Pojo.PagePojo;
 import net.bus.web.model.User;
 import net.bus.web.service.ICommodityService;
@@ -126,7 +126,7 @@ public class CommodityController {
      * @return
      */
     @Auth(role = Auth.Role.USER)
-    @RequestMapping(value="/orderList", method = RequestMethod.GET)
+    @RequestMapping(value="/order/list", method = RequestMethod.GET)
     @ApiOperation(value = "用户订单列表页面", httpMethod = "GET", response = ModelAndView.class, notes = "用户订单列表页面")
     public ModelAndView orderList(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "0")int page,
                                   @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "10")int limit,
@@ -137,7 +137,7 @@ public class CommodityController {
         HttpSession session = request.getSession();
         ModelAndView mv = new ModelAndView();
 
-        List<CommodityOrder> commodityOrders= _commodityService.getAllOrers(page,limit);
+        List<Orders> commodityOrders= _commodityService.getAllOrders(page, limit);
         mv.addObject("commodityOrders",commodityOrders);
         PagePojo pagePojo = new PagePojo(_commodityService.getAllOrderCount(),limit,page);
         session.setAttribute("pagePojo",pagePojo);
@@ -154,7 +154,7 @@ public class CommodityController {
     {
         CommodityOrderList commodityOrderList = new CommodityOrderList();
         User currentUser = (User) session.getAttribute(SessionContext.CURRENT_USER);
-        List<CommodityOrder> commodityOrders = _commodityService.getUserOrders(currentUser.getId(), page, limit);
+        List<Orders> commodityOrders = _commodityService.getUserOrders(currentUser.getId(), page, limit);
         commodityOrderList.setCommoditys(getOrderDisplayList(commodityOrders));
         commodityOrderList.setPage(page);
         commodityOrderList.setTotal_count(_commodityService.getUserOrdersCount(currentUser.getId()));
@@ -177,13 +177,13 @@ public class CommodityController {
         return displayList;
     }
 
-    private List<CommodityOrderItem> getOrderDisplayList(List<CommodityOrder> commodityOrderList)
+    private List<CommodityOrderItem> getOrderDisplayList(List<Orders> commodityOrderList)
     {
         List<CommodityOrderItem> displayList = new ArrayList<CommodityOrderItem>();
 
         List<Long> commodityIds = new ArrayList<Long>();
-        for(CommodityOrder commodityOrder:commodityOrderList){
-            commodityIds.add(commodityOrder.getCommodityId());
+        for(Orders commodityOrder:commodityOrderList){
+            commodityIds.add(commodityOrder.getProductId());
         }
         if(commodityIds.size()==0)
             return displayList;
@@ -194,12 +194,12 @@ public class CommodityController {
             commodityMaps.put(commodity.getId(),commodity);
         }
 
-        for(CommodityOrder commodityOrder:commodityOrderList){
+        for(Orders commodityOrder:commodityOrderList){
             CommodityOrderItem commodityOrderItem = new CommodityOrderItem();
             commodityOrderItem.setId(commodityOrder.getId());
-            if(commodityMaps.containsKey((commodityOrder.getCommodityId()))){
-                commodityOrderItem.setName(commodityMaps.get(commodityOrder.getCommodityId()).getName());
-                commodityOrderItem.setImg(commodityMaps.get(commodityOrder.getCommodityId()).getItemImg());
+            if(commodityMaps.containsKey((commodityOrder.getProductId()))){
+                commodityOrderItem.setName(commodityMaps.get(commodityOrder.getProductId()).getName());
+                commodityOrderItem.setImg(commodityMaps.get(commodityOrder.getProductId()).getItemImg());
             }else{
                 commodityOrderItem.setName(RString.COMMODITY_NOT_FOUND);
                 commodityOrderItem.setImg("");
