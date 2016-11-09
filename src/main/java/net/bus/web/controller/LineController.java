@@ -453,7 +453,57 @@ public class LineController {
         logger.info("url:/line/del");
         BaseResult result=new BaseResult();
         List<Long> ids =request.getIds();
-
+         if(_lineService.del(ids)){
+             result.setResult("success");
+             result.setContent("删除成功!");
+         } else{
+             result.setResult("failure");
+             result.setContent("删除失败!");
+         }
         return result;
+    }
+
+    @Auth(role=Auth.Role.USER)
+    @RequestMapping(value = "/updateline",method = RequestMethod.POST)
+    @ApiOperation(value = "修改线路",httpMethod = "POST",response = BaseResult.class,notes = "修改线路")
+    @ResponseBody
+    public BaseResult UpdateActivity(@ApiParam(required = true, name = "updateline", value = "修改线路请求")
+                                     @RequestBody Line line
+
+    ) {
+        logger.info("url:/line/updateline");
+        BaseResult result=new BaseResult();
+        if(_lineService.updateline(line)){
+            result.setResult("success");
+            result.setContent("修改成功!");
+        }else{
+            result.setResult("failure");
+            result.setContent("修改失败!");
+        }
+        return result;
+    }
+
+    @Auth(role = Auth.Role.NONE)
+    @ResponseBody
+    @RequestMapping(value = "/linedetail", method = RequestMethod.GET)
+    @ApiOperation(value = "获取线路详细", httpMethod = "GET", response = ActivityItem.class, notes = "获取线路详细")
+    public IResult detail(
+            @ApiParam(required = true, name = "id", value = "id")
+            @RequestParam(value = "id", required = true, defaultValue = "0")long id
+    )
+    {
+        LineItem lineItem=new LineItem();
+        Line line =_lineService.getLineDetails(id);
+        lineItem.setId(line.getId());
+        lineItem.setName(line.getName());
+        lineItem.setAnnotation(line.getAnnotation());
+        lineItem.setCityName(line.getCityName());
+        lineItem.setPropName(line.getPropName());
+        lineItem.setPrice(line.getPrice().doubleValue());
+        lineItem.setStart_station(line.getStart());
+        lineItem.setEnd_station(line.getEnd());
+        lineItem.setStart_time(line.getStartTime().getTime());
+        lineItem.setEnd_time(line.getEndTime().getTime());
+        return lineItem;
     }
 }

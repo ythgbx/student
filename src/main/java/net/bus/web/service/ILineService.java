@@ -54,4 +54,6 @@ public interface ILineService {
     boolean del(Long id);
 
     boolean del(List<Long> ids);
+
+    boolean updateline(Line line);
 }

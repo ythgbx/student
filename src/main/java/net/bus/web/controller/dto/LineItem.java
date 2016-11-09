@@ -3,7 +3,7 @@ package net.bus.web.controller.dto;
 /**
  * Created by Edifi_000 on 2016-07-04.
  */
-public class LineItem {
+public class LineItem extends BaseResult{
     private Long id;
     private String name;
     private String start_station;
@@ -12,6 +12,33 @@ public class LineItem {
     private Long end_time;
     private Double price;
     private String bus_img;
+    private String annotation;
+    private String cityName;
+    private String propName;
+
+    public String getAnnotation() {
+        return annotation;
+    }
+
+    public void setAnnotation(String annotation) {
+        this.annotation = annotation;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+    public String getPropName() {
+        return propName;
+    }
+
+    public void setPropName(String propName) {
+        this.propName = propName;
+    }
 
     public Long getId(){ return id; }
 
