@@ -9,6 +9,7 @@ import net.bus.web.model.Pojo.Product;
 import net.bus.web.model.Pojo.WxOrderCallBack;
 import net.bus.web.service.IProductService;
 import net.bus.web.service.IWxpayService;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
@@ -60,23 +61,25 @@ public class WxpayService implements IWxpayService ,IPayService{
 
         if(callBack.getResultCode().equals("SUCCESS")){
             SortedMap<Object,Object> parameters = new TreeMap<Object,Object>();
-            parameters.put("appid", WeiXinConfig.app_id);
             //packageParams.put("attach", order.getMember().getId().toString()); //用自己系统的数据：会员id
-            parameters.put("bank_type", callBack.getBankType());
-            //parameters.put("cash_fee", cash_fee);
-            parameters.put("fee_type", callBack.getFeeType());
-            parameters.put("is_subscribe", callBack.isSubscribe()?"Y":"N");
-            parameters.put("mch_id", WeiXinConfig.MCH_ID);
-            parameters.put("nonce_str", callBack.getNonceStr());
-            parameters.put("openid", callBack.getOpenId());
+            parameters.put("appid", WeiXinConfig.app_id);
             parameters.put("out_trade_no", callBack.getOutTradeNo());
-            parameters.put("result_code", callBack.getResultCode());
-            parameters.put("return_code", callBack.getReturnCode());
-            parameters.put("sub_mch_id", callBack.getSubMchId());
-            parameters.put("time_end", callBack.getTimeEnd());
             parameters.put("total_fee", callBack.getTotalFee()); //用自己系统的数据：订单金额
+            parameters.put("bank_type", callBack.getBankType());
+            parameters.put("openid", callBack.getOpenId());
+            parameters.put("fee_type", callBack.getFeeType());
+            parameters.put("mch_id", WeiXinConfig.MCH_ID);
+            parameters.put("cash_fee", callBack.getCashFee());
             parameters.put("trade_type", callBack.getTradeType());
-            parameters.put("transaction_id", callBack.getTransactionId());
+            parameters.put("nonce_str", callBack.getNonceStr());
+            parameters.put("transaction_id",callBack.getTransactionId());
+            parameters.put("is_subscribe", callBack.isSubscribe()?"Y":"N");
+            parameters.put("result_code", callBack.getResultCode());
+            parameters.put("time_end", callBack.getTimeEnd());
+            parameters.put("return_code", callBack.getReturnCode());
+            if(!StringUtils.isBlank(callBack.getSubMchId())){
+                parameters.put("sub_mch_id", callBack.getSubMchId());
+            }
 
             String sign = PayCommonUtil.createSign("UTF-8", parameters);
             logger.info("async check sign:"+sign+" callback.sign:"+callBack.getSign());
@@ -150,6 +153,7 @@ public class WxpayService implements IWxpayService ,IPayService{
         callBack.setSubMchId(handleFormStr(params.get("sub_mch_id")));//商户应用id
         callBack.setTimeEnd(handleFormStr(params.get("time_end")));//支付完成时间
         callBack.setTotalFee(Integer.parseInt(handleFormStr(params.get("total_fee"))));//总金额
+        callBack.setCashFee(Integer.parseInt(handleFormStr(params.get("cash_fee"))));//现金支付金额
         callBack.setTradeType(handleFormStr(params.get("trade_type")));//交易类型
         callBack.setTransactionId(handleFormStr(params.get("transaction_id")));//微信支付订单号
 
