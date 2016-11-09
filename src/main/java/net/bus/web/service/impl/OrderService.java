@@ -111,9 +111,9 @@ public class OrderService implements IOrderService{
         }
 
         if(asyncCallBack!=null&&!StringUtils.isBlank(asyncCallBack.getFailed())){
-            if(!StringUtils.isBlank(asyncCallBack.getTradeNo())){
+            if(!StringUtils.isBlank(asyncCallBack.getSelfTradeNo())){
 
-                Orders orders = query(asyncCallBack.getTradeNo());
+                Orders orders = query(asyncCallBack.getSelfTradeNo());
                 if(orders!=null){
                     IProductService payService = ProducedTypeEnum.get(orders.getProductType()).getService();
                     if(payService.buyComplete(asyncCallBack)){

@@ -139,7 +139,7 @@ public class ActivityService implements IActivityService,IProductService {
 
     @Transactional
     public boolean buyComplete(AsyncCallBack callBack) {
-        ActivityOrder order = activityOrderRepository.getItem(new ActivityOrderSpecification(callBack.getTradeNo()));
+        ActivityOrder order = activityOrderRepository.getItem(new ActivityOrderSpecification(callBack.getSelfTradeNo()));
         if(order!=null&&order.getPayTime()==null){
 
             Activity activity = activityRepository.getItem(order.getActivityId());

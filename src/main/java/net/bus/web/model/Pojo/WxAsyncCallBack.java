@@ -161,7 +161,7 @@ public class WxAsyncCallBack extends AsyncCallBack{
     }
 
     @Override
-    public String getTradeNo(){
+    public String getSelfTradeNo(){
         return getOutTradeNo();
     }
 
