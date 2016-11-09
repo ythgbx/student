@@ -2,10 +2,12 @@ package net.bus.web.service.impl;
 
 import net.bus.web.common.weixin.config.WeiXinConfig;
 import net.bus.web.common.weixin.util.PayCommonUtil;
+import net.bus.web.enums.ProducedTypeEnum;
 import net.bus.web.model.Orders;
 import net.bus.web.model.Pojo.WxAsyncCallBack;
 import net.bus.web.model.Pojo.Product;
 import net.bus.web.model.Pojo.WxOrderCallBack;
+import net.bus.web.service.IProductService;
 import net.bus.web.service.IWxpayService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
@@ -79,13 +81,24 @@ public class WxpayService implements IWxpayService ,IPayService{
             String sign = PayCommonUtil.createSign("UTF-8", parameters);
             logger.info("async check sign:"+sign+" callback.sign:"+callBack.getSign());
             if(callBack.getSign().equals(sign)){
-                //TODO 判断支付并执行后续处理
                 logger.info("async sign verified success:"+callBack.getOutTradeNo());
-                return callBack;
+                IProductService payService = ProducedTypeEnum.get(callBack.getOutTradeNo().substring(1, 2).charAt(0)).getService();
+                if(payService.buyComplete(callBack)){
+                    logger.info("buy complete:"+callBack.getOutTradeNo());
+                }else{
+                    logger.info("buy failed:"+callBack.getOutTradeNo());
+                    callBack.setFailed("buy failed:"+callBack.getOutTradeNo());
+                }
+            }else{
+                logger.info("async sign verified failed");
+                callBack.setFailed("async sign verified failed");
             }
+        }else{
+            logger.info("trade not finished or success");
+            callBack.setFailed("trade not finished or success");
         }
 
-        return null;
+        return callBack;
     }
 
     public boolean refund(Orders orders,String refundTradeNo,String userId){

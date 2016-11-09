@@ -240,8 +240,7 @@ public class WeiXinController {
             String msgXml=new String(out.toByteArray(),"utf-8");//xml数据
             Map params = XMLUtil.doXMLParse(msgXml);
 
-            WxAsyncCallBack callBack = _wxpayService.async(params);
-            if(callBack!=null&& !StringUtils.isBlank(callBack.getFailed())){
+            if(_orderService.confirm(OrderTypeEnum.WXPAY,params)){
                 return PayCommonUtil.setXML("SUCCESS", "OK");
             }
             else{
