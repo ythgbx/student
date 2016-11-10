@@ -17,6 +17,7 @@ import net.bus.web.service.exception.ActivityException;
 import net.bus.web.service.exception.OutOfStockException;
 import net.bus.web.service.exception.RepeatApplyException;
 import org.apache.commons.lang.StringUtils;
+import org.apache.ibatis.annotations.Param;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -237,6 +238,20 @@ public class ActivityController {
         return result;
     }
 
+    @Auth(role=Auth.Role.USER)
+    @RequestMapping(value="/joinActivity" ,method=RequestMethod.POST)
+    @ApiOperation(value = "参加活动人信息",httpMethod = "POST",response = BaseResult.class,notes="参加活动人信息")
+    @ResponseBody
+    public BaseResult JoinActivity(@ApiParam(required=true,name="joinActivity",value = "参加活动人信息")
+                                   @RequestBody    Applicants applicants
+
+                                   )
+    {
+        logger.info("url:/activity/joinActivity");
+        BaseResult result=new BaseResult();
+        result.setResult("success");
+        return  result;
+    }
 
 
 
