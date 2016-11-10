@@ -65,15 +65,7 @@ public class AlipayService implements IAlipayService ,IPayService{
             if(true||AlipayNotify.verifyResponse(callBack.getNotifyId()).equals("true")){
                 if(AlipayNotify.getSignVeryfy(params, sign)){
                     if(callBack.getTradeStatus().equals("TRADE_FINISHED") || callBack.getTradeStatus().equals("TRADE_SUCCESS")) {
-
                         logger.info("async sign verified success:"+callBack.getOutTradeNo());
-                        IProductService payService = ProducedTypeEnum.get(callBack.getOutTradeNo().substring(1, 2).charAt(0)).getService();
-                        if(payService.buyComplete(callBack)){
-                            logger.info("buy complete:"+callBack.getOutTradeNo());
-                        }else{
-                            logger.info("buy failed:"+callBack.getOutTradeNo());
-                            callBack.setFailed("buy failed:"+callBack.getOutTradeNo());
-                        }
                     }else{
                         logger.info("trade not finished or success");
                         callBack.setFailed("trade not finished or success");

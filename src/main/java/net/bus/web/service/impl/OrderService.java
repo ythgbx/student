@@ -18,6 +18,7 @@ import net.bus.web.service.IOrderService;
 import net.bus.web.service.IProductService;
 import net.bus.web.service.IWxpayService;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,6 +41,7 @@ public class OrderService implements IOrderService{
     @Autowired
     private IWxpayService _wxpayService;
 
+    private Logger logger = Logger.getLogger("CommonLogger");
 
     public String createTradeNo(OrderTypeEnum orderTypeEnum,ProducedTypeEnum producedType){
         return String.valueOf(orderTypeEnum.getPre())+String.valueOf(producedType.getPre())+UUIDUtil.getNew();
@@ -111,9 +113,9 @@ public class OrderService implements IOrderService{
                 throw new RuntimeException("unknown order type");
         }
 
-        if(asyncCallBack!=null&&!StringUtils.isBlank(asyncCallBack.getFailed())){
+        if(asyncCallBack!=null&&StringUtils.isBlank(asyncCallBack.getFailed())){
             if(!StringUtils.isBlank(asyncCallBack.getSelfTradeNo())){
-
+                logger.info("confirm async success");
                 Orders orders = query(asyncCallBack.getSelfTradeNo());
                 if(orders!=null){
                     IProductService payService = ProducedTypeEnum.get(orders.getProductType()).getService();
@@ -121,11 +123,15 @@ public class OrderService implements IOrderService{
                         orders.setPay(asyncCallBack.getPay());
                         orders.setPayTime(new Date());
                         _rootRepository.updateItem(orders);
-
+                        logger.info("confirm success:" + asyncCallBack.getSelfTradeNo());
                         return true;
                     }
                 }
+            }else{
+                logger.info("confirm asyncCallBack self tradeNo null or empty");
             }
+        }else{
+            logger.info("confirm asyncCallBack failed:"+asyncCallBack.getFailed());
         }
         return false;
     }
