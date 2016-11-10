@@ -1,13 +1,14 @@
 package net.bus.web.repository;
 
-import net.bus.web.mapper.CommodityMapper;
 import net.bus.web.model.Commodity;
+import net.bus.web.mapper.CommodityMapper;
 import net.bus.web.model.CommodityExample;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -78,6 +79,13 @@ public class CommodityRepository {
             return true;
 
         return  false;
+    }
+
+    public int delete(ISpecification Specification) {
+        return _mapper.deleteByExample((CommodityExample)Specification.createExample());
+    }
+    public int delete(Long id) {
+        return _mapper.deleteByPrimaryKey(id);
     }
 
     public int count(ISpecification specification)

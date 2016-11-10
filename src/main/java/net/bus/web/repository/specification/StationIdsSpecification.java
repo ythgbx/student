@@ -18,12 +18,11 @@ public class StationIdsSpecification  implements ISpecification<StationExample> 
 
     public StationExample createExample()
     {
-        if(_ids.isEmpty())
-            return null;
-
         StationExample example = new StationExample();
-        StationExample.Criteria criteriaId = example.createCriteria();
-        criteriaId.andIdIn(_ids);
+        if(_ids!= null && !_ids.isEmpty()){
+            StationExample.Criteria criteriaId = example.createCriteria();
+            criteriaId.andIdIn(_ids);
+        }
         return example;
     }
 }

@@ -5,13 +5,17 @@ import java.math.BigDecimal;
 /**
  * Created by Edifi_000 on 2016-07-27.
  */
-public class StationItem {
+public class StationItem extends BaseResult{
 
     private Long id;
     private String name;
     private Position pos;
     private String annotation;
     private BigDecimal price;
+
+    public BigDecimal getPrice() {return price;}
+
+    public void setPrice(BigDecimal price) {this.price = price;}
 
     public Long getId() {
         return id;
@@ -45,11 +49,4 @@ public class StationItem {
         this.annotation = annotation;
     }
 
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
 }

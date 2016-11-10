@@ -67,16 +67,12 @@ public class UserController {
     @Autowired
     private FileUploadController fileUploadController;
 
-    @RequestMapping(value="/login" , method = RequestMethod.GET)
-    @ApiOperation(value = "登陆页面", httpMethod = "GET", response = ModelAndView.class, notes = "登陆页面")
-    public ModelAndView index(Model model)
-    {
-        logger.info("url:/user");
-        ModelAndView mv =new ModelAndView();
-        mv.setViewName("user_login");
-        return mv;
-    }
 
+    /**
+     * 用户登录
+     * @param login
+     * @return
+     */
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -425,7 +421,11 @@ public class UserController {
         return result;
     }
 
-
+    /**
+     * 用户提交反馈信息
+     * @param feedbackResult
+     * @return
+     */
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/feedback", method = RequestMethod.POST)
@@ -458,24 +458,7 @@ public class UserController {
     }
 
 
-    @Auth(role = Auth.Role.USER)
-    @RequestMapping(value="/list", method = RequestMethod.GET)
-    @ApiOperation(value = "用户列表页面", httpMethod = "GET", response = ModelAndView.class, notes = "用户列表页面")
-    public ModelAndView list(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "0")int page,
-                             @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "10")int limit,
-                             HttpServletRequest request,Model model)
-    {
-        logger.info("url:/user/list");
-        HttpSession session = request.getSession();
-        PagePojo pagePojo = new PagePojo(service.getAllCount(),limit,page);
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("user_list");
-        List<User> users= service.getAllUsers(page,limit);
-        mv.addObject("userList",users);
-        session.setAttribute("pagePojo",pagePojo);
 
-        return mv;
-    }
 
 
     @Auth(role = Auth.Role.USER)
@@ -540,6 +523,71 @@ public class UserController {
         int status = response.getStatus();
         return (status==200);
     }
+    //endregion
+
+
+    //region 网页后台管理部分
+
+    /**
+     * 后台管理登录界面
+     * @param model
+     * @return
+     */
+    @RequestMapping(value="/login" , method = RequestMethod.GET)
+    @ApiOperation(value = "登陆页面", httpMethod = "GET", response = ModelAndView.class, notes = "登陆页面")
+    public ModelAndView index(Model model)
+    {
+        logger.info("url:/user");
+        ModelAndView mv =new ModelAndView();
+        mv.setViewName("user_login");
+        return mv;
+    }
+
+    /**
+     * 获取用户信息列表
+     * @param page
+     * @param limit
+     * @param request
+     * @param model
+     * @return
+     */
+    @Auth(role = Auth.Role.USER)
+    @RequestMapping(value="/list", method = RequestMethod.GET)
+    @ApiOperation(value = "用户列表页面", httpMethod = "GET", response = ModelAndView.class, notes = "用户列表页面")
+    public ModelAndView list(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "0")int page,
+                             @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "10")int limit,
+                             HttpServletRequest request,Model model)
+    {
+        logger.info("url:/user/list");
+        HttpSession session = request.getSession();
+        PagePojo pagePojo = new PagePojo(service.getAllCount(),limit,page);
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("user_list");
+        List<User> users= service.getAllUsers(page,limit);
+        mv.addObject("userList",users);
+        session.setAttribute("pagePojo",pagePojo);
+
+        return mv;
+    }
+
+    @Auth(role = Auth.Role.USER)
+    @ResponseBody
+    @RequestMapping(value = "/recharge/point", method = RequestMethod.POST)
+    @ApiOperation(value = "积分充值", httpMethod = "PUT", response = BaseResult.class, notes = "积分充值")
+    public BaseResult rechargePoint(@ApiParam(required = true, name = "rechargePoint", value = "用户积分充值(管理员操作)")@RequestBody UserPointAdd pointAdd)
+    {
+        BaseResult result = new BaseResult();
+        if(service.addPoint(service.getUser(pointAdd.getId()),pointAdd.getAddNum())){
+            result.setResult("success");
+            result.setContent("充值成功");
+        }else{
+            result.setResult("failure");
+            result.setContent("充值失败");
+        }
+        return result;
+        
+    }
+
 
 
 }

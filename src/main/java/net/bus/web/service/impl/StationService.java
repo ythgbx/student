@@ -34,7 +34,7 @@ public class StationService implements IStationService {
 
     public List<Station> getAllStations(int page,int limit)
     {
-        return  _rootRepository.getAll(page - 1, limit);
+        return  _rootRepository.getAll(page , limit);
     }
 
     public List<Station> getPropStations(String propName)
@@ -64,6 +64,31 @@ public class StationService implements IStationService {
         int result = _rootRepository.insertItem(station);
 
         if(result>0){
+            return true;
+        }
+        return false;
+    }
+
+    public Boolean del(List<Long> longList) {
+        StationIdsSpecification Specification = new StationIdsSpecification(longList);
+        int result ;
+        if (longList.size()==1){
+            result = _rootRepository.delete(longList.get(0));
+        }else {
+            result = _rootRepository.delete(Specification);
+        }
+        if(result  > 0){
+            return true;
+        }
+        return false;
+    }
+
+    public Station getDetails(Long id) {
+        return _rootRepository.getItem(id);
+    }
+
+    public boolean updateStation(Station station) {
+        if (_rootRepository.updateItem(station)>0){
             return true;
         }
         return false;

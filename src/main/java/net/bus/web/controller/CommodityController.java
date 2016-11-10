@@ -7,14 +7,13 @@ import net.bus.web.common.config.RString;
 import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.*;
 import net.bus.web.enums.OrderTypeEnum;
+import net.bus.web.model.*;
 import net.bus.web.model.Commodity;
-import net.bus.web.model.Orders;
 import net.bus.web.model.Pojo.AlipayOrderCallBack;
 import net.bus.web.model.Pojo.PagePojo;
-import net.bus.web.model.Pojo.WxOrderCallBack;
-import net.bus.web.model.User;
 import net.bus.web.service.ICommodityService;
 import org.apache.commons.lang.StringUtils;
+import org.apache.ibatis.annotations.Param;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,6 +35,7 @@ import java.util.List;
 @RequestMapping("/commodity")
 public class CommodityController {
 
+    //region restfull接口部分
     //@Autowired
     //@Qualifier("commodityService")
     @Resource(name = "commodityService")
@@ -52,7 +53,6 @@ public class CommodityController {
      */
     @Auth(role = Auth.Role.USER)
     @RequestMapping(value="/list", method = RequestMethod.GET)
-    @ApiOperation(value = "商品列表页面", httpMethod = "GET", response = ModelAndView.class, notes = "商品列表页面")
     public ModelAndView list(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "0")int page,
                              @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "10")int limit,
                              HttpServletRequest request, Model model)
@@ -62,7 +62,7 @@ public class CommodityController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("commodity_list");
 
-        List<Commodity> commodityList= _commodityService.getAll(page, limit);
+        List<net.bus.web.model.Commodity> commodityList= _commodityService.getAll(page, limit);
         PagePojo pagePojo = new PagePojo(_commodityService.getAllCount(),limit,page);
         mv.addObject("commodityLists",commodityList);
         session.setAttribute("pagePojo",pagePojo);
@@ -78,7 +78,7 @@ public class CommodityController {
                        @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "5")int limit)
     {
         CommodityList commodityList = new  CommodityList();
-        List<Commodity> list = _commodityService.getAll(page, limit);
+        List<net.bus.web.model.Commodity> list = _commodityService.getAll(page, limit);
         commodityList.setCommoditys(getDisplayList(list));
         commodityList.setPage(page);
         commodityList.setTotal_count(_commodityService.getAllCount());
@@ -92,13 +92,18 @@ public class CommodityController {
     public IResult detail(@ApiParam(required = true, name = "id", value = "id")@RequestParam(value = "id", required = true, defaultValue = "0")long id)
     {
         CommodityDetail commodityDetail = new CommodityDetail();
-        Commodity commodity = _commodityService.getDetails(id);
+        net.bus.web.model.Commodity commodity = _commodityService.getDetails(id);
         commodityDetail.setId(commodity.getId());
         commodityDetail.setName(commodity.getName());
         commodityDetail.setDepict(commodity.getDepict());
-        commodityDetail.setPoint(commodity.getPoint());
-        commodityDetail.setImg(commodity.getImg());
         commodityDetail.setPrice(commodity.getPrice());
+        commodityDetail.setAmount(commodity.getAmount());
+        commodityDetail.setItemImg(commodity.getItemImg());
+        commodityDetail.setImg(commodity.getImg());
+        commodityDetail.setPoint(commodity.getPoint());
+        commodityDetail.setCouponType(commodity.getCouponType());
+        commodityDetail.setTypeId(commodity.getTypeId());
+        commodityDetail.setFlag(commodity.getFlag());
         return commodityDetail;
     }
 
@@ -110,7 +115,7 @@ public class CommodityController {
     {
         BaseResult result = new BaseResult();
         User currentUser = (User) session.getAttribute(SessionContext.CURRENT_USER);
-        OrderTypeEnum orderType = request.getOrder_type()==0?OrderTypeEnum.ALIPAY:OrderTypeEnum.get(request.getOrder_type());
+        OrderTypeEnum orderType = request.getOrder_type()==0? OrderTypeEnum.ALIPAY:OrderTypeEnum.get(request.getOrder_type());
         //TODO 暂时根据支付宝请求返回结果,后跟前端协调修改dto后支持微信支付
         String sign = ((AlipayOrderCallBack)_commodityService.buy(orderType,request.getId(),currentUser)).getSign();
         if(!StringUtils.isBlank(sign)){
@@ -124,31 +129,6 @@ public class CommodityController {
     }
 
 
-    /**
-
-     * 用户订单查询界面
-     * @param model
-     * @return
-     */
-    @Auth(role = Auth.Role.USER)
-    @RequestMapping(value="/order/list", method = RequestMethod.GET)
-    @ApiOperation(value = "用户订单列表页面", httpMethod = "GET", response = ModelAndView.class, notes = "用户订单列表页面")
-    public ModelAndView orderList(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "0")int page,
-                                  @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "10")int limit,
-            HttpServletRequest request,Model model)
-    {
-        logger.info("url:/commodity/orderList");
-        System.out.println(page+"aaa");
-        HttpSession session = request.getSession();
-        ModelAndView mv = new ModelAndView();
-
-        List<Orders> commodityOrders= _commodityService.getAllOrders(page, limit);
-        mv.addObject("commodityOrders",commodityOrders);
-        PagePojo pagePojo = new PagePojo(_commodityService.getAllOrderCount(),limit,page);
-        session.setAttribute("pagePojo",pagePojo);
-        mv.setViewName("user_orderList");
-        return mv;
-    }
 
     @Auth(role = Auth.Role.USER)
     @ResponseBody
@@ -167,10 +147,10 @@ public class CommodityController {
     }
 
 
-    private List<CommodityItem> getDisplayList(List<Commodity> commodityList)
+    private List<CommodityItem> getDisplayList(List<net.bus.web.model.Commodity> commodityList)
     {
         List<CommodityItem> displayList = new ArrayList<CommodityItem>();
-        for(Commodity commodity:commodityList){
+        for(net.bus.web.model.Commodity commodity:commodityList){
             CommodityItem commodityItem = new CommodityItem();
             commodityItem.setId(commodity.getId());
             commodityItem.setName(commodity.getName());
@@ -218,4 +198,105 @@ public class CommodityController {
         }
         return displayList;
     }
+    //endregion
+
+
+    //region 网页后台管理部分
+
+
+    /**
+     * 用户订单查询界面
+     * @return
+     */
+    @Auth(role = Auth.Role.USER)
+    @RequestMapping(value="/orderList", method = RequestMethod.GET)
+    public ModelAndView orderList(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "0")int page,
+                                  @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "10")int limit,
+                                  HttpServletRequest request)
+    {
+        logger.info("url:/commodity/orderList");
+        HttpSession session = request.getSession();
+        ModelAndView mv = new ModelAndView();
+
+        List<Orders> orders= _commodityService.getAllOrders(page,limit);
+        mv.addObject("orders",orders);
+        PagePojo pagePojo = new PagePojo(_commodityService.getAllOrderCount(),limit,page);
+        session.setAttribute("pagePojo",pagePojo);
+        mv.setViewName("user_orderList");
+        return mv;
+    }
+
+    /**
+     * 商品添加
+     * @param commodity
+     * @return
+     */
+    @Auth(role=Auth.Role.USER)
+    @RequestMapping(value = "/add",method = RequestMethod.POST)
+    @ApiOperation(value = "添加商品",hidden = true)
+    @ResponseBody
+    public BaseResult addCommodity(@RequestBody Commodity commodity){
+
+        logger.info("url:/commodity/add");
+        BaseResult result = new BaseResult();
+        if (_commodityService.add(commodity)) {
+            result.setResult("success");
+            result.setContent("添加成功");
+        }else {
+            result.setResult("failure");
+            result.setContent("添加失败");
+        }
+        return result;
+    }
+
+    /**
+     * 商品修改
+     * @param commodity
+     * @return
+     */
+    @Auth(role=Auth.Role.USER)
+    @RequestMapping(value = "/update",method = RequestMethod.POST)
+    @ApiOperation(value = "修改商品",hidden = true)
+    @ResponseBody
+    public BaseResult updateCommodity(@RequestBody Commodity commodity){
+
+        logger.info("url:/commodity/update");
+        BaseResult result = new BaseResult();
+        if(_commodityService.update(commodity)){
+            result.setResult("success");
+            result.setContent("修改过成功!");
+        }else {
+            result.setResult("error");
+            result.setContent("修改失败!");
+        }
+        return result;
+    }
+
+    /**
+     * 商品删除操作(支持批量删除)
+     * @param request
+     * @return
+     */
+    @RequestMapping(value="/del", method = RequestMethod.DELETE)
+    @ApiOperation(value = "批量删除商品", httpMethod = "POST", response = BaseResult.class, notes = "批量删除商品")
+    @ResponseBody
+    public BaseResult delCommodity(@ApiParam(required = true, name = "request", value = "商品编号列表")
+                                   @RequestBody BaseRequest request)
+    {
+        BaseResult result = new BaseResult();
+        List<Long> ids = request.getIds();
+        result.setResult("success");
+        if(ids !=null && ids.size()> 0){
+            if(_commodityService.del(ids)){
+                result.setContent("删除成功");
+            }else{
+                result.setResult("failure");
+                result.setContent("删除失败");
+            }
+        }else{
+            result.setContent("您没有选中任何项");
+        }
+        return result;
+    }
+
 }

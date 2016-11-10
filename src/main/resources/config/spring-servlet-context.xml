@@ -7,7 +7,8 @@
              xmlns:util="http://www.springframework.org/schema/util"
              xmlns:aop="http://www.springframework.org/schema/aop"
              xmlns:cache="http://www.springframework.org/schema/cache"
-             xmlns:tx="http://www.springframework.org/schema/tx" xsi:schemaLocation="http://www.springframework.org/schema/mvc
+             xmlns:tx="http://www.springframework.org/schema/tx"
+             xsi:schemaLocation="http://www.springframework.org/schema/mvc
              http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -40,6 +41,9 @@
 
     <!-- AOP -->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <!-- 默认的注解映射的支持 -->
+    <mvc:annotation-driven />
 
     <!--mybatis 数据库配置 -->
     <util:properties id="dbConfig" location="/WEB-INF/classes/config/jdbc.properties"/>

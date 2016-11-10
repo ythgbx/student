@@ -1,8 +1,11 @@
 package net.bus.web.repository;
 
+import net.bus.web.mapper.CommodityMapper;
 import net.bus.web.mapper.CommodityOrderMapper;
+import net.bus.web.model.Commodity;
 import net.bus.web.model.CommodityOrder;
 import net.bus.web.model.CommodityOrderExample;
+import net.bus.web.repository.specification.CommodityIdsSpecification;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,6 +20,9 @@ import java.util.List;
 public class CommodityOrderRepository {
     @Autowired
     private CommodityOrderMapper _mapper;
+
+    @Autowired
+    private CommodityMapper _commodityMapper;
 
     public List<CommodityOrder> getAll() {
         CommodityOrderExample example = new CommodityOrderExample();
@@ -65,6 +71,13 @@ public class CommodityOrderRepository {
         return _mapper.insert(commodityOrder);
     }
 
+    Boolean insertItem(Commodity commodity){
+        if (_commodityMapper.insert(commodity)>0){
+            return true;
+        }
+        return false;
+    }
+
     public int updateItem(CommodityOrder commodityOrder)
     {
         return _mapper.updateByPrimaryKey(commodityOrder);
@@ -90,5 +103,12 @@ public class CommodityOrderRepository {
     public int count()
     {
         return _mapper.countByExample(null);
+    }
+
+    public int delete(ISpecification Specification) {
+        return _mapper.deleteByExample((CommodityOrderExample)Specification);
+    }
+    public int delete(Long id) {
+        return _mapper.deleteByPrimaryKey(id);
     }
 }

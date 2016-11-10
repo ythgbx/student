@@ -21,6 +21,12 @@ public interface ICommodityService {
 
     //boolean buyComplete(AlipayAsyncCallBack callBack);
 
+    Boolean del(List<Long> longList);
+
+    Boolean update(Commodity commodity);
+
+    Boolean add(Commodity commodity);
+
     int getAllCount();
 
     List<Commodity> getList(List<Long> ids);

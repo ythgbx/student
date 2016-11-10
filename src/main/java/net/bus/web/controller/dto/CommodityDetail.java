@@ -10,16 +10,16 @@ import java.math.BigDecimal;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CommodityDetail extends BaseResult{
     private Long id;
-
     private String name;
-
-    private String img;
-
-    private BigDecimal price;
-
     private String depict;
-
+    private BigDecimal price;
+    private Integer amount;
+    private String itemImg;
+    private String img;
     private Integer point;
+    private Integer couponType;
+    private Long typeId;
+    private Integer flag;
 
     public Long getId() {
         return id;
@@ -37,12 +37,12 @@ public class CommodityDetail extends BaseResult{
         this.name = name;
     }
 
-    public String getImg() {
-        return img;
+    public String getDepict() {
+        return depict;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setDepict(String depict) {
+        this.depict = depict;
     }
 
     public BigDecimal getPrice() {
@@ -53,12 +53,28 @@ public class CommodityDetail extends BaseResult{
         this.price = price;
     }
 
-    public String getDepict() {
-        return depict;
+    public Integer getAmount() {
+        return amount;
     }
 
-    public void setDepict(String depict) {
-        this.depict = depict;
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
+
+    public String getItemImg() {
+        return itemImg;
+    }
+
+    public void setItemImg(String itemImg) {
+        this.itemImg = itemImg;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public Integer getPoint() {
@@ -67,5 +83,29 @@ public class CommodityDetail extends BaseResult{
 
     public void setPoint(Integer point) {
         this.point = point;
+    }
+
+    public Integer getCouponType() {
+        return couponType;
+    }
+
+    public void setCouponType(Integer couponType) {
+        this.couponType = couponType;
+    }
+
+    public Long getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(Long typeId) {
+        this.typeId = typeId;
+    }
+
+    public Integer getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Integer flag) {
+        this.flag = flag;
     }
 }
