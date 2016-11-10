@@ -43,7 +43,6 @@ public class AlipayAsyncCallBack extends AsyncCallBack{
         this.outTradeNo = outTradeNo;
     }
 
-    @Override
     public String getTradeNo() {
         return tradeNo;
     }
@@ -115,6 +114,9 @@ public class AlipayAsyncCallBack extends AsyncCallBack{
     public void setAppId(String appId) {
         this.appId = appId;
     }
+
+    @Override
+    public String getSelfTradeNo(){return getOutTradeNo();}
 
     @Override
     public BigDecimal getPay(){

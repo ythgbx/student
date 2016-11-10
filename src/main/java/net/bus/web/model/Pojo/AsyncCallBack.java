@@ -17,7 +17,7 @@ public class AsyncCallBack {
         this.failed = failed;
     }
 
-    public String getTradeNo(){
+    public String getSelfTradeNo(){
         throw new RuntimeException("function not impl");
     }
 

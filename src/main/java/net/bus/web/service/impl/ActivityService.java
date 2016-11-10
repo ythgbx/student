@@ -1,9 +1,13 @@
 package net.bus.web.service.impl;
 
+import net.bus.web.enums.OrderTypeEnum;
 import net.bus.web.enums.ProducedTypeEnum;
 import net.bus.web.model.Activity;
 import net.bus.web.model.ActivityOrder;
+import net.bus.web.model.Orders;
 import net.bus.web.model.Pojo.AsyncCallBack;
+import net.bus.web.model.Pojo.OrderCallBack;
+import net.bus.web.model.Pojo.Product;
 import net.bus.web.model.User;
 import net.bus.web.repository.ActivityOrderRepository;
 import net.bus.web.repository.ActivityRepository;
@@ -11,6 +15,7 @@ import net.bus.web.repository.specification.ActivityOrderSpecification;
 import net.bus.web.repository.specification.ActivitySpecification;
 import net.bus.web.service.IActivityService;
 import net.bus.web.service.IAlipayService;
+import net.bus.web.service.IOrderService;
 import net.bus.web.service.IProductService;
 import net.bus.web.service.exception.ActivityException;
 import net.bus.web.service.exception.OutOfStockException;
@@ -34,13 +39,13 @@ public class ActivityService implements IActivityService,IProductService {
     private ActivityRepository activityRepository;
 
     @Autowired
-    private ActivityOrderRepository activityOrderRepository;
-
-    @Autowired
     private IAlipayService alipayService;
 
     @Autowired
     private UserService _userService;
+
+    @Autowired
+    private IOrderService _orderService;
 
     @Value("#{sysProperties['payDebug']}")
     private Boolean _payDebug;
@@ -86,31 +91,29 @@ public class ActivityService implements IActivityService,IProductService {
         return false;
     }
 
-
-    public String join(Long id, User user) {
+    @Transactional
+    public OrderCallBack join(OrderTypeEnum orderType,Long id, User user){
         Activity activity= activityRepository.getItem(id);
-        int count = activityOrderRepository.count(new ActivityOrderSpecification(id));
-        String sign = null;
+        int count = _orderService.getProductOrdersCount(activity.getId(), ProducedTypeEnum.ACTIVITY);
         if(activity!=null){
             if(count < activity.getUpperLimit()){
-                ActivityOrder order = new ActivityOrder();
-                order.setAmount(1); //目前就一个人参加活动
-                order.setTradeNo(getOutTradeNo());
-                order.setUserId(user.getId());
-                order.setActivityId(activity.getId());
+                Product product = new Product();
+                product.setId(activity.getId());
+                product.setSubject(activity.getTitle());
+                product.setBody(activity.getDetail());
+                product.setType(ProducedTypeEnum.ACTIVITY);
                 //测试使用价格
                 if(_payDebug){
-                    order.setPrice(BigDecimal.valueOf(0.01));
+                    product.setPrice(BigDecimal.valueOf(0.01));
                 }else{
-                    order.setPrice(activity.getPrice());
+                    product.setPrice(activity.getPrice());
                 }
-                order.setPay(BigDecimal.valueOf(0));
 
-                sign = alipayService.sign(order.getTradeNo(),activity.getTitle(),activity.getDetail(),order.getPrice().toString());
-                int result = activityOrderRepository.insertItem(order);
+
+                return _orderService.submit(user.getId(),orderType,product,1);//目前就一个人参加活动
             }
         }
-        return sign;
+        return null;
     }
 
     public boolean updateActivity(Activity activity) {
@@ -137,27 +140,20 @@ public class ActivityService implements IActivityService,IProductService {
         return ProducedTypeEnum.ACTIVITY.getIndex() + UUID.randomUUID().toString().replace("-", "");
     }
 
-    @Transactional
     public boolean buyComplete(AsyncCallBack callBack) {
-        ActivityOrder order = activityOrderRepository.getItem(new ActivityOrderSpecification(callBack.getTradeNo()));
+        Orders order = _orderService.query(callBack.getSelfTradeNo());
         if(order!=null&&order.getPayTime()==null){
 
-            Activity activity = activityRepository.getItem(order.getActivityId());
+            Activity activity = activityRepository.getItem(order.getProductId());
             User user = _userService.getUser(order.getUserId());
-            int count = activityOrderRepository.count(new ActivityOrderSpecification(order.getActivityId()));
+            int count = _orderService.getProductOrdersCount(activity.getId(), ProducedTypeEnum.ACTIVITY);
 
             //判断商品与用户是否存在合法
             if(activity!=null&&user!=null){
                 //TODO 订单完成后更新活动参与人数
                 if(count < activity.getUpperLimit()){
-                    order.setPay(callBack.getPay());
-                    order.setPayTime(new Date());
                     activity.setNumberOfPeople(activity.getNumberOfPeople()+1);
-                    int result = activityOrderRepository.updateItem(order);
-                    if(result < 1){
-                        throw new ActivityException("更新订单异常");
-                    }
-                    result = activityRepository.updateItem(activity);
+                    int result = activityRepository.updateItem(activity);
                     if(result < 1){
                         throw new ActivityException("更新库存异常");
                     }

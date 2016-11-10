@@ -271,17 +271,24 @@
         var ids = new Array();
         var object = event.srcElement;
         if (object.id == "button1") {
+            var chk_value = [];
+            $('input[name="choose"]:checked').each(function () {  //获取选中状态
+                chk_value.push($(this).val());
+            });
             var obj = document.getElementsByName("choose");
-            for (var i in obj) {
-                if (obj[i].checked) {
-                    ids.push(obj[i].value)
-                }
-            }
-            if (ids == "") {
+
+            if (chk_value.length == 0) {
                 alert("请至少选择一项!");
                 return ;
             } else if (confirm("确定删除所选项目?")) {
+                for (var i in obj) {
+                    if (obj[i].checked) {
+                        ids.push(obj[i].value)
+                    }
+                }
                 console.log(ids)
+            }else{
+                return ;
             }
         } else if (object.id == "button2") {
             var tr1 = node.parentNode.parentNode;

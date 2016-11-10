@@ -245,12 +245,29 @@ public class LineService implements ILineService {
 
     public boolean del(Long id) {
         if(_rootRepository.del(id)>0){
-
+          return true;
         }
         return false;
     }
 
     public boolean del(List<Long> ids) {
+        LineIdsSpecification lineIdsSpecification=new LineIdsSpecification(ids);
+        int result;
+        if(ids.size()==1){
+            result=_rootRepository.del(ids.get(0));
+        }else{
+            result = _rootRepository.del( lineIdsSpecification);
+        }
+        if(result>0){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean updateline(Line line) {
+       if(_rootRepository.updateItem(line)>0){
+           return  true;
+       }
         return false;
     }
 

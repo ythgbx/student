@@ -21,6 +21,7 @@ public class WxAsyncCallBack extends AsyncCallBack{
     private String subMchId;
     private String timeEnd;
     private Integer totalFee;
+    private Integer cashFee;
     private String tradeType;
     private String transactionId;
 
@@ -161,12 +162,20 @@ public class WxAsyncCallBack extends AsyncCallBack{
     }
 
     @Override
-    public String getTradeNo(){
+    public String getSelfTradeNo(){
         return getOutTradeNo();
     }
 
     @Override
     public BigDecimal getPay(){
         return BigDecimal.valueOf(Long.valueOf(getTotalFee())/1000);
+    }
+
+    public Integer getCashFee() {
+        return cashFee;
+    }
+
+    public void setCashFee(Integer cashFee) {
+        this.cashFee = cashFee;
     }
 }

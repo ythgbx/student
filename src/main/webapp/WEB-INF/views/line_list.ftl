@@ -134,6 +134,10 @@
                         <input type="text" class="form-control" id="text2" name="end">
                     </div>
                     <div class="form-group">
+                        <label for="exampleInputPassword1">站点经纬度</label>
+                        <input type="text" class="form-control" id="text2" name="latlng" value="">
+                    </div>
+                    <div class="form-group">
                         <label for="exampleInputPassword1">票价</label>
                         <input type="text" class="form-control" id="text3" name="price">
                     </div>
@@ -194,6 +198,10 @@
                         <input type="text" class="form-control" id="text2" name="end">
                     </div>
                     <div class="form-group">
+                        <label for="exampleInputPassword1">站点经纬度</label>
+                        <input type="text" class="form-control" id="text2" name="latlng" value="">
+                    </div>
+                    <div class="form-group">
                         <label for="exampleInputPassword1">票价</label>
                         <input type="text" class="form-control" id="text3" name="price">
                     </div>
@@ -207,7 +215,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">专线属性</label>
-                        <input type="text" class="form-control" id="text4" name="propName">
+                        <input type="text" class="form-control" id="text4" name="propName" value="">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">起始时间</label>
@@ -270,17 +278,24 @@
         var ids = new Array();
         var object = event.srcElement;
         if (object.id == "button1") {
+            var chk_value = [];
+            $('input[name="choose"]:checked').each(function () {  //获取选中状态
+                chk_value.push($(this).val());
+            });
             var obj = document.getElementsByName("choose");
-            for (var i in obj) {
-                if (obj[i].checked) {
-                    ids.push(obj[i].value)
-                }
-            }
-            if (ids == "") {
+console.log(obj)
+            if (chk_value.length == 0) {
                 alert("请至少选择一项!");
                 return ;
             } else if (confirm("确定删除所选项目?")) {
+                for (var i in obj) {
+                    if (obj[i].checked) {
+                        ids.push(obj[i].value)
+                    }
+                }
                 console.log(ids)
+            }else{
+                return ;
             }
         } else if (object.id == "button2") {
             var tr1 = node.parentNode.parentNode;
@@ -290,7 +305,7 @@
             return ;
         }
         $.ajax({
-            url: "/activity/del",
+            url: "/line/del",
             data: JSON.stringify({"ids": ids}),
             type: "DELETE",
             dataType: "json",
@@ -304,6 +319,7 @@
                     alert(data.content)
                 }
             }
+
         })
     }
 
@@ -341,7 +357,7 @@
                 alert(data.content)
             }
         });
-
+        window.location.reload();
     }
 </script>
 <script>
@@ -350,18 +366,20 @@
         var id = tr1.cells[1].innerText;
         console.log(id)
         $.ajax({
-            url: "/activity/detail?id="+id,
+            url: "/line/linedetail?id="+id,
             type: "GET",
             contentType: "application/json;charset=UTF-8",
             success:function (data) {
                 console.log(data)
                 if (data != null) {
                     $("[name=id]").val(data.id);
-                    $("[name=title]").val(data.title);
-                    $("[name=detail]").val(data.detail);
-                    $("[name=lowerLimit]").val(data.lower_limit);
-                    $("[name=upperLimit]").val(data.upper_limit);
+                    $("[name=name]").val(data.name);
+                    $("[name=start]").val(data.start_station);
+                    $("[name=end]").val(data.end_station);
                     $("[name=price]").val(data.price);
+                    $("[name=annotation]").val(data.annotation);
+                    $("[name=cityName]").val(data.cityName);
+                    $("[name=propName]").val(data.propName);
                     var date=new Date(data.start_time);
                     var year=date.getFullYear();
                     var mouth=date.getMonth()+1;
@@ -384,11 +402,9 @@
                         day2="0"+day2;
                     }
                     var endtime=year2+"-"+mouth2+"-"+day2;
-                    $("[name=startime]").val(startime);
-                    $("[name=endtime]").val(endtime);
-                    $("[name=numberOfPeople]").val(data.number_of_people);
-                    $("[name=image]").val(data.img);
-                    img.src="/upload/"+data.img;
+                    $("[name=startTime]").val(startime);
+                    $("[name=endTime]").val(endtime);
+
 
                 }
             },

@@ -9,6 +9,7 @@ import net.bus.web.model.Pojo.AsyncCallBack;
 import net.bus.web.model.Pojo.OrderCallBack;
 import net.bus.web.model.Pojo.Product;
 import net.bus.web.repository.OrdersRepository;
+import net.bus.web.repository.specification.OrdersProdIdProdTypeAndPaidSpecification;
 import net.bus.web.repository.specification.OrdersProdTypeAndPaidSpecification;
 import net.bus.web.repository.specification.OrdersTradeNoSpecification;
 import net.bus.web.repository.specification.OrdersUserIdProdTypeAndPaidSpecification;
@@ -111,9 +112,9 @@ public class OrderService implements IOrderService{
         }
 
         if(asyncCallBack!=null&&!StringUtils.isBlank(asyncCallBack.getFailed())){
-            if(!StringUtils.isBlank(asyncCallBack.getTradeNo())){
+            if(!StringUtils.isBlank(asyncCallBack.getSelfTradeNo())){
 
-                Orders orders = query(asyncCallBack.getTradeNo());
+                Orders orders = query(asyncCallBack.getSelfTradeNo());
                 if(orders!=null){
                     IProductService payService = ProducedTypeEnum.get(orders.getProductType()).getService();
                     if(payService.buyComplete(asyncCallBack)){
@@ -198,5 +199,13 @@ public class OrderService implements IOrderService{
 
     public int getUserOrdersCount(long userId,ProducedTypeEnum prodType){
         return _rootRepository.count(new OrdersUserIdProdTypeAndPaidSpecification(userId,prodType));
+    }
+
+    public List<Orders> getProductOrders(long productId, ProducedTypeEnum prodType,int page,int limit){
+        return _rootRepository.getList(new OrdersProdIdProdTypeAndPaidSpecification(productId,prodType), page - 1, limit);
+    }
+
+    public int getProductOrdersCount(long productId,ProducedTypeEnum prodType){
+        return _rootRepository.count(new OrdersProdIdProdTypeAndPaidSpecification(productId,prodType));
     }
 }

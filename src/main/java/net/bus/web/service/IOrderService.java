@@ -33,4 +33,8 @@ public interface IOrderService {
     List<Orders> getUserOrders(long userId,ProducedTypeEnum prodType,int page,int limit);
 
     int getUserOrdersCount(long userId,ProducedTypeEnum prodType);
+
+    List<Orders> getProductOrders(long productId, ProducedTypeEnum prodType,int page,int limit);
+
+    int getProductOrdersCount(long productId,ProducedTypeEnum prodType);
 }

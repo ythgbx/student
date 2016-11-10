@@ -7,15 +7,15 @@ import net.bus.web.aspect.Auth;
 import net.bus.web.common.Util;
 import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.*;
+import net.bus.web.enums.OrderTypeEnum;
 import net.bus.web.model.Activity;
+import net.bus.web.model.Pojo.AlipayOrderCallBack;
 import net.bus.web.model.Pojo.PagePojo;
 import net.bus.web.model.User;
 import net.bus.web.service.IActivityService;
 import net.bus.web.service.exception.ActivityException;
 import net.bus.web.service.exception.OutOfStockException;
 import net.bus.web.service.exception.RepeatApplyException;
-import net.bus.web.service.impl.ActivityService;
-import org.apache.ibatis.annotations.Param;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +29,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.math.BigDecimal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -123,12 +120,14 @@ public class ActivityController {
     @ApiOperation(value = "参加活动", httpMethod = "POST", response = BaseResult.class, notes = "获取活动详细")
     @ResponseBody
     public IResult join(@ApiParam(required = true, name = "id", value = "id")
-                             @RequestBody(required = true) Acitvityjoin request){
+                             @RequestBody(required = true) ActivityJoin request){
         //TODO 参加活动逻辑
         BaseResult result = new BaseResult();
         User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
         try {
-            String sign = _activityService.join(request.getId(),user);
+            OrderTypeEnum orderType = request.getOrder_type()==0?OrderTypeEnum.ALIPAY:OrderTypeEnum.get(request.getOrder_type());
+            //TODO 暂时根据支付宝请求返回结果,后跟前端协调修改dto后支持微信支付
+            String sign = ((AlipayOrderCallBack)_activityService.join(orderType,request.getId(),user)).getSign();
             if(!StringUtils.isBlank(sign)){
                 result.setContent(sign);
                 result.setResult("success");

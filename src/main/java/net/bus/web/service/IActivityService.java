@@ -1,6 +1,8 @@
 package net.bus.web.service;
 
+import net.bus.web.enums.OrderTypeEnum;
 import net.bus.web.model.Activity;
+import net.bus.web.model.Pojo.OrderCallBack;
 import net.bus.web.model.User;
 import net.bus.web.service.exception.OutOfStockException;
 import net.bus.web.service.exception.RepeatApplyException;
@@ -24,7 +26,7 @@ public interface IActivityService {
 
     boolean delete(List<Long> ids);
 
-    String join(Long id, User user) throws OutOfStockException, RepeatApplyException;
+    OrderCallBack join(OrderTypeEnum orderType,Long id, User user) throws OutOfStockException, RepeatApplyException;
 
     boolean updateActivity(Activity activity);
 }

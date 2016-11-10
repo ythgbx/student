@@ -115,7 +115,7 @@ public class CommodityService implements ICommodityService,IProductService {
 
     public boolean buyComplete(AsyncCallBack callBack) throws RuntimeException
     {
-        Orders commodityOrder = _orderService.query(callBack.getTradeNo());
+        Orders commodityOrder = _orderService.query(callBack.getSelfTradeNo());
         if(commodityOrder!=null&&commodityOrder.getPayTime()==null){
 
             Commodity commodity = getDetails(commodityOrder.getProductId());
