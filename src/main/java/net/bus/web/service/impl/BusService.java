@@ -60,6 +60,14 @@ public class BusService  implements IBusService {
         return result;
     }
 
+    public List<Bus> getAllBus() {
+        return _rootRepository.getAll();
+    }
+
+    public int getAllCount() {
+        return _rootRepository.count();
+    }
+
     public boolean addBus(Bus bus)
     {
         //TODO addBus
