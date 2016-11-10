@@ -30,20 +30,20 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <#list orders as order>
-                        <tr class="active">
-                            <td class="text-center">
-                                <div class="custom-checkbox">
-                                    <input type="checkbox" name="choose" id="chk${order.userId}" class="inbox-check" value="${order.userId}">
-                                    <label for="chk${order.userId}"></label>
-                                </div>
-                            </td>
-                            <td>${order.userId}</td>
-                            <td>${order.id}</td>
-                            <td>${order.tradeNo}</td>
-                            <td>${order.amount}</td>
-                            <td>${order.payTime?string('yyyy-MM-dd HH:mm:ss')}</td>
-                        </tr>
+                    <#list commodityOrders as commodityOrder>
+                    <tr class="active">
+                        <td class="text-center">
+                            <div class="custom-checkbox">
+                                <input type="checkbox" name="choose" id="chk${commodityOrder.userId}" class="inbox-check" value="${commodityOrder.userId}">
+                                <label for="chk${commodityOrder.userId}"></label>
+                            </div>
+                        </td>
+                        <td>${commodityOrder.userId}</td>
+                        <td>${commodityOrder.commodityId}</td>
+                        <td>${commodityOrder.tradeNo}</td>
+                        <td>${commodityOrder.amount}</td>
+                        <td>${commodityOrder.payTime?string('yyyy-MM-dd HH:mm:ss')}</td>
+                    </tr>
                     </#list>
                 </tbody>
                 <tbody>

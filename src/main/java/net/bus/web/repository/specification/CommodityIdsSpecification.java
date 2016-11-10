@@ -18,12 +18,11 @@ public class CommodityIdsSpecification  implements ISpecification<CommodityExamp
 
     public CommodityExample createExample()
     {
-        if(_ids.isEmpty())
-            return null;
-
         CommodityExample example = new CommodityExample();
-        CommodityExample.Criteria criteriaId = example.createCriteria();
-        criteriaId.andIdIn(_ids);
+        if(_ids!= null && !_ids.isEmpty()){
+            CommodityExample.Criteria criteriaId = example.createCriteria();
+            criteriaId.andIdIn(_ids);
+        }
         return example;
     }
 }

@@ -28,6 +28,22 @@ public class Commodity {
 
     private Integer flag;
 
+    public Commodity() {
+    }
+
+    public Commodity(String name, String depict, BigDecimal price, Integer amount, String itemImg, String img, Integer point, Integer couponType, Long typeId,Date activeTime) {
+        this.name = name;
+        this.depict = depict;
+        this.price = price;
+        this.amount = amount;
+        this.itemImg = itemImg;
+        this.img = img;
+        this.point = point;
+        this.couponType = couponType;
+        this.typeId = typeId;
+        this.activeTime = activeTime;
+    }
+
     public Long getId() {
         return id;
     }

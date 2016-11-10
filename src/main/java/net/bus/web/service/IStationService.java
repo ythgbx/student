@@ -20,4 +20,10 @@ public interface IStationService {
     int getAllStationsCount();
 
     boolean addStation(Station station);
+
+    Boolean del(List<Long> longList);
+
+    Station getDetails(Long id);
+
+    boolean updateStation(Station station);
 }

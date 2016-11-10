@@ -12,8 +12,11 @@ import net.bus.web.model.User;
 import net.bus.web.model.type.PointRecordType;
 import net.bus.web.model.type.PointSourceType;
 import net.bus.web.model.type.UserCouponType;
+import net.bus.web.repository.CommodityOrderRepository;
 import net.bus.web.repository.CommodityRepository;
 import net.bus.web.repository.specification.CommodityIdsSpecification;
+import net.bus.web.repository.specification.CommodityOrderTradeNoSpecification;
+import net.bus.web.repository.specification.CommodityOrderUserIdAndPaied;
 import net.bus.web.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,6 +35,8 @@ public class CommodityService implements ICommodityService,IProductService {
 
     @Autowired
     private CommodityRepository _rootRepository;
+    @Autowired
+    private CommodityOrderRepository _commodityOrderRepository;
     @Autowired
     private IUserCouponService _userCouponService;
     @Autowired
@@ -80,6 +85,34 @@ public class CommodityService implements ICommodityService,IProductService {
         return null;
     }
 
+    public Boolean add(Commodity commodity) {
+        if (_rootRepository.insertItem(commodity)>0){
+            return true;
+        }
+        return false;
+    }
+
+    public Boolean del(List<Long> longList) {
+        CommodityIdsSpecification Specification = new CommodityIdsSpecification(longList);
+        int result ;
+        if (longList.size()==1){
+            result = _rootRepository.delete(longList.get(0));
+        }else {
+            result = _rootRepository.delete(Specification);
+        }
+        if(result  > 0){
+            return true;
+        }
+        return false;
+    }
+
+    public Boolean update(Commodity commodity) {
+        if (_rootRepository.updateItem(commodity)>0){
+            return true;
+        }
+        return false;
+    }
+
     public boolean buyComplete(AsyncCallBack callBack) throws RuntimeException
     {
         Orders commodityOrder = _orderService.query(callBack.getSelfTradeNo());
@@ -119,8 +152,6 @@ public class CommodityService implements ICommodityService,IProductService {
     {
         return _rootRepository.count();
     }
-
-
 
     public List<Commodity> getList(List<Long> ids){
         return _rootRepository.getList(new CommodityIdsSpecification(ids));

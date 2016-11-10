@@ -82,4 +82,12 @@ public class StationRepository {
     {
         return _mapper.countByExample(null);
     }
+
+    public int delete(ISpecification Specification) {
+        return _mapper.deleteByExample((StationExample) Specification.createExample());
+    }
+    public int delete(Long id) {
+        return _mapper.deleteByPrimaryKey(id);
+    }
+
 }
