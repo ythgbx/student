@@ -10,6 +10,7 @@ import net.bus.web.enums.OrderTypeEnum;
 import net.bus.web.model.*;
 import net.bus.web.model.Commodity;
 import net.bus.web.model.Pojo.AlipayOrderCallBack;
+import net.bus.web.model.Pojo.OrderCallBack;
 import net.bus.web.model.Pojo.PagePojo;
 import net.bus.web.service.ICommodityService;
 import org.apache.commons.lang.StringUtils;
@@ -117,11 +118,19 @@ public class CommodityController {
         User currentUser = (User) session.getAttribute(SessionContext.CURRENT_USER);
         OrderTypeEnum orderType = request.getOrder_type()==0? OrderTypeEnum.ALIPAY:OrderTypeEnum.get(request.getOrder_type());
         //TODO 暂时根据支付宝请求返回结果,后跟前端协调修改dto后支持微信支付
-        String sign = ((AlipayOrderCallBack)_commodityService.buy(orderType,request.getId(),currentUser)).getSign();
+        /*String sign = ((AlipayOrderCallBack)_commodityService.buy(orderType,request.getId(),currentUser)).getSign();
         if(!StringUtils.isBlank(sign)){
             result.setContent(sign);
             result.setResult("success");
 
+        }else{
+            result.setResult("failure");
+        }
+        return result;*/
+        OrderCallBack orderCallBack = _commodityService.buy(orderType,request.getId(),currentUser);
+        if(orderCallBack!=null&&StringUtils.isBlank(orderCallBack.getFailed())){
+            result.setContent(orderCallBack);
+            result.setResult("success");
         }else{
             result.setResult("failure");
         }
