@@ -68,11 +68,32 @@ public class BusService  implements IBusService {
         return _rootRepository.count();
     }
 
+    public boolean del(List<Long> longList) {
+        BusIdSpecification Specification = new BusIdSpecification(longList);
+        int result ;
+        if (longList.size()==1){
+            result = _rootRepository.delete(longList.get(0));
+        }else {
+            result = _rootRepository.delete(Specification);
+        }
+        if(result  > 0){
+            return true;
+        }
+        return false;
+    }
+
     public boolean addBus(Bus bus)
     {
         //TODO addBus
         _rootRepository.insertItem(bus);
         return true;
+    }
+
+    public boolean update(Bus bus) {
+        if (_rootRepository.updateItem(bus)>0){
+            return true;
+        }
+        return false;
     }
 
     public boolean bindBus(Long busId,String name,Long userId,Long lineId,String device)
@@ -132,5 +153,9 @@ public class BusService  implements IBusService {
         }
 
         return bus;
+    }
+
+    public Bus getBus(Long id) {
+        return _rootRepository.getItem(id);
     }
 }

@@ -1,9 +1,11 @@
 package net.bus.web.controller.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 /**
- * Created by Edifi_000 on 2016-08-28.
+ * Created by sky on 16/11/11.
  */
-public class BusRequest extends BaseRequest {
+public class BusRespond extends BaseResult{
     private Long id;
 
     private String name;
