@@ -119,13 +119,18 @@ public class OrderService implements IOrderService{
                 Orders orders = query(asyncCallBack.getSelfTradeNo());
                 if(orders!=null){
                     IProductService payService = ProducedTypeEnum.get(orders.getProductType()).getService();
+                    logger.info("confirm get order success:" + asyncCallBack.getSelfTradeNo());
                     if(payService.buyComplete(asyncCallBack)){
                         orders.setPay(asyncCallBack.getPay());
                         orders.setPayTime(new Date());
                         _rootRepository.updateItem(orders);
                         logger.info("confirm success:" + asyncCallBack.getSelfTradeNo());
                         return true;
+                    }else{
+                        logger.info("confirm payService buy complete failed:" +orders.getProductType()+","+payService.getClass().getName().toString());
                     }
+                }else {
+                    logger.info("confirm orders get failed:" + asyncCallBack.getSelfTradeNo());
                 }
             }else{
                 logger.info("confirm asyncCallBack self tradeNo null or empty");

@@ -354,14 +354,16 @@
                 contentType: "application/json;charset=utf-8",
                 success: function (data) {
                     if (data.result == "success") {
-                        alert("删除成功!");
+                        alert(data.content);
                         window.location.reload();
                     }
                     if (data.result == "failure") {
                         alert(data.content)
+                        window.location.reload();
                     }
                 }
             })
+            window.location.reload();
         }
 
         Bus.prototype.getCommodityBuyId = function (node) {//通过ID获取商品详情

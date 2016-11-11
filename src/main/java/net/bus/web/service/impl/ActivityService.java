@@ -3,15 +3,12 @@ package net.bus.web.service.impl;
 import net.bus.web.enums.OrderTypeEnum;
 import net.bus.web.enums.ProducedTypeEnum;
 import net.bus.web.model.Activity;
-import net.bus.web.model.ActivityOrder;
 import net.bus.web.model.Orders;
 import net.bus.web.model.Pojo.AsyncCallBack;
 import net.bus.web.model.Pojo.OrderCallBack;
 import net.bus.web.model.Pojo.Product;
 import net.bus.web.model.User;
-import net.bus.web.repository.ActivityOrderRepository;
 import net.bus.web.repository.ActivityRepository;
-import net.bus.web.repository.specification.ActivityOrderSpecification;
 import net.bus.web.repository.specification.ActivitySpecification;
 import net.bus.web.service.IActivityService;
 import net.bus.web.service.IAlipayService;
@@ -25,9 +22,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Created by sky on 16/10/13.
@@ -47,12 +44,32 @@ public class ActivityService implements IActivityService,IProductService {
     @Autowired
     private IOrderService _orderService;
 
+
     @Value("#{sysProperties['payDebug']}")
     private Boolean _payDebug;
 
     public List<Activity> getAllActivity(int page,int limit){
         return activityRepository.getAll(page,limit);
     }
+
+    public List<Orders> getUserActivity(User user, int page, int limit){
+        return _orderService.getUserOrders(user.getId(),ProducedTypeEnum.ACTIVITY,page,limit);
+    }
+
+    public int getUserActivityCount(User user){
+
+        return _orderService.getUserOrdersCount(user.getId(),ProducedTypeEnum.ACTIVITY);
+    }
+
+    public List<Activity> getActivityByIds(List<Long> ids){
+        if(ids!=null && ids.size()>0){
+            return activityRepository.getList(new ActivitySpecification(ids));
+        }else {
+            return new ArrayList<Activity>();
+        }
+    }
+
+
 
     public int getAllActivityCount(){
         return activityRepository.count();
@@ -108,8 +125,6 @@ public class ActivityService implements IActivityService,IProductService {
                 }else{
                     product.setPrice(activity.getPrice());
                 }
-
-
                 return _orderService.submit(user.getId(),orderType,product,1);//目前就一个人参加活动
             }
         }
@@ -136,10 +151,7 @@ public class ActivityService implements IActivityService,IProductService {
     }
 
 
-    public String getOutTradeNo() {
-        return ProducedTypeEnum.ACTIVITY.getIndex() + UUID.randomUUID().toString().replace("-", "");
-    }
-
+    @Transactional
     public boolean buyComplete(AsyncCallBack callBack) {
         Orders order = _orderService.query(callBack.getSelfTradeNo());
         if(order!=null&&order.getPayTime()==null){

@@ -161,15 +161,11 @@
     $(function () {//全选
         $('.inbox-check').click(function () {
             var activeRow = $(this).parent().parent().parent();
-
             activeRow.toggleClass('active');
         });
-
-
         $('#inboxCollapse').click(function () {
             $('.inbox-menu-inner').slideToggle();
         });
-
         $('#chkAll').click(function () {
             if ($(this).prop('checked')) {
                 $('.inbox-check').prop('checked', true);
@@ -211,7 +207,7 @@
                         if (obj[i].checked) {
                             ids.push(obj[i].value)
                         }
-                    }
+                    }console.log(ids);
                 } else {
                     return;
                 }
@@ -220,12 +216,13 @@
                 var tr1 = node.parentNode.parentNode;
                 if (confirm("确定删除所选项目?")) {
                     ids.push(tr1.cells[1].innerText);
+                    console.log(ids);
                 } else {
                     return;
                 }
             }
             $.ajax({
-                url: "/station/del",
+                url: "/bus/del",
                 data: JSON.stringify({"ids": ids}),
                 type: "DELETE",
                 dataType: "json",
@@ -246,17 +243,17 @@
             var tr1 = node.parentNode.parentNode;//获取id
             var id = tr1.cells[1].innerText;
             $.ajax({
-                url: "/station/detail?id=" + id,
+                url: "/bus/detail?id=" + id,
                 type: "GET",
                 contentType: "application/json;charset=utf-8",
                 success: function (data) {
                     if (data != null || data != "") {
+                        console.log(data);
                         $("[name=id]").val(data.id);
                         $("[name=name]").val(data.name);
-                        $("[name=lng]").val(data.pos.lng);
-                        $("[name=lat]").val(data.pos.lat);
-                        $("[name=annotation]").val(data.annotation);
-                        $("[name=price]").val(data.price);
+                        $("[name=user_id]").val(data.user_id);
+                        $("[name=line_id]").val(data.line_id);
+                        $("[name=device]").val(data.device);
                     } else {
                         alert("数据获取失败!");
                     }
@@ -281,9 +278,7 @@
                 $.each(t, function () {
                     d[this.name] = this.value;
                 });
-                console.log(d);
             }
-            ;
             $.ajax({
                 url: url,
                 data: JSON.stringify(d),
@@ -293,9 +288,11 @@
                 success: function (data) {
                     if (data.result == "success") {
                         alert(data.content);
+                        window.location.reload();//刷新
                     }
                     if (data.result == "failure") {
                         alert(data.content);
+                        window.location.reload();
                     }
                 },
                 error: function (data) {
