@@ -250,6 +250,7 @@ public class ActivityController {
         logger.info("url:/activity/joinActivity");
         BaseResult result=new BaseResult();
         result.setResult("success");
+        result.setContent("报名成功!");
         return  result;
     }
 

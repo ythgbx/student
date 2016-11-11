@@ -96,19 +96,7 @@
     </div><!-- ./smart-widget-inner -->
 
 </div><!-- ./smart-widget -->
-<div class="pagination-row clearfix">
-    <div class="pull-left vertical-middle hidden-xs">112 messages</div>
-    <div class="pull-right pull-left-sm">
-        <div class=" inline-block vertical-middle m-right-xs ">Page 1 of 8</div>
-        <ul class="pagination vertical-middle">
-            <li><a href="#"><i class="fa fa-step-backward"></i></a></li>
-            <li><a href="#"><i class="fa fa-caret-left large"></i></a></li>
-            <li><a href="#"><i class="fa fa-caret-right large"></i></a></li>
-            <li
-            "><a href="#"><i class="fa fa-step-forward"></i></a></li>
-        </ul>
-    </div>
-</div><!-- ./pagination-row -->
+!-- ./pagination-row -->
 <form role="form" enctype="multipart/form-data" id="form1">
     <div class="modal fade" id="myModal">
         <div class="modal-dialog">
