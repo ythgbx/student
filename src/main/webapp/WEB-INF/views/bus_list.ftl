@@ -10,9 +10,9 @@
 </ul>
 <div class="smart-widget">
     <div class="smart-widget-header">
-        站点管理
+        车辆管理
         <button class="btn btn-success smart-widget-option" data-toggle="modal" data-target="#add">
-            添加站点
+            添加车辆
         </button>
         &nbsp;&nbsp;
         <button onclick="bus.del(this)" id="del" class="button border-red"><span class="icon-trash-o"></span> 批量删除
@@ -29,33 +29,31 @@
                             <label for="chkAll"></label>
                         </div>
                     </th>
-                    <th>站点ID</th>
-                    <th>站点名称</th>
-                    <th>站点经度</th>
-                    <th>站点纬度</th>
-                    <th>站点说明</th>
-                    <th>站点价格</th>
+                    <th>汽车ID</th>
+                    <th>车牌号</th>
+                    <th>线路</th>
+                    <th>司机ID</th>
+                    <th>设备编号</th>
                     <th>操作</th>
                 </tr>
                 </thead>
                 <tbody>
-                    <#list stationList.stations as station>
+                    <#list busList as bus>
                     <tr class="active">
                         <td class="text-center">
                             <div class="custom-checkbox">
-                                <input type="checkbox" name="choose" id="chk${station.id}" class="inbox-check"
-                                       value="${station.id}">
-                                <label for="chk${station.id}"></label>
+                                <input type="checkbox" name="choose" id="chk${bus.id}" class="inbox-check"
+                                       value="${bus.id}">
+                                <label for="chk${bus.id}"></label>
                             </div>
                         </td>
-                        <td>${station.id}</td>
-                        <td>${station.name}</td>
-                        <td>${station.pos.lng}</td>
-                        <td>${station.pos.lat}</td>
-                        <td>${station.annotation}</td>
-                        <td>${station.price}</td>
+                        <td>${bus.id}</td>
+                        <td>${bus.name}</td>
+                        <td>${bus.lineId}</td>
+                        <td>${bus.userId}</td>
+                        <td>${bus.device}</td>
                         <td>
-                            <a onclick="bus.getStationBuyId(this)" data-toggle="modal" data-target="#update"><i
+                            <a onclick="bus.getBusBuyId(this)" data-toggle="modal" data-target="#update"><i
                                     class="fa fa-bars"></i></a>
                             <a onclick="bus.del(this)" id="delSingle"><i class="fa fa-times"></i></a>
                         </td>
@@ -65,13 +63,13 @@
                 <tbody>
                 <tr>
                     <ul class="pagination">
-                        <li><a href="/station/listAll?page=${pagePojo.homePage}">首页</a></li>
-                        <li><a href="/station/listAll?page=${pagePojo.getPreviousPage()}">上一页</a></li>
+                        <li><a href="/bus/list?page=${pagePojo.homePage}">首页</a></li>
+                        <li><a href="/bus/list?page=${pagePojo.getPreviousPage()}">上一页</a></li>
                         <li><a href="#">当前第${pagePojo.getCurrentPage()+1}页</a></li>
                         <li><a href="#">共${pagePojo.countPage}页</a></li>
                         <li><a href="#">总${pagePojo.amount}条数据</a></li>
-                        <li><a href="/station/listAll?page=${pagePojo.getNextPage()}">下一页</a></li>
-                        <li><a href="/station/listAll?page=${pagePojo.trailerPage-1}">尾页</a></li>
+                        <li><a href="/bus/list?page=${pagePojo.getNextPage()}">下一页</a></li>
+                        <li><a href="/bus/list?page=${pagePojo.trailerPage-1}">尾页</a></li>
                     </ul>
                 </tr>
                 </tbody>
@@ -90,29 +88,26 @@
                     <#--&times;-->
                     </button>
                     <h4 class="modal-title" id="myModalLabel">
-                        添加站点
+                        添加车辆
                     </h4>
                 </div>
                 <div class="modal-body">
 
-                    <label for="exampleInputEmail1">站点名称</label>
+                    <label for="exampleInputEmail1">车牌号</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" name="name"
-                           placeholder="请输入站点名称">
+                           placeholder="请输入该车辆车牌号">
 
-                    <label for="exampleInputEmail1">站点经度</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" name="lng"
-                           placeholder="请输入该站点所在经度">
+                    <label for="exampleInputEmail1">线路</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" name="line_id"
+                           placeholder="请输入该车票行驶路线">
 
-                    <label for="exampleInputEmail1">站点维度</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" name="lat"
-                           placeholder="请输入该站点所在纬度">
+                    <label for="exampleInputEmail1">司机ID</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" name="user_id"
+                           placeholder="请输入司机对应ID">
 
-                    <label for="exampleInputEmail1">站点说明</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" name="annotation"
-                           placeholder="请对该站点备注说明">
-                    <label for="exampleInputEmail1">站点价格</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" name="price"
-                           placeholder="请对该站点设置价格">
+                    <label for="exampleInputEmail1">设备编号</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" name="device"
+                           placeholder="请输入该车辆对应的设备编号">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -138,25 +133,17 @@
                 </div>
                 <div class="modal-body">
                     <input type="hidden" name="id">
-                    <label for="exampleInputEmail1">站点名称</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" name="name"
-                           placeholder="请输入站点名称">
+                    <label for="exampleInputEmail1">车牌号</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" name="name">
 
-                    <label for="exampleInputEmail1">站点经度</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" name="lng"
-                           placeholder="请输入该站点所在经度">
+                    <label for="exampleInputEmail1">线路</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" name="line_id">
 
-                    <label for="exampleInputEmail1">站点维度</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" name="lat"
-                           placeholder="请输入该站点所在纬度">
+                    <label for="exampleInputEmail1">司机ID</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" name="user_id">
 
-                    <label for="exampleInputEmail1">站点说明</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" name="annotation"
-                           placeholder="请对该站点备注说明">
-
-                    <label for="exampleInputEmail1">站点价格</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" name="price"
-                           placeholder="请对该站点设置价格">
+                    <label for="exampleInputEmail1">设备编号</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" name="device">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -255,7 +242,7 @@
             })
         };
 
-        Bus.prototype.getStationBuyId = function (node) {//通过ID获取站点详情
+        Bus.prototype.getBusBuyId = function (node) {//通过ID获取站点详情
             var tr1 = node.parentNode.parentNode;//获取id
             var id = tr1.cells[1].innerText;
             $.ajax({
@@ -283,13 +270,13 @@
             var d = {};
             var url = "";
             if (event.srcElement.id == "add") {
-                url = "/station/add";
+                url = "/bus/add";
                 var t = $('#formAdd').serializeArray();
                 $.each(t, function () {
                     d[this.name] = this.value;
                 });
             } else if (event.srcElement.id == "update") {
-                url = "/station/update";
+                url = "/bus/update";
                 var t = $('#formUpdate').serializeArray();
                 $.each(t, function () {
                     d[this.name] = this.value;

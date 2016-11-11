@@ -6,6 +6,7 @@ import net.bus.web.context.Track;
 import net.bus.web.model.Bus;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Edifi_000 on 2016-07-20.
@@ -15,6 +16,10 @@ public interface IBusService {
     void setBusesLocation(long busId,Position pos);
 
     HashMap<Long,Integer> getBusesCurrentTrack(long lineId,BusTracks.Direction direction);
+
+    List<Bus> getAllBus();
+
+    int getAllCount();
 
     boolean addBus(Bus bus);
 

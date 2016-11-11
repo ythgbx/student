@@ -85,13 +85,6 @@ public class WxpayService implements IWxpayService ,IPayService{
             logger.info("async check sign:"+sign+" callback.sign:"+callBack.getSign());
             if(callBack.getSign().equals(sign)){
                 logger.info("async sign verified success:"+callBack.getOutTradeNo());
-                IProductService payService = ProducedTypeEnum.get(callBack.getOutTradeNo().substring(1, 2).charAt(0)).getService();
-                if(payService.buyComplete(callBack)){
-                    logger.info("buy complete:"+callBack.getOutTradeNo());
-                }else{
-                    logger.info("buy failed:"+callBack.getOutTradeNo());
-                    callBack.setFailed("buy failed:"+callBack.getOutTradeNo());
-                }
             }else{
                 logger.info("async sign verified failed");
                 callBack.setFailed("async sign verified failed");

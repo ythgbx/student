@@ -164,7 +164,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li><a href="#"><span class="submenu-label">添加车辆</span></a></li>
+                        <li><a href="/bus/list"><span class="submenu-label">车辆管理</span></a></li>
                     </ul>
                 </li>
             </ul>
