@@ -9,7 +9,8 @@ import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.*;
 import net.bus.web.enums.OrderTypeEnum;
 import net.bus.web.model.Activity;
-import net.bus.web.model.Pojo.AlipayOrderCallBack;
+import net.bus.web.model.Orders;
+import net.bus.web.model.Pojo.OrderCallBack;
 import net.bus.web.model.Pojo.PagePojo;
 import net.bus.web.model.User;
 import net.bus.web.service.IActivityService;
@@ -108,7 +109,7 @@ public class ActivityController {
             disItem.setEnd_time(activity.getEndtime());
             disItem.setLower_limit(activity.getLowerLimit());
             disItem.setUpper_limit(activity.getUpperLimit());
-            disItem.setRemain(Util.daysBetween(new Date(),activity.getStartime()));  //剩余时间
+            disItem.setRemain(Util.daysBetween(new Date(),activity.getEndtime()));  //剩余时间
             disItem.setNumber_of_people(activity.getNumberOfPeople());
             displayList.add(disItem);
         }
@@ -121,17 +122,14 @@ public class ActivityController {
     @ResponseBody
     public IResult join(@ApiParam(required = true, name = "id", value = "id")
                              @RequestBody(required = true) ActivityJoin request){
-        //TODO 参加活动逻辑
-        BaseResult result = new BaseResult();
+        OrderBack result = new OrderBack();
         User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
         try {
             OrderTypeEnum orderType = request.getOrder_type()==0?OrderTypeEnum.ALIPAY:OrderTypeEnum.get(request.getOrder_type());
-            //TODO 暂时根据支付宝请求返回结果,后跟前端协调修改dto后支持微信支付
-            String sign = ((AlipayOrderCallBack)_activityService.join(orderType,request.getId(),user)).getSign();
-            if(!StringUtils.isBlank(sign)){
-                result.setContent(sign);
+            OrderCallBack orderCallBack = _activityService.join(orderType,request.getId(),user);
+            if(orderCallBack != null && StringUtils.isBlank(orderCallBack.getFailed())){
+                result.setPayinfo(orderCallBack);
                 result.setResult("success");
-
             }else{
                 result.setResult("failure");
             }
@@ -153,6 +151,32 @@ public class ActivityController {
         return result;
     }
 
+    @Auth(role = Auth.Role.USER)
+    @ResponseBody
+    @RequestMapping(value = "/list/mine",method = RequestMethod.GET)
+    @ApiOperation(value = "我的活动页面", httpMethod = "GET", response = ActivityList.class, notes="获取全部活动")
+    public BaseResult mine(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "0")int page,
+                           @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "5")int limit){
+        ActivityList result = new ActivityList();
+        User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
+        List<Orders> orderses = _activityService.getUserActivity(user,page,limit);
+        List<Long> ids = new ArrayList<Long>();
+        for (Orders orders : orderses){
+            ids.add(orders.getProductId());
+        }
+        List<Activity> activities = _activityService.getActivityByIds(ids);
+        result.setActivity(this.getDisplayList(activities));
+        for (ActivityItem activityItem : result.getActivity()){
+            for (Orders orders:orderses){
+                if(orders.getProductId() == activityItem.getId()){
+                    activityItem.setPaytime(orders.getPayTime());
+                }
+            }
+        }
+        result.setPage(page);
+        result.setTotal_count(_activityService.getUserActivityCount(user));
+        return result;
+    }
 
     @Auth(role = Auth.Role.USER)
     @RequestMapping(value="/list", method = RequestMethod.GET)
@@ -235,22 +259,6 @@ public class ActivityController {
             result.setContent("修改失败!");
         }
         return result;
-    }
-
-    @Auth(role=Auth.Role.USER)
-    @RequestMapping(value="/joinActivity" ,method=RequestMethod.POST)
-    @ApiOperation(value = "参加活动人信息",httpMethod = "POST",response = BaseResult.class,notes="参加活动人信息")
-    @ResponseBody
-    public BaseResult JoinActivity(@ApiParam(required=true,name="joinActivity",value = "参加活动人信息")
-                                   @RequestBody    Applicants applicants
-
-                                   )
-    {
-        logger.info("url:/activity/joinActivity");
-        BaseResult result=new BaseResult();
-        result.setResult("success");
-        result.setContent("报名成功!");
-        return  result;
     }
 
 

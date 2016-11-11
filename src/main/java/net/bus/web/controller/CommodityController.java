@@ -9,12 +9,10 @@ import net.bus.web.controller.dto.*;
 import net.bus.web.enums.OrderTypeEnum;
 import net.bus.web.model.*;
 import net.bus.web.model.Commodity;
-import net.bus.web.model.Pojo.AlipayOrderCallBack;
 import net.bus.web.model.Pojo.OrderCallBack;
 import net.bus.web.model.Pojo.PagePojo;
 import net.bus.web.service.ICommodityService;
 import org.apache.commons.lang.StringUtils;
-import org.apache.ibatis.annotations.Param;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +22,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -114,7 +111,7 @@ public class CommodityController {
     @ApiOperation(value = "购买商品", httpMethod = "POST", response = BaseResult.class, notes = "购买商品")
     public IResult detail(@ApiParam(required = true, name = "request", value = "购买商品请求")@RequestBody CommodityBuy request)
     {
-        BaseResult result = new BaseResult();
+        OrderBack result = new OrderBack();
         User currentUser = (User) session.getAttribute(SessionContext.CURRENT_USER);
         OrderTypeEnum orderType = request.getOrder_type()==0? OrderTypeEnum.ALIPAY:OrderTypeEnum.get(request.getOrder_type());
         //TODO 暂时根据支付宝请求返回结果,后跟前端协调修改dto后支持微信支付
@@ -129,7 +126,7 @@ public class CommodityController {
         return result;*/
         OrderCallBack orderCallBack = _commodityService.buy(orderType,request.getId(),currentUser);
         if(orderCallBack!=null&&StringUtils.isBlank(orderCallBack.getFailed())){
-            result.setContent(orderCallBack);
+            result.setPayinfo(orderCallBack);
             result.setResult("success");
         }else{
             result.setResult("failure");

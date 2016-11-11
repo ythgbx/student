@@ -21,6 +21,16 @@ public class ActivityItem extends BaseResult{
     private Integer lower_limit;   //人数下限
     private Integer upper_limit;   //人数上限
     private BigDecimal price;
+    private Date paytime;
+
+    public Date getPaytime() {
+        return paytime;
+    }
+
+    public void setPaytime(Date paytime) {
+        this.paytime = paytime;
+    }
+
     public Long getId() {
         return id;
     }
