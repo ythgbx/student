@@ -1,5 +1,6 @@
 package net.bus.web.service;
 
+import net.bus.web.model.LineStation;
 import net.bus.web.model.Station;
 
 import java.util.List;
@@ -17,6 +18,8 @@ public interface IStationService {
 
     List<Station> getStations(List<Long> ids);
 
+    List<LineStation> getLineStations(Long id);
+
     int getAllStationsCount();
 
     boolean addStation(Station station);
@@ -26,4 +29,6 @@ public interface IStationService {
     Station getDetails(Long id);
 
     boolean updateStation(Station station);
+
+    boolean addLineStation(LineStation lineStation);
 }

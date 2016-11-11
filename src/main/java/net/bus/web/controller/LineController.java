@@ -507,19 +507,20 @@ public class LineController {
         return lineItem;
     }
 
-    @Auth(role = Auth.Role.NONE)
+    @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/detail_list", method = RequestMethod.GET)
-    @ApiOperation(value = "线路详细列表", httpMethod = "GET", response = LineDetail.class, notes = "获取线路详细列表")
+    @ApiOperation(value = "线路详细列表界面", httpMethod = "GET", response = ModelAndView.class, notes = "线路详细列表界面")
     public ModelAndView LineDetail (@ApiParam(required = true, name = "id", value = "id")
-                               @RequestParam(value = "id", required = true, defaultValue = "0")long id) {
+                               @RequestParam(value = "id", required = true, defaultValue = "0")long id,
+                                    HttpServletRequest request
+                                    ) {
         logger.info("url:/line/detail_list");
         ModelAndView mv=new ModelAndView();
+        mv.setViewName("linestation_list");
         List<Station> lineStations = _lineService.getStationList(id);
-
-
-
-
+        mv.addObject("linestation",lineStations);
+        mv.addObject("id",id);
         return mv;
 
 

@@ -17,13 +17,14 @@ public class LineStationLineIdsSpecification implements ISpecification<LineStati
     }
 
     public LineStationExample createExample()
-    {
-        if(_lineIds.isEmpty())
-            return null;
 
+    {
         LineStationExample example = new LineStationExample();
-        LineStationExample.Criteria criteriaLineId = example.createCriteria();
-        criteriaLineId.andLineIdIn(_lineIds);
+        if(_lineIds!=null&&!_lineIds.isEmpty()){
+
+            LineStationExample.Criteria criteriaLineId = example.createCriteria();
+            criteriaLineId.andLineIdIn(_lineIds);
+        }
         return example;
     }
 }

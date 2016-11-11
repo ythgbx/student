@@ -5,8 +5,8 @@ import com.wordnik.swagger.annotations.ApiParam;
 import net.bus.web.aspect.Auth;
 import net.bus.web.context.StationsLocationContext;
 import net.bus.web.controller.dto.*;
+import net.bus.web.model.*;
 import net.bus.web.model.Pojo.PagePojo;
-import net.bus.web.model.Station;
 import net.bus.web.service.ILineService;
 import net.bus.web.service.IStationService;
 import org.apache.log4j.Logger;
@@ -18,7 +18,10 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import net.bus.web.model.LineStation;
 
 /**
  * Created by Edifi_000 on 2016-07-27.
@@ -80,8 +83,18 @@ public class StationController {
             station.setAnnotation(request.getAnnotation());
             station.setPrice(request.getPrice());
             if(_stationService.addStation(station)){
-                result.setResult("success");
-                result.setContent("添加成功!");
+                Long id=request.getLineid();
+                List<LineStation> lineStations=_stationService.getLineStations(id);
+                Integer index = lineStations.get(lineStations.size()-1).getIndex();
+                LineStation lineStation=new LineStation();
+                lineStation.setLineId(id);
+                lineStation.setStationId(station.getId());
+                lineStation.setIndex(index+1);
+                if(_stationService.addLineStation(lineStation)){
+                    result.setResult("success");
+                    result.setContent("添加成功!");
+                }
+
             }else{
                 result.setResult("failed");
                 result.setContent("添加失败!");

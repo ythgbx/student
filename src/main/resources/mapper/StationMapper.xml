@@ -100,7 +100,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="net.bus.web.model.Station" >
+  <insert id="insert" parameterType="net.bus.web.model.Station" useGeneratedKeys="true" keyProperty="id">
     insert into station (id, name, lat, 
       lng, annotation, price
       )
