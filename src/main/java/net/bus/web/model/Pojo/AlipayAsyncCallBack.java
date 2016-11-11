@@ -120,6 +120,6 @@ public class AlipayAsyncCallBack extends AsyncCallBack{
 
     @Override
     public BigDecimal getPay(){
-        return BigDecimal.valueOf(Long.valueOf(getAmount()));
+        return BigDecimal.valueOf(Double.valueOf(getAmount()));
     }
 }

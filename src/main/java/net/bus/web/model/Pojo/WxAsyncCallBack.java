@@ -168,7 +168,7 @@ public class WxAsyncCallBack extends AsyncCallBack{
 
     @Override
     public BigDecimal getPay(){
-        return BigDecimal.valueOf(Long.valueOf(getTotalFee())/1000);
+        return BigDecimal.valueOf(Double.valueOf(getTotalFee())/100.00d);
     }
 
     public Integer getCashFee() {
