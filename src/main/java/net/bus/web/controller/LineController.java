@@ -486,7 +486,7 @@ public class LineController {
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/linedetail", method = RequestMethod.GET)
-    @ApiOperation(value = "获取线路详细", httpMethod = "GET", response = ActivityItem.class, notes = "获取线路详细")
+    @ApiOperation(value = "获取线路", httpMethod = "GET", response = ActivityItem.class, notes = "获取线路")
     public IResult detail(
             @ApiParam(required = true, name = "id", value = "id")
             @RequestParam(value = "id", required = true, defaultValue = "0")long id
@@ -506,4 +506,24 @@ public class LineController {
         lineItem.setEnd_time(line.getEndTime().getTime());
         return lineItem;
     }
+
+    @Auth(role = Auth.Role.NONE)
+    @ResponseBody
+    @RequestMapping(value = "/detail_list", method = RequestMethod.GET)
+    @ApiOperation(value = "线路详细列表", httpMethod = "GET", response = LineDetail.class, notes = "获取线路详细列表")
+    public ModelAndView LineDetail (@ApiParam(required = true, name = "id", value = "id")
+                               @RequestParam(value = "id", required = true, defaultValue = "0")long id) {
+        logger.info("url:/line/detail_list");
+        ModelAndView mv=new ModelAndView();
+        List<Station> lineStations = _lineService.getStationList(id);
+
+
+
+
+        return mv;
+
+
+    }
+
+
 }
