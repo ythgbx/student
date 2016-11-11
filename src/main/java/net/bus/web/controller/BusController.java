@@ -1,6 +1,5 @@
 package net.bus.web.controller;
 
-import com.oracle.tools.packager.Log;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 import net.bus.web.aspect.Auth;
