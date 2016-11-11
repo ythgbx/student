@@ -1,6 +1,5 @@
 package net.bus.web.controller;
 
-import com.oracle.tools.packager.Log;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 import net.bus.web.aspect.Auth;
@@ -48,8 +47,10 @@ public class BusController {
         bus.setLat(-1d);
         if(_busService.addBus(bus)){
             result.setResult("success");
+            result.setContent("添加成功!");
         }else{
-            result.setResult("failed");
+            result.setResult("failure");
+            result.setContent("添加失败!");
         }
         return result;
     }
@@ -113,4 +114,82 @@ public class BusController {
         }
         return mv;
     }
+
+    /**
+     * 车辆删除操作(支持批量删除)
+     * @param request
+     * @return
+     */
+    @RequestMapping(value="/del", method = RequestMethod.DELETE)
+    @ApiOperation(value = "批量删除车辆", httpMethod = "POST", response = BaseResult.class, notes = "批量删除车辆")
+    @ResponseBody
+    public BaseResult delCommodity(@ApiParam(required = true, name = "request", value = "车辆编号列表")
+                                   @RequestBody BaseRequest request)
+    {
+        logger.info("bus del");
+        BaseResult result = new BaseResult();
+        if (_busService.del(request.getIds())){
+            result.setResult("success");
+            result.setContent("删除成功!");
+        }else{
+            result.setResult("error");
+            result.setContent("删除失败!");
+        }
+        return result;
+    }
+
+
+    /**
+     * 通过ID 获取车辆信息
+     * @param id
+     * @return
+     */
+    @Auth(role = Auth.Role.NONE)
+    @ResponseBody
+    @RequestMapping(value = "/detail", method = RequestMethod.GET)
+    @ApiOperation(value = "获取车辆详细", httpMethod = "GET", response = CommodityDetail.class, notes = "获取商品详细")
+    public IResult detail(@ApiParam(required = true, name = "id", value = "id")@RequestParam(value = "id", required = true, defaultValue = "0")long id)
+    {
+        BusRespond busRespond = new BusRespond();
+        Bus bus = _busService.getBus(id);
+        busRespond.setId(bus.getId());
+        busRespond.setName(bus.getName());
+        busRespond.setLine_id(bus.getLineId());
+        busRespond.setUser_id(bus.getUserId());
+        busRespond.setDevice(bus.getDevice());
+        return busRespond;
+    }
+
+
+    /**
+     * 修改车辆信息
+     * @param request
+     * @return
+     */
+    @RequestMapping(value="/update", method = RequestMethod.POST)
+    @ApiOperation(value = "修改车辆信息", httpMethod = "POST", response = BaseResult.class, notes = "修改车辆信息")
+    @ResponseBody
+    public BaseResult update(@ApiParam(required = true, name = "request", value = "车辆编号列表")
+                                   @RequestBody BusRequest request)
+    {
+        logger.info("bus update");
+        BaseResult result = new BaseResult();
+        Bus bus = new Bus();
+        bus.setId(request.getId());
+        bus.setName(request.getName());
+        bus.setLineId(request.getLine_id() == null ? -1 : request.getLine_id());
+        bus.setUserId(request.getUser_id() == null ? -1 : request.getUser_id());
+        bus.setLng(-1d);
+        bus.setLat(-1d);
+        bus.setDevice(request.getDevice());
+        if (_busService.update(bus)){
+            result.setResult("success");
+            result.setContent("修改成功!");
+        }else{
+            result.setResult("error");
+            result.setContent("修改失败!");
+        }
+        return result;
+    }
+
 }

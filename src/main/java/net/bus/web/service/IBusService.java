@@ -21,9 +21,15 @@ public interface IBusService {
 
     int getAllCount();
 
+    boolean del(List<Long> longList);
+
     boolean addBus(Bus bus);
+
+    boolean update(Bus bus);
 
     boolean bindBus(Long busId,String name,Long userId,Long lineId,String device);
 
     Bus getBus(String name,String device);
+
+    Bus getBus(Long id);
 }

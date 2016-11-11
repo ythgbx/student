@@ -72,6 +72,13 @@ public class BusRepository {
         return _mapper.updateByPrimaryKey(bus);
     }
 
+    public int delete(ISpecification Specification) {
+        return _mapper.deleteByExample((BusExample) Specification.createExample());
+    }
+    public int delete(Long id) {
+        return _mapper.deleteByPrimaryKey(id);
+    }
+
     public boolean existItem(ISpecification specification){
         int result = _mapper.countByExample((BusExample)specification.createExample());
         if(result>0)
