@@ -1,5 +1,6 @@
 package net.bus.web.service;
 
+import net.bus.web.model.Orders;
 import net.bus.web.model.Pojo.AlipayAsyncCallBack;
 import net.bus.web.model.Pojo.AlipayOrderCallBack;
 import net.bus.web.model.Pojo.Product;
@@ -19,5 +20,5 @@ public interface IAlipayService {
 
     boolean ret(String prestr,Map<String, String> params);
 
-
+    boolean refund(Orders orders,String refundTradeNo,String userId);
 }
