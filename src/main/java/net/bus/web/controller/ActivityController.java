@@ -89,7 +89,7 @@ public class ActivityController {
         disItem.setEnd_time(activity.getEndtime());
         disItem.setLower_limit(activity.getLowerLimit());
         disItem.setUpper_limit(activity.getUpperLimit());
-        disItem.setRemain(Util.daysBetween(new Date(),activity.getStartime()));  //剩余时间
+        disItem.setRemain(Util.daysBetween(new Date(),activity.getEndtime()));  //剩余时间
         disItem.setNumber_of_people(activity.getNumberOfPeople());
         return disItem;
     }
