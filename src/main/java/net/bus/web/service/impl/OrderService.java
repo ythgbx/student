@@ -122,6 +122,7 @@ public class OrderService implements IOrderService{
                     logger.info("confirm get order success:" + asyncCallBack.getSelfTradeNo());
                     if(payService.buyComplete(asyncCallBack)){
                         orders.setPay(asyncCallBack.getPay());
+                        orders.setPayTradeNo(asyncCallBack.getPayTradeNo());
                         orders.setPayTime(new Date());
                         _rootRepository.updateItem(orders);
                         logger.info("confirm success:" + asyncCallBack.getSelfTradeNo());

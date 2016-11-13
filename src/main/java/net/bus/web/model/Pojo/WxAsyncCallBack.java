@@ -167,6 +167,11 @@ public class WxAsyncCallBack extends AsyncCallBack{
     }
 
     @Override
+    public String getPayTradeNo(){
+        return getTransactionId();
+    }
+
+    @Override
     public BigDecimal getPay(){
         return BigDecimal.valueOf(Double.valueOf(getTotalFee())/100.00d);
     }

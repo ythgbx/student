@@ -21,6 +21,10 @@ public class AsyncCallBack {
         throw new RuntimeException("function not impl");
     }
 
+    public String getPayTradeNo(){
+        throw new RuntimeException("function not impl");
+    }
+
     public BigDecimal getPay(){
         throw new RuntimeException("function not impl");
     }

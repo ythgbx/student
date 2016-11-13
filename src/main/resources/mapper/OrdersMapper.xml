@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="net.bus.web.model.Orders" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="trade_no" property="tradeNo" jdbcType="VARCHAR" />
+    <result column="pay_trade_no" property="payTradeNo" jdbcType="VARCHAR" />
     <result column="trade_type" property="tradeType" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="BIGINT" />
     <result column="product_id" property="productId" jdbcType="BIGINT" />
@@ -75,8 +76,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, trade_no, trade_type, user_id, product_id, product_type, amount, price, pay, 
-    state, create_time, pay_time, modify_time
+    id, trade_no, pay_trade_no, trade_type, user_id, product_id, product_type, amount,
+    price, pay, state, create_time, pay_time, modify_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="net.bus.web.model.OrdersExample" >
     select
@@ -93,7 +94,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from orders
     where id = #{id,jdbcType=BIGINT}
@@ -109,16 +110,16 @@
     </if>
   </delete>
   <insert id="insert" parameterType="net.bus.web.model.Orders" >
-    insert into orders (id, trade_no, trade_type, 
-      user_id, product_id, product_type, 
-      amount, price, pay, 
-      state, create_time, pay_time, 
-      modify_time)
-    values (#{id,jdbcType=BIGINT}, #{tradeNo,jdbcType=VARCHAR}, #{tradeType,jdbcType=INTEGER}, 
-      #{userId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, #{productType,jdbcType=INTEGER}, 
-      #{amount,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{pay,jdbcType=DECIMAL}, 
-      #{state,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{payTime,jdbcType=TIMESTAMP}, 
-      #{modifyTime,jdbcType=TIMESTAMP})
+    insert into orders (id, trade_no, pay_trade_no,
+    trade_type, user_id, product_id,
+    product_type, amount, price,
+    pay, state, create_time,
+    pay_time, modify_time)
+    values (#{id,jdbcType=BIGINT}, #{tradeNo,jdbcType=VARCHAR}, #{payTradeNo,jdbcType=VARCHAR},
+    #{tradeType,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT},
+    #{productType,jdbcType=INTEGER}, #{amount,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL},
+    #{pay,jdbcType=DECIMAL}, #{state,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP},
+    #{payTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="net.bus.web.model.Orders" >
     insert into orders
@@ -128,6 +129,9 @@
       </if>
       <if test="tradeNo != null" >
         trade_no,
+      </if>
+      <if test="payTradeNo != null" >
+        pay_trade_no,
       </if>
       <if test="tradeType != null" >
         trade_type,
@@ -169,6 +173,9 @@
       </if>
       <if test="tradeNo != null" >
         #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payTradeNo != null" >
+        #{payTradeNo,jdbcType=VARCHAR},
       </if>
       <if test="tradeType != null" >
         #{tradeType,jdbcType=INTEGER},
@@ -220,6 +227,9 @@
       <if test="record.tradeNo != null" >
         trade_no = #{record.tradeNo,jdbcType=VARCHAR},
       </if>
+      <if test="record.payTradeNo != null" >
+        pay_trade_no = #{record.payTradeNo,jdbcType=VARCHAR},
+      </if>
       <if test="record.tradeType != null" >
         trade_type = #{record.tradeType,jdbcType=INTEGER},
       </if>
@@ -261,18 +271,19 @@
   <update id="updateByExample" parameterType="map" >
     update orders
     set id = #{record.id,jdbcType=BIGINT},
-      trade_no = #{record.tradeNo,jdbcType=VARCHAR},
-      trade_type = #{record.tradeType,jdbcType=INTEGER},
-      user_id = #{record.userId,jdbcType=BIGINT},
-      product_id = #{record.productId,jdbcType=BIGINT},
-      product_type = #{record.productType,jdbcType=INTEGER},
-      amount = #{record.amount,jdbcType=INTEGER},
-      price = #{record.price,jdbcType=DECIMAL},
-      pay = #{record.pay,jdbcType=DECIMAL},
-      state = #{record.state,jdbcType=INTEGER},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      pay_time = #{record.payTime,jdbcType=TIMESTAMP},
-      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP}
+    trade_no = #{record.tradeNo,jdbcType=VARCHAR},
+    pay_trade_no = #{record.payTradeNo,jdbcType=VARCHAR},
+    trade_type = #{record.tradeType,jdbcType=INTEGER},
+    user_id = #{record.userId,jdbcType=BIGINT},
+    product_id = #{record.productId,jdbcType=BIGINT},
+    product_type = #{record.productType,jdbcType=INTEGER},
+    amount = #{record.amount,jdbcType=INTEGER},
+    price = #{record.price,jdbcType=DECIMAL},
+    pay = #{record.pay,jdbcType=DECIMAL},
+    state = #{record.state,jdbcType=INTEGER},
+    create_time = #{record.createTime,jdbcType=TIMESTAMP},
+    pay_time = #{record.payTime,jdbcType=TIMESTAMP},
+    modify_time = #{record.modifyTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -282,6 +293,9 @@
     <set >
       <if test="tradeNo != null" >
         trade_no = #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payTradeNo != null" >
+        pay_trade_no = #{payTradeNo,jdbcType=VARCHAR},
       </if>
       <if test="tradeType != null" >
         trade_type = #{tradeType,jdbcType=INTEGER},
@@ -322,6 +336,7 @@
   <update id="updateByPrimaryKey" parameterType="net.bus.web.model.Orders" >
     update orders
     set trade_no = #{tradeNo,jdbcType=VARCHAR},
+      pay_trade_no = #{payTradeNo,jdbcType=VARCHAR},
       trade_type = #{tradeType,jdbcType=INTEGER},
       user_id = #{userId,jdbcType=BIGINT},
       product_id = #{productId,jdbcType=BIGINT},
