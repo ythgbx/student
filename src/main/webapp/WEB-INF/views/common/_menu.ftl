@@ -82,6 +82,7 @@
                         <li><a href="/activity/list"><span class="submenu-label">活动中心</span></a></li>
                         <li><a href="/news/list"><span class="submenu-label">新闻中心</span></a></li>
                         <li><a href="/line/list"><span class="submenu-label">线路中心</span></a></li>
+                        <li><a href="/activity/test"><span class="submenu-label">测试界面</span></a></li>
                     </ul>
                 </li>
                 <li class="openable bg-palette4">

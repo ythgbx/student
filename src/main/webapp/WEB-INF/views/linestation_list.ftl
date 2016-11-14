@@ -69,9 +69,6 @@
                             >
                                 <i class="fa fa-times" id="button2"></i>
                             </a>
-                            <a href="/line/detail_list?id=${oneLine.id}">
-                                <i class="fa fa-bookmark"></i>
-                            </a>
                         </td><!--删除线路 -->
                     </tr>
                     </#list>
@@ -137,69 +134,6 @@
     </div><!-- /.modal -->
 </div>
 
-
-<div class="modal fade" id="myModal2">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">修改线路</h4>
-            </div>
-
-            <form role="form" enctype="multipart/form-data" id="form2">
-                <div class="modal-body">
-                    <input type="hidden" name="id" id="updateid">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">线路名称</label>
-                        <input type="text" class="form-control" id="text1" name="name">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">起始站点</label>
-                        <input type="text" class="form-control" id="text2" name="start">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">结束站点</label>
-                        <input type="text" class="form-control" id="text2" name="end">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">站点经纬度</label>
-                        <input type="text" class="form-control" id="text2" name="latlng" value="">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">票价</label>
-                        <input type="text" class="form-control" id="text3" name="price">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">站点注释</label>
-                        <input type="text" class="form-control" id="text6" name="annotation">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">所在城市</label>
-                        <input type="text" class="form-control" id="text7" name="cityName">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">专线属性</label>
-                        <input type="text" class="form-control" id="text4" name="propName" value="">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">起始时间</label>
-                        <input type="date" class="form-control" id="text5" name="startTime">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">结束时间</label>
-                        <input type="date" class="form-control" id="text5" name="endTime">
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary" id="update" onclick="operate()">提交</button>
-                </div>
-            </form>
-
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
 
 </@layoutBody>
 
@@ -322,60 +256,6 @@
             }
         });
         window.location.reload();
-    }
-</script>
-<script>
-    function getContent(node) {
-        var tr1 = node.parentNode.parentNode;
-        var id = tr1.cells[1].innerText;
-        console.log(id)
-        $.ajax({
-            url: "/line/linedetail?id="+id,
-            type: "GET",
-            contentType: "application/json;charset=UTF-8",
-            success:function (data) {
-                console.log(data)
-                if (data != null) {
-                    $("[name=id]").val(data.id);
-                    $("[name=name]").val(data.name);
-                    $("[name=start]").val(data.start_station);
-                    $("[name=end]").val(data.end_station);
-                    $("[name=price]").val(data.price);
-                    $("[name=annotation]").val(data.annotation);
-                    $("[name=cityName]").val(data.cityName);
-                    $("[name=propName]").val(data.propName);
-                    var date=new Date(data.start_time);
-                    var year=date.getFullYear();
-                    var mouth=date.getMonth()+1;
-                    var day=date.getDate();
-                    if(mouth<10){
-                        mouth="0"+mouth;
-                    }
-                    if(day<10){
-                        day="0"+day;
-                    }
-                    var startime = year+"-"+mouth+"-"+day;
-                    var date2=new Date(data.end_time);
-                    var year2=date2.getFullYear();
-                    var mouth2=date2.getMonth()+1;
-                    var day2=date2.getDate();
-                    if(mouth2<10){
-                        mouth2="0"+mouth2;
-                    }
-                    if(day2<10){
-                        day2="0"+day2;
-                    }
-                    var endtime=year2+"-"+mouth2+"-"+day2;
-                    $("[name=startTime]").val(startime);
-                    $("[name=endTime]").val(endtime);
-
-
-                }
-            },
-            error:function (data) {
-                console.log(data)
-            }
-        })
     }
 </script>
 
