@@ -56,5 +56,11 @@ public class AlipayConfig {
 	public static String seller_id ="whytxnkj@163.com";
 
 //↑↑↑↑↑↑↑↑↑↑请在这里配置您的基本信息↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+
+	//退款通知的接口名
+	public static String refund_service = "refund_fastpay_by_platform_pwd";
+
+	// 服务器接受退款回调地址
+	public static String refund_notify_url = "http://service.zfbus.net/alipay/refundasync";
 }
 

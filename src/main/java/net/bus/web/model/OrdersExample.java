@@ -236,6 +236,76 @@ public class OrdersExample {
             return (Criteria) this;
         }
 
+        public Criteria andPayTradeNoIsNull() {
+            addCriterion("pay_trade_no is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTradeNoIsNotNull() {
+            addCriterion("pay_trade_no is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTradeNoEqualTo(String value) {
+            addCriterion("pay_trade_no =", value, "payTradeNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTradeNoNotEqualTo(String value) {
+            addCriterion("pay_trade_no <>", value, "payTradeNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTradeNoGreaterThan(String value) {
+            addCriterion("pay_trade_no >", value, "payTradeNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTradeNoGreaterThanOrEqualTo(String value) {
+            addCriterion("pay_trade_no >=", value, "payTradeNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTradeNoLessThan(String value) {
+            addCriterion("pay_trade_no <", value, "payTradeNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTradeNoLessThanOrEqualTo(String value) {
+            addCriterion("pay_trade_no <=", value, "payTradeNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTradeNoLike(String value) {
+            addCriterion("pay_trade_no like", value, "payTradeNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTradeNoNotLike(String value) {
+            addCriterion("pay_trade_no not like", value, "payTradeNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTradeNoIn(List<String> values) {
+            addCriterion("pay_trade_no in", values, "payTradeNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTradeNoNotIn(List<String> values) {
+            addCriterion("pay_trade_no not in", values, "payTradeNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTradeNoBetween(String value1, String value2) {
+            addCriterion("pay_trade_no between", value1, value2, "payTradeNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTradeNoNotBetween(String value1, String value2) {
+            addCriterion("pay_trade_no not between", value1, value2, "payTradeNo");
+            return (Criteria) this;
+        }
+
         public Criteria andTradeTypeIsNull() {
             addCriterion("trade_type is null");
             return (Criteria) this;

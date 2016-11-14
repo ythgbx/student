@@ -8,6 +8,8 @@ public class Orders {
 
     private String tradeNo;
 
+    private String payTradeNo;
+
     private Integer tradeType;
 
     private Long userId;
@@ -44,6 +46,14 @@ public class Orders {
 
     public void setTradeNo(String tradeNo) {
         this.tradeNo = tradeNo;
+    }
+
+    public String getPayTradeNo() {
+        return payTradeNo;
+    }
+
+    public void setPayTradeNo(String payTradeNo) {
+        this.payTradeNo = payTradeNo;
     }
 
     public Integer getTradeType() {

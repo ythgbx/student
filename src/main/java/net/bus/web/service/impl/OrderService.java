@@ -122,7 +122,9 @@ public class OrderService implements IOrderService{
                     logger.info("confirm get order success:" + asyncCallBack.getSelfTradeNo());
                     if(payService.buyComplete(asyncCallBack)){
                         orders.setPay(asyncCallBack.getPay());
+                        orders.setPayTradeNo(asyncCallBack.getPayTradeNo());
                         orders.setPayTime(new Date());
+                        orders.setState(1);
                         _rootRepository.updateItem(orders);
                         logger.info("confirm success:" + asyncCallBack.getSelfTradeNo());
                         return true;
@@ -149,9 +151,10 @@ public class OrderService implements IOrderService{
             switch (OrderTypeEnum.get(orders.getTradeType())){
                 case ALIPAY:
                 {
-                    //TODO 微信退款
-                    isRefund = false;
-                    throw new RuntimeException("alipay refund not impl");
+                    isRefund = _alipayService.refund(orders,
+                            createRefundTradeNo(OrderTypeEnum.get(orders.getTradeType()), ProducedTypeEnum.get(orders.getProductType())),
+                            userId);
+                    break;
                 }
                 case WXPAY:
                 {

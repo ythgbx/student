@@ -5,6 +5,8 @@ import net.bus.web.common.alipay.config.AlipayConfig;
 import net.bus.web.common.alipay.sign.RSA;
 import net.bus.web.common.alipay.util.AlipayCore;
 import net.bus.web.common.alipay.util.AlipayNotify;
+import net.bus.web.common.alipay.util.AlipaySubmit;
+import net.bus.web.model.Orders;
 import net.bus.web.model.Pojo.AlipayAsyncCallBack;
 import net.bus.web.enums.ProducedTypeEnum;
 import net.bus.web.model.Pojo.AlipayOrderCallBack;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -61,7 +64,7 @@ public class AlipayService implements IAlipayService ,IPayService{
         //TODO 4 outTradeNo 对应的 app_id 是否匹配
 
         try {
-            logger.info("async notify check:"+callBack.getNotifyId());
+            logger.info("async notify check:" + callBack.getNotifyId());
             if(true||AlipayNotify.verifyResponse(callBack.getNotifyId()).equals("true")){
                 if(AlipayNotify.getSignVeryfy(params, sign)){
                     if(callBack.getTradeStatus().equals("TRADE_FINISHED") || callBack.getTradeStatus().equals("TRADE_SUCCESS")) {
@@ -128,6 +131,38 @@ public class AlipayService implements IAlipayService ,IPayService{
         return false;
     }
 
+    public boolean refund(Orders orders,String refundTradeNo,String userId){
+        //批次号，必填，格式：当天日期[8位]+序列号[3至24位]，如：201603081000001
+        String batch_no = "201611140001";
+        //退款笔数，必填，参数detail_data的值中，“#”字符出现的数量加1，最大支持1000笔（即“#”字符出现的数量999个）
+        String batch_num = "1";
+        //退款详细数据，必填，格式（支付宝交易号^退款金额^备注），多笔请用#隔开
+        String detail_data =orders.getPayTradeNo()+"^"+orders.getPay()+"^test refund";
+
+        java.text.DateFormat format2 = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        Map<String, String> sParaTemp = new HashMap<String, String>();
+        sParaTemp.put("service", (AlipayConfig.refund_service));
+        sParaTemp.put("partner", (AlipayConfig.partner));
+        sParaTemp.put("_input_charset", (AlipayConfig.input_charset));
+        sParaTemp.put("notify_url", AlipayConfig.refund_notify_url);
+        sParaTemp.put("seller_user_id", (AlipayConfig.partner));
+        sParaTemp.put("refund_date", format2.format(new Date()));
+        sParaTemp.put("batch_no", batch_no);
+        sParaTemp.put("batch_num", batch_num);
+        sParaTemp.put("detail_data", detail_data);
+
+        //建立请求
+        String sHtmlText = AlipaySubmit.buildRequest(sParaTemp, "get", "确认");
+        try {
+            logger.info(sHtmlText);
+            return true;
+        }catch (Exception e){
+
+        }
+        return false;
+    }
+
     private String getOrderInfo(String tradeNo,String subject, String body, String price) {
 
         Map<String,String> params = new HashMap<String,String>();
@@ -182,6 +217,14 @@ public class AlipayService implements IAlipayService ,IPayService{
     {
         if(param!=null){
             return param.replace("\"","");
+        }else{
+            return param;
+        }
+    }
+
+    private String handleAddChar(String param){
+        if(param!=null){
+            return "\""+ param+"\"";
         }else{
             return param;
         }

@@ -1,10 +1,11 @@
 package net.bus.web.service.impl;
 
-import net.bus.web.controller.dto.LineStation;
+import net.bus.web.model.LineStation;
 import net.bus.web.model.Line;
 import net.bus.web.model.Station;
 import net.bus.web.repository.LineStationRepository;
 import net.bus.web.repository.StationRepository;
+import net.bus.web.repository.specification.LineStationLineIdsSpecification;
 import net.bus.web.repository.specification.StationIdsSpecification;
 import net.bus.web.service.ILineService;
 import net.bus.web.service.IStationService;
@@ -54,6 +55,13 @@ public class StationService implements IStationService {
         return  _rootRepository.getList(new StationIdsSpecification(ids));
     }
 
+    public List<LineStation> getLineStations(Long id) {
+        List<Long> lineIds = new ArrayList<Long>();
+        lineIds.add(id);
+       List<LineStation> lineStations= _lineStationRepository.getList(new LineStationLineIdsSpecification(lineIds));
+        return lineStations;
+    }
+
     public int getAllStationsCount()
     {
         return _rootRepository.count();
@@ -65,6 +73,13 @@ public class StationService implements IStationService {
 
         if(result>0){
             return true;
+        }
+        return false;
+    }
+
+    public boolean addLineStation(LineStation lineStation){
+        if(_lineStationRepository.insertItem(lineStation)>0){
+            return  true;
         }
         return false;
     }

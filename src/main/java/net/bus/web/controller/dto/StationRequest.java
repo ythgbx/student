@@ -14,6 +14,9 @@ public class StationRequest extends BaseRequest {
     private String annotation;
     private BigDecimal price;
 
+    private Long lineid;
+
+
 //    public Position getPos() {
 //        return pos;
 //    }
@@ -21,6 +24,8 @@ public class StationRequest extends BaseRequest {
 //    public void setPos(Position pos) {
 //        this.pos = pos;
 //    }
+
+
 
     public String getName() {
         return name;
@@ -60,5 +65,12 @@ public class StationRequest extends BaseRequest {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+    public Long getLineid() {
+        return lineid;
+    }
+
+    public void setLineid(Long lineid) {
+        this.lineid = lineid;
     }
 }

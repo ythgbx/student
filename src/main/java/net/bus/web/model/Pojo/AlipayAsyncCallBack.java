@@ -119,6 +119,11 @@ public class AlipayAsyncCallBack extends AsyncCallBack{
     public String getSelfTradeNo(){return getOutTradeNo();}
 
     @Override
+    public String getPayTradeNo(){
+        return getTradeNo();
+    }
+
+    @Override
     public BigDecimal getPay(){
         return BigDecimal.valueOf(Double.valueOf(getAmount()));
     }
