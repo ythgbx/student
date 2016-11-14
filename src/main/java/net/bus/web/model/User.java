@@ -27,6 +27,12 @@ public class User {
 
     private String idCard;
 
+    private String school;
+
+    private String institute;
+
+    private String source;
+
     public Long getId() {
         return id;
     }
@@ -129,5 +135,29 @@ public class User {
 
     public void setIdCard(String idCard) {
         this.idCard = idCard;
+    }
+
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
+    }
+
+    public String getInstitute() {
+        return institute;
+    }
+
+    public void setInstitute(String institute) {
+        this.institute = institute;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
     }
 }

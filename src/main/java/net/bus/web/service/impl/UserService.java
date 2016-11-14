@@ -108,6 +108,27 @@ public class UserService  implements IUserService {
         return user;
     }
 
+    public User registerByActive(String phone,String password,String name,String school,String institute,String source)
+    {
+        User user = new User();
+        user.setName(name);
+        user.setPhone(phone);
+        user.setPhoto("default");
+        user.setLat(0d);
+        user.setLng(0d);
+        user.setPoints(0);
+        user.setType(0);//用户类型：0是普通用户，1是司机，999是管理员
+        user.setSalt(getRandomString(6));
+        user.setPassword(getUserPasswordMd5(user.getSalt(),password));
+        user.setRealName("");
+        user.setIdCard("");
+        user.setSchool(school);
+        user.setInstitute(institute);
+        user.setSource(source);
+        _rootRepository.insertUser(user);
+        return user;
+    }
+
     public User bindWx(User user,String wxUnionId,String name,String photo)
     {
         user.setName(name);
@@ -176,6 +197,13 @@ public class UserService  implements IUserService {
             user.setRealName(realName);
             user.setIdCard(id_card);
             _rootRepository.updateUser(user);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean updateUser(User user) {
+        if(_rootRepository.updateUser(user)>0){
             return true;
         }
         return false;

@@ -31,6 +31,8 @@ public class RString {
 
     public static String COMMODITY_NOT_FOUND;
 
+    public static String ACTIVE_COMMENT;
+
     public void setLOGIN_SUCCESS(String LOGIN_SUCCESS) {
         RString.LOGIN_SUCCESS = LOGIN_SUCCESS;
     }
@@ -97,5 +99,9 @@ public class RString {
 
     public void setCOMMODITY_NOT_FOUND(String COMMODITY_NOT_FOUND) {
         RString.COMMODITY_NOT_FOUND = COMMODITY_NOT_FOUND;
+    }
+
+    public void setACTIVE_COMMENT(String ACTIVE_COMMENT) {
+        RString.ACTIVE_COMMENT = ACTIVE_COMMENT;
     }
 }
