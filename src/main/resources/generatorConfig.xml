@@ -86,7 +86,7 @@
                enableDeleteByExample="true"
                enableCountByExample="true"
                enableUpdateByExample="true">
-        </table>
+        </table>-->
         <table tableName="user" domainObjectName="User"  enableSelectByPrimaryKey="true"
                enableUpdateByPrimaryKey="true"
                enableDeleteByPrimaryKey="true"
@@ -95,6 +95,7 @@
                enableCountByExample="true"
                enableUpdateByExample="true">
         </table>
+        <!--
         <table tableName="user_coupon" domainObjectName="UserCoupon"  enableSelectByPrimaryKey="true"
                enableUpdateByPrimaryKey="true"
                enableDeleteByPrimaryKey="true"
@@ -210,7 +211,7 @@
                enableDeleteByExample="true"
                enableCountByExample="true"
                enableUpdateByExample="true">
-        </table>-->
+        </table>
 
         <table tableName="temp_active" domainObjectName="Temp_active"  enableSelectByPrimaryKey="true"
                enableUpdateByPrimaryKey="true"
@@ -219,6 +220,6 @@
                enableDeleteByExample="true"
                enableCountByExample="true"
                enableUpdateByExample="true">
-        </table>
+        </table>-->
     </context>
 </generatorConfiguration>

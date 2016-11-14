@@ -15,6 +15,9 @@
     <result column="type" property="type" jdbcType="INTEGER" />
     <result column="real_name" property="realName" jdbcType="VARCHAR" />
     <result column="id_card" property="idCard" jdbcType="VARCHAR" />
+    <result column="school" property="school" jdbcType="VARCHAR" />
+    <result column="institute" property="institute" jdbcType="VARCHAR" />
+    <result column="source" property="source" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -76,7 +79,7 @@
   </sql>
   <sql id="Base_Column_List" >
     id, name, photo, password, salt, phone, wx_union_id, lat, lng, points, type, real_name, 
-    id_card
+    id_card, school, institute, source
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="net.bus.web.model.UserExample" >
     select
@@ -113,12 +116,14 @@
       password, salt, phone, 
       wx_union_id, lat, lng, 
       points, type, real_name, 
-      id_card)
+      id_card, school, institute, 
+      source)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
       #{wxUnionId,jdbcType=VARCHAR}, #{lat,jdbcType=DOUBLE}, #{lng,jdbcType=DOUBLE}, 
       #{points,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{realName,jdbcType=VARCHAR}, 
-      #{idCard,jdbcType=VARCHAR})
+      #{idCard,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, #{institute,jdbcType=VARCHAR}, 
+      #{source,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="net.bus.web.model.User" >
     insert into user
@@ -162,6 +167,15 @@
       <if test="idCard != null" >
         id_card,
       </if>
+      <if test="school != null" >
+        school,
+      </if>
+      <if test="institute != null" >
+        institute,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -202,6 +216,15 @@
       </if>
       <if test="idCard != null" >
         #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null" >
+        #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="institute != null" >
+        #{institute,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -253,6 +276,15 @@
       <if test="record.idCard != null" >
         id_card = #{record.idCard,jdbcType=VARCHAR},
       </if>
+      <if test="record.school != null" >
+        school = #{record.school,jdbcType=VARCHAR},
+      </if>
+      <if test="record.institute != null" >
+        institute = #{record.institute,jdbcType=VARCHAR},
+      </if>
+      <if test="record.source != null" >
+        source = #{record.source,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -272,7 +304,10 @@
       points = #{record.points,jdbcType=INTEGER},
       type = #{record.type,jdbcType=INTEGER},
       real_name = #{record.realName,jdbcType=VARCHAR},
-      id_card = #{record.idCard,jdbcType=VARCHAR}
+      id_card = #{record.idCard,jdbcType=VARCHAR},
+      school = #{record.school,jdbcType=VARCHAR},
+      institute = #{record.institute,jdbcType=VARCHAR},
+      source = #{record.source,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -316,6 +351,15 @@
       <if test="idCard != null" >
         id_card = #{idCard,jdbcType=VARCHAR},
       </if>
+      <if test="school != null" >
+        school = #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="institute != null" >
+        institute = #{institute,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -332,7 +376,10 @@
       points = #{points,jdbcType=INTEGER},
       type = #{type,jdbcType=INTEGER},
       real_name = #{realName,jdbcType=VARCHAR},
-      id_card = #{idCard,jdbcType=VARCHAR}
+      id_card = #{idCard,jdbcType=VARCHAR},
+      school = #{school,jdbcType=VARCHAR},
+      institute = #{institute,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <select resultMap="BaseResultMap" parameterType="net.bus.web.model.UserExample" id="selectByExampleWithRowbounds" >

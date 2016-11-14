@@ -588,6 +588,54 @@ public class UserController {
         
     }
 
+    @Auth(role = Auth.Role.NONE)
+    @ResponseBody
+    @ApiOperation(value = "笑傲江湖2016-11报名", httpMethod = "POST", response = BaseResult.class, notes = "笑傲江湖2016-11报名")
+    @RequestMapping(value = "/sign",method = RequestMethod.POST)
+    public IResult sign(@ApiParam(required = true, name = "sign", value = "报名请求")@RequestBody Register register)
+    {
+        BaseResult result = new BaseResult();
+        User user = service.getUser(register.getPhone());
+        if(user!=null){
+            user.setSchool(register.getSchool());
+            user.setInstitute(register.getInstitute());
+            if (service.updateUser(user));{
+                result.setResult("success");
+                result.setContent("报名成功!");
+                return result;
+            }
+        }else {
+            if(!checkCodeWithPhone(register.getPhone(),register.getCode()).equals(PhoneSMSContext.SmsCheckResult.Success))
+            {
+                result.setResult("failure");
+                result.setContent(RString.REGISTER_FAILED_SMS_CODE);
+                return result;
+            }
+            try {
+                if(service.registerCheck(register.getPhone())){
+                    String password = getRandNum(6);
+                    User user1 = service.registerByActive(register.getPhone(),password,
+                            register.getName(),register.getSchool(),register.getInstitute(),RString.ACTIVE_COMMENT);
+                    if (user1!=null&&smsCodeSend(register.getPhone(),"您的初始密码为:"+password)){
+                        result.setResult("success");
+                        result.setContent("报名成功!");
+                    }else {
+                        result.setResult("error");
+                        result.setContent("报名失败,请重新报名!");
+                    }
+                }else {
+                    result.setResult("failure");
+                    result.setContent(RString.REGISTER_FAILED_USER_HAD);
+                }
+            }catch (Exception ex){
+                result.setResult("error");
+                result.setError(ex.getMessage());
+            }
+
+        }
+        return result;
+    }
+
 
 
 }

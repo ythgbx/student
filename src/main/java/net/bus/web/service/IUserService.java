@@ -30,6 +30,8 @@ public interface IUserService {
 
     User registerByWx(String wxUnionId,String name,String photo);
 
+    User registerByActive(String phone,String password,String name,String school,String institute,String source);
+
     User bindWx(User user,String wxUnionId,String name,String photo);
 
     boolean setAccount(User user,String phone,String password);
@@ -43,4 +45,6 @@ public interface IUserService {
     boolean checkPassword(User user,String password);
 
     boolean userCertification(User user,String realName,String id_card);
+
+    boolean updateUser(User user);
 }

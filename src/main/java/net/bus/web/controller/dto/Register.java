@@ -7,8 +7,26 @@ public class Register {
 
     private String phone;
     private String password;
+    private String school;
+    private String institute;
     private String name;
     private String code;
+
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
+    }
+
+    public String getInstitute() {
+        return institute;
+    }
+
+    public void setInstitute(String institute) {
+        this.institute = institute;
+    }
 
     public String getPhone() {
         return phone;
