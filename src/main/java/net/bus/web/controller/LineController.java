@@ -340,7 +340,7 @@ public class LineController {
         BaseResult result = new BaseResult();
         try {
             Line line = new Line();
-            List<LineStation> stations =  request.getList_stations();
+            List<LineStation> stations = request.getList_stations();
             Collections.sort(stations, new Comparator<LineStation>() {
                 //@Override
                 public int compare(LineStation s1, LineStation s2) {
@@ -409,7 +409,7 @@ public class LineController {
     @ResponseBody
     public ModelAndView list(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "0")int page,
                              @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "10")int limit,
-                             HttpServletRequest request, Model model)
+                             HttpServletRequest request)
     {
         logger.info("url:/line/list");
         HttpSession session=request.getSession();
@@ -516,9 +516,6 @@ public class LineController {
         logger.info("url:/line/detail_list");
         ModelAndView mv=new ModelAndView();
         List<Station> lineStations = _lineService.getStationList(id);
-
-
-
 
         return mv;
 

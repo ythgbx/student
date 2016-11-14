@@ -1,6 +1,6 @@
 package net.bus.web.model;
 
-public class Xajh_2016_11 {
+public class Temp_active {
     private Long id;
 
     private String name;

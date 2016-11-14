@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("/xajh")
-public class XajhController {
+public class TempActiveController {
 
     @Autowired
     IXajhService xajhService;

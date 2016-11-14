@@ -99,7 +99,7 @@
                                 <small class="badge badge-success badge-square bounceIn animation-delay2 m-left-xs pull-right">3</small>
                             </a>
                             <ul class="submenu third-level">
-                                <li><a href="#"><span class="submenu-label">城市线路</span></a></li>
+                                <li><a href="/line/list"><span class="submenu-label">城市线路</span></a></li>
                                 <li><a href="/station/listAll"><span class="submenu-label">站点管理</span></a></li>
                                 <li class="openable">
                                     <a href="#">

@@ -43,7 +43,7 @@
         <mapper resource="mapper/ActivityOrderMapper.xml" />
         <mapper resource="mapper/FeedbackMapper.xml"/>
         <mapper resource="mapper/OrdersMapper.xml"/>
-        <mapper resource="mapper/Xajh_2016_11Mapper.xml"/>
+        <mapper resource="mapper/Temp_activeMapper.xml"/>
     </mappers>
 
 </configuration>

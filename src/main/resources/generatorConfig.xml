@@ -212,7 +212,7 @@
                enableUpdateByExample="true">
         </table>-->
 
-        <table tableName="xajh_2016_11" domainObjectName="Xajh_2016_11"  enableSelectByPrimaryKey="true"
+        <table tableName="temp_active" domainObjectName="Temp_active"  enableSelectByPrimaryKey="true"
                enableUpdateByPrimaryKey="true"
                enableDeleteByPrimaryKey="true"
                enableSelectByExample="true"

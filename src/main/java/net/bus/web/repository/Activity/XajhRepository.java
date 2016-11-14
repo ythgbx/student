@@ -1,8 +1,8 @@
 package net.bus.web.repository.Activity;
 
-import net.bus.web.mapper.Xajh_2016_11Mapper;
-import net.bus.web.model.Xajh_2016_11;
-import net.bus.web.model.Xajh_2016_11Example;
+import net.bus.web.mapper.Temp_activeMapper;
+import net.bus.web.model.Temp_active;
+import net.bus.web.model.Temp_activeExample;
 import net.bus.web.repository.ISpecification;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,40 +17,40 @@ import java.util.List;
 @Repository
 public class XajhRepository {
     @Autowired
-    Xajh_2016_11Mapper _mapper;
+    Temp_activeMapper _mapper;
 
 
-    public List<Xajh_2016_11> getAll() {
-        Xajh_2016_11Example example = new Xajh_2016_11Example();
+    public List<Temp_active> getAll() {
+        Temp_activeExample example = new Temp_activeExample();
         return _mapper.selectByExample(example);
     }
 
-    public List<Xajh_2016_11> getAll(int page,int limit) {
-        Xajh_2016_11Example example = new Xajh_2016_11Example();
+    public List<Temp_active> getAll(int page,int limit) {
+        Temp_activeExample example = new Temp_activeExample();
         if(example!=null) {
             return _mapper.selectByExampleWithRowbounds(example, new RowBounds(page*limit, limit)); //分页
         }
-        return new ArrayList<Xajh_2016_11>();
+        return new ArrayList<Temp_active>();
     }
 
-    public List<Xajh_2016_11> getList(ISpecification specification) {
-        Xajh_2016_11Example example = (Xajh_2016_11Example)specification.createExample();
+    public List<Temp_active> getList(ISpecification specification) {
+        Temp_activeExample example = (Temp_activeExample)specification.createExample();
         if(example!=null) {
             return _mapper.selectByExample(example);
         }
-        return new ArrayList<Xajh_2016_11>();
+        return new ArrayList<Temp_active>();
     }
 
-    public List<Xajh_2016_11> getList(ISpecification specification, int page, int limit) {
-        Xajh_2016_11Example example = (Xajh_2016_11Example)specification.createExample();
+    public List<Temp_active> getList(ISpecification specification, int page, int limit) {
+        Temp_activeExample example = (Temp_activeExample)specification.createExample();
         if(example!=null) {
             return _mapper.selectByExampleWithRowbounds(example, new RowBounds(page*limit, limit)); //分页
         }
-        return new ArrayList<Xajh_2016_11>();
+        return new ArrayList<Temp_active>();
     }
 
-    public Xajh_2016_11 getItem(ISpecification specification) {
-        List<Xajh_2016_11> list= _mapper.selectByExample((Xajh_2016_11Example)specification.createExample());
+    public Temp_active getItem(ISpecification specification) {
+        List<Temp_active> list= _mapper.selectByExample((Temp_activeExample)specification.createExample());
         if(!list.isEmpty())
         {
             return list.get(0);
@@ -59,22 +59,22 @@ public class XajhRepository {
         return null;
     }
 
-    public Xajh_2016_11 getItem(Long id) {
+    public Temp_active getItem(Long id) {
         return _mapper.selectByPrimaryKey(id);
     }
 
-    public int insertItem(Xajh_2016_11 Xajh_2016_11)
+    public int insertItem(Temp_active Xajh_2016_11)
     {
         return _mapper.insert(Xajh_2016_11);
     }
 
-    public int updateItem(Xajh_2016_11 Xajh_2016_11)
+    public int updateItem(Temp_active Xajh_2016_11)
     {
         return _mapper.updateByPrimaryKey(Xajh_2016_11);
     }
 
     public boolean existItem(ISpecification specification){
-        int result = _mapper.countByExample((Xajh_2016_11Example)specification.createExample());
+        int result = _mapper.countByExample((Temp_activeExample)specification.createExample());
         if(result>0)
             return true;
 
@@ -83,7 +83,7 @@ public class XajhRepository {
 
     public int count(ISpecification specification)
     {
-        Xajh_2016_11Example example = (Xajh_2016_11Example)specification.createExample();
+        Temp_activeExample example = (Temp_activeExample)specification.createExample();
         if(example!=null){
             return _mapper.countByExample(example);
         }
@@ -98,6 +98,6 @@ public class XajhRepository {
     public int del(Long id){return _mapper.deleteByPrimaryKey(id);}
 
     public int del(ISpecification specification){
-        return _mapper.deleteByExample((Xajh_2016_11Example) specification.createExample());
+        return _mapper.deleteByExample((Temp_activeExample) specification.createExample());
     }
 }

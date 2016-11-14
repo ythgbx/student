@@ -1,6 +1,6 @@
 package net.bus.web.service.Activity.impl;
 
-import net.bus.web.model.Xajh_2016_11;
+import net.bus.web.model.Temp_active;
 import net.bus.web.repository.Activity.XajhRepository;
 import net.bus.web.service.Activity.IXajhService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ public class XajhService implements IXajhService {
     XajhRepository _repository;
 
     public boolean sign(String name, String phone, String school, String institute) {
-        Xajh_2016_11 model = new Xajh_2016_11();
+        Temp_active model = new Temp_active();
         model.setName(name);
         model.setPhone(phone);
         model.setSchool(school);

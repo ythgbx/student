@@ -3,14 +3,14 @@ package net.bus.web.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Xajh_2016_11Example {
+public class Temp_activeExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public Xajh_2016_11Example() {
+    public Temp_activeExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
