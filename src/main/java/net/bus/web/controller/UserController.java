@@ -618,7 +618,7 @@ public class UserController {
                             register.getName(),register.getSchool(),register.getInstitute(),RString.ACTIVE_COMMENT);
                     if (user1!=null&&smsCodeSend(register.getPhone(),"您的初始密码为:"+password)){
                         result.setResult("success");
-                        result.setContent("报名成功!");
+                        result.setContent(password);
                     }else {
                         result.setResult("error");
                         result.setContent("报名失败,请重新报名!");

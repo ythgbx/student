@@ -35,6 +35,8 @@
     <mvc:resources mapping="/images/**" location="/resources/images/"/>
     <mvc:resources mapping="/swagger/**" location="/WEB-INF/swagger/"/>
     <mvc:resources mapping="/upload/**" location="/resources/upload/"/>
+    <mvc:resources mapping="/activity/**" location="/resources/activity/"/>
+
 
     <!-- 扫描net.bus.web包里下的所有class文件，配置注解的类全都装入容器中进行管理 -->
     <context:component-scan base-package="net.bus.web"/>
