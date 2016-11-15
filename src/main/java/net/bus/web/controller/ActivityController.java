@@ -262,18 +262,5 @@ public class ActivityController {
     }
 
 
-    @Auth(role = Auth.Role.USER)
-    @RequestMapping(value="/test", method = RequestMethod.GET)
-    @ApiOperation(value = "测试界面", httpMethod = "GET", response = ModelAndView.class, notes = "测试界面")
-    @ResponseBody
-    public ModelAndView list(
-            HttpServletRequest request, Model model)
-    {
-        logger.info("url:/activity/test");
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("test");
-
-        return mv;
-    }
 
 }
