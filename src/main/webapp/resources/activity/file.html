@@ -205,5 +205,13 @@
     })
 
 </script>
+<script type="text/javascript">
+    $('input[type="text"],textarea').on('click', function () {
+        var target = this;
+        setTimeout(function(){
+            target.scrollIntoViewIfNeeded();
+        },400);
+    });
+</script>
 </body>
 </html>
