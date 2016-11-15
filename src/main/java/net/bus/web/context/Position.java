@@ -26,9 +26,7 @@ public class Position {
     }
 
     public Position()
-    {
-
-    }
+    {}
     public Position(double lat,double lng)
     {
         setLat(lat);

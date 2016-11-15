@@ -51,7 +51,7 @@ public class CommodityController {
      */
     @Auth(role = Auth.Role.USER)
     @RequestMapping(value="/list", method = RequestMethod.GET)
-    public ModelAndView list(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "0")int page,
+    public ModelAndView list(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "1")int page,
                              @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "10")int limit,
                              HttpServletRequest request, Model model)
     {
@@ -145,7 +145,7 @@ public class CommodityController {
     {
         CommodityOrderList commodityOrderList = new CommodityOrderList();
         User currentUser = (User) session.getAttribute(SessionContext.CURRENT_USER);
-        List<Orders> commodityOrders = _commodityService.getUserOrders(currentUser.getId(), page, limit);
+        List<Orders> commodityOrders = _commodityService.getUserOrders(currentUser.getId(), limit, page);
         commodityOrderList.setCommoditys(getOrderDisplayList(commodityOrders));
         commodityOrderList.setPage(page);
         commodityOrderList.setTotal_count(_commodityService.getUserOrdersCount(currentUser.getId()));
@@ -216,7 +216,7 @@ public class CommodityController {
      */
     @Auth(role = Auth.Role.USER)
     @RequestMapping(value="/orderList", method = RequestMethod.GET)
-    public ModelAndView orderList(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "0")int page,
+    public ModelAndView orderList(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "1")int page,
                                   @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "10")int limit,
                                   HttpServletRequest request)
     {

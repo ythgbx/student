@@ -158,7 +158,7 @@ public class CommodityService implements ICommodityService,IProductService {
     }
 
     public List<Orders> getAllOrders(int page,int limit){
-        return  _orderService.getAllOrders(ProducedTypeEnum.COMMODITY, page, limit);
+        return  _orderService.getAllOrders(ProducedTypeEnum.COMMODITY, page-1, limit);
     }
 
     public int getAllOrderCount(){ return _orderService.getAllOrdersCount(ProducedTypeEnum.COMMODITY);}

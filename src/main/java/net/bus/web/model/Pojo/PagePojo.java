@@ -68,7 +68,7 @@ public class PagePojo {
     }
 
     public void setHomePage() {
-        this.homePage = 0;
+        this.homePage = 1;
     }
 
     public int getTrailerPage() {
@@ -95,7 +95,7 @@ public class PagePojo {
     }
 
     public void setPreviousPage() {
-        if (this.currentPage <= 0) {
+        if (this.currentPage == 1) {
             this.previousPage = this.currentPage;
         } else {
             this.previousPage = currentPage-1;
@@ -108,8 +108,8 @@ public class PagePojo {
     }
 
     public void setNextPage() {
-        if (this.currentPage>=this.countPage-1){
-            this.nextPage = this.currentPage;
+        if (this.currentPage>=this.countPage){
+            this.nextPage = this.countPage;
         }else {
             this.nextPage = currentPage+1;
         }

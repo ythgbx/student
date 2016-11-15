@@ -25,6 +25,10 @@ public class UserService  implements IUserService {
         return _rootRepository.getAllUsers(page - 1, limit);
     }
 
+    public List<User> getAllUsersByExample(String source, int page, int limit) {
+        return _rootRepository.getAllUsersByExample(new UserPhoneSpecification(null,source),page-1,limit);
+    }
+
     public List<User> getUsers(List<Long> ids)
     {
         return _rootRepository.getItems(new UserIdsSpecification(ids));
@@ -42,6 +46,10 @@ public class UserService  implements IUserService {
 
     public int getAllCount() {
         return _rootRepository.Count();
+    }
+
+    public int getAllCount(String source) {
+        return _rootRepository.CountByExample(new UserPhoneSpecification(null,source));
     }
 
     public User getUserByWx(String wxUnionId){

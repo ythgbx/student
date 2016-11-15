@@ -1,5 +1,6 @@
 <#include "common/_layout.ftl">
 <@layoutHead title="网站"></@layoutHead>
+
 <@layoutBody>
 <!-- 这是nested的内容-->
 
@@ -10,15 +11,14 @@
 </ul>
 <div class="smart-widget">
     <div class="smart-widget-header">
-        用户列表
+        活动管理
         <div class="search-input pull-right">
             <input type="text" class="form-control input-sm inline-block" id="sea">
-            <a class="input-icon text-normal" onclick="bus.searchTicket()">
+            <a class="input-icon text-normal" onclick="bus.search()">
                 <i class="ion-ios7-search-strong"></i>
             </a>
         </div>
     </div>
-
     <div class="smart-widget-inner">
         <div class="smart-widget-body">
             <table class="table table-hover">
@@ -30,16 +30,16 @@
                 <#--<label for="chkAll"></label>-->
                 <#--</div>-->
                 <#--</th>-->
-                    <th>线路ID</th>
-                    <th>起点站</th>
-                    <th>终点站</th>
-                    <th>乘车时间</th>
-                    <th>消费</th>
+                    <th>用户ID</th>
+                    <th>姓名</th>
+                    <th>学校</th>
+                    <th>院系</th>
+                    <th>活动名称</th>
                     <#--<th>操作</th>-->
                 </tr>
                 </thead>
                 <tbody>
-                    <#list resultTicketList.tickets as ticket>
+                    <#list userList as oneUser>
                     <tr class="active">
                     <#--<td class="text-center">-->
                     <#--<div class="custom-checkbox">-->
@@ -47,16 +47,11 @@
                     <#--<label for="chk${oneUser.id}"></label>-->
                     <#--</div>-->
                     <#--</td>-->
-                        <td>${ticket.id}</td>
-                        <td>${ticket.start_station}</td>
-                        <td>${ticket.end_station}</td>
-                        <td id="time">${ticket.time?number_to_date?string("YYYY-MM-dd HH:mm:ss")}</td>
-                        <td>-${ticket.price}</td>
-                        <#--<#if oneUser.type==1>-->
-                            <#--<td>管理员</td>-->
-                        <#--<#else>-->
-                            <#--<td>用户</td>-->
-                        <#--</#if>-->
+                        <td>${oneUser.id}</td>
+                        <td>${oneUser.name}</td>
+                        <td>${oneUser.school}</td>
+                        <td>${oneUser.institute}</td>
+                        <td>${oneUser.source}</td>
                         <#--<td><input type="button" data-toggle="modal" data-target="#Recharge" id="" value="充值" onclick="bus.getUserBuyId(this)"/></td>-->
                     </tr>
                     </#list>
@@ -64,13 +59,13 @@
                 <tbody>
                 <tr>
                     <ul class="pagination">
-                        <li><a href="/ticket/userList?page=${pagePojo.homePage}">首页</a></li>
-                        <li><a href="/ticket/userList?page=${pagePojo.getPreviousPage()}">上一页</a></li>
-                        <li><a href="#">当前第${pagePojo.getCurrentPage()+1}页</a></li>
+                        <li><a href="/user/activeAll?page=${pagePojo.homePage}">首页</a></li>
+                        <li><a href="/user/activeAll?page=${pagePojo.getPreviousPage()}">上一页</a></li>
+                        <li><a href="#">当前第${pagePojo.getCurrentPage()}页</a></li>
                         <li><a href="#">共${pagePojo.countPage}页</a></li>
                         <li><a href="#">总${pagePojo.amount}条数据</a></li>
-                        <li><a href="/ticket/userList?page=${pagePojo.getNextPage()}">下一页</a></li>
-                        <li><a href="/ticket/userList?page=${pagePojo.trailerPage-1}">尾页</a></li>
+                        <li><a href="/user/activeAll?page=${pagePojo.getNextPage()}">下一页</a></li>
+                        <li><a href="/user/activeAll?page=${pagePojo.trailerPage}">尾页</a></li>
                     </ul>
                 </tr>
                 </tbody>
@@ -89,47 +84,42 @@
                     <#--&times;-->
                     </button>
                     <h4 class="modal-title" id="myModalLabel">
-                        用户乘车记录
+                        积分充值
                     </h4>
                 </div>
                 <div class="modal-body">
 
-                    <label for="exampleInputEmail1">用户ID</label>
+                    <label for="exampleInputEmail1">确认充值账号ID</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" name="id">
-                    <label for="exampleInputEmail1">起点站</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" name="start_station">
-                    <label for="exampleInputEmail1">终点站</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" name="end_station">
-                    <label for="exampleInputEmail1">乘车时间</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" name="time">
-                    <label for="exampleInputEmail1">消费</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" name="price">
+                    <label for="exampleInputEmail1">充值额度</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" name="addNum"
+                           placeholder="请输入充值积分">
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                    </button>
-                    <button type="button" class="btn btn-primary btn-lg " onclick="bus.addPoint()">充值</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button onclick="bus.addPoint()" type="button" class="btn btn-primary">充值</button>
                 </div>
             </form>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
+
 </@layoutBody>
 
 <@layoutFooter>
 <script type="text/javascript">
-    var Bus = ((function () {// 根据用户id搜索乘车记录
+    var Bus = ((function () {
         function Bus() {
         }
-        Bus.prototype.searchTicket = function () {
+        Bus.prototype.search = function () {
             var d = document.getElementById("sea");
-            window.location.href="/ticket/userList?id="+d.value;
+            window.location.href="/user/activeAll?source="+d.value;
+            console.log(d.value)
         };
-
-
         return Bus;
     })());
     window.bus = new Bus();
 </script>
+
 </@layoutFooter>

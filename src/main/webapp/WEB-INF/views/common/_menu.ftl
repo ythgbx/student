@@ -49,7 +49,7 @@
                     </a>
                     <ul class="submenu">
                         <li><a href="/user/list"><span class="submenu-label">用户详情信息</span></a></li>
-                        <li><a href="button.html"><span class="submenu-label">积分充值</span></a></li>
+                        <#--<li><a href="button.html"><span class="submenu-label">积分充值</span></a></li>-->
                         <li class="openable">
                             <a href="#">
                                 <small class="badge badge-success badge-square bounceIn animation-delay2 m-left-xs pull-right">2</small>
@@ -63,7 +63,7 @@
                         <li><a href="widget.html"><span class="submenu-label">用户反馈信息</span></a></li>
                         <li><a href="/ticket/userList?id=110"><span class="submenu-label">乘车记录</span></a></li>
                         <li><a href="calendar.html"><span class="submenu-label">交易记录</span></a></li>
-                        <li><a href="treeview.html"><span class="submenu-label">Treeview</span></a></li>
+                        <li><a href="/user/activeAll"><span class="submenu-label">活动管理</span></a></li>
                         <li><a href="nestable_list.html"><span class="submenu-label">Nestable Lists</span></a></li>
                     </ul>
                 </li>

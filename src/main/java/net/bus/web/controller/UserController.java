@@ -554,7 +554,7 @@ public class UserController {
     @Auth(role = Auth.Role.USER)
     @RequestMapping(value="/list", method = RequestMethod.GET)
     @ApiOperation(value = "用户列表页面", httpMethod = "GET", response = ModelAndView.class, notes = "用户列表页面")
-    public ModelAndView list(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "0")int page,
+    public ModelAndView list(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "1")int page,
                              @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "10")int limit,
                              HttpServletRequest request,Model model)
     {
@@ -617,11 +617,10 @@ public class UserController {
                     User user1 = service.registerByActive(register.getPhone(),password,
                             register.getName(),register.getSchool(),register.getInstitute(),RString.ACTIVE_COMMENT);
                     if (user1!=null&&smsCodeSend(register.getPhone(),"您的初始密码为:"+password)){
+                        result.setContent(password);
                         result.setResult("success");
-                        result.setContent("报名成功!");
                     }else {
                         result.setResult("error");
-                        result.setContent("报名失败,请重新报名!");
                     }
                 }else {
                     result.setResult("failure");
@@ -634,6 +633,32 @@ public class UserController {
 
         }
         return result;
+    }
+
+    /**
+     * 获取报名了获得
+     * @param page
+     * @param limit
+     * @param request
+     * @return
+     */
+    @Auth(role = Auth.Role.USER)
+    @RequestMapping(value="/activeAll", method = RequestMethod.GET)
+    @ApiOperation(value = "用户列表页面", httpMethod = "GET", response = ModelAndView.class, notes = "用户列表页面")
+    public ModelAndView activeAll(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "1")int page,
+                             @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "10")int limit,
+                                  @ApiParam(required = true, name = "source", value = "活动名称")@RequestParam(value = "source",required = true,defaultValue = "笑傲江湖2016活动")String source,
+                             HttpServletRequest request)
+    {
+        logger.info("url:/user/activeAll");
+        session = request.getSession();
+        PagePojo pagePojo = new PagePojo(service.getAllCount(source),limit,page);
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("tempActive_list");
+        List<User> users= service.getAllUsersByExample(source,page,limit);
+        mv.addObject("userList",users);
+        session.setAttribute("pagePojo",pagePojo);
+        return mv;
     }
 
 

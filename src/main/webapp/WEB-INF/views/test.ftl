@@ -183,6 +183,8 @@ flex(100, 1);</script>
 </script>
 <script type="text/javascript">
     $("#checkcode").click(function(e){
+
+
         e.preventDefault()
         var phone=$("#input1").val();
         console.log(JSON.stringify({"phone":phone}))
@@ -194,7 +196,7 @@ flex(100, 1);</script>
                 data: JSON.stringify({"phone":phone}),
                 type: "POST",
                 contentType:"application/json",
-                success: function () {
+                success: function (data) {
                     alert("发送成功！");
                 },
                 failure:function () {

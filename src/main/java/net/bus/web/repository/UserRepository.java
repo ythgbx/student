@@ -30,6 +30,10 @@ public class UserRepository {
         return userMapper.selectByExampleWithRowbounds(example, new RowBounds(page*limit, limit));
     }
 
+    public List<User> getAllUsersByExample(ISpecification specification,int page,int limit) {
+        return userMapper.selectByExampleWithRowbounds((UserExample)specification.createExample(), new RowBounds(page*limit, limit));
+    }
+
     public List<User> getItems(ISpecification specification) {
         UserExample example = (UserExample)specification.createExample();
         if(example==null)
@@ -72,5 +76,9 @@ public class UserRepository {
 
     public int Count(){
         return userMapper.countByExample(null);
+    }
+
+    public int CountByExample(ISpecification specification){
+        return userMapper.countByExample((UserExample)specification.createExample());
     }
 }

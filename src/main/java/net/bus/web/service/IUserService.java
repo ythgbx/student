@@ -12,6 +12,8 @@ public interface IUserService {
 
     List<User> getAllUsers(int page,int limit);
 
+    List<User> getAllUsersByExample(String source,int page,int limit);
+
     List<User> getUsers(List<Long> ids);
 
     User getUser(Long id);
@@ -19,6 +21,8 @@ public interface IUserService {
     User getUser(String phone);
 
     int getAllCount();
+
+    int getAllCount(String source);
 
     User getUserByWx(String wxUnionId);
 
