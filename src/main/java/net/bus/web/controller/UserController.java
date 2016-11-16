@@ -601,7 +601,7 @@ public class UserController {
             user.setInstitute(register.getInstitute());
             if (service.updateUser(user));{
                 result.setResult("success");
-                result.setContent("报名成功!");
+                result.setContent("true");
                 return result;
             }
         }else {
