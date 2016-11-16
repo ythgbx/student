@@ -35,7 +35,7 @@ public class StationService implements IStationService {
 
     public List<Station> getAllStations(int page,int limit)
     {
-        return  _rootRepository.getAll(page , limit);
+        return  _rootRepository.getAll(page-1 , limit);
     }
 
     public List<Station> getPropStations(String propName)

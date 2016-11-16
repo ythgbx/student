@@ -49,11 +49,11 @@ public class ActivityService implements IActivityService,IProductService {
     private Boolean _payDebug;
 
     public List<Activity> getAllActivity(int page,int limit){
-        return activityRepository.getAll(page,limit);
+        return activityRepository.getAll(page-1,limit);
     }
 
     public List<Orders> getUserActivity(User user, int page, int limit){
-        return _orderService.getUserOrders(user.getId(),ProducedTypeEnum.ACTIVITY,page,limit);
+        return _orderService.getUserOrders(user.getId(),ProducedTypeEnum.ACTIVITY,page-1,limit);
     }
 
     public int getUserActivityCount(User user){

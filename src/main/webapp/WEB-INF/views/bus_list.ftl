@@ -65,11 +65,11 @@
                     <ul class="pagination">
                         <li><a href="/bus/list?page=${pagePojo.homePage}">首页</a></li>
                         <li><a href="/bus/list?page=${pagePojo.getPreviousPage()}">上一页</a></li>
-                        <li><a href="#">当前第${pagePojo.getCurrentPage()+1}页</a></li>
+                        <li><a href="#">当前第${pagePojo.getCurrentPage()}页</a></li>
                         <li><a href="#">共${pagePojo.countPage}页</a></li>
                         <li><a href="#">总${pagePojo.amount}条数据</a></li>
                         <li><a href="/bus/list?page=${pagePojo.getNextPage()}">下一页</a></li>
-                        <li><a href="/bus/list?page=${pagePojo.trailerPage-1}">尾页</a></li>
+                        <li><a href="/bus/list?page=${pagePojo.trailerPage}">尾页</a></li>
                     </ul>
                 </tr>
                 </tbody>
