@@ -14,7 +14,7 @@ public class CommodityDetail extends BaseResult{
     private String depict;
     private BigDecimal price;
     private Integer amount;
-    private String itemImg;
+    private String ItemImg;
     private String img;
     private Integer point;
     private Integer couponType;
@@ -62,11 +62,11 @@ public class CommodityDetail extends BaseResult{
     }
 
     public String getItemImg() {
-        return itemImg;
+        return ItemImg;
     }
 
     public void setItemImg(String itemImg) {
-        this.itemImg = itemImg;
+        this.ItemImg = itemImg;
     }
 
     public String getImg() {

@@ -145,7 +145,7 @@ public class CommodityController {
     {
         CommodityOrderList commodityOrderList = new CommodityOrderList();
         User currentUser = (User) session.getAttribute(SessionContext.CURRENT_USER);
-        List<Orders> commodityOrders = _commodityService.getUserOrders(currentUser.getId(), limit, page);
+        List<Orders> commodityOrders = _commodityService.getUserOrders(currentUser.getId(), page, limit);
         commodityOrderList.setCommoditys(getOrderDisplayList(commodityOrders));
         commodityOrderList.setPage(page);
         commodityOrderList.setTotal_count(_commodityService.getUserOrdersCount(currentUser.getId()));
@@ -162,7 +162,7 @@ public class CommodityController {
             commodityItem.setName(commodity.getName());
             commodityItem.setDepict(commodity.getDepict());
             commodityItem.setPrice(commodity.getPrice());
-            commodityItem.setItemimg(commodity.getItemImg());
+            commodityItem.setImg(commodity.getItemImg());
             displayList.add(commodityItem);
         }
         return displayList;

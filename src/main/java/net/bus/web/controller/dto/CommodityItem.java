@@ -11,7 +11,7 @@ public class CommodityItem {
 
     private String name;
 
-    private String Itemimg;
+    private String img;
 
     private BigDecimal price;
 
@@ -33,12 +33,12 @@ public class CommodityItem {
         this.name = name;
     }
 
-    public String getItemimg() {
-        return Itemimg;
+    public String getImg() {
+        return img;
     }
 
-    public void setItemimg(String Itemimg) {
-        this.Itemimg = Itemimg;
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public BigDecimal getPrice() {

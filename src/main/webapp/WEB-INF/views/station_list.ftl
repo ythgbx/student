@@ -294,9 +294,7 @@
                 $.each(t, function () {
                     d[this.name] = this.value;
                 });
-                console.log(d);
             }
-            ;
             $.ajax({
                 url: url,
                 data: JSON.stringify(d),
