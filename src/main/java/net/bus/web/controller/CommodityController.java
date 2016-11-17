@@ -162,7 +162,7 @@ public class CommodityController {
             commodityItem.setName(commodity.getName());
             commodityItem.setDepict(commodity.getDepict());
             commodityItem.setPrice(commodity.getPrice());
-            commodityItem.setItemimg(commodity.getItemImg());
+            commodityItem.setItemImg(commodity.getItemImg());
             displayList.add(commodityItem);
         }
         return displayList;
