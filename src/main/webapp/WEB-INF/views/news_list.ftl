@@ -99,7 +99,10 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">新闻内容</label>
-                        <input type="text" class="form-control" id="text2" name="content">
+                        <#--<input type="text" class="form-control" id="text2" name="content">-->
+                        <textarea class="form-control" rows="3" name="content" cols="3">
+
+                        </textarea>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">新闻类型</label>
@@ -368,6 +371,7 @@ window.bus = new Bus();
             $.each(t, function () {
                 console.log("aaa");
                 d[this.name] = this.value;
+                console.log(d)
             });
         }else if(event.srcElement.id=="update"){
             url="/news/updatenews";

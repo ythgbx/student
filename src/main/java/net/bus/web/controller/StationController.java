@@ -177,7 +177,7 @@ public class StationController {
         logger.info("station del");
         BaseResult result = new BaseResult();
         List<Long> ids = request.getIds();
-        if(_stationService.del(ids)){
+        if(_stationService.del(ids)&&_stationService.delLineStation(ids)){
             result.setResult("success");
             result.setContent("删除成功");
         }else{
@@ -186,6 +186,7 @@ public class StationController {
         }
         return result;
     }
+
 
     /**
      * 根据Id获取站点详情

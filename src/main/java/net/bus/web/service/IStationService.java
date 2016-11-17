@@ -26,6 +26,8 @@ public interface IStationService {
 
     Boolean del(List<Long> longList);
 
+    Boolean delLineStation(List<Long> longList);
+
     Station getDetails(Long id);
 
     boolean updateStation(Station station);

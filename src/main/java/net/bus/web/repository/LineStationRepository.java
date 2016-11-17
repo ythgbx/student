@@ -68,4 +68,11 @@ public class LineStationRepository {
     {
         return _mapper.updateByPrimaryKey(lineStation);
     }
+
+    public int delete(ISpecification specification){
+       return  _mapper.deleteByExample((LineStationExample)specification.createExample());
+
+    }
+
 }
+

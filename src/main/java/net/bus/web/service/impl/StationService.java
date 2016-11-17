@@ -6,6 +6,7 @@ import net.bus.web.model.Station;
 import net.bus.web.repository.LineStationRepository;
 import net.bus.web.repository.StationRepository;
 import net.bus.web.repository.specification.LineStationLineIdsSpecification;
+import net.bus.web.repository.specification.LineStationStationIdsSpecification;
 import net.bus.web.repository.specification.StationIdsSpecification;
 import net.bus.web.service.ILineService;
 import net.bus.web.service.IStationService;
@@ -93,6 +94,14 @@ public class StationService implements IStationService {
             result = _rootRepository.delete(Specification);
         }
         if(result  > 0){
+            return true;
+        }
+        return false;
+    }
+
+    public Boolean delLineStation(List<Long> longList) {
+        LineStationStationIdsSpecification lineStationStationIdsSpecification=new LineStationStationIdsSpecification(longList);
+        if(_lineStationRepository.delete(lineStationStationIdsSpecification)>0){
             return true;
         }
         return false;
