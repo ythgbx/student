@@ -69,7 +69,7 @@
                             >
                                 <i class="fa fa-times" id="button2"></i>
                             </a>
-                        </td><!--删除线路 -->
+                        </td><!--删除站点 -->
                     </tr>
                     </#list>
 
@@ -77,13 +77,13 @@
 
             </table>
             <ul class="pagination">
-                <li><a href="/line/detail_list?page=${pagePojo.homePage}">首页</a></li>
-                <li><a href="/line/detail_list?page=${pagePojo.getPreviousPage()}">上一页</a></li>
+                <li><a href="/line/detail_list?page=${pagePojo.homePage}&&id=${id}">首页</a></li>
+                <li><a href="/line/detail_list?page=${pagePojo.getPreviousPage()}&&id=${id}">上一页</a></li>
                 <li><a href="#">当前第${pagePojo.getCurrentPage()}页</a></li>
                 <li><a href="#">共${pagePojo.countPage}页</a></li>
                 <li><a href="#">总${pagePojo.amount}条数据</a></li>
-                <li><a href="/line/detail_list?page=${pagePojo.getNextPage()}">下一页</a></li>
-                <li><a href="/line/detail_list?page=${pagePojo.trailerPage}">尾页</a></li>
+                <li><a href="/line/detail_list?page=${pagePojo.getNextPage()}&&id=${id}">下一页</a></li>
+                <li><a href="/line/detail_list?page=${pagePojo.trailerPage}&&id=${id}">尾页</a></li>
             </ul>
         </div>
 
@@ -132,6 +132,47 @@
             </form>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
+
+</div>
+
+<!-- 模态框（Modal） 修改-->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="form2" enctype="multipart/form-data" >
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <#--&times;-->
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        修改站点
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="id" >
+                    <label for="exampleInputEmail1">站点名称</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" name="name">
+
+                    <label for="exampleInputEmail1">站点经度</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" name="lng">
+
+                    <label for="exampleInputEmail1">站点维度</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" name="lat"
+                           placeholder="请输入该站点所在纬度">
+
+                    <label for="exampleInputEmail1">站点说明</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" name="annotation">
+                    <label for="exampleInputEmail1">站点价格</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" name="price">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button onclick="operate()" id="update" type="button" class="btn btn-primary">提交</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+
 </div>
 
 
@@ -203,7 +244,7 @@
             return ;
         }
         $.ajax({
-            url: "/line/del",
+            url: "/station/del",
             data: JSON.stringify({"ids": ids}),
             type: "DELETE",
             dataType: "json",
@@ -235,7 +276,7 @@
                 d[this.name] = this.value;
             });
         }else if(event.srcElement.id=="update"){
-            url="/line/updateline";
+            url="/station/update";
             var t = $('#form2').serializeArray();
             console.log("bbb");
             $.each(t, function () {
@@ -257,6 +298,31 @@
         });
         window.location.reload();
     }
+</script>
+<script>
+   function getContent(node) {//通过ID获取站点详情
+        var tr1 = node.parentNode.parentNode;//获取id
+        var id = tr1.cells[1].innerText;
+        $.ajax({
+            url: "/station/detail?id=" + id,
+            type: "GET",
+            contentType: "application/json;charset=utf-8",
+            success: function (data) {
+                if (data != null || data != "") {
+                    $("[name=id]").val(data.id);
+                    $("[name=name]").val(data.name);
+                    $("[name=lng]").val(data.pos.lng);
+                    $("[name=lat]").val(data.pos.lat);
+                    $("[name=annotation]").val(data.annotation);
+                    $("[name=price]").val(data.price);
+                } else {
+                    alert("数据获取失败!");
+                }
+
+            }
+        })
+
+    };
 </script>
 
 </@layoutFooter>

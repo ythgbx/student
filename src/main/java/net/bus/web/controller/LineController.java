@@ -513,18 +513,24 @@ public class LineController {
     @ApiOperation(value = "线路详细列表界面", httpMethod = "GET", response = ModelAndView.class, notes = "线路详细列表界面")
     public ModelAndView LineDetail (@ApiParam(required = true, name = "id", value = "id")
                                @RequestParam(value = "id", required = true, defaultValue = "0")long id,
+                                    @RequestParam(value = "page", required = true, defaultValue = "1")int page,
+                                    @RequestParam(value = "limit", required = true, defaultValue = "10")int limit,
                                     HttpServletRequest request
                                     ) {
         logger.info("url:/line/detail_list");
         ModelAndView mv=new ModelAndView();
         mv.setViewName("linestation_list");
-        List<Station> lineStations = _lineService.getStationList(id);
+        List<Station> lineStations = _lineService.getStationList(id,page,limit);
+        PagePojo pagePojo = new PagePojo(lineStations.size(),limit,page);
         mv.addObject("linestation",lineStations);
         mv.addObject("id",id);
+        session.setAttribute("pagePojo",pagePojo);
         return mv;
 
 
     }
+
+
 
 
 }
