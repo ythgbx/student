@@ -12,6 +12,7 @@ import java.util.List;
 public class LineDetail extends BaseResult{
 
     private Long id;
+    private String name;
     private String start_station;
     private String end_station;
     private Long start_time;
@@ -30,6 +31,14 @@ public class LineDetail extends BaseResult{
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getStart_station() {

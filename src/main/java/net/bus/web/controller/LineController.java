@@ -214,6 +214,7 @@ public class LineController {
 
         LineDetail lineDetail = new LineDetail();
         lineDetail.setId(line.getId());
+        lineDetail.setName(line.getName());
         lineDetail.setStart_station(line.getStart());
         lineDetail.setEnd_station(line.getEnd());
         lineDetail.setStart_time(line.getStartTime().getTime());
