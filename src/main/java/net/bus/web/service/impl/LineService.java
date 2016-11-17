@@ -113,6 +113,13 @@ public class LineService implements ILineService {
         return _rootRepository.getItem(id);
     }
 
+    public List<LineStation> getLineStations(Long id,int page,int limit)
+    {
+        List<Long> lineIds = new ArrayList<Long>();
+        lineIds.add(id);
+        List<LineStation> listLineStation = _lineStationRepository.getList(new LineStationLineIdsSpecification(lineIds), page, limit);
+        return listLineStation;
+    }
     public List<LineStation> getLineStations(Long id)
     {
         List<Long> lineIds = new ArrayList<Long>();
@@ -129,6 +136,24 @@ public class LineService implements ILineService {
             stationIds.add(lineStation.getStationId());
         }
         List<Station> stationList = _stationRepository.getList(new StationIdsSpecification(stationIds));
+        Collections.sort(stationList, new Comparator<Station>() {
+            //@Override
+            public int compare(Station s1, Station s2) {
+                Integer indexS1 = getLineStationIndex(listLineStation, s1);
+                Integer indexS2 = getLineStationIndex(listLineStation, s2);
+                return indexS1.compareTo(indexS2);
+            }
+        });
+        return stationList;
+    }
+    public List<Station> getStationList(Long id,int page,int limit)
+    {
+        final List<LineStation> listLineStation = getLineStations(id);
+        List<Long> stationIds = new ArrayList<Long>();
+        for(LineStation lineStation:listLineStation){
+            stationIds.add(lineStation.getStationId());
+        }
+        List<Station> stationList = _stationRepository.getList(new StationIdsSpecification(stationIds), page-1,limit);
         Collections.sort(stationList, new Comparator<Station>() {
             //@Override
             public int compare(Station s1, Station s2) {
@@ -201,6 +226,7 @@ public class LineService implements ILineService {
     {
         return _rootRepository.count();
     }
+
 
     public int getCityLinesCount(String city_name)
     {

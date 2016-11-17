@@ -30,6 +30,7 @@ public interface ILineService {
     List<LineStation> getLineStations(Long id);
 
     List<Station> getStationList(Long id);
+    List<Station> getStationList(Long id,int page,int limit);
 
     boolean checkLineExist(Long id);
 
