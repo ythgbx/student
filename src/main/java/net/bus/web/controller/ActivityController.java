@@ -57,7 +57,7 @@ public class ActivityController {
     @ResponseBody
     @RequestMapping(value = "/list/all",method = RequestMethod.GET)
     @ApiOperation(value = "获取全部活动", httpMethod = "GET", response = ActivityList.class, notes="获取全部活动")
-    public IResult all(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "0")int page,
+    public IResult all(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "1")int page,
                        @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "5")int limit)
     {
         logger.info("activity all query");
@@ -155,7 +155,7 @@ public class ActivityController {
     @ResponseBody
     @RequestMapping(value = "/list/mine",method = RequestMethod.GET)
     @ApiOperation(value = "我的活动页面", httpMethod = "GET", response = ActivityList.class, notes="获取全部活动")
-    public BaseResult mine(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "0")int page,
+    public BaseResult mine(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "1")int page,
                            @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "5")int limit){
         ActivityList result = new ActivityList();
         User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
@@ -182,7 +182,7 @@ public class ActivityController {
     @RequestMapping(value="/list", method = RequestMethod.GET)
     @ApiOperation(value = "活动列表页面", httpMethod = "GET", response = ModelAndView.class, notes = "活动列表页面")
     @ResponseBody
-    public ModelAndView list(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "0")int page,
+    public ModelAndView list(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "1")int page,
                              @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "10")int limit,
                              HttpServletRequest request, Model model)
     {

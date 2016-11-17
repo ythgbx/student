@@ -55,6 +55,7 @@
                         <#--<td><input type="button" data-toggle="modal" data-target="#Recharge" id="" value="充值" onclick="bus.getUserBuyId(this)"/></td>-->
                     </tr>
                     </#list>
+                <p>活动报名总人数:${pagePojo.amount}人</p>
                 </tbody>
                 <tbody>
                 <tr>
@@ -74,36 +75,36 @@
     </div>
 </div>
 
-<!-- 模态框（Modal） 充值-->
-<div class="modal fade" id="Recharge" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form id="fromRecharge"  enctype="multipart/form-data" method="post">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    <#--&times;-->
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel">
-                        积分充值
-                    </h4>
-                </div>
-                <div class="modal-body">
+<#--<!-- 模态框（Modal） 充值&ndash;&gt;-->
+<#--<div class="modal fade" id="Recharge" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
+    <#--<div class="modal-dialog">-->
+        <#--<div class="modal-content">-->
+            <#--<form id="fromRecharge"  enctype="multipart/form-data" method="post">-->
+                <#--<div class="modal-header">-->
+                    <#--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">-->
+                    <#--&lt;#&ndash;&times;&ndash;&gt;-->
+                    <#--</button>-->
+                    <#--<h4 class="modal-title" id="myModalLabel">-->
+                        <#--积分充值-->
+                    <#--</h4>-->
+                <#--</div>-->
+                <#--<div class="modal-body">-->
 
-                    <label for="exampleInputEmail1">确认充值账号ID</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" name="id">
-                    <label for="exampleInputEmail1">充值额度</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" name="addNum"
-                           placeholder="请输入充值积分">
+                    <#--<label for="exampleInputEmail1">确认充值账号ID</label>-->
+                    <#--<input type="text" class="form-control" id="exampleInputEmail1" name="id">-->
+                    <#--<label for="exampleInputEmail1">充值额度</label>-->
+                    <#--<input type="text" class="form-control" id="exampleInputEmail1" name="addNum"-->
+                           <#--placeholder="请输入充值积分">-->
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button onclick="bus.addPoint()" type="button" class="btn btn-primary">充值</button>
-                </div>
-            </form>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
-</div>
+                <#--</div>-->
+                <#--<div class="modal-footer">-->
+                    <#--<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>-->
+                    <#--<button onclick="bus.addPoint()" type="button" class="btn btn-primary">充值</button>-->
+                <#--</div>-->
+            <#--</form>-->
+        <#--</div><!-- /.modal-content &ndash;&gt;-->
+    <#--</div><!-- /.modal &ndash;&gt;-->
+<#--</div>-->
 
 </@layoutBody>
 

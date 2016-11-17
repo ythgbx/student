@@ -95,7 +95,7 @@ public class BusController {
     @ResponseBody
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ApiOperation(value = "获取车辆信息", httpMethod = "GET", response = LineDetail.class, notes = "获取车辆信息")
-    public ModelAndView list(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "0")int page,
+    public ModelAndView list(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "1")int page,
                              @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "10")int limit,
                              HttpServletRequest request, Model model)
     {
@@ -103,7 +103,7 @@ public class BusController {
         ModelAndView mv = new ModelAndView();
         HttpSession session = request.getSession();
         PagePojo pagePojo = new PagePojo(_busService.getAllCount(),limit,page);
-        List<Bus> busList = _busService.getAllBus();
+        List<Bus> busList = _busService.getAllBus(page,limit);
         if(busList!=null){
             model.addAttribute("success","获取成功!");
             session.setAttribute("busList",busList);

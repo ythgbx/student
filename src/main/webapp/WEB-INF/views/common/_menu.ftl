@@ -62,7 +62,7 @@
                         </li>
                         <li><a href="widget.html"><span class="submenu-label">用户反馈信息</span></a></li>
                         <li><a href="/ticket/userList?id=110"><span class="submenu-label">乘车记录</span></a></li>
-                        <li><a href="calendar.html"><span class="submenu-label">交易记录</span></a></li>
+                        <li><a href="/commodity/orderList"><span class="submenu-label">交易记录</span></a></li>
                         <li><a href="/user/activeAll"><span class="submenu-label">活动管理</span></a></li>
                         <li><a href="nestable_list.html"><span class="submenu-label">Nestable Lists</span></a></li>
                     </ul>
@@ -82,7 +82,7 @@
                         <li><a href="/activity/list"><span class="submenu-label">活动中心</span></a></li>
                         <li><a href="/news/list"><span class="submenu-label">新闻中心</span></a></li>
                         <li><a href="/line/list"><span class="submenu-label">线路中心</span></a></li>
-                        <li><a href="/activity/test"><span class="submenu-label">测试界面</span></a></li>
+                        <#--<li><a href="/activity/test"><span class="submenu-label">测试界面</span></a></li>-->
                     </ul>
                 </li>
                 <li class="openable bg-palette4">

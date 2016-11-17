@@ -145,7 +145,7 @@ public class StationController {
     @ResponseBody
     @RequestMapping(value = "/listAll", method = RequestMethod.GET)
     @ApiOperation(value = "获取全部站点", httpMethod = "GET", response = StationList.class, notes = "获取全部站点")
-    public ModelAndView all(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "0")int page,
+    public ModelAndView all(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "1")int page,
                             @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "10")int limit,
                             HttpServletRequest request)
     {

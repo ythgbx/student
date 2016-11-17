@@ -17,7 +17,7 @@ public interface IBusService {
 
     HashMap<Long,Integer> getBusesCurrentTrack(long lineId,BusTracks.Direction direction);
 
-    List<Bus> getAllBus();
+    List<Bus> getAllBus(int page,int limit);
 
     int getAllCount();
 

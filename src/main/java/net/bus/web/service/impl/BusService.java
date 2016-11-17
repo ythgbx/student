@@ -60,8 +60,9 @@ public class BusService  implements IBusService {
         return result;
     }
 
-    public List<Bus> getAllBus() {
-        return _rootRepository.getAll();
+
+    public List<Bus> getAllBus(int page,int limit) {
+        return _rootRepository.getAll(page-1,limit);
     }
 
     public int getAllCount() {
