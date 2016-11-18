@@ -159,8 +159,10 @@ public class UserController {
     @RequestMapping(value = "/getsignrecord", method = RequestMethod.GET)
     public IResult getSignRecord(int page,int limit){
         User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
-        List<SignRecordPojo> records = signService.getSignRecordByUserId(user.getId(),page,limit);
         int totoal_count = pointRecordService.getSignRecordCount(user);
+        List<SignRecordPojo> records = signService.getSignRecordByUserId(user.getId(),page,totoal_count);
+//        List<SignRecordPojo> records = signService.getSignRecordByUserId(user.getId());
+
         SignRecordList signRecordList = new SignRecordList();
         for (SignRecordPojo item : records){
             signRecordList.getList().add(new SignRecordItem(item.getSuccession(),item.getAccount()));

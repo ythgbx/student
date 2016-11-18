@@ -3,6 +3,7 @@ package net.bus.web.service.impl;
 import net.bus.web.enums.OrderTypeEnum;
 import net.bus.web.enums.ProducedTypeEnum;
 import net.bus.web.model.Commodity;
+import net.bus.web.model.CommodityType;
 import net.bus.web.model.Orders;
 import net.bus.web.model.Pojo.AlipayOrderCallBack;
 import net.bus.web.model.Pojo.AsyncCallBack;
@@ -14,6 +15,7 @@ import net.bus.web.model.type.PointSourceType;
 import net.bus.web.model.type.UserCouponType;
 import net.bus.web.repository.CommodityOrderRepository;
 import net.bus.web.repository.CommodityRepository;
+import net.bus.web.repository.CommodityTypeRepository;
 import net.bus.web.repository.specification.CommodityIdsSpecification;
 import net.bus.web.repository.specification.CommodityOrderTradeNoSpecification;
 import net.bus.web.repository.specification.CommodityOrderUserIdAndPaied;
@@ -37,6 +39,8 @@ public class CommodityService implements ICommodityService,IProductService {
     private CommodityRepository _rootRepository;
     @Autowired
     private CommodityOrderRepository _commodityOrderRepository;
+    @Autowired
+    private CommodityTypeRepository _commodityTypeRepository;
     @Autowired
     private IUserCouponService _userCouponService;
     @Autowired
@@ -87,6 +91,15 @@ public class CommodityService implements ICommodityService,IProductService {
 
     public Boolean add(Commodity commodity) {
         if (_rootRepository.insertItem(commodity)>0){
+            return true;
+        }
+        return false;
+    }
+
+    public Boolean addType(String typeName) {
+        CommodityType commodityType = new CommodityType();
+        commodityType.setName(typeName);
+        if (_commodityTypeRepository.insertItem(commodityType)>0){
             return true;
         }
         return false;

@@ -27,6 +27,8 @@ public interface ICommodityService {
 
     Boolean add(Commodity commodity);
 
+    Boolean addType(String TypeName);
+
     int getAllCount();
 
     List<Commodity> getList(List<Long> ids);

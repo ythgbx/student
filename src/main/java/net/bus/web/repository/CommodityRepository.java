@@ -68,6 +68,8 @@ public class CommodityRepository {
         return _mapper.insert(commodity);
     }
 
+
+
     public int updateItem(Commodity commodity)
     {
         return _mapper.updateByPrimaryKey(commodity);

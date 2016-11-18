@@ -165,8 +165,8 @@ public class UserTicketController {
     @RequestMapping(value = "/userList", method = RequestMethod.GET)
     @ApiOperation(value = "获取当前用户车票", httpMethod = "GET", response = TicketList.class, notes = "获取用户车票")
     public ModelAndView userList(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "1")int page,
-                        @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "5")int limit,
-                        @ApiParam(required = true,name = "id",value = "用户id")@RequestParam(value = "id",required = true,defaultValue = "1")Long id,HttpServletRequest request)
+                        @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "10")int limit,
+                        @ApiParam(required = true,name = "id",value = "用户id")@RequestParam(value = "id",required = true,defaultValue = "110")Long id,HttpServletRequest request)
     {
         logger.info("ticket list by userId");
         HttpSession session = request.getSession();
