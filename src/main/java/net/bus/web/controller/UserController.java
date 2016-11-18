@@ -544,6 +544,21 @@ public class UserController {
     }
 
     /**
+     * 后台管理注册界面
+     * @param model
+     * @return
+     */
+    @RequestMapping(value="/registerPage" , method = RequestMethod.GET)
+    @ApiOperation(value = "注册页面", httpMethod = "GET", response = ModelAndView.class, notes = "注册页面")
+    public ModelAndView register(Model model)
+    {
+        logger.info("url:/user/registerPage");
+        ModelAndView mv =new ModelAndView();
+        mv.setViewName("user_register");
+        return mv;
+    }
+
+    /**
      * 获取用户信息列表
      * @param page
      * @param limit

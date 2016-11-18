@@ -11,8 +11,9 @@
 </ul>
 <div class="smart-widget clearfix">
     <div class="smart-widget-header ">
-         新闻中心
-        <button type="button" onclick="mulit_del()" class="button border-red" id="button1"><span class="icon-trash-o"></span> 批量删除
+        新闻中心
+        <button type="button" onclick="mulit_del()" class="button border-red" id="button1"><span
+                class="icon-trash-o"></span> 批量删除
         </button>
         <button class="btn btn-success  smart-widget-option" data-toggle="modal" data-target="#myModal1">添加新闻</button>
     </div>
@@ -42,7 +43,8 @@
                     <tr class="active">
                         <td class="text-center">
                             <div class="custom-checkbox">
-                                <input type="checkbox" id="chk${oneNew.id}" class="inbox-check" name="choose" value="${oneNew.id}">
+                                <input type="checkbox" id="chk${oneNew.id}" class="inbox-check" name="choose"
+                                       value="${oneNew.id}">
                                 <label for="chk${oneNew.id}"></label>
                             </div>
                         </td>
@@ -68,30 +70,30 @@
                     </#list>
                 </tbody>
                 <tbody>
-                    <ul class="pagination">
-                        <li><a href="/news/list?page=${pagePojo.homePage}">首页</a></li>
-                        <li><a href="/news/list?page=${pagePojo.getPreviousPage()}">上一页</a></li>
-                        <li><a href="#">当前第${pagePojo.getCurrentPage()}页</a></li>
-                        <li><a href="#">共${pagePojo.countPage}页</a></li>
-                        <li><a href="#">总${pagePojo.amount}条数据</a></li>
-                        <li><a href="/news/list?page=${pagePojo.getNextPage()}">下一页</a></li>
-                        <li><a href="/news/list?page=${pagePojo.trailerPage}">尾页</a></li>
-                    </ul>
+                <ul class="pagination">
+                    <li><a href="/news/list?page=${pagePojo.homePage}">首页</a></li>
+                    <li><a href="/news/list?page=${pagePojo.getPreviousPage()}">上一页</a></li>
+                    <li><a href="#">当前第${pagePojo.getCurrentPage()}页</a></li>
+                    <li><a href="#">共${pagePojo.countPage}页</a></li>
+                    <li><a href="#">总${pagePojo.amount}条数据</a></li>
+                    <li><a href="/news/list?page=${pagePojo.getNextPage()}">下一页</a></li>
+                    <li><a href="/news/list?page=${pagePojo.trailerPage}">尾页</a></li>
+                </ul>
                 </tbody>
 
             </table>
         </div>
     </div><!-- ./smart-widget-inner -->
 </div><!-- ./smart-widget -->
-    <!--添加新闻 -->
-    <div class="modal fade" id="myModal1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" ><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">添加新闻</h4>
-                </div>
-                <form role="form" enctype="multipart/form-data" id="form1">
+<!--添加新闻 -->
+<div class="modal fade" id="myModal1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">添加新闻</h4>
+            </div>
+            <form role="form" enctype="multipart/form-data" id="form1">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="exampleInputEmail1">新闻标题</label>
@@ -99,7 +101,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">新闻内容</label>
-                        <#--<input type="text" class="form-control" id="text2" name="content">-->
+                    <#--<input type="text" class="form-control" id="text2" name="content">-->
                         <textarea class="form-control" rows="3" name="content" cols="3">
 
                         </textarea>
@@ -110,7 +112,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">作者</label>
-                        <input type="text" class="form-control" id="text3" name="author" >
+                        <input type="text" class="form-control" id="text3" name="author">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">发布时间</label>
@@ -128,22 +130,22 @@
                      </div>-->
 
                 </div>
-                </form>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary" id="add" onclick="operate()">提交</button>
-                </div>
+            </form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="add" onclick="operate()">提交</button>
+            </div>
 
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 <!--修改新闻 -->
 <div class="modal fade" id="myModal2">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" ><span class="sr-only">Close</span></button>
+                <button type="button" class="close" data-dismiss="modal"><span class="sr-only">Close</span></button>
                 <h4 class="modal-title">修改新闻</h4>
             </div>
             <form role="form" enctype="multipart/form-data" id="form2">
@@ -155,7 +157,10 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">新闻内容</label>
-                        <input type="text" class="form-control" id="text2" name="content">
+                    <#--<input type="text" class="form-control" id="text2" name="content">-->
+                        <textarea class="form-control" rows="3" name="content" cols="3">
+
+                        </textarea>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">新闻类型</label>
@@ -163,7 +168,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">作者</label>
-                        <input type="text" class="form-control" id="text3" name="author" >
+                        <input type="text" class="form-control" id="text3" name="author">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">发布时间</label>
@@ -184,7 +189,7 @@
             </form>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" id="update"  onclick="operate()">提交</button>
+                <button type="button" class="btn btn-primary" id="update" onclick="operate()">提交</button>
             </div>
 
         </div><!-- /.modal-content -->
@@ -231,8 +236,8 @@
     function mulit_del(node) {// 全选
         //判断至少写了一项
         var ids = new Array();
-        var object=event.srcElement;
-        if(object.id=="button1"){
+        var object = event.srcElement;
+        if (object.id == "button1") {
             var chk_value = [];
             $('input[name="choose"]:checked').each(function () {  //获取选中状态
                 chk_value.push($(this).val());
@@ -240,7 +245,7 @@
             var obj = document.getElementsByName("choose");
             if (chk_value.length == 0) {
                 alert("请至少选择一项!");
-                return ;
+                return;
                 console.log(ids)
             } else if (confirm("确定删除所选项目?")) {
                 for (var i in obj) {
@@ -250,17 +255,17 @@
                     console.log(ids)
                 }
                 console.log(ids)
-            }else {
+            } else {
                 return;
             }
 
-        }else if(object.id=="button2"){
+        } else if (object.id == "button2") {
             var tr1 = node.parentNode.parentNode;
-            if(confirm("确定删除所选项目?")){
+            if (confirm("确定删除所选项目?")) {
                 ids.push(tr1.cells[1].innerText);
                 console.log(ids)
             }
-            return ;
+            return;
         }
         $.ajax({
             url: "/news/del",
@@ -365,22 +370,23 @@ window.bus = new Bus();
     function operate() {
         var d = {};
         var url = "";
-        if(event.srcElement.id=="add"){
-            url="/news/addnews";
+        if (event.srcElement.id == "add") {
+            url = "/news/addnews";
             var t = $('#form1').serializeArray();
             $.each(t, function () {
                 console.log("aaa");
                 d[this.name] = this.value;
                 console.log(d)
             });
-        }else if(event.srcElement.id=="update"){
-            url="/news/updatenews";
+        } else if (event.srcElement.id == "update") {
+            url = "/news/updatenews";
             var t = $('#form2').serializeArray();
             console.log("bbb");
             $.each(t, function () {
                 d[this.name] = this.value;
             });
-        };
+        }
+        ;
         $.ajax({
             url: url,
             data: JSON.stringify(d),
@@ -390,7 +396,7 @@ window.bus = new Bus();
             success: function (data) {
                 alert(data.content);
             },
-            failure:function (data) {
+            failure: function (data) {
                 alert(data.content)
             }
         });
@@ -404,10 +410,10 @@ window.bus = new Bus();
         var id = tr1.cells[1].innerText;
         console.log(id)
         $.ajax({
-            url: "/news/detail?id="+id,
+            url: "/news/detail?id=" + id,
             type: "GET",
             contentType: "application/json;charset=UTF-8",
-            success:function (data) {
+            success: function (data) {
                 console.log(data)
                 if (data != null) {
                     var img = document.getElementById("img");
@@ -416,24 +422,24 @@ window.bus = new Bus();
                     $("[name=author]").val(data.author);
                     $("[name=type]").val(data.type);
                     $("[name=content]").val(data.content);
-                    var date=new Date(data.time);
-                    var year=date.getFullYear();
-                    var mouth=date.getMonth()+1;
-                    var day=date.getDate();
-                    if(mouth<10){
-                        mouth="0"+mouth;
+                    var date = new Date(data.time);
+                    var year = date.getFullYear();
+                    var mouth = date.getMonth() + 1;
+                    var day = date.getDate();
+                    if (mouth < 10) {
+                        mouth = "0" + mouth;
                     }
-                    if(day<10){
-                        day="0"+day;
+                    if (day < 10) {
+                        day = "0" + day;
                     }
-                    var time = year+"-"+mouth+"-"+day;
+                    var time = year + "-" + mouth + "-" + day;
                     $("[name=time]").val(time);
                     $("[name=image]").val(data.img);
-                    img.src="/upload/"+data.img;
+                    img.src = "/upload/" + data.img;
 
                 }
             },
-            error:function (data) {
+            error: function (data) {
                 console.log(data)
             }
         })

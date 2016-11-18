@@ -13,7 +13,8 @@
 <div class="smart-widget clearfix">
     <div class="smart-widget-header ">
         线路列表
-        <button type="button" onclick="mulit_del()" class="button border-red" id="button1"><span class="icon-trash-o"></span> 批量删除
+        <button type="button" onclick="mulit_del()" class="button border-red" id="button1"><span
+                class="icon-trash-o"></span> 批量删除
         </button>
         <button class="btn btn-success  smart-widget-option" data-toggle="modal" data-target="#myModal1">添加站点
         </button>
@@ -52,7 +53,7 @@
                         </td>
                         <td>${oneLine.id}</td>
                         <td>${oneLine.name}</td>
-                        <td >${oneLine.lat}</td>
+                        <td>${oneLine.lat}</td>
                         <td>${oneLine.lng}</td>
                         <td>${oneLine.annotation}</td>
                         <td>${oneLine.price}</td>
@@ -95,7 +96,7 @@
 <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form id="form1" enctype="multipart/form-data" >
+            <form id="form1" enctype="multipart/form-data">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     <#--&times;-->
@@ -105,7 +106,7 @@
                     </h4>
                 </div>
                 <div class="modal-body">
-                     <input type="hidden" name="lineid" value="${id}">
+                    <input type="hidden" name="lineid" value="${id}">
                     <label for="exampleInputEmail1">站点名称</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" name="name"
                            placeholder="请输入站点名称">
@@ -139,7 +140,7 @@
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form id="form2" enctype="multipart/form-data" >
+            <form id="form2" enctype="multipart/form-data">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     <#--&times;-->
@@ -149,7 +150,7 @@
                     </h4>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" name="id" >
+                    <input type="hidden" name="id">
                     <label for="exampleInputEmail1">站点名称</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" name="name">
 
@@ -225,7 +226,7 @@
             console.log(obj)
             if (chk_value.length == 0) {
                 alert("请至少选择一项!");
-                return ;
+                return;
             } else if (confirm("确定删除所选项目?")) {
                 for (var i in obj) {
                     if (obj[i].checked) {
@@ -233,15 +234,15 @@
                     }
                 }
                 console.log(ids)
-            }else{
-                return ;
+            } else {
+                return;
             }
         } else if (object.id == "button2") {
             var tr1 = node.parentNode.parentNode;
             if (confirm("确定删除所选项目?")) {
                 ids.push(tr1.cells[1].innerText);
             }
-            return ;
+            return;
         }
         $.ajax({
             url: "/station/del",
@@ -268,21 +269,22 @@
     function operate() {
         var d = {};
         var url = "";
-        if(event.srcElement.id=="add"){
-            url="/station/add";
+        if (event.srcElement.id == "add") {
+            url = "/station/add";
             var t = $('#form1').serializeArray();
             $.each(t, function () {
                 console.log("aaa");
                 d[this.name] = this.value;
             });
-        }else if(event.srcElement.id=="update"){
-            url="/station/update";
+        } else if (event.srcElement.id == "update") {
+            url = "/station/update";
             var t = $('#form2').serializeArray();
             console.log("bbb");
             $.each(t, function () {
                 d[this.name] = this.value;
             });
-        };
+        }
+        ;
         $.ajax({
             url: url,
             data: JSON.stringify(d),
@@ -293,7 +295,7 @@
                 alert(data.content);
                 window.location.reload();
             },
-            failure:function (data) {
+            failure: function (data) {
                 alert(data.content)
             }
         });
@@ -301,7 +303,7 @@
     }
 </script>
 <script>
-   function getContent(node) {//通过ID获取站点详情
+    function getContent(node) {//通过ID获取站点详情
         var tr1 = node.parentNode.parentNode;//获取id
         var id = tr1.cells[1].innerText;
         $.ajax({
@@ -323,7 +325,8 @@
             }
         })
 
-    };
+    }
+    ;
 </script>
 
 </@layoutFooter>
