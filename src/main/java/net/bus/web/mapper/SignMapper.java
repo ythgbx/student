@@ -34,4 +34,6 @@ public interface SignMapper {
     int updateByPrimaryKey(Sign record);
     /*2016年10月19日13:56:15 author: sakura*/
     List<SignRecordPojo> selectSignRecordByUserId(long userId, RowBounds rowBounds);
+
+    List<SignRecordPojo> selectSignRecordByUserId(long userId);
 }

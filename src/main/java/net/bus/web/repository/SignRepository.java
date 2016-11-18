@@ -55,4 +55,8 @@ public class SignRepository {
     public List<SignRecordPojo> getSignRecordByUserId(long userId, int page, int limit) {
         return _mapper.selectSignRecordByUserId(userId, new RowBounds((page - 1)*limit, limit));
     }
+
+    public List<SignRecordPojo> getSignRecordByUserId(long userId) {
+        return _mapper.selectSignRecordByUserId(userId);
+    }
 }

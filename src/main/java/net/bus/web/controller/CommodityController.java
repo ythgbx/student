@@ -6,6 +6,7 @@ import net.bus.web.aspect.Auth;
 import net.bus.web.common.config.RString;
 import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.*;
+import net.bus.web.controller.dto.CommodityType;
 import net.bus.web.enums.OrderTypeEnum;
 import net.bus.web.model.*;
 import net.bus.web.model.Commodity;
@@ -291,9 +292,9 @@ public class CommodityController {
     {
         BaseResult result = new BaseResult();
         List<Long> ids = request.getIds();
-        result.setResult("success");
         if(ids !=null && ids.size()> 0){
             if(_commodityService.del(ids)){
+                result.setResult("success");
                 result.setContent("删除成功");
             }else{
                 result.setResult("failure");
@@ -301,6 +302,25 @@ public class CommodityController {
             }
         }else{
             result.setContent("您没有选中任何项");
+        }
+        return result;
+    }
+
+
+    @Auth(role = Auth.Role.NONE)
+    @ResponseBody
+    @RequestMapping(value = "/type/add", method = RequestMethod.POST)
+    @ApiOperation(value = "添加商品类型", httpMethod = "POST", response = CommodityList.class, notes = "添加商品类型")
+    public BaseResult add(@ApiParam(required = true, name = "request", value = "商品类型")
+                              @RequestBody CommodityType commodityType) {
+        BaseResult result = new BaseResult();
+        if (_commodityService.addType(commodityType.getTypeName()))
+        {
+            result.setResult("success");
+            result.setContent("添加成功!");
+        }else{
+            result.setResult("error");
+            result.setContent("添加失败!");
         }
         return result;
     }

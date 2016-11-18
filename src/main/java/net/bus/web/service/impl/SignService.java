@@ -79,4 +79,8 @@ public class SignService implements ISignService {
         return _respository.getSignRecordByUserId(userId,page,limit);
     }
 
+    public List<SignRecordPojo> getSignRecordByUserId(long userId) {
+        return _respository.getSignRecordByUserId(userId);
+    }
+
 }
