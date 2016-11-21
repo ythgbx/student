@@ -217,6 +217,27 @@ public class UserService  implements IUserService {
         return false;
     }
 
+    public boolean del(List<Long> ids) {
+        UserIdsSpecification userIdsSpecification=new UserIdsSpecification(ids);
+         int result;
+        if(ids.size()==1){
+            result=_rootRepository.deleteByPrimaryKey(ids.get(0));
+        }else {
+            result=_rootRepository.deleteByExample(userIdsSpecification);
+        }
+        if(result>0){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean del(Long id) {
+        if(_rootRepository.deleteByPrimaryKey(id)>0){
+            return true;
+        }
+        return false;
+    }
+
     private String getUserPasswordMd5(String salt,String password){
         //兼容原有账号(对salt为null进行直接判断)
         if(salt.equals(null)||salt.equals("")){

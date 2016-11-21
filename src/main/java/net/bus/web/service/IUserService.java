@@ -51,4 +51,8 @@ public interface IUserService {
     boolean userCertification(User user,String realName,String id_card);
 
     boolean updateUser(User user);
+
+    boolean del(List<Long> ids);
+
+    boolean del(Long id);
 }

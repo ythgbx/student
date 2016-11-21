@@ -89,7 +89,7 @@ public class NewsController {
     @RequestMapping(value="/list", method = RequestMethod.GET)
     @ApiOperation(value = "新闻列表页面", httpMethod = "GET", response = ModelAndView.class, notes = "新闻列表页面")
     @ResponseBody
-    public ModelAndView list(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "0")int page,
+    public ModelAndView list(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "1")int page,
                              @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "10")int limit,
                              HttpServletRequest request, Model model)
     {

@@ -10,14 +10,16 @@ import java.util.List;
  */
 public class ActivitySpecification implements ISpecification<ActivityExample> {
     protected List<Long> _ids;
-    public ActivitySpecification(List<Long> ids){
-        this._ids=ids;
+
+    public ActivitySpecification(List<Long> ids) {
+        this._ids = ids;
     }
+
     //TODO ActivitySpecification logical implement
     public ActivityExample createExample() {
         ActivityExample example = new ActivityExample();
-        if(_ids!=null&&!_ids.isEmpty()){
-            ActivityExample.Criteria criteria=example.createCriteria();
+        if (_ids != null && !_ids.isEmpty()) {
+            ActivityExample.Criteria criteria = example.createCriteria();
             criteria.andIdIn(_ids);
         }
         return example;

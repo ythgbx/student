@@ -13,7 +13,8 @@
 <div class="smart-widget clearfix">
     <div class="smart-widget-header ">
         线路列表
-        <button type="button" onclick="mulit_del()" class="button border-red" id="button1"><span class="icon-trash-o"></span> 批量删除
+        <button type="button" onclick="mulit_del()" class="button border-red" id="button1"><span
+                class="icon-trash-o"></span> 批量删除
         </button>
         <button class="btn btn-success  smart-widget-option" data-toggle="modal" data-target="#myModal">添加线路
         </button>
@@ -58,7 +59,7 @@
                         <#--<td>${oneLine_index+1}</td>-->
                         <td>${oneLine.id}</td>
                         <td>${oneLine.name}</td>
-                        <td >${oneLine.start}</td>
+                        <td>${oneLine.start}</td>
                         <td>${oneLine.end}</td>
                         <td>${oneLine.price}</td>
                         <td>${oneLine.annotation}</td>
@@ -87,15 +88,15 @@
                     </#list>
                 </tbody>
                 <tbody>
-                    <ul class="pagination">
-                        <li><a href="/line/list?page=${pagePojo.homePage}">首页</a></li>
-                        <li><a href="/line/list?page=${pagePojo.getPreviousPage()}">上一页</a></li>
-                        <li><a href="#">当前第${pagePojo.getCurrentPage()}页</a></li>
-                        <li><a href="#">共${pagePojo.countPage}页</a></li>
-                        <li><a href="#">总${pagePojo.amount}条数据</a></li>
-                        <li><a href="/line/list?page=${pagePojo.getNextPage()}">下一页</a></li>
-                        <li><a href="/line/list?page=${pagePojo.trailerPage}">尾页</a></li>
-                    </ul>
+                <ul class="pagination">
+                    <li><a href="/line/list?page=${pagePojo.homePage}">首页</a></li>
+                    <li><a href="/line/list?page=${pagePojo.getPreviousPage()}">上一页</a></li>
+                    <li><a href="#">当前第${pagePojo.getCurrentPage()}页</a></li>
+                    <li><a href="#">共${pagePojo.countPage}页</a></li>
+                    <li><a href="#">总${pagePojo.amount}条数据</a></li>
+                    <li><a href="/line/list?page=${pagePojo.getNextPage()}">下一页</a></li>
+                    <li><a href="/line/list?page=${pagePojo.trailerPage}">尾页</a></li>
+                </ul>
                 </tbody>
             </table>
         </div>
@@ -274,10 +275,10 @@
                 chk_value.push($(this).val());
             });
             var obj = document.getElementsByName("choose");
-console.log(obj)
+            console.log(obj)
             if (chk_value.length == 0) {
                 alert("请至少选择一项!");
-                return ;
+                return;
             } else if (confirm("确定删除所选项目?")) {
                 for (var i in obj) {
                     if (obj[i].checked) {
@@ -285,15 +286,15 @@ console.log(obj)
                     }
                 }
                 console.log(ids)
-            }else{
-                return ;
+            } else {
+                return;
             }
         } else if (object.id == "button2") {
             var tr1 = node.parentNode.parentNode;
             if (confirm("确定删除所选项目?")) {
                 ids.push(tr1.cells[1].innerText);
             }
-            return ;
+            return;
         }
         $.ajax({
             url: "/line/del",
@@ -320,21 +321,22 @@ console.log(obj)
     function operate() {
         var d = {};
         var url = "";
-        if(event.srcElement.id=="add"){
-            url="/line/addline";
+        if (event.srcElement.id == "add") {
+            url = "/line/addline";
             var t = $('#form1').serializeArray();
             $.each(t, function () {
                 console.log("aaa");
                 d[this.name] = this.value;
             });
-        }else if(event.srcElement.id=="update"){
-            url="/line/updateline";
+        } else if (event.srcElement.id == "update") {
+            url = "/line/updateline";
             var t = $('#form2').serializeArray();
             console.log("bbb");
             $.each(t, function () {
                 d[this.name] = this.value;
             });
-        };
+        }
+        ;
         $.ajax({
             url: url,
             data: JSON.stringify(d),
@@ -344,7 +346,7 @@ console.log(obj)
             success: function (data) {
                 alert(data.content);
             },
-            failure:function (data) {
+            failure: function (data) {
                 alert(data.content)
             }
         });
@@ -357,10 +359,10 @@ console.log(obj)
         var id = tr1.cells[1].innerText;
         console.log(id)
         $.ajax({
-            url: "/line/linedetail?id="+id,
+            url: "/line/linedetail?id=" + id,
             type: "GET",
             contentType: "application/json;charset=UTF-8",
-            success:function (data) {
+            success: function (data) {
                 console.log(data)
                 if (data != null) {
                     $("[name=id]").val(data.id);
@@ -371,35 +373,35 @@ console.log(obj)
                     $("[name=annotation]").val(data.annotation);
                     $("[name=cityName]").val(data.cityName);
                     $("[name=propName]").val(data.propName);
-                    var date=new Date(data.start_time);
-                    var year=date.getFullYear();
-                    var mouth=date.getMonth()+1;
-                    var day=date.getDate();
-                    if(mouth<10){
-                        mouth="0"+mouth;
+                    var date = new Date(data.start_time);
+                    var year = date.getFullYear();
+                    var mouth = date.getMonth() + 1;
+                    var day = date.getDate();
+                    if (mouth < 10) {
+                        mouth = "0" + mouth;
                     }
-                    if(day<10){
-                        day="0"+day;
+                    if (day < 10) {
+                        day = "0" + day;
                     }
-                    var startime = year+"-"+mouth+"-"+day;
-                    var date2=new Date(data.end_time);
-                    var year2=date2.getFullYear();
-                    var mouth2=date2.getMonth()+1;
-                    var day2=date2.getDate();
-                    if(mouth2<10){
-                        mouth2="0"+mouth2;
+                    var startime = year + "-" + mouth + "-" + day;
+                    var date2 = new Date(data.end_time);
+                    var year2 = date2.getFullYear();
+                    var mouth2 = date2.getMonth() + 1;
+                    var day2 = date2.getDate();
+                    if (mouth2 < 10) {
+                        mouth2 = "0" + mouth2;
                     }
-                    if(day2<10){
-                        day2="0"+day2;
+                    if (day2 < 10) {
+                        day2 = "0" + day2;
                     }
-                    var endtime=year2+"-"+mouth2+"-"+day2;
+                    var endtime = year2 + "-" + mouth2 + "-" + day2;
                     $("[name=startTime]").val(startime);
                     $("[name=endTime]").val(endtime);
 
 
                 }
             },
-            error:function (data) {
+            error: function (data) {
                 console.log(data)
             }
         })

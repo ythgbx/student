@@ -69,23 +69,31 @@ public class AlipaySubmit {
         List<String> keys = new ArrayList<String>(sPara.keySet());
 
         StringBuffer sbHtml = new StringBuffer();
-
-        sbHtml.append("<form id=\"alipaysubmit\" name=\"alipaysubmit\" action=\"" + ALIPAY_GATEWAY_NEW
-                + "_input_charset=" + AlipayConfig.input_charset + "\" method=\"" + strMethod
-                + "\">");
-
+        sbHtml.append(ALIPAY_GATEWAY_NEW);
+        sbHtml.append( "_input_charset=" + AlipayConfig.input_charset + "&");
         for (int i = 0; i < keys.size(); i++) {
-            String name = (String) keys.get(i);
-            String value = (String) sPara.get(name);
-
-            sbHtml.append("<input type=\"hidden\" name=\"" + name + "\" value=\"" + value + "\"/>");
+            String name =  keys.get(i);
+            String value =  sPara.get(name);
+            sbHtml.append( name + "=" +value + "&");
         }
+        return sbHtml.toString().substring(0,sbHtml.toString().length()-1);
 
-        //submit按钮控件请不要含有name属性
-        sbHtml.append("<input type=\"submit\" value=\"" + strButtonName + "\" style=\"display:none;\"></form>");
-        sbHtml.append("<script>document.forms['alipaysubmit'].submit();</script>");
-
-        return sbHtml.toString();
+//        sbHtml.append("<form id=\"alipaysubmit\" name=\"alipaysubmit\" action=\"" + ALIPAY_GATEWAY_NEW
+//                + "_input_charset=" + AlipayConfig.input_charset + "\" method=\"" + strMethod
+//                + "\">");
+//
+//        for (int i = 0; i < keys.size(); i++) {
+//            String name = (String) keys.get(i);
+//            String value = (String) sPara.get(name);
+//
+//            sbHtml.append("<input type=\"hidden\" name=\"" + name + "\" value=\"" + value + "\"/>");
+//        }
+//
+//        //submit按钮控件请不要含有name属性
+//        sbHtml.append("<input type=\"submit\" value=\"" + strButtonName + "\" style=\"display:none;\"></form>");
+//        sbHtml.append("<script>document.forms['alipaysubmit'].submit();</script>");
+//
+//        return sbHtml.toString();
     }
 
 

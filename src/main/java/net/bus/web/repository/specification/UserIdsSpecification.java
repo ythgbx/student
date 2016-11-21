@@ -18,12 +18,13 @@ public class UserIdsSpecification implements ISpecification<UserExample> {
 
     public UserExample createExample()
     {
-        if(_ids.isEmpty())
-            return null;
 
         UserExample example = new UserExample();
-        UserExample.Criteria criteria = example.createCriteria();
-        criteria.andIdIn(_ids);
+        if(_ids !=null && !_ids.isEmpty()){
+            UserExample.Criteria criteria = example.createCriteria();
+            criteria.andIdIn(_ids);
+        }
+
         return example;
     }
 }

@@ -62,5 +62,7 @@ public class AlipayConfig {
 
 	// 服务器接受退款回调地址
 	public static String refund_notify_url = "http://service.zfbus.net/alipay/refundasync";
+
+	public static String app_id = "2016083101827187";
 }
 

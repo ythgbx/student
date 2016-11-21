@@ -36,7 +36,7 @@
                         <a href="#" class="font-12">Forgot password ?</a>
                     </div>
                     <div class="font-12 text-center m-bottom-xs">Do not have an account?</div>
-                    <a href="signup.html" class="btn btn-default block">Create an accounts</a>
+                    <a href="/user/registerPage" class="btn btn-default block">注册</a>
                 </div>
             </form>
         </div><!-- ./sign-in-inner -->

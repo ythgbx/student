@@ -13,7 +13,8 @@
 <div class="smart-widget clearfix">
     <div class="smart-widget-header ">
         活动中心
-        <button type="button" onclick="mulit_del()" class="button border-red" id="button1"><span class="icon-trash-o"></span> 批量删除
+        <button type="button" onclick="mulit_del()" class="button border-red" id="button1"><span
+                class="icon-trash-o"></span> 批量删除
         </button>
         <button class="btn btn-success  smart-widget-option" data-toggle="modal" data-target="#myModal">添加活动
         </button>
@@ -82,15 +83,15 @@
                     </#list>
                 </tbody>
                 <tbody>
-                    <ul class="pagination">
-                        <li><a href="/activity/list?page=${pagePojo.homePage}">首页</a></li>
-                        <li><a href="/activity/list?page=${pagePojo.getPreviousPage()}">上一页</a></li>
-                        <li><a href="#">当前第${pagePojo.getCurrentPage()}页</a></li>
-                        <li><a href="#">共${pagePojo.countPage}页</a></li>
-                        <li><a href="#">总${pagePojo.amount}条数据</a></li>
-                        <li><a href="/activity/list?page=${pagePojo.getNextPage()}">下一页</a></li>
-                        <li><a href="/activity/list?page=${pagePojo.trailerPage}">尾页</a></li>
-                    </ul>
+                <ul class="pagination">
+                    <li><a href="/activity/list?page=${pagePojo.homePage}">首页</a></li>
+                    <li><a href="/activity/list?page=${pagePojo.getPreviousPage()}">上一页</a></li>
+                    <li><a href="#">当前第${pagePojo.getCurrentPage()}页</a></li>
+                    <li><a href="#">共${pagePojo.countPage}页</a></li>
+                    <li><a href="#">总${pagePojo.amount}条数据</a></li>
+                    <li><a href="/activity/list?page=${pagePojo.getNextPage()}">下一页</a></li>
+                    <li><a href="/activity/list?page=${pagePojo.trailerPage}">尾页</a></li>
+                </ul>
                 </tbody>
 
             </table>
@@ -269,7 +270,7 @@
 
             if (chk_value.length == 0) {
                 alert("请至少选择一项!");
-                return ;
+                return;
             } else if (confirm("确定删除所选项目?")) {
                 for (var i in obj) {
                     if (obj[i].checked) {
@@ -277,15 +278,15 @@
                     }
                 }
                 console.log(ids)
-            }else{
-                return ;
+            } else {
+                return;
             }
         } else if (object.id == "button2") {
             var tr1 = node.parentNode.parentNode;
             if (confirm("确定删除所选项目?")) {
                 ids.push(tr1.cells[1].innerText);
             }
-            return ;
+            return;
         }
         $.ajax({
             url: "/activity/del",
@@ -389,21 +390,22 @@ window.bus = new Bus();
     function operate() {
         var d = {};
         var url = "";
-        if(event.srcElement.id=="add"){
-            url="/activity/addactivity";
+        if (event.srcElement.id == "add") {
+            url = "/activity/addactivity";
             var t = $('#form1').serializeArray();
             $.each(t, function () {
                 console.log("aaa");
                 d[this.name] = this.value;
             });
-        }else if(event.srcElement.id=="update"){
-            url="/activity/updateactivity";
+        } else if (event.srcElement.id == "update") {
+            url = "/activity/updateactivity";
             var t = $('#form2').serializeArray();
             console.log("bbb");
             $.each(t, function () {
                 d[this.name] = this.value;
             });
-        };
+        }
+        ;
         $.ajax({
             url: url,
             data: JSON.stringify(d),
@@ -411,9 +413,9 @@ window.bus = new Bus();
             dataType: "json",
             contentType: "application/json;charset=UTF-8",
             success: function (data) {
-                    alert(data.content);
+                alert(data.content);
             },
-            failure:function (data) {
+            failure: function (data) {
                 alert(data.content)
             }
         });
@@ -426,50 +428,50 @@ window.bus = new Bus();
         var id = tr1.cells[1].innerText;
         console.log(id)
         $.ajax({
-            url: "/activity/detail?id="+id,
+            url: "/activity/detail?id=" + id,
             type: "GET",
             contentType: "application/json;charset=UTF-8",
-             success:function (data) {
-               console.log(data)
+            success: function (data) {
+                console.log(data)
                 if (data != null) {
                     var img = document.getElementById("img");
                     $("[name=id]").val(data.id);
-                   $("[name=title]").val(data.title);
+                    $("[name=title]").val(data.title);
                     $("[name=detail]").val(data.detail);
                     $("[name=lowerLimit]").val(data.lower_limit);
                     $("[name=upperLimit]").val(data.upper_limit);
                     $("[name=price]").val(data.price);
-                    var date=new Date(data.start_time);
-                    var year=date.getFullYear();
-                    var mouth=date.getMonth()+1;
-                    var day=date.getDate();
-                    if(mouth<10){
-                        mouth="0"+mouth;
+                    var date = new Date(data.start_time);
+                    var year = date.getFullYear();
+                    var mouth = date.getMonth() + 1;
+                    var day = date.getDate();
+                    if (mouth < 10) {
+                        mouth = "0" + mouth;
                     }
-                    if(day<10){
-                        day="0"+day;
+                    if (day < 10) {
+                        day = "0" + day;
                     }
-                    var startime = year+"-"+mouth+"-"+day;
-                    var date2=new Date(data.end_time);
-                    var year2=date2.getFullYear();
-                    var mouth2=date2.getMonth()+1;
-                    var day2=date2.getDate();
-                    if(mouth2<10){
-                        mouth2="0"+mouth2;
+                    var startime = year + "-" + mouth + "-" + day;
+                    var date2 = new Date(data.end_time);
+                    var year2 = date2.getFullYear();
+                    var mouth2 = date2.getMonth() + 1;
+                    var day2 = date2.getDate();
+                    if (mouth2 < 10) {
+                        mouth2 = "0" + mouth2;
                     }
-                    if(day2<10){
-                        day2="0"+day2;
+                    if (day2 < 10) {
+                        day2 = "0" + day2;
                     }
-                    var endtime=year2+"-"+mouth2+"-"+day2;
+                    var endtime = year2 + "-" + mouth2 + "-" + day2;
                     $("[name=startime]").val(startime);
                     $("[name=endtime]").val(endtime);
                     $("[name=numberOfPeople]").val(data.number_of_people);
                     $("[name=image]").val(data.img);
-                    img.src="/upload/"+data.img;
+                    img.src = "/upload/" + data.img;
 
                 }
-           },
-            error:function (data) {
+            },
+            error: function (data) {
                 console.log(data)
             }
         })
