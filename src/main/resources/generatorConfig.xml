@@ -87,14 +87,14 @@
                enableCountByExample="true"
                enableUpdateByExample="true">
         </table>-->
-        <table tableName="user" domainObjectName="User"  enableSelectByPrimaryKey="true"
-               enableUpdateByPrimaryKey="true"
-               enableDeleteByPrimaryKey="true"
-               enableSelectByExample="true"
-               enableDeleteByExample="true"
-               enableCountByExample="true"
-               enableUpdateByExample="true">
-        </table>
+        <!--<table tableName="user" domainObjectName="User"  enableSelectByPrimaryKey="true"-->
+               <!--enableUpdateByPrimaryKey="true"-->
+               <!--enableDeleteByPrimaryKey="true"-->
+               <!--enableSelectByExample="true"-->
+               <!--enableDeleteByExample="true"-->
+               <!--enableCountByExample="true"-->
+               <!--enableUpdateByExample="true">-->
+        <!--</table>-->
         <!--
         <table tableName="user_coupon" domainObjectName="UserCoupon"  enableSelectByPrimaryKey="true"
                enableUpdateByPrimaryKey="true"
@@ -221,5 +221,13 @@
                enableCountByExample="true"
                enableUpdateByExample="true">
         </table>-->
+        <table tableName="terminal_record" domainObjectName="TerminalRecord"  enableSelectByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true"
+               enableDeleteByPrimaryKey="true"
+               enableSelectByExample="true"
+               enableDeleteByExample="true"
+               enableCountByExample="true"
+               enableUpdateByExample="true">
+        </table>
     </context>
 </generatorConfiguration>

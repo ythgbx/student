@@ -1,10 +1,13 @@
 package net.bus.web.controller;
 
+import com.wordnik.swagger.annotations.ApiParam;
 import net.bus.web.aspect.Auth;
 import net.bus.web.common.AES;
 import net.bus.web.controller.dto.BaseResult;
 import net.bus.web.controller.dto.CheckData;
 import net.bus.web.controller.dto.IResult;
+import net.bus.web.controller.dto.TerminalRecords;
+import net.bus.web.service.ITerminalRecordService;
 import net.bus.web.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +28,8 @@ public class TerminalController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private ITerminalRecordService _terminalRecordService;
 
     @Auth(role = Auth.Role.USER)
     @ResponseBody
@@ -62,6 +67,22 @@ public class TerminalController {
             temp = temp.substring(0,temp.length()-1);
             result.setResult("success");//暂时都成功逻辑以后再写
             result.setContent(temp);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.setResult("error");
+            result.setError(e.getMessage());
+        }
+        return result;
+    }
+
+    @Auth(role = Auth.Role.NONE)
+    @ResponseBody
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    public IResult upload(@ApiParam(required = true, name = "request", value = "上传数据")@RequestBody TerminalRecords request){
+        BaseResult result = new BaseResult();
+        try {
+            _terminalRecordService.upload(request.getDevice(),request.getData());
+            result.setResult("success");
         } catch (Exception e) {
             e.printStackTrace();
             result.setResult("error");
