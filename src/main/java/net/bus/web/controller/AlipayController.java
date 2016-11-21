@@ -137,7 +137,7 @@ public class AlipayController {
     public String refund(@ApiParam(required = true, name = "request", value = "退款请求") HttpServletRequest request)
     {
         User user = (User) _session.getAttribute(SessionContext.CURRENT_USER);
-        _orderService.refund("AALgYi8o7dPfiwncnOClB",user.getId().toString());
+        _orderService.refund("AAoskmOqRXkeLj2RjgqJf",user.getId().toString());
         return PayCommonUtil.setXML("FAIL", "FAIL");
     }
 

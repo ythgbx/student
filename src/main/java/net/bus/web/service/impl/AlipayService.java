@@ -152,7 +152,6 @@ public class AlipayService implements IAlipayService ,IPayService{
                 "  }");
         AlipayTradeRefundResponse response = null;
 
-        //TODO 测试发现execute校验报错,待确定alipay_public_key问题
         try {
             response = alipayClient.execute(request);
             if(response.isSuccess()){
