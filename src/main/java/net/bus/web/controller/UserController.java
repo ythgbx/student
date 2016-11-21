@@ -561,6 +561,31 @@ public class UserController {
     }
 
     /**
+     * 后台管理用户注册
+     * @param register
+     * @return
+     */
+
+    @Auth(role = Auth.Role.NONE)
+    @ResponseBody
+    @RequestMapping(value = "/userRegister", method = RequestMethod.POST)
+    @ApiOperation(value = "注册", httpMethod = "POST", response = BaseResult.class, notes = "注册")
+    public IResult UserRegister(@ApiParam(required = true, name = "userRegister", value = "后台管理界面注册请求")
+                                @RequestBody Register register)
+    {
+        BaseResult result=new BaseResult();
+        if(service.registerCheck(register.getPhone())){
+            service.register(register.getPhone(), register.getPassword(), register.getName());
+            result.setResult("success");
+            result.setContent("注册成功！");
+        }else {
+            result.setResult("failure");
+            result.setContent(RString.REGISTER_FAILED_USER_HAD);
+        }
+
+        return result;
+    }
+    /**
      * 获取用户信息列表
      * @param page
      * @param limit
@@ -586,6 +611,26 @@ public class UserController {
 
         return mv;
     }
+
+    @Auth(role=Auth.Role.USER)
+    @RequestMapping(value = "/del",method = RequestMethod.DELETE)
+    @ResponseBody
+    @ApiOperation(value = "批量删除用户", httpMethod = "DELETE", response = BaseResult.class, notes = "批量删除用户")
+    public BaseResult Del(@ApiParam(required = true, name = "del", value = "批量删除用户") @RequestBody BaseRequest request)
+    {
+        logger.info("url:/user/del");
+        BaseResult result=new BaseResult();
+        List<Long> ids=request.getIds();
+        if(service.del(ids)){
+            result.setResult("success");
+            result.setContent("删除成功!");
+        }else{
+            result.setResult("failure");
+            result.setContent("删除失败!");
+        }
+        return result;
+    }
+
 
     @Auth(role = Auth.Role.USER)
     @ResponseBody
@@ -661,7 +706,7 @@ public class UserController {
      */
     @Auth(role = Auth.Role.USER)
     @RequestMapping(value="/activeAll", method = RequestMethod.GET)
-    @ApiOperation(value = "用户列表页面", httpMethod = "GET", response = ModelAndView.class, notes = "用户列表页面")
+    @ApiOperation(value = "活动列表页面", httpMethod = "GET", response = ModelAndView.class, notes = "用户列表页面")
     public ModelAndView activeAll(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "1")int page,
                              @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "10")int limit,
                                   @ApiParam(required = true, name = "source", value = "活动名称")@RequestParam(value = "source",required = true,defaultValue = "笑傲江湖2016活动")String source,

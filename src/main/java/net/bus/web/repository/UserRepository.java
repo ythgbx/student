@@ -81,4 +81,13 @@ public class UserRepository {
     public int CountByExample(ISpecification specification){
         return userMapper.countByExample((UserExample)specification.createExample());
     }
+
+    public int deleteByPrimaryKey(Long id){
+        return  userMapper.deleteByPrimaryKey(id);
+    }
+
+    public int deleteByExample(ISpecification specification){
+        return  userMapper.deleteByExample((UserExample) specification.createExample());
+    }
+
 }

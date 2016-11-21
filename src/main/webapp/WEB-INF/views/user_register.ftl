@@ -39,5 +39,32 @@
 
 <@layoutFooter>
 
+<script type="text/javascript">
+    $("#submit").click(function () {
+        if($("input[name=password]").val()==$("input[name=confirmpassword]").val()){
+            console.log("aaa")
+            $.ajax({
+                url:"/user/userRegister",
+                type:"POST",
+                contentType:"application/json",
+                data:JSON.stringify({
+                    "phone": $("input[name=phone]").val(),
+                    "password":$("input[name=password]").val(),
+                    "name":""
+                }),
+                success:function (data) {
+                    alert(data.content);
+                    window.location.href = '/user/login';
+                },
+                error:function () {
+                    alert("注册失败！")
+                }
+            })
+        }else{
+            alert("密码不一致！")
+        }
+
+    })
+</script>
 
 </@layoutFooter>

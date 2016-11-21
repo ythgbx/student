@@ -12,18 +12,22 @@
 <div class="smart-widget">
     <div class="smart-widget-header">
         用户列表
+        <button type="button" onclick="mulit_del()" class="button border-red" id="button1"><span
+                class="icon-trash-o"></span> 批量删除
+        </button>
     </div>
+
     <div class="smart-widget-inner">
         <div class="smart-widget-body">
             <table class="table table-hover">
                 <thead>
                 <tr class="active">
-                    <#--<th class="text-center">-->
-                        <#--<div class="custom-checkbox">-->
-                            <#--<input type="checkbox" id="chkAll" class="inbox-check">-->
-                            <#--<label for="chkAll"></label>-->
-                        <#--</div>-->
-                    <#--</th>-->
+                    <th class="text-center">
+                        <div class="custom-checkbox">
+                            <input class="inbox-check" id="chkAll" type="checkbox">
+                            <label for="chkAll"></label>
+                        </div>
+                    </th>
                     <th>用户ID</th>
                     <th>姓名</th>
                     <th>电话</th>
@@ -35,12 +39,13 @@
                 <tbody>
                     <#list userList as oneUser>
                     <tr class="active">
-                        <#--<td class="text-center">-->
-                            <#--<div class="custom-checkbox">-->
-                                <#--<input type="checkbox" name="choose" id="chk${oneUser.id}" class="inbox-check" value="${oneUser.id}">-->
-                                <#--<label for="chk${oneUser.id}"></label>-->
-                            <#--</div>-->
-                        <#--</td>-->
+                        <td class="text-center">
+                            <div class="custom-checkbox">
+                                <input type="checkbox" id="chk${oneUser.id}" name="choose" class="inbox-check"
+                                       value="${oneUser.id}">
+                                <label for="chk${oneUser.id}"></label>
+                            </div>
+                        </td>
                         <td>${oneUser.id}</td>
                         <td>${oneUser.name}</td>
                         <td>${oneUser.phone}</td>
@@ -148,6 +153,91 @@
         return Bus;
     })());
     window.bus = new Bus();
+</script>
+
+<script>
+    $(function () {//全选
+        $('.inbox-check').click(function () {
+            var activeRow = $(this).parent().parent().parent();
+
+            activeRow.toggleClass('active');
+        });
+
+
+        $('#inboxCollapse').click(function () {
+            $('.inbox-menu-inner').slideToggle();
+        });
+
+        $('#chkAll').click(function () {
+            if ($(this).prop('checked')) {
+                $('.inbox-check').prop('checked', true);
+                $('.inbox-check').parent().parent().parent().addClass('active');
+            }
+            else {
+                $('.inbox-check').prop('checked', false);
+                $('.inbox-check').parent().parent().parent().removeClass('active');
+            }
+        });
+
+        $(window).resize(function () {
+            if (Modernizr.mq('(min-width: 980px)')) {
+                $('.inbox-menu ul').show();
+            }
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    function mulit_del(node) {// 全选
+        //判断至少写了一项
+        var ids = new Array();
+        var object = event.srcElement;
+        if (object.id == "button1") {
+            var chk_value = [];
+            $('input[name="choose"]:checked').each(function () {  //获取选中状态
+                chk_value.push($(this).val());
+            });
+            var obj = document.getElementsByName("choose");
+
+            if (chk_value.length == 0) {
+                alert("请至少选择一项!");
+                return;
+            } else if (confirm("确定删除所选项目?")) {
+                for (var i in obj) {
+                    if (obj[i].checked) {
+                        ids.push(obj[i].value)
+                    }
+                }
+                console.log(ids)
+            } else {
+                return;
+            }
+        } else if (object.id == "button2") {
+            var tr1 = node.parentNode.parentNode;
+            if (confirm("确定删除所选项目?")) {
+                ids.push(tr1.cells[1].innerText);
+            }
+            return;
+        }
+        $.ajax({
+            url: "/user/del",
+            data: JSON.stringify({"ids": ids}),
+            type: "DELETE",
+            dataType: "json",
+            contentType: "application/json;charset=utf-8",
+            success: function (data) {
+                if (data.result == "success") {
+                    alert("删除成功!");
+                    window.location.reload();
+                }
+                if (data.result == "failure") {
+                    alert(data.content)
+                }
+            }
+        })
+    }
+
+
 </script>
 
 </@layoutFooter>
