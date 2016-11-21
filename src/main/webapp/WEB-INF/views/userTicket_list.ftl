@@ -4,9 +4,9 @@
 <!-- 这是nested的内容-->
 
 <ul class="breadcrumb">
-    <li><span class="primary-font"><i class="icon-home"></i></span><a href="index.html"> Home</a></li>
-    <li>Table</li>
-    <li>Static Table</li>
+    <li><span class="primary-font"><i class="icon-home"></i></span><a href="#">首页</a></li>
+    <li>管理中心</li>
+    <li>用户乘车记录管理</li>
 </ul>
 <div class="smart-widget">
     <div class="smart-widget-header">
@@ -30,6 +30,7 @@
                 <#--<label for="chkAll"></label>-->
                 <#--</div>-->
                 <#--</th>-->
+                    <#--<th>序号</th>-->
                     <th>线路ID</th>
                     <th>起点站</th>
                     <th>终点站</th>
@@ -47,6 +48,7 @@
                     <#--<label for="chk${oneUser.id}"></label>-->
                     <#--</div>-->
                     <#--</td>-->
+                        <#--<td>${ticket_index+1}</td>-->
                         <td>${ticket.id}</td>
                         <td>${ticket.start_station}</td>
                         <td>${ticket.end_station}</td>

@@ -43,7 +43,6 @@ public class SignRepository {
         if (!list.isEmpty()) {
             return list.get(0);
         }
-
         return null;
     }
 

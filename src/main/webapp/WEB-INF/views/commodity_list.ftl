@@ -8,14 +8,17 @@
 
 
 <ul class="breadcrumb">
-    <li><span class="primary-font"><i class="icon-home"></i></span><a href="index.html"> Home</a></li>
-    <li>Table</li>
-    <li>Static Table</li>
+    <li><span class="primary-font"><i class="icon-home"></i></span><a href="#">首页</a></li>
+    <li>管理中心</li>
+    <li>商品管理</li>
 </ul>
 <div class="smart-widget clearfix">
     <div class="smart-widget-header">
-        Hover rows
+        商品管理
 
+        <#--<button class="btn btn-success smart-widget-option" data-toggle="modal" data-target="#add">-->
+            <#--添加商品类型-->
+        <#--</button>-->
         <button class="btn btn-success smart-widget-option" data-toggle="modal" data-target="#add">
             添加商品
         </button>
@@ -35,6 +38,7 @@
                             <label for="chkAll"></label>
                         </div>
                     </th>
+                    <#--<th>序号</th>-->
                     <th>商品ID</th>
                     <th>商品名称</th>
                     <th>商品类型</th>
@@ -53,6 +57,7 @@
                                 <label for="chk${Commodity.id}"></label>
                             </div>
                         </td>
+                        <#--<td>${Commodity_index+1}</td>-->
                         <td>${Commodity.id}</td>
                         <td>${Commodity.name}</td>
                         <#if Commodity.typeId==1>

@@ -3,9 +3,9 @@
 <@layoutBody>
 <!-- 这是nested的内容-->
 <ul class="breadcrumb">
-    <li><span class="primary-font"><i class="icon-home"></i></span><a href="index.html"> Home</a></li>
-    <li>Table</li>
-    <li>Static Table</li>
+    <li><span class="primary-font"><i class="icon-home"></i></span><a href="#">首页</a></li>
+    <li>管理中心</li>
+    <li>订单管理</li>
 </ul>
 <div class="smart-widget">
     <div class="smart-widget-header">
@@ -22,6 +22,7 @@
                             <label for="chkAll"></label>
                         </div>
                     </th>
+                    <#--<th>序号</th>-->
                     <th>用户ID</th>
                     <th>商品ID</th>
                     <th>订单号</th>
@@ -38,6 +39,7 @@
                                 <label for="chk${commodityOrder.userId}"></label>
                             </div>
                         </td>
+                        <#--<td>${commodityOrder_index+1}</td>-->
                         <td>${commodityOrder.userId}</td>
                         <td>${commodityOrder.commodityId}</td>
                         <td>${commodityOrder.tradeNo}</td>

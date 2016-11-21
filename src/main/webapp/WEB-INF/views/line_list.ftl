@@ -5,9 +5,9 @@
 <!-- 这是nested的内容-->
 
 <ul class="breadcrumb">
-    <li><span class="primary-font"><i class="icon-home"></i></span><a href="index.html"> Home</a></li>
-    <li>Table</li>
-    <li>Static Table</li>
+    <li><span class="primary-font"><i class="icon-home"></i></span><a href="#">首页</a></li>
+    <li>管理中心</li>
+    <li>线路管理</li>
 </ul>
 
 <div class="smart-widget clearfix">
@@ -31,6 +31,7 @@
                             <label for="chkAll"></label>
                         </div>
                     </th>
+                    <#--<th>序号</th>-->
                     <th>线路ID</th>
                     <th>线路名称</th>
                     <th>起始站点</th>
@@ -54,6 +55,7 @@
                                 <label for="chk${oneLine.id}"></label>
                             </div>
                         </td>
+                        <#--<td>${oneLine_index+1}</td>-->
                         <td>${oneLine.id}</td>
                         <td>${oneLine.name}</td>
                         <td >${oneLine.start}</td>

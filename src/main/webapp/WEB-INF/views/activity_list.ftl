@@ -5,9 +5,9 @@
 <!-- 这是nested的内容-->
 
 <ul class="breadcrumb">
-    <li><span class="primary-font"><i class="icon-home"></i></span><a href="index.html"> Home</a></li>
-    <li>Table</li>
-    <li>Static Table</li>
+    <li><span class="primary-font"><i class="icon-home"></i></span><a href="#">首页</a></li>
+    <li>管理中心</li>
+    <li>活动管理</li>
 </ul>
 
 <div class="smart-widget clearfix">
@@ -31,6 +31,7 @@
                             <label for="chkAll"></label>
                         </div>
                     </th>
+                    <#--<th>序号</th>-->
                     <th>活动ID</th>
                     <th>活动名称</th>
                     <th>活动简介</th>
@@ -53,6 +54,7 @@
                                 <label for="chk${oneActivity.id}"></label>
                             </div>
                         </td>
+                        <#--<td>${oneActivity_index+1}</td>-->
                         <td>${oneActivity.id}</td>
                         <td>${oneActivity.title}</td>
                         <td width="200">${oneActivity.detail}</td>

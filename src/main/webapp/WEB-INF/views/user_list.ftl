@@ -5,9 +5,9 @@
 <!-- 这是nested的内容-->
 
 <ul class="breadcrumb">
-    <li><span class="primary-font"><i class="icon-home"></i></span><a href="index.html"> Home</a></li>
-    <li>Table</li>
-    <li>Static Table</li>
+    <li><span class="primary-font"><i class="icon-home"></i></span><a href="#">首页</a></li>
+    <li>管理中心</li>
+    <li>用户管理</li>
 </ul>
 <div class="smart-widget">
     <div class="smart-widget-header">
@@ -24,6 +24,7 @@
                             <#--<label for="chkAll"></label>-->
                         <#--</div>-->
                     <#--</th>-->
+                    <#--<th>序号</th>-->
                     <th>用户ID</th>
                     <th>姓名</th>
                     <th>电话</th>
@@ -41,6 +42,7 @@
                                 <#--<label for="chk${oneUser.id}"></label>-->
                             <#--</div>-->
                         <#--</td>-->
+                        <#--<td>${oneUser_index+1}</td>-->
                         <td>${oneUser.id}</td>
                         <td>${oneUser.name}</td>
                         <td>${oneUser.phone}</td>

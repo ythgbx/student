@@ -4,9 +4,9 @@
 <@layoutBody>
 <!-- 这是nested的内容-->
 <ul class="breadcrumb">
-    <li><span class="primary-font"><i class="icon-home"></i></span><a href="index.html"> Home</a></li>
-    <li>Table</li>
-    <li>Static Table</li>
+    <li><span class="primary-font"><i class="icon-home"></i></span><a href="#">首页</a></li>
+    <li>管理中心</li>
+    <li>站点管理</li>
 </ul>
 <div class="smart-widget">
     <div class="smart-widget-header">
@@ -29,6 +29,7 @@
                             <label for="chkAll"></label>
                         </div>
                     </th>
+                    <#--<th>序号</th>-->
                     <th>站点ID</th>
                     <th>站点名称</th>
                     <th>站点经度</th>
@@ -48,6 +49,7 @@
                                 <label for="chk${station.id}"></label>
                             </div>
                         </td>
+                        <#--<td>${station_index+1}</td>-->
                         <td>${station.id}</td>
                         <td>${station.name}</td>
                         <td>${station.pos.lng}</td>
