@@ -4,12 +4,14 @@
   <resultMap id="BaseResultMap" type="net.bus.web.model.TerminalRecord" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="device" property="device" jdbcType="VARCHAR" />
+    <result column="line_id" property="lineId" jdbcType="BIGINT" />
     <result column="station_id" property="stationId" jdbcType="BIGINT" />
     <result column="user_id" property="userId" jdbcType="BIGINT" />
     <result column="card_id" property="cardId" jdbcType="BIGINT" />
     <result column="type" property="type" jdbcType="INTEGER" />
     <result column="lat" property="lat" jdbcType="DOUBLE" />
     <result column="lng" property="lng" jdbcType="DOUBLE" />
+    <result column="state" property="state" jdbcType="INTEGER" />
     <result column="time" property="time" jdbcType="TIMESTAMP" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -72,7 +74,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, device, station_id, user_id, card_id, type, lat, lng, time, create_time
+    id, device, line_id, station_id, user_id, card_id, type, lat, lng, state, time, create_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="net.bus.web.model.TerminalRecordExample" >
     select
@@ -89,7 +91,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from terminal_record
     where id = #{id,jdbcType=BIGINT}
@@ -105,14 +107,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="net.bus.web.model.TerminalRecord" >
-    insert into terminal_record (id, device, station_id, 
-      user_id, card_id, type, 
-      lat, lng, time, create_time
-      )
-    values (#{id,jdbcType=BIGINT}, #{device,jdbcType=VARCHAR}, #{stationId,jdbcType=BIGINT}, 
-      #{userId,jdbcType=BIGINT}, #{cardId,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}, 
-      #{lat,jdbcType=DOUBLE}, #{lng,jdbcType=DOUBLE}, #{time,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}
-      )
+    insert into terminal_record (id, device, line_id,
+    station_id, user_id, card_id,
+    type, lat, lng, state,
+    time, create_time)
+    values (#{id,jdbcType=BIGINT}, #{device,jdbcType=VARCHAR}, #{lineId,jdbcType=BIGINT},
+    #{stationId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{cardId,jdbcType=BIGINT},
+    #{type,jdbcType=INTEGER}, #{lat,jdbcType=DOUBLE}, #{lng,jdbcType=DOUBLE}, #{state,jdbcType=INTEGER},
+    #{time,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="net.bus.web.model.TerminalRecord" >
     insert into terminal_record
@@ -122,6 +124,9 @@
       </if>
       <if test="device != null" >
         device,
+      </if>
+      <if test="lineId != null" >
+        line_id,
       </if>
       <if test="stationId != null" >
         station_id,
@@ -141,6 +146,9 @@
       <if test="lng != null" >
         lng,
       </if>
+      <if test="state != null" >
+        state,
+      </if>
       <if test="time != null" >
         time,
       </if>
@@ -154,6 +162,9 @@
       </if>
       <if test="device != null" >
         #{device,jdbcType=VARCHAR},
+      </if>
+      <if test="lineId != null" >
+        #{lineId,jdbcType=BIGINT},
       </if>
       <if test="stationId != null" >
         #{stationId,jdbcType=BIGINT},
@@ -172,6 +183,9 @@
       </if>
       <if test="lng != null" >
         #{lng,jdbcType=DOUBLE},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
       </if>
       <if test="time != null" >
         #{time,jdbcType=TIMESTAMP},
@@ -196,6 +210,9 @@
       <if test="record.device != null" >
         device = #{record.device,jdbcType=VARCHAR},
       </if>
+      <if test="record.lineId != null" >
+        line_id = #{record.lineId,jdbcType=BIGINT},
+      </if>
       <if test="record.stationId != null" >
         station_id = #{record.stationId,jdbcType=BIGINT},
       </if>
@@ -214,6 +231,9 @@
       <if test="record.lng != null" >
         lng = #{record.lng,jdbcType=DOUBLE},
       </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=INTEGER},
+      </if>
       <if test="record.time != null" >
         time = #{record.time,jdbcType=TIMESTAMP},
       </if>
@@ -228,15 +248,17 @@
   <update id="updateByExample" parameterType="map" >
     update terminal_record
     set id = #{record.id,jdbcType=BIGINT},
-      device = #{record.device,jdbcType=VARCHAR},
-      station_id = #{record.stationId,jdbcType=BIGINT},
-      user_id = #{record.userId,jdbcType=BIGINT},
-      card_id = #{record.cardId,jdbcType=BIGINT},
-      type = #{record.type,jdbcType=INTEGER},
-      lat = #{record.lat,jdbcType=DOUBLE},
-      lng = #{record.lng,jdbcType=DOUBLE},
-      time = #{record.time,jdbcType=TIMESTAMP},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    device = #{record.device,jdbcType=VARCHAR},
+    line_id = #{record.lineId,jdbcType=BIGINT},
+    station_id = #{record.stationId,jdbcType=BIGINT},
+    user_id = #{record.userId,jdbcType=BIGINT},
+    card_id = #{record.cardId,jdbcType=BIGINT},
+    type = #{record.type,jdbcType=INTEGER},
+    lat = #{record.lat,jdbcType=DOUBLE},
+    lng = #{record.lng,jdbcType=DOUBLE},
+    state = #{record.state,jdbcType=INTEGER},
+    time = #{record.time,jdbcType=TIMESTAMP},
+    create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -246,6 +268,9 @@
     <set >
       <if test="device != null" >
         device = #{device,jdbcType=VARCHAR},
+      </if>
+      <if test="lineId != null" >
+        line_id = #{lineId,jdbcType=BIGINT},
       </if>
       <if test="stationId != null" >
         station_id = #{stationId,jdbcType=BIGINT},
@@ -265,6 +290,9 @@
       <if test="lng != null" >
         lng = #{lng,jdbcType=DOUBLE},
       </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
       <if test="time != null" >
         time = #{time,jdbcType=TIMESTAMP},
       </if>
@@ -277,12 +305,14 @@
   <update id="updateByPrimaryKey" parameterType="net.bus.web.model.TerminalRecord" >
     update terminal_record
     set device = #{device,jdbcType=VARCHAR},
+      line_id = #{lineId,jdbcType=BIGINT},
       station_id = #{stationId,jdbcType=BIGINT},
       user_id = #{userId,jdbcType=BIGINT},
       card_id = #{cardId,jdbcType=BIGINT},
       type = #{type,jdbcType=INTEGER},
       lat = #{lat,jdbcType=DOUBLE},
       lng = #{lng,jdbcType=DOUBLE},
+      state = #{state,jdbcType=INTEGER},
       time = #{time,jdbcType=TIMESTAMP},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}

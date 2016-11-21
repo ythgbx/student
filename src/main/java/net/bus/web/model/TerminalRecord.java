@@ -7,6 +7,8 @@ public class TerminalRecord {
 
     private String device;
 
+    private Long lineId;
+
     private Long stationId;
 
     private Long userId;
@@ -18,6 +20,8 @@ public class TerminalRecord {
     private Double lat;
 
     private Double lng;
+
+    private Integer state;
 
     private Date time;
 
@@ -37,6 +41,14 @@ public class TerminalRecord {
 
     public void setDevice(String device) {
         this.device = device;
+    }
+
+    public Long getLineId() {
+        return lineId;
+    }
+
+    public void setLineId(Long lineId) {
+        this.lineId = lineId;
     }
 
     public Long getStationId() {
@@ -85,6 +97,14 @@ public class TerminalRecord {
 
     public void setLng(Double lng) {
         this.lng = lng;
+    }
+
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
     }
 
     public Date getTime() {

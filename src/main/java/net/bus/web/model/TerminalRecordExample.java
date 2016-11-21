@@ -235,6 +235,66 @@ public class TerminalRecordExample {
             return (Criteria) this;
         }
 
+        public Criteria andLineIdIsNull() {
+            addCriterion("line_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineIdIsNotNull() {
+            addCriterion("line_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineIdEqualTo(Long value) {
+            addCriterion("line_id =", value, "lineId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineIdNotEqualTo(Long value) {
+            addCriterion("line_id <>", value, "lineId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineIdGreaterThan(Long value) {
+            addCriterion("line_id >", value, "lineId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("line_id >=", value, "lineId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineIdLessThan(Long value) {
+            addCriterion("line_id <", value, "lineId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineIdLessThanOrEqualTo(Long value) {
+            addCriterion("line_id <=", value, "lineId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineIdIn(List<Long> values) {
+            addCriterion("line_id in", values, "lineId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineIdNotIn(List<Long> values) {
+            addCriterion("line_id not in", values, "lineId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineIdBetween(Long value1, Long value2) {
+            addCriterion("line_id between", value1, value2, "lineId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineIdNotBetween(Long value1, Long value2) {
+            addCriterion("line_id not between", value1, value2, "lineId");
+            return (Criteria) this;
+        }
+
         public Criteria andStationIdIsNull() {
             addCriterion("station_id is null");
             return (Criteria) this;
@@ -592,6 +652,66 @@ public class TerminalRecordExample {
 
         public Criteria andLngNotBetween(Double value1, Double value2) {
             addCriterion("lng not between", value1, value2, "lng");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateIsNull() {
+            addCriterion("state is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateIsNotNull() {
+            addCriterion("state is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateEqualTo(Integer value) {
+            addCriterion("state =", value, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateNotEqualTo(Integer value) {
+            addCriterion("state <>", value, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateGreaterThan(Integer value) {
+            addCriterion("state >", value, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateGreaterThanOrEqualTo(Integer value) {
+            addCriterion("state >=", value, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateLessThan(Integer value) {
+            addCriterion("state <", value, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateLessThanOrEqualTo(Integer value) {
+            addCriterion("state <=", value, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateIn(List<Integer> values) {
+            addCriterion("state in", values, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateNotIn(List<Integer> values) {
+            addCriterion("state not in", values, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateBetween(Integer value1, Integer value2) {
+            addCriterion("state between", value1, value2, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateNotBetween(Integer value1, Integer value2) {
+            addCriterion("state not between", value1, value2, "state");
             return (Criteria) this;
         }
 
