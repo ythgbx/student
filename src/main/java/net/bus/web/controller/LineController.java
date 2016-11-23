@@ -522,7 +522,7 @@ public class LineController {
         ModelAndView mv=new ModelAndView();
         mv.setViewName("linestation_list");
         List<Station> lineStations = _lineService.getStationList(id,page,limit);
-        PagePojo pagePojo = new PagePojo(lineStations.size(),limit,page);
+        PagePojo pagePojo = new PagePojo(_lineService.getStationLinesCount(id),limit,page);
         mv.addObject("linestation",lineStations);
         mv.addObject("id",id);
         session.setAttribute("pagePojo",pagePojo);
