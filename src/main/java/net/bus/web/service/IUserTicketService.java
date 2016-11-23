@@ -19,6 +19,10 @@ public interface IUserTicketService {
 
     boolean buyTicket(long line_id,User user);
 
+    boolean buyTicket(long line_id,long user_id);
+
+    boolean buyTicket(long line_id,long user_id,long start_station_id,long end_station_id);
+
     boolean buyTickets(String device,List<TicketBuyItem> userTickets) throws Exception;
 
     int getTicketsCount(long user_id);
