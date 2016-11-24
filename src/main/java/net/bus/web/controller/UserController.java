@@ -659,12 +659,20 @@ public class UserController {
         BaseResult result = new BaseResult();
         User user = service.getUser(register.getPhone());
         if(user!=null){
-            user.setSchool(register.getSchool());
-            user.setInstitute(register.getInstitute());
-            if (service.updateUser(user));{
-                result.setResult("success");
-                result.setContent("true");
+            if(!checkCodeWithPhone(register.getPhone(),register.getCode()).equals(PhoneSMSContext.SmsCheckResult.Success))
+            {
+                result.setResult("failure");
+                result.setContent(RString.REGISTER_FAILED_SMS_CODE);
                 return result;
+
+            }else{
+                user.setSchool(register.getSchool());
+                user.setInstitute(register.getInstitute());
+                if (service.updateUser(user));{
+                    result.setResult("success");
+                    result.setContent("true");
+                    return result;
+                }
             }
         }else {
             if(!checkCodeWithPhone(register.getPhone(),register.getCode()).equals(PhoneSMSContext.SmsCheckResult.Success))

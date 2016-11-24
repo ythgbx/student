@@ -55,4 +55,5 @@ public interface IUserService {
     boolean del(List<Long> ids);
 
     boolean del(Long id);
+
 }

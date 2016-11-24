@@ -55,8 +55,8 @@
                         <#--<td>${oneLine_index+1}</td>-->
                         <td>${oneLine.id}</td>
                         <td>${oneLine.name}</td>
-                        <td>${oneLine.lat}</td>
-                        <td>${oneLine.lng}</td>
+                        <td>${oneLine.lat?string("0.######")}</td>
+                        <td>${oneLine.lng?string("0.######")}</td>
                         <td>${oneLine.annotation}</td>
                         <td>${oneLine.price}</td>
                         <td>
@@ -75,19 +75,19 @@
                         </td><!--删除站点 -->
                     </tr>
                     </#list>
-
                 </tbody>
-
+                <tbody>
+                <ul class="pagination">
+                    <li><a href="/line/detail_list?page=${pagePojo.homePage}&&id=${id}">首页</a></li>
+                    <li><a href="/line/detail_list?page=${pagePojo.getPreviousPage()}&&id=${id}">上一页</a></li>
+                    <li><a href="#">当前第${pagePojo.getCurrentPage()}页</a></li>
+                    <li><a href="#">共${pagePojo.countPage}页</a></li>
+                    <li><a href="#">总${pagePojo.amount}条数据</a></li>
+                    <li><a href="/line/detail_list?page=${pagePojo.getNextPage()}&&id=${id}">下一页</a></li>
+                    <li><a href="/line/detail_list?page=${pagePojo.trailerPage}&&id=${id}">尾页</a></li>
+                </ul>
+                </tbody>
             </table>
-            <ul class="pagination">
-                <li><a href="/line/detail_list?page=${pagePojo.homePage}&&id=${id}">首页</a></li>
-                <li><a href="/line/detail_list?page=${pagePojo.getPreviousPage()}&&id=${id}">上一页</a></li>
-                <li><a href="#">当前第${pagePojo.getCurrentPage()}页</a></li>
-                <li><a href="#">共${pagePojo.countPage}页</a></li>
-                <li><a href="#">总${pagePojo.amount}条数据</a></li>
-                <li><a href="/line/detail_list?page=${pagePojo.getNextPage()}&&id=${id}">下一页</a></li>
-                <li><a href="/line/detail_list?page=${pagePojo.trailerPage}&&id=${id}">尾页</a></li>
-            </ul>
         </div>
 
     </div><!-- ./smart-widget-inner -->

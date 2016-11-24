@@ -52,8 +52,8 @@
                         <#--<td>${station_index+1}</td>-->
                         <td>${station.id}</td>
                         <td>${station.name}</td>
-                        <td>${station.pos.lng}</td>
-                        <td>${station.pos.lat}</td>
+                        <td>${station.pos.lng?string("0.######")}</td>
+                        <td>${station.pos.lat?string("0.######")}</td>
                         <td>${station.annotation}</td>
                         <td>${station.price}</td>
                         <td>
