@@ -52,7 +52,7 @@ public class TerminalRecordService implements ITerminalRecordService{
             Map<Long,ArrayList<TerminalRecord>> records = new HashMap<Long, ArrayList<TerminalRecord>>();
             for (int i = 0;i<list.size();i++){
                 TerminalRecord record = list.get(i);
-                if(!records.containsKey(record.getUserId())){
+                if(records.containsKey(record.getUserId())){
                     records.get(record.getUserId()).add(record);
                 }else{
                     ArrayList<TerminalRecord> newList = new ArrayList<TerminalRecord>();
