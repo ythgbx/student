@@ -68,27 +68,56 @@
                     </ul>
                 </li>
                 <li class="openable bg-palette3">
-                    <a href="#">
+                <a href="#">
 									<span class="menu-content block">
 										<span class="menu-icon"><i class="block fa fa-gift fa-lg"></i></span>
-										<span class="text m-left-sm">临时界面</span>
+										<span class="text m-left-sm">活动管理</span>
 										<span class="submenu-icon"></span>
 									</span>
-									<span class="menu-content-hover block">
+                    <span class="menu-content-hover block">
+										Pages
+									</span>
+                </a>
+                <ul class="submenu">
+                    <li><a href="/activity/list"><span class="submenu-label">活动中心</span></a></li>
+                </ul>
+            </li>
+
+                <li class="openable bg-palette3">
+                    <a href="#">
+									<span class="menu-content block">
+										<span class="menu-icon"><i class="block fa fa-bell fa-lg"></i></span>
+										<span class="text m-left-sm">新闻管理</span>
+										<span class="submenu-icon"></span>
+									</span>
+                        <span class="menu-content-hover block">
 										Pages
 									</span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="/activity/list"><span class="submenu-label">活动中心</span></a></li>
                         <li><a href="/news/list"><span class="submenu-label">新闻中心</span></a></li>
+                    </ul>
+                </li>
+
+                <li class="openable bg-palette3">
+                    <a href="#">
+									<span class="menu-content block">
+										<span class="menu-icon"><i class="block fa fa-arrows-h fa-lg"></i></span>
+										<span class="text m-left-sm">线路管理</span>
+										<span class="submenu-icon"></span>
+									</span>
+                        <span class="menu-content-hover block">
+										Pages
+									</span>
+                    </a>
+                    <ul class="submenu">
                         <li><a href="/line/list"><span class="submenu-label">线路中心</span></a></li>
-                        <#--<li><a href="/activity/test"><span class="submenu-label">测试界面</span></a></li>-->
                     </ul>
                 </li>
                 <li class="openable bg-palette4">
                     <a href="#">
 									<span class="menu-content block">
-										<span class="menu-icon"><i class="block fa fa-list fa-lg"></i></span>
+										<span class="menu-icon"><i class="block fa fa-anchor fa-lg" aria-hidden="true"></i></span>
 										<span class="text m-left-sm">车辆管理</span>
 										<span class="submenu-icon"></span>
 									</span>

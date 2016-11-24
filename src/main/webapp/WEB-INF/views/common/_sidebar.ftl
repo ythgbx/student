@@ -48,7 +48,7 @@
                             <i class="fa fa-circle-o text-success"></i>
                         </div>
                         <div class="chat-alert">
-                            <span class="badge badge-purple bounceIn animation-delay2">2</span>
+                            <span class="badge badge-purple bounceIn animation-delay2"></span>
                         </div>
                     </a>
                 </li>
