@@ -6,7 +6,6 @@ import java.util.List;
  * Created by Edifi_000 on 2016-11-21.
  */
 public class TerminalRecords extends BaseRequest{
-
     private String device;
     private List<String> data;
 

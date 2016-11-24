@@ -1,8 +1,8 @@
 package net.bus.web.service.impl;
 
+import net.bus.web.common.AES;
 import net.bus.web.enums.TerminalRecordState;
 import net.bus.web.enums.TerminalRecordType;
-import net.bus.web.model.Line;
 import net.bus.web.model.TerminalRecord;
 import net.bus.web.repository.TerminalRecordRepository;
 import net.bus.web.repository.specification.TerminalRecordDeviceStateAndTypeSpecification;
@@ -16,51 +16,84 @@ import java.util.*;
  * Created by Edifi_000 on 2016-11-21.
  */
 @Service
-public class TerminalRecordService implements ITerminalRecordService{
+public class TerminalRecordService implements ITerminalRecordService {
 
     @Autowired
     private TerminalRecordRepository _rootRepository;
 
-   public Boolean upload(String device,List<String> data){
+    public Boolean upload(String device, List<String> data) {
 
-       List<TerminalRecord> list = decryptSerialize(device,data);
-       if(list!=null&&list.size()>0){
-           for(int i=0;i<list.size();i++){
-               _rootRepository.insertItem(list.get(i));
-           }
-           checkTicket(device,list.get(0).getLineId(),list.get(0).getStationId());
-       }
-       return true;
-   }
-
-    private List<TerminalRecord> decryptSerialize(String device,List<String> data){
-        //TODO 解密设备上传的data
-        return new ArrayList<TerminalRecord>();
+        List<TerminalRecord> list = decryptSerialize(device, data);
+        if (list != null && list.size() > 0) {
+            for (int i = 0; i < list.size(); i++) {
+                _rootRepository.insertItem(list.get(i));
+            }
+            checkTicket(device, list.get(0).getLineId(), list.get(0).getStationId());
+        }
+        return true;
     }
 
-    private void checkTicket(String device,Long currentLineId,Long currentStationId){
+    private List<TerminalRecord> decryptSerialize(String device, List<String> data) {
+        //TODO 解密设备上传的data
+        List<TerminalRecord> records = new ArrayList<TerminalRecord>();
+        for (String item : data) {
+            String raw_data = "";
+            try {
+                raw_data = AES.getAesInstance().Decrypt(item);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return new ArrayList<TerminalRecord>();
+            }
+            String[] decode_data = raw_data.split("&");
+            TerminalRecord terminalRecord = new TerminalRecord();
+            /*
+                S&用户名&时间&经度&维度&线路id&站点id
+                C&UID&时间&精度&纬度&线路ID&站点ID
+             */
+            if (decode_data[0].equals("C")) {
+                //TODO 数据解析
+                terminalRecord.setCardUid(decode_data[1]);
+                terminalRecord.setType(2);
+            }
+            if (decode_data[0].equals("S")) {
+                //TODO 数据解析
+                terminalRecord.setUserId(Long.parseLong(decode_data[1]));
+                terminalRecord.setType(1);
+            }
+            terminalRecord.setDevice(device);
+            terminalRecord.setTime(new Date((long) (Float.parseFloat(decode_data[2]) * 1000)));
+            terminalRecord.setLng(Double.parseDouble(decode_data[3]));
+            terminalRecord.setLat(Double.parseDouble(decode_data[4]));
+            terminalRecord.setLineId(Long.parseLong(decode_data[5]));
+            terminalRecord.setStationId(Long.parseLong(decode_data[6]));
+            records.add(terminalRecord);
+        }
+        return records;
+    }
+
+    private void checkTicket(String device, Long currentLineId, Long currentStationId) {
         List<TerminalRecord> list = _rootRepository.getList(new TerminalRecordDeviceStateAndTypeSpecification(device, TerminalRecordState.UNCHECKED.ordinal(), TerminalRecordType.QR.ordinal()));
-        if(list!=null&&list.size()>0){
-            Map<Long,ArrayList<TerminalRecord>> records = new HashMap<Long, ArrayList<TerminalRecord>>();
-            for (int i = 0;i<list.size();i++){
+        if (list != null && list.size() > 0) {
+            Map<Long, ArrayList<TerminalRecord>> records = new HashMap<Long, ArrayList<TerminalRecord>>();
+            for (int i = 0; i < list.size(); i++) {
                 TerminalRecord record = list.get(i);
-                if(!records.containsKey(record.getUserId())){
+                if (!records.containsKey(record.getUserId())) {
                     records.get(record.getUserId()).add(record);
-                }else{
+                } else {
                     ArrayList<TerminalRecord> newList = new ArrayList<TerminalRecord>();
                     newList.add(record);
                     records.put(record.getUserId(), newList);
                 }
             }
 
-            for(List<TerminalRecord> userRecords:records.values()){
+            for (List<TerminalRecord> userRecords : records.values()) {
                 sortByTime(userRecords);
             }
 
-            for(Long userId:records.keySet()){
-                List<TerminalRecord> userRecords = records.get(userId);
-;
-                for(TerminalRecord record:userRecords){
+            for (Long user_id : records.keySet()) {
+                List<TerminalRecord> userRecords = records.get(user_id);
+                ;
+                for (TerminalRecord record : userRecords) {
                     //TODO 判断检票类型,是单检票还是区间检票
                     //IF 单检票
                     //  UserTicketService.单检票(currentLineId,currentStationId)
@@ -74,7 +107,7 @@ public class TerminalRecordService implements ITerminalRecordService{
         }
     }
 
-    private void sortByTime(List<TerminalRecord> list){
+    private void sortByTime(List<TerminalRecord> list) {
         Collections.sort(list, new Comparator<TerminalRecord>() {
             //@Override
             public int compare(TerminalRecord s1, TerminalRecord s2) {
