@@ -2,21 +2,17 @@ package net.bus.web.service.impl;
 
 import net.bus.web.common.AES;
 import net.bus.web.controller.dto.TicketBuyItem;
-import net.bus.web.model.Bus;
-import net.bus.web.model.Line;
+import net.bus.web.model.*;
 import net.bus.web.model.Pojo.UserCheckPojo;
-import net.bus.web.model.User;
-import net.bus.web.model.UserTicket;
 import net.bus.web.model.type.PointRecordType;
 import net.bus.web.model.type.PointSourceType;
-import net.bus.web.repository.*;
-import net.bus.web.repository.specification.BusDeviceSpecification;
+import net.bus.web.repository.ISpecification;
+import net.bus.web.repository.UserTicketRepository;
 import net.bus.web.repository.specification.UserTicketIdSpecification;
 import net.bus.web.repository.specification.UserTicketLineIdSpecification;
 import net.bus.web.repository.specification.UserTicketUserIdSpecification;
-import net.bus.web.service.IPointRecordService;
-import net.bus.web.service.IUserTicketService;
-import org.apache.commons.lang.StringUtils;
+import net.bus.web.service.*;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,13 +30,15 @@ public class UserTicketService implements IUserTicketService {
     @Autowired
     private UserTicketRepository _rootRepository;
     @Autowired
-    private LineRepository _lineRepository;
+    private ILineService _lineService;
     @Autowired
-    private UserRepository _userRepository;
+    private IUserService _userService;
     @Autowired
-    private BusRepository _busRepository;
+    private IBusService _busService;
     @Autowired
     private IPointRecordService _pointRecordService;
+    @Autowired
+    private IStationService _stationService;
 
     public List<UserTicket> getTickets(long user_id,int page,int limit)
     {
@@ -65,7 +63,7 @@ public class UserTicketService implements IUserTicketService {
     @Transactional
     public boolean buyTicket(long line_id,User user) throws RuntimeException {
         //TODO 需要新增事务控制购票过程
-        Line line = _lineRepository.getItem(line_id);
+        Line line = _lineService.getLineDetails(line_id);
         if(line!=null){
 
             //TODO 负值是否仍需范围内限定,可设置于sys.properties内
@@ -80,10 +78,45 @@ public class UserTicketService implements IUserTicketService {
             userTicket.setUserId(user.getId());
             userTicket.setPrice(line.getPrice());
 
-            user.setPoints(user.getPoints() - line.getPrice());
+            user.setPoints(user.getPoints() - userTicket.getPrice());
 
             _rootRepository.insertItem(userTicket);
-            _userRepository.updateUser(user);
+            _userService.updateUser(user);
+
+            return true;
+        }
+        return  false;
+    }
+
+    @Transactional
+    public boolean buyTicket(long line_id,long user_id){
+        return buyTicket(line_id,_userService.getUser(user_id));
+    }
+
+    @Transactional
+    public boolean buyTicket(long line_id,long user_id,long start_station_id,long end_station_id){
+        Line line = _lineService.getLineDetails(line_id);
+        User user = _userService.getUser(user_id);
+        if(line!=null&&user!=null){
+
+            //TODO 负值是否仍需范围内限定,可设置于sys.properties内
+//            //由于弱联网检票需要废弃该代码 允许少量负值 20160803
+//            //当不够积分支付时,返回
+//            if(user.getPoints()<line.getPrice()){
+//                return false;
+//            }
+
+            Station startStation = _stationService.getDetails(start_station_id);
+            Station endStation = _stationService.getDetails(end_station_id);
+            UserTicket userTicket = new UserTicket();
+            userTicket.setLineId(line_id);
+            userTicket.setUserId(user.getId());
+            userTicket.setPrice((endStation.getPrice().subtract(startStation.getPrice())).abs().intValue());
+
+            user.setPoints(user.getPoints() - userTicket.getPrice());
+
+            _rootRepository.insertItem(userTicket);
+            _userService.updateUser(user);
 
             return true;
         }
@@ -94,15 +127,15 @@ public class UserTicketService implements IUserTicketService {
     public boolean buyTickets(String device,List<TicketBuyItem> userTickets) throws Exception
     {
         if(!StringUtils.isBlank(device)){
-            Bus bus = _busRepository.getItem(new BusDeviceSpecification(device));
-            if(bus!=null){
+            Bus bus = _busService.getBus(null,device);
+            if (bus != null) {
                 if(bus.getLineId()>0){
-                    Line line = _lineRepository.getItem(bus.getLineId());
+                    Line line = _lineService.getLineDetails(bus.getLineId());
                     if(line!=null){
                         for(TicketBuyItem ticketBuyItem:userTickets){
                             //TODO 解密user_check获取user_id与check_date
                             UserCheckPojo checkPojo = getUserCheckPojo(ticketBuyItem.getUser_check());
-                            User user = _userRepository.getUser(checkPojo.getId());
+                            User user = _userService.getUser(checkPojo.getId());
                             if(user!=null){
                                 UserTicket userTicket = new UserTicket();
                                 userTicket.setLineId(line.getId());
@@ -113,7 +146,7 @@ public class UserTicketService implements IUserTicketService {
                                 user.setPoints(user.getPoints() - line.getPrice());
 
                                 _rootRepository.insertItem(userTicket);
-                                _userRepository.updateUser(user);
+                                _userService.updateUser(user);
                                 _pointRecordService.recordPoint(user.getId(), PointRecordType.Expend, PointSourceType.TICKET, line.getPrice(), line.getName());
                             }
                         }

@@ -171,6 +171,10 @@ public class LineService implements ILineService {
         return  _rootRepository.existItem(new LineIdsSpecification(ids));
     }
 
+    public int getStationLinesCount(Long id) {
+        return getLineStations(id).size();
+    }
+
     public int getAroundLinesCount(double lat,double lng)
     {
         List<Station> listStation =  _locationService.getAroundStation(new Position(lat, lng));

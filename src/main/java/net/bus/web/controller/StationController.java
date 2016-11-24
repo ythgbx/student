@@ -196,7 +196,7 @@ public class StationController {
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
-    @ApiOperation(value = "获取商品详细", httpMethod = "GET", response = CommodityDetail.class, notes = "获取站点详情")
+    @ApiOperation(value = "获取线路站点", httpMethod = "GET", response = CommodityDetail.class, notes = "获取站点详情")
     public IResult detail(@ApiParam(required = true, name = "id", value = "id")@RequestParam(value = "id", required = true, defaultValue = "0")long id)
     {
         StationItem stationItem = new StationItem();

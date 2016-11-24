@@ -34,6 +34,8 @@ public interface ILineService {
 
     boolean checkLineExist(Long id);
 
+    int getStationLinesCount(Long id);
+
     int getAroundLinesCount(double lat,double lng);
 
     int getUserLinesCount(Long userId);

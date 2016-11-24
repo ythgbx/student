@@ -9,16 +9,25 @@ import net.bus.web.repository.ISpecification;
 public class StationNameSpecification implements ISpecification<StationExample> {
 
     protected String _name;
+    protected Long _id;
 
     public StationNameSpecification(String name){
         this._name = name;
+    }
+    public StationNameSpecification(Long id){
+        this._id = id;
     }
 
     public StationExample createExample()
     {
         StationExample example = new StationExample();
         StationExample.Criteria criteriaId = example.createCriteria();
-        criteriaId.andNameLike(_name);
+        if (_name!=""&&_name!=null){
+            criteriaId.andNameLike(_name);
+        }
+        if (_id!=null){
+            criteriaId.andIdEqualTo(_id);
+        }
         return example;
     }
 }
