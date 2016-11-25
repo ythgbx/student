@@ -208,7 +208,7 @@ public class OrderService implements IOrderService{
     }
 
     public List<Orders> getUserOrders(long userId,ProducedTypeEnum prodType,int page,int limit){
-        return _rootRepository.getList(new OrdersUserIdProdTypeAndPaidSpecification(userId,prodType), page - 1, limit);
+        return _rootRepository.getList(new OrdersUserIdProdTypeAndPaidSpecification(userId,prodType), page, limit);
     }
 
     public int getUserOrdersCount(long userId,ProducedTypeEnum prodType){

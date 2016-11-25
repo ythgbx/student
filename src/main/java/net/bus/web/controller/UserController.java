@@ -638,7 +638,7 @@ public class UserController {
     public BaseResult rechargePoint(@ApiParam(required = true, name = "rechargePoint", value = "用户积分充值(管理员操作)")@RequestBody UserPointAdd pointAdd)
     {
         BaseResult result = new BaseResult();
-        if(service.addPoint(service.getUser(pointAdd.getId()),pointAdd.getAddNum())){
+        if(service.addPoint(service.getUser(pointAdd.getPhone()),pointAdd.getAddNum())){
             result.setResult("success");
             result.setContent("充值成功");
         }else{

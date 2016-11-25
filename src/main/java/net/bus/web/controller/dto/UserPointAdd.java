@@ -4,16 +4,16 @@ package net.bus.web.controller.dto;
  * Created by Edifi_000 on 2016-07-24.
  */
 public class UserPointAdd {
-    private Long id;
+    private String phone;
 
     private Integer addNum;
 
-    public Long getId() {
-        return id;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public Integer getAddNum() {
