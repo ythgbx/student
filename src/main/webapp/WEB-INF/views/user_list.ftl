@@ -15,6 +15,12 @@
         <button type="button" onclick="mulit_del()" class="button border-red" id="button1"><span
                 class="icon-trash-o"></span> 批量删除
         </button>
+        <div class="search-input pull-right">
+            <input type="text" class="form-control input-sm inline-block" id="sea">
+            <a class="input-icon text-normal" onclick="bus.searchUser()">
+                <i class="ion-ios7-search-strong"></i>
+            </a>
+        </div>
     </div>
 
     <div class="smart-widget-inner">
@@ -36,8 +42,8 @@
                         </div>
                     </th>
                     <th>用户ID</th>
-                    <th>姓名</th>
-                    <th>电话</th>
+                    <#--<th>姓名</th>-->
+                    <th>账号</th>
                     <th>积分</th>
                     <th>用户类型</th>
                     <th>操作</th>
@@ -61,7 +67,7 @@
                             </div>
                         </td>
                         <td>${oneUser.id}</td>
-                        <td>${oneUser.name}</td>
+                        <#--<td>${oneUser.name}</td>-->
                         <td>${oneUser.phone}</td>
                         <td>${oneUser.points}</td>
                         <#if oneUser.type==1>
@@ -129,6 +135,34 @@
     var Bus = ((function () {
         function Bus() {
         }
+
+        Bus.prototype.searchUser = function () {
+            var phone = document.getElementById("sea").value;
+            if(!(/^1[34578]\d{9}$/.test(phone))){
+                alert("手机号码有误，请重填");
+                return false;
+            }else {
+                window.location.href="/user/find?phone="+phone;
+            }
+//            console.log(phone);
+//            $.ajax({
+//                url: "/user/find?phone="+phone,
+//                type: "GET",
+//                dataType: "json",
+//                contentType: "application/json;charset=UTF-8",
+//                success: function (data) {
+//                    if (data.result == "success") {
+////
+//                    }
+//                    if (data.result == "error") {
+//                        console.log("error");
+//                        alert(data.content);
+//                    }
+//                },
+//                error: function (data) {
+//                }
+//            });
+        };
 
         Bus.prototype.getUserBuyId = function (node) {//通过ID获取商品详情
             var tr1 = node.parentNode.parentNode;//获取id

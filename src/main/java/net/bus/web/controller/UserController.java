@@ -33,6 +33,7 @@ import net.bus.web.controller.dto.BaseResult;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -595,7 +596,8 @@ public class UserController {
     @Auth(role = Auth.Role.USER)
     @RequestMapping(value="/list", method = RequestMethod.GET)
     @ApiOperation(value = "用户列表页面", httpMethod = "GET", response = ModelAndView.class, notes = "用户列表页面")
-    public ModelAndView list(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "1")int page,
+    public ModelAndView list(@ApiParam(required = true, name = "phone", value = "电话号码")@RequestParam(value = "phone", required = true, defaultValue = "")String phone,
+                             @ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "1")int page,
                              @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "10")int limit,
                              HttpServletRequest request,Model model)
     {
@@ -608,6 +610,42 @@ public class UserController {
         mv.addObject("userList",users);
         session.setAttribute("pagePojo",pagePojo);
 
+        return mv;
+    }
+
+
+    /**
+     * 用户查找
+     * @param phone
+     * @param request
+     * @param model
+     * @return
+     */
+    @Auth(role = Auth.Role.USER)
+    @RequestMapping(value="/find", method = RequestMethod.GET)
+    @ApiOperation(value = "查找用户", httpMethod = "GET", response = ModelAndView.class, notes = "查找用户")
+    public ModelAndView find(@ApiParam(required = true, name = "phone", value = "电话号码")@RequestParam(value = "phone", required = true, defaultValue = "")String phone,
+                             @ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page",required = true,defaultValue = "1")int page,
+                             @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "10")int limit,
+                             HttpServletRequest request,Model model)
+    {
+        logger.info("url:/user/find");
+        ModelAndView mv = new ModelAndView();
+        HttpSession session = request.getSession();
+        User currentUser = service.getUser(phone);
+        if(currentUser!=null){
+            PagePojo pagePojo = new PagePojo(1,limit,page);
+            List<User> users = new ArrayList<User>();
+            users.add(currentUser);
+            mv.addObject("userList",users);
+            session.setAttribute("pagePojo",pagePojo);
+        }else{
+            List<User> users = new ArrayList<User>();
+            PagePojo pagePojo = new PagePojo(0,limit,page);
+            mv.addObject("userList",users);
+            session.setAttribute("pagePojo",pagePojo);
+        }
+        mv.setViewName("user_list");
         return mv;
     }
 

@@ -16,6 +16,7 @@ public interface IUserService {
 
     List<User> getUsers(List<Long> ids);
 
+
     User getUser(Long id);
 
     User getUser(String phone);

@@ -33,6 +33,7 @@
                     <#--<th>序号</th>-->
                     <th>用户ID</th>
                     <th>姓名</th>
+                    <th>联系方式</th>
                     <th>学校</th>
                     <th>院系</th>
                     <th>活动名称</th>
@@ -51,6 +52,7 @@
                         <#--<td>${oneUser_index+1}</td>-->
                         <td>${oneUser.id}</td>
                         <td>${oneUser.name}</td>
+                        <td>${oneUser.phone}</td>
                         <td>${oneUser.school}</td>
                         <td>${oneUser.institute}</td>
                         <td>${oneUser.source}</td>
