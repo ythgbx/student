@@ -103,7 +103,7 @@
                     </div>
                     <input type="text" class="form-control"  name="code" placeholder="验证码" maxlength="6">
                     <div class="col-sm-12 text-center">
-                        <a onclick="submit()"><img src="/images/9.png" style="width:80%; margin-top: 30px;margin-bottom: 45px " align="absmiddle"></a>
+                        <a id="submit"><img src="/images/9.png" style="width:80%; margin-top: 30px;margin-bottom: 45px " align="absmiddle"></a>
                     </div>
                 </form>
 
@@ -131,18 +131,22 @@
     </div>
 </div>
 <script type="text/javascript">
-    function submit() {
-        console.log("aaaaass")
+    $("#submit").click(function () {
         var d = {};
         var t = $('#form1').serializeArray();
         $.each(t, function () {
             d[this.name] = this.value;
         })
-        console.log(d)
         if(d.school==""||d.institute==""||d.name==""||d.phone==""||d.code==""){
             $("p").text("请输入完整信息！");
             $("#myModal").modal();
-        }else{
+        }else if(!(d.name && /^[\u4E00-\u9FA5]{2,4}$/.test(d.name)) ||!(d.school && /^[\u4E00-\u9FA5]{4,20}$/.test(d.institute))||!(d.school && /^[\u4E00-\u9FA5]{4,20}$/.test(d.institute))){
+            $("p").text("请输入合法信息!");
+            $("#myModal").modal();
+        }else if(!(d.code && /^\d{6}$/.test(d.code))){
+            $("p").text("请输入合法验证码!");
+            $("#myModal").modal();
+        }else {
             $.ajax({
                 url: "/user/sign",
                 data: JSON.stringify(d),
@@ -151,26 +155,30 @@
                 contentType: "application/json;charset=UTF-8",
                 success: function (data) {
                     var phone=$("[name=phone]").val();
-                    $("p").text("报名成功！");
+                    if(data.result=="success"){
+                        $("p").text("报名成功!");
+                    }else{
+                        $("p").text(data.content);
+                    }
                     $("#myModal").modal();
                     var dataToSend = JSON.stringify({success: true, phone:phone,password:data.content});
-
                     if(WebViewBridge){
                         WebViewBridge.send(dataToSend);
                     }
-
                 },
-                failure: function () {
-                    $("p").text("报名失败！");
+                failure:function (data) {
+                    if(data.result=="failure"){
+                        $("p").text(data.content);
+                    }
                     $("#myModal").modal();
 
                 }
             });
-
         }
 
+    })
 
-    }
+
 </script>
 <script type="text/javascript">
 

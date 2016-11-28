@@ -106,8 +106,8 @@
                 </div>
                 <div class="modal-body">
 
-                    <label for="exampleInputEmail1">确认充值账号ID</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" name="id">
+                    <label for="exampleInputEmail1">确认充值账号</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" name="phone">
                     <label for="exampleInputEmail1">充值额度</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" name="addNum"
                            placeholder="请输入充值积分">
@@ -132,8 +132,8 @@
 
         Bus.prototype.getUserBuyId = function (node) {//通过ID获取商品详情
             var tr1 = node.parentNode.parentNode;//获取id
-            var id=tr1.cells[0].innerText;
-            $("[name=id]").val(id);
+            var phone=tr1.cells[3].innerText;
+            $("[name=phone]").val(phone);
 
         };
 
