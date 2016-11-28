@@ -19,6 +19,8 @@ public interface ILineService {
 
     List<Line> getStationLines(String station_name,int page,int limit);
 
+    List<Line> getAllLines(String lineName,int page,int limit);
+
     List<Line> getAllLines(int page,int limit);
 
     List<Line> getCityLines(String cityName, int page,int limit);

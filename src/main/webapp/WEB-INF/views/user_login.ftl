@@ -13,10 +13,10 @@
 
             <form id="form" data-validate="parsley" novalidate>
                 <div class="form-group m-bottom-md">
-                    <input name="phone" type="text" class="form-control" data-parsley-required="true" placeholder="Phone Number">
+                    <input name="phone" type="text" class="form-control" data-parsley-required="true" placeholder="手机号">
                 </div>
                 <div class="form-group">
-                    <input name="password" type="password" class="form-control" data-parsley-required="true" placeholder="Password">
+                    <input name="password" type="password" class="form-control" data-parsley-required="true" placeholder="密码">
                 </div>
 
                 <div class="form-group">
@@ -24,18 +24,18 @@
                         <input type="checkbox" id="chkRemember">
                         <label for="chkRemember"></label>
                     </div>
-                    Remember me
+                    记住密码
                 </div>
 
                 <div class="m-top-md p-top-sm">
-                    <a id="submit"  class="btn btn-success block">Sign in</a>
+                    <a id="submit"  class="btn btn-success block">登录</a>
                 </div>
 
                 <div class="m-top-md p-top-sm">
                     <div class="font-12 text-center m-bottom-xs">
-                        <a href="#" class="font-12">Forgot password ?</a>
+                        <a href="#" class="font-12">忘记密码?</a>
                     </div>
-                    <div class="font-12 text-center m-bottom-xs">Do not have an account?</div>
+                    <div class="font-12 text-center m-bottom-xs">没有账号?</div>
                     <a href="/user/registerPage" class="btn btn-default block">注册</a>
                 </div>
             </form>

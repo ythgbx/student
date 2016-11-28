@@ -32,6 +32,16 @@ public class LineRepository {
         return new ArrayList<Line>();
     }
 
+    public List<Line> getAllByLineName(ISpecification specification,int page, int limit){
+        LineExample example = (LineExample)specification.createExample();
+        if (example!=null){
+            return _mapper.selectByExampleWithRowbounds(example,new RowBounds(page*limit, limit));
+        }
+        return new ArrayList<Line>();
+
+    }
+
+
     public List<Line> getList(ISpecification specification) {
         LineExample example = (LineExample)specification.createExample();
         if(example!=null) {

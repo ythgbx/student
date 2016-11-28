@@ -97,6 +97,17 @@
                     <li><a href="/line/list?page=${pagePojo.getNextPage()}">下一页</a></li>
                     <li><a href="/line/list?page=${pagePojo.trailerPage}">尾页</a></li>
                 </ul>
+
+                <ul class="nav-notification  inline-block pull-right">
+                    <li class="search-list">
+                        <div class="search-input-wrapper">
+                            <div class="search-input">
+                                <input type="text" class="form-control input-sm inline-block" id="search_input" >
+                                <a href="/line/list?lineName" id="search_submit" class="input-icon text-normal"><i class="ion-ios7-search-strong"></i></a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
                 </tbody>
             </table>
         </div>
@@ -406,6 +417,23 @@
             }
         })
     }
+</script>
+<script type="text/javascript">
+    $("#search_submit").click(function () {
+        var d=$("#search_input").val();
+        console.log(d)
+        $.ajax({
+            url: "/line/list?lineName="+d,
+            type: "GET",
+            contentType: "application/json;charset=UTF-8",
+            success: function (data) {
+               window.location.href="/line/list?lineName="+d
+            },
+            failure: function (data) {
+                alert(data.content)
+            }
+        });
+    })
 </script>
 
 </@layoutFooter>
