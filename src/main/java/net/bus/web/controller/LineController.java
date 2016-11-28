@@ -408,7 +408,8 @@ public class LineController {
     @RequestMapping(value="/list", method = RequestMethod.GET)
     @ApiOperation(value = "线路列表页面", httpMethod = "GET", response = ModelAndView.class, notes = "线路列表页面")
     @ResponseBody
-    public ModelAndView list(@ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "1")int page,
+    public ModelAndView list(@ApiParam(required = true, name = "lineName", value = "线路名称")@RequestParam(value = "lineName", required = true, defaultValue = "")String lineName,
+                             @ApiParam(required = true, name = "page", value = "页")@RequestParam(value = "page", required = true, defaultValue = "1")int page,
                              @ApiParam(required = true, name = "limit", value = "数量")@RequestParam(value = "limit", required = true, defaultValue = "10")int limit,
                              HttpServletRequest request)
     {
@@ -416,7 +417,7 @@ public class LineController {
         HttpSession session=request.getSession();
         ModelAndView mv = new ModelAndView();
         mv.setViewName("line_list");
-        List<Line> lines = _lineService.getAllLines(page,limit);
+        List<Line> lines = _lineService.getAllLines(lineName,page,limit);
         PagePojo pagePojo = new PagePojo(_lineService.getAllLinesCount(),limit,page);
         mv.addObject("lineList",lines);
         session.setAttribute("pagePojo",pagePojo);

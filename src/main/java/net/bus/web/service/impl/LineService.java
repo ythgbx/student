@@ -89,6 +89,15 @@ public class LineService implements ILineService {
         return _rootRepository.getList(new LineIdsSpecification(listLineIds), page - 1, limit);
     }
 
+    public List<Line> getAllLines(String lineName, int page, int limit) {
+        if(lineName.equals("")){
+            return _rootRepository.getAll(page - 1, limit);
+        }else {
+            return _rootRepository.getAllByLineName(new LineNamesSpecification(lineName),page-1,limit);
+        }
+
+    }
+
     public List<Line> getAllLines(int page,int limit)
     {
         return _rootRepository.getAll(page - 1, limit);

@@ -64,7 +64,7 @@
                     <div class="search-input-wrapper">
                         <div class="search-input">
                             <input type="text" class="form-control input-sm inline-block">
-                            <a href="#" class="input-icon text-normal"><i class="ion-ios7-search-strong"></i></a>
+                            <a href="/line/list?lineName=817" class="input-icon text-normal"><i class="ion-ios7-search-strong"></i></a>
                         </div>
                     </div>
                 </li>
@@ -93,7 +93,7 @@
                                     <#--</a>-->
                                 <#--</li>-->
                                 <li>
-                                    <a href="#">
+                                    <a id="logout">
                                         <i class="fa fa-power-off fa-lg"></i><span class="m-left-xs">安全退出</span>
                                     </a>
                                 </li>
@@ -224,24 +224,27 @@
         </div>
     </div><!-- ./top-nav-inner -->
 </header>
-</#macro>
-<#--<#include "_layout.ftl">-->
-<#--<@layoutFooter>-->
-<#--<script type="text/javascript">-->
-<#--//    $("#logout").click(function () {-->
-<#--//        console.log("aaa")-->
-<#--//            $.ajax({-->
-<#--//                url: "/user/logout",-->
-<#--//                data: JSON.stringify({}),-->
-<#--//                type: "POST",-->
-<#--//                dataType: "json",-->
-<#--//                contentType: "application/json;charset=utf-8",-->
-<#--//                success: function (data) {-->
-<#--//                    window.location.href='/user/login';-->
-<#--//                }-->
-<#--//-->
-<#--//            })-->
-<#--//    })-->
 
-<#--</script>-->
-<#--</@layoutFooter>-->
+<script src="/js/jquery-1.11.1.min.js"></script>
+<script src='/js/jquery.slimscroll.min.js'></script>
+    <script type="text/javascript">
+            $("#logout").click(function () {
+                    $.ajax({
+                        url: "/user/logout",
+                        data: JSON.stringify({}),
+                        type: "POST",
+                        dataType: "json",
+                        contentType: "application/json;charset=utf-8",
+                        success: function (data) {
+                            alert("确定退出?")
+                            window.location.href='/user/login';
+                        }
+
+                    })
+            })
+
+    </script>
+
+
+</#macro>
+
