@@ -21,29 +21,8 @@
         <setting name="logImpl" value="STDOUT_LOGGING"/>
     </settings>
     <mappers>
-        <mapper resource="mapper/BusMapper.xml"/>
-        <mapper resource="mapper/LineMapper.xml"/>
-        <mapper resource="mapper/LineStationMapper.xml"/>
-        <mapper resource="mapper/StationMapper.xml"/>
-        <mapper resource="mapper/NewsMapper.xml"/>
-        <mapper resource="mapper/UserTicketMapper.xml"/>
+        <mapper resource="mapper/StudentMapper.xml"/>
         <mapper resource="mapper/UserMapper.xml"/>
-        <mapper resource="mapper/UserCouponMapper.xml"/>
-        <mapper resource="mapper/UserLineMapper.xml"/>
-        <mapper resource="mapper/UserLogMapper.xml"/>
-        <mapper resource="mapper/UserNoticeMapper.xml"/>
-        <mapper resource="mapper/SignMapper.xml"/>
-        <mapper resource="mapper/PointRecordMapper.xml"/>
-        <mapper resource="mapper/CommodityMapper.xml"/>
-        <mapper resource="mapper/CommodityOrderMapper.xml"/>
-        <mapper resource="mapper/CommodityTypeMapper.xml"/>
-        <mapper resource="mapper/CommodityTypeMapper.xml"/>
-        <mapper resource="mapper/MyMessageMapper.xml"/>
-        <mapper resource="mapper/ActivityMapper.xml" />
-        <mapper resource="mapper/ActivityOrderMapper.xml" />
-        <mapper resource="mapper/FeedbackMapper.xml"/>
-        <mapper resource="mapper/OrdersMapper.xml"/>
-        <mapper resource="mapper/TerminalRecordMapper.xml"/>
     </mappers>
 
 </configuration>

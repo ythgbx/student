@@ -14,9 +14,9 @@
 
         <!--数据库连接 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://123.206.201.54:3306/bus_dev"
+                        connectionURL="jdbc:mysql://112.74.108.166:3306/student"
                         userId="root"
-                        password="ibus2016">
+                        password="1qazxsw2">
         </jdbcConnection>
         <!--默认false
            Java type resolver will always use java.math.BigDecimal if the database column is of type DECIMAL or NUMERIC.
@@ -39,47 +39,7 @@
         </javaClientGenerator>
 
         <!--&lt;!&ndash;对应数据库表 mysql可以加入主键自增 字段命名 忽略某字段等&ndash;&gt;
-        <table tableName="bus" domainObjectName="Bus"  enableSelectByPrimaryKey="true"
-               enableUpdateByPrimaryKey="true"
-               enableDeleteByPrimaryKey="true"
-               enableSelectByExample="true"
-               enableDeleteByExample="true"
-               enableCountByExample="true"
-               enableUpdateByExample="true">
-        </table>
-        <table tableName="line" domainObjectName="Line"  enableSelectByPrimaryKey="true"
-               enableUpdateByPrimaryKey="true"
-               enableDeleteByPrimaryKey="true"
-               enableSelectByExample="true"
-               enableDeleteByExample="true"
-               enableCountByExample="true"
-               enableUpdateByExample="true">
-        </table>
-        <table tableName="line_station" domainObjectName="LineStation"  enableSelectByPrimaryKey="true"
-               enableUpdateByPrimaryKey="true"
-               enableDeleteByPrimaryKey="true"
-               enableSelectByExample="true"
-               enableDeleteByExample="true"
-               enableCountByExample="true"
-               enableUpdateByExample="true">
-        </table>
-        <table tableName="station" domainObjectName="Station"  enableSelectByPrimaryKey="true"
-               enableUpdateByPrimaryKey="true"
-               enableDeleteByPrimaryKey="true"
-               enableSelectByExample="true"
-               enableDeleteByExample="true"
-               enableCountByExample="true"
-               enableUpdateByExample="true">
-        </table>
-        <table tableName="news" domainObjectName="News"  enableSelectByPrimaryKey="true"
-               enableUpdateByPrimaryKey="true"
-               enableDeleteByPrimaryKey="true"
-               enableSelectByExample="true"
-               enableDeleteByExample="true"
-               enableCountByExample="true"
-               enableUpdateByExample="true">
-        </table>
-        <table tableName="user_ticket" domainObjectName="UserTicket"  enableSelectByPrimaryKey="true"
+        <table tableName="students" domainObjectName="Student"  enableSelectByPrimaryKey="true"
                enableUpdateByPrimaryKey="true"
                enableDeleteByPrimaryKey="true"
                enableSelectByExample="true"
@@ -87,141 +47,7 @@
                enableCountByExample="true"
                enableUpdateByExample="true">
         </table>-->
-        <!--<table tableName="user" domainObjectName="User"  enableSelectByPrimaryKey="true"-->
-               <!--enableUpdateByPrimaryKey="true"-->
-               <!--enableDeleteByPrimaryKey="true"-->
-               <!--enableSelectByExample="true"-->
-               <!--enableDeleteByExample="true"-->
-               <!--enableCountByExample="true"-->
-               <!--enableUpdateByExample="true">-->
-        <!--</table>-->
-        <!--
-        <table tableName="user_coupon" domainObjectName="UserCoupon"  enableSelectByPrimaryKey="true"
-               enableUpdateByPrimaryKey="true"
-               enableDeleteByPrimaryKey="true"
-               enableSelectByExample="true"
-               enableDeleteByExample="true"
-               enableCountByExample="true"
-               enableUpdateByExample="true">
-        </table>
-        <table tableName="user_line" domainObjectName="UserLine"  enableSelectByPrimaryKey="true"
-               enableUpdateByPrimaryKey="true"
-               enableDeleteByPrimaryKey="true"
-               enableSelectByExample="true"
-               enableDeleteByExample="true"
-               enableCountByExample="true"
-               enableUpdateByExample="true">
-        </table>
-        <table tableName="user_log" domainObjectName="UserLog"  enableSelectByPrimaryKey="true"
-               enableUpdateByPrimaryKey="true"
-               enableDeleteByPrimaryKey="true"
-               enableSelectByExample="true"
-               enableDeleteByExample="true"
-               enableCountByExample="true"
-               enableUpdateByExample="true">
-        </table>
-        <table tableName="user_notice" domainObjectName="UserNotice"  enableSelectByPrimaryKey="true"
-               enableUpdateByPrimaryKey="true"
-               enableDeleteByPrimaryKey="true"
-               enableSelectByExample="true"
-               enableDeleteByExample="true"
-               enableCountByExample="true"
-               enableUpdateByExample="true">
-        </table>
-        <table tableName="sign" domainObjectName="Sign"  enableSelectByPrimaryKey="true"
-            enableUpdateByPrimaryKey="true"
-            enableDeleteByPrimaryKey="true"
-            enableSelectByExample="true"
-            enableDeleteByExample="true"
-            enableCountByExample="true"
-            enableUpdateByExample="true">
-        </table>
-        <table tableName="point_record" domainObjectName="PointRecord"  enableSelectByPrimaryKey="true"
-            enableUpdateByPrimaryKey="true"
-            enableDeleteByPrimaryKey="true"
-            enableSelectByExample="true"
-            enableDeleteByExample="true"
-            enableCountByExample="true"
-            enableUpdateByExample="true">
-        </table>
-        <table tableName="commodity" domainObjectName="Commodity"  enableSelectByPrimaryKey="true"
-               enableUpdateByPrimaryKey="true"
-               enableDeleteByPrimaryKey="true"
-               enableSelectByExample="true"
-               enableDeleteByExample="true"
-               enableCountByExample="true"
-               enableUpdateByExample="true">
-        </table>
-        <table tableName="commodity_order" domainObjectName="CommodityOrder"  enableSelectByPrimaryKey="true"
-               enableUpdateByPrimaryKey="true"
-               enableDeleteByPrimaryKey="true"
-               enableSelectByExample="true"
-               enableDeleteByExample="true"
-               enableCountByExample="true"
-               enableUpdateByExample="true">
-        </table>
-        <table tableName="commodity_type" domainObjectName="CommodityType"  enableSelectByPrimaryKey="true"
-               enableUpdateByPrimaryKey="true"
-               enableDeleteByPrimaryKey="true"
-               enableSelectByExample="true"
-               enableDeleteByExample="true"
-               enableCountByExample="true"
-               enableUpdateByExample="true">
-        </table>
-        <table tableName="my_message" domainObjectName="MyMessage"  enableSelectByPrimaryKey="true"
-               enableUpdateByPrimaryKey="true"
-               enableDeleteByPrimaryKey="true"
-               enableSelectByExample="true"
-               enableDeleteByExample="true"
-               enableCountByExample="true"
-               enableUpdateByExample="true">
-        </table>
-
-        <table tableName="activity" domainObjectName="Activity"  enableSelectByPrimaryKey="true"
-               enableUpdateByPrimaryKey="true"
-               enableDeleteByPrimaryKey="true"
-               enableSelectByExample="true"
-               enableDeleteByExample="true"
-               enableCountByExample="true"
-               enableUpdateByExample="true">
-        </table>
-
-        <table tableName="feedback" domainObjectName="Feedback"  enableSelectByPrimaryKey="true"
-               enableUpdateByPrimaryKey="true"
-               enableDeleteByPrimaryKey="true"
-               enableSelectByExample="true"
-               enableDeleteByExample="true"
-               enableCountByExample="true"
-               enableUpdateByExample="true">
-        </table>
-
-        <table tableName="orders" domainObjectName="Orders"  enableSelectByPrimaryKey="true"
-               enableUpdateByPrimaryKey="true"
-               enableDeleteByPrimaryKey="true"
-               enableSelectByExample="true"
-               enableDeleteByExample="true"
-               enableCountByExample="true"
-               enableUpdateByExample="true">
-        </table>
-
-        <table tableName="activity_order" domainObjectName="ActivityOrder"  enableSelectByPrimaryKey="true"
-               enableUpdateByPrimaryKey="true"
-               enableDeleteByPrimaryKey="true"
-               enableSelectByExample="true"
-               enableDeleteByExample="true"
-               enableCountByExample="true"
-               enableUpdateByExample="true">
-        </table>
-
-        <table tableName="temp_active" domainObjectName="Temp_active"  enableSelectByPrimaryKey="true"
-               enableUpdateByPrimaryKey="true"
-               enableDeleteByPrimaryKey="true"
-               enableSelectByExample="true"
-               enableDeleteByExample="true"
-               enableCountByExample="true"
-               enableUpdateByExample="true">
-        </table>-->
-        <table tableName="terminal_record" domainObjectName="TerminalRecord"  enableSelectByPrimaryKey="true"
+        <table tableName="user" domainObjectName="User"  enableSelectByPrimaryKey="true"
                enableUpdateByPrimaryKey="true"
                enableDeleteByPrimaryKey="true"
                enableSelectByExample="true"

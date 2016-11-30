@@ -1,9 +1,8 @@
 package net.bus.web.repository;
 
 /**
- * Created by sky on 16/7/9.
+ * Created by sky on 16/11/29.
  */
-public interface ISpecification <T>{
-
+public interface ISpecification <T> {
     T createExample();
 }

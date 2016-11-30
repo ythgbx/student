@@ -1,60 +1,28 @@
 package net.bus.web.model;
 
 public class User {
-    private Long id;
+    private String username;
 
-    private String name;
-
-    private String photo;
+    private Integer no;
 
     private String password;
 
-    private String salt;
+    private String identity;
 
-    private String phone;
-
-    private String wxUnionId;
-
-    private Double lat;
-
-    private Double lng;
-
-    private Integer points;
-
-    private Integer type;
-
-    private String realName;
-
-    private String idCard;
-
-    private String school;
-
-    private String institute;
-
-    private String source;
-
-    public Long getId() {
-        return id;
+    public String getUsername() {
+        return username;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getName() {
-        return name;
+    public Integer getNo() {
+        return no;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setNo(Integer no) {
+        this.no = no;
     }
 
     public String getPassword() {
@@ -65,99 +33,11 @@ public class User {
         this.password = password;
     }
 
-    public String getSalt() {
-        return salt;
+    public String getIdentity() {
+        return identity;
     }
 
-    public void setSalt(String salt) {
-        this.salt = salt;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getWxUnionId() {
-        return wxUnionId;
-    }
-
-    public void setWxUnionId(String wxUnionId) {
-        this.wxUnionId = wxUnionId;
-    }
-
-    public Double getLat() {
-        return lat;
-    }
-
-    public void setLat(Double lat) {
-        this.lat = lat;
-    }
-
-    public Double getLng() {
-        return lng;
-    }
-
-    public void setLng(Double lng) {
-        this.lng = lng;
-    }
-
-    public Integer getPoints() {
-        return points;
-    }
-
-    public void setPoints(Integer points) {
-        this.points = points;
-    }
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public String getRealName() {
-        return realName;
-    }
-
-    public void setRealName(String realName) {
-        this.realName = realName;
-    }
-
-    public String getIdCard() {
-        return idCard;
-    }
-
-    public void setIdCard(String idCard) {
-        this.idCard = idCard;
-    }
-
-    public String getSchool() {
-        return school;
-    }
-
-    public void setSchool(String school) {
-        this.school = school;
-    }
-
-    public String getInstitute() {
-        return institute;
-    }
-
-    public void setInstitute(String institute) {
-        this.institute = institute;
-    }
-
-    public String getSource() {
-        return source;
-    }
-
-    public void setSource(String source) {
-        this.source = source;
+    public void setIdentity(String identity) {
+        this.identity = identity;
     }
 }

@@ -3,7 +3,6 @@ package net.bus.web.repository;
 import net.bus.web.mapper.UserMapper;
 import net.bus.web.model.User;
 import net.bus.web.model.UserExample;
-import net.bus.web.repository.specification.UserPhonePasswordSpecification;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by sky on 16/7/9.
+ * Created by sky on 16/11/30.
  */
 @Repository
 public class UserRepository {
@@ -31,7 +30,7 @@ public class UserRepository {
     }
 
     public List<User> getAllUsersByExample(ISpecification specification,int page,int limit) {
-        return userMapper.selectByExampleWithRowbounds((UserExample)specification.createExample(), new RowBounds(page*limit, limit));
+        return userMapper.selectByExampleWithRowbounds((UserExample) specification.createExample(), new RowBounds(page*limit, limit));
     }
 
     public List<User> getItems(ISpecification specification) {
@@ -60,18 +59,18 @@ public class UserRepository {
         return null;
     }
 
-    public User getUser(Long id) {
-        return userMapper.selectByPrimaryKey(id);
+    public User getUser(String userName) {
+        return userMapper.selectByPrimaryKey(userName);
     }
 
-    public int insertUser(User user)
+    public int insertUser(User student)
     {
-        return userMapper.insert(user);
+        return userMapper.insert(student);
     }
 
-    public int updateUser(User user)
+    public int updateUser(User student)
     {
-        return userMapper.updateByPrimaryKey(user);
+        return userMapper.updateByPrimaryKey(student);
     }
 
     public int Count(){
@@ -82,12 +81,11 @@ public class UserRepository {
         return userMapper.countByExample((UserExample)specification.createExample());
     }
 
-    public int deleteByPrimaryKey(Long id){
-        return  userMapper.deleteByPrimaryKey(id);
+    public int deleteByPrimaryKey(String userName){
+        return  userMapper.deleteByPrimaryKey(userName);
     }
 
     public int deleteByExample(ISpecification specification){
         return  userMapper.deleteByExample((UserExample) specification.createExample());
     }
-
 }

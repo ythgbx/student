@@ -30,12 +30,9 @@
     <!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
     <mvc:resources mapping="/js/**" location="/resources/js/"/>
     <mvc:resources mapping="/css/**" location="/resources/css/"/>
-    <mvc:resources mapping="/fonts/**" location="/resources/fonts/"/>
-    <mvc:resources mapping="/bootstrap/**" location="/resources/bootstrap/"/>
     <mvc:resources mapping="/images/**" location="/resources/images/"/>
     <mvc:resources mapping="/swagger/**" location="/WEB-INF/swagger/"/>
     <mvc:resources mapping="/upload/**" location="/resources/upload/"/>
-    <mvc:resources mapping="/activity/**" location="/resources/activity/"/>
 
 
     <!-- 扫描net.bus.web包里下的所有class文件，配置注解的类全都装入容器中进行管理 -->
@@ -165,40 +162,40 @@
         <beans:property name="maxPoolSize" value="100" />
         <beans:property name="queueCapacity" value="500" />
     </beans:bean>
-    <!-- 业务对象 -->
-    <beans:bean id="bizBusObject" class="net.bus.web.task.BusTask" />
-    <beans:bean id="bizUserObject" class="net.bus.web.task.UserTask" />
+    <!--&lt;!&ndash; 业务对象 &ndash;&gt;-->
+    <!--<beans:bean id="bizBusObject" class="net.bus.web.task.BusTask" />-->
+    <!--<beans:bean id="bizUserObject" class="net.bus.web.task.UserTask" />-->
     <!-- 调度业务 -->
-    <beans:bean id="busJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-        <beans:property name="targetObject" ref="bizBusObject" />
-        <beans:property name="targetMethod" value="doBiz" />
-    </beans:bean>
-    <beans:bean id="userJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-        <beans:property name="targetObject" ref="bizUserObject" />
-        <beans:property name="targetMethod" value="doBiz" />
-    </beans:bean>
-    <!-- 调度触发器 -->
-    <beans:bean id="busTaskTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
-        <beans:property name="jobDetail" ref="busJobDetail" />
-        <beans:property name="startDelay" value="1000" />
-        <beans:property name="repeatInterval" value="1000" />
-    </beans:bean>
-    <beans:bean id="userTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-        <beans:property name="jobDetail" ref="userJobDetail" />
-        <beans:property name="cronExpression">
-            <beans:value>0 0 1 * * ?</beans:value>
-        </beans:property>
-    </beans:bean>
+    <!--<beans:bean id="busJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+        <!--<beans:property name="targetObject" ref="bizBusObject" />-->
+        <!--<beans:property name="targetMethod" value="doBiz" />-->
+    <!--</beans:bean>-->
+    <!--<beans:bean id="userJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+        <!--<beans:property name="targetObject" ref="bizUserObject" />-->
+        <!--<beans:property name="targetMethod" value="doBiz" />-->
+    <!--</beans:bean>-->
+    <!--&lt;!&ndash; 调度触发器 &ndash;&gt;-->
+    <!--<beans:bean id="busTaskTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">-->
+        <!--<beans:property name="jobDetail" ref="busJobDetail" />-->
+        <!--<beans:property name="startDelay" value="1000" />-->
+        <!--<beans:property name="repeatInterval" value="1000" />-->
+    <!--</beans:bean>-->
+    <!--<beans:bean id="userTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+        <!--<beans:property name="jobDetail" ref="userJobDetail" />-->
+        <!--<beans:property name="cronExpression">-->
+            <!--<beans:value>0 0 1 * * ?</beans:value>-->
+        <!--</beans:property>-->
+    <!--</beans:bean>-->
     <!-- 设置调度 -->
-    <beans:bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-        <beans:property name="triggers">
-            <beans:list>
-                <beans:ref bean="busTaskTrigger" />
-                <beans:ref bean="userTaskTrigger" />
-            </beans:list>
-        </beans:property>
-        <beans:property name="taskExecutor" ref="executor" />
-    </beans:bean>
+    <!--<beans:bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">-->
+        <!--<beans:property name="triggers">-->
+            <!--<beans:list>-->
+                <!--<beans:ref bean="busTaskTrigger" />-->
+                <!--<beans:ref bean="userTaskTrigger" />-->
+            <!--</beans:list>-->
+        <!--</beans:property>-->
+        <!--<beans:property name="taskExecutor" ref="executor" />-->
+    <!--</beans:bean>-->
     <!-- task -->
 
     <!-- ehcache cache -->
@@ -245,7 +242,7 @@
     <!-- string配置文件导入 -->
     <beans:import resource="string.xml"/>
     <!--context提供-->
-    <beans:bean id="applicationContextProvder"
-          class="net.bus.web.context.ApplicationContextProvider"/>
+    <!--<beans:bean id="applicationContextProvder"-->
+          <!--class="net.bus.web.context.ApplicationContextProvider"/>-->
 
 </beans:beans>

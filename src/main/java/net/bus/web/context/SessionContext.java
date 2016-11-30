@@ -1,10 +1,9 @@
 package net.bus.web.context;
 
 /**
- * Created by Edifi_000 on 2016-07-01.
+ * Created by sky on 16/11/29.
  */
 public class SessionContext {
-
     /**
      * 当前用户
      */

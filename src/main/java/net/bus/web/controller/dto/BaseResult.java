@@ -3,11 +3,10 @@ package net.bus.web.controller.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 /**
- * Created by Edifi_000 on 2016-07-12.
+ * Created by sky on 16/11/29.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class BaseResult implements IResult {
-
+public class BaseResult implements IResult{
     private String result;
     private Object content;
     private String error;

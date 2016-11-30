@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.bus.web.mapper.StudentMapper" >
+  <resultMap id="BaseResultMap" type="net.bus.web.model.Student" >
+    <id column="sno" property="sno" jdbcType="VARCHAR" />
+    <result column="no" property="no" jdbcType="BIGINT" />
+    <result column="sname" property="sname" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="CHAR" />
+    <result column="sage" property="sage" jdbcType="INTEGER" />
+    <result column="grade" property="grade" jdbcType="INTEGER" />
+    <result column="classId" property="classid" jdbcType="VARCHAR" />
+    <result column="id_card" property="idCard" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="national" property="national" jdbcType="VARCHAR" />
+    <result column="native_place" property="nativePlace" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="sroom" property="sroom" jdbcType="VARCHAR" />
+    <result column="fatherName" property="fathername" jdbcType="VARCHAR" />
+    <result column="fatherTel" property="fathertel" jdbcType="VARCHAR" />
+    <result column="motherName" property="mothername" jdbcType="VARCHAR" />
+    <result column="motherTel" property="mothertel" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="position" property="position" jdbcType="VARCHAR" />
+    <result column="img" property="img" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sno, no, sname, sex, sage, grade, classId, id_card, tel, national, native_place, 
+    address, sroom, fatherName, fatherTel, motherName, motherTel, password, position, 
+    img
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="net.bus.web.model.StudentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from students
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from students
+    where sno = #{sno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from students
+    where sno = #{sno,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="net.bus.web.model.StudentExample" >
+    delete from students
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="net.bus.web.model.Student" >
+    insert into students (sno, no, sname, 
+      sex, sage, grade, classId, 
+      id_card, tel, national, 
+      native_place, address, sroom, 
+      fatherName, fatherTel, motherName, 
+      motherTel, password, position, 
+      img)
+    values (#{sno,jdbcType=VARCHAR}, #{no,jdbcType=BIGINT}, #{sname,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=CHAR}, #{sage,jdbcType=INTEGER}, #{grade,jdbcType=INTEGER}, #{classid,jdbcType=VARCHAR}, 
+      #{idCard,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{national,jdbcType=VARCHAR}, 
+      #{nativePlace,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{sroom,jdbcType=VARCHAR}, 
+      #{fathername,jdbcType=VARCHAR}, #{fathertel,jdbcType=VARCHAR}, #{mothername,jdbcType=VARCHAR}, 
+      #{mothertel,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, 
+      #{img,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="net.bus.web.model.Student" >
+    insert into students
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sno != null" >
+        sno,
+      </if>
+      <if test="no != null" >
+        no,
+      </if>
+      <if test="sname != null" >
+        sname,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="sage != null" >
+        sage,
+      </if>
+      <if test="grade != null" >
+        grade,
+      </if>
+      <if test="classid != null" >
+        classId,
+      </if>
+      <if test="idCard != null" >
+        id_card,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="national != null" >
+        national,
+      </if>
+      <if test="nativePlace != null" >
+        native_place,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="sroom != null" >
+        sroom,
+      </if>
+      <if test="fathername != null" >
+        fatherName,
+      </if>
+      <if test="fathertel != null" >
+        fatherTel,
+      </if>
+      <if test="mothername != null" >
+        motherName,
+      </if>
+      <if test="mothertel != null" >
+        motherTel,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="position != null" >
+        position,
+      </if>
+      <if test="img != null" >
+        img,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sno != null" >
+        #{sno,jdbcType=VARCHAR},
+      </if>
+      <if test="no != null" >
+        #{no,jdbcType=BIGINT},
+      </if>
+      <if test="sname != null" >
+        #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=CHAR},
+      </if>
+      <if test="sage != null" >
+        #{sage,jdbcType=INTEGER},
+      </if>
+      <if test="grade != null" >
+        #{grade,jdbcType=INTEGER},
+      </if>
+      <if test="classid != null" >
+        #{classid,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="national != null" >
+        #{national,jdbcType=VARCHAR},
+      </if>
+      <if test="nativePlace != null" >
+        #{nativePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="sroom != null" >
+        #{sroom,jdbcType=VARCHAR},
+      </if>
+      <if test="fathername != null" >
+        #{fathername,jdbcType=VARCHAR},
+      </if>
+      <if test="fathertel != null" >
+        #{fathertel,jdbcType=VARCHAR},
+      </if>
+      <if test="mothername != null" >
+        #{mothername,jdbcType=VARCHAR},
+      </if>
+      <if test="mothertel != null" >
+        #{mothertel,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null" >
+        #{img,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="net.bus.web.model.StudentExample" resultType="java.lang.Integer" >
+    select count(*) from students
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update students
+    <set >
+      <if test="record.sno != null" >
+        sno = #{record.sno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.no != null" >
+        no = #{record.no,jdbcType=BIGINT},
+      </if>
+      <if test="record.sname != null" >
+        sname = #{record.sname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=CHAR},
+      </if>
+      <if test="record.sage != null" >
+        sage = #{record.sage,jdbcType=INTEGER},
+      </if>
+      <if test="record.grade != null" >
+        grade = #{record.grade,jdbcType=INTEGER},
+      </if>
+      <if test="record.classid != null" >
+        classId = #{record.classid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCard != null" >
+        id_card = #{record.idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tel != null" >
+        tel = #{record.tel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.national != null" >
+        national = #{record.national,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nativePlace != null" >
+        native_place = #{record.nativePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sroom != null" >
+        sroom = #{record.sroom,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fathername != null" >
+        fatherName = #{record.fathername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fathertel != null" >
+        fatherTel = #{record.fathertel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mothername != null" >
+        motherName = #{record.mothername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mothertel != null" >
+        motherTel = #{record.mothertel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.position != null" >
+        position = #{record.position,jdbcType=VARCHAR},
+      </if>
+      <if test="record.img != null" >
+        img = #{record.img,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update students
+    set sno = #{record.sno,jdbcType=VARCHAR},
+      no = #{record.no,jdbcType=BIGINT},
+      sname = #{record.sname,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=CHAR},
+      sage = #{record.sage,jdbcType=INTEGER},
+      grade = #{record.grade,jdbcType=INTEGER},
+      classId = #{record.classid,jdbcType=VARCHAR},
+      id_card = #{record.idCard,jdbcType=VARCHAR},
+      tel = #{record.tel,jdbcType=VARCHAR},
+      national = #{record.national,jdbcType=VARCHAR},
+      native_place = #{record.nativePlace,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      sroom = #{record.sroom,jdbcType=VARCHAR},
+      fatherName = #{record.fathername,jdbcType=VARCHAR},
+      fatherTel = #{record.fathertel,jdbcType=VARCHAR},
+      motherName = #{record.mothername,jdbcType=VARCHAR},
+      motherTel = #{record.mothertel,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      position = #{record.position,jdbcType=VARCHAR},
+      img = #{record.img,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="net.bus.web.model.Student" >
+    update students
+    <set >
+      <if test="no != null" >
+        no = #{no,jdbcType=BIGINT},
+      </if>
+      <if test="sname != null" >
+        sname = #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="sage != null" >
+        sage = #{sage,jdbcType=INTEGER},
+      </if>
+      <if test="grade != null" >
+        grade = #{grade,jdbcType=INTEGER},
+      </if>
+      <if test="classid != null" >
+        classId = #{classid,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        id_card = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="national != null" >
+        national = #{national,jdbcType=VARCHAR},
+      </if>
+      <if test="nativePlace != null" >
+        native_place = #{nativePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="sroom != null" >
+        sroom = #{sroom,jdbcType=VARCHAR},
+      </if>
+      <if test="fathername != null" >
+        fatherName = #{fathername,jdbcType=VARCHAR},
+      </if>
+      <if test="fathertel != null" >
+        fatherTel = #{fathertel,jdbcType=VARCHAR},
+      </if>
+      <if test="mothername != null" >
+        motherName = #{mothername,jdbcType=VARCHAR},
+      </if>
+      <if test="mothertel != null" >
+        motherTel = #{mothertel,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null" >
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sno = #{sno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.bus.web.model.Student" >
+    update students
+    set no = #{no,jdbcType=BIGINT},
+      sname = #{sname,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=CHAR},
+      sage = #{sage,jdbcType=INTEGER},
+      grade = #{grade,jdbcType=INTEGER},
+      classId = #{classid,jdbcType=VARCHAR},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      national = #{national,jdbcType=VARCHAR},
+      native_place = #{nativePlace,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      sroom = #{sroom,jdbcType=VARCHAR},
+      fatherName = #{fathername,jdbcType=VARCHAR},
+      fatherTel = #{fathertel,jdbcType=VARCHAR},
+      motherName = #{mothername,jdbcType=VARCHAR},
+      motherTel = #{mothertel,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      position = #{position,jdbcType=VARCHAR},
+      img = #{img,jdbcType=VARCHAR}
+    where sno = #{sno,jdbcType=VARCHAR}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="net.bus.web.model.StudentExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from students
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

@@ -1,7 +1,7 @@
 package net.bus.web.controller.dto;
 
 /**
- * Created by Edifi_000 on 2016-07-12.
+ * Created by sky on 16/11/29.
  */
 public interface IResult {
 }
