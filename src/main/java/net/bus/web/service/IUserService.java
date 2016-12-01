@@ -7,4 +7,5 @@ import net.bus.web.model.User;
  */
 public interface IUserService {
     User loginCheck(String userName, String password, String role);
+    User getUser(String id);
 }

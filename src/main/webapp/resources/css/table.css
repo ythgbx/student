@@ -4,19 +4,29 @@
     /*margin: 0;*/
 /*}*/
 
-.table {
-    width: 960px;
-    margin: 0 auto;
-}
+/*.table {*/
+    /*width: 950px;*/
+    /*margin: 0 auto;*/
+/*}*/
 
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    width: 100%;
-}
+/*table {*/
+    /*border-collapse: collapse;*/
+    /*border-spacing: 0;*/
+    /*width: 100%;*/
+/*}*/
 
-td {
-    border: 1px solid black;
-    padding: 5px 10px;
-    height:22px;
+/*td {*/
+    /*border: 1px solid black;*/
+    /*!*padding: 5px 10px;*!*/
+    /*!*height:22px;*!*/
+    /*text-align: center;*/
+/*}*/
+
+table{
+    margin: auto;
+}
+td{
+    width: 50px;
+    height: 22px;
+    text-align: center;
 }

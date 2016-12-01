@@ -59,8 +59,8 @@ public class UserRepository {
         return null;
     }
 
-    public User getUser(String userName) {
-        return userMapper.selectByPrimaryKey(userName);
+    public User getUser(String id) {
+        return userMapper.selectByPrimaryKey(id);
     }
 
     public int insertUser(User student)
@@ -81,8 +81,8 @@ public class UserRepository {
         return userMapper.countByExample((UserExample)specification.createExample());
     }
 
-    public int deleteByPrimaryKey(String userName){
-        return  userMapper.deleteByPrimaryKey(userName);
+    public int deleteByPrimaryKey(String id){
+        return  userMapper.deleteByPrimaryKey(id);
     }
 
     public int deleteByExample(ISpecification specification){

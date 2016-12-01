@@ -23,4 +23,8 @@ public class UserService implements IUserService{
         }
         return null;
     }
+
+    public User getUser(String id) {
+        return _rootRepository.getUser(id);
+    }
 }

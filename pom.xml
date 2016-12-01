@@ -326,18 +326,6 @@
             <version>1.6.1</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.alipay</groupId>
-            <artifactId>sdk-java</artifactId>
-            <version>20160907220101</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.alipay</groupId>
-            <artifactId>commons-logging</artifactId>
-            <version>1.1.1</version>
-        </dependency>
-
     </dependencies>
     <build>
         <finalName>mybatis_generator</finalName>

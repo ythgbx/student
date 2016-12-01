@@ -112,8 +112,36 @@ public class UserController {
                 mv.setViewName("main_student");
                 break;
         }
-
         return mv;
+    }
+
+    @Auth(role = Auth.Role.USER)
+    @RequestMapping(value = "/getinfo",method = RequestMethod.GET)
+    public IResult getInfo(){
+        logger.info("user getinfo");
+        BaseResult result = new BaseResult();
+        UserDetail userDetail = new UserDetail();
+        User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
+        User currentUser = service.getUser(user.getId());
+        userDetail.setId(currentUser.getId());
+        userDetail.setSchool(currentUser.getSchool());
+        userDetail.setDepartment(currentUser.getDepartment());
+        userDetail.setGrade(currentUser.getGrade());
+        userDetail.setClasses(currentUser.getClasses());
+        userDetail.setName(currentUser.getName());
+        userDetail.setSex(currentUser.getSex());
+        userDetail.setBirthdata(currentUser.getBirthdata());
+        userDetail.setAdmissiondate(currentUser.getAdmissiondate());
+        userDetail.setPoliticalstatus(currentUser.getPoliticalstatus());
+        userDetail.setNation(currentUser.getNation());
+        userDetail.setSpecialty(currentUser.getSpecialty());
+        userDetail.setStudylength(currentUser.getStudylength());
+        userDetail.setIdcard(currentUser.getIdcard());
+        userDetail.setNativeplace(currentUser.getNativeplace());
+        userDetail.setDepth(currentUser.getDepth());
+        userDetail.setTel(currentUser.getTel());
+        userDetail.setImg(currentUser.getImg());
+        return userDetail;
     }
 
 }
