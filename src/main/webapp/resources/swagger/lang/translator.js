@@ -3,7 +3,7 @@
 /**
  * Translator for documentation pages.
  *
- * To enable translation you should include one of language-files in your index.ftl
+ * To enable translation you should include one of language-files in your main.ftl
  * after <script src='lang/translator.js' type='text/javascript'></script>.
  * For example - <script src='lang/ru.js' type='text/javascript'></script>
  *

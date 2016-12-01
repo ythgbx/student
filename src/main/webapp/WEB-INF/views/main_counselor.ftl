@@ -1,4 +1,4 @@
-<#include "common/_layout2.ftl">
+<#include "common/_layout1.ftl">
 
 <@HEAD title="主页"/>
 <@TOP />

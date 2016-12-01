@@ -7,7 +7,6 @@ import net.bus.web.common.config.RString;
 import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.*;
 import net.bus.web.model.User;
-import net.bus.web.service.IStudentService;
 import net.bus.web.service.IUserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +32,6 @@ public class UserController {
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
-    @Value("#{sysProperties['smsDebug']}")
-    private boolean _smsDebug;
-    @Value("#{sysProperties['smsDebugCode']}")
-    private String _smsDebugCode;
     @Autowired
     private FileUploadController fileUploadController;
 
@@ -69,7 +64,7 @@ public class UserController {
     public IResult login(@ApiParam(name = "login", value = "登陆登录")@RequestBody Login login)
     {
         logger.info("url:/user/login");
-        User user = service.loginCheck(login.getUserName(),login.getPassword());
+        User user = service.loginCheck(login.getUserName(),login.getPassword(),login.getRole());
         LoginResult result = new LoginResult();
         if(user!=null) {
             session.setAttribute(SessionContext.CURRENT_USER, user);
@@ -85,12 +80,39 @@ public class UserController {
         return result;
     }
 
+    /**
+     * 用户退出
+     * @return
+     */
+    @Auth(role = Auth.Role.USER)
+    @ResponseBody
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public ModelAndView logout()
+    {
+        logger.info("url:/user/logout");
+        session.removeAttribute(SessionContext.CURRENT_USER);
+        session.removeAttribute(SessionContext.CURRENT_USER_ROLE);
+        return new ModelAndView("redirect:/user/login");
+    }
+
     @Auth(role = Auth.Role.USER)
     @RequestMapping(value = "/main",method = RequestMethod.GET)
     public ModelAndView main(Model model){
         logger.info("url:/user");
         ModelAndView mv =new ModelAndView();
-        mv.setViewName("index");
+        User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
+        switch (Integer.parseInt(user.getRole())){
+            case 1:
+                mv.setViewName("main_counselor");
+                break;
+            case 2:
+                mv.setViewName("main_teacher");
+                break;
+            case 3:
+                mv.setViewName("main_student");
+                break;
+        }
+
         return mv;
     }
 

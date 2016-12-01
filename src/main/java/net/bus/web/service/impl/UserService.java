@@ -13,12 +13,12 @@ import org.springframework.stereotype.Service;
 public class UserService implements IUserService{
     @Autowired
     private UserRepository _rootRepository;
-    public User loginCheck(String userName, String password)
+    public User loginCheck(String userName, String password, String role)
     {
         User user = _rootRepository.getUser(userName);
         if (user == null){
             return null;
-        }else if (user.getPassword().equals(password)){
+        }else if (user.getPassword().equals(password) && user.getRole().equals(role)){
             return user;
         }
         return null;

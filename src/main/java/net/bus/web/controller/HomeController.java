@@ -16,7 +16,6 @@ public class HomeController {
     @RequestMapping(value="/",method = RequestMethod.GET)
     public ModelAndView index(Model model)
     {
-        System.out.println("aaaaa");
         logger.info("url:/");
 
         return new ModelAndView("redirect:/user/login");

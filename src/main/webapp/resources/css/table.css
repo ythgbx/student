@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+/** {*/
+    /*padding: 0;*/
+    /*margin: 0;*/
+/*}*/
+
+.table {
+    width: 960px;
+    margin: 0 auto;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+}
+
+td {
+    border: 1px solid black;
+    padding: 5px 10px;
+    height:22px;
+}
