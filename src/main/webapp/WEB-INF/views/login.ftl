@@ -36,12 +36,52 @@
                     <input type="button" name="submit" id="sub_btn" onclick="validate();" value="登&nbsp;&nbsp;录">&nbsp;&nbsp;
                     <input type="text"  id="input1" class="verify">
                     <input type="text" id="checkCode" class="code"> <a href="#" onclick="createCode()">看不清楚</a>
+                    <button type="button" id="update" data-toggle="modal" data-target="#update">忘记密码</button>
                 <#--<img src="/images/login/verify.png" alt="" width="80" height="40" id="checkCode"><a href="#" onclick="createCode()">看不清楚</a>-->
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+<!-- 模态框（Modal） 添加-->
+<div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="formAdd" enctype="multipart/form-data" method="post">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <#--&times;-->
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        找回密码
+                    </h4>
+                </div>
+                <div class="modal-body">
+
+                    <label for="exampleInputEmail1">商品名称</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" name="name"
+                           placeholder="请输入商品名称">
+
+                    <label for="exampleInputEmail1">商品类型(1:积分 2:优惠卡)</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" name="typeId"
+                           placeholder="请输入该商品类型">
+
+                <#--<label for="exampleInputEmail1">商品标记(默认为0)</label>-->
+                    <input type="hidden" class="form-control" id="exampleInputEmail1" name="flag" value="0"
+                           placeholder="0">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button onclick="bus.updateCommodity(this)" id="add" type="button" class="btn btn-primary">提交
+                    </button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
 <div id="login_bottom">
     版权所有
 </div>

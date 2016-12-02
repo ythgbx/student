@@ -10,7 +10,7 @@
     <result column="classes" property="classes" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="sex" property="sex" jdbcType="CHAR" />
-    <result column="birthData" property="birthdata" jdbcType="DATE" />
+    <result column="birthDate" property="birthdate" jdbcType="DATE" />
     <result column="admissionDate" property="admissiondate" jdbcType="DATE" />
     <result column="politicalStatus" property="politicalstatus" jdbcType="VARCHAR" />
     <result column="nation" property="nation" jdbcType="VARCHAR" />
@@ -23,6 +23,13 @@
     <result column="img" property="img" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="role" property="role" jdbcType="CHAR" />
+    <result column="sroom" property="sroom" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="fname" property="fname" jdbcType="VARCHAR" />
+    <result column="mname" property="mname" jdbcType="VARCHAR" />
+    <result column="ftel" property="ftel" jdbcType="VARCHAR" />
+    <result column="mtel" property="mtel" jdbcType="VARCHAR" />
+    <result column="qq" property="qq" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -83,9 +90,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, no, school, department, grade, classes, name, sex, birthData, admissionDate, 
+    id, no, school, department, grade, classes, name, sex, birthDate, admissionDate, 
     politicalStatus, nation, specialty, studyLength, idCard, nativePlace, depth, tel, 
-    img, password, role
+    img, password, role, sroom, address, fname, mname, ftel, mtel, qq
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="net.bus.web.model.UserExample" >
     select
@@ -120,18 +127,22 @@
   <insert id="insert" parameterType="net.bus.web.model.User" >
     insert into user (id, no, school, 
       department, grade, classes, 
-      name, sex, birthData, admissionDate, 
+      name, sex, birthDate, admissionDate, 
       politicalStatus, nation, specialty, 
       studyLength, idCard, nativePlace, 
       depth, tel, img, password, 
-      role)
+      role, sroom, address, 
+      fname, mname, ftel, 
+      mtel, qq)
     values (#{id,jdbcType=VARCHAR}, #{no,jdbcType=BIGINT}, #{school,jdbcType=VARCHAR}, 
       #{department,jdbcType=VARCHAR}, #{grade,jdbcType=INTEGER}, #{classes,jdbcType=VARCHAR}, 
-      #{name,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{birthdata,jdbcType=DATE}, #{admissiondate,jdbcType=DATE}, 
+      #{name,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{birthdate,jdbcType=DATE}, #{admissiondate,jdbcType=DATE}, 
       #{politicalstatus,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR}, #{specialty,jdbcType=VARCHAR}, 
       #{studylength,jdbcType=INTEGER}, #{idcard,jdbcType=VARCHAR}, #{nativeplace,jdbcType=VARCHAR}, 
       #{depth,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{role,jdbcType=CHAR})
+      #{role,jdbcType=CHAR}, #{sroom,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{fname,jdbcType=VARCHAR}, #{mname,jdbcType=VARCHAR}, #{ftel,jdbcType=VARCHAR}, 
+      #{mtel,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="net.bus.web.model.User" >
     insert into user
@@ -160,8 +171,8 @@
       <if test="sex != null" >
         sex,
       </if>
-      <if test="birthdata != null" >
-        birthData,
+      <if test="birthdate != null" >
+        birthDate,
       </if>
       <if test="admissiondate != null" >
         admissionDate,
@@ -199,6 +210,27 @@
       <if test="role != null" >
         role,
       </if>
+      <if test="sroom != null" >
+        sroom,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="fname != null" >
+        fname,
+      </if>
+      <if test="mname != null" >
+        mname,
+      </if>
+      <if test="ftel != null" >
+        ftel,
+      </if>
+      <if test="mtel != null" >
+        mtel,
+      </if>
+      <if test="qq != null" >
+        qq,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -225,8 +257,8 @@
       <if test="sex != null" >
         #{sex,jdbcType=CHAR},
       </if>
-      <if test="birthdata != null" >
-        #{birthdata,jdbcType=DATE},
+      <if test="birthdate != null" >
+        #{birthdate,jdbcType=DATE},
       </if>
       <if test="admissiondate != null" >
         #{admissiondate,jdbcType=DATE},
@@ -264,6 +296,27 @@
       <if test="role != null" >
         #{role,jdbcType=CHAR},
       </if>
+      <if test="sroom != null" >
+        #{sroom,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="fname != null" >
+        #{fname,jdbcType=VARCHAR},
+      </if>
+      <if test="mname != null" >
+        #{mname,jdbcType=VARCHAR},
+      </if>
+      <if test="ftel != null" >
+        #{ftel,jdbcType=VARCHAR},
+      </if>
+      <if test="mtel != null" >
+        #{mtel,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="net.bus.web.model.UserExample" resultType="java.lang.Integer" >
@@ -299,8 +352,8 @@
       <if test="record.sex != null" >
         sex = #{record.sex,jdbcType=CHAR},
       </if>
-      <if test="record.birthdata != null" >
-        birthData = #{record.birthdata,jdbcType=DATE},
+      <if test="record.birthdate != null" >
+        birthDate = #{record.birthdate,jdbcType=DATE},
       </if>
       <if test="record.admissiondate != null" >
         admissionDate = #{record.admissiondate,jdbcType=DATE},
@@ -338,6 +391,27 @@
       <if test="record.role != null" >
         role = #{record.role,jdbcType=CHAR},
       </if>
+      <if test="record.sroom != null" >
+        sroom = #{record.sroom,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fname != null" >
+        fname = #{record.fname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mname != null" >
+        mname = #{record.mname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ftel != null" >
+        ftel = #{record.ftel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mtel != null" >
+        mtel = #{record.mtel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qq != null" >
+        qq = #{record.qq,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -353,7 +427,7 @@
       classes = #{record.classes,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       sex = #{record.sex,jdbcType=CHAR},
-      birthData = #{record.birthdata,jdbcType=DATE},
+      birthDate = #{record.birthdate,jdbcType=DATE},
       admissionDate = #{record.admissiondate,jdbcType=DATE},
       politicalStatus = #{record.politicalstatus,jdbcType=VARCHAR},
       nation = #{record.nation,jdbcType=VARCHAR},
@@ -365,7 +439,14 @@
       tel = #{record.tel,jdbcType=VARCHAR},
       img = #{record.img,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
-      role = #{record.role,jdbcType=CHAR}
+      role = #{record.role,jdbcType=CHAR},
+      sroom = #{record.sroom,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      fname = #{record.fname,jdbcType=VARCHAR},
+      mname = #{record.mname,jdbcType=VARCHAR},
+      ftel = #{record.ftel,jdbcType=VARCHAR},
+      mtel = #{record.mtel,jdbcType=VARCHAR},
+      qq = #{record.qq,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -394,8 +475,8 @@
       <if test="sex != null" >
         sex = #{sex,jdbcType=CHAR},
       </if>
-      <if test="birthdata != null" >
-        birthData = #{birthdata,jdbcType=DATE},
+      <if test="birthdate != null" >
+        birthDate = #{birthdate,jdbcType=DATE},
       </if>
       <if test="admissiondate != null" >
         admissionDate = #{admissiondate,jdbcType=DATE},
@@ -433,6 +514,27 @@
       <if test="role != null" >
         role = #{role,jdbcType=CHAR},
       </if>
+      <if test="sroom != null" >
+        sroom = #{sroom,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="fname != null" >
+        fname = #{fname,jdbcType=VARCHAR},
+      </if>
+      <if test="mname != null" >
+        mname = #{mname,jdbcType=VARCHAR},
+      </if>
+      <if test="ftel != null" >
+        ftel = #{ftel,jdbcType=VARCHAR},
+      </if>
+      <if test="mtel != null" >
+        mtel = #{mtel,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -445,7 +547,7 @@
       classes = #{classes,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=CHAR},
-      birthData = #{birthdata,jdbcType=DATE},
+      birthDate = #{birthdate,jdbcType=DATE},
       admissionDate = #{admissiondate,jdbcType=DATE},
       politicalStatus = #{politicalstatus,jdbcType=VARCHAR},
       nation = #{nation,jdbcType=VARCHAR},
@@ -457,7 +559,14 @@
       tel = #{tel,jdbcType=VARCHAR},
       img = #{img,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      role = #{role,jdbcType=CHAR}
+      role = #{role,jdbcType=CHAR},
+      sroom = #{sroom,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      fname = #{fname,jdbcType=VARCHAR},
+      mname = #{mname,jdbcType=VARCHAR},
+      ftel = #{ftel,jdbcType=VARCHAR},
+      mtel = #{mtel,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <select resultMap="BaseResultMap" parameterType="net.bus.web.model.UserExample" id="selectByExampleWithRowbounds" >

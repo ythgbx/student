@@ -1,12 +1,11 @@
 package net.bus.web.controller.dto;
-import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.Date;
 
 /**
  * Created by yth on 2016/12/1.
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
+
 public class UserDetail extends BaseResult{
     private String id;
 
@@ -24,7 +23,7 @@ public class UserDetail extends BaseResult{
 
     private String sex;
 
-    private Date birthdata;
+    private Date birthdate;
 
     private Date admissiondate;
 
@@ -46,7 +45,23 @@ public class UserDetail extends BaseResult{
 
     private String img;
 
+    private String password;
+
     private String role;
+
+    private String sroom;
+
+    private String address;
+
+    private String fname;
+
+    private String mname;
+
+    private String ftel;
+
+    private String mtel;
+
+    private String qq;
 
     public String getId() {
         return id;
@@ -112,12 +127,12 @@ public class UserDetail extends BaseResult{
         this.sex = sex;
     }
 
-    public Date getBirthdata() {
-        return birthdata;
+    public Date getBirthdate() {
+        return birthdate;
     }
 
-    public void setBirthdata(Date birthdata) {
-        this.birthdata = birthdata;
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
     }
 
     public Date getAdmissiondate() {
@@ -200,6 +215,14 @@ public class UserDetail extends BaseResult{
         this.img = img;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getRole() {
         return role;
     }
@@ -208,4 +231,59 @@ public class UserDetail extends BaseResult{
         this.role = role;
     }
 
+    public String getSroom() {
+        return sroom;
+    }
+
+    public void setSroom(String sroom) {
+        this.sroom = sroom;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getFname() {
+        return fname;
+    }
+
+    public void setFname(String fname) {
+        this.fname = fname;
+    }
+
+    public String getMname() {
+        return mname;
+    }
+
+    public void setMname(String mname) {
+        this.mname = mname;
+    }
+
+    public String getFtel() {
+        return ftel;
+    }
+
+    public void setFtel(String ftel) {
+        this.ftel = ftel;
+    }
+
+    public String getMtel() {
+        return mtel;
+    }
+
+    public void setMtel(String mtel) {
+        this.mtel = mtel;
+    }
+
+    public String getQq() {
+        return qq;
+    }
+
+    public void setQq(String qq) {
+        this.qq = qq;
+    }
 }

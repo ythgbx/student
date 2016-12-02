@@ -10,7 +10,6 @@ import net.bus.web.model.User;
 import net.bus.web.service.IUserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -116,10 +115,10 @@ public class UserController {
     }
 
     @Auth(role = Auth.Role.USER)
+    @ResponseBody
     @RequestMapping(value = "/getinfo",method = RequestMethod.GET)
     public IResult getInfo(){
-        logger.info("user getinfo");
-        BaseResult result = new BaseResult();
+        logger.info("url:/user/getinfo");
         UserDetail userDetail = new UserDetail();
         User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
         User currentUser = service.getUser(user.getId());
@@ -130,7 +129,7 @@ public class UserController {
         userDetail.setClasses(currentUser.getClasses());
         userDetail.setName(currentUser.getName());
         userDetail.setSex(currentUser.getSex());
-        userDetail.setBirthdata(currentUser.getBirthdata());
+        userDetail.setBirthdate(currentUser.getBirthdate());
         userDetail.setAdmissiondate(currentUser.getAdmissiondate());
         userDetail.setPoliticalstatus(currentUser.getPoliticalstatus());
         userDetail.setNation(currentUser.getNation());
@@ -141,7 +140,74 @@ public class UserController {
         userDetail.setDepth(currentUser.getDepth());
         userDetail.setTel(currentUser.getTel());
         userDetail.setImg(currentUser.getImg());
+        userDetail.setRole(currentUser.getRole());
+        userDetail.setSroom(currentUser.getSroom());
+        userDetail.setAddress(currentUser.getAddress());
+        userDetail.setFname(currentUser.getFname());
+        userDetail.setMname(currentUser.getMname());
+        userDetail.setFtel(currentUser.getFtel());
+        userDetail.setMtel(currentUser.getMtel());
         return userDetail;
+    }
+
+    @Auth(role = Auth.Role.USER)
+    @ResponseBody
+    @RequestMapping(value = "/modify/password", method = RequestMethod.PUT)
+    @ApiOperation(value = "密码修改", httpMethod = "PUT", response = BaseResult.class, notes = "密码修改")
+    public IResult modifyPassword(@ApiParam(required = true, name = "account",
+            value = "用户账户请求-用户名+原密码+新密码")@RequestBody UserAccount account)
+    {
+        BaseResult result = new BaseResult();
+        try {
+            User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
+            if(currentUser.getId().equals(account.getId())&&account.getPassword()!=null&&currentUser.getPassword().equals(account.getPassword())){
+
+                service.setAccount(currentUser, currentUser.getId(), account.getNew_password());
+
+                session.setAttribute(SessionContext.CURRENT_USER, currentUser);
+
+                result.setResult("success");
+                result.setContent("密码修改成功!");
+            }
+            else{
+                result.setResult("failure");
+                result.setContent(RString.MODIFY_PASSWORD_FAILED);
+            }
+        }catch (Exception ex){
+            result.setResult("error");
+            result.setError(ex.getMessage());
+        }
+        return result;
+    }
+
+    @Auth(role = Auth.Role.NONE)
+    @ResponseBody
+    @RequestMapping(value = "/retrieve/password", method = RequestMethod.PUT)
+    @ApiOperation(value = "密码找回", httpMethod = "PUT", response = BaseResult.class, notes = "密码找回")
+    public IResult retrievePassword(@ApiParam(required = true, name = "account", value = "用户账户请求-手机号+身份证号+新密码")@RequestBody UserAccount account)
+    {
+        BaseResult result = new BaseResult();
+        try {
+            User retrieveUser = service.getUser(account.getId());
+            if (retrieveUser!=null){
+                if (retrieveUser.getIdcard().equals(account.getIdCard())){
+                    service.setAccount(retrieveUser,retrieveUser.getId(),account.getNew_password());
+                    result.setResult("success");
+                    result.setContent("密码修改成功请从新登录!");
+                }else {
+                    result.setResult("error");
+                    result.setContent("身份证号不正确!");
+                }
+            }
+            else{
+                result.setResult("error");
+                result.setContent("用户名不正确!");
+            }
+        }catch (Exception ex){
+            result.setResult("error");
+            result.setError(ex.getMessage());
+        }
+        return result;
     }
 
 }

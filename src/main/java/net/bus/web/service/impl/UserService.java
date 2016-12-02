@@ -27,4 +27,20 @@ public class UserService implements IUserService{
     public User getUser(String id) {
         return _rootRepository.getUser(id);
     }
+
+    public boolean checkPassword(User user, String password) {
+        return false;
+    }
+
+    public boolean setAccount(User user,String id,String password)
+    {
+        if(user!=null)
+        {
+            user.setId(id);
+            user.setPassword(password);
+            _rootRepository.updateUser(user);
+            return true;
+        }
+        return false;
+    }
 }

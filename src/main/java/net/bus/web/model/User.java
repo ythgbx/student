@@ -19,7 +19,7 @@ public class User {
 
     private String sex;
 
-    private Date birthdata;
+    private Date birthdate;
 
     private Date admissiondate;
 
@@ -44,6 +44,20 @@ public class User {
     private String password;
 
     private String role;
+
+    private String sroom;
+
+    private String address;
+
+    private String fname;
+
+    private String mname;
+
+    private String ftel;
+
+    private String mtel;
+
+    private String qq;
 
     public String getId() {
         return id;
@@ -109,12 +123,12 @@ public class User {
         this.sex = sex;
     }
 
-    public Date getBirthdata() {
-        return birthdata;
+    public Date getBirthdate() {
+        return birthdate;
     }
 
-    public void setBirthdata(Date birthdata) {
-        this.birthdata = birthdata;
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
     }
 
     public Date getAdmissiondate() {
@@ -211,5 +225,61 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getSroom() {
+        return sroom;
+    }
+
+    public void setSroom(String sroom) {
+        this.sroom = sroom;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getFname() {
+        return fname;
+    }
+
+    public void setFname(String fname) {
+        this.fname = fname;
+    }
+
+    public String getMname() {
+        return mname;
+    }
+
+    public void setMname(String mname) {
+        this.mname = mname;
+    }
+
+    public String getFtel() {
+        return ftel;
+    }
+
+    public void setFtel(String ftel) {
+        this.ftel = ftel;
+    }
+
+    public String getMtel() {
+        return mtel;
+    }
+
+    public void setMtel(String mtel) {
+        this.mtel = mtel;
+    }
+
+    public String getQq() {
+        return qq;
+    }
+
+    public void setQq(String qq) {
+        this.qq = qq;
     }
 }

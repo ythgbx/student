@@ -63,14 +63,14 @@ public class UserRepository {
         return userMapper.selectByPrimaryKey(id);
     }
 
-    public int insertUser(User student)
+    public int insertUser(User user)
     {
-        return userMapper.insert(student);
+        return userMapper.insert(user);
     }
 
-    public int updateUser(User student)
+    public int updateUser(User user)
     {
-        return userMapper.updateByPrimaryKey(student);
+        return userMapper.updateByPrimaryKey(user);
     }
 
     public int Count(){

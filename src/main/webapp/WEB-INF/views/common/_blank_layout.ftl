@@ -11,10 +11,9 @@
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/common.css">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/table.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
 <#nested>
 
 </head>
@@ -38,7 +37,7 @@
 <script type="text/javascript" src="/js/colResizable-1.3.min.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="/js/jquery.min.js"></script>
-<script type="text/javascript" src="/js/jquery.SuperSlide.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 <#nested>
 
 </body>
