@@ -114,6 +114,10 @@ public class UserController {
         return mv;
     }
 
+    /**
+     * 获取用户信息
+     * @return
+     */
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/getinfo",method = RequestMethod.GET)
@@ -150,6 +154,11 @@ public class UserController {
         return userDetail;
     }
 
+    /**
+     * 修改密码
+     * @param account
+     * @return
+     */
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/modify/password", method = RequestMethod.PUT)
@@ -180,11 +189,17 @@ public class UserController {
         return result;
     }
 
+    /**
+     * 找回密码
+     * @param account
+     * @return
+     */
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
     @RequestMapping(value = "/retrieve/password", method = RequestMethod.PUT)
     @ApiOperation(value = "密码找回", httpMethod = "PUT", response = BaseResult.class, notes = "密码找回")
-    public IResult retrievePassword(@ApiParam(required = true, name = "account", value = "用户账户请求-手机号+身份证号+新密码")@RequestBody UserAccount account)
+    public IResult retrievePassword(@ApiParam(required = true, name = "account", value = "用户账户请求-手机号+身份证号+新密码")
+                                        @RequestBody UserAccount account)
     {
         BaseResult result = new BaseResult();
         try {

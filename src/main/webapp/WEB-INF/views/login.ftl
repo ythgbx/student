@@ -26,44 +26,47 @@
                     用户登录&nbsp;&nbsp;UserLogin
                 </div>
                 <div><input type="text" class="username" name="userName"></div>
-                <div><input type="password" class="pwd" name="password"></div>&nbsp;
-                <div>
-                    <input type="radio" name="role" value="1" > 辅导员&nbsp;&nbsp;
-                    <input type="radio" name="role" value="2"> 班主任&nbsp;&nbsp;
-                    <input type="radio" name="role" value="3" checked> 学生
+                <div><input type="password" class="pwd" name="password">&nbsp;<div><a href="#" data-toggle="modal" data-target="#myModal" style="margin-top: 4px">忘记密码?</a></div>&nbsp;</div>
+                <div >
+                    <input style="margin: 0 auto" type="radio" name="role" value="1" > 辅导员&nbsp;&nbsp;
+                    <input style="margin: 0 auto" type="radio" name="role" value="2"> 班主任&nbsp;&nbsp;
+                    <input style="margin: 0 auto" type="radio" name="role" value="3" checked> 学生
                 </div>
                 <div id="btn_area">
                     <input type="button" name="submit" id="sub_btn" onclick="validate();" value="登&nbsp;&nbsp;录">&nbsp;&nbsp;
                     <input type="text"  id="input1" class="verify">
                     <input type="text" id="checkCode" class="code"> <a href="#" onclick="createCode()">看不清楚</a>
-                <#--<img src="/images/login/verify.png" alt="" width="80" height="40" id="checkCode"><a href="#" onclick="createCode()">看不清楚</a>-->
                 </div>
             </form>
         </div>
     </div>
 </div>
-
-<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" >加载模态框</button>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" style="width:300px">
         <div class="modal-content">
+            <form id="retrievePassword">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h4 class="modal-title">找回密码</h4>
             </div>
             <div class="modal-body">
-                请输入身份证号<input type="text" class="form-control" name="idCard" >
+                请输入账号<input type="text" class="form-control" name="id" id="id" >
             </div>
             <div class="modal-body">
-                请输入新密码<input type="password" class="form-control" name="newPassword" >
+                请输入身份证号<input type="text" class="form-control" name="idCard" id="idCard" >
             </div>
             <div class="modal-body">
-                请确认新密码<input type="password" class="form-control" name="newPassword1" >
+                请输入新密码<input type="password" class="form-control" name="new_password" id="pwd1">
+            </div>
+            <div class="modal-body">
+                请确认新密码<input type="password" class="form-control" name="newPassword1" id="pwd2">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary">提交</button>
+                <input onclick="retrievePassword()" type="button" class="btn btn-primary"
+                       value="提交"/>
             </div>
+            </form>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
@@ -133,6 +136,44 @@
 
         }
 
+    }
+    
+    function retrievePassword() {
+        var t = $('#retrievePassword').serializeArray();
+//        if($("#id").val()==""||$("#idCard").val()==""||$('#pwd1').val()==""||$('#pwd2').val()==""){
+//            alert("请输入完整信息");
+//        }else if ((/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/).test($("idCard").value)){
+//            alert("请输入合法身份证号!");
+//        }else
+        if ($('#pwd1').val()==$('#pwd2').val()){
+            var d = {};
+            $.each(t, function () {
+                if (this.name!="newPassword1"){
+                    d[this.name] = this.value;
+                }
+            });
+            console.log(d);
+            $.ajax({
+                url: "/user/retrieve/password",
+                data: JSON.stringify(d),
+                type: "PUT",
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                success: function (data) {
+                    if (data.result == "success") {
+                        alert(data.content);
+                        window.location.reload();
+                    }else{
+                        alert(data.content)
+                        window.location.reload();
+                    }
+                }
+            })
+        }else{
+            alert("两次密码输入不一致!");
+        }
+
+        
     }
     $(function () {
         createCode();

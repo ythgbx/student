@@ -40,7 +40,7 @@ html, body {
 	margin: 0px auto;
 	width: 986px;
 	height: 570px;
-	background: url('../images/login/login.gif') 0px 0px no-repeat;
+	background: url('../images/login/login1.gif') 0px 0px no-repeat;
 	position: relative;
 }
 #login_form{
@@ -74,6 +74,8 @@ input,img{
 .pwd{
 	background: url('../images/login/pwd.gif') 0px 0px no-repeat;
 }
+
+
 #btn_area{
  margin-top: 20px;
 }
@@ -90,7 +92,7 @@ input,img{
 	vertical-align: middle;
 }
 .verify{
-	width: 50px;
+	width: 70px;
 	height: 38px;
 	line-height: 38px;
 	padding-left: 25px;
