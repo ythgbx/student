@@ -59,12 +59,12 @@
                     面貌
                 </td>
                 <td colspan="2" rowspan="2">
-                    <input type="text" name="politicalstatus" style="width:60px;">
+                    <input type="text" name="politicalstatus" style="width:100px;">
                 </td>
             </tr>
             <tr>
                 <td height="56" colspan="5">
-                    <input type="text" name="classes" style="width:150px;">
+                    <input type="text" name="classes" style="width:180px;">
                 </td>
             </tr>
             <tr>
@@ -72,7 +72,7 @@
                     寝室
                 </td>
                 <td colspan="2">
-                    <input type="text" name="sroom" style="width:60px;">
+                    <input type="text" name="sroom" style="width:100px;">
                 </td>
                 <td colspan="2">
                     联系<br>
@@ -95,7 +95,7 @@
                     证号
                 </td>
                 <td colspan="7">
-                    <input type="text" name="idCard" style="width: 130pxs">
+                    <input type="text" name="idCard" style="width: 200px;">
                 </td>
                 <td colspan="2">
                     校园<br>

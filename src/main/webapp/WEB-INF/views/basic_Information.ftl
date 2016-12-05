@@ -7,7 +7,7 @@
 <body>
 <div class="container clearfix">
     <div class="table_main clearfix">
-        <br><h1 align="center">湖北理工学院学生个人信息表</h1><br>
+        <br><h1 align="center">湖北理工学院学生个人基本信息表</h1><br>
         <form id="info">
             <input type="hidden" name="id"/>
         <table border="1px" cellspacing="0px" cellpadding="0px"  border-collapse="collapse" rules="all">
@@ -65,12 +65,12 @@
                     专业</td>
                 <td style="width:106px;">
 
-                    <select name="specialty" class="message" style="font-size:5px" >
+                    <select name="specialty" class="message" style="font-size:14px; text-align: center " >
                         <option value="计算机科学与技术" selected="selected">计算机科学与技术</option>
                         <option value="计算机科学与技术(专升本)" >计算机科学与技术(专升本)</option>
                         <option value="软件工程">软件工程</option>
                         <option value="物联网工程">物联网工程</option>
-                        <option value="网络工程">网络工程</option>
+                        <option value="网络工程"  style=" text-align: center ">网络工程</option>
                         <option value="计算机应用技术">计算机应用技术</option>
                         <option value="计算机网络技术">计算机网络技术</option>
                     </select>
