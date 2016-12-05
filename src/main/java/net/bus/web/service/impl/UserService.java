@@ -43,4 +43,11 @@ public class UserService implements IUserService{
         }
         return false;
     }
+
+    public boolean update(User user) {
+        if (_rootRepository.updateUser(user)>0){
+            return true;
+        }
+        return false;
+    }
 }

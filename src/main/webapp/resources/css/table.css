@@ -1,34 +1,4 @@
 @CHARSET "UTF-8";
-/** {*/
-    /*padding: 0;*/
-    /*margin: 0;*/
-/*}*/
-
-/*.table {*/
-    /*width: 950px;*/
-    /*margin: 0 auto;*/
-/*}*/
-
-/*table {*/
-    /*border-collapse: collapse;*/
-    /*border-spacing: 0;*/
-    /*width: 100%;*/
-/*}*/
-
-/*td {*/
-    /*border: 1px solid black;*/
-    /*!*padding: 5px 10px;*!*/
-    /*!*height:22px;*!*/
-    /*text-align: center;*/
-/*}*/
-
-/*table{*/
-    /*margin: auto;*/
-/*}*/
-/*td{*/
-    /*width: 50px;*/
-    /*height: 22px;*/
-    /*text-align: center;*/
 pre{
     font-size:16px;
     text-align:justify}
@@ -49,12 +19,32 @@ table {
     width: 95%;
 }
 
-input.text{
-    border: 0px solid black;
-}
-input.text{
+input[type=text]{
+    width:135px;
+    height:30px;
     text-align:center;
+    font-size:14px;
+    border:none
 }
+
+input[type=radio]{
+    text-align:center;
+    font-size:14px;
+    border:none
+}
+
+select{
+    text-align:center;
+    font-size:14px;
+    border:none
+}
+
+/*input.text{*/
+    /*border: 0px solid black;*/
+/*}*/
+/*input.text{*/
+    /*text-align:center;*/
+/*}*/
 
 td {
     border: 1px solid black;

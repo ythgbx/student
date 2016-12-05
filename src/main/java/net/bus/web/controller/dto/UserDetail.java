@@ -23,9 +23,9 @@ public class UserDetail extends BaseResult{
 
     private String sex;
 
-    private Date birthdate;
+    private String birthdate;
 
-    private Date admissiondate;
+    private String admissiondate;
 
     private String politicalstatus;
 
@@ -45,8 +45,6 @@ public class UserDetail extends BaseResult{
 
     private String img;
 
-    private String password;
-
     private String role;
 
     private String sroom;
@@ -62,6 +60,12 @@ public class UserDetail extends BaseResult{
     private String mtel;
 
     private String qq;
+
+    private String bankcard;
+
+    private String residence;
+
+    private String remarks;
 
     public String getId() {
         return id;
@@ -127,19 +131,19 @@ public class UserDetail extends BaseResult{
         this.sex = sex;
     }
 
-    public Date getBirthdate() {
+    public String getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(Date birthdate) {
+    public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
     }
 
-    public Date getAdmissiondate() {
+    public String getAdmissiondate() {
         return admissiondate;
     }
 
-    public void setAdmissiondate(Date admissiondate) {
+    public void setAdmissiondate(String admissiondate) {
         this.admissiondate = admissiondate;
     }
 
@@ -215,14 +219,6 @@ public class UserDetail extends BaseResult{
         this.img = img;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getRole() {
         return role;
     }
@@ -285,5 +281,29 @@ public class UserDetail extends BaseResult{
 
     public void setQq(String qq) {
         this.qq = qq;
+    }
+
+    public String getBankcard() {
+        return bankcard;
+    }
+
+    public void setBankcard(String bankcard) {
+        this.bankcard = bankcard;
+    }
+
+    public String getResidence() {
+        return residence;
+    }
+
+    public void setResidence(String residence) {
+        this.residence = residence;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 }

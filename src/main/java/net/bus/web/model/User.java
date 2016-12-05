@@ -59,6 +59,12 @@ public class User {
 
     private String qq;
 
+    private String bankcard;
+
+    private String residence;
+
+    private String remarks;
+
     public String getId() {
         return id;
     }
@@ -281,5 +287,29 @@ public class User {
 
     public void setQq(String qq) {
         this.qq = qq;
+    }
+
+    public String getBankcard() {
+        return bankcard;
+    }
+
+    public void setBankcard(String bankcard) {
+        this.bankcard = bankcard;
+    }
+
+    public String getResidence() {
+        return residence;
+    }
+
+    public void setResidence(String residence) {
+        this.residence = residence;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 }

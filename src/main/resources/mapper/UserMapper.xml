@@ -30,6 +30,9 @@
     <result column="ftel" property="ftel" jdbcType="VARCHAR" />
     <result column="mtel" property="mtel" jdbcType="VARCHAR" />
     <result column="qq" property="qq" jdbcType="VARCHAR" />
+    <result column="bankCard" property="bankcard" jdbcType="VARCHAR" />
+    <result column="residence" property="residence" jdbcType="VARCHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -92,7 +95,8 @@
   <sql id="Base_Column_List" >
     id, no, school, department, grade, classes, name, sex, birthDate, admissionDate, 
     politicalStatus, nation, specialty, studyLength, idCard, nativePlace, depth, tel, 
-    img, password, role, sroom, address, fname, mname, ftel, mtel, qq
+    img, password, role, sroom, address, fname, mname, ftel, mtel, qq, bankCard, residence, 
+    remarks
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="net.bus.web.model.UserExample" >
     select
@@ -133,7 +137,8 @@
       depth, tel, img, password, 
       role, sroom, address, 
       fname, mname, ftel, 
-      mtel, qq)
+      mtel, qq, bankCard, 
+      residence, remarks)
     values (#{id,jdbcType=VARCHAR}, #{no,jdbcType=BIGINT}, #{school,jdbcType=VARCHAR}, 
       #{department,jdbcType=VARCHAR}, #{grade,jdbcType=INTEGER}, #{classes,jdbcType=VARCHAR}, 
       #{name,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{birthdate,jdbcType=DATE}, #{admissiondate,jdbcType=DATE}, 
@@ -142,7 +147,8 @@
       #{depth,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{role,jdbcType=CHAR}, #{sroom,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
       #{fname,jdbcType=VARCHAR}, #{mname,jdbcType=VARCHAR}, #{ftel,jdbcType=VARCHAR}, 
-      #{mtel,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR})
+      #{mtel,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{bankcard,jdbcType=VARCHAR}, 
+      #{residence,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="net.bus.web.model.User" >
     insert into user
@@ -231,6 +237,15 @@
       <if test="qq != null" >
         qq,
       </if>
+      <if test="bankcard != null" >
+        bankCard,
+      </if>
+      <if test="residence != null" >
+        residence,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -316,6 +331,15 @@
       </if>
       <if test="qq != null" >
         #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="bankcard != null" >
+        #{bankcard,jdbcType=VARCHAR},
+      </if>
+      <if test="residence != null" >
+        #{residence,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -412,6 +436,15 @@
       <if test="record.qq != null" >
         qq = #{record.qq,jdbcType=VARCHAR},
       </if>
+      <if test="record.bankcard != null" >
+        bankCard = #{record.bankcard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.residence != null" >
+        residence = #{record.residence,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null" >
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -446,7 +479,10 @@
       mname = #{record.mname,jdbcType=VARCHAR},
       ftel = #{record.ftel,jdbcType=VARCHAR},
       mtel = #{record.mtel,jdbcType=VARCHAR},
-      qq = #{record.qq,jdbcType=VARCHAR}
+      qq = #{record.qq,jdbcType=VARCHAR},
+      bankCard = #{record.bankcard,jdbcType=VARCHAR},
+      residence = #{record.residence,jdbcType=VARCHAR},
+      remarks = #{record.remarks,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -535,6 +571,15 @@
       <if test="qq != null" >
         qq = #{qq,jdbcType=VARCHAR},
       </if>
+      <if test="bankcard != null" >
+        bankCard = #{bankcard,jdbcType=VARCHAR},
+      </if>
+      <if test="residence != null" >
+        residence = #{residence,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -566,7 +611,10 @@
       mname = #{mname,jdbcType=VARCHAR},
       ftel = #{ftel,jdbcType=VARCHAR},
       mtel = #{mtel,jdbcType=VARCHAR},
-      qq = #{qq,jdbcType=VARCHAR}
+      qq = #{qq,jdbcType=VARCHAR},
+      bankCard = #{bankcard,jdbcType=VARCHAR},
+      residence = #{residence,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <select resultMap="BaseResultMap" parameterType="net.bus.web.model.UserExample" id="selectByExampleWithRowbounds" >

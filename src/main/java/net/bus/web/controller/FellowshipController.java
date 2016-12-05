@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Created by sky on 16/12/1.
+ * 此controller助学金操作
  */
 @Controller
 @RequestMapping("/fellowship")

@@ -26,7 +26,8 @@
                     用户登录&nbsp;&nbsp;UserLogin
                 </div>
                 <div><input type="text" class="username" name="userName"></div>
-                <div><input type="password" class="pwd" name="password">&nbsp;<div><a href="#" data-toggle="modal" data-target="#myModal" style="margin-top: 4px">忘记密码?</a></div>&nbsp;</div>
+                <div><input type="password" class="pwd" name="password">&nbsp;<br>
+                    <a href="#" data-toggle="modal" data-target="#myModal" style="margin-top: 4px">忘记密码?</a></div>&nbsp;
                 <div >
                     <input style="margin: 0 auto" type="radio" name="role" value="1" > 辅导员&nbsp;&nbsp;
                     <input style="margin: 0 auto" type="radio" name="role" value="2"> 班主任&nbsp;&nbsp;

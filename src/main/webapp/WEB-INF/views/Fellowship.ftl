@@ -8,6 +8,7 @@
 <div class="container clearfix">
     <div class="table_main clearfix">
         <br><h1 align="center">湖北理工学院家庭经济困难学生申请认定(档案)表</h1><br>
+
         <table border="1" cellspacing="0" cellpadding="0" align="left" border-collapse="collapse">
             <tbody><tr>
                 <td width="69" class="toptitle">
@@ -101,7 +102,7 @@
                     卡号
                 </td>
                 <td colspan="3">
-
+                    <input class="message" type="text" name="bandCard" style="width:320px;"/>
                 </td>
             </tr>
             <tr>
@@ -173,7 +174,7 @@
                     父亲
                 </td>
                 <td colspan="3" valign="top">
-
+                    <input type="text" name="fname" style="width:130px;">
                 </td>
                 <td colspan="4">
 
@@ -187,7 +188,7 @@
                     母亲
                 </td>
                 <td colspan="3" valign="top">
-
+                    <input type="text" name="mname" style="width:130px;">
                 </td>
                 <td colspan="4">
 
@@ -325,16 +326,19 @@
                     var img = document.getElementById("img");
                     $("[name=name]").val(data.name);
                     $("[name=sex]").val(data.sex);
-                    $("[name=birthdate]").val(new Date(parseInt(data.birthdate)).toLocaleString());
+                    $("[name=birthdate]").val(data.birthdate);
                     $("[name=nation]").val(data.nation);
                     $("[name=studylength]").val(data.depth);
                     $("[name=grade]").val(data.grade+"级");
                     $("[name=classes]").val(data.classes);
+                    $("[name=bandCard]").val(data.bankcard);
                     $("[name=politicalstatus]").val(data.politicalstatus);
                     $("[name=sroom]").val(data.sroom);
                     $("[name=tel]").val(data.tel);
                     $("[name=idCard]").val(data.idcard);
                     $("[name=address]").val(data.address);
+                    $("[name=fname]").val(data.fname);
+                    $("[name=mname]").val(data.mname);
 
 //
                 }

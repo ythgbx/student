@@ -13,4 +13,6 @@ public interface IUserService {
     boolean checkPassword(User user,String password);
 
     boolean setAccount(User user,String id,String password);
+
+    boolean update(User user);
 }

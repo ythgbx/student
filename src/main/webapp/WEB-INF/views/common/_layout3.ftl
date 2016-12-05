@@ -14,6 +14,7 @@
     <script type="text/javascript" src="/js/jquery.min.js"></script>
     <script type="text/javascript" src="/js/jquery.SuperSlide.js"></script>
     <script type="text/javascript" src="/js/top.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
     <#nested>
     <title>${title!""} - 资助管理系统</title>
 </head>
@@ -67,12 +68,36 @@
         </ul>
         <h3> 系统管理</h3>
         <ul>
-            <a href="#"><li>修改个人信息</li></a>
-            <a href="#"><li>密码修改</li></a>
+            <a href="/user/information"><li>修改个人信息</li></a>
+            <a href="#" data-toggle="modal" data-target="#myModal"><li>修改密码</li></a>
         </ul>
 
     </div>
 </div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width:300px">
+        <div class="modal-content">
+            <form id="retrievePassword">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">修改密码</h4>
+                </div>
+                <div class="modal-body">
+                    请输入新密码<input type="password" class="form-control" name="new_password" id="pwd1">
+                </div>
+                <div class="modal-body">
+                    请确认新密码<input type="password" class="form-control" name="newPassword1" id="pwd2">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <input onclick="modifyPassword()" type="button" class="btn btn-primary"
+                           value="提交"/>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 </#macro>
 <#macro BODY>
 <div class="main" style="overflow: auto">

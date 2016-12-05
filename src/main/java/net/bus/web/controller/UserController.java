@@ -17,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/user")
@@ -33,6 +35,8 @@ public class UserController {
 
     @Autowired
     private FileUploadController fileUploadController;
+
+    SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 
 
 
@@ -133,8 +137,8 @@ public class UserController {
         userDetail.setClasses(currentUser.getClasses());
         userDetail.setName(currentUser.getName());
         userDetail.setSex(currentUser.getSex());
-        userDetail.setBirthdate(currentUser.getBirthdate());
-        userDetail.setAdmissiondate(currentUser.getAdmissiondate());
+        userDetail.setBirthdate(TimeToString(currentUser.getBirthdate()));
+        userDetail.setAdmissiondate(TimeToString(currentUser.getAdmissiondate()));
         userDetail.setPoliticalstatus(currentUser.getPoliticalstatus());
         userDetail.setNation(currentUser.getNation());
         userDetail.setSpecialty(currentUser.getSpecialty());
@@ -151,8 +155,75 @@ public class UserController {
         userDetail.setMname(currentUser.getMname());
         userDetail.setFtel(currentUser.getFtel());
         userDetail.setMtel(currentUser.getMtel());
+        userDetail.setQq(currentUser.getQq());
+        userDetail.setBankcard(currentUser.getBankcard());
+        userDetail.setResidence(currentUser.getResidence());
+        userDetail.setRemarks(currentUser.getRemarks());
         return userDetail;
     }
+
+    /**
+     * 进入用户信息修改界面
+     * @param model
+     * @return
+     */
+    @Auth(role = Auth.Role.USER)
+    @RequestMapping(value = "/information",method = RequestMethod.GET)
+    public ModelAndView information(Model model){
+        logger.info("url:/information");
+        return new ModelAndView("basic_Information");
+    }
+
+    /**
+     * 修改用户信息
+     * @return
+     */
+    @Auth(role = Auth.Role.USER)
+    @ResponseBody
+    @RequestMapping(value = "/updateinfo",method = RequestMethod.POST)
+    public IResult updateInfo(@ApiParam(name = "updateinfo", value = "修改用户信息")@RequestBody UserDetail userDetail){
+        logger.info("url:/user/updateinfo");
+        BaseResult result = new BaseResult();
+        User user = service.getUser(userDetail.getId());
+        if(user!=null){
+            user.setSchool(userDetail.getSchool());
+            user.setDepartment(userDetail.getDepartment());
+            user.setGrade(userDetail.getGrade());
+            user.setSpecialty(userDetail.getSpecialty());
+            user.setName(userDetail.getName());
+            user.setSex(userDetail.getSex());
+            user.setNation(userDetail.getNation());
+            user.setBirthdate(StringToTime(userDetail.getBirthdate()));
+            user.setAdmissiondate(StringToTime(userDetail.getAdmissiondate()));
+            user.setPoliticalstatus(userDetail.getPoliticalstatus());
+            user.setStudylength(userDetail.getStudylength());
+            user.setNativeplace(userDetail.getNativeplace());
+            user.setClasses(userDetail.getClasses());
+            user.setBankcard(userDetail.getBankcard());
+            user.setIdcard(userDetail.getIdcard());
+            user.setResidence(userDetail.getResidence());
+            user.setTel(userDetail.getTel());
+            user.setQq(userDetail.getQq());
+            user.setSroom(userDetail.getSroom());
+            user.setFname(userDetail.getFname());
+            user.setFtel(userDetail.getFtel());
+            user.setMname(userDetail.getMname());
+            user.setMtel(userDetail.getMtel());
+            user.setAddress(userDetail.getAddress());
+            user.setRemarks(userDetail.getRemarks());
+            if (service.update(user)){
+                result.setResult("success");
+                result.setContent("修改成功!");
+            }else {
+                result.setResult("error");
+                result.setContent("修改失败!");
+            }
+        }
+
+        return result;
+    }
+
+
 
     /**
      * 修改密码
@@ -224,5 +295,17 @@ public class UserController {
         }
         return result;
     }
+
+
+    public String TimeToString(Date date){
+        return sdf.format(date);
+    }
+
+    public Date StringToTime(String date){
+        Date date1 = new Date(date);
+        return new Date(date) ;
+    }
+
+
 
 }
