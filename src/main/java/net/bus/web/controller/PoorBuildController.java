@@ -48,7 +48,11 @@ public class PoorBuildController {
         return mv;
     }
 
-
+    /**
+     * 贫困申请
+     * @param poorBuildDto
+     * @return
+     */
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/application",method = RequestMethod.POST)

@@ -54,8 +54,8 @@
                     年级<br>
                     班级
                 </td>
-                <td colspan="5">
-                    <input type="text" name="grade" style="width:60px;">
+                <td colspan="5" style="text-align: center">
+                    <input type="text" name="grade" style="width:60px;">级
                 </td>
                 <td width="88" rowspan="2">
                     政治<br>
@@ -336,7 +336,7 @@
                     $("[name=nation]").val(data.nation);
                     $("[name=studylength]").val(data.studyLength);
                     $("[name=studylength1]").val(data.depth);
-                    $("[name=grade]").val(data.grade+"级");
+                    $("[name=grade]").val(data.grade);
                     $("[name=classes]").val(data.classes);
                     $("[name=bandCard]").val(data.bandCard);
                     $("[name=politicalstatus]").val(data.politicalStatus);
@@ -361,6 +361,18 @@
             d[this.name] = this.value;
         });
         console.log(d);
+        $.ajax({
+            url: "/poorBuild/application",
+            data: JSON.stringify(d),
+            type: "POST",
+            dataType: "json",
+            contentType: "application/json;charset=UTF-8",
+            success: function (data) {
+                alert(data.content);
+            },
+            error: function (data) {
+            }
+        });
 
     }
 </script>
