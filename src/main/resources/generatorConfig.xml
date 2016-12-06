@@ -46,8 +46,16 @@
                enableDeleteByExample="true"
                enableCountByExample="true"
                enableUpdateByExample="true">
-        </table>-->
+        </table>
         <table tableName="user" domainObjectName="User"  enableSelectByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true"
+               enableDeleteByPrimaryKey="true"
+               enableSelectByExample="true"
+               enableDeleteByExample="true"
+               enableCountByExample="true"
+               enableUpdateByExample="true">
+        </table>-->
+        <table tableName="poorBuild" domainObjectName="PoorBuild"  enableSelectByPrimaryKey="true"
                enableUpdateByPrimaryKey="true"
                enableDeleteByPrimaryKey="true"
                enableSelectByExample="true"

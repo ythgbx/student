@@ -3,6 +3,7 @@ package net.bus.web.controller;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 import net.bus.web.aspect.Auth;
+import net.bus.web.common.Util;
 import net.bus.web.common.config.RString;
 import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.*;
@@ -142,8 +143,8 @@ public class UserController {
         userDetail.setName(currentUser.getName());
         userDetail.setImg(currentUser.getImg());
         userDetail.setSex(currentUser.getSex());
-        userDetail.setBirthDate(TimeToString(currentUser.getBirthdate()));
-        userDetail.setAdmissionDate(TimeToString(currentUser.getAdmissiondate()));
+        userDetail.setBirthDate(Util.TimeToString(currentUser.getBirthdate()));
+        userDetail.setAdmissionDate(Util.TimeToString(currentUser.getAdmissiondate()));
         userDetail.setPoliticalStatus(currentUser.getPoliticalstatus());
         userDetail.setNation(currentUser.getNation());
         userDetail.setSpecialty(currentUser.getSpecialty());
@@ -199,8 +200,8 @@ public class UserController {
             user.setImg(userDetail.getImg());
             user.setSex(userDetail.getSex());
             user.setNation(userDetail.getNation());
-            user.setBirthdate(StringToTime(userDetail.getBirthDate()));
-            user.setAdmissiondate(StringToTime(userDetail.getAdmissionDate()));
+            user.setBirthdate(Util.StringToTime(userDetail.getBirthDate()));
+            user.setAdmissiondate(Util.StringToTime(userDetail.getAdmissionDate()));
             user.setPoliticalstatus(userDetail.getPoliticalStatus());
             user.setStudylength(userDetail.getStudyLength());
             user.setNativeplace(userDetail.getNativePlace());
@@ -225,7 +226,6 @@ public class UserController {
                 result.setContent("修改失败!");
             }
         }
-
         return result;
     }
 
@@ -301,27 +301,6 @@ public class UserController {
         }
         return result;
     }
-
-    /**
-     * 日期格式转换
-     * @param date
-     * @return
-     */
-    SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-    public String TimeToString(Date date){
-        return sdf.format(date);
-    }
-
-    public Date StringToTime(String time){
-        Date date = null;
-        try {
-            date = sdf.parse(time);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return date;
-    }
-
 
 
 }

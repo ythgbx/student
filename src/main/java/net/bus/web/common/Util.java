@@ -1,5 +1,7 @@
 package net.bus.web.common;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -16,4 +18,24 @@ public class Util {
     public static int daysBetween(Date from, Date to) {
         return (int) Math.ceil((double)(to.getTime() - from.getTime())/(1000 * 60 * 60 * 24));
     }
+
+    /**
+     * 日期格式转换
+     * @param date
+     * @return
+     */
+    public static String TimeToString(Date date){
+        return new SimpleDateFormat("yyyy-MM-dd").format(date);
+    }
+
+    public static Date StringToTime(String time){
+        Date date = null;
+        try {
+            date = new SimpleDateFormat("yyyy-MM-dd").parse(time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
+
 }

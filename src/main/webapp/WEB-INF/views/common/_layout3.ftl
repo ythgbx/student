@@ -52,7 +52,7 @@
     <div class="sideMenu" style="margin:0 auto" id="nav">
         <h3> 贫困建档</h3>
         <ul>
-            <a href="/fellowship/page"><li>在线申请</li></a>
+            <a href="/poorBuild/page"><li>在线申请</li></a>
         </ul>
         <h3> 国家奖学金</h3>
         <ul>
