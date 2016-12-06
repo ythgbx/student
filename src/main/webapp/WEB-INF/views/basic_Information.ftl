@@ -7,7 +7,7 @@
 <body>
 <div class="container clearfix">
     <div class="table_main clearfix">
-        <br><h1 align="center">湖北理工学院学生个人基本信息表</h1><br>
+        <br><h1 align="center">计算机学院学生个人基本信息表</h1><br>
         <form id="info">
             <input type="hidden" name="id"/>
         <table border="1px" cellspacing="0px" cellpadding="0px"  border-collapse="collapse" rules="all">
@@ -26,22 +26,22 @@
                 <td style="width:113px;">
                     <select name="department">
                         <option value="计算机学院" selected="selected">计算机学院</option>
-                        <option value="化学与化工学院">化学与化工学院</option>
-                        <option value="机电工程学院">机电工程学院</option>
-                        <option value="材料与冶金学院">材料与冶金学院</option>
-                        <option value="电子信息工程学院" >电子信息工程学院</option>
-                        <option value="土木建筑工程学院">土木建筑工程学院</option>
-                        <option value="数理学院">数理学院</option>
-                        <option value="材料与冶金学院">材料与冶金学院</option>
-                        <option value="环境工程学院">环境工程学院</option>
-                        <option value="医学院">医学院</option>
-                        <option value="经济与管理学院">经济与管理学院</option>
-                        <option value="师范学院">师范学院</option>
-                        <option value="外国语学院">外国语学院</option>
-                        <option value="国际学院">国际学院</option>
-                        <option value="艺术学院">艺术学院</option>
-                        <option value="光谷国际北斗学院">光谷国际北斗学院</option>
-                        <option value="高职学院">高职学院</option>
+                        <#--<option value="化学与化工学院">化学与化工学院</option>-->
+                        <#--<option value="机电工程学院">机电工程学院</option>-->
+                        <#--<option value="材料与冶金学院">材料与冶金学院</option>-->
+                        <#--<option value="电子信息工程学院" >电子信息工程学院</option>-->
+                        <#--<option value="土木建筑工程学院">土木建筑工程学院</option>-->
+                        <#--<option value="数理学院">数理学院</option>-->
+                        <#--<option value="材料与冶金学院">材料与冶金学院</option>-->
+                        <#--<option value="环境工程学院">环境工程学院</option>-->
+                        <#--<option value="医学院">医学院</option>-->
+                        <#--<option value="经济与管理学院">经济与管理学院</option>-->
+                        <#--<option value="师范学院">师范学院</option>-->
+                        <#--<option value="外国语学院">外国语学院</option>-->
+                        <#--<option value="国际学院">国际学院</option>-->
+                        <#--<option value="艺术学院">艺术学院</option>-->
+                        <#--<option value="光谷国际北斗学院">光谷国际北斗学院</option>-->
+                        <#--<option value="高职学院">高职学院</option>-->
                     </select>
                 </td>
                 <td style="width:83px;">
@@ -56,8 +56,10 @@
                         <option value="2017">2017级</option>
                     </select>
                 </td>
-                <td rowspan="4" style="width:110px;">
-                    <input class="uploadptoto" type="submit" name="button" id="button" value="上传照片" /><br/>
+                <td rowspan="4" style="width:130px;" id="updateImg">
+                    <img  src="/images/tx.png" alt="" width="130" height="150" id="Img1"><br>
+                    <input name="img" type="hidden" value="">
+                    <button onclick="updateImg()" type="button">点击更换头像</button>
                 </td>
             </tr>
             <tr>
@@ -256,33 +258,34 @@
 <@FOOT>
 <script type="text/javascript">
     $(function () {
-        console.log("aaa");
         $.ajax({
-            url: "/user/getinfo",
+            url: "/user/getInfo",
             type: "GET",
             dataType: "json",
             contentType: "application/json;charset=UTF-8",
             success: function (data) {
-                console.log(data);
+                var img = document.getElementById("Img1");
                 if(data!=null||data!=""){
-                    var img = document.getElementById("img");
+                    $("#img1").src = "/upload/"+data.img;
                     $("[name=id]").val(data.id);
                     $("[name=school]").val(data.school);
                     $("[name=department]").val(data.department);
                     $("[name=name]").val(data.name);
+                    $("[name=img]").val(data.img);
+                    img.src = "/upload/"+data.img;
                     $("[name=sex]").val([data.sex]);
-                    $("[name=birthDate]").val(data.birthdate);
-                    $("[name=admissionDate]").val(data.admissiondate);
+                    $("[name=birthDate]").val(data.birthDate);
+                    $("[name=admissionDate]").val(data.admissionDate);
                     $("[name=nation]").val(data.nation);
                     $("[name=studyLength]").val(data.depth);
-                    $("[name=nativePlace]").val(data.nativeplace);
+                    $("[name=nativePlace]").val(data.nativePlace);
                     $("[name=grade]").val(data.grade);
                     $("[name=classes]").val(data.classes);
-                    $("[name=bandCard]").val(data.bankcard);
-                    $("[name=politicalStatus]").val(data.politicalstatus);
+                    $("[name=bandCard]").val(data.bandCard);
+                    $("[name=politicalStatus]").val(data.politicalStatus);
                     $("[name=sroom]").val(data.sroom);
                     $("[name=tel]").val(data.tel);
-                    $("[name=idCard]").val(data.idcard);
+                    $("[name=idCard]").val(data.idCard);
                     $("[name=residence]").val([data.residence]);
                     $("[name=address]").val(data.address);
                     $("[name=fname]").val(data.fname);
@@ -306,7 +309,7 @@
         });
         console.log(d);
         $.ajax({
-            url: "/user/updateinfo",
+            url: "/user/updateInfo",
             data: JSON.stringify(d),
             type: "POST",
             dataType: "json",

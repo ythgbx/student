@@ -43,7 +43,7 @@
     </div>
     <div id="side_here">
         <div id="side_here_l" class="fl"></div>
-        <div id="here_area" class="fl">当前位置：</div>
+        <div id="here_area" class="fl">当前时间:</div>
     </div>
 </div>
 </#macro>
@@ -66,7 +66,7 @@
         <ul>
             <a href="#"><li>在线申请</li></a>
         </ul>
-        <h3> 系统管理</h3>
+        <h3> 信息维护</h3>
         <ul>
             <a href="/user/information"><li>修改个人信息</li></a>
             <a href="#" data-toggle="modal" data-target="#myModal"><li>修改密码</li></a>

@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -35,8 +36,6 @@ public class UserController {
 
     @Autowired
     private FileUploadController fileUploadController;
-
-    SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 
 
 
@@ -98,6 +97,11 @@ public class UserController {
         return new ModelAndView("redirect:/user/login");
     }
 
+    /**
+     * 根据用户角色进入不同界面
+     * @param model
+     * @return
+     */
     @Auth(role = Auth.Role.USER)
     @RequestMapping(value = "/main",method = RequestMethod.GET)
     public ModelAndView main(Model model){
@@ -124,9 +128,9 @@ public class UserController {
      */
     @Auth(role = Auth.Role.USER)
     @ResponseBody
-    @RequestMapping(value = "/getinfo",method = RequestMethod.GET)
+    @RequestMapping(value = "/getInfo",method = RequestMethod.GET)
     public IResult getInfo(){
-        logger.info("url:/user/getinfo");
+        logger.info("url:/user/getInfo");
         UserDetail userDetail = new UserDetail();
         User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
         User currentUser = service.getUser(user.getId());
@@ -136,15 +140,16 @@ public class UserController {
         userDetail.setGrade(currentUser.getGrade());
         userDetail.setClasses(currentUser.getClasses());
         userDetail.setName(currentUser.getName());
+        userDetail.setImg(currentUser.getImg());
         userDetail.setSex(currentUser.getSex());
-        userDetail.setBirthdate(TimeToString(currentUser.getBirthdate()));
-        userDetail.setAdmissiondate(TimeToString(currentUser.getAdmissiondate()));
-        userDetail.setPoliticalstatus(currentUser.getPoliticalstatus());
+        userDetail.setBirthDate(TimeToString(currentUser.getBirthdate()));
+        userDetail.setAdmissionDate(TimeToString(currentUser.getAdmissiondate()));
+        userDetail.setPoliticalStatus(currentUser.getPoliticalstatus());
         userDetail.setNation(currentUser.getNation());
         userDetail.setSpecialty(currentUser.getSpecialty());
-        userDetail.setStudylength(currentUser.getStudylength());
-        userDetail.setIdcard(currentUser.getIdcard());
-        userDetail.setNativeplace(currentUser.getNativeplace());
+        userDetail.setStudyLength(currentUser.getStudylength());
+        userDetail.setIdCard(currentUser.getIdcard());
+        userDetail.setNativePlace(currentUser.getNativeplace());
         userDetail.setDepth(currentUser.getDepth());
         userDetail.setTel(currentUser.getTel());
         userDetail.setImg(currentUser.getImg());
@@ -156,7 +161,7 @@ public class UserController {
         userDetail.setFtel(currentUser.getFtel());
         userDetail.setMtel(currentUser.getMtel());
         userDetail.setQq(currentUser.getQq());
-        userDetail.setBankcard(currentUser.getBankcard());
+        userDetail.setBandCard(currentUser.getBankcard());
         userDetail.setResidence(currentUser.getResidence());
         userDetail.setRemarks(currentUser.getRemarks());
         return userDetail;
@@ -180,9 +185,9 @@ public class UserController {
      */
     @Auth(role = Auth.Role.USER)
     @ResponseBody
-    @RequestMapping(value = "/updateinfo",method = RequestMethod.POST)
-    public IResult updateInfo(@ApiParam(name = "updateinfo", value = "修改用户信息")@RequestBody UserDetail userDetail){
-        logger.info("url:/user/updateinfo");
+    @RequestMapping(value = "/updateInfo",method = RequestMethod.POST)
+    public IResult updateInfo(@ApiParam(name = "updateInfo", value = "修改用户信息")@RequestBody UserDetail userDetail){
+        logger.info("url:/user/updateInfo");
         BaseResult result = new BaseResult();
         User user = service.getUser(userDetail.getId());
         if(user!=null){
@@ -191,16 +196,17 @@ public class UserController {
             user.setGrade(userDetail.getGrade());
             user.setSpecialty(userDetail.getSpecialty());
             user.setName(userDetail.getName());
+            user.setImg(userDetail.getImg());
             user.setSex(userDetail.getSex());
             user.setNation(userDetail.getNation());
-            user.setBirthdate(StringToTime(userDetail.getBirthdate()));
-            user.setAdmissiondate(StringToTime(userDetail.getAdmissiondate()));
-            user.setPoliticalstatus(userDetail.getPoliticalstatus());
-            user.setStudylength(userDetail.getStudylength());
-            user.setNativeplace(userDetail.getNativeplace());
+            user.setBirthdate(StringToTime(userDetail.getBirthDate()));
+            user.setAdmissiondate(StringToTime(userDetail.getAdmissionDate()));
+            user.setPoliticalstatus(userDetail.getPoliticalStatus());
+            user.setStudylength(userDetail.getStudyLength());
+            user.setNativeplace(userDetail.getNativePlace());
             user.setClasses(userDetail.getClasses());
-            user.setBankcard(userDetail.getBankcard());
-            user.setIdcard(userDetail.getIdcard());
+            user.setBankcard(userDetail.getBandCard());
+            user.setIdcard(userDetail.getIdCard());
             user.setResidence(userDetail.getResidence());
             user.setTel(userDetail.getTel());
             user.setQq(userDetail.getQq());
@@ -296,14 +302,24 @@ public class UserController {
         return result;
     }
 
-
+    /**
+     * 日期格式转换
+     * @param date
+     * @return
+     */
+    SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
     public String TimeToString(Date date){
         return sdf.format(date);
     }
 
-    public Date StringToTime(String date){
-        Date date1 = new Date(date);
-        return new Date(date) ;
+    public Date StringToTime(String time){
+        Date date = null;
+        try {
+            date = sdf.parse(time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
     }
 
 

@@ -67,6 +67,7 @@ public class UserDetail extends BaseResult{
 
     private String remarks;
 
+
     public String getId() {
         return id;
     }
@@ -131,28 +132,28 @@ public class UserDetail extends BaseResult{
         this.sex = sex;
     }
 
-    public String getBirthdate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthdate(String birthdate) {
-        this.birthDate = birthdate;
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 
-    public String getAdmissiondate() {
+    public String getAdmissionDate() {
         return admissionDate;
     }
 
-    public void setAdmissiondate(String admissiondate) {
-        this.admissionDate = admissiondate;
+    public void setAdmissionDate(String admissionDate) {
+        this.admissionDate = admissionDate;
     }
 
-    public String getPoliticalstatus() {
+    public String getPoliticalStatus() {
         return politicalStatus;
     }
 
-    public void setPoliticalstatus(String politicalstatus) {
-        this.politicalStatus = politicalstatus;
+    public void setPoliticalStatus(String politicalStatus) {
+        this.politicalStatus = politicalStatus;
     }
 
     public String getNation() {
@@ -171,28 +172,28 @@ public class UserDetail extends BaseResult{
         this.specialty = specialty;
     }
 
-    public Integer getStudylength() {
+    public Integer getStudyLength() {
         return studyLength;
     }
 
-    public void setStudylength(Integer studylength) {
-        this.studyLength = studylength;
+    public void setStudyLength(Integer studyLength) {
+        this.studyLength = studyLength;
     }
 
-    public String getIdcard() {
+    public String getIdCard() {
         return idCard;
     }
 
-    public void setIdcard(String idcard) {
-        this.idCard = idcard;
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
     }
 
-    public String getNativeplace() {
+    public String getNativePlace() {
         return nativePlace;
     }
 
-    public void setNativeplace(String nativeplace) {
-        this.nativePlace = nativeplace;
+    public void setNativePlace(String nativePlace) {
+        this.nativePlace = nativePlace;
     }
 
     public String getDepth() {
@@ -283,12 +284,12 @@ public class UserDetail extends BaseResult{
         this.qq = qq;
     }
 
-    public String getBankcard() {
+    public String getBandCard() {
         return bandCard;
     }
 
-    public void setBankcard(String bankcard) {
-        this.bandCard = bankcard;
+    public void setBandCard(String bandCard) {
+        this.bandCard = bandCard;
     }
 
     public String getResidence() {

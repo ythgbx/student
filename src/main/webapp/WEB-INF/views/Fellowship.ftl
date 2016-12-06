@@ -36,8 +36,9 @@
                     <input type="text" name="nation" style="width:50px;">
                 </td>
                 <td width="122" rowspan="5">
-                    <img id="img" src="/images/tx.png" alt="" width="120" height="130"><br>
-                    <input type="file"  style="width:100px;">
+                    <img  src="/images/tx.png" alt="" width="130" height="170" id="Img1"><br>
+                    <input name="img" type="hidden" value="">
+                    <button onclick="updateImg()" type="button">点击更换头像</button>
                 </td>
             </tr>
             <tr>
@@ -316,26 +317,28 @@
     $(function () {
         console.log("aaa");
         $.ajax({
-            url: "/user/getinfo",
+            url: "/user/getInfo",
             type: "GET",
             dataType: "json",
             contentType: "application/json;charset=UTF-8",
             success: function (data) {
                 console.log(data);
                 if(data!=null||data!=""){
-                    var img = document.getElementById("img");
+                    var img = document.getElementById("Img1");
                     $("[name=name]").val(data.name);
+                    $("[name=img]").val(data.img);
+                    img.src="/upload/"+data.img;
                     $("[name=sex]").val(data.sex);
-                    $("[name=birthdate]").val(data.birthdate);
+                    $("[name=birthdate]").val(data.birthDate);
                     $("[name=nation]").val(data.nation);
                     $("[name=studylength]").val(data.depth);
                     $("[name=grade]").val(data.grade+"级");
                     $("[name=classes]").val(data.classes);
-                    $("[name=bandCard]").val(data.bankcard);
-                    $("[name=politicalstatus]").val(data.politicalstatus);
+                    $("[name=bandCard]").val(data.bandCard);
+                    $("[name=politicalstatus]").val(data.politicalStatus);
                     $("[name=sroom]").val(data.sroom);
                     $("[name=tel]").val(data.tel);
-                    $("[name=idCard]").val(data.idcard);
+                    $("[name=idCard]").val(data.idCard);
                     $("[name=address]").val(data.address);
                     $("[name=fname]").val(data.fname);
                     $("[name=mname]").val(data.mname);
