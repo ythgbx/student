@@ -28,7 +28,7 @@
                     出生年月
                 </td>
                 <td width="88">
-                    <input type="text" name="birthdate" style="width:100px;">
+                    <input type="text" name="birthDate" style="width:100px;">
                 </td>
                 <td width="50">
                     民族
@@ -47,8 +47,8 @@
                     学制
                 </td>
                 <td colspan="2" rowspan="2">
-                    <input type="hidden" name="studylength">
-                    <input type="text" name="studylength1" style="width:50px;">
+                    <input type="hidden" name="studyLength">
+                    <input type="text" name="depth" style="width:50px;">
                 </td>
                 <td colspan="2" rowspan="2">
                     年级<br>
@@ -62,7 +62,7 @@
                     面貌
                 </td>
                 <td colspan="2" rowspan="2">
-                    <input type="text" name="politicalstatus" style="width:100px;">
+                    <input type="text" name="politicalStatus" style="width:100px;">
                 </td>
             </tr>
             <tr>
@@ -147,7 +147,7 @@
                     生源地贷款
                 </td>
                 <td width="122">
-                    <input type="text" name="isloan" width="10">
+                    <input type="text" name="isLoan" width="10">
                 </td>
             </tr>
             <tr>
@@ -332,14 +332,14 @@
                     $("[name=img]").val(data.img);
                     img.src="/upload/"+data.img;
                     $("[name=sex]").val(data.sex);
-                    $("[name=birthdate]").val(data.birthDate);
+                    $("[name=birthDate]").val(data.birthDate);
                     $("[name=nation]").val(data.nation);
-                    $("[name=studylength]").val(data.studyLength);
-                    $("[name=studylength1]").val(data.depth);
+                    $("[name=studyLength]").val(data.studyLength);
+                    $("[name=depth]").val(data.depth);
                     $("[name=grade]").val(data.grade);
                     $("[name=classes]").val(data.classes);
                     $("[name=bandCard]").val(data.bandCard);
-                    $("[name=politicalstatus]").val(data.politicalStatus);
+                    $("[name=politicalStatus]").val(data.politicalStatus);
                     $("[name=sroom]").val(data.sroom);
                     $("[name=tel]").val(data.tel);
                     $("[name=idCard]").val(data.idCard);
