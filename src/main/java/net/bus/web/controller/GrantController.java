@@ -14,8 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
  * 此controller助学金操作
  */
 @Controller
-@RequestMapping("/fellowship")
-public class FellowshipController {
+@RequestMapping("/grant")
+public class GrantController {
 
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
@@ -32,9 +32,9 @@ public class FellowshipController {
     @RequestMapping(value="/page" , method = RequestMethod.GET)
     public ModelAndView index(Model model)
     {
-        logger.info("url:/fellowship/page");
+        logger.info("url:/grant/page");
         ModelAndView mv =new ModelAndView();
-        mv.setViewName("Fellowship");
+        mv.setViewName("Grants");
         return mv;
     }
 }

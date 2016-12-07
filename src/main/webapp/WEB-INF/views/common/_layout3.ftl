@@ -64,7 +64,7 @@
         </ul>
         <h3> 国家助学金</h3>
         <ul>
-            <a href="#"><li>在线申请</li></a>
+            <a href="/grant/page"><li>在线申请</li></a>
         </ul>
         <h3> 信息维护</h3>
         <ul>

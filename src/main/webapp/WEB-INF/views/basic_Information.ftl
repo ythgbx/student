@@ -14,8 +14,8 @@
             <tbody>
             <tr>
                 <td rowspan="7" style="width:33px;">
-                    <br />
-                    学<br />生<br />基<br />本<br />信<br />息</td>
+                    <br>
+                    学<br><br>生<br><br>基<br><br>本<br><br>信<br><br>息</td>
                 <td height="36" style="width:84px;">
                     学校</td>
                 <td style="width:106px;">
@@ -207,7 +207,7 @@
             </tr>
             <tr>
                 <td rowspan="3" style="width:33px;">
-                    家<br />庭<br />信<br />息</td>
+                    家<br><br>庭<br><br>信<br><br>息</td>
                 <td height="39" style="width:84px;">
                     父亲姓名</td>
                 <td colspan="2" style="width:154px;">
@@ -264,6 +264,7 @@
             dataType: "json",
             contentType: "application/json;charset=UTF-8",
             success: function (data) {
+                console.log(data);
                 var img = document.getElementById("Img1");
                 if(data!=null||data!=""){
                     $("#img1").src = "/upload/"+data.img;
