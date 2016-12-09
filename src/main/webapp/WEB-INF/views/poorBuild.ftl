@@ -8,7 +8,7 @@
 <div class="container clearfix">
     <div class="table_main clearfix">
         <br><h1 align="center">湖北理工学院家庭经济困难学生申请认定(档案)表</h1><br>
-        <form id="poor">
+        <form id="grant">
             <input type="hidden" name="id" value="">
         <table border="1" cellspacing="0" cellpadding="0" align="left" border-collapse="collapse">
             <tbody><tr>
@@ -356,7 +356,7 @@
 
     function sub() {
         var d = {};
-        var t = $('#poor').serializeArray();
+        var t = $('#grant').serializeArray();
         $.each(t, function () {
             d[this.name] = this.value;
         });

@@ -7,6 +7,8 @@ public class Grant {
 
     private Long no;
 
+    private String populationcount;
+
     private String familyincome;
 
     private String monthlyincome;
@@ -65,6 +67,12 @@ public class Grant {
 
     private String remarks;
 
+    private String treviewed;
+
+    private String dreviewed;
+
+    private String sreviewed;
+
     public String getId() {
         return id;
     }
@@ -79,6 +87,14 @@ public class Grant {
 
     public void setNo(Long no) {
         this.no = no;
+    }
+
+    public String getPopulationcount() {
+        return populationcount;
+    }
+
+    public void setPopulationcount(String populationcount) {
+        this.populationcount = populationcount;
     }
 
     public String getFamilyincome() {
@@ -311,5 +327,29 @@ public class Grant {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks;
+    }
+
+    public String getTreviewed() {
+        return treviewed;
+    }
+
+    public void setTreviewed(String treviewed) {
+        this.treviewed = treviewed;
+    }
+
+    public String getDreviewed() {
+        return dreviewed;
+    }
+
+    public void setDreviewed(String dreviewed) {
+        this.dreviewed = dreviewed;
+    }
+
+    public String getSreviewed() {
+        return sreviewed;
+    }
+
+    public void setSreviewed(String sreviewed) {
+        this.sreviewed = sreviewed;
     }
 }

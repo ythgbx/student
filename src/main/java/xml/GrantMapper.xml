@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="net.bus.web.model.Grant" >
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="no" property="no" jdbcType="BIGINT" />
+    <result column="populationCount" property="populationcount" jdbcType="VARCHAR" />
     <result column="familyIncome" property="familyincome" jdbcType="VARCHAR" />
     <result column="monthlyIncome" property="monthlyincome" jdbcType="VARCHAR" />
     <result column="revenueSource" property="revenuesource" jdbcType="VARCHAR" />
@@ -33,6 +34,9 @@
     <result column="Sgrade" property="sgrade" jdbcType="VARCHAR" />
     <result column="SsignDate" property="ssigndate" jdbcType="DATE" />
     <result column="Remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="Treviewed" property="treviewed" jdbcType="VARCHAR" />
+    <result column="Dreviewed" property="dreviewed" jdbcType="VARCHAR" />
+    <result column="Sreviewed" property="sreviewed" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -93,10 +97,11 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, no, familyIncome, monthlyIncome, revenueSource, poorGrades, amounted, fundedPurpose, 
-    fundPurpose, bankAccount, m1name, m1age, m1Relations, m1Company, m2name, m2age, m2Relations, 
-    m2Company, m3name, m3age, m3Relations, m3Company, applicationReasons, Msign, MsignDate, 
-    Dsign, DsignDate, Ssign, Sgrade, SsignDate, Remarks
+    id, no, populationCount, familyIncome, monthlyIncome, revenueSource, poorGrades, 
+    amounted, fundedPurpose, fundPurpose, bankAccount, m1name, m1age, m1Relations, m1Company, 
+    m2name, m2age, m2Relations, m2Company, m3name, m3age, m3Relations, m3Company, applicationReasons, 
+    Msign, MsignDate, Dsign, DsignDate, Ssign, Sgrade, SsignDate, Remarks, Treviewed, 
+    Dreviewed, Sreviewed
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="net.bus.web.model.GrantExample" >
     select
@@ -129,28 +134,30 @@
     </if>
   </delete>
   <insert id="insert" parameterType="net.bus.web.model.Grant" >
-    insert into grants (id, no, familyIncome, 
-      monthlyIncome, revenueSource, poorGrades, 
-      amounted, fundedPurpose, fundPurpose, 
-      bankAccount, m1name, m1age, 
-      m1Relations, m1Company, m2name, 
-      m2age, m2Relations, m2Company, 
-      m3name, m3age, m3Relations, 
-      m3Company, applicationReasons, Msign, 
-      MsignDate, Dsign, DsignDate, 
-      Ssign, Sgrade, SsignDate, 
-      Remarks)
-    values (#{id,jdbcType=VARCHAR}, #{no,jdbcType=BIGINT}, #{familyincome,jdbcType=VARCHAR}, 
-      #{monthlyincome,jdbcType=VARCHAR}, #{revenuesource,jdbcType=VARCHAR}, #{poorgrades,jdbcType=VARCHAR}, 
-      #{amounted,jdbcType=VARCHAR}, #{fundedpurpose,jdbcType=VARCHAR}, #{fundpurpose,jdbcType=VARCHAR}, 
-      #{bankaccount,jdbcType=VARCHAR}, #{m1name,jdbcType=VARCHAR}, #{m1age,jdbcType=INTEGER}, 
-      #{m1relations,jdbcType=VARCHAR}, #{m1company,jdbcType=VARCHAR}, #{m2name,jdbcType=VARCHAR}, 
-      #{m2age,jdbcType=INTEGER}, #{m2relations,jdbcType=VARCHAR}, #{m2company,jdbcType=VARCHAR}, 
-      #{m3name,jdbcType=VARCHAR}, #{m3age,jdbcType=INTEGER}, #{m3relations,jdbcType=VARCHAR}, 
-      #{m3company,jdbcType=VARCHAR}, #{applicationreasons,jdbcType=VARCHAR}, #{msign,jdbcType=VARCHAR}, 
-      #{msigndate,jdbcType=DATE}, #{dsign,jdbcType=VARCHAR}, #{dsigndate,jdbcType=DATE}, 
-      #{ssign,jdbcType=VARCHAR}, #{sgrade,jdbcType=VARCHAR}, #{ssigndate,jdbcType=DATE}, 
-      #{remarks,jdbcType=VARCHAR})
+    insert into grants (id, no, populationCount, 
+      familyIncome, monthlyIncome, revenueSource, 
+      poorGrades, amounted, fundedPurpose, 
+      fundPurpose, bankAccount, m1name, 
+      m1age, m1Relations, m1Company, 
+      m2name, m2age, m2Relations, 
+      m2Company, m3name, m3age, 
+      m3Relations, m3Company, applicationReasons, 
+      Msign, MsignDate, Dsign, 
+      DsignDate, Ssign, Sgrade, 
+      SsignDate, Remarks, Treviewed, 
+      Dreviewed, Sreviewed)
+    values (#{id,jdbcType=VARCHAR}, #{no,jdbcType=BIGINT}, #{populationcount,jdbcType=VARCHAR}, 
+      #{familyincome,jdbcType=VARCHAR}, #{monthlyincome,jdbcType=VARCHAR}, #{revenuesource,jdbcType=VARCHAR}, 
+      #{poorgrades,jdbcType=VARCHAR}, #{amounted,jdbcType=VARCHAR}, #{fundedpurpose,jdbcType=VARCHAR}, 
+      #{fundpurpose,jdbcType=VARCHAR}, #{bankaccount,jdbcType=VARCHAR}, #{m1name,jdbcType=VARCHAR}, 
+      #{m1age,jdbcType=INTEGER}, #{m1relations,jdbcType=VARCHAR}, #{m1company,jdbcType=VARCHAR}, 
+      #{m2name,jdbcType=VARCHAR}, #{m2age,jdbcType=INTEGER}, #{m2relations,jdbcType=VARCHAR}, 
+      #{m2company,jdbcType=VARCHAR}, #{m3name,jdbcType=VARCHAR}, #{m3age,jdbcType=INTEGER}, 
+      #{m3relations,jdbcType=VARCHAR}, #{m3company,jdbcType=VARCHAR}, #{applicationreasons,jdbcType=VARCHAR}, 
+      #{msign,jdbcType=VARCHAR}, #{msigndate,jdbcType=DATE}, #{dsign,jdbcType=VARCHAR}, 
+      #{dsigndate,jdbcType=DATE}, #{ssign,jdbcType=VARCHAR}, #{sgrade,jdbcType=VARCHAR}, 
+      #{ssigndate,jdbcType=DATE}, #{remarks,jdbcType=VARCHAR}, #{treviewed,jdbcType=VARCHAR}, 
+      #{dreviewed,jdbcType=VARCHAR}, #{sreviewed,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="net.bus.web.model.Grant" >
     insert into grants
@@ -160,6 +167,9 @@
       </if>
       <if test="no != null" >
         no,
+      </if>
+      <if test="populationcount != null" >
+        populationCount,
       </if>
       <if test="familyincome != null" >
         familyIncome,
@@ -248,6 +258,15 @@
       <if test="remarks != null" >
         Remarks,
       </if>
+      <if test="treviewed != null" >
+        Treviewed,
+      </if>
+      <if test="dreviewed != null" >
+        Dreviewed,
+      </if>
+      <if test="sreviewed != null" >
+        Sreviewed,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -255,6 +274,9 @@
       </if>
       <if test="no != null" >
         #{no,jdbcType=BIGINT},
+      </if>
+      <if test="populationcount != null" >
+        #{populationcount,jdbcType=VARCHAR},
       </if>
       <if test="familyincome != null" >
         #{familyincome,jdbcType=VARCHAR},
@@ -343,6 +365,15 @@
       <if test="remarks != null" >
         #{remarks,jdbcType=VARCHAR},
       </if>
+      <if test="treviewed != null" >
+        #{treviewed,jdbcType=VARCHAR},
+      </if>
+      <if test="dreviewed != null" >
+        #{dreviewed,jdbcType=VARCHAR},
+      </if>
+      <if test="sreviewed != null" >
+        #{sreviewed,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="net.bus.web.model.GrantExample" resultType="java.lang.Integer" >
@@ -359,6 +390,9 @@
       </if>
       <if test="record.no != null" >
         no = #{record.no,jdbcType=BIGINT},
+      </if>
+      <if test="record.populationcount != null" >
+        populationCount = #{record.populationcount,jdbcType=VARCHAR},
       </if>
       <if test="record.familyincome != null" >
         familyIncome = #{record.familyincome,jdbcType=VARCHAR},
@@ -447,6 +481,15 @@
       <if test="record.remarks != null" >
         Remarks = #{record.remarks,jdbcType=VARCHAR},
       </if>
+      <if test="record.treviewed != null" >
+        Treviewed = #{record.treviewed,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dreviewed != null" >
+        Dreviewed = #{record.dreviewed,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sreviewed != null" >
+        Sreviewed = #{record.sreviewed,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -456,6 +499,7 @@
     update grants
     set id = #{record.id,jdbcType=VARCHAR},
       no = #{record.no,jdbcType=BIGINT},
+      populationCount = #{record.populationcount,jdbcType=VARCHAR},
       familyIncome = #{record.familyincome,jdbcType=VARCHAR},
       monthlyIncome = #{record.monthlyincome,jdbcType=VARCHAR},
       revenueSource = #{record.revenuesource,jdbcType=VARCHAR},
@@ -484,7 +528,10 @@
       Ssign = #{record.ssign,jdbcType=VARCHAR},
       Sgrade = #{record.sgrade,jdbcType=VARCHAR},
       SsignDate = #{record.ssigndate,jdbcType=DATE},
-      Remarks = #{record.remarks,jdbcType=VARCHAR}
+      Remarks = #{record.remarks,jdbcType=VARCHAR},
+      Treviewed = #{record.treviewed,jdbcType=VARCHAR},
+      Dreviewed = #{record.dreviewed,jdbcType=VARCHAR},
+      Sreviewed = #{record.sreviewed,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -494,6 +541,9 @@
     <set >
       <if test="no != null" >
         no = #{no,jdbcType=BIGINT},
+      </if>
+      <if test="populationcount != null" >
+        populationCount = #{populationcount,jdbcType=VARCHAR},
       </if>
       <if test="familyincome != null" >
         familyIncome = #{familyincome,jdbcType=VARCHAR},
@@ -582,12 +632,22 @@
       <if test="remarks != null" >
         Remarks = #{remarks,jdbcType=VARCHAR},
       </if>
+      <if test="treviewed != null" >
+        Treviewed = #{treviewed,jdbcType=VARCHAR},
+      </if>
+      <if test="dreviewed != null" >
+        Dreviewed = #{dreviewed,jdbcType=VARCHAR},
+      </if>
+      <if test="sreviewed != null" >
+        Sreviewed = #{sreviewed,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="net.bus.web.model.Grant" >
     update grants
     set no = #{no,jdbcType=BIGINT},
+      populationCount = #{populationcount,jdbcType=VARCHAR},
       familyIncome = #{familyincome,jdbcType=VARCHAR},
       monthlyIncome = #{monthlyincome,jdbcType=VARCHAR},
       revenueSource = #{revenuesource,jdbcType=VARCHAR},
@@ -616,7 +676,10 @@
       Ssign = #{ssign,jdbcType=VARCHAR},
       Sgrade = #{sgrade,jdbcType=VARCHAR},
       SsignDate = #{ssigndate,jdbcType=DATE},
-      Remarks = #{remarks,jdbcType=VARCHAR}
+      Remarks = #{remarks,jdbcType=VARCHAR},
+      Treviewed = #{treviewed,jdbcType=VARCHAR},
+      Dreviewed = #{dreviewed,jdbcType=VARCHAR},
+      Sreviewed = #{sreviewed,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <select resultMap="BaseResultMap" parameterType="net.bus.web.model.GrantExample" id="selectByExampleWithRowbounds" >

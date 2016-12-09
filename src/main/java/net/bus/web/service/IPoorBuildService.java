@@ -1,6 +1,7 @@
 package net.bus.web.service;
 
 import net.bus.web.controller.dto.PoorBuildDto;
+import net.bus.web.model.PoorBuild;
 import org.springframework.stereotype.Service;
 
 /**
@@ -9,5 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface IPoorBuildService {
     boolean insert(PoorBuildDto poorBuildDto);
+    PoorBuild getStudent(String id);
+
 
 }

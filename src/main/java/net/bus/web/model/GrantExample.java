@@ -262,6 +262,76 @@ public class GrantExample {
             return (Criteria) this;
         }
 
+        public Criteria andPopulationcountIsNull() {
+            addCriterion("populationCount is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPopulationcountIsNotNull() {
+            addCriterion("populationCount is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPopulationcountEqualTo(String value) {
+            addCriterion("populationCount =", value, "populationcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andPopulationcountNotEqualTo(String value) {
+            addCriterion("populationCount <>", value, "populationcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andPopulationcountGreaterThan(String value) {
+            addCriterion("populationCount >", value, "populationcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andPopulationcountGreaterThanOrEqualTo(String value) {
+            addCriterion("populationCount >=", value, "populationcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andPopulationcountLessThan(String value) {
+            addCriterion("populationCount <", value, "populationcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andPopulationcountLessThanOrEqualTo(String value) {
+            addCriterion("populationCount <=", value, "populationcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andPopulationcountLike(String value) {
+            addCriterion("populationCount like", value, "populationcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andPopulationcountNotLike(String value) {
+            addCriterion("populationCount not like", value, "populationcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andPopulationcountIn(List<String> values) {
+            addCriterion("populationCount in", values, "populationcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andPopulationcountNotIn(List<String> values) {
+            addCriterion("populationCount not in", values, "populationcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andPopulationcountBetween(String value1, String value2) {
+            addCriterion("populationCount between", value1, value2, "populationcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andPopulationcountNotBetween(String value1, String value2) {
+            addCriterion("populationCount not between", value1, value2, "populationcount");
+            return (Criteria) this;
+        }
+
         public Criteria andFamilyincomeIsNull() {
             addCriterion("familyIncome is null");
             return (Criteria) this;
@@ -2229,6 +2299,216 @@ public class GrantExample {
 
         public Criteria andRemarksNotBetween(String value1, String value2) {
             addCriterion("Remarks not between", value1, value2, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andTreviewedIsNull() {
+            addCriterion("Treviewed is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTreviewedIsNotNull() {
+            addCriterion("Treviewed is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTreviewedEqualTo(String value) {
+            addCriterion("Treviewed =", value, "treviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andTreviewedNotEqualTo(String value) {
+            addCriterion("Treviewed <>", value, "treviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andTreviewedGreaterThan(String value) {
+            addCriterion("Treviewed >", value, "treviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andTreviewedGreaterThanOrEqualTo(String value) {
+            addCriterion("Treviewed >=", value, "treviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andTreviewedLessThan(String value) {
+            addCriterion("Treviewed <", value, "treviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andTreviewedLessThanOrEqualTo(String value) {
+            addCriterion("Treviewed <=", value, "treviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andTreviewedLike(String value) {
+            addCriterion("Treviewed like", value, "treviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andTreviewedNotLike(String value) {
+            addCriterion("Treviewed not like", value, "treviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andTreviewedIn(List<String> values) {
+            addCriterion("Treviewed in", values, "treviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andTreviewedNotIn(List<String> values) {
+            addCriterion("Treviewed not in", values, "treviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andTreviewedBetween(String value1, String value2) {
+            addCriterion("Treviewed between", value1, value2, "treviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andTreviewedNotBetween(String value1, String value2) {
+            addCriterion("Treviewed not between", value1, value2, "treviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andDreviewedIsNull() {
+            addCriterion("Dreviewed is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDreviewedIsNotNull() {
+            addCriterion("Dreviewed is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDreviewedEqualTo(String value) {
+            addCriterion("Dreviewed =", value, "dreviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andDreviewedNotEqualTo(String value) {
+            addCriterion("Dreviewed <>", value, "dreviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andDreviewedGreaterThan(String value) {
+            addCriterion("Dreviewed >", value, "dreviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andDreviewedGreaterThanOrEqualTo(String value) {
+            addCriterion("Dreviewed >=", value, "dreviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andDreviewedLessThan(String value) {
+            addCriterion("Dreviewed <", value, "dreviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andDreviewedLessThanOrEqualTo(String value) {
+            addCriterion("Dreviewed <=", value, "dreviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andDreviewedLike(String value) {
+            addCriterion("Dreviewed like", value, "dreviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andDreviewedNotLike(String value) {
+            addCriterion("Dreviewed not like", value, "dreviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andDreviewedIn(List<String> values) {
+            addCriterion("Dreviewed in", values, "dreviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andDreviewedNotIn(List<String> values) {
+            addCriterion("Dreviewed not in", values, "dreviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andDreviewedBetween(String value1, String value2) {
+            addCriterion("Dreviewed between", value1, value2, "dreviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andDreviewedNotBetween(String value1, String value2) {
+            addCriterion("Dreviewed not between", value1, value2, "dreviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andSreviewedIsNull() {
+            addCriterion("Sreviewed is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSreviewedIsNotNull() {
+            addCriterion("Sreviewed is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSreviewedEqualTo(String value) {
+            addCriterion("Sreviewed =", value, "sreviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andSreviewedNotEqualTo(String value) {
+            addCriterion("Sreviewed <>", value, "sreviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andSreviewedGreaterThan(String value) {
+            addCriterion("Sreviewed >", value, "sreviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andSreviewedGreaterThanOrEqualTo(String value) {
+            addCriterion("Sreviewed >=", value, "sreviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andSreviewedLessThan(String value) {
+            addCriterion("Sreviewed <", value, "sreviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andSreviewedLessThanOrEqualTo(String value) {
+            addCriterion("Sreviewed <=", value, "sreviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andSreviewedLike(String value) {
+            addCriterion("Sreviewed like", value, "sreviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andSreviewedNotLike(String value) {
+            addCriterion("Sreviewed not like", value, "sreviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andSreviewedIn(List<String> values) {
+            addCriterion("Sreviewed in", values, "sreviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andSreviewedNotIn(List<String> values) {
+            addCriterion("Sreviewed not in", values, "sreviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andSreviewedBetween(String value1, String value2) {
+            addCriterion("Sreviewed between", value1, value2, "sreviewed");
+            return (Criteria) this;
+        }
+
+        public Criteria andSreviewedNotBetween(String value1, String value2) {
+            addCriterion("Sreviewed not between", value1, value2, "sreviewed");
             return (Criteria) this;
         }
     }

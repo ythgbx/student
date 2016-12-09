@@ -6,6 +6,7 @@ import net.bus.web.common.Util;
 import net.bus.web.controller.dto.BaseResult;
 import net.bus.web.controller.dto.IResult;
 import net.bus.web.controller.dto.PoorBuildDto;
+import net.bus.web.model.PoorBuild;
 import net.bus.web.model.User;
 import net.bus.web.service.IPoorBuildService;
 import net.bus.web.service.IUserService;
@@ -60,31 +61,37 @@ public class PoorBuildController {
     {
         logger.info("url:/poorBuild/application");
         BaseResult result = new BaseResult();
-        User user = userService.getUser(poorBuildDto.getId());
-        user.setSchool(poorBuildDto.getSchool());
-        user.setName(poorBuildDto.getName());
-        user.setSex(poorBuildDto.getSex());
-        user.setBirthdate(Util.StringToTime(poorBuildDto.getBirthDate()));
-        user.setNation(poorBuildDto.getNation());
-        user.setStudylength(poorBuildDto.getStudyLength());
-        user.setDepth(poorBuildDto.getDepth());
-        user.setGrade(poorBuildDto.getGrade());
-        user.setClasses(poorBuildDto.getClasses());
-        user.setPoliticalstatus(poorBuildDto.getPoliticalStatus());
-        user.setSroom(poorBuildDto.getSroom());
-        user.setTel(poorBuildDto.getTel());
-        user.setIdcard(poorBuildDto.getIdCard());
-        user.setBankcard(poorBuildDto.getBandCard());
-        user.setAddress(poorBuildDto.getAddress());
-        user.setFname(poorBuildDto.getFname());
-        user.setMname(poorBuildDto.getMname());
-        userService.update(user);
-        if (service.insert(poorBuildDto)){
-            result.setResult("success");
-            result.setContent("申请成功!");
+        PoorBuild poorBuild = service.getStudent(poorBuildDto.getId());
+        if (poorBuild!=null){
+            result.setResult("failure");
+            result.setContent("您已申请!");
         }else {
-            result.setResult("error");
-            result.setContent("申请失败!");
+            User user = userService.getUser(poorBuildDto.getId());
+            user.setSchool(poorBuildDto.getSchool());
+            user.setName(poorBuildDto.getName());
+            user.setSex(poorBuildDto.getSex());
+            user.setBirthdate(Util.StringToTime(poorBuildDto.getBirthDate()));
+            user.setNation(poorBuildDto.getNation());
+            user.setStudylength(poorBuildDto.getStudyLength());
+            user.setDepth(poorBuildDto.getDepth());
+            user.setGrade(poorBuildDto.getGrade());
+            user.setClasses(poorBuildDto.getClasses());
+            user.setPoliticalstatus(poorBuildDto.getPoliticalStatus());
+            user.setSroom(poorBuildDto.getSroom());
+            user.setTel(poorBuildDto.getTel());
+            user.setIdcard(poorBuildDto.getIdCard());
+            user.setBankcard(poorBuildDto.getBandCard());
+            user.setAddress(poorBuildDto.getAddress());
+            user.setFname(poorBuildDto.getFname());
+            user.setMname(poorBuildDto.getMname());
+            userService.update(user);
+            if (service.insert(poorBuildDto)){
+                result.setResult("success");
+                result.setContent("申请成功!");
+            }else {
+                result.setResult("error");
+                result.setContent("申请失败!");
+            }
         }
         return result;
     }

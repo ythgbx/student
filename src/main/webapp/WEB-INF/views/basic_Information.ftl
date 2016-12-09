@@ -268,12 +268,12 @@
                 var img = document.getElementById("Img1");
                 if(data!=null||data!=""){
                     $("#img1").src = "/upload/"+data.img;
+                    img.src = "/upload/"+data.img;
                     $("[name=id]").val(data.id);
                     $("[name=school]").val(data.school);
                     $("[name=department]").val(data.department);
                     $("[name=name]").val(data.name);
                     $("[name=img]").val(data.img);
-                    img.src = "/upload/"+data.img;
                     $("[name=sex]").val([data.sex]);
                     $("[name=birthDate]").val(data.birthDate);
                     $("[name=admissionDate]").val(data.admissionDate);

@@ -15,7 +15,7 @@ import java.util.List;
  * Created by sky on 16/12/6.
  */
 @Repository
-public class PoorBuildRespositiory {
+public class PoorBuildRepositiory {
     @Autowired
     private PoorBuildMapper poorBuildMapper;
 
