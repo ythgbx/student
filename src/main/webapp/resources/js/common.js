@@ -30,7 +30,6 @@ $(function(){
 
 function updateImg() {
 	var img = document.getElementById("Img1");
-	var imgName = document.getElementById("Img2");
 	var file = $("<input type='file' accept='image/gif,image/png,image/jpeg'/>");
 	file.click().change(function (e) {
 		sendFile(

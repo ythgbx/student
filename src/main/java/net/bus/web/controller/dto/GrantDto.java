@@ -19,12 +19,11 @@ public class GrantDto {
     private String admissionDate;
     private String idCard;
     private String tel;
-    private String QQ;
     private String residence;
     private String totalNum;
     private String totalMoney;
     private String aveMoney;
-    private String Esources;
+    private String esources;
     private String level;
     private String address;
     private String ftel;
@@ -52,6 +51,16 @@ public class GrantDto {
     private Date ddatetime;
     private String Sgrade;
     private Date sdatetime;
+
+    private String qq;
+
+    public String getQq() {
+        return qq;
+    }
+
+    public void setQq(String qq) {
+        this.qq = qq;
+    }
 
     public String getSchool() {
         return school;
@@ -88,6 +97,8 @@ public class GrantDto {
     public String getName() {
         return name;
     }
+
+
 
     public void setName(String name) {
         this.name = name;
@@ -157,14 +168,6 @@ public class GrantDto {
         this.tel = tel;
     }
 
-    public String getQQ() {
-        return QQ;
-    }
-
-    public void setQQ(String QQ) {
-        this.QQ = QQ;
-    }
-
     public String getResidence() {
         return residence;
     }
@@ -198,11 +201,11 @@ public class GrantDto {
     }
 
     public String getEsources() {
-        return Esources;
+        return esources;
     }
 
     public void setEsources(String esources) {
-        Esources = esources;
+        this.esources = esources;
     }
 
     public String getLevel() {

@@ -18,6 +18,7 @@ public class GrantService implements IGrantService{
 
     public boolean insert(GrantDto grantDto) {
         Grant grant = new Grant();
+        grant.setId(grantDto.getId());
         grant.setPopulationcount(grantDto.getTotalNum());
         grant.setFamilyincome(grantDto.getTotalMoney());
         grant.setMonthlyincome(grantDto.getAveMoney());

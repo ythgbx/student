@@ -87,7 +87,7 @@ public class GrantController {
             user.setAdmissiondate(grantDto.getDatetime());
             user.setIdcard(grantDto.getIdCard());
             user.setTel(grantDto.getTel());
-            user.setQq(grantDto.getQQ());
+            user.setQq(grantDto.getQq());
             user.setResidence(grantDto.getResidence());
             user.setAddress(grantDto.getAddress());
             if (service.insert(grantDto)){

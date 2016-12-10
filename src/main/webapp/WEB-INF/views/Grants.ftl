@@ -73,7 +73,7 @@
                         联系电话及ＱＱ号</td>
                     <td style="width:60px; text-align:justify">
                         <input type="tel" name="tel" class="message" style="height:15px" /><br />
-                        &nbsp;QQ：<input type="text" name="QQ" class="message" style="height:15px; width:80px" /> <!--没有该字段-->
+                        &nbsp;QQ：<input type="text" name="qq" class="message" style="height:15px; width:80px" /> <!--没有该字段-->
                     </td>
                 </tr>
                 <tr>
@@ -108,7 +108,7 @@
                     <td style="width:109px;">
                         收入来源</td>
                     <td style="width:101px;">
-                        <input type="text" name="Esources" class="message" style="width:110px;"  />	<!--没有该字段-->
+                        <input type="text" name="esources" class="message" style="width:110px;"  />	<!--没有该字段-->
                     </td>
                 </tr>
                 <tr>
@@ -291,6 +291,7 @@
                 if(data!=null||data!=""){
                     var img = document.getElementById("Img1");
                     img.src = "/upload/"+data.img;
+                    $("[name=img]").val(data.img);
                     $("[name=school]").val(data.school);
                     $("[name=department]").val(data.department);
                     $("[name=classes]").val(data.classes);
@@ -303,7 +304,7 @@
                     $("[name=admissionDate]").val(data.admissionDate);
                     $("[name=idCard]").val(data.idCard);
                     $("[name=tel]").val(data.tel);
-                    $("[name=QQ]").val(data.qq);
+                    $("[name=qq]").val(data.qq);
                     $("[name=residence]").val([data.residence]);
                     $("[name=address]").val(data.address);
                     $("[name=bandCard]").val(data.bandCard);
