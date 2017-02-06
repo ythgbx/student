@@ -11,7 +11,7 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="sex" property="sex" jdbcType="CHAR" />
     <result column="birthDate" property="birthdate" jdbcType="DATE" />
-    <result column="admissionDate" property="admissiondate" jdbcType="DATE" />
+    <result column="admissionDate" property="admissiondate" jdbcType="TIMESTAMP" />
     <result column="politicalStatus" property="politicalstatus" jdbcType="VARCHAR" />
     <result column="nation" property="nation" jdbcType="VARCHAR" />
     <result column="specialty" property="specialty" jdbcType="VARCHAR" />
@@ -141,7 +141,7 @@
       residence, remarks)
     values (#{id,jdbcType=VARCHAR}, #{no,jdbcType=BIGINT}, #{school,jdbcType=VARCHAR}, 
       #{department,jdbcType=VARCHAR}, #{grade,jdbcType=INTEGER}, #{classes,jdbcType=VARCHAR}, 
-      #{name,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{birthdate,jdbcType=DATE}, #{admissiondate,jdbcType=DATE}, 
+      #{name,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{birthdate,jdbcType=DATE}, #{admissiondate,jdbcType=TIMESTAMP}, 
       #{politicalstatus,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR}, #{specialty,jdbcType=VARCHAR}, 
       #{studylength,jdbcType=INTEGER}, #{idcard,jdbcType=VARCHAR}, #{nativeplace,jdbcType=VARCHAR}, 
       #{depth,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
@@ -276,7 +276,7 @@
         #{birthdate,jdbcType=DATE},
       </if>
       <if test="admissiondate != null" >
-        #{admissiondate,jdbcType=DATE},
+        #{admissiondate,jdbcType=TIMESTAMP},
       </if>
       <if test="politicalstatus != null" >
         #{politicalstatus,jdbcType=VARCHAR},
@@ -380,7 +380,7 @@
         birthDate = #{record.birthdate,jdbcType=DATE},
       </if>
       <if test="record.admissiondate != null" >
-        admissionDate = #{record.admissiondate,jdbcType=DATE},
+        admissionDate = #{record.admissiondate,jdbcType=TIMESTAMP},
       </if>
       <if test="record.politicalstatus != null" >
         politicalStatus = #{record.politicalstatus,jdbcType=VARCHAR},
@@ -461,7 +461,7 @@
       name = #{record.name,jdbcType=VARCHAR},
       sex = #{record.sex,jdbcType=CHAR},
       birthDate = #{record.birthdate,jdbcType=DATE},
-      admissionDate = #{record.admissiondate,jdbcType=DATE},
+      admissionDate = #{record.admissiondate,jdbcType=TIMESTAMP},
       politicalStatus = #{record.politicalstatus,jdbcType=VARCHAR},
       nation = #{record.nation,jdbcType=VARCHAR},
       specialty = #{record.specialty,jdbcType=VARCHAR},
@@ -515,7 +515,7 @@
         birthDate = #{birthdate,jdbcType=DATE},
       </if>
       <if test="admissiondate != null" >
-        admissionDate = #{admissiondate,jdbcType=DATE},
+        admissionDate = #{admissiondate,jdbcType=TIMESTAMP},
       </if>
       <if test="politicalstatus != null" >
         politicalStatus = #{politicalstatus,jdbcType=VARCHAR},
@@ -593,7 +593,7 @@
       name = #{name,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=CHAR},
       birthDate = #{birthdate,jdbcType=DATE},
-      admissionDate = #{admissiondate,jdbcType=DATE},
+      admissionDate = #{admissiondate,jdbcType=TIMESTAMP},
       politicalStatus = #{politicalstatus,jdbcType=VARCHAR},
       nation = #{nation,jdbcType=VARCHAR},
       specialty = #{specialty,jdbcType=VARCHAR},

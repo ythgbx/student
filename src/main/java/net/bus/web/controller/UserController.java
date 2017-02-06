@@ -62,11 +62,11 @@ public class UserController {
      */
     @Auth(role = Auth.Role.NONE)
     @ResponseBody
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/checkLogin", method = RequestMethod.POST)
     @ApiOperation(value = "用户登录", httpMethod = "POST", response = LoginResult.class, notes = "用户登录")
     public IResult login(@ApiParam(name = "login", value = "登陆登录")@RequestBody Login login)
     {
-        logger.info("url:/user/login");
+        logger.info("url:/user/checkLogin");
         User user = service.loginCheck(login.getUserName(),login.getPassword(),login.getRole());
         LoginResult result = new LoginResult();
         if(user!=null) {

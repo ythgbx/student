@@ -119,7 +119,7 @@
             });
             console.log(d);
             $.ajax({
-                url: "/user/login",
+                url: "/user/checkLogin",
                 data: JSON.stringify(d),
                 type: "POST",
                 dataType: "json",
