@@ -7,7 +7,6 @@ import net.bus.web.controller.dto.BaseResult;
 import net.bus.web.controller.dto.GrantDto;
 import net.bus.web.controller.dto.IResult;
 import net.bus.web.model.Grant;
-import net.bus.web.model.User;
 import net.bus.web.service.IGrantService;
 import net.bus.web.service.IUserService;
 import org.apache.log4j.Logger;
@@ -55,46 +54,46 @@ public class GrantController {
         return mv;
     }
 
-    /**
-     * 国家助学金申请
-     * @param grantDto
-     * @return
-     */
-    @Auth(role = Auth.Role.USER)
-    @ResponseBody
-    @RequestMapping(value = "/application", method = RequestMethod.POST)
-    public IResult application(@ApiParam(name = "application", value = "助学金申请")@RequestBody GrantDto grantDto){
-        logger.info("url:/grant/application");
-        BaseResult result = new BaseResult();
-        Grant grant = service.getStudent(grantDto.getId());
-        if (grant!=null){
-            result.setResult("failure");
-            result.setContent("您已申请!");
-        }else {
-            User user = userService.getUser(grantDto.getId());
-            user.setSchool(grantDto.getSchool());
-            user.setDepartment(grantDto.getDepartment());
-            user.setClasses(grantDto.getClasses());
-            user.setId(grantDto.getId());
-            user.setName(grantDto.getName());
-            user.setSex(grantDto.getSex());
-            user.setBirthdate(Util.StringToTime(grantDto.getBirthDate()));
-            user.setImg(grantDto.getImg());
-            user.setNation(grantDto.getNation());
-            user.setPoliticalstatus(grantDto.getPoliticalStatus());
-            user.setAdmissiondate(grantDto.getDatetime());
-            user.setIdcard(grantDto.getIdCard());
-            user.setTel(grantDto.getTel());
-            user.setQq(grantDto.getQq());
-            user.setResidence(grantDto.getResidence());
-            user.setAddress(grantDto.getAddress());
-            if (service.insert(grantDto)){
-                result.setContent("申请成功!");
-            }else {
-                result.setContent("申请失败!");
-            }
-        }
-
-        return result;
-    }
+//    /**
+//     * 国家助学金申请
+//     * @param grantDto
+//     * @return
+//     */
+//    @Auth(role = Auth.Role.USER)
+//    @ResponseBody
+//    @RequestMapping(value = "/application", method = RequestMethod.POST)
+//    public IResult application(@ApiParam(name = "application", value = "助学金申请")@RequestBody GrantDto grantDto){
+//        logger.info("url:/grant/application");
+//        BaseResult result = new BaseResult();
+//        Grant grant = service.getStudent(grantDto.getId());
+//        if (grant!=null){
+//            result.setResult("failure");
+//            result.setContent("您已申请!");
+//        }else {
+//            User user = userService.getUser(grantDto.getId());
+//            user.setSchool(grantDto.getSchool());
+//            user.setDepartment(grantDto.getDepartment());
+//            user.setClasses(grantDto.getClasses());
+//            user.setId(grantDto.getId());
+//            user.setName(grantDto.getName());
+//            user.setSex(grantDto.getSex());
+//            user.setBirthdate(Util.StringToTime(grantDto.getBirthDate()));
+//            user.setImg(grantDto.getImg());
+//            user.setNation(grantDto.getNation());
+//            user.setPoliticalstatus(grantDto.getPoliticalStatus());
+//            user.setAdmissiondate(grantDto.getDatetime());
+//            user.setIdcard(grantDto.getIdCard());
+//            user.setTel(grantDto.getTel());
+//            user.setQq(grantDto.getQq());
+//            user.setResidence(grantDto.getResidence());
+//            user.setAddress(grantDto.getAddress());
+//            if (service.insert(grantDto)){
+//                result.setContent("申请成功!");
+//            }else {
+//                result.setContent("申请失败!");
+//            }
+//        }
+//
+//        return result;
+//    }
 }

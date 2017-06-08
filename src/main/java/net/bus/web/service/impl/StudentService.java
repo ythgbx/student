@@ -14,12 +14,10 @@ class StudentService implements IStudentService{
 
     @Autowired
     private StudentRepository _rootRepository;
-    public Student loginCheck(String sno, String password)
-    {
-        Student student = _rootRepository.getStudent(sno);
-        if (student == null){
-            return null;
-        }else if (student.getPassword().equals(password)){
+
+    public Student getStudent(String username) {
+        Student student = _rootRepository.getStudent(username);
+        if (student!=null){
             return student;
         }
         return null;

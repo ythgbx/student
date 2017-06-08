@@ -58,8 +58,8 @@ public class StudentRepository {
         return null;
     }
 
-    public Student getStudent(String sno) {
-        return studentMapper.selectByPrimaryKey(sno);
+    public Student getStudent(String username) {
+        return studentMapper.selectByPrimaryKey(username);
     }
 
     public int insertStudent(Student student)

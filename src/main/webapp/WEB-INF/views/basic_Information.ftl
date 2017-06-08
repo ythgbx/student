@@ -259,7 +259,7 @@
 <script type="text/javascript">
     $(function () {
         $.ajax({
-            url: "/user/getInfo",
+            url: "/student/getInfo",
             type: "GET",
             dataType: "json",
             contentType: "application/json;charset=UTF-8",

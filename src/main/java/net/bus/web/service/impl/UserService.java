@@ -18,7 +18,7 @@ public class UserService implements IUserService{
         User user = _rootRepository.getUser(userName);
         if (user == null){
             return null;
-        }else if (user.getPassword().equals(password) && user.getRole().equals(role)){
+        }else if ((user.getPassword()).toString().equals(password) && user.getRole().equals(Integer.parseInt(role))){
             return user;
         }
         return null;
@@ -36,7 +36,7 @@ public class UserService implements IUserService{
     {
         if(user!=null)
         {
-            user.setId(id);
+            user.setUsername(id);
             user.setPassword(password);
             _rootRepository.updateUser(user);
             return true;

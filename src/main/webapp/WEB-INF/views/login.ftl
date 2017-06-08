@@ -29,9 +29,9 @@
                 <div><input type="password" class="pwd" name="password">&nbsp;<br>
                     <a href="#" data-toggle="modal" data-target="#myModal" style="margin-top: 4px">忘记密码?</a></div>&nbsp;
                 <div >
-                    <input style="margin: 0 auto" type="radio" name="role" value="1" > 辅导员&nbsp;&nbsp;
-                    <input style="margin: 0 auto" type="radio" name="role" value="2"> 班主任&nbsp;&nbsp;
-                    <input style="margin: 0 auto" type="radio" name="role" value="3" checked> 学生
+                    <input style="margin: 0 auto" type="radio" name="role" value="2" > 管理员&nbsp;&nbsp;
+                    <input style="margin: 0 auto" type="radio" name="role" value="1"> 辅导员&nbsp;&nbsp;
+                    <input style="margin: 0 auto" type="radio" name="role" value="0" checked> 学生
                 </div>
                 <div id="btn_area">
                     <input type="button" name="submit" id="sub_btn" onclick="validate();" value="登&nbsp;&nbsp;录">&nbsp;&nbsp;
