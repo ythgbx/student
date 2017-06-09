@@ -87,4 +87,7 @@ public class StudentRepository {
     public int deleteByExample(ISpecification specification){
         return  studentMapper.deleteByExample((StudentExample) specification.createExample());
     }
+
+
+
 }

@@ -47,37 +47,37 @@
                enableCountByExample="true"
                enableUpdateByExample="true">
         </table>
-        <!--<table tableName="user" domainObjectName="User"  enableSelectByPrimaryKey="true"-->
-               <!--enableUpdateByPrimaryKey="true"-->
-               <!--enableDeleteByPrimaryKey="true"-->
-               <!--enableSelectByExample="true"-->
-               <!--enableDeleteByExample="true"-->
-               <!--enableCountByExample="true"-->
-               <!--enableUpdateByExample="true">-->
-        <!--</table>-->
-        <!--<table tableName="poorBuild" domainObjectName="PoorBuild"  enableSelectByPrimaryKey="true"-->
-               <!--enableUpdateByPrimaryKey="true"-->
-               <!--enableDeleteByPrimaryKey="true"-->
-               <!--enableSelectByExample="true"-->
-               <!--enableDeleteByExample="true"-->
-               <!--enableCountByExample="true"-->
-               <!--enableUpdateByExample="true">-->
-        <!--</table>-->
-        <!--<table tableName="grants" domainObjectName="Grant"  enableSelectByPrimaryKey="true"-->
-               <!--enableUpdateByPrimaryKey="true"-->
-               <!--enableDeleteByPrimaryKey="true"-->
-               <!--enableSelectByExample="true"-->
-               <!--enableDeleteByExample="true"-->
-               <!--enableCountByExample="true"-->
-               <!--enableUpdateByExample="true">-->
-        <!--</table>-->
-        <!--<table tableName="motivational" domainObjectName="Motivational"  enableSelectByPrimaryKey="true"-->
-               <!--enableUpdateByPrimaryKey="true"-->
-               <!--enableDeleteByPrimaryKey="true"-->
-               <!--enableSelectByExample="true"-->
-               <!--enableDeleteByExample="true"-->
-               <!--enableCountByExample="true"-->
-               <!--enableUpdateByExample="true">-->
-        <!--</table>-->
+        <table tableName="user" domainObjectName="User"  enableSelectByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true"
+               enableDeleteByPrimaryKey="true"
+               enableSelectByExample="true"
+               enableDeleteByExample="true"
+               enableCountByExample="true"
+               enableUpdateByExample="true">
+        </table>
+        <table tableName="poorBuild" domainObjectName="PoorBuild"  enableSelectByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true"
+               enableDeleteByPrimaryKey="true"
+               enableSelectByExample="true"
+               enableDeleteByExample="true"
+               enableCountByExample="true"
+               enableUpdateByExample="true">
+        </table>
+        <table tableName="grants" domainObjectName="Grant"  enableSelectByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true"
+               enableDeleteByPrimaryKey="true"
+               enableSelectByExample="true"
+               enableDeleteByExample="true"
+               enableCountByExample="true"
+               enableUpdateByExample="true">
+        </table>
+        <table tableName="motivational" domainObjectName="Motivational"  enableSelectByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true"
+               enableDeleteByPrimaryKey="true"
+               enableSelectByExample="true"
+               enableDeleteByExample="true"
+               enableCountByExample="true"
+               enableUpdateByExample="true">
+        </table>
     </context>
 </generatorConfiguration>

@@ -20,7 +20,7 @@
 <#macro TOP>
 <body>
 <div class="top">
-    <div id="top_t">
+    <div id="">
         <div id="logo" class="fl"></div>
         <div id="photo_info" class="fr">
             <div id="photo" class="fl">
@@ -39,100 +39,9 @@
             </div>
         </div>
     </div>
-    <div id="side_here">
-        <div id="side_here_l" class="fl"></div>
-        <div id="here_area" class="fl">当前位置：</div>
-    </div>
 </div>
 </#macro>
-<#macro SIDE>
-<div class="side">
-    <div class="sideMenu" style="margin:0 auto">
-        <h3>导航菜单</h3>
-        <ul>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li class="on">导航菜单</li>
-            <li>导航菜单</li>
-        </ul>
-        <h3> 导航菜单</h3>
-        <ul>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-        </ul>
-        <h3> 导航菜单</h3>
-        <ul>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-        </ul>
-        <h3>导航菜单</h3>
-        <ul>
-            <li >导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li class="on">导航菜单</li>
-            <li>导航菜单</li>
-        </ul>
-        <h3> 导航菜单</h3>
-        <ul>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-        </ul>
-        <h3> 导航菜单</h3>
-        <ul>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-            <li>导航菜单</li>
-        </ul>
 
-
-
-
-    </div>
-</div>
-</#macro>
 <#macro BODY>
 <div class="main">
     <#nested />

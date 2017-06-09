@@ -1,10 +1,13 @@
 package net.bus.web.service.impl;
 
 import net.bus.web.model.Student;
+import net.bus.web.repository.ISpecification;
 import net.bus.web.repository.StudentRepository;
 import net.bus.web.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created by sky on 16/11/29.
@@ -22,4 +25,18 @@ class StudentService implements IStudentService{
         }
         return null;
     }
+
+    public List<Student> getAllStudents(int page,int limit){
+        return _rootRepository.getAllStudents(page,limit);
+    }
+
+    public List<Student> getAllStudentsByExample(ISpecification specification, int page, int limit) {
+        return _rootRepository.getAllStudentsByExample(specification, page, limit);
+    }
+
+    public int getCount() {
+        return _rootRepository.Count();
+    }
+
+
 }
