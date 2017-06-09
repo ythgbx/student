@@ -7,4 +7,5 @@ import net.bus.web.model.Student;
  */
 public interface IStudentService {
     Student getStudent(String username);
+    Boolean update(Student student);
 }

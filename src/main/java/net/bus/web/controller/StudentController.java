@@ -2,8 +2,10 @@ package net.bus.web.controller;
 
 import net.bus.web.aspect.Auth;
 import net.bus.web.context.SessionContext;
+import net.bus.web.controller.dto.BaseResult;
 import net.bus.web.controller.dto.IResult;
 import net.bus.web.controller.dto.StudentDetail;
+import net.bus.web.controller.dto.StudentInfo;
 import net.bus.web.model.Student;
 import net.bus.web.model.User;
 import net.bus.web.service.IStudentService;
@@ -11,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -59,31 +62,74 @@ public class StudentController {
     @RequestMapping(value = "/getInfo",method = RequestMethod.GET)
     public IResult getInfo(){
         logger.info("url:/user/getInfo");
+        BaseResult result = new BaseResult();
         StudentDetail studentDetail = new StudentDetail();
         User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
         Student currentUser = service.getStudent(user.getUsername());
-        studentDetail.setSno(currentUser.getSno());
-        studentDetail.setSname(currentUser.getSname());
-        studentDetail.setUsedname(currentUser.getUsedname());
-        studentDetail.setSex(currentUser.getSex());
-        studentDetail.setCollege(currentUser.getCollege());
-        studentDetail.setIdcard(currentUser.getIdcard());
-        studentDetail.setProfession(currentUser.getProfession());
-        studentDetail.setClassName(currentUser.getClassname());
-        studentDetail.setGrade(currentUser.getGrade());
-        studentDetail.setLevel(currentUser.getLevel());
-        studentDetail.setStudylength(currentUser.getStudylength());
-        studentDetail.setNationality(currentUser.getNationality());
-        studentDetail.setPolitical(currentUser.getPolitical());
-        studentDetail.setSroom(currentUser.getSroom());
-        studentDetail.setStel(currentUser.getStel());
-        studentDetail.setSchoolcard(currentUser.getSchoolcard());
-        studentDetail.setFname(currentUser.getFname());
-        studentDetail.setFtel(currentUser.getFtel());
-        studentDetail.setMname(currentUser.getMname());
-        studentDetail.setMtel(currentUser.getMtel());
-        studentDetail.setNativeplace(currentUser.getNativeplace());
-        studentDetail.setImg(currentUser.getImg());
-        return studentDetail;
+        if(currentUser!=null){
+            studentDetail.setSno(currentUser.getSno());
+            studentDetail.setSname(currentUser.getSname());
+            studentDetail.setUsedname(currentUser.getUsedname());
+            studentDetail.setSex(currentUser.getSex());
+            studentDetail.setCollege(currentUser.getCollege());
+            studentDetail.setIdcard(currentUser.getIdcard());
+            studentDetail.setProfession(currentUser.getProfession());
+            studentDetail.setClassName(currentUser.getClassname());
+            studentDetail.setGrade(currentUser.getGrade());
+            studentDetail.setLevel(currentUser.getLevel());
+            studentDetail.setStudylength(currentUser.getStudylength());
+            studentDetail.setNationality(currentUser.getNationality());
+            studentDetail.setPolitical(currentUser.getPolitical());
+            studentDetail.setSroom(currentUser.getSroom());
+            studentDetail.setStel(currentUser.getStel());
+            studentDetail.setSchoolcard(currentUser.getSchoolcard());
+            studentDetail.setFname(currentUser.getFname());
+            studentDetail.setFtel(currentUser.getFtel());
+            studentDetail.setMname(currentUser.getMname());
+            studentDetail.setMtel(currentUser.getMtel());
+            studentDetail.setNativeplace(currentUser.getNativeplace());
+            studentDetail.setImg(currentUser.getImg());
+            result.setContent("数据获取成功");
+            result.setResult("success");
+            return studentDetail;
+        }
+        result.setContent("数据获取失败");
+        result.setError("error");
+        return result;
+    }
+
+    /**
+     * 完善基本信息
+     * @param studentInfo
+     * @return
+     */
+    @Auth(role = Auth.Role.USER)
+    @ResponseBody
+    @RequestMapping(value = "/perfectInfor",method = RequestMethod.GET)
+    public IResult perfectInfor(@RequestBody StudentInfo studentInfo){
+        logger.info("/student/perfectInfor");
+        BaseResult result = new BaseResult();
+        Student student = service.getStudent(studentInfo.getIdcard());
+        if (student!=null){
+            student.setNativeplace(studentInfo.getNativeplace());
+            student.setPolitical(studentInfo.getPolitical());
+            student.setSroom(studentInfo.getSroom());
+            student.setStel(studentInfo.getStel());
+            student.setSchoolcard(studentInfo.getSchoolcard());
+            student.setFname(studentInfo.getFname());
+            student.setFtel(studentInfo.getFtel());
+            student.setMname(studentInfo.getMname());
+            student.setMtel(studentInfo.getMtel());
+            student.setNativeplace(studentInfo.getNativeplace());
+            student.setImg(studentInfo.getImg());
+            if (service.update(student)){
+                result.setContent("提交成功！");
+                result.setResult("success");
+            }
+        }else {
+            result.setResult("error");
+            result.setContent("信息完善失败！");
+        }
+        return result;
     }
 }

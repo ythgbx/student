@@ -22,4 +22,13 @@ class StudentService implements IStudentService{
         }
         return null;
     }
+
+    public Boolean update(Student student) {
+        if ((_rootRepository.updateStudent(student))>0){
+            return true;
+        }
+        return false;
+    }
+
+
 }
