@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.bus.web.mapper.MotivationalMapper" >
+  <resultMap id="BaseResultMap" type="net.bus.web.model.Motivational" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="no" property="no" jdbcType="BIGINT" />
+    <result column="ranking" property="ranking" jdbcType="INTEGER" />
+    <result column="tnumber" property="tnumber" jdbcType="INTEGER" />
+    <result column="level" property="level" jdbcType="VARCHAR" />
+    <result column="lastyearMoney" property="lastyearmoney" jdbcType="VARCHAR" />
+    <result column="useofFunds" property="useoffunds" jdbcType="VARCHAR" />
+    <result column="thisUse" property="thisuse" jdbcType="VARCHAR" />
+    <result column="bankAccount" property="bankaccount" jdbcType="VARCHAR" />
+    <result column="totalNum" property="totalnum" jdbcType="VARCHAR" />
+    <result column="totalMoney" property="totalmoney" jdbcType="VARCHAR" />
+    <result column="aveMoney" property="avemoney" jdbcType="VARCHAR" />
+    <result column="Esources" property="esources" jdbcType="VARCHAR" />
+    <result column="application" property="application" jdbcType="VARCHAR" />
+    <result column="datetime" property="datetime" jdbcType="DATE" />
+    <result column="dsuggest" property="dsuggest" jdbcType="VARCHAR" />
+    <result column="ddatetime" property="ddatetime" jdbcType="DATE" />
+    <result column="sdatetime" property="sdatetime" jdbcType="DATE" />
+    <result column="Treviewed" property="treviewed" jdbcType="VARCHAR" />
+    <result column="DTreviewed" property="dtreviewed" jdbcType="VARCHAR" />
+    <result column="STreviewed" property="streviewed" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, no, ranking, tnumber, level, lastyearMoney, useofFunds, thisUse, bankAccount, 
+    totalNum, totalMoney, aveMoney, Esources, application, datetime, dsuggest, ddatetime, 
+    sdatetime, Treviewed, DTreviewed, STreviewed
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="net.bus.web.model.MotivationalExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from motivational
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from motivational
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from motivational
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="net.bus.web.model.MotivationalExample" >
+    delete from motivational
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="net.bus.web.model.Motivational" >
+    insert into motivational (id, no, ranking, 
+      tnumber, level, lastyearMoney, 
+      useofFunds, thisUse, bankAccount, 
+      totalNum, totalMoney, aveMoney, 
+      Esources, application, datetime, 
+      dsuggest, ddatetime, sdatetime, 
+      Treviewed, DTreviewed, STreviewed
+      )
+    values (#{id,jdbcType=VARCHAR}, #{no,jdbcType=BIGINT}, #{ranking,jdbcType=INTEGER}, 
+      #{tnumber,jdbcType=INTEGER}, #{level,jdbcType=VARCHAR}, #{lastyearmoney,jdbcType=VARCHAR}, 
+      #{useoffunds,jdbcType=VARCHAR}, #{thisuse,jdbcType=VARCHAR}, #{bankaccount,jdbcType=VARCHAR}, 
+      #{totalnum,jdbcType=VARCHAR}, #{totalmoney,jdbcType=VARCHAR}, #{avemoney,jdbcType=VARCHAR}, 
+      #{esources,jdbcType=VARCHAR}, #{application,jdbcType=VARCHAR}, #{datetime,jdbcType=DATE}, 
+      #{dsuggest,jdbcType=VARCHAR}, #{ddatetime,jdbcType=DATE}, #{sdatetime,jdbcType=DATE}, 
+      #{treviewed,jdbcType=VARCHAR}, #{dtreviewed,jdbcType=VARCHAR}, #{streviewed,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="net.bus.web.model.Motivational" >
+    insert into motivational
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="no != null" >
+        no,
+      </if>
+      <if test="ranking != null" >
+        ranking,
+      </if>
+      <if test="tnumber != null" >
+        tnumber,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="lastyearmoney != null" >
+        lastyearMoney,
+      </if>
+      <if test="useoffunds != null" >
+        useofFunds,
+      </if>
+      <if test="thisuse != null" >
+        thisUse,
+      </if>
+      <if test="bankaccount != null" >
+        bankAccount,
+      </if>
+      <if test="totalnum != null" >
+        totalNum,
+      </if>
+      <if test="totalmoney != null" >
+        totalMoney,
+      </if>
+      <if test="avemoney != null" >
+        aveMoney,
+      </if>
+      <if test="esources != null" >
+        Esources,
+      </if>
+      <if test="application != null" >
+        application,
+      </if>
+      <if test="datetime != null" >
+        datetime,
+      </if>
+      <if test="dsuggest != null" >
+        dsuggest,
+      </if>
+      <if test="ddatetime != null" >
+        ddatetime,
+      </if>
+      <if test="sdatetime != null" >
+        sdatetime,
+      </if>
+      <if test="treviewed != null" >
+        Treviewed,
+      </if>
+      <if test="dtreviewed != null" >
+        DTreviewed,
+      </if>
+      <if test="streviewed != null" >
+        STreviewed,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="no != null" >
+        #{no,jdbcType=BIGINT},
+      </if>
+      <if test="ranking != null" >
+        #{ranking,jdbcType=INTEGER},
+      </if>
+      <if test="tnumber != null" >
+        #{tnumber,jdbcType=INTEGER},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="lastyearmoney != null" >
+        #{lastyearmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="useoffunds != null" >
+        #{useoffunds,jdbcType=VARCHAR},
+      </if>
+      <if test="thisuse != null" >
+        #{thisuse,jdbcType=VARCHAR},
+      </if>
+      <if test="bankaccount != null" >
+        #{bankaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="totalnum != null" >
+        #{totalnum,jdbcType=VARCHAR},
+      </if>
+      <if test="totalmoney != null" >
+        #{totalmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="avemoney != null" >
+        #{avemoney,jdbcType=VARCHAR},
+      </if>
+      <if test="esources != null" >
+        #{esources,jdbcType=VARCHAR},
+      </if>
+      <if test="application != null" >
+        #{application,jdbcType=VARCHAR},
+      </if>
+      <if test="datetime != null" >
+        #{datetime,jdbcType=DATE},
+      </if>
+      <if test="dsuggest != null" >
+        #{dsuggest,jdbcType=VARCHAR},
+      </if>
+      <if test="ddatetime != null" >
+        #{ddatetime,jdbcType=DATE},
+      </if>
+      <if test="sdatetime != null" >
+        #{sdatetime,jdbcType=DATE},
+      </if>
+      <if test="treviewed != null" >
+        #{treviewed,jdbcType=VARCHAR},
+      </if>
+      <if test="dtreviewed != null" >
+        #{dtreviewed,jdbcType=VARCHAR},
+      </if>
+      <if test="streviewed != null" >
+        #{streviewed,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="net.bus.web.model.MotivationalExample" resultType="java.lang.Integer" >
+    select count(*) from motivational
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update motivational
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.no != null" >
+        no = #{record.no,jdbcType=BIGINT},
+      </if>
+      <if test="record.ranking != null" >
+        ranking = #{record.ranking,jdbcType=INTEGER},
+      </if>
+      <if test="record.tnumber != null" >
+        tnumber = #{record.tnumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.level != null" >
+        level = #{record.level,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastyearmoney != null" >
+        lastyearMoney = #{record.lastyearmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.useoffunds != null" >
+        useofFunds = #{record.useoffunds,jdbcType=VARCHAR},
+      </if>
+      <if test="record.thisuse != null" >
+        thisUse = #{record.thisuse,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankaccount != null" >
+        bankAccount = #{record.bankaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalnum != null" >
+        totalNum = #{record.totalnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalmoney != null" >
+        totalMoney = #{record.totalmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.avemoney != null" >
+        aveMoney = #{record.avemoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.esources != null" >
+        Esources = #{record.esources,jdbcType=VARCHAR},
+      </if>
+      <if test="record.application != null" >
+        application = #{record.application,jdbcType=VARCHAR},
+      </if>
+      <if test="record.datetime != null" >
+        datetime = #{record.datetime,jdbcType=DATE},
+      </if>
+      <if test="record.dsuggest != null" >
+        dsuggest = #{record.dsuggest,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ddatetime != null" >
+        ddatetime = #{record.ddatetime,jdbcType=DATE},
+      </if>
+      <if test="record.sdatetime != null" >
+        sdatetime = #{record.sdatetime,jdbcType=DATE},
+      </if>
+      <if test="record.treviewed != null" >
+        Treviewed = #{record.treviewed,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dtreviewed != null" >
+        DTreviewed = #{record.dtreviewed,jdbcType=VARCHAR},
+      </if>
+      <if test="record.streviewed != null" >
+        STreviewed = #{record.streviewed,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update motivational
+    set id = #{record.id,jdbcType=VARCHAR},
+      no = #{record.no,jdbcType=BIGINT},
+      ranking = #{record.ranking,jdbcType=INTEGER},
+      tnumber = #{record.tnumber,jdbcType=INTEGER},
+      level = #{record.level,jdbcType=VARCHAR},
+      lastyearMoney = #{record.lastyearmoney,jdbcType=VARCHAR},
+      useofFunds = #{record.useoffunds,jdbcType=VARCHAR},
+      thisUse = #{record.thisuse,jdbcType=VARCHAR},
+      bankAccount = #{record.bankaccount,jdbcType=VARCHAR},
+      totalNum = #{record.totalnum,jdbcType=VARCHAR},
+      totalMoney = #{record.totalmoney,jdbcType=VARCHAR},
+      aveMoney = #{record.avemoney,jdbcType=VARCHAR},
+      Esources = #{record.esources,jdbcType=VARCHAR},
+      application = #{record.application,jdbcType=VARCHAR},
+      datetime = #{record.datetime,jdbcType=DATE},
+      dsuggest = #{record.dsuggest,jdbcType=VARCHAR},
+      ddatetime = #{record.ddatetime,jdbcType=DATE},
+      sdatetime = #{record.sdatetime,jdbcType=DATE},
+      Treviewed = #{record.treviewed,jdbcType=VARCHAR},
+      DTreviewed = #{record.dtreviewed,jdbcType=VARCHAR},
+      STreviewed = #{record.streviewed,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="net.bus.web.model.Motivational" >
+    update motivational
+    <set >
+      <if test="no != null" >
+        no = #{no,jdbcType=BIGINT},
+      </if>
+      <if test="ranking != null" >
+        ranking = #{ranking,jdbcType=INTEGER},
+      </if>
+      <if test="tnumber != null" >
+        tnumber = #{tnumber,jdbcType=INTEGER},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="lastyearmoney != null" >
+        lastyearMoney = #{lastyearmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="useoffunds != null" >
+        useofFunds = #{useoffunds,jdbcType=VARCHAR},
+      </if>
+      <if test="thisuse != null" >
+        thisUse = #{thisuse,jdbcType=VARCHAR},
+      </if>
+      <if test="bankaccount != null" >
+        bankAccount = #{bankaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="totalnum != null" >
+        totalNum = #{totalnum,jdbcType=VARCHAR},
+      </if>
+      <if test="totalmoney != null" >
+        totalMoney = #{totalmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="avemoney != null" >
+        aveMoney = #{avemoney,jdbcType=VARCHAR},
+      </if>
+      <if test="esources != null" >
+        Esources = #{esources,jdbcType=VARCHAR},
+      </if>
+      <if test="application != null" >
+        application = #{application,jdbcType=VARCHAR},
+      </if>
+      <if test="datetime != null" >
+        datetime = #{datetime,jdbcType=DATE},
+      </if>
+      <if test="dsuggest != null" >
+        dsuggest = #{dsuggest,jdbcType=VARCHAR},
+      </if>
+      <if test="ddatetime != null" >
+        ddatetime = #{ddatetime,jdbcType=DATE},
+      </if>
+      <if test="sdatetime != null" >
+        sdatetime = #{sdatetime,jdbcType=DATE},
+      </if>
+      <if test="treviewed != null" >
+        Treviewed = #{treviewed,jdbcType=VARCHAR},
+      </if>
+      <if test="dtreviewed != null" >
+        DTreviewed = #{dtreviewed,jdbcType=VARCHAR},
+      </if>
+      <if test="streviewed != null" >
+        STreviewed = #{streviewed,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.bus.web.model.Motivational" >
+    update motivational
+    set no = #{no,jdbcType=BIGINT},
+      ranking = #{ranking,jdbcType=INTEGER},
+      tnumber = #{tnumber,jdbcType=INTEGER},
+      level = #{level,jdbcType=VARCHAR},
+      lastyearMoney = #{lastyearmoney,jdbcType=VARCHAR},
+      useofFunds = #{useoffunds,jdbcType=VARCHAR},
+      thisUse = #{thisuse,jdbcType=VARCHAR},
+      bankAccount = #{bankaccount,jdbcType=VARCHAR},
+      totalNum = #{totalnum,jdbcType=VARCHAR},
+      totalMoney = #{totalmoney,jdbcType=VARCHAR},
+      aveMoney = #{avemoney,jdbcType=VARCHAR},
+      Esources = #{esources,jdbcType=VARCHAR},
+      application = #{application,jdbcType=VARCHAR},
+      datetime = #{datetime,jdbcType=DATE},
+      dsuggest = #{dsuggest,jdbcType=VARCHAR},
+      ddatetime = #{ddatetime,jdbcType=DATE},
+      sdatetime = #{sdatetime,jdbcType=DATE},
+      Treviewed = #{treviewed,jdbcType=VARCHAR},
+      DTreviewed = #{dtreviewed,jdbcType=VARCHAR},
+      STreviewed = #{streviewed,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="net.bus.web.model.MotivationalExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from motivational
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

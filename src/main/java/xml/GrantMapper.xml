@@ -1,0 +1,699 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.bus.web.mapper.GrantMapper" >
+  <resultMap id="BaseResultMap" type="net.bus.web.model.Grant" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="no" property="no" jdbcType="BIGINT" />
+    <result column="populationCount" property="populationcount" jdbcType="VARCHAR" />
+    <result column="familyIncome" property="familyincome" jdbcType="VARCHAR" />
+    <result column="monthlyIncome" property="monthlyincome" jdbcType="VARCHAR" />
+    <result column="revenueSource" property="revenuesource" jdbcType="VARCHAR" />
+    <result column="poorGrades" property="poorgrades" jdbcType="VARCHAR" />
+    <result column="amounted" property="amounted" jdbcType="VARCHAR" />
+    <result column="fundedPurpose" property="fundedpurpose" jdbcType="VARCHAR" />
+    <result column="fundPurpose" property="fundpurpose" jdbcType="VARCHAR" />
+    <result column="bankAccount" property="bankaccount" jdbcType="VARCHAR" />
+    <result column="m1name" property="m1name" jdbcType="VARCHAR" />
+    <result column="m1age" property="m1age" jdbcType="INTEGER" />
+    <result column="m1Relations" property="m1relations" jdbcType="VARCHAR" />
+    <result column="m1Company" property="m1company" jdbcType="VARCHAR" />
+    <result column="m2name" property="m2name" jdbcType="VARCHAR" />
+    <result column="m2age" property="m2age" jdbcType="INTEGER" />
+    <result column="m2Relations" property="m2relations" jdbcType="VARCHAR" />
+    <result column="m2Company" property="m2company" jdbcType="VARCHAR" />
+    <result column="m3name" property="m3name" jdbcType="VARCHAR" />
+    <result column="m3age" property="m3age" jdbcType="INTEGER" />
+    <result column="m3Relations" property="m3relations" jdbcType="VARCHAR" />
+    <result column="m3Company" property="m3company" jdbcType="VARCHAR" />
+    <result column="applicationReasons" property="applicationreasons" jdbcType="VARCHAR" />
+    <result column="Msign" property="msign" jdbcType="VARCHAR" />
+    <result column="MsignDate" property="msigndate" jdbcType="DATE" />
+    <result column="Dsign" property="dsign" jdbcType="VARCHAR" />
+    <result column="DsignDate" property="dsigndate" jdbcType="DATE" />
+    <result column="Ssign" property="ssign" jdbcType="VARCHAR" />
+    <result column="Sgrade" property="sgrade" jdbcType="VARCHAR" />
+    <result column="SsignDate" property="ssigndate" jdbcType="DATE" />
+    <result column="Remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="Treviewed" property="treviewed" jdbcType="VARCHAR" />
+    <result column="Dreviewed" property="dreviewed" jdbcType="VARCHAR" />
+    <result column="Sreviewed" property="sreviewed" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, no, populationCount, familyIncome, monthlyIncome, revenueSource, poorGrades, 
+    amounted, fundedPurpose, fundPurpose, bankAccount, m1name, m1age, m1Relations, m1Company, 
+    m2name, m2age, m2Relations, m2Company, m3name, m3age, m3Relations, m3Company, applicationReasons, 
+    Msign, MsignDate, Dsign, DsignDate, Ssign, Sgrade, SsignDate, Remarks, Treviewed, 
+    Dreviewed, Sreviewed
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="net.bus.web.model.GrantExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from grants
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from grants
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from grants
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="net.bus.web.model.GrantExample" >
+    delete from grants
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="net.bus.web.model.Grant" >
+    insert into grants (id, no, populationCount, 
+      familyIncome, monthlyIncome, revenueSource, 
+      poorGrades, amounted, fundedPurpose, 
+      fundPurpose, bankAccount, m1name, 
+      m1age, m1Relations, m1Company, 
+      m2name, m2age, m2Relations, 
+      m2Company, m3name, m3age, 
+      m3Relations, m3Company, applicationReasons, 
+      Msign, MsignDate, Dsign, 
+      DsignDate, Ssign, Sgrade, 
+      SsignDate, Remarks, Treviewed, 
+      Dreviewed, Sreviewed)
+    values (#{id,jdbcType=VARCHAR}, #{no,jdbcType=BIGINT}, #{populationcount,jdbcType=VARCHAR}, 
+      #{familyincome,jdbcType=VARCHAR}, #{monthlyincome,jdbcType=VARCHAR}, #{revenuesource,jdbcType=VARCHAR}, 
+      #{poorgrades,jdbcType=VARCHAR}, #{amounted,jdbcType=VARCHAR}, #{fundedpurpose,jdbcType=VARCHAR}, 
+      #{fundpurpose,jdbcType=VARCHAR}, #{bankaccount,jdbcType=VARCHAR}, #{m1name,jdbcType=VARCHAR}, 
+      #{m1age,jdbcType=INTEGER}, #{m1relations,jdbcType=VARCHAR}, #{m1company,jdbcType=VARCHAR}, 
+      #{m2name,jdbcType=VARCHAR}, #{m2age,jdbcType=INTEGER}, #{m2relations,jdbcType=VARCHAR}, 
+      #{m2company,jdbcType=VARCHAR}, #{m3name,jdbcType=VARCHAR}, #{m3age,jdbcType=INTEGER}, 
+      #{m3relations,jdbcType=VARCHAR}, #{m3company,jdbcType=VARCHAR}, #{applicationreasons,jdbcType=VARCHAR}, 
+      #{msign,jdbcType=VARCHAR}, #{msigndate,jdbcType=DATE}, #{dsign,jdbcType=VARCHAR}, 
+      #{dsigndate,jdbcType=DATE}, #{ssign,jdbcType=VARCHAR}, #{sgrade,jdbcType=VARCHAR}, 
+      #{ssigndate,jdbcType=DATE}, #{remarks,jdbcType=VARCHAR}, #{treviewed,jdbcType=VARCHAR}, 
+      #{dreviewed,jdbcType=VARCHAR}, #{sreviewed,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="net.bus.web.model.Grant" >
+    insert into grants
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="no != null" >
+        no,
+      </if>
+      <if test="populationcount != null" >
+        populationCount,
+      </if>
+      <if test="familyincome != null" >
+        familyIncome,
+      </if>
+      <if test="monthlyincome != null" >
+        monthlyIncome,
+      </if>
+      <if test="revenuesource != null" >
+        revenueSource,
+      </if>
+      <if test="poorgrades != null" >
+        poorGrades,
+      </if>
+      <if test="amounted != null" >
+        amounted,
+      </if>
+      <if test="fundedpurpose != null" >
+        fundedPurpose,
+      </if>
+      <if test="fundpurpose != null" >
+        fundPurpose,
+      </if>
+      <if test="bankaccount != null" >
+        bankAccount,
+      </if>
+      <if test="m1name != null" >
+        m1name,
+      </if>
+      <if test="m1age != null" >
+        m1age,
+      </if>
+      <if test="m1relations != null" >
+        m1Relations,
+      </if>
+      <if test="m1company != null" >
+        m1Company,
+      </if>
+      <if test="m2name != null" >
+        m2name,
+      </if>
+      <if test="m2age != null" >
+        m2age,
+      </if>
+      <if test="m2relations != null" >
+        m2Relations,
+      </if>
+      <if test="m2company != null" >
+        m2Company,
+      </if>
+      <if test="m3name != null" >
+        m3name,
+      </if>
+      <if test="m3age != null" >
+        m3age,
+      </if>
+      <if test="m3relations != null" >
+        m3Relations,
+      </if>
+      <if test="m3company != null" >
+        m3Company,
+      </if>
+      <if test="applicationreasons != null" >
+        applicationReasons,
+      </if>
+      <if test="msign != null" >
+        Msign,
+      </if>
+      <if test="msigndate != null" >
+        MsignDate,
+      </if>
+      <if test="dsign != null" >
+        Dsign,
+      </if>
+      <if test="dsigndate != null" >
+        DsignDate,
+      </if>
+      <if test="ssign != null" >
+        Ssign,
+      </if>
+      <if test="sgrade != null" >
+        Sgrade,
+      </if>
+      <if test="ssigndate != null" >
+        SsignDate,
+      </if>
+      <if test="remarks != null" >
+        Remarks,
+      </if>
+      <if test="treviewed != null" >
+        Treviewed,
+      </if>
+      <if test="dreviewed != null" >
+        Dreviewed,
+      </if>
+      <if test="sreviewed != null" >
+        Sreviewed,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="no != null" >
+        #{no,jdbcType=BIGINT},
+      </if>
+      <if test="populationcount != null" >
+        #{populationcount,jdbcType=VARCHAR},
+      </if>
+      <if test="familyincome != null" >
+        #{familyincome,jdbcType=VARCHAR},
+      </if>
+      <if test="monthlyincome != null" >
+        #{monthlyincome,jdbcType=VARCHAR},
+      </if>
+      <if test="revenuesource != null" >
+        #{revenuesource,jdbcType=VARCHAR},
+      </if>
+      <if test="poorgrades != null" >
+        #{poorgrades,jdbcType=VARCHAR},
+      </if>
+      <if test="amounted != null" >
+        #{amounted,jdbcType=VARCHAR},
+      </if>
+      <if test="fundedpurpose != null" >
+        #{fundedpurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="fundpurpose != null" >
+        #{fundpurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="bankaccount != null" >
+        #{bankaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="m1name != null" >
+        #{m1name,jdbcType=VARCHAR},
+      </if>
+      <if test="m1age != null" >
+        #{m1age,jdbcType=INTEGER},
+      </if>
+      <if test="m1relations != null" >
+        #{m1relations,jdbcType=VARCHAR},
+      </if>
+      <if test="m1company != null" >
+        #{m1company,jdbcType=VARCHAR},
+      </if>
+      <if test="m2name != null" >
+        #{m2name,jdbcType=VARCHAR},
+      </if>
+      <if test="m2age != null" >
+        #{m2age,jdbcType=INTEGER},
+      </if>
+      <if test="m2relations != null" >
+        #{m2relations,jdbcType=VARCHAR},
+      </if>
+      <if test="m2company != null" >
+        #{m2company,jdbcType=VARCHAR},
+      </if>
+      <if test="m3name != null" >
+        #{m3name,jdbcType=VARCHAR},
+      </if>
+      <if test="m3age != null" >
+        #{m3age,jdbcType=INTEGER},
+      </if>
+      <if test="m3relations != null" >
+        #{m3relations,jdbcType=VARCHAR},
+      </if>
+      <if test="m3company != null" >
+        #{m3company,jdbcType=VARCHAR},
+      </if>
+      <if test="applicationreasons != null" >
+        #{applicationreasons,jdbcType=VARCHAR},
+      </if>
+      <if test="msign != null" >
+        #{msign,jdbcType=VARCHAR},
+      </if>
+      <if test="msigndate != null" >
+        #{msigndate,jdbcType=DATE},
+      </if>
+      <if test="dsign != null" >
+        #{dsign,jdbcType=VARCHAR},
+      </if>
+      <if test="dsigndate != null" >
+        #{dsigndate,jdbcType=DATE},
+      </if>
+      <if test="ssign != null" >
+        #{ssign,jdbcType=VARCHAR},
+      </if>
+      <if test="sgrade != null" >
+        #{sgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="ssigndate != null" >
+        #{ssigndate,jdbcType=DATE},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="treviewed != null" >
+        #{treviewed,jdbcType=VARCHAR},
+      </if>
+      <if test="dreviewed != null" >
+        #{dreviewed,jdbcType=VARCHAR},
+      </if>
+      <if test="sreviewed != null" >
+        #{sreviewed,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="net.bus.web.model.GrantExample" resultType="java.lang.Integer" >
+    select count(*) from grants
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update grants
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.no != null" >
+        no = #{record.no,jdbcType=BIGINT},
+      </if>
+      <if test="record.populationcount != null" >
+        populationCount = #{record.populationcount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.familyincome != null" >
+        familyIncome = #{record.familyincome,jdbcType=VARCHAR},
+      </if>
+      <if test="record.monthlyincome != null" >
+        monthlyIncome = #{record.monthlyincome,jdbcType=VARCHAR},
+      </if>
+      <if test="record.revenuesource != null" >
+        revenueSource = #{record.revenuesource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.poorgrades != null" >
+        poorGrades = #{record.poorgrades,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amounted != null" >
+        amounted = #{record.amounted,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fundedpurpose != null" >
+        fundedPurpose = #{record.fundedpurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fundpurpose != null" >
+        fundPurpose = #{record.fundpurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankaccount != null" >
+        bankAccount = #{record.bankaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.m1name != null" >
+        m1name = #{record.m1name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.m1age != null" >
+        m1age = #{record.m1age,jdbcType=INTEGER},
+      </if>
+      <if test="record.m1relations != null" >
+        m1Relations = #{record.m1relations,jdbcType=VARCHAR},
+      </if>
+      <if test="record.m1company != null" >
+        m1Company = #{record.m1company,jdbcType=VARCHAR},
+      </if>
+      <if test="record.m2name != null" >
+        m2name = #{record.m2name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.m2age != null" >
+        m2age = #{record.m2age,jdbcType=INTEGER},
+      </if>
+      <if test="record.m2relations != null" >
+        m2Relations = #{record.m2relations,jdbcType=VARCHAR},
+      </if>
+      <if test="record.m2company != null" >
+        m2Company = #{record.m2company,jdbcType=VARCHAR},
+      </if>
+      <if test="record.m3name != null" >
+        m3name = #{record.m3name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.m3age != null" >
+        m3age = #{record.m3age,jdbcType=INTEGER},
+      </if>
+      <if test="record.m3relations != null" >
+        m3Relations = #{record.m3relations,jdbcType=VARCHAR},
+      </if>
+      <if test="record.m3company != null" >
+        m3Company = #{record.m3company,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applicationreasons != null" >
+        applicationReasons = #{record.applicationreasons,jdbcType=VARCHAR},
+      </if>
+      <if test="record.msign != null" >
+        Msign = #{record.msign,jdbcType=VARCHAR},
+      </if>
+      <if test="record.msigndate != null" >
+        MsignDate = #{record.msigndate,jdbcType=DATE},
+      </if>
+      <if test="record.dsign != null" >
+        Dsign = #{record.dsign,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dsigndate != null" >
+        DsignDate = #{record.dsigndate,jdbcType=DATE},
+      </if>
+      <if test="record.ssign != null" >
+        Ssign = #{record.ssign,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sgrade != null" >
+        Sgrade = #{record.sgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ssigndate != null" >
+        SsignDate = #{record.ssigndate,jdbcType=DATE},
+      </if>
+      <if test="record.remarks != null" >
+        Remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.treviewed != null" >
+        Treviewed = #{record.treviewed,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dreviewed != null" >
+        Dreviewed = #{record.dreviewed,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sreviewed != null" >
+        Sreviewed = #{record.sreviewed,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update grants
+    set id = #{record.id,jdbcType=VARCHAR},
+      no = #{record.no,jdbcType=BIGINT},
+      populationCount = #{record.populationcount,jdbcType=VARCHAR},
+      familyIncome = #{record.familyincome,jdbcType=VARCHAR},
+      monthlyIncome = #{record.monthlyincome,jdbcType=VARCHAR},
+      revenueSource = #{record.revenuesource,jdbcType=VARCHAR},
+      poorGrades = #{record.poorgrades,jdbcType=VARCHAR},
+      amounted = #{record.amounted,jdbcType=VARCHAR},
+      fundedPurpose = #{record.fundedpurpose,jdbcType=VARCHAR},
+      fundPurpose = #{record.fundpurpose,jdbcType=VARCHAR},
+      bankAccount = #{record.bankaccount,jdbcType=VARCHAR},
+      m1name = #{record.m1name,jdbcType=VARCHAR},
+      m1age = #{record.m1age,jdbcType=INTEGER},
+      m1Relations = #{record.m1relations,jdbcType=VARCHAR},
+      m1Company = #{record.m1company,jdbcType=VARCHAR},
+      m2name = #{record.m2name,jdbcType=VARCHAR},
+      m2age = #{record.m2age,jdbcType=INTEGER},
+      m2Relations = #{record.m2relations,jdbcType=VARCHAR},
+      m2Company = #{record.m2company,jdbcType=VARCHAR},
+      m3name = #{record.m3name,jdbcType=VARCHAR},
+      m3age = #{record.m3age,jdbcType=INTEGER},
+      m3Relations = #{record.m3relations,jdbcType=VARCHAR},
+      m3Company = #{record.m3company,jdbcType=VARCHAR},
+      applicationReasons = #{record.applicationreasons,jdbcType=VARCHAR},
+      Msign = #{record.msign,jdbcType=VARCHAR},
+      MsignDate = #{record.msigndate,jdbcType=DATE},
+      Dsign = #{record.dsign,jdbcType=VARCHAR},
+      DsignDate = #{record.dsigndate,jdbcType=DATE},
+      Ssign = #{record.ssign,jdbcType=VARCHAR},
+      Sgrade = #{record.sgrade,jdbcType=VARCHAR},
+      SsignDate = #{record.ssigndate,jdbcType=DATE},
+      Remarks = #{record.remarks,jdbcType=VARCHAR},
+      Treviewed = #{record.treviewed,jdbcType=VARCHAR},
+      Dreviewed = #{record.dreviewed,jdbcType=VARCHAR},
+      Sreviewed = #{record.sreviewed,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="net.bus.web.model.Grant" >
+    update grants
+    <set >
+      <if test="no != null" >
+        no = #{no,jdbcType=BIGINT},
+      </if>
+      <if test="populationcount != null" >
+        populationCount = #{populationcount,jdbcType=VARCHAR},
+      </if>
+      <if test="familyincome != null" >
+        familyIncome = #{familyincome,jdbcType=VARCHAR},
+      </if>
+      <if test="monthlyincome != null" >
+        monthlyIncome = #{monthlyincome,jdbcType=VARCHAR},
+      </if>
+      <if test="revenuesource != null" >
+        revenueSource = #{revenuesource,jdbcType=VARCHAR},
+      </if>
+      <if test="poorgrades != null" >
+        poorGrades = #{poorgrades,jdbcType=VARCHAR},
+      </if>
+      <if test="amounted != null" >
+        amounted = #{amounted,jdbcType=VARCHAR},
+      </if>
+      <if test="fundedpurpose != null" >
+        fundedPurpose = #{fundedpurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="fundpurpose != null" >
+        fundPurpose = #{fundpurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="bankaccount != null" >
+        bankAccount = #{bankaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="m1name != null" >
+        m1name = #{m1name,jdbcType=VARCHAR},
+      </if>
+      <if test="m1age != null" >
+        m1age = #{m1age,jdbcType=INTEGER},
+      </if>
+      <if test="m1relations != null" >
+        m1Relations = #{m1relations,jdbcType=VARCHAR},
+      </if>
+      <if test="m1company != null" >
+        m1Company = #{m1company,jdbcType=VARCHAR},
+      </if>
+      <if test="m2name != null" >
+        m2name = #{m2name,jdbcType=VARCHAR},
+      </if>
+      <if test="m2age != null" >
+        m2age = #{m2age,jdbcType=INTEGER},
+      </if>
+      <if test="m2relations != null" >
+        m2Relations = #{m2relations,jdbcType=VARCHAR},
+      </if>
+      <if test="m2company != null" >
+        m2Company = #{m2company,jdbcType=VARCHAR},
+      </if>
+      <if test="m3name != null" >
+        m3name = #{m3name,jdbcType=VARCHAR},
+      </if>
+      <if test="m3age != null" >
+        m3age = #{m3age,jdbcType=INTEGER},
+      </if>
+      <if test="m3relations != null" >
+        m3Relations = #{m3relations,jdbcType=VARCHAR},
+      </if>
+      <if test="m3company != null" >
+        m3Company = #{m3company,jdbcType=VARCHAR},
+      </if>
+      <if test="applicationreasons != null" >
+        applicationReasons = #{applicationreasons,jdbcType=VARCHAR},
+      </if>
+      <if test="msign != null" >
+        Msign = #{msign,jdbcType=VARCHAR},
+      </if>
+      <if test="msigndate != null" >
+        MsignDate = #{msigndate,jdbcType=DATE},
+      </if>
+      <if test="dsign != null" >
+        Dsign = #{dsign,jdbcType=VARCHAR},
+      </if>
+      <if test="dsigndate != null" >
+        DsignDate = #{dsigndate,jdbcType=DATE},
+      </if>
+      <if test="ssign != null" >
+        Ssign = #{ssign,jdbcType=VARCHAR},
+      </if>
+      <if test="sgrade != null" >
+        Sgrade = #{sgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="ssigndate != null" >
+        SsignDate = #{ssigndate,jdbcType=DATE},
+      </if>
+      <if test="remarks != null" >
+        Remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="treviewed != null" >
+        Treviewed = #{treviewed,jdbcType=VARCHAR},
+      </if>
+      <if test="dreviewed != null" >
+        Dreviewed = #{dreviewed,jdbcType=VARCHAR},
+      </if>
+      <if test="sreviewed != null" >
+        Sreviewed = #{sreviewed,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.bus.web.model.Grant" >
+    update grants
+    set no = #{no,jdbcType=BIGINT},
+      populationCount = #{populationcount,jdbcType=VARCHAR},
+      familyIncome = #{familyincome,jdbcType=VARCHAR},
+      monthlyIncome = #{monthlyincome,jdbcType=VARCHAR},
+      revenueSource = #{revenuesource,jdbcType=VARCHAR},
+      poorGrades = #{poorgrades,jdbcType=VARCHAR},
+      amounted = #{amounted,jdbcType=VARCHAR},
+      fundedPurpose = #{fundedpurpose,jdbcType=VARCHAR},
+      fundPurpose = #{fundpurpose,jdbcType=VARCHAR},
+      bankAccount = #{bankaccount,jdbcType=VARCHAR},
+      m1name = #{m1name,jdbcType=VARCHAR},
+      m1age = #{m1age,jdbcType=INTEGER},
+      m1Relations = #{m1relations,jdbcType=VARCHAR},
+      m1Company = #{m1company,jdbcType=VARCHAR},
+      m2name = #{m2name,jdbcType=VARCHAR},
+      m2age = #{m2age,jdbcType=INTEGER},
+      m2Relations = #{m2relations,jdbcType=VARCHAR},
+      m2Company = #{m2company,jdbcType=VARCHAR},
+      m3name = #{m3name,jdbcType=VARCHAR},
+      m3age = #{m3age,jdbcType=INTEGER},
+      m3Relations = #{m3relations,jdbcType=VARCHAR},
+      m3Company = #{m3company,jdbcType=VARCHAR},
+      applicationReasons = #{applicationreasons,jdbcType=VARCHAR},
+      Msign = #{msign,jdbcType=VARCHAR},
+      MsignDate = #{msigndate,jdbcType=DATE},
+      Dsign = #{dsign,jdbcType=VARCHAR},
+      DsignDate = #{dsigndate,jdbcType=DATE},
+      Ssign = #{ssign,jdbcType=VARCHAR},
+      Sgrade = #{sgrade,jdbcType=VARCHAR},
+      SsignDate = #{ssigndate,jdbcType=DATE},
+      Remarks = #{remarks,jdbcType=VARCHAR},
+      Treviewed = #{treviewed,jdbcType=VARCHAR},
+      Dreviewed = #{dreviewed,jdbcType=VARCHAR},
+      Sreviewed = #{sreviewed,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="net.bus.web.model.GrantExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from grants
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>
