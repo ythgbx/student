@@ -82,7 +82,6 @@
 
 //	渲染table
         $("#new_table").datagrid({
-
             url : '/tea/query',
             pagination : true,
             pagePosition : 'bottom',
@@ -141,31 +140,45 @@
                 field : 'studylength',
                 title : '学制',
                 width : 100,
+            },{
+                field: 'opetra',
+                title:'更多操作',
+                width : 100,
+                formatter : function(value,row,index){
+                    var str = '<a name="opera" ></a>';
+                    return str;
+                },
             }
             ] ],
-        });
-        obj={
-            query : function () {
-                var datetype = $('input[name="dateselect"]').val();
-                var starttime = $('input[name="datestart"]').val();
-                var endtime = $('input[name="dateend"]').val();
-                $('#new_table').datagrid({
-                    url : 'new/getBydate.do',
-                    //提交额外的参数
-                    queryParams:{
-                        datetype : datetype,
-                        starttime : starttime,
-                        endtime : endtime
-                    }
+            onDblClickRow: function (rowIndex,rowData) {
+//                $('#other').dialog('open',true);
+                //详细信息的对话框
+                $('#other').dialog({
+                    title : '详细信息',
+                    width : 300,
+                    height : 400,
                 });
-                //使用ajax
-//			$.post('test',
-//					{datetype : datetype,
-//					start : start,
-//					end : end},
-//					function(data, textStatus, xhr) {
-//					/*optional stuff to do after success */
-//				});
+                console.log(rowData);
+            },
+            onLoadSuccess : function(data){
+                $("a[name='opera']").linkbutton({
+                    text:'详细信息',
+                    plain:true,
+                    iconCls:'icon-man'
+                });
+            },
+        });
+
+
+
+
+        obj={
+            getOther : function (row) {
+
+//                alert('');
+            },
+            query : function () {
+                console.log('query');
             },
             resetnew : function(){
                 //重置搜索
@@ -176,29 +189,6 @@
                     url : '/tea/query',
                 });
             },
-            remove : function(){
-                var id = $("#new_table").datagrid('getSelected').newid;
-                $.ajax({
-                    url: 'new/delnew.do',
-                    type: 'post',
-                    data: {"newid":id},
-                    success : function(data) {
-                        $.messager.show({
-                            title : '消息',
-                            msg : '删除'+data+'条数据成功！'
-                        });
-                        $("#new_table").datagrid("reload");
-                    },
-                    error : function(){
-                        $.messager.show({
-                            title : '消息',
-                            msg : '删除失败！'
-                        });
-
-                    }
-                });
-            },
-
         }
 
         //格式化搜索框
@@ -217,7 +207,6 @@
                 }
             },
         });
-
     });
 </script>
 

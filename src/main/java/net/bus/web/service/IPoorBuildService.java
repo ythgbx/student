@@ -4,6 +4,8 @@ import net.bus.web.controller.dto.PoorBuildDto;
 import net.bus.web.model.PoorBuild;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 /**
  * Created by sky on 16/12/6.
  */
@@ -11,6 +13,9 @@ import org.springframework.stereotype.Service;
 public interface IPoorBuildService {
     boolean insert(PoorBuildDto poorBuildDto);
     PoorBuild getStudent(String id);
+
+    //获取所有贫困生建档的信息
+    Map<String,Object> getAllPoor(int page, int rows);
 
 
 }

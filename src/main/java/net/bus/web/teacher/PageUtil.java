@@ -6,6 +6,7 @@ import java.util.Map;
 
 /**
  * Created by lenovo on 2017/6/9.
+ * 分页的辅助类
  */
 public class PageUtil {
 
@@ -19,6 +20,15 @@ public class PageUtil {
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("rows",list);
         map.put("total",total);
+        return map;
+    }
+
+    public static Map<String,Integer> pageMap(int page,int rows){
+        Map<String,Integer> map = new HashMap<String, Integer>();
+        int start = (page-1)*rows;
+        int end = rows;
+        map.put("start", start);
+        map.put("end", end);
         return map;
     }
 }

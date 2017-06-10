@@ -11,7 +11,7 @@
         <input name="profession">
         <label>班级:</label>
         <input name="classname">
-     <a href="#" type="query" onclick="obj.query();">查询</a>
+        <a href="#" type="query" onclick="obj.query();">查询</a>
     </label> <label style="padding-left: 100px;">
     <label>查询:</label>
     <input name="searchterm">

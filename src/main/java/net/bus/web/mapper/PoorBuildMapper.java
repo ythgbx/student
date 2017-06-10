@@ -1,10 +1,13 @@
 package net.bus.web.mapper;
 
-import java.util.List;
 import net.bus.web.model.PoorBuild;
 import net.bus.web.model.PoorBuildExample;
+import net.bus.web.model.PoorPovo;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
+
+import java.util.List;
+import java.util.Map;
 
 public interface PoorBuildMapper {
     int countByExample(PoorBuildExample example);
@@ -30,4 +33,6 @@ public interface PoorBuildMapper {
     int updateByPrimaryKeySelective(PoorBuild record);
 
     int updateByPrimaryKey(PoorBuild record);
+
+    List<PoorPovo> getAllPoorinfo(Map map);
 }

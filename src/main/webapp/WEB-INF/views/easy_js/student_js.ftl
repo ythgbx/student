@@ -141,12 +141,6 @@
                 field : 'studylength',
                 title : '学制',
                 width : 100,
-            },{
-                title : '其它操作',
-                with : 100,
-                formatter : function(value,row,index){
-                    return "<a class='easyui-linkbutton'>更多信息</a>"
-                }
             }
             ] ],
         });

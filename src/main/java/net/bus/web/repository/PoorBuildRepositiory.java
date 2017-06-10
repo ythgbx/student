@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by sky on 16/12/6.
@@ -131,5 +132,13 @@ public class PoorBuildRepositiory {
 
     public int deleteByExample(ISpecification specification){
         return  poorBuildMapper.deleteByExample((PoorBuildExample) specification.createExample());
+    }
+
+
+    /**
+     * 返回所有
+     */
+    public List getPoor(Map map){
+        return poorBuildMapper.getAllPoorinfo(map);
     }
 }
