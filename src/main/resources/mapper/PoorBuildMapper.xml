@@ -1,72 +1,72 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="net.bus.web.mapper.PoorBuildMapper">
-  <resultMap id="BaseResultMap" type="net.bus.web.model.PoorBuild">
-    <id column="idcard" jdbcType="VARCHAR" property="idcard" />
-    <result column="no" jdbcType="BIGINT" property="no" />
-    <result column="applicationDate" jdbcType="DATE" property="applicationdate" />
-    <result column="Insurance" jdbcType="CHAR" property="insurance" />
-    <result column="code" jdbcType="VARCHAR" property="code" />
-    <result column="economicSources" jdbcType="VARCHAR" property="economicsources" />
-    <result column="familyIncome" jdbcType="INTEGER" property="familyincome" />
-    <result column="isLoan" jdbcType="CHAR" property="isloan" />
-    <result column="fworkplace" jdbcType="VARCHAR" property="fworkplace" />
-    <result column="fEarning" jdbcType="VARCHAR" property="fearning" />
-    <result column="mworkplace" jdbcType="VARCHAR" property="mworkplace" />
-    <result column="mEarning" jdbcType="VARCHAR" property="mearning" />
-    <result column="population" jdbcType="INTEGER" property="population" />
-    <result column="application" jdbcType="VARCHAR" property="application" />
-    <result column="poorProve" jdbcType="VARCHAR" property="poorprove" />
-    <result column="retireProve" jdbcType="VARCHAR" property="retireprove" />
-    <result column="deformityProve" jdbcType="VARCHAR" property="deformityprove" />
-    <result column="efficiencyProve" jdbcType="VARCHAR" property="efficiencyprove" />
-    <result column="conditionProve" jdbcType="VARCHAR" property="conditionprove" />
-    <result column="awardsProve" jdbcType="VARCHAR" property="awardsprove" />
-    <result column="TAppraisal" jdbcType="VARCHAR" property="tappraisal" />
-    <result column="TSign" jdbcType="VARCHAR" property="tsign" />
-    <result column="TSignDate" jdbcType="DATE" property="tsigndate" />
-    <result column="DGrades" jdbcType="VARCHAR" property="dgrades" />
-    <result column="DSign" jdbcType="VARCHAR" property="dsign" />
-    <result column="DSignDate" jdbcType="DATE" property="dsigndate" />
-    <result column="SGrades" jdbcType="VARCHAR" property="sgrades" />
-    <result column="SSign" jdbcType="VARCHAR" property="ssign" />
-    <result column="SSignDate" jdbcType="DATE" property="ssigndate" />
-    <result column="Treviewed" jdbcType="CHAR" property="treviewed" />
-    <result column="Dreviewed" jdbcType="CHAR" property="dreviewed" />
-    <result column="Sreviewed" jdbcType="CHAR" property="sreviewed" />
-    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
-    <result column="m1" jdbcType="VARCHAR" property="m1" />
-    <result column="m1name" jdbcType="VARCHAR" property="m1name" />
-    <result column="m1workplace" jdbcType="VARCHAR" property="m1workplace" />
-    <result column="m1Earning" jdbcType="VARCHAR" property="m1earning" />
-    <result column="m2" jdbcType="VARCHAR" property="m2" />
-    <result column="m2name" jdbcType="VARCHAR" property="m2name" />
-    <result column="m2wordpress" jdbcType="VARCHAR" property="m2wordpress" />
-    <result column="m2Earning" jdbcType="VARCHAR" property="m2earning" />
-    <result column="m3" jdbcType="VARCHAR" property="m3" />
-    <result column="m3name" jdbcType="VARCHAR" property="m3name" />
-    <result column="m3wordpress" jdbcType="VARCHAR" property="m3wordpress" />
-    <result column="m3Earning" jdbcType="VARCHAR" property="m3earning" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.bus.web.mapper.PoorBuildMapper" >
+  <resultMap id="BaseResultMap" type="net.bus.web.model.PoorBuild" >
+    <id column="idcard" property="idcard" jdbcType="VARCHAR" />
+    <result column="no" property="no" jdbcType="BIGINT" />
+    <result column="applicationDate" property="applicationdate" jdbcType="DATE" />
+    <result column="Insurance" property="insurance" jdbcType="CHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="economicSources" property="economicsources" jdbcType="VARCHAR" />
+    <result column="familyIncome" property="familyincome" jdbcType="INTEGER" />
+    <result column="isLoan" property="isloan" jdbcType="CHAR" />
+    <result column="fworkplace" property="fworkplace" jdbcType="VARCHAR" />
+    <result column="fEarning" property="fearning" jdbcType="VARCHAR" />
+    <result column="mworkplace" property="mworkplace" jdbcType="VARCHAR" />
+    <result column="mEarning" property="mearning" jdbcType="VARCHAR" />
+    <result column="population" property="population" jdbcType="INTEGER" />
+    <result column="application" property="application" jdbcType="VARCHAR" />
+    <result column="poorProve" property="poorprove" jdbcType="VARCHAR" />
+    <result column="retireProve" property="retireprove" jdbcType="VARCHAR" />
+    <result column="deformityProve" property="deformityprove" jdbcType="VARCHAR" />
+    <result column="efficiencyProve" property="efficiencyprove" jdbcType="VARCHAR" />
+    <result column="conditionProve" property="conditionprove" jdbcType="VARCHAR" />
+    <result column="awardsProve" property="awardsprove" jdbcType="VARCHAR" />
+    <result column="TAppraisal" property="tappraisal" jdbcType="VARCHAR" />
+    <result column="TSign" property="tsign" jdbcType="VARCHAR" />
+    <result column="TSignDate" property="tsigndate" jdbcType="DATE" />
+    <result column="DGrades" property="dgrades" jdbcType="VARCHAR" />
+    <result column="DSign" property="dsign" jdbcType="VARCHAR" />
+    <result column="DSignDate" property="dsigndate" jdbcType="DATE" />
+    <result column="SGrades" property="sgrades" jdbcType="VARCHAR" />
+    <result column="SSign" property="ssign" jdbcType="VARCHAR" />
+    <result column="SSignDate" property="ssigndate" jdbcType="DATE" />
+    <result column="Treviewed" property="treviewed" jdbcType="CHAR" />
+    <result column="Dreviewed" property="dreviewed" jdbcType="CHAR" />
+    <result column="Sreviewed" property="sreviewed" jdbcType="CHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="m1" property="m1" jdbcType="VARCHAR" />
+    <result column="m1name" property="m1name" jdbcType="VARCHAR" />
+    <result column="m1workplace" property="m1workplace" jdbcType="VARCHAR" />
+    <result column="m1Earning" property="m1earning" jdbcType="VARCHAR" />
+    <result column="m2" property="m2" jdbcType="VARCHAR" />
+    <result column="m2name" property="m2name" jdbcType="VARCHAR" />
+    <result column="m2wordpress" property="m2wordpress" jdbcType="VARCHAR" />
+    <result column="m2Earning" property="m2earning" jdbcType="VARCHAR" />
+    <result column="m3" property="m3" jdbcType="VARCHAR" />
+    <result column="m3name" property="m3name" jdbcType="VARCHAR" />
+    <result column="m3wordpress" property="m3wordpress" jdbcType="VARCHAR" />
+    <result column="m3Earning" property="m3earning" jdbcType="VARCHAR" />
   </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -77,25 +77,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -106,7 +106,7 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List">
+  <sql id="Base_Column_List" >
     idcard, no, applicationDate, Insurance, code, economicSources, familyIncome, isLoan, 
     fworkplace, fEarning, mworkplace, mEarning, population, application, poorProve, retireProve, 
     deformityProve, efficiencyProve, conditionProve, awardsProve, TAppraisal, TSign, 
@@ -114,37 +114,37 @@
     Sreviewed, remarks, m1, m1name, m1workplace, m1Earning, m2, m2name, m2wordpress, 
     m2Earning, m3, m3name, m3wordpress, m3Earning
   </sql>
-  <select id="selectByExample" parameterType="net.bus.web.model.PoorBuildExample" resultMap="BaseResultMap">
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="net.bus.web.model.PoorBuildExample" >
     select
-    <if test="distinct">
+    <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
     from poorBuild
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null">
+    <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from poorBuild
     where idcard = #{idcard,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from poorBuild
     where idcard = #{idcard,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="net.bus.web.model.PoorBuildExample">
+  <delete id="deleteByExample" parameterType="net.bus.web.model.PoorBuildExample" >
     delete from poorBuild
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="net.bus.web.model.PoorBuild">
+  <insert id="insert" parameterType="net.bus.web.model.PoorBuild" >
     insert into poorBuild (idcard, no, applicationDate, 
       Insurance, code, economicSources, 
       familyIncome, isLoan, fworkplace, 
@@ -178,433 +178,433 @@
       #{m3name,jdbcType=VARCHAR}, #{m3wordpress,jdbcType=VARCHAR}, #{m3earning,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="net.bus.web.model.PoorBuild">
+  <insert id="insertSelective" parameterType="net.bus.web.model.PoorBuild" >
     insert into poorBuild
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="idcard != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idcard != null" >
         idcard,
       </if>
-      <if test="no != null">
+      <if test="no != null" >
         no,
       </if>
-      <if test="applicationdate != null">
+      <if test="applicationdate != null" >
         applicationDate,
       </if>
-      <if test="insurance != null">
+      <if test="insurance != null" >
         Insurance,
       </if>
-      <if test="code != null">
+      <if test="code != null" >
         code,
       </if>
-      <if test="economicsources != null">
+      <if test="economicsources != null" >
         economicSources,
       </if>
-      <if test="familyincome != null">
+      <if test="familyincome != null" >
         familyIncome,
       </if>
-      <if test="isloan != null">
+      <if test="isloan != null" >
         isLoan,
       </if>
-      <if test="fworkplace != null">
+      <if test="fworkplace != null" >
         fworkplace,
       </if>
-      <if test="fearning != null">
+      <if test="fearning != null" >
         fEarning,
       </if>
-      <if test="mworkplace != null">
+      <if test="mworkplace != null" >
         mworkplace,
       </if>
-      <if test="mearning != null">
+      <if test="mearning != null" >
         mEarning,
       </if>
-      <if test="population != null">
+      <if test="population != null" >
         population,
       </if>
-      <if test="application != null">
+      <if test="application != null" >
         application,
       </if>
-      <if test="poorprove != null">
+      <if test="poorprove != null" >
         poorProve,
       </if>
-      <if test="retireprove != null">
+      <if test="retireprove != null" >
         retireProve,
       </if>
-      <if test="deformityprove != null">
+      <if test="deformityprove != null" >
         deformityProve,
       </if>
-      <if test="efficiencyprove != null">
+      <if test="efficiencyprove != null" >
         efficiencyProve,
       </if>
-      <if test="conditionprove != null">
+      <if test="conditionprove != null" >
         conditionProve,
       </if>
-      <if test="awardsprove != null">
+      <if test="awardsprove != null" >
         awardsProve,
       </if>
-      <if test="tappraisal != null">
+      <if test="tappraisal != null" >
         TAppraisal,
       </if>
-      <if test="tsign != null">
+      <if test="tsign != null" >
         TSign,
       </if>
-      <if test="tsigndate != null">
+      <if test="tsigndate != null" >
         TSignDate,
       </if>
-      <if test="dgrades != null">
+      <if test="dgrades != null" >
         DGrades,
       </if>
-      <if test="dsign != null">
+      <if test="dsign != null" >
         DSign,
       </if>
-      <if test="dsigndate != null">
+      <if test="dsigndate != null" >
         DSignDate,
       </if>
-      <if test="sgrades != null">
+      <if test="sgrades != null" >
         SGrades,
       </if>
-      <if test="ssign != null">
+      <if test="ssign != null" >
         SSign,
       </if>
-      <if test="ssigndate != null">
+      <if test="ssigndate != null" >
         SSignDate,
       </if>
-      <if test="treviewed != null">
+      <if test="treviewed != null" >
         Treviewed,
       </if>
-      <if test="dreviewed != null">
+      <if test="dreviewed != null" >
         Dreviewed,
       </if>
-      <if test="sreviewed != null">
+      <if test="sreviewed != null" >
         Sreviewed,
       </if>
-      <if test="remarks != null">
+      <if test="remarks != null" >
         remarks,
       </if>
-      <if test="m1 != null">
+      <if test="m1 != null" >
         m1,
       </if>
-      <if test="m1name != null">
+      <if test="m1name != null" >
         m1name,
       </if>
-      <if test="m1workplace != null">
+      <if test="m1workplace != null" >
         m1workplace,
       </if>
-      <if test="m1earning != null">
+      <if test="m1earning != null" >
         m1Earning,
       </if>
-      <if test="m2 != null">
+      <if test="m2 != null" >
         m2,
       </if>
-      <if test="m2name != null">
+      <if test="m2name != null" >
         m2name,
       </if>
-      <if test="m2wordpress != null">
+      <if test="m2wordpress != null" >
         m2wordpress,
       </if>
-      <if test="m2earning != null">
+      <if test="m2earning != null" >
         m2Earning,
       </if>
-      <if test="m3 != null">
+      <if test="m3 != null" >
         m3,
       </if>
-      <if test="m3name != null">
+      <if test="m3name != null" >
         m3name,
       </if>
-      <if test="m3wordpress != null">
+      <if test="m3wordpress != null" >
         m3wordpress,
       </if>
-      <if test="m3earning != null">
+      <if test="m3earning != null" >
         m3Earning,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="idcard != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idcard != null" >
         #{idcard,jdbcType=VARCHAR},
       </if>
-      <if test="no != null">
+      <if test="no != null" >
         #{no,jdbcType=BIGINT},
       </if>
-      <if test="applicationdate != null">
+      <if test="applicationdate != null" >
         #{applicationdate,jdbcType=DATE},
       </if>
-      <if test="insurance != null">
+      <if test="insurance != null" >
         #{insurance,jdbcType=CHAR},
       </if>
-      <if test="code != null">
+      <if test="code != null" >
         #{code,jdbcType=VARCHAR},
       </if>
-      <if test="economicsources != null">
+      <if test="economicsources != null" >
         #{economicsources,jdbcType=VARCHAR},
       </if>
-      <if test="familyincome != null">
+      <if test="familyincome != null" >
         #{familyincome,jdbcType=INTEGER},
       </if>
-      <if test="isloan != null">
+      <if test="isloan != null" >
         #{isloan,jdbcType=CHAR},
       </if>
-      <if test="fworkplace != null">
+      <if test="fworkplace != null" >
         #{fworkplace,jdbcType=VARCHAR},
       </if>
-      <if test="fearning != null">
+      <if test="fearning != null" >
         #{fearning,jdbcType=VARCHAR},
       </if>
-      <if test="mworkplace != null">
+      <if test="mworkplace != null" >
         #{mworkplace,jdbcType=VARCHAR},
       </if>
-      <if test="mearning != null">
+      <if test="mearning != null" >
         #{mearning,jdbcType=VARCHAR},
       </if>
-      <if test="population != null">
+      <if test="population != null" >
         #{population,jdbcType=INTEGER},
       </if>
-      <if test="application != null">
+      <if test="application != null" >
         #{application,jdbcType=VARCHAR},
       </if>
-      <if test="poorprove != null">
+      <if test="poorprove != null" >
         #{poorprove,jdbcType=VARCHAR},
       </if>
-      <if test="retireprove != null">
+      <if test="retireprove != null" >
         #{retireprove,jdbcType=VARCHAR},
       </if>
-      <if test="deformityprove != null">
+      <if test="deformityprove != null" >
         #{deformityprove,jdbcType=VARCHAR},
       </if>
-      <if test="efficiencyprove != null">
+      <if test="efficiencyprove != null" >
         #{efficiencyprove,jdbcType=VARCHAR},
       </if>
-      <if test="conditionprove != null">
+      <if test="conditionprove != null" >
         #{conditionprove,jdbcType=VARCHAR},
       </if>
-      <if test="awardsprove != null">
+      <if test="awardsprove != null" >
         #{awardsprove,jdbcType=VARCHAR},
       </if>
-      <if test="tappraisal != null">
+      <if test="tappraisal != null" >
         #{tappraisal,jdbcType=VARCHAR},
       </if>
-      <if test="tsign != null">
+      <if test="tsign != null" >
         #{tsign,jdbcType=VARCHAR},
       </if>
-      <if test="tsigndate != null">
+      <if test="tsigndate != null" >
         #{tsigndate,jdbcType=DATE},
       </if>
-      <if test="dgrades != null">
+      <if test="dgrades != null" >
         #{dgrades,jdbcType=VARCHAR},
       </if>
-      <if test="dsign != null">
+      <if test="dsign != null" >
         #{dsign,jdbcType=VARCHAR},
       </if>
-      <if test="dsigndate != null">
+      <if test="dsigndate != null" >
         #{dsigndate,jdbcType=DATE},
       </if>
-      <if test="sgrades != null">
+      <if test="sgrades != null" >
         #{sgrades,jdbcType=VARCHAR},
       </if>
-      <if test="ssign != null">
+      <if test="ssign != null" >
         #{ssign,jdbcType=VARCHAR},
       </if>
-      <if test="ssigndate != null">
+      <if test="ssigndate != null" >
         #{ssigndate,jdbcType=DATE},
       </if>
-      <if test="treviewed != null">
+      <if test="treviewed != null" >
         #{treviewed,jdbcType=CHAR},
       </if>
-      <if test="dreviewed != null">
+      <if test="dreviewed != null" >
         #{dreviewed,jdbcType=CHAR},
       </if>
-      <if test="sreviewed != null">
+      <if test="sreviewed != null" >
         #{sreviewed,jdbcType=CHAR},
       </if>
-      <if test="remarks != null">
+      <if test="remarks != null" >
         #{remarks,jdbcType=VARCHAR},
       </if>
-      <if test="m1 != null">
+      <if test="m1 != null" >
         #{m1,jdbcType=VARCHAR},
       </if>
-      <if test="m1name != null">
+      <if test="m1name != null" >
         #{m1name,jdbcType=VARCHAR},
       </if>
-      <if test="m1workplace != null">
+      <if test="m1workplace != null" >
         #{m1workplace,jdbcType=VARCHAR},
       </if>
-      <if test="m1earning != null">
+      <if test="m1earning != null" >
         #{m1earning,jdbcType=VARCHAR},
       </if>
-      <if test="m2 != null">
+      <if test="m2 != null" >
         #{m2,jdbcType=VARCHAR},
       </if>
-      <if test="m2name != null">
+      <if test="m2name != null" >
         #{m2name,jdbcType=VARCHAR},
       </if>
-      <if test="m2wordpress != null">
+      <if test="m2wordpress != null" >
         #{m2wordpress,jdbcType=VARCHAR},
       </if>
-      <if test="m2earning != null">
+      <if test="m2earning != null" >
         #{m2earning,jdbcType=VARCHAR},
       </if>
-      <if test="m3 != null">
+      <if test="m3 != null" >
         #{m3,jdbcType=VARCHAR},
       </if>
-      <if test="m3name != null">
+      <if test="m3name != null" >
         #{m3name,jdbcType=VARCHAR},
       </if>
-      <if test="m3wordpress != null">
+      <if test="m3wordpress != null" >
         #{m3wordpress,jdbcType=VARCHAR},
       </if>
-      <if test="m3earning != null">
+      <if test="m3earning != null" >
         #{m3earning,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="net.bus.web.model.PoorBuildExample" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="net.bus.web.model.PoorBuildExample" resultType="java.lang.Integer" >
     select count(*) from poorBuild
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+  <update id="updateByExampleSelective" parameterType="map" >
     update poorBuild
-    <set>
-      <if test="record.idcard != null">
+    <set >
+      <if test="record.idcard != null" >
         idcard = #{record.idcard,jdbcType=VARCHAR},
       </if>
-      <if test="record.no != null">
+      <if test="record.no != null" >
         no = #{record.no,jdbcType=BIGINT},
       </if>
-      <if test="record.applicationdate != null">
+      <if test="record.applicationdate != null" >
         applicationDate = #{record.applicationdate,jdbcType=DATE},
       </if>
-      <if test="record.insurance != null">
+      <if test="record.insurance != null" >
         Insurance = #{record.insurance,jdbcType=CHAR},
       </if>
-      <if test="record.code != null">
+      <if test="record.code != null" >
         code = #{record.code,jdbcType=VARCHAR},
       </if>
-      <if test="record.economicsources != null">
+      <if test="record.economicsources != null" >
         economicSources = #{record.economicsources,jdbcType=VARCHAR},
       </if>
-      <if test="record.familyincome != null">
+      <if test="record.familyincome != null" >
         familyIncome = #{record.familyincome,jdbcType=INTEGER},
       </if>
-      <if test="record.isloan != null">
+      <if test="record.isloan != null" >
         isLoan = #{record.isloan,jdbcType=CHAR},
       </if>
-      <if test="record.fworkplace != null">
+      <if test="record.fworkplace != null" >
         fworkplace = #{record.fworkplace,jdbcType=VARCHAR},
       </if>
-      <if test="record.fearning != null">
+      <if test="record.fearning != null" >
         fEarning = #{record.fearning,jdbcType=VARCHAR},
       </if>
-      <if test="record.mworkplace != null">
+      <if test="record.mworkplace != null" >
         mworkplace = #{record.mworkplace,jdbcType=VARCHAR},
       </if>
-      <if test="record.mearning != null">
+      <if test="record.mearning != null" >
         mEarning = #{record.mearning,jdbcType=VARCHAR},
       </if>
-      <if test="record.population != null">
+      <if test="record.population != null" >
         population = #{record.population,jdbcType=INTEGER},
       </if>
-      <if test="record.application != null">
+      <if test="record.application != null" >
         application = #{record.application,jdbcType=VARCHAR},
       </if>
-      <if test="record.poorprove != null">
+      <if test="record.poorprove != null" >
         poorProve = #{record.poorprove,jdbcType=VARCHAR},
       </if>
-      <if test="record.retireprove != null">
+      <if test="record.retireprove != null" >
         retireProve = #{record.retireprove,jdbcType=VARCHAR},
       </if>
-      <if test="record.deformityprove != null">
+      <if test="record.deformityprove != null" >
         deformityProve = #{record.deformityprove,jdbcType=VARCHAR},
       </if>
-      <if test="record.efficiencyprove != null">
+      <if test="record.efficiencyprove != null" >
         efficiencyProve = #{record.efficiencyprove,jdbcType=VARCHAR},
       </if>
-      <if test="record.conditionprove != null">
+      <if test="record.conditionprove != null" >
         conditionProve = #{record.conditionprove,jdbcType=VARCHAR},
       </if>
-      <if test="record.awardsprove != null">
+      <if test="record.awardsprove != null" >
         awardsProve = #{record.awardsprove,jdbcType=VARCHAR},
       </if>
-      <if test="record.tappraisal != null">
+      <if test="record.tappraisal != null" >
         TAppraisal = #{record.tappraisal,jdbcType=VARCHAR},
       </if>
-      <if test="record.tsign != null">
+      <if test="record.tsign != null" >
         TSign = #{record.tsign,jdbcType=VARCHAR},
       </if>
-      <if test="record.tsigndate != null">
+      <if test="record.tsigndate != null" >
         TSignDate = #{record.tsigndate,jdbcType=DATE},
       </if>
-      <if test="record.dgrades != null">
+      <if test="record.dgrades != null" >
         DGrades = #{record.dgrades,jdbcType=VARCHAR},
       </if>
-      <if test="record.dsign != null">
+      <if test="record.dsign != null" >
         DSign = #{record.dsign,jdbcType=VARCHAR},
       </if>
-      <if test="record.dsigndate != null">
+      <if test="record.dsigndate != null" >
         DSignDate = #{record.dsigndate,jdbcType=DATE},
       </if>
-      <if test="record.sgrades != null">
+      <if test="record.sgrades != null" >
         SGrades = #{record.sgrades,jdbcType=VARCHAR},
       </if>
-      <if test="record.ssign != null">
+      <if test="record.ssign != null" >
         SSign = #{record.ssign,jdbcType=VARCHAR},
       </if>
-      <if test="record.ssigndate != null">
+      <if test="record.ssigndate != null" >
         SSignDate = #{record.ssigndate,jdbcType=DATE},
       </if>
-      <if test="record.treviewed != null">
+      <if test="record.treviewed != null" >
         Treviewed = #{record.treviewed,jdbcType=CHAR},
       </if>
-      <if test="record.dreviewed != null">
+      <if test="record.dreviewed != null" >
         Dreviewed = #{record.dreviewed,jdbcType=CHAR},
       </if>
-      <if test="record.sreviewed != null">
+      <if test="record.sreviewed != null" >
         Sreviewed = #{record.sreviewed,jdbcType=CHAR},
       </if>
-      <if test="record.remarks != null">
+      <if test="record.remarks != null" >
         remarks = #{record.remarks,jdbcType=VARCHAR},
       </if>
-      <if test="record.m1 != null">
+      <if test="record.m1 != null" >
         m1 = #{record.m1,jdbcType=VARCHAR},
       </if>
-      <if test="record.m1name != null">
+      <if test="record.m1name != null" >
         m1name = #{record.m1name,jdbcType=VARCHAR},
       </if>
-      <if test="record.m1workplace != null">
+      <if test="record.m1workplace != null" >
         m1workplace = #{record.m1workplace,jdbcType=VARCHAR},
       </if>
-      <if test="record.m1earning != null">
+      <if test="record.m1earning != null" >
         m1Earning = #{record.m1earning,jdbcType=VARCHAR},
       </if>
-      <if test="record.m2 != null">
+      <if test="record.m2 != null" >
         m2 = #{record.m2,jdbcType=VARCHAR},
       </if>
-      <if test="record.m2name != null">
+      <if test="record.m2name != null" >
         m2name = #{record.m2name,jdbcType=VARCHAR},
       </if>
-      <if test="record.m2wordpress != null">
+      <if test="record.m2wordpress != null" >
         m2wordpress = #{record.m2wordpress,jdbcType=VARCHAR},
       </if>
-      <if test="record.m2earning != null">
+      <if test="record.m2earning != null" >
         m2Earning = #{record.m2earning,jdbcType=VARCHAR},
       </if>
-      <if test="record.m3 != null">
+      <if test="record.m3 != null" >
         m3 = #{record.m3,jdbcType=VARCHAR},
       </if>
-      <if test="record.m3name != null">
+      <if test="record.m3name != null" >
         m3name = #{record.m3name,jdbcType=VARCHAR},
       </if>
-      <if test="record.m3wordpress != null">
+      <if test="record.m3wordpress != null" >
         m3wordpress = #{record.m3wordpress,jdbcType=VARCHAR},
       </if>
-      <if test="record.m3earning != null">
+      <if test="record.m3earning != null" >
         m3Earning = #{record.m3earning,jdbcType=VARCHAR},
       </if>
     </set>
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map">
+  <update id="updateByExample" parameterType="map" >
     update poorBuild
     set idcard = #{record.idcard,jdbcType=VARCHAR},
       no = #{record.no,jdbcType=BIGINT},
@@ -651,149 +651,149 @@
       m3name = #{record.m3name,jdbcType=VARCHAR},
       m3wordpress = #{record.m3wordpress,jdbcType=VARCHAR},
       m3Earning = #{record.m3earning,jdbcType=VARCHAR}
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="net.bus.web.model.PoorBuild">
+  <update id="updateByPrimaryKeySelective" parameterType="net.bus.web.model.PoorBuild" >
     update poorBuild
-    <set>
-      <if test="no != null">
+    <set >
+      <if test="no != null" >
         no = #{no,jdbcType=BIGINT},
       </if>
-      <if test="applicationdate != null">
+      <if test="applicationdate != null" >
         applicationDate = #{applicationdate,jdbcType=DATE},
       </if>
-      <if test="insurance != null">
+      <if test="insurance != null" >
         Insurance = #{insurance,jdbcType=CHAR},
       </if>
-      <if test="code != null">
+      <if test="code != null" >
         code = #{code,jdbcType=VARCHAR},
       </if>
-      <if test="economicsources != null">
+      <if test="economicsources != null" >
         economicSources = #{economicsources,jdbcType=VARCHAR},
       </if>
-      <if test="familyincome != null">
+      <if test="familyincome != null" >
         familyIncome = #{familyincome,jdbcType=INTEGER},
       </if>
-      <if test="isloan != null">
+      <if test="isloan != null" >
         isLoan = #{isloan,jdbcType=CHAR},
       </if>
-      <if test="fworkplace != null">
+      <if test="fworkplace != null" >
         fworkplace = #{fworkplace,jdbcType=VARCHAR},
       </if>
-      <if test="fearning != null">
+      <if test="fearning != null" >
         fEarning = #{fearning,jdbcType=VARCHAR},
       </if>
-      <if test="mworkplace != null">
+      <if test="mworkplace != null" >
         mworkplace = #{mworkplace,jdbcType=VARCHAR},
       </if>
-      <if test="mearning != null">
+      <if test="mearning != null" >
         mEarning = #{mearning,jdbcType=VARCHAR},
       </if>
-      <if test="population != null">
+      <if test="population != null" >
         population = #{population,jdbcType=INTEGER},
       </if>
-      <if test="application != null">
+      <if test="application != null" >
         application = #{application,jdbcType=VARCHAR},
       </if>
-      <if test="poorprove != null">
+      <if test="poorprove != null" >
         poorProve = #{poorprove,jdbcType=VARCHAR},
       </if>
-      <if test="retireprove != null">
+      <if test="retireprove != null" >
         retireProve = #{retireprove,jdbcType=VARCHAR},
       </if>
-      <if test="deformityprove != null">
+      <if test="deformityprove != null" >
         deformityProve = #{deformityprove,jdbcType=VARCHAR},
       </if>
-      <if test="efficiencyprove != null">
+      <if test="efficiencyprove != null" >
         efficiencyProve = #{efficiencyprove,jdbcType=VARCHAR},
       </if>
-      <if test="conditionprove != null">
+      <if test="conditionprove != null" >
         conditionProve = #{conditionprove,jdbcType=VARCHAR},
       </if>
-      <if test="awardsprove != null">
+      <if test="awardsprove != null" >
         awardsProve = #{awardsprove,jdbcType=VARCHAR},
       </if>
-      <if test="tappraisal != null">
+      <if test="tappraisal != null" >
         TAppraisal = #{tappraisal,jdbcType=VARCHAR},
       </if>
-      <if test="tsign != null">
+      <if test="tsign != null" >
         TSign = #{tsign,jdbcType=VARCHAR},
       </if>
-      <if test="tsigndate != null">
+      <if test="tsigndate != null" >
         TSignDate = #{tsigndate,jdbcType=DATE},
       </if>
-      <if test="dgrades != null">
+      <if test="dgrades != null" >
         DGrades = #{dgrades,jdbcType=VARCHAR},
       </if>
-      <if test="dsign != null">
+      <if test="dsign != null" >
         DSign = #{dsign,jdbcType=VARCHAR},
       </if>
-      <if test="dsigndate != null">
+      <if test="dsigndate != null" >
         DSignDate = #{dsigndate,jdbcType=DATE},
       </if>
-      <if test="sgrades != null">
+      <if test="sgrades != null" >
         SGrades = #{sgrades,jdbcType=VARCHAR},
       </if>
-      <if test="ssign != null">
+      <if test="ssign != null" >
         SSign = #{ssign,jdbcType=VARCHAR},
       </if>
-      <if test="ssigndate != null">
+      <if test="ssigndate != null" >
         SSignDate = #{ssigndate,jdbcType=DATE},
       </if>
-      <if test="treviewed != null">
+      <if test="treviewed != null" >
         Treviewed = #{treviewed,jdbcType=CHAR},
       </if>
-      <if test="dreviewed != null">
+      <if test="dreviewed != null" >
         Dreviewed = #{dreviewed,jdbcType=CHAR},
       </if>
-      <if test="sreviewed != null">
+      <if test="sreviewed != null" >
         Sreviewed = #{sreviewed,jdbcType=CHAR},
       </if>
-      <if test="remarks != null">
+      <if test="remarks != null" >
         remarks = #{remarks,jdbcType=VARCHAR},
       </if>
-      <if test="m1 != null">
+      <if test="m1 != null" >
         m1 = #{m1,jdbcType=VARCHAR},
       </if>
-      <if test="m1name != null">
+      <if test="m1name != null" >
         m1name = #{m1name,jdbcType=VARCHAR},
       </if>
-      <if test="m1workplace != null">
+      <if test="m1workplace != null" >
         m1workplace = #{m1workplace,jdbcType=VARCHAR},
       </if>
-      <if test="m1earning != null">
+      <if test="m1earning != null" >
         m1Earning = #{m1earning,jdbcType=VARCHAR},
       </if>
-      <if test="m2 != null">
+      <if test="m2 != null" >
         m2 = #{m2,jdbcType=VARCHAR},
       </if>
-      <if test="m2name != null">
+      <if test="m2name != null" >
         m2name = #{m2name,jdbcType=VARCHAR},
       </if>
-      <if test="m2wordpress != null">
+      <if test="m2wordpress != null" >
         m2wordpress = #{m2wordpress,jdbcType=VARCHAR},
       </if>
-      <if test="m2earning != null">
+      <if test="m2earning != null" >
         m2Earning = #{m2earning,jdbcType=VARCHAR},
       </if>
-      <if test="m3 != null">
+      <if test="m3 != null" >
         m3 = #{m3,jdbcType=VARCHAR},
       </if>
-      <if test="m3name != null">
+      <if test="m3name != null" >
         m3name = #{m3name,jdbcType=VARCHAR},
       </if>
-      <if test="m3wordpress != null">
+      <if test="m3wordpress != null" >
         m3wordpress = #{m3wordpress,jdbcType=VARCHAR},
       </if>
-      <if test="m3earning != null">
+      <if test="m3earning != null" >
         m3Earning = #{m3earning,jdbcType=VARCHAR},
       </if>
     </set>
     where idcard = #{idcard,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="net.bus.web.model.PoorBuild">
+  <update id="updateByPrimaryKey" parameterType="net.bus.web.model.PoorBuild" >
     update poorBuild
     set no = #{no,jdbcType=BIGINT},
       applicationDate = #{applicationdate,jdbcType=DATE},
@@ -841,871 +841,17 @@
       m3Earning = #{m3earning,jdbcType=VARCHAR}
     where idcard = #{idcard,jdbcType=VARCHAR}
   </update>
-  <select id="selectByExampleWithRowbounds" parameterType="net.bus.web.model.PoorBuildExample" resultMap="BaseResultMap">
+  <select resultMap="BaseResultMap" parameterType="net.bus.web.model.PoorBuildExample" id="selectByExampleWithRowbounds" >
     select
-    <if test="distinct">
+    <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
     from poorBuild
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <resultMap id="BaseResultMap" type="net.bus.web.model.PoorBuild">
-    <id column="no" jdbcType="BIGINT" property="no" />
-    <id column="idcard" jdbcType="VARCHAR" property="idcard" />
-    <result column="applicationDate" jdbcType="DATE" property="applicationdate" />
-    <result column="Insurance" jdbcType="CHAR" property="insurance" />
-    <result column="code" jdbcType="VARCHAR" property="code" />
-    <result column="economicSources" jdbcType="VARCHAR" property="economicsources" />
-    <result column="familyIncome" jdbcType="INTEGER" property="familyincome" />
-    <result column="isLoan" jdbcType="CHAR" property="isloan" />
-    <result column="fworkplace" jdbcType="VARCHAR" property="fworkplace" />
-    <result column="fEarning" jdbcType="VARCHAR" property="fearning" />
-    <result column="mworkplace" jdbcType="VARCHAR" property="mworkplace" />
-    <result column="mEarning" jdbcType="VARCHAR" property="mearning" />
-    <result column="population" jdbcType="INTEGER" property="population" />
-    <result column="application" jdbcType="VARCHAR" property="application" />
-    <result column="poorProve" jdbcType="VARCHAR" property="poorprove" />
-    <result column="retireProve" jdbcType="VARCHAR" property="retireprove" />
-    <result column="deformityProve" jdbcType="VARCHAR" property="deformityprove" />
-    <result column="efficiencyProve" jdbcType="VARCHAR" property="efficiencyprove" />
-    <result column="conditionProve" jdbcType="VARCHAR" property="conditionprove" />
-    <result column="awardsProve" jdbcType="VARCHAR" property="awardsprove" />
-    <result column="TAppraisal" jdbcType="VARCHAR" property="tappraisal" />
-    <result column="TSign" jdbcType="VARCHAR" property="tsign" />
-    <result column="TSignDate" jdbcType="DATE" property="tsigndate" />
-    <result column="DGrades" jdbcType="VARCHAR" property="dgrades" />
-    <result column="DSign" jdbcType="VARCHAR" property="dsign" />
-    <result column="DSignDate" jdbcType="DATE" property="dsigndate" />
-    <result column="SGrades" jdbcType="VARCHAR" property="sgrades" />
-    <result column="SSign" jdbcType="VARCHAR" property="ssign" />
-    <result column="SSignDate" jdbcType="DATE" property="ssigndate" />
-    <result column="Treviewed" jdbcType="CHAR" property="treviewed" />
-    <result column="Dreviewed" jdbcType="CHAR" property="dreviewed" />
-    <result column="Sreviewed" jdbcType="CHAR" property="sreviewed" />
-    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
-    <result column="m1" jdbcType="VARCHAR" property="m1" />
-    <result column="m1name" jdbcType="VARCHAR" property="m1name" />
-    <result column="m1workplace" jdbcType="VARCHAR" property="m1workplace" />
-    <result column="m1Earning" jdbcType="VARCHAR" property="m1earning" />
-    <result column="m2" jdbcType="VARCHAR" property="m2" />
-    <result column="m2name" jdbcType="VARCHAR" property="m2name" />
-    <result column="m2wordpress" jdbcType="VARCHAR" property="m2wordpress" />
-    <result column="m2Earning" jdbcType="VARCHAR" property="m2earning" />
-    <result column="m3" jdbcType="VARCHAR" property="m3" />
-    <result column="m3name" jdbcType="VARCHAR" property="m3name" />
-    <result column="m3wordpress" jdbcType="VARCHAR" property="m3wordpress" />
-    <result column="m3Earning" jdbcType="VARCHAR" property="m3earning" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    no, idcard, applicationDate, Insurance, code, economicSources, familyIncome, isLoan, 
-    fworkplace, fEarning, mworkplace, mEarning, population, application, poorProve, retireProve, 
-    deformityProve, efficiencyProve, conditionProve, awardsProve, TAppraisal, TSign, 
-    TSignDate, DGrades, DSign, DSignDate, SGrades, SSign, SSignDate, Treviewed, Dreviewed, 
-    Sreviewed, remarks, m1, m1name, m1workplace, m1Earning, m2, m2name, m2wordpress, 
-    m2Earning, m3, m3name, m3wordpress, m3Earning
-  </sql>
-  <select id="selectByExample" parameterType="net.bus.web.model.PoorBuildExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from poorBuild
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="net.bus.web.model.PoorBuildKey" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from poorBuild
-    where no = #{no,jdbcType=BIGINT}
-      and idcard = #{idcard,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="net.bus.web.model.PoorBuildKey">
-    delete from poorBuild
-    where no = #{no,jdbcType=BIGINT}
-      and idcard = #{idcard,jdbcType=VARCHAR}
-  </delete>
-  <delete id="deleteByExample" parameterType="net.bus.web.model.PoorBuildExample">
-    delete from poorBuild
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="net.bus.web.model.PoorBuild">
-    insert into poorBuild (no, idcard, applicationDate, 
-      Insurance, code, economicSources, 
-      familyIncome, isLoan, fworkplace, 
-      fEarning, mworkplace, mEarning, 
-      population, application, poorProve, 
-      retireProve, deformityProve, efficiencyProve, 
-      conditionProve, awardsProve, TAppraisal, 
-      TSign, TSignDate, DGrades, 
-      DSign, DSignDate, SGrades, 
-      SSign, SSignDate, Treviewed, 
-      Dreviewed, Sreviewed, remarks, 
-      m1, m1name, m1workplace, 
-      m1Earning, m2, m2name, 
-      m2wordpress, m2Earning, m3, 
-      m3name, m3wordpress, m3Earning
-      )
-    values (#{no,jdbcType=BIGINT}, #{idcard,jdbcType=VARCHAR}, #{applicationdate,jdbcType=DATE}, 
-      #{insurance,jdbcType=CHAR}, #{code,jdbcType=VARCHAR}, #{economicsources,jdbcType=VARCHAR}, 
-      #{familyincome,jdbcType=INTEGER}, #{isloan,jdbcType=CHAR}, #{fworkplace,jdbcType=VARCHAR}, 
-      #{fearning,jdbcType=VARCHAR}, #{mworkplace,jdbcType=VARCHAR}, #{mearning,jdbcType=VARCHAR}, 
-      #{population,jdbcType=INTEGER}, #{application,jdbcType=VARCHAR}, #{poorprove,jdbcType=VARCHAR}, 
-      #{retireprove,jdbcType=VARCHAR}, #{deformityprove,jdbcType=VARCHAR}, #{efficiencyprove,jdbcType=VARCHAR}, 
-      #{conditionprove,jdbcType=VARCHAR}, #{awardsprove,jdbcType=VARCHAR}, #{tappraisal,jdbcType=VARCHAR}, 
-      #{tsign,jdbcType=VARCHAR}, #{tsigndate,jdbcType=DATE}, #{dgrades,jdbcType=VARCHAR}, 
-      #{dsign,jdbcType=VARCHAR}, #{dsigndate,jdbcType=DATE}, #{sgrades,jdbcType=VARCHAR}, 
-      #{ssign,jdbcType=VARCHAR}, #{ssigndate,jdbcType=DATE}, #{treviewed,jdbcType=CHAR}, 
-      #{dreviewed,jdbcType=CHAR}, #{sreviewed,jdbcType=CHAR}, #{remarks,jdbcType=VARCHAR}, 
-      #{m1,jdbcType=VARCHAR}, #{m1name,jdbcType=VARCHAR}, #{m1workplace,jdbcType=VARCHAR}, 
-      #{m1earning,jdbcType=VARCHAR}, #{m2,jdbcType=VARCHAR}, #{m2name,jdbcType=VARCHAR}, 
-      #{m2wordpress,jdbcType=VARCHAR}, #{m2earning,jdbcType=VARCHAR}, #{m3,jdbcType=VARCHAR}, 
-      #{m3name,jdbcType=VARCHAR}, #{m3wordpress,jdbcType=VARCHAR}, #{m3earning,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="net.bus.web.model.PoorBuild">
-    insert into poorBuild
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="no != null">
-        no,
-      </if>
-      <if test="idcard != null">
-        idcard,
-      </if>
-      <if test="applicationdate != null">
-        applicationDate,
-      </if>
-      <if test="insurance != null">
-        Insurance,
-      </if>
-      <if test="code != null">
-        code,
-      </if>
-      <if test="economicsources != null">
-        economicSources,
-      </if>
-      <if test="familyincome != null">
-        familyIncome,
-      </if>
-      <if test="isloan != null">
-        isLoan,
-      </if>
-      <if test="fworkplace != null">
-        fworkplace,
-      </if>
-      <if test="fearning != null">
-        fEarning,
-      </if>
-      <if test="mworkplace != null">
-        mworkplace,
-      </if>
-      <if test="mearning != null">
-        mEarning,
-      </if>
-      <if test="population != null">
-        population,
-      </if>
-      <if test="application != null">
-        application,
-      </if>
-      <if test="poorprove != null">
-        poorProve,
-      </if>
-      <if test="retireprove != null">
-        retireProve,
-      </if>
-      <if test="deformityprove != null">
-        deformityProve,
-      </if>
-      <if test="efficiencyprove != null">
-        efficiencyProve,
-      </if>
-      <if test="conditionprove != null">
-        conditionProve,
-      </if>
-      <if test="awardsprove != null">
-        awardsProve,
-      </if>
-      <if test="tappraisal != null">
-        TAppraisal,
-      </if>
-      <if test="tsign != null">
-        TSign,
-      </if>
-      <if test="tsigndate != null">
-        TSignDate,
-      </if>
-      <if test="dgrades != null">
-        DGrades,
-      </if>
-      <if test="dsign != null">
-        DSign,
-      </if>
-      <if test="dsigndate != null">
-        DSignDate,
-      </if>
-      <if test="sgrades != null">
-        SGrades,
-      </if>
-      <if test="ssign != null">
-        SSign,
-      </if>
-      <if test="ssigndate != null">
-        SSignDate,
-      </if>
-      <if test="treviewed != null">
-        Treviewed,
-      </if>
-      <if test="dreviewed != null">
-        Dreviewed,
-      </if>
-      <if test="sreviewed != null">
-        Sreviewed,
-      </if>
-      <if test="remarks != null">
-        remarks,
-      </if>
-      <if test="m1 != null">
-        m1,
-      </if>
-      <if test="m1name != null">
-        m1name,
-      </if>
-      <if test="m1workplace != null">
-        m1workplace,
-      </if>
-      <if test="m1earning != null">
-        m1Earning,
-      </if>
-      <if test="m2 != null">
-        m2,
-      </if>
-      <if test="m2name != null">
-        m2name,
-      </if>
-      <if test="m2wordpress != null">
-        m2wordpress,
-      </if>
-      <if test="m2earning != null">
-        m2Earning,
-      </if>
-      <if test="m3 != null">
-        m3,
-      </if>
-      <if test="m3name != null">
-        m3name,
-      </if>
-      <if test="m3wordpress != null">
-        m3wordpress,
-      </if>
-      <if test="m3earning != null">
-        m3Earning,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="no != null">
-        #{no,jdbcType=BIGINT},
-      </if>
-      <if test="idcard != null">
-        #{idcard,jdbcType=VARCHAR},
-      </if>
-      <if test="applicationdate != null">
-        #{applicationdate,jdbcType=DATE},
-      </if>
-      <if test="insurance != null">
-        #{insurance,jdbcType=CHAR},
-      </if>
-      <if test="code != null">
-        #{code,jdbcType=VARCHAR},
-      </if>
-      <if test="economicsources != null">
-        #{economicsources,jdbcType=VARCHAR},
-      </if>
-      <if test="familyincome != null">
-        #{familyincome,jdbcType=INTEGER},
-      </if>
-      <if test="isloan != null">
-        #{isloan,jdbcType=CHAR},
-      </if>
-      <if test="fworkplace != null">
-        #{fworkplace,jdbcType=VARCHAR},
-      </if>
-      <if test="fearning != null">
-        #{fearning,jdbcType=VARCHAR},
-      </if>
-      <if test="mworkplace != null">
-        #{mworkplace,jdbcType=VARCHAR},
-      </if>
-      <if test="mearning != null">
-        #{mearning,jdbcType=VARCHAR},
-      </if>
-      <if test="population != null">
-        #{population,jdbcType=INTEGER},
-      </if>
-      <if test="application != null">
-        #{application,jdbcType=VARCHAR},
-      </if>
-      <if test="poorprove != null">
-        #{poorprove,jdbcType=VARCHAR},
-      </if>
-      <if test="retireprove != null">
-        #{retireprove,jdbcType=VARCHAR},
-      </if>
-      <if test="deformityprove != null">
-        #{deformityprove,jdbcType=VARCHAR},
-      </if>
-      <if test="efficiencyprove != null">
-        #{efficiencyprove,jdbcType=VARCHAR},
-      </if>
-      <if test="conditionprove != null">
-        #{conditionprove,jdbcType=VARCHAR},
-      </if>
-      <if test="awardsprove != null">
-        #{awardsprove,jdbcType=VARCHAR},
-      </if>
-      <if test="tappraisal != null">
-        #{tappraisal,jdbcType=VARCHAR},
-      </if>
-      <if test="tsign != null">
-        #{tsign,jdbcType=VARCHAR},
-      </if>
-      <if test="tsigndate != null">
-        #{tsigndate,jdbcType=DATE},
-      </if>
-      <if test="dgrades != null">
-        #{dgrades,jdbcType=VARCHAR},
-      </if>
-      <if test="dsign != null">
-        #{dsign,jdbcType=VARCHAR},
-      </if>
-      <if test="dsigndate != null">
-        #{dsigndate,jdbcType=DATE},
-      </if>
-      <if test="sgrades != null">
-        #{sgrades,jdbcType=VARCHAR},
-      </if>
-      <if test="ssign != null">
-        #{ssign,jdbcType=VARCHAR},
-      </if>
-      <if test="ssigndate != null">
-        #{ssigndate,jdbcType=DATE},
-      </if>
-      <if test="treviewed != null">
-        #{treviewed,jdbcType=CHAR},
-      </if>
-      <if test="dreviewed != null">
-        #{dreviewed,jdbcType=CHAR},
-      </if>
-      <if test="sreviewed != null">
-        #{sreviewed,jdbcType=CHAR},
-      </if>
-      <if test="remarks != null">
-        #{remarks,jdbcType=VARCHAR},
-      </if>
-      <if test="m1 != null">
-        #{m1,jdbcType=VARCHAR},
-      </if>
-      <if test="m1name != null">
-        #{m1name,jdbcType=VARCHAR},
-      </if>
-      <if test="m1workplace != null">
-        #{m1workplace,jdbcType=VARCHAR},
-      </if>
-      <if test="m1earning != null">
-        #{m1earning,jdbcType=VARCHAR},
-      </if>
-      <if test="m2 != null">
-        #{m2,jdbcType=VARCHAR},
-      </if>
-      <if test="m2name != null">
-        #{m2name,jdbcType=VARCHAR},
-      </if>
-      <if test="m2wordpress != null">
-        #{m2wordpress,jdbcType=VARCHAR},
-      </if>
-      <if test="m2earning != null">
-        #{m2earning,jdbcType=VARCHAR},
-      </if>
-      <if test="m3 != null">
-        #{m3,jdbcType=VARCHAR},
-      </if>
-      <if test="m3name != null">
-        #{m3name,jdbcType=VARCHAR},
-      </if>
-      <if test="m3wordpress != null">
-        #{m3wordpress,jdbcType=VARCHAR},
-      </if>
-      <if test="m3earning != null">
-        #{m3earning,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="net.bus.web.model.PoorBuildExample" resultType="java.lang.Integer">
-    select count(*) from poorBuild
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update poorBuild
-    <set>
-      <if test="record.no != null">
-        no = #{record.no,jdbcType=BIGINT},
-      </if>
-      <if test="record.idcard != null">
-        idcard = #{record.idcard,jdbcType=VARCHAR},
-      </if>
-      <if test="record.applicationdate != null">
-        applicationDate = #{record.applicationdate,jdbcType=DATE},
-      </if>
-      <if test="record.insurance != null">
-        Insurance = #{record.insurance,jdbcType=CHAR},
-      </if>
-      <if test="record.code != null">
-        code = #{record.code,jdbcType=VARCHAR},
-      </if>
-      <if test="record.economicsources != null">
-        economicSources = #{record.economicsources,jdbcType=VARCHAR},
-      </if>
-      <if test="record.familyincome != null">
-        familyIncome = #{record.familyincome,jdbcType=INTEGER},
-      </if>
-      <if test="record.isloan != null">
-        isLoan = #{record.isloan,jdbcType=CHAR},
-      </if>
-      <if test="record.fworkplace != null">
-        fworkplace = #{record.fworkplace,jdbcType=VARCHAR},
-      </if>
-      <if test="record.fearning != null">
-        fEarning = #{record.fearning,jdbcType=VARCHAR},
-      </if>
-      <if test="record.mworkplace != null">
-        mworkplace = #{record.mworkplace,jdbcType=VARCHAR},
-      </if>
-      <if test="record.mearning != null">
-        mEarning = #{record.mearning,jdbcType=VARCHAR},
-      </if>
-      <if test="record.population != null">
-        population = #{record.population,jdbcType=INTEGER},
-      </if>
-      <if test="record.application != null">
-        application = #{record.application,jdbcType=VARCHAR},
-      </if>
-      <if test="record.poorprove != null">
-        poorProve = #{record.poorprove,jdbcType=VARCHAR},
-      </if>
-      <if test="record.retireprove != null">
-        retireProve = #{record.retireprove,jdbcType=VARCHAR},
-      </if>
-      <if test="record.deformityprove != null">
-        deformityProve = #{record.deformityprove,jdbcType=VARCHAR},
-      </if>
-      <if test="record.efficiencyprove != null">
-        efficiencyProve = #{record.efficiencyprove,jdbcType=VARCHAR},
-      </if>
-      <if test="record.conditionprove != null">
-        conditionProve = #{record.conditionprove,jdbcType=VARCHAR},
-      </if>
-      <if test="record.awardsprove != null">
-        awardsProve = #{record.awardsprove,jdbcType=VARCHAR},
-      </if>
-      <if test="record.tappraisal != null">
-        TAppraisal = #{record.tappraisal,jdbcType=VARCHAR},
-      </if>
-      <if test="record.tsign != null">
-        TSign = #{record.tsign,jdbcType=VARCHAR},
-      </if>
-      <if test="record.tsigndate != null">
-        TSignDate = #{record.tsigndate,jdbcType=DATE},
-      </if>
-      <if test="record.dgrades != null">
-        DGrades = #{record.dgrades,jdbcType=VARCHAR},
-      </if>
-      <if test="record.dsign != null">
-        DSign = #{record.dsign,jdbcType=VARCHAR},
-      </if>
-      <if test="record.dsigndate != null">
-        DSignDate = #{record.dsigndate,jdbcType=DATE},
-      </if>
-      <if test="record.sgrades != null">
-        SGrades = #{record.sgrades,jdbcType=VARCHAR},
-      </if>
-      <if test="record.ssign != null">
-        SSign = #{record.ssign,jdbcType=VARCHAR},
-      </if>
-      <if test="record.ssigndate != null">
-        SSignDate = #{record.ssigndate,jdbcType=DATE},
-      </if>
-      <if test="record.treviewed != null">
-        Treviewed = #{record.treviewed,jdbcType=CHAR},
-      </if>
-      <if test="record.dreviewed != null">
-        Dreviewed = #{record.dreviewed,jdbcType=CHAR},
-      </if>
-      <if test="record.sreviewed != null">
-        Sreviewed = #{record.sreviewed,jdbcType=CHAR},
-      </if>
-      <if test="record.remarks != null">
-        remarks = #{record.remarks,jdbcType=VARCHAR},
-      </if>
-      <if test="record.m1 != null">
-        m1 = #{record.m1,jdbcType=VARCHAR},
-      </if>
-      <if test="record.m1name != null">
-        m1name = #{record.m1name,jdbcType=VARCHAR},
-      </if>
-      <if test="record.m1workplace != null">
-        m1workplace = #{record.m1workplace,jdbcType=VARCHAR},
-      </if>
-      <if test="record.m1earning != null">
-        m1Earning = #{record.m1earning,jdbcType=VARCHAR},
-      </if>
-      <if test="record.m2 != null">
-        m2 = #{record.m2,jdbcType=VARCHAR},
-      </if>
-      <if test="record.m2name != null">
-        m2name = #{record.m2name,jdbcType=VARCHAR},
-      </if>
-      <if test="record.m2wordpress != null">
-        m2wordpress = #{record.m2wordpress,jdbcType=VARCHAR},
-      </if>
-      <if test="record.m2earning != null">
-        m2Earning = #{record.m2earning,jdbcType=VARCHAR},
-      </if>
-      <if test="record.m3 != null">
-        m3 = #{record.m3,jdbcType=VARCHAR},
-      </if>
-      <if test="record.m3name != null">
-        m3name = #{record.m3name,jdbcType=VARCHAR},
-      </if>
-      <if test="record.m3wordpress != null">
-        m3wordpress = #{record.m3wordpress,jdbcType=VARCHAR},
-      </if>
-      <if test="record.m3earning != null">
-        m3Earning = #{record.m3earning,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update poorBuild
-    set no = #{record.no,jdbcType=BIGINT},
-      idcard = #{record.idcard,jdbcType=VARCHAR},
-      applicationDate = #{record.applicationdate,jdbcType=DATE},
-      Insurance = #{record.insurance,jdbcType=CHAR},
-      code = #{record.code,jdbcType=VARCHAR},
-      economicSources = #{record.economicsources,jdbcType=VARCHAR},
-      familyIncome = #{record.familyincome,jdbcType=INTEGER},
-      isLoan = #{record.isloan,jdbcType=CHAR},
-      fworkplace = #{record.fworkplace,jdbcType=VARCHAR},
-      fEarning = #{record.fearning,jdbcType=VARCHAR},
-      mworkplace = #{record.mworkplace,jdbcType=VARCHAR},
-      mEarning = #{record.mearning,jdbcType=VARCHAR},
-      population = #{record.population,jdbcType=INTEGER},
-      application = #{record.application,jdbcType=VARCHAR},
-      poorProve = #{record.poorprove,jdbcType=VARCHAR},
-      retireProve = #{record.retireprove,jdbcType=VARCHAR},
-      deformityProve = #{record.deformityprove,jdbcType=VARCHAR},
-      efficiencyProve = #{record.efficiencyprove,jdbcType=VARCHAR},
-      conditionProve = #{record.conditionprove,jdbcType=VARCHAR},
-      awardsProve = #{record.awardsprove,jdbcType=VARCHAR},
-      TAppraisal = #{record.tappraisal,jdbcType=VARCHAR},
-      TSign = #{record.tsign,jdbcType=VARCHAR},
-      TSignDate = #{record.tsigndate,jdbcType=DATE},
-      DGrades = #{record.dgrades,jdbcType=VARCHAR},
-      DSign = #{record.dsign,jdbcType=VARCHAR},
-      DSignDate = #{record.dsigndate,jdbcType=DATE},
-      SGrades = #{record.sgrades,jdbcType=VARCHAR},
-      SSign = #{record.ssign,jdbcType=VARCHAR},
-      SSignDate = #{record.ssigndate,jdbcType=DATE},
-      Treviewed = #{record.treviewed,jdbcType=CHAR},
-      Dreviewed = #{record.dreviewed,jdbcType=CHAR},
-      Sreviewed = #{record.sreviewed,jdbcType=CHAR},
-      remarks = #{record.remarks,jdbcType=VARCHAR},
-      m1 = #{record.m1,jdbcType=VARCHAR},
-      m1name = #{record.m1name,jdbcType=VARCHAR},
-      m1workplace = #{record.m1workplace,jdbcType=VARCHAR},
-      m1Earning = #{record.m1earning,jdbcType=VARCHAR},
-      m2 = #{record.m2,jdbcType=VARCHAR},
-      m2name = #{record.m2name,jdbcType=VARCHAR},
-      m2wordpress = #{record.m2wordpress,jdbcType=VARCHAR},
-      m2Earning = #{record.m2earning,jdbcType=VARCHAR},
-      m3 = #{record.m3,jdbcType=VARCHAR},
-      m3name = #{record.m3name,jdbcType=VARCHAR},
-      m3wordpress = #{record.m3wordpress,jdbcType=VARCHAR},
-      m3Earning = #{record.m3earning,jdbcType=VARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="net.bus.web.model.PoorBuild">
-    update poorBuild
-    <set>
-      <if test="applicationdate != null">
-        applicationDate = #{applicationdate,jdbcType=DATE},
-      </if>
-      <if test="insurance != null">
-        Insurance = #{insurance,jdbcType=CHAR},
-      </if>
-      <if test="code != null">
-        code = #{code,jdbcType=VARCHAR},
-      </if>
-      <if test="economicsources != null">
-        economicSources = #{economicsources,jdbcType=VARCHAR},
-      </if>
-      <if test="familyincome != null">
-        familyIncome = #{familyincome,jdbcType=INTEGER},
-      </if>
-      <if test="isloan != null">
-        isLoan = #{isloan,jdbcType=CHAR},
-      </if>
-      <if test="fworkplace != null">
-        fworkplace = #{fworkplace,jdbcType=VARCHAR},
-      </if>
-      <if test="fearning != null">
-        fEarning = #{fearning,jdbcType=VARCHAR},
-      </if>
-      <if test="mworkplace != null">
-        mworkplace = #{mworkplace,jdbcType=VARCHAR},
-      </if>
-      <if test="mearning != null">
-        mEarning = #{mearning,jdbcType=VARCHAR},
-      </if>
-      <if test="population != null">
-        population = #{population,jdbcType=INTEGER},
-      </if>
-      <if test="application != null">
-        application = #{application,jdbcType=VARCHAR},
-      </if>
-      <if test="poorprove != null">
-        poorProve = #{poorprove,jdbcType=VARCHAR},
-      </if>
-      <if test="retireprove != null">
-        retireProve = #{retireprove,jdbcType=VARCHAR},
-      </if>
-      <if test="deformityprove != null">
-        deformityProve = #{deformityprove,jdbcType=VARCHAR},
-      </if>
-      <if test="efficiencyprove != null">
-        efficiencyProve = #{efficiencyprove,jdbcType=VARCHAR},
-      </if>
-      <if test="conditionprove != null">
-        conditionProve = #{conditionprove,jdbcType=VARCHAR},
-      </if>
-      <if test="awardsprove != null">
-        awardsProve = #{awardsprove,jdbcType=VARCHAR},
-      </if>
-      <if test="tappraisal != null">
-        TAppraisal = #{tappraisal,jdbcType=VARCHAR},
-      </if>
-      <if test="tsign != null">
-        TSign = #{tsign,jdbcType=VARCHAR},
-      </if>
-      <if test="tsigndate != null">
-        TSignDate = #{tsigndate,jdbcType=DATE},
-      </if>
-      <if test="dgrades != null">
-        DGrades = #{dgrades,jdbcType=VARCHAR},
-      </if>
-      <if test="dsign != null">
-        DSign = #{dsign,jdbcType=VARCHAR},
-      </if>
-      <if test="dsigndate != null">
-        DSignDate = #{dsigndate,jdbcType=DATE},
-      </if>
-      <if test="sgrades != null">
-        SGrades = #{sgrades,jdbcType=VARCHAR},
-      </if>
-      <if test="ssign != null">
-        SSign = #{ssign,jdbcType=VARCHAR},
-      </if>
-      <if test="ssigndate != null">
-        SSignDate = #{ssigndate,jdbcType=DATE},
-      </if>
-      <if test="treviewed != null">
-        Treviewed = #{treviewed,jdbcType=CHAR},
-      </if>
-      <if test="dreviewed != null">
-        Dreviewed = #{dreviewed,jdbcType=CHAR},
-      </if>
-      <if test="sreviewed != null">
-        Sreviewed = #{sreviewed,jdbcType=CHAR},
-      </if>
-      <if test="remarks != null">
-        remarks = #{remarks,jdbcType=VARCHAR},
-      </if>
-      <if test="m1 != null">
-        m1 = #{m1,jdbcType=VARCHAR},
-      </if>
-      <if test="m1name != null">
-        m1name = #{m1name,jdbcType=VARCHAR},
-      </if>
-      <if test="m1workplace != null">
-        m1workplace = #{m1workplace,jdbcType=VARCHAR},
-      </if>
-      <if test="m1earning != null">
-        m1Earning = #{m1earning,jdbcType=VARCHAR},
-      </if>
-      <if test="m2 != null">
-        m2 = #{m2,jdbcType=VARCHAR},
-      </if>
-      <if test="m2name != null">
-        m2name = #{m2name,jdbcType=VARCHAR},
-      </if>
-      <if test="m2wordpress != null">
-        m2wordpress = #{m2wordpress,jdbcType=VARCHAR},
-      </if>
-      <if test="m2earning != null">
-        m2Earning = #{m2earning,jdbcType=VARCHAR},
-      </if>
-      <if test="m3 != null">
-        m3 = #{m3,jdbcType=VARCHAR},
-      </if>
-      <if test="m3name != null">
-        m3name = #{m3name,jdbcType=VARCHAR},
-      </if>
-      <if test="m3wordpress != null">
-        m3wordpress = #{m3wordpress,jdbcType=VARCHAR},
-      </if>
-      <if test="m3earning != null">
-        m3Earning = #{m3earning,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where no = #{no,jdbcType=BIGINT}
-      and idcard = #{idcard,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="net.bus.web.model.PoorBuild">
-    update poorBuild
-    set applicationDate = #{applicationdate,jdbcType=DATE},
-      Insurance = #{insurance,jdbcType=CHAR},
-      code = #{code,jdbcType=VARCHAR},
-      economicSources = #{economicsources,jdbcType=VARCHAR},
-      familyIncome = #{familyincome,jdbcType=INTEGER},
-      isLoan = #{isloan,jdbcType=CHAR},
-      fworkplace = #{fworkplace,jdbcType=VARCHAR},
-      fEarning = #{fearning,jdbcType=VARCHAR},
-      mworkplace = #{mworkplace,jdbcType=VARCHAR},
-      mEarning = #{mearning,jdbcType=VARCHAR},
-      population = #{population,jdbcType=INTEGER},
-      application = #{application,jdbcType=VARCHAR},
-      poorProve = #{poorprove,jdbcType=VARCHAR},
-      retireProve = #{retireprove,jdbcType=VARCHAR},
-      deformityProve = #{deformityprove,jdbcType=VARCHAR},
-      efficiencyProve = #{efficiencyprove,jdbcType=VARCHAR},
-      conditionProve = #{conditionprove,jdbcType=VARCHAR},
-      awardsProve = #{awardsprove,jdbcType=VARCHAR},
-      TAppraisal = #{tappraisal,jdbcType=VARCHAR},
-      TSign = #{tsign,jdbcType=VARCHAR},
-      TSignDate = #{tsigndate,jdbcType=DATE},
-      DGrades = #{dgrades,jdbcType=VARCHAR},
-      DSign = #{dsign,jdbcType=VARCHAR},
-      DSignDate = #{dsigndate,jdbcType=DATE},
-      SGrades = #{sgrades,jdbcType=VARCHAR},
-      SSign = #{ssign,jdbcType=VARCHAR},
-      SSignDate = #{ssigndate,jdbcType=DATE},
-      Treviewed = #{treviewed,jdbcType=CHAR},
-      Dreviewed = #{dreviewed,jdbcType=CHAR},
-      Sreviewed = #{sreviewed,jdbcType=CHAR},
-      remarks = #{remarks,jdbcType=VARCHAR},
-      m1 = #{m1,jdbcType=VARCHAR},
-      m1name = #{m1name,jdbcType=VARCHAR},
-      m1workplace = #{m1workplace,jdbcType=VARCHAR},
-      m1Earning = #{m1earning,jdbcType=VARCHAR},
-      m2 = #{m2,jdbcType=VARCHAR},
-      m2name = #{m2name,jdbcType=VARCHAR},
-      m2wordpress = #{m2wordpress,jdbcType=VARCHAR},
-      m2Earning = #{m2earning,jdbcType=VARCHAR},
-      m3 = #{m3,jdbcType=VARCHAR},
-      m3name = #{m3name,jdbcType=VARCHAR},
-      m3wordpress = #{m3wordpress,jdbcType=VARCHAR},
-      m3Earning = #{m3earning,jdbcType=VARCHAR}
-    where no = #{no,jdbcType=BIGINT}
-      and idcard = #{idcard,jdbcType=VARCHAR}
-  </update>
-  <select id="selectByExampleWithRowbounds" parameterType="net.bus.web.model.PoorBuildExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from poorBuild
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
+    <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
   </select>

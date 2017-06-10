@@ -14,7 +14,7 @@
                             },
                             {
                                 "text" : "建档管理",
-                                "url":""
+                                "url":"/page/poorlist"
                             },{
                                 "text":"助学金管理",
                                 "url":""
