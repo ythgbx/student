@@ -155,9 +155,11 @@
                 //详细信息的对话框
                 $('#other').dialog({
                     title : '详细信息',
-                    width : 300,
-                    height : 400,
+                    fit : true,
                 });
+                $('#grant').form('load',
+                    rowData
+                );
                 console.log(rowData);
             },
             onLoadSuccess : function(data){

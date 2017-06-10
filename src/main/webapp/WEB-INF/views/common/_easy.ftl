@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="/easyui/themes/metro-blue/easyui.css"/>
     <link rel="stylesheet" type="text/css" href="/easyui/themes/icon.css" />
+
 </head>
 </#macro>
 
