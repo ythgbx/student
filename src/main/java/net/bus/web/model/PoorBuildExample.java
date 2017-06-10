@@ -132,66 +132,6 @@ public class PoorBuildExample {
             addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
         }
 
-        public Criteria andNoIsNull() {
-            addCriterion("no is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoIsNotNull() {
-            addCriterion("no is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoEqualTo(Long value) {
-            addCriterion("no =", value, "no");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoNotEqualTo(Long value) {
-            addCriterion("no <>", value, "no");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoGreaterThan(Long value) {
-            addCriterion("no >", value, "no");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoGreaterThanOrEqualTo(Long value) {
-            addCriterion("no >=", value, "no");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoLessThan(Long value) {
-            addCriterion("no <", value, "no");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoLessThanOrEqualTo(Long value) {
-            addCriterion("no <=", value, "no");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoIn(List<Long> values) {
-            addCriterion("no in", values, "no");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoNotIn(List<Long> values) {
-            addCriterion("no not in", values, "no");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoBetween(Long value1, Long value2) {
-            addCriterion("no between", value1, value2, "no");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoNotBetween(Long value1, Long value2) {
-            addCriterion("no not between", value1, value2, "no");
-            return (Criteria) this;
-        }
-
         public Criteria andIdcardIsNull() {
             addCriterion("idcard is null");
             return (Criteria) this;
@@ -259,6 +199,66 @@ public class PoorBuildExample {
 
         public Criteria andIdcardNotBetween(String value1, String value2) {
             addCriterion("idcard not between", value1, value2, "idcard");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoIsNull() {
+            addCriterion("no is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoIsNotNull() {
+            addCriterion("no is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoEqualTo(Long value) {
+            addCriterion("no =", value, "no");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoNotEqualTo(Long value) {
+            addCriterion("no <>", value, "no");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoGreaterThan(Long value) {
+            addCriterion("no >", value, "no");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoGreaterThanOrEqualTo(Long value) {
+            addCriterion("no >=", value, "no");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoLessThan(Long value) {
+            addCriterion("no <", value, "no");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoLessThanOrEqualTo(Long value) {
+            addCriterion("no <=", value, "no");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoIn(List<Long> values) {
+            addCriterion("no in", values, "no");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoNotIn(List<Long> values) {
+            addCriterion("no not in", values, "no");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoBetween(Long value1, Long value2) {
+            addCriterion("no between", value1, value2, "no");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoNotBetween(Long value1, Long value2) {
+            addCriterion("no not between", value1, value2, "no");
             return (Criteria) this;
         }
 

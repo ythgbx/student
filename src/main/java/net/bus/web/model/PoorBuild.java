@@ -2,7 +2,11 @@ package net.bus.web.model;
 
 import java.util.Date;
 
-public class PoorBuild extends PoorBuildKey {
+public class PoorBuild {
+    private String idcard;
+
+    private Long no;
+
     private Date applicationdate;
 
     private String insurance;
@@ -88,6 +92,22 @@ public class PoorBuild extends PoorBuildKey {
     private String m3wordpress;
 
     private String m3earning;
+
+    public String getIdcard() {
+        return idcard;
+    }
+
+    public void setIdcard(String idcard) {
+        this.idcard = idcard;
+    }
+
+    public Long getNo() {
+        return no;
+    }
+
+    public void setNo(Long no) {
+        this.no = no;
+    }
 
     public Date getApplicationdate() {
         return applicationdate;

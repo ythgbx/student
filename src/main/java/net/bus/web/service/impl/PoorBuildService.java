@@ -1,6 +1,7 @@
 package net.bus.web.service.impl;
 
 import net.bus.web.controller.dto.PoorBuildDto;
+import net.bus.web.model.PoorBuild;
 import net.bus.web.repository.PoorBuildRepositiory;
 import net.bus.web.service.IPoorBuildService;
 import org.springframework.beans.factory.annotation.Autowired;

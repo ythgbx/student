@@ -1,6 +1,9 @@
 package net.bus.web.repository;
 
 import net.bus.web.controller.dto.PoorBuildDto;
+import net.bus.web.mapper.PoorBuildMapper;
+import net.bus.web.model.PoorBuild;
+import net.bus.web.model.PoorBuildExample;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -56,14 +59,14 @@ public class PoorBuildRepositiory {
         return null;
     }
 
-    public PoorBuild getStudent(String sno) {
-        return poorBuildMapper.selectByPrimaryKey(sno);
+    public PoorBuild getStudent(String idcard) {
+        return poorBuildMapper.selectByPrimaryKey(idcard);
     }
 
     public int insertStudent(PoorBuildDto poorBuildDto)
     {
         PoorBuild poorBuild = new PoorBuild();
-        poorBuild.setId(poorBuildDto.getId());
+        poorBuild.setIdcard(poorBuildDto.getId());
         poorBuild.setApplicationdate(poorBuildDto.getApplicationDate());
         poorBuild.setInsurance(poorBuildDto.getInsurance());
         poorBuild.setCode(poorBuildDto.getCode());

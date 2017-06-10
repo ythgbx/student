@@ -3,7 +3,6 @@ package net.bus.web.mapper;
 import java.util.List;
 import net.bus.web.model.PoorBuild;
 import net.bus.web.model.PoorBuildExample;
-import net.bus.web.model.PoorBuildKey;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
@@ -12,7 +11,7 @@ public interface PoorBuildMapper {
 
     int deleteByExample(PoorBuildExample example);
 
-    int deleteByPrimaryKey(PoorBuildKey key);
+    int deleteByPrimaryKey(String idcard);
 
     int insert(PoorBuild record);
 
@@ -22,7 +21,7 @@ public interface PoorBuildMapper {
 
     List<PoorBuild> selectByExample(PoorBuildExample example);
 
-    PoorBuild selectByPrimaryKey(PoorBuildKey key);
+    PoorBuild selectByPrimaryKey(String idcard);
 
     int updateByExampleSelective(@Param("record") PoorBuild record, @Param("example") PoorBuildExample example);
 
