@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package net.bus.web.model;
 
 public class Student {

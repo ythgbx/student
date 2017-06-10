@@ -40,7 +40,7 @@ class StudentService implements IStudentService{
     }
 
     public List<Student> getAllStudentsByExample(ISpecification specification, int page, int limit) {
-        return _rootRepository.getAllStudentsByExample(specification, page, limit);
+        return _rootRepository.getAllStudentsByExample(specification, page-1, limit);
     }
 
     public int getCount() {

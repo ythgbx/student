@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package net.bus.web.mapper;
 
 import java.util.List;

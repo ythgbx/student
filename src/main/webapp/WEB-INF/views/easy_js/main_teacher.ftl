@@ -5,7 +5,7 @@
                 data : [
                     {
                         "id" : 1,
-                        "text" : "系统管理",
+                        "text" : "资助管理",
                         "iconCls" : "icon-save",
                         "children" : [
                             {
@@ -13,7 +13,13 @@
                                 "url" : "/page/stulist"
                             },
                             {
-                                "text" : "程序信息"
+                                "text" : "建档管理",
+                                "url":""
+                            },{
+                                "text":"助学金管理",
+                                "url":""
+                            },{
+                                "text":"励志奖学金"
                             }
                         ]
                     },
