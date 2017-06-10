@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="net.bus.web.mapper.PoorBuildMapper" >
   <resultMap id="BaseResultMap" type="net.bus.web.model.PoorBuild" >
-    <id column="id" property="id" jdbcType="VARCHAR" />
-    <result column="no" property="no" jdbcType="BIGINT" />
+    <id column="no" property="no" jdbcType="BIGINT" />
+    <id column="idcard" property="idcard" jdbcType="VARCHAR" />
     <result column="applicationDate" property="applicationdate" jdbcType="DATE" />
     <result column="Insurance" property="insurance" jdbcType="CHAR" />
     <result column="code" property="code" jdbcType="VARCHAR" />
@@ -107,7 +107,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, no, applicationDate, Insurance, code, economicSources, familyIncome, isLoan, 
+    no, idcard, applicationDate, Insurance, code, economicSources, familyIncome, isLoan, 
     fworkplace, fEarning, mworkplace, mEarning, population, application, poorProve, retireProve, 
     deformityProve, efficiencyProve, conditionProve, awardsProve, TAppraisal, TSign, 
     TSignDate, DGrades, DSign, DSignDate, SGrades, SSign, SSignDate, Treviewed, Dreviewed, 
@@ -128,15 +128,17 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="net.bus.web.model.PoorBuildKey" >
     select 
     <include refid="Base_Column_List" />
     from poorBuild
-    where id = #{id,jdbcType=VARCHAR}
+    where no = #{no,jdbcType=BIGINT}
+      and idcard = #{idcard,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+  <delete id="deleteByPrimaryKey" parameterType="net.bus.web.model.PoorBuildKey" >
     delete from poorBuild
-    where id = #{id,jdbcType=VARCHAR}
+    where no = #{no,jdbcType=BIGINT}
+      and idcard = #{idcard,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="net.bus.web.model.PoorBuildExample" >
     delete from poorBuild
@@ -145,7 +147,7 @@
     </if>
   </delete>
   <insert id="insert" parameterType="net.bus.web.model.PoorBuild" >
-    insert into poorBuild (id, no, applicationDate, 
+    insert into poorBuild (no, idcard, applicationDate, 
       Insurance, code, economicSources, 
       familyIncome, isLoan, fworkplace, 
       fEarning, mworkplace, mEarning, 
@@ -161,7 +163,7 @@
       m2wordpress, m2Earning, m3, 
       m3name, m3wordpress, m3Earning
       )
-    values (#{id,jdbcType=VARCHAR}, #{no,jdbcType=BIGINT}, #{applicationdate,jdbcType=DATE}, 
+    values (#{no,jdbcType=BIGINT}, #{idcard,jdbcType=VARCHAR}, #{applicationdate,jdbcType=DATE}, 
       #{insurance,jdbcType=CHAR}, #{code,jdbcType=VARCHAR}, #{economicsources,jdbcType=VARCHAR}, 
       #{familyincome,jdbcType=INTEGER}, #{isloan,jdbcType=CHAR}, #{fworkplace,jdbcType=VARCHAR}, 
       #{fearning,jdbcType=VARCHAR}, #{mworkplace,jdbcType=VARCHAR}, #{mearning,jdbcType=VARCHAR}, 
@@ -181,11 +183,11 @@
   <insert id="insertSelective" parameterType="net.bus.web.model.PoorBuild" >
     insert into poorBuild
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="no != null" >
         no,
+      </if>
+      <if test="idcard != null" >
+        idcard,
       </if>
       <if test="applicationdate != null" >
         applicationDate,
@@ -318,11 +320,11 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=VARCHAR},
-      </if>
       <if test="no != null" >
         #{no,jdbcType=BIGINT},
+      </if>
+      <if test="idcard != null" >
+        #{idcard,jdbcType=VARCHAR},
       </if>
       <if test="applicationdate != null" >
         #{applicationdate,jdbcType=DATE},
@@ -464,11 +466,11 @@
   <update id="updateByExampleSelective" parameterType="map" >
     update poorBuild
     <set >
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=VARCHAR},
-      </if>
       <if test="record.no != null" >
         no = #{record.no,jdbcType=BIGINT},
+      </if>
+      <if test="record.idcard != null" >
+        idcard = #{record.idcard,jdbcType=VARCHAR},
       </if>
       <if test="record.applicationdate != null" >
         applicationDate = #{record.applicationdate,jdbcType=DATE},
@@ -606,8 +608,8 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update poorBuild
-    set id = #{record.id,jdbcType=VARCHAR},
-      no = #{record.no,jdbcType=BIGINT},
+    set no = #{record.no,jdbcType=BIGINT},
+      idcard = #{record.idcard,jdbcType=VARCHAR},
       applicationDate = #{record.applicationdate,jdbcType=DATE},
       Insurance = #{record.insurance,jdbcType=CHAR},
       code = #{record.code,jdbcType=VARCHAR},
@@ -658,9 +660,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="net.bus.web.model.PoorBuild" >
     update poorBuild
     <set >
-      <if test="no != null" >
-        no = #{no,jdbcType=BIGINT},
-      </if>
       <if test="applicationdate != null" >
         applicationDate = #{applicationdate,jdbcType=DATE},
       </if>
@@ -791,12 +790,12 @@
         m3Earning = #{m3earning,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=VARCHAR}
+    where no = #{no,jdbcType=BIGINT}
+      and idcard = #{idcard,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="net.bus.web.model.PoorBuild" >
     update poorBuild
-    set no = #{no,jdbcType=BIGINT},
-      applicationDate = #{applicationdate,jdbcType=DATE},
+    set applicationDate = #{applicationdate,jdbcType=DATE},
       Insurance = #{insurance,jdbcType=CHAR},
       code = #{code,jdbcType=VARCHAR},
       economicSources = #{economicsources,jdbcType=VARCHAR},
@@ -839,7 +838,8 @@
       m3name = #{m3name,jdbcType=VARCHAR},
       m3wordpress = #{m3wordpress,jdbcType=VARCHAR},
       m3Earning = #{m3earning,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=VARCHAR}
+    where no = #{no,jdbcType=BIGINT}
+      and idcard = #{idcard,jdbcType=VARCHAR}
   </update>
   <select resultMap="BaseResultMap" parameterType="net.bus.web.model.PoorBuildExample" id="selectByExampleWithRowbounds" >
     select

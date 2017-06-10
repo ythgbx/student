@@ -132,76 +132,6 @@ public class PoorBuildExample {
             addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
         }
 
-        public Criteria andIdIsNull() {
-            addCriterion("id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdIsNotNull() {
-            addCriterion("id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdEqualTo(String value) {
-            addCriterion("id =", value, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdNotEqualTo(String value) {
-            addCriterion("id <>", value, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdGreaterThan(String value) {
-            addCriterion("id >", value, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdGreaterThanOrEqualTo(String value) {
-            addCriterion("id >=", value, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdLessThan(String value) {
-            addCriterion("id <", value, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdLessThanOrEqualTo(String value) {
-            addCriterion("id <=", value, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdLike(String value) {
-            addCriterion("id like", value, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdNotLike(String value) {
-            addCriterion("id not like", value, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdIn(List<String> values) {
-            addCriterion("id in", values, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdNotIn(List<String> values) {
-            addCriterion("id not in", values, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdBetween(String value1, String value2) {
-            addCriterion("id between", value1, value2, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdNotBetween(String value1, String value2) {
-            addCriterion("id not between", value1, value2, "id");
-            return (Criteria) this;
-        }
-
         public Criteria andNoIsNull() {
             addCriterion("no is null");
             return (Criteria) this;
@@ -259,6 +189,76 @@ public class PoorBuildExample {
 
         public Criteria andNoNotBetween(Long value1, Long value2) {
             addCriterion("no not between", value1, value2, "no");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardIsNull() {
+            addCriterion("idcard is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardIsNotNull() {
+            addCriterion("idcard is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardEqualTo(String value) {
+            addCriterion("idcard =", value, "idcard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardNotEqualTo(String value) {
+            addCriterion("idcard <>", value, "idcard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardGreaterThan(String value) {
+            addCriterion("idcard >", value, "idcard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardGreaterThanOrEqualTo(String value) {
+            addCriterion("idcard >=", value, "idcard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardLessThan(String value) {
+            addCriterion("idcard <", value, "idcard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardLessThanOrEqualTo(String value) {
+            addCriterion("idcard <=", value, "idcard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardLike(String value) {
+            addCriterion("idcard like", value, "idcard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardNotLike(String value) {
+            addCriterion("idcard not like", value, "idcard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardIn(List<String> values) {
+            addCriterion("idcard in", values, "idcard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardNotIn(List<String> values) {
+            addCriterion("idcard not in", values, "idcard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardBetween(String value1, String value2) {
+            addCriterion("idcard between", value1, value2, "idcard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardNotBetween(String value1, String value2) {
+            addCriterion("idcard not between", value1, value2, "idcard");
             return (Criteria) this;
         }
 

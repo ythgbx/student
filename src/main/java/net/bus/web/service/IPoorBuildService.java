@@ -1,7 +1,6 @@
 package net.bus.web.service;
 
 import net.bus.web.controller.dto.PoorBuildDto;
-import net.bus.web.model.PoorBuild;
 import org.springframework.stereotype.Service;
 
 /**

@@ -1,9 +1,6 @@
 package net.bus.web.repository;
 
 import net.bus.web.controller.dto.PoorBuildDto;
-import net.bus.web.mapper.PoorBuildMapper;
-import net.bus.web.model.PoorBuild;
-import net.bus.web.model.PoorBuildExample;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
