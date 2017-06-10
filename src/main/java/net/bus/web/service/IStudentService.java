@@ -15,4 +15,5 @@ public interface IStudentService {
 
     //得到学生的总数
     public int getCount();
+    Boolean update(Student student);
 }

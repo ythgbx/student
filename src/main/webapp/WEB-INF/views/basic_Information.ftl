@@ -17,31 +17,31 @@
                     <br>
                     学<br><br>生<br><br>基<br><br>本<br><br>信<br><br>息</td>
                 <td height="36" style="width:84px;">
-                    学校</td>
+                    学号</td>
                 <td style="width:106px;">
-                    <input class="message" type="text" name="school"   />
+                    <input class="message" type="text" name="sno"   />
                 </td>
                 <td style="width:48px;">
                     学院</td>
                 <td style="width:113px;">
-                    <select name="department">
+                    <select name="college">
                         <option value="计算机学院" selected="selected">计算机学院</option>
-                        <#--<option value="化学与化工学院">化学与化工学院</option>-->
-                        <#--<option value="机电工程学院">机电工程学院</option>-->
-                        <#--<option value="材料与冶金学院">材料与冶金学院</option>-->
-                        <#--<option value="电子信息工程学院" >电子信息工程学院</option>-->
-                        <#--<option value="土木建筑工程学院">土木建筑工程学院</option>-->
-                        <#--<option value="数理学院">数理学院</option>-->
-                        <#--<option value="材料与冶金学院">材料与冶金学院</option>-->
-                        <#--<option value="环境工程学院">环境工程学院</option>-->
-                        <#--<option value="医学院">医学院</option>-->
-                        <#--<option value="经济与管理学院">经济与管理学院</option>-->
-                        <#--<option value="师范学院">师范学院</option>-->
-                        <#--<option value="外国语学院">外国语学院</option>-->
-                        <#--<option value="国际学院">国际学院</option>-->
-                        <#--<option value="艺术学院">艺术学院</option>-->
-                        <#--<option value="光谷国际北斗学院">光谷国际北斗学院</option>-->
-                        <#--<option value="高职学院">高职学院</option>-->
+                        <option value="化学与化工学院">化学与化工学院</option>
+                        <option value="机电工程学院">机电工程学院</option>
+                        <option value="材料与冶金学院">材料与冶金学院</option>
+                        <option value="电子信息工程学院" >电子信息工程学院</option>
+                        <option value="土木建筑工程学院">土木建筑工程学院</option>
+                        <option value="数理学院">数理学院</option>
+                        <option value="材料与冶金学院">材料与冶金学院</option>
+                        <option value="环境工程学院">环境工程学院</option>
+                        <option value="医学院">医学院</option>
+                        <option value="经济与管理学院">经济与管理学院</option>
+                        <option value="师范学院">师范学院</option>
+                        <option value="外国语学院">外国语学院</option>
+                        <option value="国际学院">国际学院</option>
+                        <option value="艺术学院">艺术学院</option>
+                        <option value="光谷国际北斗学院">光谷国际北斗学院</option>
+                        <option value="高职学院">高职学院</option>
                     </select>
                 </td>
                 <td style="width:83px;">
@@ -67,7 +67,7 @@
                     专业</td>
                 <td style="width:106px;">
 
-                    <select name="specialty" class="message" style="font-size:14px; text-align: center " >
+                    <select name="college" class="message" style="font-size:14px; text-align: center " >
                         <option value="计算机科学与技术" selected="selected">计算机科学与技术</option>
                         <option value="计算机科学与技术(专升本)" >计算机科学与技术(专升本)</option>
                         <option value="软件工程">软件工程</option>
@@ -82,7 +82,7 @@
                 <td style="width:48px;">
                     姓名</td>
                 <td style="width:113px;">
-                    <input class="message" type="text" name="name" />
+                    <input class="message" type="text" name="sname" />
                 </td>
                 <td style="width:83px;">
                     性别</td>
@@ -131,7 +131,7 @@
 
                 <td style="width:48px;">
 
-                    <select name="studyLength" style="width:50px">
+                    <select name="studylength" style="width:50px">
                         <option value="2" >2年</option>
                         <option value="3">3年</option>
                         <option value="4" selected="selected">4年</option>
@@ -269,7 +269,8 @@
                 if(data!=null||data!=""){
                     $("#img1").src = "/upload/"+data.img;
                     img.src = "/upload/"+data.img;
-                    $("[name=id]").val(data.id);
+                    $("[name=sno]").val(data.sno);
+                    $("[name=college]").val(data.college);
                     $("[name=school]").val(data.school);
                     $("[name=department]").val(data.department);
                     $("[name=name]").val(data.name);

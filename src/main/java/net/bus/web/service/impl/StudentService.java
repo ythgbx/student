@@ -26,6 +26,15 @@ class StudentService implements IStudentService{
         return null;
     }
 
+    public Boolean update(Student student) {
+        if ((_rootRepository.updateStudent(student))>0){
+            return true;
+        }
+        return false;
+    }
+
+
+
     public List<Student> getAllStudents(int page,int limit){
         return _rootRepository.getAllStudents(page,limit);
     }
