@@ -25,6 +25,9 @@
         <mapper resource="mapper/UserMapper.xml"/>
         <mapper resource="mapper/PoorBuildMapper.xml"/>
         <mapper resource="mapper/GrantMapper.xml"/>
+        <mapper resource="mapper/ClassnameMapper.xml"/>
+        <mapper resource="mapper/CollegeMapper.xml"/>
+        <mapper resource="mapper/ProfessionalMapper.xml"/>
     </mappers>
 
 </configuration>
