@@ -2,12 +2,15 @@ package net.bus.web.controller;
 
 import net.bus.web.controller.dto.CollegeList;
 import net.bus.web.controller.dto.IResult;
+import net.bus.web.model.Classname;
 import net.bus.web.model.College;
+import net.bus.web.model.Professional;
 import net.bus.web.service.IMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -21,11 +24,19 @@ public class MenuController {
     private IMenuService service;
 
     @RequestMapping(value="/getAllCollege" , method = RequestMethod.GET)
-    public IResult getAll(){
-        List<College> colleges = service.getAll();
-        CollegeList collegeList = new CollegeList();
-        collegeList.setColleges(colleges);
-       return collegeList;
+    public @ResponseBody List<College> getAll(){
+       return service.getAll();
     }
+
+    @RequestMapping(value="/getProfessional" , method = RequestMethod.GET)
+    public @ResponseBody List<Professional> getProfessional(String  code){
+        return service.getProfessional(code);
+    }
+
+    @RequestMapping(value="/getClassName" , method = RequestMethod.GET)
+    public @ResponseBody List<Classname> getClassname(String  pcode){
+        return service.getClassname(pcode);
+    }
+
 
 }
