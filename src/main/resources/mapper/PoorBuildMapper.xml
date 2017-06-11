@@ -36,6 +36,7 @@
     <result column="m3Earning" property="m3earning" jdbcType="VARCHAR" />
     <result column="counselorReview" property="counselorreview" jdbcType="INTEGER" />
     <result column="admin" property="admin" jdbcType="INTEGER" />
+    <result column="applicationTime" property="applicationtime" jdbcType="DATE" />
   </resultMap>
 
   <resultMap id="poorResultMap" type="net.bus.web.model.PoorPovo" extends="BaseResultMap">
@@ -64,7 +65,6 @@
       <result column="img" property="img" jdbcType="VARCHAR" />
     </association>
   </resultMap>
-
 
   <sql id="Example_Where_Clause" >
     <where >
@@ -129,7 +129,7 @@
     mworkplace, mEarning, population, application, poorProve, retireProve, deformityProve, 
     efficiencyProve, conditionProve, awardsProve, remarks, m1, m1name, m1workplace, m1Earning, 
     m2, m2name, m2wordpress, m2Earning, m3, m3name, m3wordpress, m3Earning, counselorReview, 
-    admin
+    admin, applicationTime
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="net.bus.web.model.PoorBuildExample" >
     select
@@ -148,14 +148,15 @@
 
   <!--联合查询出所有申请的信息-->
   <select id="getAllPoorinfo" parameterType="java.util.Map" resultMap="poorResultMap">
-  SELECT * FROM poorBuild
-  INNER JOIN students
-  ON poorBuild.`idcard`=students.`idCard`
-  <if test="college!=null">
-    AND College=#{college}
-  </if>
-  LIMIT #{start},#{end}
-</select>
+    SELECT * FROM poorBuild
+    INNER JOIN students
+    ON poorBuild.`idcard`=students.`idCard`
+    <if test="college!=null">
+      AND College=#{college}
+    </if>
+    LIMIT #{start},#{end}
+  </select>
+
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -185,7 +186,7 @@
       m2, m2name, m2wordpress, 
       m2Earning, m3, m3name, 
       m3wordpress, m3Earning, counselorReview, 
-      admin)
+      admin, applicationTime)
     values (#{idcard,jdbcType=VARCHAR}, #{no,jdbcType=BIGINT}, #{insurance,jdbcType=CHAR}, 
       #{code,jdbcType=VARCHAR}, #{economicsources,jdbcType=VARCHAR}, #{familyincome,jdbcType=INTEGER}, 
       #{isloan,jdbcType=CHAR}, #{fworkplace,jdbcType=VARCHAR}, #{fearning,jdbcType=VARCHAR}, 
@@ -197,7 +198,7 @@
       #{m2,jdbcType=VARCHAR}, #{m2name,jdbcType=VARCHAR}, #{m2wordpress,jdbcType=VARCHAR}, 
       #{m2earning,jdbcType=VARCHAR}, #{m3,jdbcType=VARCHAR}, #{m3name,jdbcType=VARCHAR}, 
       #{m3wordpress,jdbcType=VARCHAR}, #{m3earning,jdbcType=VARCHAR}, #{counselorreview,jdbcType=INTEGER}, 
-      #{admin,jdbcType=INTEGER})
+      #{admin,jdbcType=INTEGER}, #{applicationtime,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="net.bus.web.model.PoorBuild" >
     insert into poorBuild
@@ -304,6 +305,9 @@
       <if test="admin != null" >
         admin,
       </if>
+      <if test="applicationtime != null" >
+        applicationTime,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="idcard != null" >
@@ -407,6 +411,9 @@
       </if>
       <if test="admin != null" >
         #{admin,jdbcType=INTEGER},
+      </if>
+      <if test="applicationtime != null" >
+        #{applicationtime,jdbcType=DATE},
       </if>
     </trim>
   </insert>
@@ -521,6 +528,9 @@
       <if test="record.admin != null" >
         admin = #{record.admin,jdbcType=INTEGER},
       </if>
+      <if test="record.applicationtime != null" >
+        applicationTime = #{record.applicationtime,jdbcType=DATE},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -561,7 +571,8 @@
       m3wordpress = #{record.m3wordpress,jdbcType=VARCHAR},
       m3Earning = #{record.m3earning,jdbcType=VARCHAR},
       counselorReview = #{record.counselorreview,jdbcType=INTEGER},
-      admin = #{record.admin,jdbcType=INTEGER}
+      admin = #{record.admin,jdbcType=INTEGER},
+      applicationTime = #{record.applicationtime,jdbcType=DATE}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -668,6 +679,9 @@
       <if test="admin != null" >
         admin = #{admin,jdbcType=INTEGER},
       </if>
+      <if test="applicationtime != null" >
+        applicationTime = #{applicationtime,jdbcType=DATE},
+      </if>
     </set>
     where idcard = #{idcard,jdbcType=VARCHAR}
   </update>
@@ -705,7 +719,8 @@
       m3wordpress = #{m3wordpress,jdbcType=VARCHAR},
       m3Earning = #{m3earning,jdbcType=VARCHAR},
       counselorReview = #{counselorreview,jdbcType=INTEGER},
-      admin = #{admin,jdbcType=INTEGER}
+      admin = #{admin,jdbcType=INTEGER},
+      applicationTime = #{applicationtime,jdbcType=DATE}
     where idcard = #{idcard,jdbcType=VARCHAR}
   </update>
   <select resultMap="BaseResultMap" parameterType="net.bus.web.model.PoorBuildExample" id="selectByExampleWithRowbounds" >

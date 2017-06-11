@@ -5,9 +5,12 @@ import net.bus.web.controller.dto.BaseResult;
 import net.bus.web.controller.dto.IResult;
 import net.bus.web.controller.dto.PoorBuildDto;
 import net.bus.web.model.PoorBuild;
+import net.bus.web.model.Student;
 import net.bus.web.service.IPoorBuildService;
+import net.bus.web.service.IStudentService;
 import net.bus.web.service.IUserService;
 import org.apache.log4j.Logger;
+import java.util.Calendar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/poorBuild")
 public class PoorBuildController {
     @Autowired
-    private IUserService userService;
+    private IStudentService studentService;
 
     @Autowired
     private IPoorBuildService service;
@@ -46,52 +49,37 @@ public class PoorBuildController {
         return mv;
     }
 
-//    /**
-//     * 贫困申请
-//     * @param poorBuildDto
-//     * @return
-//     */
-//    @Auth(role = Auth.Role.USER)
-//    @ResponseBody
-//    @RequestMapping(value = "/application",method = RequestMethod.POST)
-//    public IResult application(@RequestBody PoorBuildDto poorBuildDto)
-//    {
-//        logger.info("url:/poorBuild/application");
-//        BaseResult result = new BaseResult();
-//        PoorBuild poorBuild = service.getPoorBuild(poorBuildDto.getIdcard());
-//        if (poorBuild!=null){
-//            result.setResult("failure");
-//            result.setContent("您已申请!");
-//        }else {
-//            User user = userService.getUser(poorBuildDto.getId());
-//            user.setSchool(poorBuildDto.getSchool());
-//            user.setName(poorBuildDto.getName());
-//            user.setSex(poorBuildDto.getSex());
-//            user.setBirthdate(Util.StringToTime(poorBuildDto.getBirthDate()));
-//            user.setNation(poorBuildDto.getNation());
-//            user.setStudylength(poorBuildDto.getStudyLength());
-//            user.setDepth(poorBuildDto.getDepth());
-//            user.setGrade(poorBuildDto.getGrade());
-//            user.setClasses(poorBuildDto.getClasses());
-//            user.setPoliticalstatus(poorBuildDto.getPoliticalStatus());
-//            user.setSroom(poorBuildDto.getSroom());
-//            user.setTel(poorBuildDto.getTel());
-//            user.setIdcard(poorBuildDto.getIdCard());
-//            user.setBankcard(poorBuildDto.getBandCard());
-//            user.setAddress(poorBuildDto.getAddress());
-//            user.setFname(poorBuildDto.getFname());
-//            user.setMname(poorBuildDto.getMname());
-//            userService.update(user);
-//            if (service.insert(poorBuildDto)){
-//                result.setResult("success");
-//                result.setContent("申请成功!");
-//            }else {
-//                result.setResult("error");
-//                result.setContent("申请失败!");
-//            }
-//        }
-//        return result;
-//    }
+    /**
+     * 贫困申请
+     * @param poorBuildDto
+     * @return
+     */
+    @Auth(role = Auth.Role.USER)
+    @ResponseBody
+    @RequestMapping(value = "/application",method = RequestMethod.POST)
+    public IResult application(@RequestBody PoorBuildDto poorBuildDto)
+    {
+        logger.info("url:/poorBuild/application");
+        Calendar a=Calendar.getInstance();
+        BaseResult result = new BaseResult();
+        PoorBuild poorBuild = service.getPoorBuild(poorBuildDto.getIdcard());
+        Student student = studentService.getStudent(poorBuildDto.getIdcard());
+        if (poorBuild.getApplicationtime().getYear()==a.get(Calendar.YEAR)){
+            result.setResult("failure");
+            result.setContent("您已申请!");
+        }else {
+//            student.setCollege(poorBuildDto);
+
+            if (service.insert(poorBuildDto)){
+                result.setResult("success");
+                result.setContent("申请成功!");
+            }else {
+                result.setResult("error");
+                result.setContent("申请失败!");
+            }
+        }
+        return result;
+    }
 
 
 }

@@ -55,14 +55,14 @@
                <!--enableCountByExample="true"-->
                <!--enableUpdateByExample="true">-->
         <!--</table>-->
-        <!--<table tableName="poorBuild" domainObjectName="PoorBuild"  enableSelectByPrimaryKey="true"-->
-               <!--enableUpdateByPrimaryKey="true"-->
-               <!--enableDeleteByPrimaryKey="true"-->
-               <!--enableSelectByExample="true"-->
-               <!--enableDeleteByExample="true"-->
-               <!--enableCountByExample="true"-->
-               <!--enableUpdateByExample="true">-->
-        <!--</table>-->
+        <table tableName="poorBuild" domainObjectName="PoorBuild"  enableSelectByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true"
+               enableDeleteByPrimaryKey="true"
+               enableSelectByExample="true"
+               enableDeleteByExample="true"
+               enableCountByExample="true"
+               enableUpdateByExample="true">
+        </table>
         <!--<table tableName="grants" domainObjectName="Grant"  enableSelectByPrimaryKey="true"-->
                <!--enableUpdateByPrimaryKey="true"-->
                <!--enableDeleteByPrimaryKey="true"-->
@@ -79,31 +79,31 @@
                <!--enableCountByExample="true"-->
                <!--enableUpdateByExample="true">-->
         <!--</table>-->
-        <table tableName="college" domainObjectName="College"  enableSelectByPrimaryKey="true"
-        enableUpdateByPrimaryKey="true"
-        enableDeleteByPrimaryKey="true"
-        enableSelectByExample="true"
-        enableDeleteByExample="true"
-        enableCountByExample="true"
-        enableUpdateByExample="true">
-        </table>
+        <!--<table tableName="college" domainObjectName="College"  enableSelectByPrimaryKey="true"-->
+        <!--enableUpdateByPrimaryKey="true"-->
+        <!--enableDeleteByPrimaryKey="true"-->
+        <!--enableSelectByExample="true"-->
+        <!--enableDeleteByExample="true"-->
+        <!--enableCountByExample="true"-->
+        <!--enableUpdateByExample="true">-->
+        <!--</table>-->
 
-        <table tableName="professional" domainObjectName="Professional"  enableSelectByPrimaryKey="true"
-               enableUpdateByPrimaryKey="true"
-               enableDeleteByPrimaryKey="true"
-               enableSelectByExample="true"
-               enableDeleteByExample="true"
-               enableCountByExample="true"
-               enableUpdateByExample="true">
-        </table>
+        <!--<table tableName="professional" domainObjectName="Professional"  enableSelectByPrimaryKey="true"-->
+               <!--enableUpdateByPrimaryKey="true"-->
+               <!--enableDeleteByPrimaryKey="true"-->
+               <!--enableSelectByExample="true"-->
+               <!--enableDeleteByExample="true"-->
+               <!--enableCountByExample="true"-->
+               <!--enableUpdateByExample="true">-->
+        <!--</table>-->
 
-        <table tableName="classname" domainObjectName="Classname"  enableSelectByPrimaryKey="true"
-               enableUpdateByPrimaryKey="true"
-               enableDeleteByPrimaryKey="true"
-               enableSelectByExample="true"
-               enableDeleteByExample="true"
-               enableCountByExample="true"
-               enableUpdateByExample="true">
-        </table>
+        <!--<table tableName="classname" domainObjectName="Classname"  enableSelectByPrimaryKey="true"-->
+               <!--enableUpdateByPrimaryKey="true"-->
+               <!--enableDeleteByPrimaryKey="true"-->
+               <!--enableSelectByExample="true"-->
+               <!--enableDeleteByExample="true"-->
+               <!--enableCountByExample="true"-->
+               <!--enableUpdateByExample="true">-->
+        <!--</table>-->
     </context>
 </generatorConfiguration>
