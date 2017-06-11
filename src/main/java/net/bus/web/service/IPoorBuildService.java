@@ -12,7 +12,7 @@ import java.util.Map;
 @Service
 public interface IPoorBuildService {
     boolean insert(PoorBuildDto poorBuildDto);
-    PoorBuild getStudent(String id);
+    PoorBuild getPoorBuild(String Idcard);
 
     //获取所有贫困生建档的信息
     Map<String,Object> getAllPoor(int page, int rows);

@@ -67,49 +67,7 @@ public class PoorBuildRepositiory {
     public int insertStudent(PoorBuildDto poorBuildDto)
     {
         PoorBuild poorBuild = new PoorBuild();
-        poorBuild.setIdcard(poorBuildDto.getId());
-        poorBuild.setApplicationdate(poorBuildDto.getApplicationDate());
-        poorBuild.setInsurance(poorBuildDto.getInsurance());
-        poorBuild.setCode(poorBuildDto.getCode());
-        poorBuild.setEconomicsources(poorBuildDto.getEconomicsources());
-        poorBuild.setFamilyincome(poorBuildDto.getFamilyincome());
-        poorBuild.setIsloan(poorBuildDto.getIsloan());
-        poorBuild.setFworkplace(poorBuildDto.getFworkplace());
-        poorBuild.setFearning(poorBuildDto.getFearning());
-        poorBuild.setMworkplace(poorBuildDto.getMworkplace());
-        poorBuild.setMearning(poorBuildDto.getMearning());
-        poorBuild.setPopulation(poorBuildDto.getPopulation());
-        poorBuild.setApplication(poorBuildDto.getApplication());
-        poorBuild.setPoorprove(poorBuildDto.getPoorprove());
-        poorBuild.setRetireprove(poorBuildDto.getRetireprove());
-        poorBuild.setDeformityprove(poorBuildDto.getDeformityprove());
-        poorBuild.setEfficiencyprove(poorBuildDto.getEfficiencyprove());
-        poorBuild.setConditionprove(poorBuildDto.getConditionprove());
-        poorBuild.setAwardsprove(poorBuildDto.getAwardsprove());
-        poorBuild.setTappraisal(poorBuildDto.getTappraisal());
-        poorBuild.setTsign(poorBuildDto.getTsign());
-        poorBuild.setTsigndate(poorBuildDto.getTsigndate());
-        poorBuild.setDgrades(poorBuildDto.getDgrades());
-        poorBuild.setDsign(poorBuildDto.getDsign());
-        poorBuild.setDsigndate(poorBuildDto.getDsigndate());
-        poorBuild.setSgrades(poorBuildDto.getSgrades());
-        poorBuild.setSsign(poorBuildDto.getSsign());
-        poorBuild.setSsigndate(poorBuildDto.getSsigndate());
-        poorBuild.setTreviewed(poorBuildDto.getTreviewed());
-        poorBuild.setDreviewed(poorBuildDto.getDreviewed());
-        poorBuild.setSreviewed(poorBuildDto.getSreviewed());
-        poorBuild.setM1(poorBuildDto.getM1());
-        poorBuild.setM1name(poorBuildDto.getM1name());
-        poorBuild.setM1workplace(poorBuildDto.getM1workplace());
-        poorBuild.setM1earning(poorBuildDto.getM1earning());
-        poorBuild.setM2(poorBuildDto.getM2());
-        poorBuild.setM2name(poorBuildDto.getM2name());
-        poorBuild.setM2wordpress(poorBuildDto.getM2wordpress());
-        poorBuild.setM2earning(poorBuildDto.getM2earning());
-        poorBuild.setM3(poorBuildDto.getM3());
-        poorBuild.setM3name(poorBuildDto.getM3name());
-        poorBuild.setM3wordpress(poorBuildDto.getM3wordpress());
-        poorBuild.setM3earning(poorBuildDto.getM3earning());
+
         return poorBuildMapper.insert(poorBuild);
     }
 

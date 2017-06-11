@@ -99,37 +99,49 @@ public class StudentController {
     }
 
     /**
-     * 完善基本信息
-     * @param studentInfo
+     * 修改基本信息
+     * @param studentDetail
      * @return
      */
     @Auth(role = Auth.Role.USER)
     @ResponseBody
-    @RequestMapping(value = "/perfectInfor",method = RequestMethod.GET)
-    public IResult perfectInfor(@RequestBody StudentInfo studentInfo){
+    @RequestMapping(value = "/updateInfo",method = RequestMethod.GET)
+    public IResult perfectInfo(@RequestBody StudentDetail studentDetail){
         logger.info("/student/perfectInfor");
         BaseResult result = new BaseResult();
-        Student student = service.getStudent(studentInfo.getIdcard());
+        Student student = service.getStudent(studentDetail.getIdcard());
         if (student!=null){
-            student.setNativeplace(studentInfo.getNativeplace());
-            student.setPolitical(studentInfo.getPolitical());
-            student.setSroom(studentInfo.getSroom());
-            student.setStel(studentInfo.getStel());
-            student.setSchoolcard(studentInfo.getSchoolcard());
-            student.setFname(studentInfo.getFname());
-            student.setFtel(studentInfo.getFtel());
-            student.setMname(studentInfo.getMname());
-            student.setMtel(studentInfo.getMtel());
-            student.setNativeplace(studentInfo.getNativeplace());
-            student.setImg(studentInfo.getImg());
+            student.setSno(studentDetail.getSno());
+            student.setSname(studentDetail.getSname());
+            student.setUsedname(studentDetail.getUsedname());
+            student.setSex(studentDetail.getSex());
+            student.setCollege(studentDetail.getCollege());
+            student.setIdcard(studentDetail.getIdcard());
+            student.setProfession(studentDetail.getProfession());
+            student.setClassname(studentDetail.getClassName());
+            student.setGrade(studentDetail.getGrade());
+            student.setLevel(studentDetail.getLevel());
+            student.setStudylength(studentDetail.getStudylength());
+            student.setNationality(studentDetail.getNationality());
+            student.setPolitical(studentDetail.getPolitical());
+            student.setSroom(studentDetail.getSroom());
+            student.setStel(studentDetail.getStel());
+            student.setSchoolcard(studentDetail.getSchoolcard());
+            student.setFname(studentDetail.getFname());
+            student.setFtel(studentDetail.getFtel());
+            student.setMname(studentDetail.getMname());
+            student.setMtel(studentDetail.getMtel());
+            student.setNativeplace(studentDetail.getNativeplace());
+            student.setImg(studentDetail.getImg());
             if (service.update(student)){
                 result.setContent("提交成功！");
                 result.setResult("success");
             }
         }else {
             result.setResult("error");
-            result.setContent("信息完善失败！");
+            result.setContent("信息修改失败！");
         }
         return result;
     }
+
 }

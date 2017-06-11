@@ -37,35 +37,6 @@
     <result column="counselorReview" property="counselorreview" jdbcType="INTEGER" />
     <result column="admin" property="admin" jdbcType="INTEGER" />
   </resultMap>
-
-  <resultMap id="poorResultMap" type="net.bus.web.model.PoorPovo" extends="BaseResultMap">
-    <association property="student" javaType="net.bus.web.model.Student">
-      <id column="idCard" property="idcard" jdbcType="VARCHAR" />
-      <result column="sno" property="sno" jdbcType="VARCHAR" />
-      <result column="sname" property="sname" jdbcType="VARCHAR" />
-      <result column="usedName" property="usedname" jdbcType="VARCHAR" />
-      <result column="sex" property="sex" jdbcType="VARCHAR" />
-      <result column="College" property="college" jdbcType="VARCHAR" />
-      <result column="profession" property="profession" jdbcType="VARCHAR" />
-      <result column="classname" property="classname" jdbcType="VARCHAR" />
-      <result column="grade" property="grade" jdbcType="VARCHAR" />
-      <result column="level" property="level" jdbcType="CHAR" />
-      <result column="studyLength" property="studylength" jdbcType="CHAR" />
-      <result column="nationality" property="nationality" jdbcType="VARCHAR" />
-      <result column="political" property="political" jdbcType="VARCHAR" />
-      <result column="sroom" property="sroom" jdbcType="VARCHAR" />
-      <result column="stel" property="stel" jdbcType="VARCHAR" />
-      <result column="schoolCard" property="schoolcard" jdbcType="VARCHAR" />
-      <result column="fname" property="fname" jdbcType="VARCHAR" />
-      <result column="ftel" property="ftel" jdbcType="VARCHAR" />
-      <result column="mname" property="mname" jdbcType="VARCHAR" />
-      <result column="mtel" property="mtel" jdbcType="VARCHAR" />
-      <result column="nativePlace" property="nativeplace" jdbcType="VARCHAR" />
-      <result column="img" property="img" jdbcType="VARCHAR" />
-    </association>
-  </resultMap>
-
-
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -145,18 +116,6 @@
       order by ${orderByClause}
     </if>
   </select>
-
-  <!--联合查询出所有申请的信息-->
-  <select id="getAllPoorinfo" parameterType="java.util.Map" resultMap="poorResultMap">
-  SELECT * FROM poorBuild
-  INNER JOIN students
-  ON poorBuild.`idcard`=students.`idCard`
-  <if test="college!=null">
-    AND College=#{college}
-  </if>
-  LIMIT #{start},#{end}
-</select>
-
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />

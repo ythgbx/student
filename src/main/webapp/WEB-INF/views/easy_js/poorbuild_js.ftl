@@ -59,30 +59,30 @@
             }]
         });
 
-        //格式化日期搜索框
-        $('input[type="date"]').datetimebox({
-
-        });
-
-        //格式化其它下拉框
-        $('input[name="search"]').combobox({
-            textField : 'othertxt',
-            valueField : 'otherval',
-            width : 80,
-            editable : false,
-            data : [{
-                othertxt : '标题',
-                otherval : 'title',
-            },{
-                othertxt : '作者',
-                otherval : 'name',
-            }]
-        });
+//        //格式化日期搜索框
+//        $('input[type="date"]').datetimebox({
+//
+//        });
+//
+//        //格式化其它下拉框
+//        $('input[name="search"]').combobox({
+//            textField : 'othertxt',
+//            valueField : 'otherval',
+//            width : 80,
+//            editable : false,
+//            data : [{
+//                othertxt : '标题',
+//                otherval : 'title',
+//            },{
+//                othertxt : '作者',
+//                otherval : 'name',
+//            }]
+//        });
 
 
 //	渲染table
         $("#new_table").datagrid({
-            url : '/tea/query',
+            url :'/puton/getinfo',
             pagination : true,
             pagePosition : 'bottom',
             singleSelect : true,

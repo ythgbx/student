@@ -27,7 +27,7 @@ public class PutOnRecordController {
      * @test @test http://localhost:8080/puton/getinfo?page=1&rows=10
      * method = RequestMethod.GET
      */
-    @RequestMapping(value = "/getinfo",method = RequestMethod.GET)
+    @RequestMapping(value = "/getinfo",method = RequestMethod.POST)
     public @ResponseBody Map<String,Object> getAll(int page, int rows){
         return poorBuildService.getAllPoor(page, rows);
     }

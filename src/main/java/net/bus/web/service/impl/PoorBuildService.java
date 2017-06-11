@@ -26,8 +26,8 @@ public class PoorBuildService implements IPoorBuildService{
         return false;
     }
 
-    public PoorBuild getStudent(String id) {
-        return _rootRepository.getStudent(id);
+    public PoorBuild getPoorBuild(String idCard) {
+        return _rootRepository.getStudent(idCard);
     }
 
     /**

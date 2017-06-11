@@ -1,13 +1,20 @@
 package net.bus.web.controller;
 
+import net.bus.web.aspect.Auth;
+import net.bus.web.controller.dto.BaseResult;
+import net.bus.web.controller.dto.IResult;
+import net.bus.web.controller.dto.PoorBuildDto;
+import net.bus.web.model.PoorBuild;
 import net.bus.web.service.IPoorBuildService;
 import net.bus.web.service.IUserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -47,11 +54,11 @@ public class PoorBuildController {
 //    @Auth(role = Auth.Role.USER)
 //    @ResponseBody
 //    @RequestMapping(value = "/application",method = RequestMethod.POST)
-//    public IResult application(@ApiParam(name = "application", value = "贫困生建档申请")@RequestBody PoorBuildDto poorBuildDto)
+//    public IResult application(@RequestBody PoorBuildDto poorBuildDto)
 //    {
 //        logger.info("url:/poorBuild/application");
 //        BaseResult result = new BaseResult();
-//        PoorBuild poorBuild = service.getStudent(poorBuildDto.getId());
+//        PoorBuild poorBuild = service.getPoorBuild(poorBuildDto.getIdcard());
 //        if (poorBuild!=null){
 //            result.setResult("failure");
 //            result.setContent("您已申请!");
@@ -85,6 +92,6 @@ public class PoorBuildController {
 //        }
 //        return result;
 //    }
-//
+
 
 }
