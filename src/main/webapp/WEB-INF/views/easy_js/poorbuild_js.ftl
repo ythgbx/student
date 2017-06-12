@@ -8,55 +8,36 @@
             plain : true,
         });
         $('input[name="profession"]').combobox({
+            textField : 'pname',
+            valueField : 'pcode',
+            editable : false,
+            onSelect : function (record) {
+                var re = record;
+                var url = '/menu/getClassName?pcode='+$(this).combobox('getValue');
+                $('input[comboname="classname"]').combobox('reload',url);
+            }
 
         });
         $('input[name="classname"]').combobox({
+            textField : 'cname',
+            valueField : 'cname',
+            editable : false,
 
         });
 
         $('input[name="college"]').combobox({
-            textField : 'collegetxt',
-            valueField : 'collegetxt',
-//            width : 80,
+            textField : 'cname',
+            valueField : 'code',
             editable : false,
-            data : [{
-                collegetxt : '计算机学院',
-
-            },{
-                collegetxt : '化学与化工学院',
-            },{
-                collegetxt : '机电工程学院',
-            },{
-                collegetxt : '材料与冶金学院',
-            },{
-                collegetxt : '电子信息工程学院',
-            },{
-                collegetxt : '土木建筑工程学院',
-            },{
-                collegetxt : '数理学院',
-            },{
-                collegetxt : '材料与冶金学院',
-            },{
-                collegetxt : '环境工程学院',
-            },{
-                collegetxt : '数理学院',
-            },{
-                collegetxt :  '医学院',
-            },{
-                collegetxt :  '经济与管理学院',
-            },{
-                collegetxt :  '师范学院',
-            },{
-                collegetxt :  '外国语学院',
-            },{
-                collegetxt :  '国际学院',
-            },{
-                collegetxt :  '艺术学院',
-            },{
-                collegetxt :  '光谷国际北斗学院',
-            },{
-                collegetxt :  '高职学院',
-            }]
+            url : '/menu/getAllCollege',
+            onSelect : function (record) {
+                var re = record;
+                var url = '/menu/getProfessional?code='+$(this).combobox('getValue');
+                $('input[comboname="profession"]').combobox('reload',url);
+                $('#new_table').datagrid('load',{
+                    college : re.cname
+                })
+            }
         });
 
 //        //格式化日期搜索框
@@ -82,7 +63,7 @@
 
 //	渲染table
         $("#new_table").datagrid({
-            url :'/puton/getinfo',
+            url : '/puton/getinfo',
             pagination : true,
             pagePosition : 'bottom',
             singleSelect : true,
@@ -100,20 +81,32 @@
                 title : '学号',
                 sortable : true,
                 width : 100,
+                formatter : function (value,row,index) {
+                    return row.student.sno;
+                }
             },{
                 field : 'sname',
                 title : '姓名',
                 sortable : true,
                 width : 100,
+                formatter : function (value,row,index) {
+                    return row.student.sname;
+                }
             },{
                 field : 'sex',
                 title : '性别',
                 width : 100,
+                formatter : function (value,row,index) {
+                    return row.student.sex;
+                }
             },{
                 field : 'college',
                 title : '学院',
                 sortable : true,
                 width : 100,
+                formatter : function (value,row,index) {
+                    return row.student.college;
+                }
             },{
                 field : 'idcard',
                 title : '身份证号',
@@ -124,30 +117,37 @@
                 field : 'profession',
                 title : '专业名称',
                 width : 100,
+                formatter : function (value,row,index) {
+                    return row.student.profession;
+                }
             },{
                 field : 'classname',
                 title : '行政班',
                 width : 100,
+                formatter : function (value,row,index) {
+                    return row.student.classname;
+                }
             },{
                 field : 'grade',
                 title : '年级',
                 width : 100,
+                formatter : function (value,row,index) {
+                    return row.student.grade;
+                }
             },{
                 field : 'level',
                 title : '层次',
                 width : 100,
+                formatter : function (value,row,index) {
+                    return row.student.level;
+                }
             },{
                 field : 'studylength',
                 title : '学制',
                 width : 100,
-            },{
-                field: 'opetra',
-                title:'更多操作',
-                width : 100,
-                formatter : function(value,row,index){
-                    var str = '<a name="opera" ></a>';
-                    return str;
-                },
+                formatter : function (value,row,index) {
+                    return row.student.studylength;
+                }
             }
             ] ],
             onDblClickRow: function (rowIndex,rowData) {
@@ -160,6 +160,10 @@
                 $('#grant').form('load',
                     rowData
                 );
+                $('#grant').form('load',
+                        rowData.student
+                );
+
                 console.log(rowData);
             },
             onLoadSuccess : function(data){
@@ -212,4 +216,8 @@
     });
 </script>
 
+</#macro>
+
+<#macro tablecss>
+<link type="text/css" rel="stylesheet" href="/css/poortable.css" />
 </#macro>

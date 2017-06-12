@@ -37,8 +37,12 @@ public class PoorBuildService implements IPoorBuildService{
      * @return
      *
      */
-    public Map<String,Object> getAllPoor(int page, int rows){
-        List list = _rootRepository.getPoor(PageUtil.pageMap(page, rows));
+    public Map<String,Object> getAllPoor(int page, int rows,String college,String profession,String classname){
+        Map<String,Object> param = PageUtil.pageMap(page, rows);
+        param.put("college",college);
+        param.put("profession",profession);
+        param.put("classname",classname);
+        List list = _rootRepository.getPoor(param);
         int total = _rootRepository.Count();
         Map<String,Object> map = PageUtil.returnMap(list,total);
         return map;

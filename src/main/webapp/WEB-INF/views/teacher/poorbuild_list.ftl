@@ -1,5 +1,6 @@
 <#include "../common/_easy.ftl">
 <#include "../easy_js/poorbuild_js.ftl">
+<@tablecss></@tablecss>
 <@css></@css>
 <body>
 <table></table>
@@ -27,8 +28,8 @@
 </div>
 <div id="new_table"></div>
 <div id="other">
-    <div class="container clearfix">
-        <div class="table_main clearfix">
+    <div class="container">
+        <div class="table_main">
             <br><h1 align="center">湖北理工学院家庭经济困难学生申请认定(档案)表</h1><br>
             <form id="grant">
                 <input type="hidden" name="id" value="">
@@ -38,7 +39,7 @@
                             姓名
                         </td>
                         <td colspan="2">
-                            <input type="text" name="sname" style="width:130px;">
+                            <input type="text" name='sname' style="width:130px;">
                         </td>
                         <td colspan="2">
                             性别
@@ -69,7 +70,7 @@
                             学制
                         </td>
                         <td colspan="2" rowspan="2">
-                            <input type="hidden" name="studyLength">
+                            <input type="hidden" name="studylength">
                             <input type="text" name="depth" style="width:50px;">
                         </td>
                         <td colspan="2" rowspan="2">
@@ -120,7 +121,7 @@
                             证号
                         </td>
                         <td colspan="7">
-                            <input type="text" name="idCard" style="width: 200px;">
+                            <input type="text" name="idcard" style="width: 200px;">
                         </td>
                         <td colspan="2">
                             校园<br>

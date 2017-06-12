@@ -1,0 +1,55 @@
+@CHARSET "UTF-8";
+#other{
+    font-size:16px;
+    text-align:justify}
+
+#other{
+    padding: 0;
+    margin: 0;
+}
+
+#other >.table_main {
+    width: 1100px;
+    margin: 0 auto;
+}
+
+#other>table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 95%;
+}
+
+#other>input[type=text]{
+    width:135px;
+    height:30px;
+    text-align:center;
+    font-size:14px;
+    border:none
+}
+
+#other>input[type=radio]{
+    text-align:center;
+    font-size:14px;
+    border:none
+}
+
+#other>select{
+    text-align:center;
+    font-size:14px;
+    border:none
+}
+
+/*input.text{*/
+/*border: 0px solid black;*/
+/*}*/
+/*input.text{*/
+/*text-align:center;*/
+/*}*/
+
+#other>td {
+    border: 1px solid black;
+    padding: 5px 10px;
+    height:20px;
+    text-align:center
+}
+

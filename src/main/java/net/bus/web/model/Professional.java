@@ -1,6 +1,8 @@
 package net.bus.web.model;
 
-public class Professional {
+import java.io.Serializable;
+
+public class Professional implements Serializable{
     private String pcode;
 
     private String pname;

@@ -23,8 +23,8 @@ public class PageUtil {
         return map;
     }
 
-    public static Map<String,Integer> pageMap(int page,int rows){
-        Map<String,Integer> map = new HashMap<String, Integer>();
+    public static Map<String,Object> pageMap(int page,int rows){
+        Map<String,Object> map = new HashMap<String, Object>();
         int start = (page-1)*rows;
         int end = rows;
         map.put("start", start);
