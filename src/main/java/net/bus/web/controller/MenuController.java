@@ -1,7 +1,5 @@
 package net.bus.web.controller;
 
-import net.bus.web.controller.dto.CollegeList;
-import net.bus.web.controller.dto.IResult;
 import net.bus.web.model.Classname;
 import net.bus.web.model.College;
 import net.bus.web.model.Professional;
@@ -23,17 +21,17 @@ public class MenuController {
     @Autowired
     private IMenuService service;
 
-    @RequestMapping(value="/getAllCollege" , method = RequestMethod.GET)
+    @RequestMapping(value="/getAllCollege" , method = RequestMethod.POST)
     public @ResponseBody List<College> getAll(){
        return service.getAll();
     }
 
-    @RequestMapping(value="/getProfessional" , method = RequestMethod.GET)
+    @RequestMapping(value="/getProfessional" , method = RequestMethod.POST)
     public @ResponseBody List<Professional> getProfessional(String  code){
         return service.getProfessional(code);
     }
 
-    @RequestMapping(value="/getClassName" , method = RequestMethod.GET)
+    @RequestMapping(value="/getClassName" , method = RequestMethod.POST)
     public @ResponseBody List<Classname> getClassname(String  pcode){
         return service.getClassname(pcode);
     }

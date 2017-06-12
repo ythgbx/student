@@ -161,7 +161,7 @@
     INNER JOIN students
     ON poorBuild.`idcard`=students.`idCard`
     <if test="college!=null">
-      AND College=#{college}
+      AND college=#{college}
     </if>
     LIMIT #{start},#{end}
   </select>
