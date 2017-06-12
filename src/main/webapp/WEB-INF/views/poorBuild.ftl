@@ -1,10 +1,7 @@
-<#include "common/_layout3.ftl">
-
-<@HEAD title="主页"/>
-<@TOP />
-<@SIDE />
-<@BODY>
+<#include "common/_blank_layout.ftl">
 <body>
+<@jquery></@jquery>
+<@table></@table>
 <div class="container clearfix">
     <div class="table_main clearfix">
         <br><h1 align="center">湖北理工学院家庭经济困难学生申请认定(档案)表</h1><br>
@@ -257,53 +254,53 @@
 
      病情证明 <input type="checkbox" name="check" >     获奖证明 <input type="checkbox" name="check" >（以上证明材料提供复印件附在后页）<pre>                </pre></pre></td>
             </tr>
-            <tr>
-                <td width="69" class="toptitle">
+            <#--<tr>-->
+                <#--<td width="69" class="toptitle">-->
 
-                    班<br><br>主<br><br>任<br><br>鉴<br><br>定
-                </td>
-                <td colspan="13" style="text-align:justify">
-                    <textarea name="tappraisal" style="width: 950px;height: 120px font-size:18px;
-    border:none"></textarea>
-			  <pre>
+                    <#--班<br><br>主<br><br>任<br><br>鉴<br><br>定-->
+                <#--</td>-->
+                <#--<td colspan="13" style="text-align:justify">-->
+                    <#--<textarea name="tappraisal" style="width: 950px;height: 120px font-size:18px;-->
+    <#--border:none"></textarea>-->
+			  <#--<pre>-->
 
-                                                    班主任签字：
+                                                    <#--班主任签字：-->
 
-                                                                   <input type="date" name="tsigndate"></pre>
-                </td>
-            </tr>
-            <tr>
-                <td width="69" class="toptitle">
-                    学<br><br>院<br><br>意<br><br>见
-                </td>
-                <td colspan="13">
-            <pre>    经核实，该生评定为：1、贫困学生 <input type="radio" name="dgrades" value="贫困学生"> 2、特困学生 <input type="radio" name="dgrades" value="特困学生">
-
-
-
-
-                                    （公章）         学院领导签字：
-
-                                                                   <input type="date" name="dsigndate"></pre>
-
-
-                </td>
-            </tr>
-            <tr>
-                <td width="69" class="toptitle">
-                    学<br><br>校<br><br>意<br><br>见
-                </td>
-                <td colspan="13">
-              <pre>    经审核，同意该生评定为：1、贫困学生 <input type="radio" name="sgrades" value="贫困学生"> 2、特困学生 <input type="radio" name="sgrades" value="贫困学生">
+                                                                   <#--<input type="date" name="tsigndate"></pre>-->
+                <#--</td>-->
+            <#--</tr>-->
+            <#--<tr>-->
+                <#--<td width="69" class="toptitle">-->
+                    <#--学<br><br>院<br><br>意<br><br>见-->
+                <#--</td>-->
+                <#--<td colspan="13">-->
+            <#--<pre>    经核实，该生评定为：1、贫困学生 <input type="radio" name="dgrades" value="贫困学生"> 2、特困学生 <input type="radio" name="dgrades" value="特困学生">-->
 
 
 
 
-                                    （公章）         学校领导签章：
+                                    <#--（公章）         学院领导签字：-->
 
-                                                                   <input type="date" name="ssigndate"></pre>
-                </td>
-            </tr>
+                                                                   <#--<input type="date" name="dsigndate"></pre>-->
+
+
+                <#--</td>-->
+            <#--</tr>-->
+            <#--<tr>-->
+                <#--<td width="69" class="toptitle">-->
+                    <#--学<br><br>校<br><br>意<br><br>见-->
+                <#--</td>-->
+                <#--<td colspan="13">-->
+              <#--<pre>    经审核，同意该生评定为：1、贫困学生 <input type="radio" name="sgrades" value="贫困学生"> 2、特困学生 <input type="radio" name="sgrades" value="贫困学生">-->
+
+
+
+
+                                    <#--（公章）         学校领导签章：-->
+
+                                                                   <#--<input type="date" name="ssigndate"></pre>-->
+                <#--</td>-->
+            <#--</tr>-->
             </tbody>
         </table>
         </form>
@@ -313,8 +310,8 @@
         <input type="button" class="btn btn82 btn_res" value="重置">
     </div>
 </div>
-</@BODY>
-<@FOOT>
+
+
 <script type="text/javascript">
     $(function () {
         console.log("aaa");
@@ -377,4 +374,7 @@
     }
 </script>
 
-</@FOOT>
+
+</body>
+
+

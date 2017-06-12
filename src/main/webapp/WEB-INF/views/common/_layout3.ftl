@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/table.css">
     <script type="text/javascript" src="/js/jquery.min.js"></script>
@@ -52,27 +51,30 @@
     <div class="sideMenu" style="margin:0 auto" id="nav">
         <h3> 贫困建档</h3>
         <ul>
-            <a href="/poorBuild/page"><li>在线申请</li></a>
+            <a href="/poorBuild/page" target="main"><li>在线申请</li></a>
         </ul>
         <h3> 国家奖学金</h3>
         <ul>
-            <a href="#"><li>在线申请</li></a>
+            <a href="#" target="main"><li>在线申请</li></a>
         </ul>
         <h3> 国家励志奖学金</h3>
         <ul>
-            <a href="/motivational/page"><li>在线申请</li></a>
+            <a href="/motivational/page" target="main"><li>在线申请</li></a>
         </ul>
         <h3> 国家助学金</h3>
         <ul>
-            <a href="/grant/page"><li>在线申请</li></a>
+            <a href="/grant/page" target="main"><li>在线申请</li></a>
         </ul>
         <h3> 信息维护</h3>
         <ul>
-            <a href="/student/information"><li>修改个人信息</li></a>
+            <a href="/student/information" target="main"><li>修改个人信息</li></a>
             <a href="#" data-toggle="modal" data-target="#myModal"><li>修改密码</li></a>
         </ul>
 
     </div>
+
+
+
 </div>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

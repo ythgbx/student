@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/css/login.css" >
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/table.css">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
 <#nested>
 
@@ -40,4 +40,14 @@
 
 </body>
 </html>
+</#macro>
+
+<#macro jquery>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
+</#macro>
+<#macro table>
+<link rel="stylesheet" href="/css/common.css">
+<#--<link rel="stylesheet" href="/css/style.css">-->
+<link rel="stylesheet" href="/css/table.css">
 </#macro>
