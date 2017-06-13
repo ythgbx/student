@@ -13,7 +13,7 @@
                     姓名
                 </td>
                 <td colspan="2">
-                    <input type="text" name="name" style="width:130px;">
+                    <input type="text" name="sname" style="width:130px;">
                 </td>
                 <td colspan="2">
                     性别
@@ -25,13 +25,13 @@
                     出生年月
                 </td>
                 <td width="88">
-                    <input type="text" name="birthDate" style="width:100px;">
+                    <input type="text" name="birthday" style="width:100px;">
                 </td>
                 <td width="50">
                     民族
                 </td>
                 <td width="58">
-                    <input type="text" name="nation" style="width:50px;">
+                    <input type="text" name="nationality" style="width:50px;">
                 </td>
                 <td width="122" rowspan="5">
                     <img  src="/images/tx.png" alt="" width="130" height="170" id="Img1"><br>
@@ -44,8 +44,8 @@
                     学制
                 </td>
                 <td colspan="2" rowspan="2">
-                    <input type="hidden" name="studyLength">
-                    <input type="text" name="depth" style="width:50px;">
+                    <#--<input type="hidden" name="studylength">-->
+                    <input type="text" name="studylength" style="width:50px;">年
                 </td>
                 <td colspan="2" rowspan="2">
                     年级<br>
@@ -59,12 +59,12 @@
                     面貌
                 </td>
                 <td colspan="2" rowspan="2">
-                    <input type="text" name="politicalStatus" style="width:100px;">
+                    <input type="text" name="political" style="width:100px;">
                 </td>
             </tr>
             <tr>
                 <td height="56" colspan="5">
-                    <input type="text" name="classes" style="width:180px;">
+                    <input type="text" name="classname" style="width:180px;">
                 </td>
             </tr>
             <tr>
@@ -79,7 +79,7 @@
                     电话
                 </td>
                 <td colspan="5">
-                    <input type="text" name="tel" style="width:120px;">
+                    <input type="text" name="stel" style="width:120px;">
                 </td>
                 <td width="88">
                     是否购<br>
@@ -95,14 +95,14 @@
                     证号
                 </td>
                 <td colspan="7">
-                    <input type="text" name="idCard" style="width: 200px;">
+                    <input type="text" name="idcard" style="width: 200px;">
                 </td>
                 <td colspan="2">
                     校园<br>
                     卡号
                 </td>
                 <td colspan="3">
-                    <input class="message" type="text" name="bandCard" style="width:320px;"/>
+                    <input class="message" type="text" name="schoolcard" style="width:320px;"/>
                 </td>
             </tr>
             <tr>
@@ -144,7 +144,7 @@
                     生源地贷款
                 </td>
                 <td width="122">
-                    <input type="text" name="isLoan" width="10">
+                    <input type="text" name="isloan" width="10">
                 </td>
             </tr>
             <tr>
@@ -256,21 +256,6 @@
             </tr>
             <#--<tr>-->
                 <#--<td width="69" class="toptitle">-->
-
-                    <#--班<br><br>主<br><br>任<br><br>鉴<br><br>定-->
-                <#--</td>-->
-                <#--<td colspan="13" style="text-align:justify">-->
-                    <#--<textarea name="tappraisal" style="width: 950px;height: 120px font-size:18px;-->
-    <#--border:none"></textarea>-->
-			  <#--<pre>-->
-
-                                                    <#--班主任签字：-->
-
-                                                                   <#--<input type="date" name="tsigndate"></pre>-->
-                <#--</td>-->
-            <#--</tr>-->
-            <#--<tr>-->
-                <#--<td width="69" class="toptitle">-->
                     <#--学<br><br>院<br><br>意<br><br>见-->
                 <#--</td>-->
                 <#--<td colspan="13">-->
@@ -306,7 +291,7 @@
         </form>
     </div>
     <div align="center">
-        <input type="button" class="btn btn82 btn_save2" onclick="sub()" value="提交">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="button" class="btn btn82 btn_save2" onclick="sub()" value="提交">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <input type="button" class="btn btn82 btn_res" value="重置">
     </div>
 </div>
@@ -316,7 +301,7 @@
     $(function () {
         console.log("aaa");
         $.ajax({
-            url: "/user/getInfo",
+            url: "/student/getInfo",
             type: "GET",
             dataType: "json",
             contentType: "application/json;charset=UTF-8",
@@ -324,29 +309,26 @@
                 console.log(data);
                 if(data!=null||data!=""){
                     var img = document.getElementById("Img1");
-                    $("[name=id]").val(data.id);
-                    $("[name=name]").val(data.name);
-                    $("[name=img]").val(data.img);
-                    img.src="/upload/"+data.img;
-                    $("[name=sex]").val(data.sex);
-                    $("[name=birthDate]").val(data.birthDate);
-                    $("[name=nation]").val(data.nation);
-                    $("[name=studyLength]").val(data.studyLength);
-                    $("[name=depth]").val(data.depth);
+                    $("[name=sname]").val(data.sname);
+                    $("[name=idcard]").val(data.idcard);
+                    $("[name=sex]").val([data.sex]);
+                    $("[name=classname]").val(data.classname);
                     $("[name=grade]").val(data.grade);
-                    $("[name=classes]").val(data.classes);
-                    $("[name=bandCard]").val(data.bandCard);
-                    $("[name=politicalStatus]").val(data.politicalStatus);
+                    $("[name=studylength]").val(data.studylength);
+                    $("[name=nationality]").val(data.nationality);
+                    $("[name=political]").val(data.political);
                     $("[name=sroom]").val(data.sroom);
-                    $("[name=tel]").val(data.tel);
-                    $("[name=idCard]").val(data.idCard);
-                    $("[name=address]").val(data.address);
+                    $("[name=stel]").val(data.stel);
+                    $("[name=schoolcard]").val(data.schoolcard);
                     $("[name=fname]").val(data.fname);
                     $("[name=mname]").val(data.mname);
+                    $("[name=address]").val(data.address);
+                    $("[name=birthday]").val(data.birthday);
 
                 }
             },
             error: function (data) {
+
             }
         });
     })

@@ -6,42 +6,71 @@ import java.util.Date;
  * Created by sky on 16/12/6.
  */
 public class PoorBuildDto {
+    private String sname;  //姓名
 
-    private String idcard;
+    private String sex;   //性别
 
-    private String insurance;
+    private String classname;  // 班级
 
-    private String code;
+    private String grade;  // 年级
 
-    private String economicsources;
+    private String studylength;  // 学制
 
-    private Integer familyincome;
+    private String nationality;//名族
 
-    private String isloan;
+    private String political;//政治面貌
 
-    private String fworkplace;
+    private String sroom;//寝室号
 
-    private String fearning;
+    private String stel;  //联系方式
 
-    private String mworkplace;
+    private String schoolcard; // 银行卡号
 
-    private String mearning;
+    private String fname; //父亲名字
 
-    private Integer population;
+    private String mname;
 
-    private String application;
+    private Date birthday;  // 出生日期
 
-    private String poorprove;
+    private String address;  //家庭地址
 
-    private String retireprove;
+    private String img;
 
-    private String deformityprove;
+    private String idcard;   //身份证号
 
-    private String efficiencyprove;
+    private String insurance;  //是否购买保险
 
-    private String conditionprove;
+    private String code;  //邮政编码
 
-    private String awardsprove;
+    private String economicsources;  // 经济来源
+
+    private Integer familyincome;  // 家庭收入
+
+    private String isloan;   // 是否获得生源地贷款
+
+    private String fworkplace;  // 父亲工作单位
+
+    private String fearning;  //父亲收入
+
+    private String mworkplace;// 母亲工作单位
+
+    private String mearning;//父亲收入
+
+    private Integer population;  //人口
+
+    private String application;  //申请书
+
+    private String poorprove;  // 特困证明
+
+    private String retireprove;  // 父母下岗证明
+
+    private String deformityprove;  //残疾证
+
+    private String efficiencyprove;  //低保证
+
+    private String conditionprove;  //病情证明
+
+    private String awardsprove;   //获奖证明
 
     private String remarks;
 
@@ -69,10 +98,125 @@ public class PoorBuildDto {
 
     private String m3earning;
 
-    private Integer counselorreview;
+    public String getSname() {
+        return sname;
+    }
 
-    private Integer adminReview;
+    public void setSname(String sname) {
+        this.sname = sname;
+    }
 
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getClassname() {
+        return classname;
+    }
+
+    public void setClassname(String classname) {
+        this.classname = classname;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    public String getStudylength() {
+        return studylength;
+    }
+
+    public void setStudylength(String studylength) {
+        this.studylength = studylength;
+    }
+
+    public String getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
+
+    public String getPolitical() {
+        return political;
+    }
+
+    public void setPolitical(String political) {
+        this.political = political;
+    }
+
+    public String getSroom() {
+        return sroom;
+    }
+
+    public void setSroom(String sroom) {
+        this.sroom = sroom;
+    }
+
+    public String getStel() {
+        return stel;
+    }
+
+    public void setStel(String stel) {
+        this.stel = stel;
+    }
+
+    public String getSchoolcard() {
+        return schoolcard;
+    }
+
+    public void setSchoolcard(String schoolcard) {
+        this.schoolcard = schoolcard;
+    }
+
+    public String getFname() {
+        return fname;
+    }
+
+    public void setFname(String fname) {
+        this.fname = fname;
+    }
+
+    public String getMname() {
+        return mname;
+    }
+
+    public void setMname(String mname) {
+        this.mname = mname;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
 
     public String getIdcard() {
         return idcard;
@@ -322,19 +466,4 @@ public class PoorBuildDto {
         this.m3earning = m3earning;
     }
 
-    public Integer getCounselorreview() {
-        return counselorreview;
-    }
-
-    public void setCounselorreview(Integer counselorreview) {
-        this.counselorreview = counselorreview;
-    }
-
-    public Integer getAdminReview() {
-        return adminReview;
-    }
-
-    public void setAdminReview(Integer adminReview) {
-        this.adminReview = adminReview;
-    }
 }

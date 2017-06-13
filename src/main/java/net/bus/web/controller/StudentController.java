@@ -1,11 +1,11 @@
 package net.bus.web.controller;
 
 import net.bus.web.aspect.Auth;
+import net.bus.web.common.Util;
 import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.BaseResult;
 import net.bus.web.controller.dto.IResult;
 import net.bus.web.controller.dto.StudentDetail;
-import net.bus.web.controller.dto.StudentInfo;
 import net.bus.web.model.Student;
 import net.bus.web.model.User;
 import net.bus.web.service.IStudentService;
@@ -61,7 +61,7 @@ public class StudentController {
     @ResponseBody
     @RequestMapping(value = "/getInfo",method = RequestMethod.GET)
     public IResult getInfo(){
-        logger.info("url:/user/getInfo");
+        logger.info("url:/student/getInfo");
         BaseResult result = new BaseResult();
         StudentDetail studentDetail = new StudentDetail();
         User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
@@ -74,7 +74,7 @@ public class StudentController {
             studentDetail.setCollege(currentUser.getCollege());
             studentDetail.setIdcard(currentUser.getIdcard());
             studentDetail.setProfession(currentUser.getProfession());
-            studentDetail.setClassName(currentUser.getClassname());
+            studentDetail.setClassname(currentUser.getClassname());
             studentDetail.setGrade(currentUser.getGrade());
             studentDetail.setLevel(currentUser.getLevel());
             studentDetail.setStudylength(currentUser.getStudylength());
@@ -89,6 +89,11 @@ public class StudentController {
             studentDetail.setMtel(currentUser.getMtel());
             studentDetail.setNativeplace(currentUser.getNativeplace());
             studentDetail.setImg(currentUser.getImg());
+            studentDetail.setBirthday(Util.TimeToString(currentUser.getBirthday()));
+            studentDetail.setAddress(currentUser.getAddress());
+            studentDetail.setAdmissiontime(Util.TimeToString(currentUser.getAdmissiontime()));
+            studentDetail.setQq(currentUser.getQq());
+            studentDetail.setFamilyaccount(currentUser.getFamilyaccount());
             result.setContent("数据获取成功");
             result.setResult("success");
             return studentDetail;
@@ -105,7 +110,7 @@ public class StudentController {
      */
     @Auth(role = Auth.Role.USER)
     @ResponseBody
-    @RequestMapping(value = "/updateInfo",method = RequestMethod.GET)
+    @RequestMapping(value = "/updateInfo",method = RequestMethod.POST)
     public IResult perfectInfo(@RequestBody StudentDetail studentDetail){
         logger.info("/student/perfectInfor");
         BaseResult result = new BaseResult();
@@ -118,7 +123,7 @@ public class StudentController {
             student.setCollege(studentDetail.getCollege());
             student.setIdcard(studentDetail.getIdcard());
             student.setProfession(studentDetail.getProfession());
-            student.setClassname(studentDetail.getClassName());
+            student.setClassname(studentDetail.getClassname());
             student.setGrade(studentDetail.getGrade());
             student.setLevel(studentDetail.getLevel());
             student.setStudylength(studentDetail.getStudylength());
@@ -133,8 +138,13 @@ public class StudentController {
             student.setMtel(studentDetail.getMtel());
             student.setNativeplace(studentDetail.getNativeplace());
             student.setImg(studentDetail.getImg());
+            student.setBirthday(Util.StringToTime(studentDetail.getBirthday()));
+            student.setAddress(studentDetail.getAddress());
+            student.setAdmissiontime(Util.StringToTime(studentDetail.getAdmissiontime()));
+            student.setQq(studentDetail.getQq());
+            student.setFamilyaccount(studentDetail.getFamilyaccount());
             if (service.update(student)){
-                result.setContent("提交成功！");
+                result.setContent("信息修改成功！");
                 result.setResult("success");
             }
         }else {

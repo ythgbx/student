@@ -1,6 +1,7 @@
 package net.bus.web.controller;
 
 import net.bus.web.aspect.Auth;
+import net.bus.web.common.Util;
 import net.bus.web.controller.dto.BaseResult;
 import net.bus.web.controller.dto.IResult;
 import net.bus.web.controller.dto.PoorBuildDto;
@@ -9,6 +10,7 @@ import net.bus.web.model.Student;
 import net.bus.web.service.IPoorBuildService;
 import net.bus.web.service.IStudentService;
 import org.apache.log4j.Logger;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -61,53 +63,63 @@ public class PoorBuildController {
     public IResult application(@RequestBody PoorBuildDto poorBuildDto)
     {
         logger.info("url:/poorBuild/application");
-        Calendar a=Calendar.getInstance();
         BaseResult result = new BaseResult();
-        PoorBuild poorBuild = service.getPoorBuild(poorBuildDto.getIdcard());
-        Student student = studentService.getStudent(poorBuildDto.getIdcard());
-        if (poorBuild.getApplicationtime().getYear()==a.get(Calendar.YEAR)){
-            result.setResult("failure");
-            result.setContent("您已申请!");
+        PoorBuild poorBuild = service.getPoorBuildByIdCard(poorBuildDto.getIdcard());
+           if (poorBuild!=null){
+               Calendar a=Calendar.getInstance();
+                if (Util.TimeToString(poorBuild.getApplicationtime()).substring(0,4).equals(String.valueOf(a.get(Calendar.YEAR)))){
+                    result.setResult("failure");
+                    result.setContent("您已申请!");
+                }else {
+                    insert(poorBuild,poorBuildDto);
+                }
+           }else {
+               PoorBuild create = new PoorBuild();
+               insert(create,poorBuildDto);
+           }
+        return result;
+
+    }
+
+    public BaseResult insert(PoorBuild poorBuild,PoorBuildDto poorBuildDto ){
+        BaseResult result = new BaseResult();
+        poorBuild.setIdcard(poorBuildDto.getIdcard());
+        poorBuild.setInsurance(poorBuildDto.getInsurance());
+        poorBuild.setCode(poorBuildDto.getCode());
+        poorBuild.setEconomicsources(poorBuildDto.getEconomicsources());
+        poorBuild.setFamilyincome(poorBuildDto.getFamilyincome());
+        poorBuild.setIsloan(poorBuildDto.getIsloan());
+        poorBuild.setFworkplace(poorBuildDto.getFworkplace());
+        poorBuild.setFearning(poorBuildDto.getFearning());
+        poorBuild.setMworkplace(poorBuildDto.getMworkplace());
+        poorBuild.setMearning(poorBuildDto.getMearning());
+        poorBuild.setPopulation(poorBuildDto.getPopulation());
+        poorBuild.setApplication(poorBuildDto.getApplication());
+        poorBuild.setPoorprove(poorBuildDto.getPoorprove());
+        poorBuild.setRetireprove(poorBuildDto.getRetireprove());
+        poorBuild.setDeformityprove(poorBuildDto.getDeformityprove());
+        poorBuild.setEfficiencyprove(poorBuildDto.getEfficiencyprove());
+        poorBuild.setConditionprove(poorBuildDto.getConditionprove());
+        poorBuild.setAwardsprove(poorBuildDto.getAwardsprove());
+        poorBuild.setM1(poorBuildDto.getM1());
+        poorBuild.setM1name(poorBuildDto.getM1name());
+        poorBuild.setM1workplace(poorBuildDto.getM1workplace());
+        poorBuild.setM1earning(poorBuildDto.getM1earning());
+        poorBuild.setM2(poorBuildDto.getM2());
+        poorBuild.setM2name(poorBuildDto.getM2name());
+        poorBuild.setM2wordpress(poorBuildDto.getM2wordpress());
+        poorBuild.setM2earning(poorBuildDto.getM2earning());
+        poorBuild.setM3(poorBuildDto.getM3());
+        poorBuild.setM3name(poorBuildDto.getM3name());
+        poorBuild.setM3wordpress(poorBuildDto.getM3wordpress());
+        poorBuild.setM3earning(poorBuildDto.getM3earning());
+        poorBuild.setApplicationtime(new Date());
+        if (service.insert(poorBuild)){
+            result.setResult("success");
+            result.setContent("申请成功!");
         }else {
-//            student.setCollege(poorBuildDto);
-            poorBuild.setIdcard(poorBuildDto.getIdcard());
-            poorBuild.setInsurance(poorBuildDto.getInsurance());
-            poorBuild.setCode(poorBuildDto.getCode());
-            poorBuild.setEconomicsources(poorBuildDto.getEconomicsources());
-            poorBuild.setFamilyincome(poorBuildDto.getFamilyincome());
-            poorBuild.setIsloan(poorBuildDto.getIsloan());
-            poorBuild.setFworkplace(poorBuildDto.getFworkplace());
-            poorBuild.setFearning(poorBuildDto.getFearning());
-            poorBuild.setMworkplace(poorBuildDto.getMworkplace());
-            poorBuild.setMearning(poorBuildDto.getMearning());
-            poorBuild.setPopulation(poorBuildDto.getPopulation());
-            poorBuild.setApplication(poorBuildDto.getApplication());
-            poorBuild.setPoorprove(poorBuildDto.getPoorprove());
-            poorBuild.setRetireprove(poorBuildDto.getRetireprove());
-            poorBuild.setDeformityprove(poorBuildDto.getDeformityprove());
-            poorBuild.setEfficiencyprove(poorBuildDto.getEfficiencyprove());
-            poorBuild.setConditionprove(poorBuildDto.getConditionprove());
-            poorBuild.setAwardsprove(poorBuildDto.getAwardsprove());
-            poorBuild.setM1(poorBuildDto.getM1());
-            poorBuild.setM1name(poorBuildDto.getM1name());
-            poorBuild.setM1workplace(poorBuildDto.getM1workplace());
-            poorBuild.setM1earning(poorBuildDto.getM1earning());
-            poorBuild.setM2(poorBuildDto.getM2());
-            poorBuild.setM2name(poorBuildDto.getM2name());
-            poorBuild.setM2wordpress(poorBuildDto.getM2wordpress());
-            poorBuild.setM2earning(poorBuildDto.getM2earning());
-            poorBuild.setM3(poorBuildDto.getM3());
-            poorBuild.setM3name(poorBuildDto.getM3name());
-            poorBuild.setM3wordpress(poorBuildDto.getM3wordpress());
-            poorBuild.setM3earning(poorBuildDto.getM3earning());
-            poorBuild.setApplicationtime(new Date());
-            if (service.insert(poorBuildDto)){
-                result.setResult("success");
-                result.setContent("申请成功!");
-            }else {
-                result.setResult("error");
-                result.setContent("申请失败!");
-            }
+            result.setResult("error");
+            result.setContent("申请失败!");
         }
         return result;
     }

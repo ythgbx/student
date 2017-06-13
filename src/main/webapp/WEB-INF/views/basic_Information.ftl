@@ -64,7 +64,7 @@
                         专业</td>
                     <td style="width:106px;">
 
-                        <select name="college" class="message" style="font-size:14px; text-align: center " >
+                        <select name="profession" class="message" style="font-size:14px; text-align: center " >
                             <option value="计算机科学与技术" selected="selected">计算机科学与技术</option>
                             <option value="计算机科学与技术(专升本)" >计算机科学与技术(专升本)</option>
                             <option value="软件工程">软件工程</option>
@@ -94,18 +94,18 @@
                     <td style="width:84px;">
                         民族</td>
                     <td style="width:106px;">
-                        <input class="message" type="text" name="nation" />
+                        <input class="message" type="text" name="nationality" />
                     </td>
                     <td style="width:48px;">
                         出生<br />
                         日期</td>
                     <td style="width:113px;">
-                        <input class="message" type="text" name="birthDate" />
+                        <input class="message" type="text" name="birthday" />
                     </td>
                     <td style="width:83px;">
                         入学时间</td>
                     <td style="width:110px;">
-                        <input class="message" type="text" name="admissionDate" />
+                        <input class="message" type="text" name="admissiontime" />
                     </td>
                 </tr>
 
@@ -115,7 +115,7 @@
                         政治面貌
                     </td>
                     <td style="width:106px;">
-                        <select name="politicalStatus" style="width:110px">
+                        <select name="political" style="width:110px">
                             <option value="共青团员" >共青团员</option>
                             <option value="中共预备党员">中共预备党员</option>
                             <option value="中共党员" selected="中共党员">中共党员</option>
@@ -136,13 +136,16 @@
                     </td>
 
                     <td>
-                        生源地
+                        层次
                     </td>
                     <td style="width:113px;">
-                        <input class="message" type="text" name="nativePlace" />
-
+                        <select name="level" style="width:50px">
+                            <option value="大专" >大专</option>
+                            <option value="本科" selected="selected">本科</option>
+                        </select>
 
                     </td>
+
 
                 </tr>
 
@@ -151,7 +154,7 @@
                     <td height="39" style="width:84px;">
                         班级</td>
                     <td colspan="2" >
-                        <input class="message" type="text" name="classes" style="width:240px;"/>
+                        <input class="message" type="text" name="classname" style="width:240px;"/>
 
                     </td>
 
@@ -160,7 +163,7 @@
                         银行卡号
                     </td>
                     <td colspan="3" style="width:219px;">
-                        <input class="message" type="text" name="bandCard" style="width:320px;"/>  <!--没有该字段-->
+                        <input class="message" type="text" name="schoolcard" style="width:320px;"/>  <!--没有该字段-->
                     </td>
                 </tr>
 
@@ -172,14 +175,13 @@
                     <td height="39" style="width:84px;">
                         身份证号</td>
                     <td colspan="3" style="width:267px;">
-                        <input class="message" type="text" name="idCard" style="width:315px" />
+                        <input class="message" type="text" name="idcard" style="width:315px" />
                     </td>
                     <td style="width:83px;">
-                        家庭户口</td>
+                        曾用名</td>
                     <td colspan="2" style="width:219px;">
                         <!--没有该字段-->
-                        <input  type="radio" name="residence" value="城镇"  />&nbsp;&nbsp;A、城镇 &nbsp;&nbsp;&nbsp;&nbsp;
-                        <input  type="radio" name="residence" value="农村" checked="checked"  />&nbsp;&nbsp;B、农村
+                        <input class="message" type="text" name="usedname" style="width:205px" />
                     </td>
                 </tr>
 
@@ -189,7 +191,7 @@
                     <td style="width:84px;">
                         电话号码</td>
                     <td style="width:106px;">
-                        <input class="message" type="text" name="tel"  />
+                        <input class="message" type="text" name="stel"  />
                     </td>
                     <td style="width:48px;">
                         QQ</td>
@@ -207,25 +209,40 @@
                         家<br><br>庭<br><br>信<br><br>息</td>
                     <td height="39" style="width:84px;">
                         父亲姓名</td>
-                    <td colspan="2" style="width:154px;">
+                    <td  style="width:154px;">
                         <input class="message" type="text" name="fname"  style="width:180px;" />
                     </td>
-                    <td colspan="2" style="width:196px;">
+                    <td  style="width:196px;">
                         父亲联系电话</td>
-                    <td colspan="2" style="width:219px;">
-                        <input class="message" type="text" name="ftel"  style="width:240px;" />
+                    <td style="width:113px;">
+                        <input class="message" type="text" name="ftel"  />
+                    </td>
+                    <td>
+                        生源地
+                    </td>
+                    <td style="width:83px;">
+                        生源地</td>
+                    <td style="width:136px;">
+                        <input class="message" type="text" name="nativeplace" />
                     </td>
                 </tr>
                 <tr>
                     <td height="40" style="width:84px;">
                         母亲姓名</td>
-                    <td colspan="2" style="width:154px;">
+                    <td  style="width:154px;">
                         <input class="message" type="text" name="mname"  style="width:180px;" />
                     </td>
-                    <td colspan="2" style="width:196px;">
+                    <td  style="width:196px;">
                         母亲联系电话</td>
+                    <td style="width:113px;">
+                        <input class="message" type="text" name="mtel"  />
+                    </td>
+                    <td style="width:83px;">
+                        家庭户口</td>
                     <td colspan="2" style="width:219px;">
-                        <input class="message" type="text" name="mtel"  style="width:240px;" />
+                        <!--没有该字段-->
+                        <input  type="radio" name="familyaccount" value="城镇"  />&nbsp;&nbsp;A、城镇 &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input  type="radio" name="familyaccount" value="农村" checked="checked"  />&nbsp;&nbsp;B、农村
                     </td>
                 </tr>
                 <tr>
@@ -233,13 +250,6 @@
                         家庭详<br />细地址</td>
                     <td colspan="6" style="width:569px;">
                         <input class="message" type="text" name="address"  style="width:650px;" />
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" height="165" style="width:33px;">
-                        备注信息</td>
-                    <td colspan="6" style="width:653px;">		<!--没有该字段-->
-                        <input class="message" type="text" name="remarks"  style="width:740px; text-align:start; padding-left:15px;" />
                     </td>
                 </tr>
                 </tbody>
@@ -267,33 +277,32 @@
                 if(data!=null||data!=""){
                     $("#img1").src = "/upload/"+data.img;
                     img.src = "/upload/"+data.img;
+                    $("[name=idcard]").val(data.idcard);
                     $("[name=sno]").val(data.sno);
-                    $("[name=college]").val(data.college);
-                    $("[name=school]").val(data.school);
-                    $("[name=department]").val(data.department);
-                    $("[name=name]").val(data.name);
-                    $("[name=img]").val(data.img);
+                    $("[name=sname]").val(data.sname);
+                    $("[name=usedname]").val(data.usedname);
                     $("[name=sex]").val([data.sex]);
-                    $("[name=birthDate]").val(data.birthDate);
-                    $("[name=admissionDate]").val(data.admissionDate);
-                    $("[name=nation]").val(data.nation);
-                    $("[name=studyLength]").val(data.depth);
-                    $("[name=nativePlace]").val(data.nativePlace);
+                    $("[name=college]").val(data.college);
+                    $("[name=birthday]").val(data.birthday);
+                    $("[name=profession]").val(data.profession);
+                    $("[name=classname]").val(data.classname);
                     $("[name=grade]").val(data.grade);
-                    $("[name=classes]").val(data.classes);
-                    $("[name=bandCard]").val(data.bandCard);
-                    $("[name=politicalStatus]").val(data.politicalStatus);
+                    $("[name=level]").val(data.level);
+                    $("[name=admissiontime]").val(data.admissiontime);
+                    $("[name=studylength]").val(data.studylength);
+                    $("[name=nationality]").val(data.nationality);
+                    $("[name=political]").val(data.political);
                     $("[name=sroom]").val(data.sroom);
-                    $("[name=tel]").val(data.tel);
-                    $("[name=idCard]").val(data.idCard);
-                    $("[name=residence]").val([data.residence]);
                     $("[name=address]").val(data.address);
+                    $("[name=stel]").val(data.stel);
+                    $("[name=schoolcard]").val(data.schoolcard);
                     $("[name=fname]").val(data.fname);
                     $("[name=ftel]").val(data.ftel);
                     $("[name=mname]").val(data.mname);
                     $("[name=mtel]").val(data.mtel);
+                    $("[name=nativeplace]").val(data.nativeplace);
                     $("[name=qq]").val(data.qq);
-                    $("[name=remarks]").val(data.remarks);
+                    $("[name=familyaccount]").val([data.familyaccount]);
                 }
             },
             error: function (data) {
@@ -309,7 +318,7 @@
         });
         console.log(d);
         $.ajax({
-            url: "/user/updateInfo",
+            url: "/student/updateInfo",
             data: JSON.stringify(d),
             type: "POST",
             dataType: "json",
@@ -320,8 +329,6 @@
             error: function (data) {
             }
         });
-
-
     }
 </script>
 

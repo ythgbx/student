@@ -7,49 +7,59 @@ import java.util.Date;
  */
 
 public class StudentDetail extends BaseResult{
-    private String idcard;
+    private String idcard;  // 身份证号
 
-    private String sno;
+    private String sno; // 学号
 
-    private String sname;
+    private String sname;  //姓名
 
-    private String usedname;
+    private String usedname;  // 曾用名
 
-    private String sex;
+    private String sex;   //性别
 
-    private String college;
+    private String college;  // 学院
 
-    private String profession;
+    private String birthday;  // 出生日期
 
-    private String className;
+    private String profession;  //专业
 
-    private String grade;
+    private String classname;  // 班级
 
-    private String level;
+    private String grade;  // 年级
 
-    private String studylength;
+    private String level;  // 层次
 
-    private String nationality;
+    private String admissiontime;  // 入学时间
 
-    private String political;
+    private String studylength;  // 学制
 
-    private String sroom;
+    private String nationality;//名族
 
-    private String stel;
+    private String political;//政治面貌
 
-    private String schoolcard;
+    private String sroom;//寝室号
 
-    private String fname;
+    private String address;  //家庭地址
 
-    private String ftel;
+    private String stel;  //联系方式
+
+    private String schoolcard; // 银行卡号
+
+    private String fname; //父亲名字
+
+    private String ftel;//
 
     private String mname;
 
     private String mtel;
 
-    private String nativeplace;
+    private String nativeplace;  //籍贯
 
     private String img;
+
+    private String qq;
+
+    private String familyaccount;  //家庭户口
 
     public String getIdcard() {
         return idcard;
@@ -107,12 +117,12 @@ public class StudentDetail extends BaseResult{
         this.profession = profession;
     }
 
-    public String getClassName() {
-        return className;
+    public String getClassname() {
+        return classname;
     }
 
-    public void setClassName(String className) {
-        this.className = className;
+    public void setClassname(String classname) {
+        this.classname = classname;
     }
 
     public String getGrade() {
@@ -129,6 +139,14 @@ public class StudentDetail extends BaseResult{
 
     public void setLevel(String level) {
         this.level = level;
+    }
+
+    public String getAdmissiontime() {
+        return admissiontime;
+    }
+
+    public void setAdmissiontime(String admissiontime) {
+        this.admissiontime = admissiontime;
     }
 
     public String getStudylength() {
@@ -161,6 +179,14 @@ public class StudentDetail extends BaseResult{
 
     public void setSroom(String sroom) {
         this.sroom = sroom;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getStel() {
@@ -225,5 +251,29 @@ public class StudentDetail extends BaseResult{
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public String getQq() {
+        return qq;
+    }
+
+    public void setQq(String qq) {
+        this.qq = qq;
+    }
+
+    public String getFamilyaccount() {
+        return familyaccount;
+    }
+
+    public void setFamilyaccount(String familyaccount) {
+        this.familyaccount = familyaccount;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 }

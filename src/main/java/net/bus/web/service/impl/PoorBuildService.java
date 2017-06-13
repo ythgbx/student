@@ -1,8 +1,8 @@
 package net.bus.web.service.impl;
 
-import net.bus.web.controller.dto.PoorBuildDto;
 import net.bus.web.model.PoorBuild;
 import net.bus.web.repository.PoorBuildRepositiory;
+import net.bus.web.repository.specification.PoorBuildIdCardSpecification;
 import net.bus.web.service.IPoorBuildService;
 import net.bus.web.teacher.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,15 +19,15 @@ public class PoorBuildService implements IPoorBuildService{
     @Autowired
     private PoorBuildRepositiory _rootRepository;
 
-    public boolean insert(PoorBuildDto poorBuildDto) {
-        if (_rootRepository.insertStudent(poorBuildDto)>0){
+    public boolean insert(PoorBuild poorBuild) {
+        if (_rootRepository.insertStudent(poorBuild)>0){
             return true;
         }
         return false;
     }
 
-    public PoorBuild getPoorBuild(String idCard) {
-        return _rootRepository.getStudent(idCard);
+    public PoorBuild getPoorBuildByIdCard(String idCard) {
+        return _rootRepository.getPoorBuildByIdCard(new PoorBuildIdCardSpecification(idCard));
     }
 
     /**

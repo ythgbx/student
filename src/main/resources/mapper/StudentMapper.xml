@@ -8,14 +8,17 @@
     <result column="usedName" property="usedname" jdbcType="VARCHAR" />
     <result column="sex" property="sex" jdbcType="VARCHAR" />
     <result column="College" property="college" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
     <result column="profession" property="profession" jdbcType="VARCHAR" />
     <result column="classname" property="classname" jdbcType="VARCHAR" />
     <result column="grade" property="grade" jdbcType="VARCHAR" />
     <result column="level" property="level" jdbcType="CHAR" />
+    <result column="admissionTime" property="admissiontime" jdbcType="DATE" />
     <result column="studyLength" property="studylength" jdbcType="CHAR" />
     <result column="nationality" property="nationality" jdbcType="VARCHAR" />
     <result column="political" property="political" jdbcType="VARCHAR" />
     <result column="sroom" property="sroom" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
     <result column="stel" property="stel" jdbcType="VARCHAR" />
     <result column="schoolCard" property="schoolcard" jdbcType="VARCHAR" />
     <result column="fname" property="fname" jdbcType="VARCHAR" />
@@ -24,6 +27,8 @@
     <result column="mtel" property="mtel" jdbcType="VARCHAR" />
     <result column="nativePlace" property="nativeplace" jdbcType="VARCHAR" />
     <result column="img" property="img" jdbcType="VARCHAR" />
+    <result column="QQ" property="qq" jdbcType="VARCHAR" />
+    <result column="familyAccount" property="familyaccount" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -84,9 +89,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    idCard, sno, sname, usedName, sex, College, profession, classname, grade, level, 
-    studyLength, nationality, political, sroom, stel, schoolCard, fname, ftel, mname, 
-    mtel, nativePlace, img
+    idCard, sno, sname, usedName, sex, College, birthday, profession, classname, grade, 
+    level, admissionTime, studyLength, nationality, political, sroom, address, stel, 
+    schoolCard, fname, ftel, mname, mtel, nativePlace, img, QQ, familyAccount
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="net.bus.web.model.StudentExample" >
     select
@@ -121,20 +126,24 @@
   <insert id="insert" parameterType="net.bus.web.model.Student" >
     insert into students (idCard, sno, sname, 
       usedName, sex, College, 
-      profession, classname, grade, 
-      level, studyLength, nationality, 
-      political, sroom, stel, 
+      birthday, profession, classname, 
+      grade, level, admissionTime, 
+      studyLength, nationality, political, 
+      sroom, address, stel, 
       schoolCard, fname, ftel, 
       mname, mtel, nativePlace, 
-      img)
+      img, QQ, familyAccount
+      )
     values (#{idcard,jdbcType=VARCHAR}, #{sno,jdbcType=VARCHAR}, #{sname,jdbcType=VARCHAR}, 
       #{usedname,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{college,jdbcType=VARCHAR}, 
-      #{profession,jdbcType=VARCHAR}, #{classname,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR}, 
-      #{level,jdbcType=CHAR}, #{studylength,jdbcType=CHAR}, #{nationality,jdbcType=VARCHAR}, 
-      #{political,jdbcType=VARCHAR}, #{sroom,jdbcType=VARCHAR}, #{stel,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=DATE}, #{profession,jdbcType=VARCHAR}, #{classname,jdbcType=VARCHAR}, 
+      #{grade,jdbcType=VARCHAR}, #{level,jdbcType=CHAR}, #{admissiontime,jdbcType=DATE}, 
+      #{studylength,jdbcType=CHAR}, #{nationality,jdbcType=VARCHAR}, #{political,jdbcType=VARCHAR}, 
+      #{sroom,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{stel,jdbcType=VARCHAR}, 
       #{schoolcard,jdbcType=VARCHAR}, #{fname,jdbcType=VARCHAR}, #{ftel,jdbcType=VARCHAR}, 
       #{mname,jdbcType=VARCHAR}, #{mtel,jdbcType=VARCHAR}, #{nativeplace,jdbcType=VARCHAR}, 
-      #{img,jdbcType=VARCHAR})
+      #{img,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{familyaccount,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="net.bus.web.model.Student" >
     insert into students
@@ -157,6 +166,9 @@
       <if test="college != null" >
         College,
       </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
       <if test="profession != null" >
         profession,
       </if>
@@ -169,6 +181,9 @@
       <if test="level != null" >
         level,
       </if>
+      <if test="admissiontime != null" >
+        admissionTime,
+      </if>
       <if test="studylength != null" >
         studyLength,
       </if>
@@ -180,6 +195,9 @@
       </if>
       <if test="sroom != null" >
         sroom,
+      </if>
+      <if test="address != null" >
+        address,
       </if>
       <if test="stel != null" >
         stel,
@@ -205,6 +223,12 @@
       <if test="img != null" >
         img,
       </if>
+      <if test="qq != null" >
+        QQ,
+      </if>
+      <if test="familyaccount != null" >
+        familyAccount,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="idcard != null" >
@@ -225,6 +249,9 @@
       <if test="college != null" >
         #{college,jdbcType=VARCHAR},
       </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=DATE},
+      </if>
       <if test="profession != null" >
         #{profession,jdbcType=VARCHAR},
       </if>
@@ -237,6 +264,9 @@
       <if test="level != null" >
         #{level,jdbcType=CHAR},
       </if>
+      <if test="admissiontime != null" >
+        #{admissiontime,jdbcType=DATE},
+      </if>
       <if test="studylength != null" >
         #{studylength,jdbcType=CHAR},
       </if>
@@ -248,6 +278,9 @@
       </if>
       <if test="sroom != null" >
         #{sroom,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
       </if>
       <if test="stel != null" >
         #{stel,jdbcType=VARCHAR},
@@ -272,6 +305,12 @@
       </if>
       <if test="img != null" >
         #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="familyaccount != null" >
+        #{familyaccount,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -302,6 +341,9 @@
       <if test="record.college != null" >
         College = #{record.college,jdbcType=VARCHAR},
       </if>
+      <if test="record.birthday != null" >
+        birthday = #{record.birthday,jdbcType=DATE},
+      </if>
       <if test="record.profession != null" >
         profession = #{record.profession,jdbcType=VARCHAR},
       </if>
@@ -314,6 +356,9 @@
       <if test="record.level != null" >
         level = #{record.level,jdbcType=CHAR},
       </if>
+      <if test="record.admissiontime != null" >
+        admissionTime = #{record.admissiontime,jdbcType=DATE},
+      </if>
       <if test="record.studylength != null" >
         studyLength = #{record.studylength,jdbcType=CHAR},
       </if>
@@ -325,6 +370,9 @@
       </if>
       <if test="record.sroom != null" >
         sroom = #{record.sroom,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
       </if>
       <if test="record.stel != null" >
         stel = #{record.stel,jdbcType=VARCHAR},
@@ -350,6 +398,12 @@
       <if test="record.img != null" >
         img = #{record.img,jdbcType=VARCHAR},
       </if>
+      <if test="record.qq != null" >
+        QQ = #{record.qq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.familyaccount != null" >
+        familyAccount = #{record.familyaccount,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -363,14 +417,17 @@
       usedName = #{record.usedname,jdbcType=VARCHAR},
       sex = #{record.sex,jdbcType=VARCHAR},
       College = #{record.college,jdbcType=VARCHAR},
+      birthday = #{record.birthday,jdbcType=DATE},
       profession = #{record.profession,jdbcType=VARCHAR},
       classname = #{record.classname,jdbcType=VARCHAR},
       grade = #{record.grade,jdbcType=VARCHAR},
       level = #{record.level,jdbcType=CHAR},
+      admissionTime = #{record.admissiontime,jdbcType=DATE},
       studyLength = #{record.studylength,jdbcType=CHAR},
       nationality = #{record.nationality,jdbcType=VARCHAR},
       political = #{record.political,jdbcType=VARCHAR},
       sroom = #{record.sroom,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
       stel = #{record.stel,jdbcType=VARCHAR},
       schoolCard = #{record.schoolcard,jdbcType=VARCHAR},
       fname = #{record.fname,jdbcType=VARCHAR},
@@ -378,7 +435,9 @@
       mname = #{record.mname,jdbcType=VARCHAR},
       mtel = #{record.mtel,jdbcType=VARCHAR},
       nativePlace = #{record.nativeplace,jdbcType=VARCHAR},
-      img = #{record.img,jdbcType=VARCHAR}
+      img = #{record.img,jdbcType=VARCHAR},
+      QQ = #{record.qq,jdbcType=VARCHAR},
+      familyAccount = #{record.familyaccount,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -401,6 +460,9 @@
       <if test="college != null" >
         College = #{college,jdbcType=VARCHAR},
       </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
       <if test="profession != null" >
         profession = #{profession,jdbcType=VARCHAR},
       </if>
@@ -413,6 +475,9 @@
       <if test="level != null" >
         level = #{level,jdbcType=CHAR},
       </if>
+      <if test="admissiontime != null" >
+        admissionTime = #{admissiontime,jdbcType=DATE},
+      </if>
       <if test="studylength != null" >
         studyLength = #{studylength,jdbcType=CHAR},
       </if>
@@ -424,6 +489,9 @@
       </if>
       <if test="sroom != null" >
         sroom = #{sroom,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
       </if>
       <if test="stel != null" >
         stel = #{stel,jdbcType=VARCHAR},
@@ -449,6 +517,12 @@
       <if test="img != null" >
         img = #{img,jdbcType=VARCHAR},
       </if>
+      <if test="qq != null" >
+        QQ = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="familyaccount != null" >
+        familyAccount = #{familyaccount,jdbcType=VARCHAR},
+      </if>
     </set>
     where idCard = #{idcard,jdbcType=VARCHAR}
   </update>
@@ -459,14 +533,17 @@
       usedName = #{usedname,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=VARCHAR},
       College = #{college,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=DATE},
       profession = #{profession,jdbcType=VARCHAR},
       classname = #{classname,jdbcType=VARCHAR},
       grade = #{grade,jdbcType=VARCHAR},
       level = #{level,jdbcType=CHAR},
+      admissionTime = #{admissiontime,jdbcType=DATE},
       studyLength = #{studylength,jdbcType=CHAR},
       nationality = #{nationality,jdbcType=VARCHAR},
       political = #{political,jdbcType=VARCHAR},
       sroom = #{sroom,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
       stel = #{stel,jdbcType=VARCHAR},
       schoolCard = #{schoolcard,jdbcType=VARCHAR},
       fname = #{fname,jdbcType=VARCHAR},
@@ -474,7 +551,9 @@
       mname = #{mname,jdbcType=VARCHAR},
       mtel = #{mtel,jdbcType=VARCHAR},
       nativePlace = #{nativeplace,jdbcType=VARCHAR},
-      img = #{img,jdbcType=VARCHAR}
+      img = #{img,jdbcType=VARCHAR},
+      QQ = #{qq,jdbcType=VARCHAR},
+      familyAccount = #{familyaccount,jdbcType=VARCHAR}
     where idCard = #{idcard,jdbcType=VARCHAR}
   </update>
   <select resultMap="BaseResultMap" parameterType="net.bus.web.model.StudentExample" id="selectByExampleWithRowbounds" >

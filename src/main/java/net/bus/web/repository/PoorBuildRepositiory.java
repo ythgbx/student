@@ -1,6 +1,5 @@
 package net.bus.web.repository;
 
-import net.bus.web.controller.dto.PoorBuildDto;
 import net.bus.web.mapper.PoorBuildMapper;
 import net.bus.web.model.PoorBuild;
 import net.bus.web.model.PoorBuildExample;
@@ -49,7 +48,7 @@ public class PoorBuildRepositiory {
     }
 
 
-    public PoorBuild getStudent(ISpecification specification)
+    public PoorBuild getPoorBuildByIdCard(ISpecification specification)
     {
         List<PoorBuild> list= poorBuildMapper.selectByExample((PoorBuildExample)specification.createExample());
         if(!list.isEmpty())
@@ -60,14 +59,17 @@ public class PoorBuildRepositiory {
         return null;
     }
 
-    public PoorBuild getStudent(String idcard) {
-        return poorBuildMapper.selectByPrimaryKey(idcard);
+    public PoorBuild getStudent(ISpecification specification) {
+        List<PoorBuild> list =  poorBuildMapper.selectByExample((PoorBuildExample)specification.createExample());
+        if(!list.isEmpty())
+        {
+            return list.get(0);
+        }
+        return null;
     }
 
-    public int insertStudent(PoorBuildDto poorBuildDto)
+    public int insertStudent(PoorBuild poorBuild)
     {
-        PoorBuild poorBuild = new PoorBuild();
-
         return poorBuildMapper.insert(poorBuild);
     }
 
@@ -84,9 +86,6 @@ public class PoorBuildRepositiory {
         return poorBuildMapper.countByExample((PoorBuildExample)specification.createExample());
     }
 
-    public int deleteByPrimaryKey(String sno){
-        return  poorBuildMapper.deleteByPrimaryKey(sno);
-    }
 
     public int deleteByExample(ISpecification specification){
         return  poorBuildMapper.deleteByExample((PoorBuildExample) specification.createExample());
