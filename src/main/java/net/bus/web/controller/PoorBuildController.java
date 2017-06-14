@@ -70,7 +70,7 @@ public class PoorBuildController {
                Calendar a=Calendar.getInstance();
                 if (Util.TimeToString(poorBuild.getApplicationtime()).substring(0,4).equals(String.valueOf(a.get(Calendar.YEAR)))){
                     result.setResult("failure");
-                    result.setContent("您已申请!");
+                    result.setContent("本年度您已申请过!");
                 }else {
                     insert(poorBuildDto);
                 }
