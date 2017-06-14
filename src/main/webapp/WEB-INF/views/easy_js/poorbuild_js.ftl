@@ -5,7 +5,7 @@
 
         //格式化查询按钮
         $('a[type="query"]').linkbutton({
-            plain : true,
+            plain : false,
         });
         $('input[name="profession"]').combobox({
             textField : 'pname',
@@ -14,7 +14,11 @@
             onSelect : function (record) {
                 var re = record;
                 var url = '/menu/getClassName?pcode='+$(this).combobox('getValue');
+                $('input[comboname="classname"]').combobox('clear');
                 $('input[comboname="classname"]').combobox('reload',url);
+                $('#new_table').datagrid('load',{
+                    profession : re.pname
+                })
             }
 
         });
@@ -22,6 +26,12 @@
             textField : 'cname',
             valueField : 'cname',
             editable : false,
+            onSelect : function(record){
+                var re = record;
+                $('#new_table').datagrid('load',{
+                    profession : re.cname
+                })
+            }
 
         });
 
@@ -30,9 +40,12 @@
             valueField : 'code',
             editable : false,
             url : '/menu/getAllCollege',
+            //
             onSelect : function (record) {
                 var re = record;
                 var url = '/menu/getProfessional?code='+$(this).combobox('getValue');
+                $('input[comboname="profession"]').combobox('clear');
+                $('input[comboname="classname"]').combobox('clear');
                 $('input[comboname="profession"]').combobox('reload',url);
                 $('#new_table').datagrid('load',{
                     college : re.cname
@@ -40,25 +53,7 @@
             }
         });
 
-//        //格式化日期搜索框
-//        $('input[type="date"]').datetimebox({
-//
-//        });
-//
-//        //格式化其它下拉框
-//        $('input[name="search"]').combobox({
-//            textField : 'othertxt',
-//            valueField : 'otherval',
-//            width : 80,
-//            editable : false,
-//            data : [{
-//                othertxt : '标题',
-//                otherval : 'title',
-//            },{
-//                othertxt : '作者',
-//                otherval : 'name',
-//            }]
-//        });
+
 
 
 //	渲染table
@@ -148,6 +143,21 @@
                 formatter : function (value,row,index) {
                     return row.student.studylength;
                 }
+            },{
+                field : 'admin',
+                title : '状态',
+                width : 100,
+                formatter : function (value,row,index) {
+                    if(value==0){
+                        return '未审核';
+                    }
+                    if (value==1){
+                        return '未通过';
+                    }
+                    if(value==2){
+                        return '通过';
+                    }
+                }
             }
             ] ],
             onDblClickRow: function (rowIndex,rowData) {
@@ -156,23 +166,39 @@
                 $('#other').dialog({
                     title : '详细信息',
                     fit : true,
+                    buttons : [
+                        {
+                            text : '通过',
+                            handler : function(){
+                                //通过ajax
+                            }
+                        },{
+                            text : '不通过',
+                            handler : function () {
+                                $.messager.prompt('提示信息','请填写备注信息',function (flag) {
+                                    if (flag){
+                                        //不同的备注信息，update ,ajax
+                                        alert(flag);
+                                    }
+                                });
+                            }
+                        }
+                    ]
                 });
+                //清除表单数据
+                $('#grant').form('clear');
+                //加载信息
                 $('#grant').form('load',
                     rowData
                 );
+                //加载学生基本信息
                 $('#grant').form('load',
                         rowData.student
                 );
 
                 console.log(rowData);
             },
-            onLoadSuccess : function(data){
-                $("a[name='opera']").linkbutton({
-                    text:'详细信息',
-                    plain:true,
-                    iconCls:'icon-man'
-                });
-            },
+
         });
 
 
@@ -186,14 +212,9 @@
             query : function () {
                 console.log('query');
             },
-            resetnew : function(){
-                //重置搜索
-                //清空查询文本框
-                $('input[type="date"]').val("");
-                $('input[name="searchterm"]').text("");
-                $('#new_table').datagrid({
-                    url : '/tea/query',
-                });
+            resetnew : function(){;
+                $('#new_table').datagrid('load'
+                );
             },
         }
 
@@ -203,11 +224,10 @@
             prompt : '输入查询条件',
             menu : '#term',
             searcher : function(value, name) {
+                var parm = {};
+                parm[name] = value;
                 if (value) {
-                    $('#new_table').datagrid('load', {
-                        term : name,
-                        termval : value,
-                    });
+                    $('#new_table').datagrid('load', parm);
                 }else{
                     $.messager.alert('警告','请输入查询条件','warning');
                 }
