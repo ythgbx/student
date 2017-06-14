@@ -6,270 +6,142 @@ import java.util.Date;
  * Created by sky on 16/12/9.
  */
 public class GrantDto {
-    private String school;
-    private String department;
-    private String classes;
-    private String id;
-    private String name;
-    private String img;
-    private String sex;
-    private String birthDate;
-    private String nation;
-    private String politicalStatus;
-    private String admissionDate;
-    private String idCard;
-    private String tel;
-    private String residence;
-    private String totalNum;
-    private String totalMoney;
-    private String aveMoney;
-    private String esources;
-    private String level;
-    private String address;
-    private String ftel;
-    private String lastyearMoney;
-    private String useofFunds;
-    private String thisUse;
-    private String bankAccount;
-    private String bandCard;
+    private String idcard;   //身份证号
+
+    private String populationcount;  //家庭总人口
+
+    private String familyincome;   //家庭总收入
+
+    private String monthlyincome;  // 人均月收入
+
+    private String revenuesource; //收入来源
+
+    private String poorgrades;  //贫困等级
+
+    private String amounted;  //上学年受助金额
+
+    private String fundedpurpose;  //上学年受助用途
+
+    private String fundpurpose;  //本学年申请用途
+
+    private String bankaccount;  //开户行
+
     private String m1name;
+
     private Integer m1age;
+
     private String m1relations;
+
     private String m1company;
+
     private String m2name;
+
     private Integer m2age;
+
     private String m2relations;
+
     private String m2company;
+
     private String m3name;
+
     private Integer m3age;
+
     private String m3relations;
+
     private String m3company;
-    private String application;
-    private String Ssign;
-    private Date datetime;
-    private String dsuggest;
-    private Date ddatetime;
-    private String Sgrade;
-    private Date sdatetime;
 
-    private String qq;
+    private String applicationreasons;   //申请理由
 
-    public String getQq() {
-        return qq;
+    private String remarks;
+
+    private String dreviewed;   //辅导员审核
+
+    private String dreviewedremarks;  //辅导员审核备注
+
+    private String admin;
+
+    private String adminremarks;
+
+    private Date applicationtime;
+
+    public String getIdcard() {
+        return idcard;
     }
 
-    public void setQq(String qq) {
-        this.qq = qq;
+    public void setIdcard(String idcard) {
+        this.idcard = idcard;
     }
 
-    public String getSchool() {
-        return school;
+    public String getPopulationcount() {
+        return populationcount;
     }
 
-    public void setSchool(String school) {
-        this.school = school;
+    public void setPopulationcount(String populationcount) {
+        this.populationcount = populationcount;
     }
 
-    public String getDepartment() {
-        return department;
+    public String getFamilyincome() {
+        return familyincome;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
+    public void setFamilyincome(String familyincome) {
+        this.familyincome = familyincome;
     }
 
-    public String getClasses() {
-        return classes;
+    public String getMonthlyincome() {
+        return monthlyincome;
     }
 
-    public void setClasses(String classes) {
-        this.classes = classes;
+    public void setMonthlyincome(String monthlyincome) {
+        this.monthlyincome = monthlyincome;
     }
 
-    public String getId() {
-        return id;
+    public String getRevenuesource() {
+        return revenuesource;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setRevenuesource(String revenuesource) {
+        this.revenuesource = revenuesource;
     }
 
-    public String getName() {
-        return name;
+    public String getPoorgrades() {
+        return poorgrades;
     }
 
-
-
-    public void setName(String name) {
-        this.name = name;
+    public void setPoorgrades(String poorgrades) {
+        this.poorgrades = poorgrades;
     }
 
-    public String getImg() {
-        return img;
+    public String getAmounted() {
+        return amounted;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setAmounted(String amounted) {
+        this.amounted = amounted;
     }
 
-    public String getSex() {
-        return sex;
+    public String getFundedpurpose() {
+        return fundedpurpose;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
+    public void setFundedpurpose(String fundedpurpose) {
+        this.fundedpurpose = fundedpurpose;
     }
 
-    public String getBirthDate() {
-        return birthDate;
+    public String getFundpurpose() {
+        return fundpurpose;
     }
 
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
+    public void setFundpurpose(String fundpurpose) {
+        this.fundpurpose = fundpurpose;
     }
 
-    public String getNation() {
-        return nation;
+    public String getBankaccount() {
+        return bankaccount;
     }
 
-    public void setNation(String nation) {
-        this.nation = nation;
-    }
-
-    public String getPoliticalStatus() {
-        return politicalStatus;
-    }
-
-    public void setPoliticalStatus(String politicalStatus) {
-        this.politicalStatus = politicalStatus;
-    }
-
-    public String getAdmissionDate() {
-        return admissionDate;
-    }
-
-    public void setAdmissionDate(String admissionDate) {
-        this.admissionDate = admissionDate;
-    }
-
-    public String getIdCard() {
-        return idCard;
-    }
-
-    public void setIdCard(String idCard) {
-        this.idCard = idCard;
-    }
-
-    public String getTel() {
-        return tel;
-    }
-
-    public void setTel(String tel) {
-        this.tel = tel;
-    }
-
-    public String getResidence() {
-        return residence;
-    }
-
-    public void setResidence(String residence) {
-        this.residence = residence;
-    }
-
-    public String getTotalNum() {
-        return totalNum;
-    }
-
-    public void setTotalNum(String totalNum) {
-        this.totalNum = totalNum;
-    }
-
-    public String getTotalMoney() {
-        return totalMoney;
-    }
-
-    public void setTotalMoney(String totalMoney) {
-        this.totalMoney = totalMoney;
-    }
-
-    public String getAveMoney() {
-        return aveMoney;
-    }
-
-    public void setAveMoney(String aveMoney) {
-        this.aveMoney = aveMoney;
-    }
-
-    public String getEsources() {
-        return esources;
-    }
-
-    public void setEsources(String esources) {
-        this.esources = esources;
-    }
-
-    public String getLevel() {
-        return level;
-    }
-
-    public void setLevel(String level) {
-        this.level = level;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getFtel() {
-        return ftel;
-    }
-
-    public void setFtel(String ftel) {
-        this.ftel = ftel;
-    }
-
-    public String getLastyearMoney() {
-        return lastyearMoney;
-    }
-
-    public void setLastyearMoney(String lastyearMoney) {
-        this.lastyearMoney = lastyearMoney;
-    }
-
-    public String getUseofFunds() {
-        return useofFunds;
-    }
-
-    public void setUseofFunds(String useofFunds) {
-        this.useofFunds = useofFunds;
-    }
-
-    public String getThisUse() {
-        return thisUse;
-    }
-
-    public void setThisUse(String thisUse) {
-        this.thisUse = thisUse;
-    }
-
-    public String getBankAccount() {
-        return bankAccount;
-    }
-
-    public void setBankAccount(String bankAccount) {
-        this.bankAccount = bankAccount;
-    }
-
-    public String getBandCard() {
-        return bandCard;
-    }
-
-    public void setBandCard(String bandCard) {
-        this.bandCard = bandCard;
+    public void setBankaccount(String bankaccount) {
+        this.bankaccount = bankaccount;
     }
 
     public String getM1name() {
@@ -368,59 +240,59 @@ public class GrantDto {
         this.m3company = m3company;
     }
 
-    public String getApplication() {
-        return application;
+    public String getApplicationreasons() {
+        return applicationreasons;
     }
 
-    public void setApplication(String application) {
-        this.application = application;
+    public void setApplicationreasons(String applicationreasons) {
+        this.applicationreasons = applicationreasons;
     }
 
-    public String getSsign() {
-        return Ssign;
+    public String getRemarks() {
+        return remarks;
     }
 
-    public void setSsign(String ssign) {
-        Ssign = ssign;
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 
-    public Date getDatetime() {
-        return datetime;
+    public String getDreviewed() {
+        return dreviewed;
     }
 
-    public void setDatetime(Date datetime) {
-        this.datetime = datetime;
+    public void setDreviewed(String dreviewed) {
+        this.dreviewed = dreviewed;
     }
 
-    public String getDsuggest() {
-        return dsuggest;
+    public String getDreviewedremarks() {
+        return dreviewedremarks;
     }
 
-    public void setDsuggest(String dsuggest) {
-        this.dsuggest = dsuggest;
+    public void setDreviewedremarks(String dreviewedremarks) {
+        this.dreviewedremarks = dreviewedremarks;
     }
 
-    public Date getDdatetime() {
-        return ddatetime;
+    public String getAdmin() {
+        return admin;
     }
 
-    public void setDdatetime(Date ddatetime) {
-        this.ddatetime = ddatetime;
+    public void setAdmin(String admin) {
+        this.admin = admin;
     }
 
-    public String getSgrade() {
-        return Sgrade;
+    public String getAdminremarks() {
+        return adminremarks;
     }
 
-    public void setSgrade(String sgrade) {
-        Sgrade = sgrade;
+    public void setAdminremarks(String adminremarks) {
+        this.adminremarks = adminremarks;
     }
 
-    public Date getSdatetime() {
-        return sdatetime;
+    public Date getApplicationtime() {
+        return applicationtime;
     }
 
-    public void setSdatetime(Date sdatetime) {
-        this.sdatetime = sdatetime;
+    public void setApplicationtime(Date applicationtime) {
+        this.applicationtime = applicationtime;
     }
 }

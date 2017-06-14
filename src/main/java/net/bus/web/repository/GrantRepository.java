@@ -57,9 +57,9 @@ public class GrantRepository {
         return null;
     }
 
-    public Grant getGrant(String id) {
-        return grantMapper.selectByPrimaryKey(id);
-    }
+//    public Grant getGrant(String id) {
+//        return grantMapper.selectByPrimaryKey(id);
+//    }
 
     public int insertGrant(Grant grant)
     {
@@ -79,9 +79,9 @@ public class GrantRepository {
         return grantMapper.countByExample((GrantExample)specification.createExample());
     }
 
-    public int deleteByPrimaryKey(String id){
-        return  grantMapper.deleteByPrimaryKey(id);
-    }
+//    public int deleteByPrimaryKey(String id){
+//        return  grantMapper.deleteByPrimaryKey(id);
+//    }
 
     public int deleteByExample(ISpecification specification){
         return  grantMapper.deleteByExample((GrantExample) specification.createExample());

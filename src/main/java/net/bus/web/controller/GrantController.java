@@ -1,6 +1,5 @@
 package net.bus.web.controller;
 
-import com.wordnik.swagger.annotations.ApiParam;
 import net.bus.web.aspect.Auth;
 import net.bus.web.common.Util;
 import net.bus.web.controller.dto.BaseResult;
@@ -15,9 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Calendar;
 
 /**
  * Created by sky on 16/12/1.
@@ -54,18 +55,38 @@ public class GrantController {
         return mv;
     }
 
-//    /**
-//     * 国家助学金申请
-//     * @param grantDto
-//     * @return
-//     */
-//    @Auth(role = Auth.Role.USER)
-//    @ResponseBody
-//    @RequestMapping(value = "/application", method = RequestMethod.POST)
-//    public IResult application(@ApiParam(name = "application", value = "助学金申请")@RequestBody GrantDto grantDto){
-//        logger.info("url:/grant/application");
-//        BaseResult result = new BaseResult();
-//        Grant grant = service.getStudent(grantDto.getId());
+    /**
+     * 国家助学金申请
+     * @param grantDto
+     * @return
+     */
+    @Auth(role = Auth.Role.USER)
+    @ResponseBody
+    @RequestMapping(value = "/application", method = RequestMethod.POST)
+    public IResult application(@RequestBody GrantDto grantDto){
+        logger.info("url:/grant/application");
+        BaseResult result = new BaseResult();
+        Grant grant = service.getStudent(grantDto.getIdcard());
+        if (grant!=null){
+            Calendar a=Calendar.getInstance();
+            if(Util.TimeToString(grant.getApplicationtime()).substring(0,4).equals(String.valueOf(a.get(Calendar.YEAR)))){
+                result.setResult("error");
+                result.setContent("本年度已申请过！");
+            }else {
+                service.insert(grantDto);
+            }
+
+        }else {
+            if (service.insert(grantDto)){
+                result.setResult("success");
+                result.setContent("申请成功！");
+            }else {
+                result.setResult("error");
+                result.setContent("申请失败！");
+            }
+        }
+        return result;
+    }
 //        if (grant!=null){
 //            result.setResult("failure");
 //            result.setContent("您已申请!");

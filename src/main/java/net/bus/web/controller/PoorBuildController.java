@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -71,17 +72,17 @@ public class PoorBuildController {
                     result.setResult("failure");
                     result.setContent("您已申请!");
                 }else {
-                    insert(poorBuild,poorBuildDto);
+                    insert(poorBuildDto);
                 }
            }else {
-               PoorBuild create = new PoorBuild();
-               insert(create,poorBuildDto);
+               insert(poorBuildDto);
            }
         return result;
 
     }
 
-    public BaseResult insert(PoorBuild poorBuild,PoorBuildDto poorBuildDto ){
+    public BaseResult insert(PoorBuildDto poorBuildDto ){
+        PoorBuild poorBuild = new PoorBuild();
         BaseResult result = new BaseResult();
         poorBuild.setIdcard(poorBuildDto.getIdcard());
         poorBuild.setInsurance(poorBuildDto.getInsurance());
