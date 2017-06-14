@@ -1,9 +1,7 @@
-<#include "common/_layout3.ftl">
-
-<@HEAD title="主页"/>
-<@TOP />
-<@SIDE />
-<@BODY>
+<#include "common/_blank_layout.ftl">
+<body>
+<@jquery></@jquery>
+<@table></@table>
 <body>
 <div class="container clearfix">
     <div class="table_main clearfix">
@@ -248,41 +246,43 @@
                     <td style="width:89px;">
                         <strong>申请理由（主要包括成绩情况及家庭情况）</strong></td>
                     <td colspan="9" style="width:567px; text-align:justify;">
-                        <input type="text" class="messageone" name="application" style="width:800px; height:150px; " />  <!--没有该字段-->
-                        <pre style="font-size:14px">                                                          申请人签名（手签）：       <input type="date" name="datetime" class="message" /><br /> </pre>
+                        <#--<input type="text" class="messageone" name="application" style="width:800px; height:150px; " />  <!--没有该字段&ndash;&gt;-->
+                            <textarea name="applicationreasons" rows="10" cols="60" style="width:810px; height:150px; margin-left: 50px " ></textarea>
+
+                            <pre style="font-size:14px">                                                          <br /> </pre>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（郑重承诺：本人保证所填信息真实、可靠，如发现有弄虚作假，愿承担相应责任。）<br /><br />
                     </td>
                 </tr>
 
 
-                <tr>
-                    <td style="width:89px;">
-                        <strong>院系推荐<br />意见</strong>
-                    </td>
+                <#--<tr>-->
+                    <#--<td style="width:89px;">-->
+                        <#--<strong>院系推荐<br />意见</strong>-->
+                    <#--</td>-->
 
 
-                    <td colspan="5" valign="middle" style="width:150px; text-align:justify;">
-                        院系审核意见：<br />
-                        <input type="text" name="dsuggest" class="message" style="width:400px; height:80px; font-size:20px;" />
-                        <br />
-                        <pre style="font-size:14px;">                                            （ 公章）</pre><br />
+                    <#--<td colspan="5" valign="middle" style="width:150px; text-align:justify;">-->
+                        <#--院系审核意见：<br />-->
+                        <#--<input type="text" name="dsuggest" class="message" style="width:400px; height:80px; font-size:20px;" />-->
+                        <#--<br />-->
+                        <#--<pre style="font-size:14px;">                                            （ 公章）</pre><br />-->
 
-                        <pre style="font-size:14px;">                       	                   <input type="date" name="ddatetime" class="message"   /></pre>
+                        <#--<pre style="font-size:14px;">                       	                   <input type="date" name="ddatetime" class="message"   /></pre>-->
 
-                    </td>
+                    <#--</td>-->
 
 
 
-                    <td colspan="4" style="width:327px; text-align:justify;">
-                        学校审核意见：<br /><br />
-                        &nbsp;&nbsp;&nbsp;&nbsp经评审、公示，无异议，现推荐该同学获得国家励志奖学金。<br />
-                        &nbsp;<br />
-                        &nbsp;<br />
-                        <pre style="font-size:14px;">                                （ 公章）</pre><br />
+                    <#--<td colspan="4" style="width:327px; text-align:justify;">-->
+                        <#--学校审核意见：<br /><br />-->
+                        <#--&nbsp;&nbsp;&nbsp;&nbsp经评审、公示，无异议，现推荐该同学获得国家励志奖学金。<br />-->
+                        <#--&nbsp;<br />-->
+                        <#--&nbsp;<br />-->
+                        <#--<pre style="font-size:14px;">                                （ 公章）</pre><br />-->
 
-                        <pre style="font-size:14px;">                              <input type="date" name="ddatetime" class="message"   /></pre>
-                        &nbsp;</td>
-                </tr>
+                        <#--<pre style="font-size:14px;">                              <input type="date" name="ddatetime" class="message"   /></pre>-->
+                        <#--&nbsp;</td>-->
+                <#--</tr>-->
 
 
 
@@ -295,8 +295,8 @@
         <input type="button" class="btn btn82 btn_res" value="重置">
     </div>
 </div>
-</@BODY>
-<@FOOT>
+
+
 <script type="text/javascript">
     $(function () {
         $.ajax({
@@ -367,4 +367,4 @@
     }
 </script>
 
-</@FOOT>
+</body>

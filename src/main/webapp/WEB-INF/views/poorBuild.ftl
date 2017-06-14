@@ -86,7 +86,10 @@
                     买保险
                 </td>
                 <td colspan="2">
-                    <input type="text" name="insurance" style="width:120px;">
+                    <select name="insurance" style="width:110px">
+                        <option value="是" >是</option>
+                        <option value="否">否</option>
+                    </select>
                 </td>
             </tr>
             <tr>
@@ -144,7 +147,10 @@
                     生源地贷款
                 </td>
                 <td width="122">
-                    <input type="text" name="isloan" width="10">
+                    <select name="isloan" style="width:110px">
+                        <option value="是" >是</option>
+                        <option value="否">否</option>
+                    </select>
                 </td>
             </tr>
             <tr>
@@ -309,6 +315,7 @@
                 console.log(data);
                 if(data!=null||data!=""){
                     var img = document.getElementById("Img1");
+                    img.src = "/upload/"+data.img;
                     $("[name=sname]").val(data.sname);
                     $("[name=idcard]").val(data.idcard);
                     $("[name=sex]").val([data.sex]);

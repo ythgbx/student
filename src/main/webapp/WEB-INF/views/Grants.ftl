@@ -5,7 +5,7 @@
 <@table></@table>
 <div class="container clearfix">
     <div class="table_main clearfix">
-        <br><h1 align="center">湖北省(${(.now).}-2017)国家助学金申请表</h1><br>
+        <br><h1 align="center">湖北省(${.now?string("yyyy")}-${.now?string("yyyy")})国家助学金申请表</h1><br>
         <form id="poor">
             学校:&nbsp;&nbsp;<input type="text" name="school" width="50">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;院系:&nbsp;&nbsp;<input type="text" name="college" width="30">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;班级:&nbsp;&nbsp;<input type="text" name="classname" width="250"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -237,8 +237,8 @@
                 <tr>
                     <td colspan="10" style="width:627px; text-align:justify;" >
                         申请理由:<br />
-                        <input type="text" class="messageone" name="applicationreasons" style="width:810px; height:150px; " />
-
+                        <#--<input type="text" class="messageone" name="applicationreasons" style="width:810px; height:150px; " />-->
+                        <textarea name="applicationreasons" rows="10" cols="60" style="width:810px; height:150px; margin-left: 50px " ></textarea>
                         <pre style="font-size:14px">                                                                        </pre>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（郑重承诺：本人保证所填信息真实、可靠，如发现有弄虚作假，愿承担相应责任。）
                     </td>
