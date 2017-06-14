@@ -5,7 +5,7 @@
 <@table></@table>
 <div class="container clearfix">
     <div class="table_main clearfix">
-        <br><h1 align="center">湖北省(${}-2017)国家助学金申请表</h1><br>
+        <br><h1 align="center">湖北省(${(.now).}-2017)国家助学金申请表</h1><br>
         <form id="poor">
             学校:&nbsp;&nbsp;<input type="text" name="school" width="50">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;院系:&nbsp;&nbsp;<input type="text" name="college" width="30">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;班级:&nbsp;&nbsp;<input type="text" name="classname" width="250"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
