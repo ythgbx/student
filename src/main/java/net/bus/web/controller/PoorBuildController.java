@@ -72,10 +72,10 @@ public class PoorBuildController {
                     result.setResult("failure");
                     result.setContent("本年度您已申请过!");
                 }else {
-                    insert(poorBuildDto);
+                    return insert(poorBuildDto);
                 }
            }else {
-               insert(poorBuildDto);
+              return insert(poorBuildDto);
            }
         return result;
 

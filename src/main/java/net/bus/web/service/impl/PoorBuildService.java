@@ -20,7 +20,8 @@ public class PoorBuildService implements IPoorBuildService{
     private PoorBuildRepositiory _rootRepository;
 
     public boolean insert(PoorBuild poorBuild) {
-        if (_rootRepository.insertStudent(poorBuild)>0){
+        int a = _rootRepository.insertStudent(poorBuild);
+        if (a>0){
             return true;
         }
         return false;

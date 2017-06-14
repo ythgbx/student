@@ -66,40 +66,50 @@ public class StudentController {
         StudentDetail studentDetail = new StudentDetail();
         User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
         Student currentUser = service.getStudent(user.getUsername());
-        if(currentUser!=null){
-            studentDetail.setSno(currentUser.getSno());
-            studentDetail.setSname(currentUser.getSname());
-            studentDetail.setUsedname(currentUser.getUsedname());
-            studentDetail.setSex(currentUser.getSex());
-            studentDetail.setCollege(currentUser.getCollege());
-            studentDetail.setIdcard(currentUser.getIdcard());
-            studentDetail.setProfession(currentUser.getProfession());
-            studentDetail.setClassname(currentUser.getClassname());
-            studentDetail.setGrade(currentUser.getGrade());
-            studentDetail.setLevel(currentUser.getLevel());
-            studentDetail.setStudylength(currentUser.getStudylength());
-            studentDetail.setNationality(currentUser.getNationality());
-            studentDetail.setPolitical(currentUser.getPolitical());
-            studentDetail.setSroom(currentUser.getSroom());
-            studentDetail.setStel(currentUser.getStel());
-            studentDetail.setSchoolcard(currentUser.getSchoolcard());
-            studentDetail.setFname(currentUser.getFname());
-            studentDetail.setFtel(currentUser.getFtel());
-            studentDetail.setMname(currentUser.getMname());
-            studentDetail.setMtel(currentUser.getMtel());
-            studentDetail.setNativeplace(currentUser.getNativeplace());
-            studentDetail.setImg(currentUser.getImg());
-            studentDetail.setBirthday(Util.TimeToString(currentUser.getBirthday()));
-            studentDetail.setAddress(currentUser.getAddress());
-            studentDetail.setAdmissiontime(Util.TimeToString(currentUser.getAdmissiontime()));
-            studentDetail.setQq(currentUser.getQq());
-            studentDetail.setFamilyaccount(currentUser.getFamilyaccount());
-            result.setContent("数据获取成功");
-            result.setResult("success");
-            return studentDetail;
+        try {
+            if(currentUser!=null){
+                studentDetail.setSno(currentUser.getSno());
+                studentDetail.setSname(currentUser.getSname());
+                studentDetail.setUsedname(currentUser.getUsedname());
+                studentDetail.setSex(currentUser.getSex());
+                studentDetail.setCollege(currentUser.getCollege());
+                studentDetail.setIdcard(currentUser.getIdcard());
+                studentDetail.setProfession(currentUser.getProfession());
+                studentDetail.setClassname(currentUser.getClassname());
+                studentDetail.setGrade(currentUser.getGrade());
+                studentDetail.setLevel(currentUser.getLevel());
+                studentDetail.setStudylength(currentUser.getStudylength());
+                studentDetail.setNationality(currentUser.getNationality());
+                studentDetail.setPolitical(currentUser.getPolitical());
+                studentDetail.setSroom(currentUser.getSroom());
+                studentDetail.setStel(currentUser.getStel());
+                studentDetail.setSchoolcard(currentUser.getSchoolcard());
+                studentDetail.setFname(currentUser.getFname());
+                studentDetail.setFtel(currentUser.getFtel());
+                studentDetail.setMname(currentUser.getMname());
+                studentDetail.setMtel(currentUser.getMtel());
+                studentDetail.setNativeplace(currentUser.getNativeplace());
+                studentDetail.setImg(currentUser.getImg());
+                if (currentUser.getBirthday()!=null){
+                    studentDetail.setBirthday(Util.TimeToString(currentUser.getBirthday()));
+                }
+                studentDetail.setAddress(currentUser.getAddress());
+                if (currentUser.getAdmissiontime()!=null){
+                    studentDetail.setAdmissiontime(Util.TimeToString(currentUser.getAdmissiontime()));
+                }
+                studentDetail.setQq(currentUser.getQq());
+                studentDetail.setFamilyaccount(currentUser.getFamilyaccount());
+                result.setContent("数据获取成功");
+                result.setResult("success");
+                return studentDetail;
+            }
+            result.setContent("数据获取失败");
+            result.setError("error");
+        } catch (Exception e) {
+            result.setResult("error");
+            result.setContent("数据获取失败");
+            result.setError(e.getMessage());
         }
-        result.setContent("数据获取失败");
-        result.setError("error");
         return result;
     }
 
