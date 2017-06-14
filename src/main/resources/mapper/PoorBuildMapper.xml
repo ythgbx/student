@@ -49,14 +49,17 @@
       <result column="usedName" property="usedname" jdbcType="VARCHAR" />
       <result column="sex" property="sex" jdbcType="VARCHAR" />
       <result column="College" property="college" jdbcType="VARCHAR" />
+      <result column="birthday" property="birthday" jdbcType="DATE" />
       <result column="profession" property="profession" jdbcType="VARCHAR" />
       <result column="classname" property="classname" jdbcType="VARCHAR" />
       <result column="grade" property="grade" jdbcType="VARCHAR" />
       <result column="level" property="level" jdbcType="CHAR" />
+      <result column="admissionTime" property="admissiontime" jdbcType="DATE" />
       <result column="studyLength" property="studylength" jdbcType="CHAR" />
       <result column="nationality" property="nationality" jdbcType="VARCHAR" />
       <result column="political" property="political" jdbcType="VARCHAR" />
       <result column="sroom" property="sroom" jdbcType="VARCHAR" />
+      <result column="address" property="address" jdbcType="VARCHAR" />
       <result column="stel" property="stel" jdbcType="VARCHAR" />
       <result column="schoolCard" property="schoolcard" jdbcType="VARCHAR" />
       <result column="fname" property="fname" jdbcType="VARCHAR" />
@@ -65,6 +68,8 @@
       <result column="mtel" property="mtel" jdbcType="VARCHAR" />
       <result column="nativePlace" property="nativeplace" jdbcType="VARCHAR" />
       <result column="img" property="img" jdbcType="VARCHAR" />
+      <result column="QQ" property="qq" jdbcType="VARCHAR" />
+      <result column="familyAccount" property="familyaccount" jdbcType="VARCHAR" />
     </association>
   </resultMap>
 
@@ -155,6 +160,12 @@
     ON poorBuild.`idcard`=students.`idCard`
     <if test="college!=null">
       AND college=#{college}
+    </if>
+    <if test="profession!=null">
+      AND profession = #{profession}
+    </if>
+    <if test="classname!=null">
+      AND classname = #{classname}
     </if>
     LIMIT #{start},#{end}
   </select>

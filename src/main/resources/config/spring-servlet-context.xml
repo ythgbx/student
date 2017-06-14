@@ -23,10 +23,7 @@
 		http://www.springframework.org/schema/tx
 		http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
-    <mvc:annotation-driven/>
-    <!-- Enables the Spring MVC @Controller programming model 添加注解驱动-->
-    <context:annotation-config/>
+
     <!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
     <mvc:resources mapping="/js/**" location="/resources/js/"/>
     <mvc:resources mapping="/css/**" location="/resources/css/"/>
@@ -39,11 +36,34 @@
     <!-- 扫描net.bus.web包里下的所有class文件，配置注解的类全都装入容器中进行管理 -->
     <context:component-scan base-package="net.bus.web"/>
 
+    <!-- 默认的注解映射的支持 -->
+    <mvc:annotation-driven>
+        <message-converters>
+            <beans:bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <beans:property name="objectMapper">
+                    <beans:bean class="com.fasterxml.jackson.databind.ObjectMapper">
+                        <!-- 处理responseBody 里面日期类型 -->
+                        <beans:property name="dateFormat">
+                            <beans:bean class="java.text.SimpleDateFormat">
+                                <beans:constructor-arg type="java.lang.String" value="yyyy-MM-dd" />
+                            </beans:bean>
+                        </beans:property>
+                        <!-- 时区指定 中国位于东八区-->
+                        <beans:property name="timeZone" value="GMT+8" />
+                        <!-- 为null字段时不显示 -->
+                        <beans:property name="serializationInclusion">
+                            <beans:value type="com.fasterxml.jackson.annotation.JsonInclude.Include">NON_NULL</beans:value>
+                        </beans:property>
+                    </beans:bean>
+                </beans:property>
+            </beans:bean>
+        </message-converters>
+    </mvc:annotation-driven>
+
     <!-- AOP -->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 
-    <!-- 默认的注解映射的支持 -->
-    <mvc:annotation-driven />
+
 
     <!--mybatis 数据库配置 -->
     <util:properties id="dbConfig" location="/WEB-INF/classes/config/jdbc.properties"/>

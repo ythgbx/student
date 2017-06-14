@@ -23,23 +23,25 @@
 
 </div>
 <div id="term">
-    <div name="title">标题</div>
-    <div name="name">作者</div>
+    <div name="sno">学号</div>
+    <div name="sname">姓名</div>
 </div>
 <div id="new_table"></div>
 <div id="other">
     <div class="container">
         <div class="table_main">
-            <br><h1 align="center">湖北理工学院家庭经济困难学生申请认定(档案)表</h1><br>
+            <br>
+            <h1 align="center">湖北理工学院家庭经济困难学生申请认定(档案)表</h1><br>
             <form id="grant">
                 <input type="hidden" name="id" value="">
                 <table border="1" cellspacing="0" cellpadding="0" align="left" border-collapse="collapse">
-                    <tbody><tr>
+                    <tbody>
+                    <tr>
                         <td width="69" class="toptitle">
                             姓名
                         </td>
                         <td colspan="2">
-                            <input type="text" name='sname' style="width:130px;">
+                            <input type="text" name="sname" style="width:130px;">
                         </td>
                         <td colspan="2">
                             性别
@@ -51,16 +53,16 @@
                             出生年月
                         </td>
                         <td width="88">
-                            <input type="text" name="birthDate" style="width:100px;">
+                            <input type="text" name="birthday" style="width:100px;">
                         </td>
                         <td width="50">
                             民族
                         </td>
                         <td width="58">
-                            <input type="text" name="nation" style="width:50px;">
+                            <input type="text" name="nationality" style="width:50px;">
                         </td>
                         <td width="122" rowspan="5">
-                            <img  src="/images/tx.png" alt="" width="130" height="170" id="Img1"><br>
+                            <img src="/images/tx.png" alt="" width="130" height="170" id="Img1"><br>
                             <input name="img" type="hidden" value="">
                             <button onclick="updateImg()" type="button">点击更换头像</button>
                         </td>
@@ -70,8 +72,8 @@
                             学制
                         </td>
                         <td colspan="2" rowspan="2">
-                            <input type="hidden" name="studylength">
-                            <input type="text" name="depth" style="width:50px;">
+                        <#--<input type="hidden" name="studylength">-->
+                            <input type="text" name="studylength" style="width:50px;">年
                         </td>
                         <td colspan="2" rowspan="2">
                             年级<br>
@@ -85,12 +87,12 @@
                             面貌
                         </td>
                         <td colspan="2" rowspan="2">
-                            <input type="text" name="politicalStatus" style="width:100px;">
+                            <input type="text" name="political" style="width:100px;">
                         </td>
                     </tr>
                     <tr>
                         <td height="56" colspan="5">
-                            <input type="text" name="classes" style="width:180px;">
+                            <input type="text" name="classname" style="width:180px;">
                         </td>
                     </tr>
                     <tr>
@@ -105,7 +107,7 @@
                             电话
                         </td>
                         <td colspan="5">
-                            <input type="text" name="tel" style="width:120px;">
+                            <input type="text" name="stel" style="width:120px;">
                         </td>
                         <td width="88">
                             是否购<br>
@@ -128,7 +130,7 @@
                             卡号
                         </td>
                         <td colspan="3">
-                            <input class="message" type="text" name="bandCard" style="width:320px;"/>
+                            <input class="message" type="text" name="schoolcard" style="width:320px;"/>
                         </td>
                     </tr>
                     <tr>
@@ -170,7 +172,7 @@
                             生源地贷款
                         </td>
                         <td width="122">
-                            <input type="text" name="isLoan" width="10">
+                            <input type="text" name="isloan" width="10">
                         </td>
                     </tr>
                     <tr>
@@ -276,13 +278,45 @@
                         </td>
                         <td colspan="13" style="text-align:left">
 
-                <pre>     个人申请 <input type="checkbox" name="check" >     特困证明 <input type="checkbox" name="check" >     父母下岗证 <input type="checkbox" name="check" >    残疾证 <input type="checkbox" name="check" >     低保证 <input type="checkbox" name="check" >
+                <pre>     个人申请 <input type="checkbox" name="check">     特困证明 <input type="checkbox" name="check">     父母下岗证 <input
+                        type="checkbox" name="check">    残疾证 <input type="checkbox" name="check">     低保证 <input
+                        type="checkbox" name="check">
 
-     病情证明 <input type="checkbox" name="check" >     获奖证明 <input type="checkbox" name="check" >（以上证明材料提供复印件附在后页）<pre>                </pre></pre></td>
+     病情证明 <input type="checkbox" name="check">     获奖证明 <input type="checkbox" name="check">（以上证明材料提供复印件附在后页）<pre>                </pre></pre>
+                        </td>
                     </tr>
+                    <#--<tr>-->
+                    <#--<td width="69" class="toptitle">-->
+                    <#--学<br><br>院<br><br>意<br><br>见-->
+                    <#--</td>-->
+                    <#--<td colspan="13">-->
+                    <#--<pre>    经核实，该生评定为：1、贫困学生 <input type="radio" name="dgrades" value="贫困学生"> 2、特困学生 <input type="radio" name="dgrades" value="特困学生">-->
 
 
 
+
+                    <#--（公章）         学院领导签字：-->
+
+                    <#--<input type="date" name="dsigndate"></pre>-->
+
+
+                    <#--</td>-->
+                    <#--</tr>-->
+                    <#--<tr>-->
+                    <#--<td width="69" class="toptitle">-->
+                    <#--学<br><br>校<br><br>意<br><br>见-->
+                    <#--</td>-->
+                    <#--<td colspan="13">-->
+                    <#--<pre>    经审核，同意该生评定为：1、贫困学生 <input type="radio" name="sgrades" value="贫困学生"> 2、特困学生 <input type="radio" name="sgrades" value="贫困学生">-->
+
+
+
+
+                    <#--（公章）         学校领导签章：-->
+
+                    <#--<input type="date" name="ssigndate"></pre>-->
+                    <#--</td>-->
+                    <#--</tr>-->
                     </tbody>
                 </table>
             </form>
