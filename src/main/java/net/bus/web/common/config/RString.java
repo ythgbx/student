@@ -5,88 +5,57 @@ package net.bus.web.common.config;
  */
 public class RString {
 
-    public static String LOGIN_SUCCESS;
-    public static String LOGIN_FAILED;
+    public static String APPLICATION_POOR;
+    public static String APPLICATION_GRANT;
+    public static String APPLICATION_MOTIVATIONAL;
+    /**
+     * 审核标记
+     */
+    public static String AUDIT_COUNSELOR_TRUE;
 
-    public static String REGISTER_FAILED_USER_HAD;
-    public static String REGISTER_FAILED_SMS_CODE;
+    public static String AUDIT_COUNSELOR_FALSE;
 
-    public static String SMS_FAILED_NO_PHONE;
-    public static String SMS_FAILED_REPEAT_SEND;
-    public static String SMS_FAILED_SEND;
+    public static String AUDIT_ADMIN_TRUE;
 
+    public static String AUDIT_ADMIN_FALSE;
 
-    public static String MODIFY_PASSWORD_FAILED;
-    public static String RETRIEVE_PASSWORD_FAILED;
-    public static String MODIFY_PHONE_FAILED_PHONE;
-    public static String MODIFY_PHONE_FAILED_CODE_OUT_DATE;
-    public static String MODIFY_PHONE_FAILED_CODE_ERROR;
-
-    public static String ADD_POINT_FAILED;
-
-    public static String UPLOAD_PHOTO_FAILED;
+    public static String AUDIT;
 
     public static String FILE_UPLOAD_FAILED_EMPTY_FILE;
     public static String FILE_UPLOAD_FAILED_EXT;
 
-    public static String COMMODITY_NOT_FOUND;
 
-    public static String ACTIVE_COMMENT;
 
-    public void setLOGIN_SUCCESS(String LOGIN_SUCCESS) {
-        RString.LOGIN_SUCCESS = LOGIN_SUCCESS;
+    public void setAPPLICATION_POOR(String APPLICATION_POOR) {
+        RString.APPLICATION_POOR = APPLICATION_POOR;
     }
 
-    public void setLOGIN_FAILED(String LOGIN_FAILED) {
-        RString.LOGIN_FAILED = LOGIN_FAILED;
+    public void setAPPLICATION_GRANT(String APPLICATION_GRANT) {
+        RString.APPLICATION_GRANT = APPLICATION_GRANT;
     }
 
-    public void setREGISTER_FAILED_USER_HAD(String REGISTER_FAILED_USER_HAD) {
-        RString.REGISTER_FAILED_USER_HAD = REGISTER_FAILED_USER_HAD;
+    public void setAPPLICATION_MOTIVATIONAL(String APPLICATION_MOTIVATIONAL) {
+        RString.APPLICATION_MOTIVATIONAL = APPLICATION_MOTIVATIONAL;
     }
 
-    public void setSMS_FAILED_NO_PHONE(String SMS_FAILED_NO_PHONE) {
-        RString.SMS_FAILED_NO_PHONE = SMS_FAILED_NO_PHONE;
+    public void setAUDIT_COUNSELOR_TRUE(String AUDIT_COUNSELOR_TRUE) {
+        RString.AUDIT_COUNSELOR_TRUE = AUDIT_COUNSELOR_TRUE;
     }
 
-    public void setSMS_FAILED_REPEAT_SEND(String SMS_FAILED_REPEAT_SEND) {
-        RString.SMS_FAILED_REPEAT_SEND = SMS_FAILED_REPEAT_SEND;
+    public void setAUDIT_COUNSELOR_FALSE(String AUDIT_COUNSELOR_FALSE) {
+        RString.AUDIT_COUNSELOR_FALSE = AUDIT_COUNSELOR_FALSE;
     }
 
-    public void setSMS_FAILED_SEND(String SMS_FAILED_SEND) {
-        RString.SMS_FAILED_SEND = SMS_FAILED_SEND;
+    public void setAUDIT_ADMIN_TRUE(String AUDIT_ADMIN_TRUE) {
+        RString.AUDIT_ADMIN_TRUE = AUDIT_ADMIN_TRUE;
     }
 
-    public void setREGISTER_FAILED_SMS_CODE(String REGISTER_FAILED_SMS_CODE) {
-        RString.REGISTER_FAILED_SMS_CODE = REGISTER_FAILED_SMS_CODE;
+    public void setAUDIT_ADMIN_FALSE(String AUDIT_ADMIN_FALSE) {
+        RString.AUDIT_ADMIN_FALSE = AUDIT_ADMIN_FALSE;
     }
 
-    public void setMODIFY_PASSWORD_FAILED(String MODIFY_PASSWORD_FAILED) {
-        RString.MODIFY_PASSWORD_FAILED = MODIFY_PASSWORD_FAILED;
-    }
-
-    public void setRETRIEVE_PASSWORD_FAILED(String RETRIEVE_PASSWORD_FAILED) {
-        RString.RETRIEVE_PASSWORD_FAILED = RETRIEVE_PASSWORD_FAILED;
-    }
-
-    public void setMODIFY_PHONE_FAILED_PHONE(String MODIFY_PHONE_FAILED_PHONE) {
-        RString.MODIFY_PHONE_FAILED_PHONE = MODIFY_PHONE_FAILED_PHONE;
-    }
-
-    public void setMODIFY_PHONE_FAILED_CODE_OUT_DATE(String MODIFY_PHONE_FAILED_CODE_OUT_DATE) {
-        RString.MODIFY_PHONE_FAILED_CODE_OUT_DATE = MODIFY_PHONE_FAILED_CODE_OUT_DATE;
-    }
-
-    public void setMODIFY_PHONE_FAILED_CODE_ERROR(String MODIFY_PHONE_FAILED_CODE_ERROR) {
-        RString.MODIFY_PHONE_FAILED_CODE_ERROR = MODIFY_PHONE_FAILED_CODE_ERROR;
-    }
-
-    public void setADD_POINT_FAILED(String ADD_POINT_FAILED) {
-        RString.ADD_POINT_FAILED = ADD_POINT_FAILED;
-    }
-
-    public void setUPLOAD_PHOTO_FAILED(String UPLOAD_PHOTO_FAILED) {
-        RString.UPLOAD_PHOTO_FAILED = UPLOAD_PHOTO_FAILED;
+    public void setAUDIT(String AUDIT) {
+        RString.AUDIT = AUDIT;
     }
 
     public void setFILE_UPLOAD_FAILED_EMPTY_FILE(String FILE_UPLOAD_FAILED_EMPTY_FILE) {
@@ -97,11 +66,5 @@ public class RString {
         RString.FILE_UPLOAD_FAILED_EXT = FILE_UPLOAD_FAILED_EXT;
     }
 
-    public void setCOMMODITY_NOT_FOUND(String COMMODITY_NOT_FOUND) {
-        RString.COMMODITY_NOT_FOUND = COMMODITY_NOT_FOUND;
-    }
 
-    public void setACTIVE_COMMENT(String ACTIVE_COMMENT) {
-        RString.ACTIVE_COMMENT = ACTIVE_COMMENT;
-    }
 }

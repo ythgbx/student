@@ -86,7 +86,7 @@ public class PoorBuildDto {
 
     private String m2name;
 
-    private String m2wordpress;
+    private String m2workplace;
 
     private String m2earning;
 
@@ -94,7 +94,7 @@ public class PoorBuildDto {
 
     private String m3name;
 
-    private String m3wordpress;
+    private String m3workplace;
 
     private String m3earning;
 
@@ -418,14 +418,6 @@ public class PoorBuildDto {
         this.m2name = m2name;
     }
 
-    public String getM2wordpress() {
-        return m2wordpress;
-    }
-
-    public void setM2wordpress(String m2wordpress) {
-        this.m2wordpress = m2wordpress;
-    }
-
     public String getM2earning() {
         return m2earning;
     }
@@ -450,12 +442,20 @@ public class PoorBuildDto {
         this.m3name = m3name;
     }
 
-    public String getM3wordpress() {
-        return m3wordpress;
+    public String getM2workplace() {
+        return m2workplace;
     }
 
-    public void setM3wordpress(String m3wordpress) {
-        this.m3wordpress = m3wordpress;
+    public void setM2workplace(String m2workplace) {
+        this.m2workplace = m2workplace;
+    }
+
+    public String getM3workplace() {
+        return m3workplace;
+    }
+
+    public void setM3workplace(String m3workplace) {
+        this.m3workplace = m3workplace;
     }
 
     public String getM3earning() {

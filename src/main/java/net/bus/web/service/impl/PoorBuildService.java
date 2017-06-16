@@ -1,8 +1,10 @@
 package net.bus.web.service.impl;
 
+import net.bus.web.common.config.RString;
 import net.bus.web.model.PoorBuild;
 import net.bus.web.repository.PoorBuildRepositiory;
 import net.bus.web.repository.specification.PoorBuildIdCardSpecification;
+import net.bus.web.service.IApplicationRecordService;
 import net.bus.web.service.IPoorBuildService;
 import net.bus.web.teacher.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +20,15 @@ import java.util.Map;
 public class PoorBuildService implements IPoorBuildService{
     @Autowired
     private PoorBuildRepositiory _rootRepository;
+    @Autowired
+    private IApplicationRecordService applicationRecordService;
 
     public boolean insert(PoorBuild poorBuild) {
         int a = _rootRepository.insertStudent(poorBuild);
         if (a>0){
-            return true;
+            if (applicationRecordService.insert(RString.APPLICATION_POOR,poorBuild.getIdcard())){
+                return true;
+            }
         }
         return false;
     }

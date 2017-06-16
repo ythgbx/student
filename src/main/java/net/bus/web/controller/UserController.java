@@ -42,7 +42,6 @@ public class UserController {
      * @return
      */
     @RequestMapping(value="/login" , method = RequestMethod.GET)
-    @ApiOperation(value = "登陆页面", httpMethod = "GET", response = ModelAndView.class, notes = "登陆页面")
     public ModelAndView index(Model model)
     {
         logger.info("url:/user");
@@ -71,10 +70,9 @@ public class UserController {
 
             result.setSession_id(session.getId());
             result.setResult("success");
-            result.setContent(RString.LOGIN_SUCCESS);
         }else{
             result.setResult("failure");
-            result.setContent(RString.LOGIN_FAILED);
+            result.setContent("用户名或密码错误！");
         }
         return result;
     }

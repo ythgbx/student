@@ -61,6 +61,9 @@ public class StudentDetail extends BaseResult{
 
     private String familyaccount;  //家庭户口
 
+    public StudentDetail() {
+    }
+
     public String getIdcard() {
         return idcard;
     }

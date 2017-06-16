@@ -10,5 +10,5 @@ import net.bus.web.model.Grant;
 public interface IGrantService {
     boolean insert(GrantDto grantDto);
 
-    Grant getStudent(String id);
+    Grant getStudent(String idCard);
 }

@@ -28,6 +28,7 @@
         <mapper resource="mapper/ClassnameMapper.xml"/>
         <mapper resource="mapper/CollegeMapper.xml"/>
         <mapper resource="mapper/ProfessionalMapper.xml"/>
+        <mapper resource="mapper/ApplicationRecordMapper.xml"/>
     </mappers>
 
 </configuration>

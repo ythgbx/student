@@ -27,9 +27,9 @@
     <result column="m3Company" property="m3company" jdbcType="VARCHAR" />
     <result column="applicationReasons" property="applicationreasons" jdbcType="VARCHAR" />
     <result column="Remarks" property="remarks" jdbcType="VARCHAR" />
-    <result column="Dreviewed" property="dreviewed" jdbcType="VARCHAR" />
+    <result column="Dreviewed" property="dreviewed" jdbcType="INTEGER" />
     <result column="DreviewedRemarks" property="dreviewedremarks" jdbcType="VARCHAR" />
-    <result column="admin" property="admin" jdbcType="VARCHAR" />
+    <result column="admin" property="admin" jdbcType="INTEGER" />
     <result column="adminRemarks" property="adminremarks" jdbcType="VARCHAR" />
     <result column="ApplicationTime" property="applicationtime" jdbcType="DATE" />
   </resultMap>
@@ -147,8 +147,8 @@
       #{m2name,jdbcType=VARCHAR}, #{m2age,jdbcType=INTEGER}, #{m2relations,jdbcType=VARCHAR}, 
       #{m2company,jdbcType=VARCHAR}, #{m3name,jdbcType=VARCHAR}, #{m3age,jdbcType=INTEGER}, 
       #{m3relations,jdbcType=VARCHAR}, #{m3company,jdbcType=VARCHAR}, #{applicationreasons,jdbcType=VARCHAR}, 
-      #{remarks,jdbcType=VARCHAR}, #{dreviewed,jdbcType=VARCHAR}, #{dreviewedremarks,jdbcType=VARCHAR}, 
-      #{admin,jdbcType=VARCHAR}, #{adminremarks,jdbcType=VARCHAR}, #{applicationtime,jdbcType=DATE}
+      #{remarks,jdbcType=VARCHAR}, #{dreviewed,jdbcType=INTEGER}, #{dreviewedremarks,jdbcType=VARCHAR}, 
+      #{admin,jdbcType=INTEGER}, #{adminremarks,jdbcType=VARCHAR}, #{applicationtime,jdbcType=DATE}
       )
   </insert>
   <insert id="insertSelective" parameterType="net.bus.web.model.Grant" >
@@ -322,13 +322,13 @@
         #{remarks,jdbcType=VARCHAR},
       </if>
       <if test="dreviewed != null" >
-        #{dreviewed,jdbcType=VARCHAR},
+        #{dreviewed,jdbcType=INTEGER},
       </if>
       <if test="dreviewedremarks != null" >
         #{dreviewedremarks,jdbcType=VARCHAR},
       </if>
       <if test="admin != null" >
-        #{admin,jdbcType=VARCHAR},
+        #{admin,jdbcType=INTEGER},
       </if>
       <if test="adminremarks != null" >
         #{adminremarks,jdbcType=VARCHAR},
@@ -423,13 +423,13 @@
         Remarks = #{record.remarks,jdbcType=VARCHAR},
       </if>
       <if test="record.dreviewed != null" >
-        Dreviewed = #{record.dreviewed,jdbcType=VARCHAR},
+        Dreviewed = #{record.dreviewed,jdbcType=INTEGER},
       </if>
       <if test="record.dreviewedremarks != null" >
         DreviewedRemarks = #{record.dreviewedremarks,jdbcType=VARCHAR},
       </if>
       <if test="record.admin != null" >
-        admin = #{record.admin,jdbcType=VARCHAR},
+        admin = #{record.admin,jdbcType=INTEGER},
       </if>
       <if test="record.adminremarks != null" >
         adminRemarks = #{record.adminremarks,jdbcType=VARCHAR},
@@ -469,9 +469,9 @@
       m3Company = #{record.m3company,jdbcType=VARCHAR},
       applicationReasons = #{record.applicationreasons,jdbcType=VARCHAR},
       Remarks = #{record.remarks,jdbcType=VARCHAR},
-      Dreviewed = #{record.dreviewed,jdbcType=VARCHAR},
+      Dreviewed = #{record.dreviewed,jdbcType=INTEGER},
       DreviewedRemarks = #{record.dreviewedremarks,jdbcType=VARCHAR},
-      admin = #{record.admin,jdbcType=VARCHAR},
+      admin = #{record.admin,jdbcType=INTEGER},
       adminRemarks = #{record.adminremarks,jdbcType=VARCHAR},
       ApplicationTime = #{record.applicationtime,jdbcType=DATE}
     <if test="_parameter != null" >
@@ -554,13 +554,13 @@
         Remarks = #{remarks,jdbcType=VARCHAR},
       </if>
       <if test="dreviewed != null" >
-        Dreviewed = #{dreviewed,jdbcType=VARCHAR},
+        Dreviewed = #{dreviewed,jdbcType=INTEGER},
       </if>
       <if test="dreviewedremarks != null" >
         DreviewedRemarks = #{dreviewedremarks,jdbcType=VARCHAR},
       </if>
       <if test="admin != null" >
-        admin = #{admin,jdbcType=VARCHAR},
+        admin = #{admin,jdbcType=INTEGER},
       </if>
       <if test="adminremarks != null" >
         adminRemarks = #{adminremarks,jdbcType=VARCHAR},
@@ -597,9 +597,9 @@
       m3Company = #{m3company,jdbcType=VARCHAR},
       applicationReasons = #{applicationreasons,jdbcType=VARCHAR},
       Remarks = #{remarks,jdbcType=VARCHAR},
-      Dreviewed = #{dreviewed,jdbcType=VARCHAR},
+      Dreviewed = #{dreviewed,jdbcType=INTEGER},
       DreviewedRemarks = #{dreviewedremarks,jdbcType=VARCHAR},
-      admin = #{admin,jdbcType=VARCHAR},
+      admin = #{admin,jdbcType=INTEGER},
       adminRemarks = #{adminremarks,jdbcType=VARCHAR},
       ApplicationTime = #{applicationtime,jdbcType=DATE}
     where no = #{no,jdbcType=BIGINT}

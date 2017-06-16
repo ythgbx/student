@@ -1,9 +1,11 @@
 package net.bus.web.service.impl;
 
+import net.bus.web.common.config.RString;
 import net.bus.web.controller.dto.GrantDto;
 import net.bus.web.model.Grant;
 import net.bus.web.repository.GrantRepository;
 import net.bus.web.repository.specification.GrantidCardSpecification;
+import net.bus.web.service.IApplicationRecordService;
 import net.bus.web.service.IGrantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,8 @@ import java.util.Date;
 public class GrantService implements IGrantService{
     @Autowired
     private GrantRepository _rootRepository;
+    @Autowired
+    private IApplicationRecordService applicationRecordService;
 
 
     public boolean insert(GrantDto grantDto) {
@@ -46,6 +50,7 @@ public class GrantService implements IGrantService{
         grant.setApplicationreasons(grantDto.getApplicationreasons());
         grant.setApplicationtime(new Date());
         if (_rootRepository.insertGrant(grant)>0){
+            applicationRecordService.insert(RString.APPLICATION_GRANT,grant.getIdcard());
             return true;
         }
         return false;

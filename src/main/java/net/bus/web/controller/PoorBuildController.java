@@ -108,12 +108,14 @@ public class PoorBuildController {
         poorBuild.setM1earning(poorBuildDto.getM1earning());
         poorBuild.setM2(poorBuildDto.getM2());
         poorBuild.setM2name(poorBuildDto.getM2name());
-        poorBuild.setM2wordpress(poorBuildDto.getM2wordpress());
+        poorBuild.setM2wordpress(poorBuildDto.getM2workplace());
         poorBuild.setM2earning(poorBuildDto.getM2earning());
         poorBuild.setM3(poorBuildDto.getM3());
         poorBuild.setM3name(poorBuildDto.getM3name());
-        poorBuild.setM3wordpress(poorBuildDto.getM3wordpress());
+        poorBuild.setM3wordpress(poorBuildDto.getM3workplace());
         poorBuild.setM3earning(poorBuildDto.getM3earning());
+        poorBuild.setCounselorreview(0);
+        poorBuild.setAdmin(0);
         poorBuild.setApplicationtime(new Date());
         if (service.insert(poorBuild)){
             result.setResult("success");

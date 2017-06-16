@@ -64,6 +64,9 @@ public class GrantDto {
 
     private Date applicationtime;
 
+    public GrantDto() {
+    }
+
     public String getIdcard() {
         return idcard;
     }

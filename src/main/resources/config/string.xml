@@ -8,38 +8,21 @@
      ">
 
     <bean class="net.bus.web.common.config.RString">
-        <!-- Login -->
-        <property name="LOGIN_SUCCESS" value="登录成功"/>
-        <property name="LOGIN_FAILED" value="用户名或密码错误"/>
-
-        <!-- Register -->
-        <property name="REGISTER_FAILED_USER_HAD" value="手机已注册"/>
-        <property name="REGISTER_FAILED_SMS_CODE" value="验证码不正确"/>
-
-        <!-- Sms -->
-        <property name="SMS_FAILED_NO_PHONE" value="手机号为空"/>
-        <property name="SMS_FAILED_REPEAT_SEND" value="慢一点获取验证码吧"/>
-        <property name="SMS_FAILED_SEND" value="验证码发送失败"/>
-
-        <!-- User Account -->
-        <property name="MODIFY_PASSWORD_FAILED" value="新密码为空或原密码不正确"/>
-        <property name="RETRIEVE_PASSWORD_FAILED" value="新密码为空或验证码不正确"/>
-        <property name="MODIFY_PHONE_FAILED_PHONE" value="原手机号不正确"/>
-        <property name="MODIFY_PHONE_FAILED_CODE_OUT_DATE" value="验证码失效"/>
-        <property name="MODIFY_PHONE_FAILED_CODE_ERROR" value="验证码不正确"/>
-
-        <!-- User Base -->
-        <property name="ADD_POINT_FAILED" value="增加积分失败"/>
-        <property name="UPLOAD_PHOTO_FAILED" value="头像上传失败"/>
+        <!-- 申请类型 -->
+        <property name="APPLICATION_POOR" value="贫困建档申请"/>
+        <property name="APPLICATION_GRANT" value="助学金申请"/>
+        <property name="APPLICATION_MOTIVATIONAL" value="贫困建档申请"/>
+        <property name="AUDIT_COUNSELOR_TRUE" value="通过"/>
+        <property name="AUDIT_COUNSELOR_FALSE" value="未通过"/>
+        <property name="AUDIT_ADMIN_TRUE" value="通过"/>
+        <property name="AUDIT_ADMIN_FALSE" value="未通过"/>
+        <property name="AUDIT" value="未审核"/>
 
         <!-- File Upload -->
         <property name="FILE_UPLOAD_FAILED_EMPTY_FILE" value="上传文件为空"/>
         <property name="FILE_UPLOAD_FAILED_EXT" value="上传文件类型不正确"/>
 
-        <!-- -->
-        <property name="COMMODITY_NOT_FOUND" value="商品已经消失在了宇宙"/>
-        
-        <!--用户source标识-->
-        <property name="ACTIVE_COMMENT" value="笑傲江湖2016活动"/>
+
+
     </bean>
 </beans>

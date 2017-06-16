@@ -6,7 +6,7 @@
     <div class="table_main clearfix">
         <br><h1 align="center">湖北理工学院学生个人基本信息表</h1><br>
         <form id="info">
-            <input type="hidden" name="id"/>
+            <#--<input type="hidden" name="id"/>-->
             <table border="1px" cellspacing="0px" cellpadding="0px"  border-collapse="collapse" rules="all">
                 <tbody>
                 <tr>
@@ -166,11 +166,6 @@
                         <input class="message" type="text" name="schoolcard" style="width:320px;"/>  <!--没有该字段-->
                     </td>
                 </tr>
-
-
-
-
-
                 <tr>
                     <td height="39" style="width:84px;">
                         身份证号</td>
@@ -327,6 +322,7 @@
                 alert(data.content);
             },
             error: function (data) {
+                alert("请求失败！")
             }
         });
     }

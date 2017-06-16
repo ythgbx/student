@@ -6,7 +6,7 @@
     <div class="table_main clearfix">
         <br><h1 align="center">湖北理工学院家庭经济困难学生申请认定(档案)表</h1><br>
         <form id="grant">
-            <input type="hidden" name="id" value="">
+            <#--<input type="hidden" name="id" value="">-->
         <table border="1" cellspacing="0" cellpadding="0" align="left" border-collapse="collapse">
             <tbody><tr>
                 <td width="69" class="toptitle">
@@ -347,9 +347,10 @@
             d[this.name] = this.value;
         });
         console.log(d);
+        var poorBuildDto = JSON.stringify(d);
         $.ajax({
             url: "/poorBuild/application",
-            data: JSON.stringify(d),
+            data: poorBuildDto,
             type: "POST",
             dataType: "json",
             contentType: "application/json;charset=UTF-8",
@@ -357,6 +358,7 @@
                 alert(data.content);
             },
             error: function (data) {
+//                alert("请求失败！")
             }
         });
 
