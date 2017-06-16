@@ -105,10 +105,10 @@ public class UserController {
         User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
         switch (user.getRole()){
             case 2:
-                mv.setViewName("main_counselor");
+                mv.setViewName("main_teacher");
                 break;
             case 1:
-                mv.setViewName("main_teacher");
+                mv.setViewName("main_counselor");
                 break;
             case 0:
                 mv.setViewName("main_student");

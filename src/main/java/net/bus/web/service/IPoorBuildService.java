@@ -14,7 +14,8 @@ public interface IPoorBuildService {
     PoorBuild getPoorBuildByIdCard(String Idcard);
 
     //获取所有贫困生建档的信息
-    Map<String,Object> getAllPoor(int page, int rows,String college,String profession,String classname);
+    Map<String,Object> getAllPoor(int page, int rows,String college,String profession,String classname,String sno,String sname,String admin);
 
+    int update(PoorBuild poorBuild);
 
 }

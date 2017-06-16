@@ -153,11 +153,12 @@
     </if>
   </select>
 
-  <!--联合查询出所有申请的信息-->
+  <!--联合查询出所有申请的信息 concounselorReview 辅导员审核通过的 -->
   <select id="getAllPoorinfo" parameterType="java.util.Map" resultMap="poorResultMap">
     SELECT * FROM poorBuild
     INNER JOIN students
     ON poorBuild.`idcard`=students.`idCard`
+    AND poorBuild.`counselorReview`=2
     <if test="college!=null">
       AND college=#{college}
     </if>
@@ -166,6 +167,15 @@
     </if>
     <if test="classname!=null">
       AND classname = #{classname}
+    </if>
+    <if test="sno!=null">
+      AND sno = #{sno}
+    </if>
+    <if test="sname!=null">
+     AND sname = #{sname}
+    </if>
+    <if test="admin!=null">
+      AND admin = #{admin}
     </if>
     LIMIT #{start},#{end}
   </select>
@@ -614,9 +624,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="net.bus.web.model.PoorBuild" >
     update poorBuild
     <set >
-      <if test="idcard != null" >
-        idcard = #{idcard,jdbcType=VARCHAR},
-      </if>
+      <!--<if test="idcard != null" >-->
+        <!--idcard = #{idcard,jdbcType=VARCHAR},-->
+      <!--</if>-->
       <if test="insurance != null" >
         Insurance = #{insurance,jdbcType=CHAR},
       </if>
@@ -723,7 +733,7 @@
         adminRemarks = #{adminremarks,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
+    where idcard = #{idcard,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="net.bus.web.model.PoorBuild" >
     update poorBuild

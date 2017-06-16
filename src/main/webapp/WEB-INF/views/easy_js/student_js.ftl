@@ -1,7 +1,7 @@
 <#macro stujs>
 <script>
     $(function() {
-        var other = $('input[name="search"]').val();
+
 
         //格式化查询按钮
         $('a[type="query"]').linkbutton({

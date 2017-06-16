@@ -2,27 +2,24 @@ package net.bus.web.controller;
 
 import net.bus.web.aspect.Auth;
 import net.bus.web.common.Util;
+import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.BaseResult;
 import net.bus.web.controller.dto.IResult;
 import net.bus.web.controller.dto.PoorBuildDto;
 import net.bus.web.model.PoorBuild;
-import net.bus.web.model.Student;
+import net.bus.web.model.User;
 import net.bus.web.service.IPoorBuildService;
 import net.bus.web.service.IStudentService;
 import org.apache.log4j.Logger;
-
-import java.util.Calendar;
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpSession;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by sky on 16/12/6.
@@ -33,7 +30,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class PoorBuildController {
     @Autowired
     private IStudentService studentService;
-
     @Autowired
     private IPoorBuildService service;
 
@@ -127,5 +123,31 @@ public class PoorBuildController {
         return result;
     }
 
+    /**
+     *
+     * @param idcard 身份证号
+     * @param result  通过或不通过的标志
+     * @param remarks  不通过的备注信息
+     * @param session   当前登录用户的session
+     * @return 修改成功的数据条数
+     */
+    @RequestMapping(value = "/examine",method = RequestMethod.POST)
+    public @ResponseBody int updateAdmin(String idcard, Integer result,
+                                         @RequestParam(required = false) String remarks, HttpSession session){
+        User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
+        PoorBuild poorBuild = new PoorBuild();
+        poorBuild.setIdcard(idcard);
+        switch (user.getRole()){
+            case 2:
+                poorBuild.setAdmin(result);
+                poorBuild.setAdminremarks(remarks);
+                break;
+            case 1:
+                poorBuild.setCounselorreview(result);
+                poorBuild.setCounselorreviewremarks(remarks);
+                break;
+        }
+        return service.update(poorBuild);
+    }
 
 }

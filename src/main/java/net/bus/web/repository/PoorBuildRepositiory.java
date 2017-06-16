@@ -73,9 +73,9 @@ public class PoorBuildRepositiory {
         return poorBuildMapper.insert(poorBuild);
     }
 
-    public int updateStudent(PoorBuild student)
+    public int updatePoorbuild(PoorBuild student)
     {
-        return poorBuildMapper.updateByPrimaryKey(student);
+        return poorBuildMapper.updateByPrimaryKeySelective(student);
     }
 
     public int Count(){

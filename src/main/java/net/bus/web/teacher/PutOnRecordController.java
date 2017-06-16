@@ -32,8 +32,11 @@ public class PutOnRecordController {
     Map<String, Object> getAll(int page, int rows,
                                @RequestParam(required = false) String college,
                                @RequestParam(required = false) String profession,
-                               @RequestParam(required = false) String classname) {
-        return poorBuildService.getAllPoor(page, rows, college, profession, classname);
+                               @RequestParam(required = false) String classname,
+                               @RequestParam(required = false) String sno,
+                               @RequestParam(required = false) String sname,
+                               @RequestParam(defaultValue = "0") String admin) {
+        return poorBuildService.getAllPoor(page, rows, college, profession, classname,sno,sname,admin);
     }
 
 
