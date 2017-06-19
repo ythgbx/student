@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="net.bus.web.model.ApplicationRecord" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="idcard" property="idcard" jdbcType="VARCHAR" />
-    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="types" property="types" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -65,7 +65,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, idcard, type
+    id, idcard, types
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="net.bus.web.model.ApplicationRecordExample" >
     select
@@ -98,9 +98,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="net.bus.web.model.ApplicationRecord" >
-    insert into applicationRecord (id, idcard, type
+    insert into applicationRecord (id, idcard, types
       )
-    values (#{id,jdbcType=INTEGER}, #{idcard,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}
+    values (#{id,jdbcType=INTEGER}, #{idcard,jdbcType=VARCHAR}, #{types,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="net.bus.web.model.ApplicationRecord" >
@@ -112,8 +112,8 @@
       <if test="idcard != null" >
         idcard,
       </if>
-      <if test="type != null" >
-        type,
+      <if test="types != null" >
+        types,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -123,8 +123,8 @@
       <if test="idcard != null" >
         #{idcard,jdbcType=VARCHAR},
       </if>
-      <if test="type != null" >
-        #{type,jdbcType=VARCHAR},
+      <if test="types != null" >
+        #{types,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -143,8 +143,8 @@
       <if test="record.idcard != null" >
         idcard = #{record.idcard,jdbcType=VARCHAR},
       </if>
-      <if test="record.type != null" >
-        type = #{record.type,jdbcType=VARCHAR},
+      <if test="record.types != null" >
+        types = #{record.types,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -155,7 +155,7 @@
     update applicationRecord
     set id = #{record.id,jdbcType=INTEGER},
       idcard = #{record.idcard,jdbcType=VARCHAR},
-      type = #{record.type,jdbcType=VARCHAR}
+      types = #{record.types,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -166,8 +166,8 @@
       <if test="idcard != null" >
         idcard = #{idcard,jdbcType=VARCHAR},
       </if>
-      <if test="type != null" >
-        type = #{type,jdbcType=VARCHAR},
+      <if test="types != null" >
+        types = #{types,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -175,7 +175,7 @@
   <update id="updateByPrimaryKey" parameterType="net.bus.web.model.ApplicationRecord" >
     update applicationRecord
     set idcard = #{idcard,jdbcType=VARCHAR},
-      type = #{type,jdbcType=VARCHAR}
+      types = #{types,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select resultMap="BaseResultMap" parameterType="net.bus.web.model.ApplicationRecordExample" id="selectByExampleWithRowbounds" >

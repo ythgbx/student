@@ -33,7 +33,7 @@ public class ApplicationRecordService implements IApplicationRecordService {
     public Boolean insert(String type,String idCard) {
         ApplicationRecord applicationRecord = new ApplicationRecord();
         applicationRecord.setIdcard(idCard);
-        applicationRecord.setType(type);
+        applicationRecord.setTypes(type);
         int a = applicationRecordRepository.insert(applicationRecord);
         if (a>0){
             return true;
@@ -43,7 +43,7 @@ public class ApplicationRecordService implements IApplicationRecordService {
 
     public List<RecordDto> getall(String idCard) {
         List<ApplicationRecord> list = applicationRecordRepository.getItems(new ApplicationRecordSpecification(idCard));
-       if (list.isEmpty()){
+       if (!list.isEmpty()){
            List<RecordDto> recordDtos = new ArrayList<RecordDto>();
            String type1 = RString.APPLICATION_POOR;
            for (ApplicationRecord applicationRecord:list){
@@ -59,8 +59,8 @@ public class ApplicationRecordService implements IApplicationRecordService {
     public RecordDto set(ApplicationRecord applicationRecord){
         RecordDto recordDto = new RecordDto();
         recordDto.setId(applicationRecord.getId());
-        recordDto.setType(applicationRecord.getType());
-        if (applicationRecord.getType().equals(RString.APPLICATION_POOR)){
+        recordDto.setType(applicationRecord.getTypes());
+        if (applicationRecord.getTypes().equals(RString.APPLICATION_POOR)){
             PoorBuild poorBuild = poorBuildService.getPoorBuildByIdCard(applicationRecord.getIdcard());
             recordDto.setDate(Util.TimeToString(poorBuild.getApplicationtime()));
             if (poorBuild.getAdmin()==0){
@@ -71,11 +71,11 @@ public class ApplicationRecordService implements IApplicationRecordService {
                 recordDto.setAdmin(RString.AUDIT_ADMIN_TRUE);
             }
             if (poorBuild.getCounselorreview()==0){
-                recordDto.setAdmin(RString.AUDIT);
+                recordDto.setCounselor(RString.AUDIT);
             }else if (poorBuild.getCounselorreview()==1){
-                recordDto.setAdmin(RString.AUDIT_ADMIN_FALSE);
+                recordDto.setCounselor(RString.AUDIT_ADMIN_FALSE);
             }else if (poorBuild.getCounselorreview()==2){
-                recordDto.setAdmin(RString.AUDIT_ADMIN_TRUE);
+                recordDto.setCounselor(RString.AUDIT_ADMIN_TRUE);
             }
             if (poorBuild.getCounselorreviewremarks()!=null){
                 recordDto.setRemark(poorBuild.getCounselorreviewremarks());
@@ -83,7 +83,7 @@ public class ApplicationRecordService implements IApplicationRecordService {
                 recordDto.setRemark(poorBuild.getAdminremarks());
             }
 
-        }else if (applicationRecord.getType().equals(RString.APPLICATION_GRANT)){
+        }else if (applicationRecord.getTypes().equals(RString.APPLICATION_GRANT)){
             Grant grant = grantService.getStudent(applicationRecord.getIdcard());
             recordDto.setDate(Util.TimeToString(grant.getApplicationtime()));
             if (grant.getAdmin()==0){

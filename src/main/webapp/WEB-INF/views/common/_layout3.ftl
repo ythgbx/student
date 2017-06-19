@@ -67,7 +67,7 @@
         </ul>
         <h3> 信息维护</h3>
         <ul>
-            <a href="/student/information" target="main"><li>申请记录</li></a>
+            <a href="/record/get" target="main"><li>申请记录</li></a>
             <a href="/student/information" target="main"><li>修改个人信息</li></a>
             <a href="#" data-toggle="modal" data-target="#myModal"><li>修改密码</li></a>
         </ul>
