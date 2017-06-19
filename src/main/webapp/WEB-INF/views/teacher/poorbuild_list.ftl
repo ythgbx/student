@@ -1,7 +1,7 @@
 <#include "../common/_easy.ftl">
 <#include "../easy_js/poorbuild_js.ftl">
-<@tablecss></@tablecss>
 <@css></@css>
+<@js></@js>
 <body>
 <div style="margin-bottom: 5px; margin-right: 0px;" id="tools">
     <label> <label>教学院:</label>
@@ -33,7 +33,6 @@
             <br>
             <h1 align="center">湖北理工学院家庭经济困难学生申请认定(档案)表</h1><br>
             <form id="grant">
-                <input type="hidden" name="id" value="">
                 <table border="1" cellspacing="0" cellpadding="0" align="left" border-collapse="collapse" id="ta">
                     <tbody>
                     <tr>
@@ -285,50 +284,14 @@
      病情证明 <input type="checkbox" name="check">     获奖证明 <input type="checkbox" name="check">（以上证明材料提供复印件附在后页）<pre>                </pre></pre>
                         </td>
                     </tr>
-                    <#--<tr>-->
-                    <#--<td width="69" class="toptitle">-->
-                    <#--学<br><br>院<br><br>意<br><br>见-->
-                    <#--</td>-->
-                    <#--<td colspan="13">-->
-                    <#--<pre>    经核实，该生评定为：1、贫困学生 <input type="radio" name="dgrades" value="贫困学生"> 2、特困学生 <input type="radio" name="dgrades" value="特困学生">-->
-
-
-
-
-                    <#--（公章）         学院领导签字：-->
-
-                    <#--<input type="date" name="dsigndate"></pre>-->
-
-
-                    <#--</td>-->
-                    <#--</tr>-->
-                    <#--<tr>-->
-                    <#--<td width="69" class="toptitle">-->
-                    <#--学<br><br>校<br><br>意<br><br>见-->
-                    <#--</td>-->
-                    <#--<td colspan="13">-->
-                    <#--<pre>    经审核，同意该生评定为：1、贫困学生 <input type="radio" name="sgrades" value="贫困学生"> 2、特困学生 <input type="radio" name="sgrades" value="贫困学生">-->
-
-
-
-
-                    <#--（公章）         学校领导签章：-->
-
-                    <#--<input type="date" name="ssigndate"></pre>-->
-                    <#--</td>-->
-                    <#--</tr>-->
                     </tbody>
                 </table>
             </form>
         </div>
-        <!--  <div align="center">
-              <input type="button" class="btn btn82 btn_save2" onclick="sub()" value="提交">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <input type="button" class="btn btn82 btn_res" value="重置">
-          </div>-->
     </div>
-
 </div>
-<@js></@js>
+
+
 <@poorbuildjs></@poorbuildjs>
 </body>
 </html>

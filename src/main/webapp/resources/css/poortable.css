@@ -1,8 +1,4 @@
 @CHARSET "UTF-8";
-pre{
-    font-size:16px;
-    text-align:justify;
-}
 
 .container {
     padding: 0;
@@ -10,8 +6,7 @@ pre{
 }
 
 .container {
-    width: 1100px;
-    margin: 0 auto;
+    margin-left: 8%;
 }
 
 .table_main {
@@ -19,8 +14,11 @@ pre{
     border-spacing: 0;
     width: 95%;
 }
+#ta{
+    text-align: center;
+}
 
-#ta > input[type=text]{
+td > input[type=text]{
     width:135px;
     height:30px;
     text-align:center;
@@ -28,13 +26,13 @@ pre{
     border:none
 }
 
-.table_main > input[type=radio]{
+td > input[type=radio]{
     text-align:center;
     font-size:14px;
     border:none
 }
 
-.table_main > select{
+td > select{
     text-align:center;
     font-size:14px;
     border:none
@@ -47,7 +45,7 @@ pre{
 /*text-align:center;*/
 /*}*/
 
-.table_main > td {
+table.table_main > tr > td {
     border: 1px solid black;
     padding: 5px 10px;
     height:20px;
