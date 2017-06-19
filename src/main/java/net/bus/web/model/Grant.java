@@ -53,9 +53,9 @@ public class Grant {
 
     private String remarks;
 
-    private Integer dreviewed;
+    private Integer counselorreview;
 
-    private String dreviewedremarks;
+    private String counselorreviewremarks;
 
     private Integer admin;
 
@@ -263,20 +263,20 @@ public class Grant {
         this.remarks = remarks;
     }
 
-    public Integer getDreviewed() {
-        return dreviewed;
+    public Integer getCounselorreview() {
+        return counselorreview;
     }
 
-    public void setDreviewed(Integer dreviewed) {
-        this.dreviewed = dreviewed;
+    public void setCounselorreview(Integer counselorreview) {
+        this.counselorreview = counselorreview;
     }
 
-    public String getDreviewedremarks() {
-        return dreviewedremarks;
+    public String getCounselorreviewremarks() {
+        return counselorreviewremarks;
     }
 
-    public void setDreviewedremarks(String dreviewedremarks) {
-        this.dreviewedremarks = dreviewedremarks;
+    public void setCounselorreviewremarks(String counselorreviewremarks) {
+        this.counselorreviewremarks = counselorreviewremarks;
     }
 
     public Integer getAdmin() {

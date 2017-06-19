@@ -12,13 +12,11 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Calendar;
+import java.util.Map;
 
 /**
  * Created by sky on 16/12/1.
@@ -117,4 +115,26 @@ public class GrantController {
 //
 //        return result;
 //    }
+
+    /**
+     * @param page
+     * @param rows
+     * @return
+     * @test
+     *
+     */
+    @RequestMapping(value = "/getinfo", method = RequestMethod.POST)
+    public @ResponseBody
+    Map<String, Object> getAll(int page, int rows,
+                               @RequestParam(required = false) String college,
+                               @RequestParam(required = false) String profession,
+                               @RequestParam(required = false) String classname,
+                               @RequestParam(required = false) String sno,
+                               @RequestParam(required = false) String sname,
+                               @RequestParam(defaultValue = "0") String admin) {
+        return service.getAllGrant(page, rows, college, profession, classname,sno,sname,admin);
+    }
+
+
+
 }

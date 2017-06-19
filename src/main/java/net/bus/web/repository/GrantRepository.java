@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by sky on 16/12/9.
@@ -17,6 +18,7 @@ import java.util.List;
 public class GrantRepository {
     @Autowired
     private GrantMapper grantMapper;
+
     public List<Grant> getAllGrant() {
         GrantExample example = new GrantExample();
         return grantMapper.selectByExample(example);
@@ -86,4 +88,11 @@ public class GrantRepository {
     public int deleteByExample(ISpecification specification){
         return  grantMapper.deleteByExample((GrantExample) specification.createExample());
     }
+
+//助学金查询
+    public List<Grant> getGrant(Map map){
+        return grantMapper.selectGrant(map);
+    }
+
+
 }

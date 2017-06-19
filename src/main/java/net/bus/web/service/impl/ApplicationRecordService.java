@@ -93,15 +93,15 @@ public class ApplicationRecordService implements IApplicationRecordService {
             }else if (grant.getAdmin()==2){
                 recordDto.setAdmin(RString.AUDIT_ADMIN_TRUE);
             }
-            if (grant.getDreviewed()==0){
+            if (grant.getCounselorreview()==0){
                 recordDto.setAdmin(RString.AUDIT);
-            }else if (grant.getDreviewed()==1){
+            }else if (grant.getCounselorreview()==1){
                 recordDto.setAdmin(RString.AUDIT_ADMIN_FALSE);
-            }else if (grant.getDreviewed()==2){
+            }else if (grant.getCounselorreview()==2){
                 recordDto.setAdmin(RString.AUDIT_ADMIN_TRUE);
             }
-            if (grant.getDreviewedremarks()!=null){
-                recordDto.setRemark(grant.getDreviewedremarks());
+            if (grant.getCounselorreviewremarks()!=null){
+                recordDto.setRemark(grant.getCounselorreviewremarks());
             }else {
                 recordDto.setRemark(grant.getAdminremarks());
             }

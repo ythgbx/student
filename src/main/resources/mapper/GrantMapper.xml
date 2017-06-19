@@ -27,12 +27,49 @@
     <result column="m3Company" property="m3company" jdbcType="VARCHAR" />
     <result column="applicationReasons" property="applicationreasons" jdbcType="VARCHAR" />
     <result column="Remarks" property="remarks" jdbcType="VARCHAR" />
-    <result column="Dreviewed" property="dreviewed" jdbcType="INTEGER" />
-    <result column="DreviewedRemarks" property="dreviewedremarks" jdbcType="VARCHAR" />
+    <result column="counselorReview" property="counselorreview" jdbcType="INTEGER" />
+    <result column="counselorReviewRemarks" property="counselorreviewremarks" jdbcType="VARCHAR" />
     <result column="admin" property="admin" jdbcType="INTEGER" />
     <result column="adminRemarks" property="adminremarks" jdbcType="VARCHAR" />
     <result column="ApplicationTime" property="applicationtime" jdbcType="DATE" />
   </resultMap>
+
+   <resultMap id="grantMap" type="net.bus.web.model.GrantPovo" extends="BaseResultMap">
+       <association property="student" javaType="net.bus.web.model.Student">
+           <id column="idCard" property="idcard" jdbcType="VARCHAR" />
+           <result column="sno" property="sno" jdbcType="VARCHAR" />
+           <result column="sname" property="sname" jdbcType="VARCHAR" />
+           <result column="usedName" property="usedname" jdbcType="VARCHAR" />
+           <result column="sex" property="sex" jdbcType="VARCHAR" />
+           <result column="College" property="college" jdbcType="VARCHAR" />
+           <result column="birthday" property="birthday" jdbcType="DATE" />
+           <result column="profession" property="profession" jdbcType="VARCHAR" />
+           <result column="classname" property="classname" jdbcType="VARCHAR" />
+           <result column="grade" property="grade" jdbcType="VARCHAR" />
+           <result column="level" property="level" jdbcType="CHAR" />
+           <result column="admissionTime" property="admissiontime" jdbcType="DATE" />
+           <result column="studyLength" property="studylength" jdbcType="CHAR" />
+           <result column="nationality" property="nationality" jdbcType="VARCHAR" />
+           <result column="political" property="political" jdbcType="VARCHAR" />
+           <result column="sroom" property="sroom" jdbcType="VARCHAR" />
+           <result column="address" property="address" jdbcType="VARCHAR" />
+           <result column="stel" property="stel" jdbcType="VARCHAR" />
+           <result column="schoolCard" property="schoolcard" jdbcType="VARCHAR" />
+           <result column="fname" property="fname" jdbcType="VARCHAR" />
+           <result column="ftel" property="ftel" jdbcType="VARCHAR" />
+           <result column="mname" property="mname" jdbcType="VARCHAR" />
+           <result column="mtel" property="mtel" jdbcType="VARCHAR" />
+           <result column="nativePlace" property="nativeplace" jdbcType="VARCHAR" />
+           <result column="img" property="img" jdbcType="VARCHAR" />
+           <result column="QQ" property="qq" jdbcType="VARCHAR" />
+           <result column="familyAccount" property="familyaccount" jdbcType="VARCHAR" />
+       </association>
+   </resultMap>
+
+
+
+
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -95,7 +132,7 @@
     no, idCard, populationCount, familyIncome, monthlyIncome, revenueSource, poorGrades, 
     amounted, fundedPurpose, fundPurpose, bankAccount, m1name, m1age, m1Relations, m1Company, 
     m2name, m2age, m2Relations, m2Company, m3name, m3age, m3Relations, m3Company, applicationReasons, 
-    Remarks, Dreviewed, DreviewedRemarks, admin, adminRemarks, ApplicationTime
+    Remarks, counselorReview, counselorReviewRemarks, admin, adminRemarks, ApplicationTime
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="net.bus.web.model.GrantExample" >
     select
@@ -136,7 +173,7 @@
       m2name, m2age, m2Relations, 
       m2Company, m3name, m3age, 
       m3Relations, m3Company, applicationReasons, 
-      Remarks, Dreviewed, DreviewedRemarks, 
+      Remarks, counselorReview, counselorReviewRemarks, 
       admin, adminRemarks, ApplicationTime
       )
     values (#{no,jdbcType=BIGINT}, #{idcard,jdbcType=VARCHAR}, #{populationcount,jdbcType=VARCHAR}, 
@@ -147,7 +184,7 @@
       #{m2name,jdbcType=VARCHAR}, #{m2age,jdbcType=INTEGER}, #{m2relations,jdbcType=VARCHAR}, 
       #{m2company,jdbcType=VARCHAR}, #{m3name,jdbcType=VARCHAR}, #{m3age,jdbcType=INTEGER}, 
       #{m3relations,jdbcType=VARCHAR}, #{m3company,jdbcType=VARCHAR}, #{applicationreasons,jdbcType=VARCHAR}, 
-      #{remarks,jdbcType=VARCHAR}, #{dreviewed,jdbcType=INTEGER}, #{dreviewedremarks,jdbcType=VARCHAR}, 
+      #{remarks,jdbcType=VARCHAR}, #{counselorreview,jdbcType=INTEGER}, #{counselorreviewremarks,jdbcType=VARCHAR}, 
       #{admin,jdbcType=INTEGER}, #{adminremarks,jdbcType=VARCHAR}, #{applicationtime,jdbcType=DATE}
       )
   </insert>
@@ -229,11 +266,11 @@
       <if test="remarks != null" >
         Remarks,
       </if>
-      <if test="dreviewed != null" >
-        Dreviewed,
+      <if test="counselorreview != null" >
+        counselorReview,
       </if>
-      <if test="dreviewedremarks != null" >
-        DreviewedRemarks,
+      <if test="counselorreviewremarks != null" >
+        counselorReviewRemarks,
       </if>
       <if test="admin != null" >
         admin,
@@ -321,11 +358,11 @@
       <if test="remarks != null" >
         #{remarks,jdbcType=VARCHAR},
       </if>
-      <if test="dreviewed != null" >
-        #{dreviewed,jdbcType=INTEGER},
+      <if test="counselorreview != null" >
+        #{counselorreview,jdbcType=INTEGER},
       </if>
-      <if test="dreviewedremarks != null" >
-        #{dreviewedremarks,jdbcType=VARCHAR},
+      <if test="counselorreviewremarks != null" >
+        #{counselorreviewremarks,jdbcType=VARCHAR},
       </if>
       <if test="admin != null" >
         #{admin,jdbcType=INTEGER},
@@ -422,11 +459,11 @@
       <if test="record.remarks != null" >
         Remarks = #{record.remarks,jdbcType=VARCHAR},
       </if>
-      <if test="record.dreviewed != null" >
-        Dreviewed = #{record.dreviewed,jdbcType=INTEGER},
+      <if test="record.counselorreview != null" >
+        counselorReview = #{record.counselorreview,jdbcType=INTEGER},
       </if>
-      <if test="record.dreviewedremarks != null" >
-        DreviewedRemarks = #{record.dreviewedremarks,jdbcType=VARCHAR},
+      <if test="record.counselorreviewremarks != null" >
+        counselorReviewRemarks = #{record.counselorreviewremarks,jdbcType=VARCHAR},
       </if>
       <if test="record.admin != null" >
         admin = #{record.admin,jdbcType=INTEGER},
@@ -469,8 +506,8 @@
       m3Company = #{record.m3company,jdbcType=VARCHAR},
       applicationReasons = #{record.applicationreasons,jdbcType=VARCHAR},
       Remarks = #{record.remarks,jdbcType=VARCHAR},
-      Dreviewed = #{record.dreviewed,jdbcType=INTEGER},
-      DreviewedRemarks = #{record.dreviewedremarks,jdbcType=VARCHAR},
+      counselorReview = #{record.counselorreview,jdbcType=INTEGER},
+      counselorReviewRemarks = #{record.counselorreviewremarks,jdbcType=VARCHAR},
       admin = #{record.admin,jdbcType=INTEGER},
       adminRemarks = #{record.adminremarks,jdbcType=VARCHAR},
       ApplicationTime = #{record.applicationtime,jdbcType=DATE}
@@ -553,11 +590,11 @@
       <if test="remarks != null" >
         Remarks = #{remarks,jdbcType=VARCHAR},
       </if>
-      <if test="dreviewed != null" >
-        Dreviewed = #{dreviewed,jdbcType=INTEGER},
+      <if test="counselorreview != null" >
+        counselorReview = #{counselorreview,jdbcType=INTEGER},
       </if>
-      <if test="dreviewedremarks != null" >
-        DreviewedRemarks = #{dreviewedremarks,jdbcType=VARCHAR},
+      <if test="counselorreviewremarks != null" >
+        counselorReviewRemarks = #{counselorreviewremarks,jdbcType=VARCHAR},
       </if>
       <if test="admin != null" >
         admin = #{admin,jdbcType=INTEGER},
@@ -597,8 +634,8 @@
       m3Company = #{m3company,jdbcType=VARCHAR},
       applicationReasons = #{applicationreasons,jdbcType=VARCHAR},
       Remarks = #{remarks,jdbcType=VARCHAR},
-      Dreviewed = #{dreviewed,jdbcType=INTEGER},
-      DreviewedRemarks = #{dreviewedremarks,jdbcType=VARCHAR},
+      counselorReview = #{counselorreview,jdbcType=INTEGER},
+      counselorReviewRemarks = #{counselorreviewremarks,jdbcType=VARCHAR},
       admin = #{admin,jdbcType=INTEGER},
       adminRemarks = #{adminremarks,jdbcType=VARCHAR},
       ApplicationTime = #{applicationtime,jdbcType=DATE}
@@ -618,4 +655,34 @@
       order by ${orderByClause}
     </if>
   </select>
+
+
+    <!--联合查询助学金信息-->
+    <select id="selectGrant" resultMap="grantMap" parameterType="java.util.Map">
+        SELECT * FROM grants
+        INNER JOIN students
+        ON grants.`idcard`=students.`idCard`
+        AND grants.`counselorReview`=2
+        <if test="college!=null">
+            AND college=#{college}
+        </if>
+        <if test="profession!=null">
+            AND profession = #{profession}
+        </if>
+        <if test="classname!=null">
+            AND classname = #{classname}
+        </if>
+        <if test="sno!=null">
+            AND sno = #{sno}
+        </if>
+        <if test="sname!=null">
+            AND sname = #{sname}
+        </if>
+        <if test="admin!=null">
+            AND admin = #{admin}
+        </if>
+        LIMIT #{start},#{end}
+
+    </select>
+
 </mapper>

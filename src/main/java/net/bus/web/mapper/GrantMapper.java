@@ -1,10 +1,12 @@
 package net.bus.web.mapper;
 
-import java.util.List;
 import net.bus.web.model.Grant;
 import net.bus.web.model.GrantExample;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
+
+import java.util.List;
+import java.util.Map;
 
 public interface GrantMapper {
     int countByExample(GrantExample example);
@@ -30,4 +32,8 @@ public interface GrantMapper {
     int updateByPrimaryKeySelective(Grant record);
 
     int updateByPrimaryKey(Grant record);
+
+//    查询贫困建档信息
+    List<Grant> selectGrant(Map map);
+
 }

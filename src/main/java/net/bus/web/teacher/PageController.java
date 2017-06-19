@@ -12,6 +12,33 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/page")
 public class PageController {
+
+    /**
+     *
+     * @return
+     */
+    @RequestMapping(value = "/motivation",method = RequestMethod.GET)
+    public ModelAndView motivation(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("");
+        return modelAndView;
+    }
+
+
+
+    /**
+     *
+     * @return 助学金管理页
+     */
+
+    @RequestMapping(value = "/gran",method = RequestMethod.GET)
+    public ModelAndView grants(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/teacher/grant_list");
+        return modelAndView;
+    }
+
+
     /**
      *
      * @return 学生信息页

@@ -3,6 +3,8 @@ package net.bus.web.service;
 import net.bus.web.controller.dto.GrantDto;
 import net.bus.web.model.Grant;
 
+import java.util.Map;
+
 /**
  * Created by sky on 16/12/9.
  */
@@ -11,4 +13,6 @@ public interface IGrantService {
     boolean insert(GrantDto grantDto);
 
     Grant getStudent(String idCard);
+
+    Map<String,Object> getAllGrant(int page, int rows,String college,String profession,String classname,String sno,String sname,String admin);
 }

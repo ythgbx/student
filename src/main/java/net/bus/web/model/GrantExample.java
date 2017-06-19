@@ -1842,133 +1842,133 @@ public class GrantExample {
             return (Criteria) this;
         }
 
-        public Criteria andDreviewedIsNull() {
-            addCriterion("Dreviewed is null");
+        public Criteria andCounselorreviewIsNull() {
+            addCriterion("counselorReview is null");
             return (Criteria) this;
         }
 
-        public Criteria andDreviewedIsNotNull() {
-            addCriterion("Dreviewed is not null");
+        public Criteria andCounselorreviewIsNotNull() {
+            addCriterion("counselorReview is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDreviewedEqualTo(Integer value) {
-            addCriterion("Dreviewed =", value, "dreviewed");
+        public Criteria andCounselorreviewEqualTo(Integer value) {
+            addCriterion("counselorReview =", value, "counselorreview");
             return (Criteria) this;
         }
 
-        public Criteria andDreviewedNotEqualTo(Integer value) {
-            addCriterion("Dreviewed <>", value, "dreviewed");
+        public Criteria andCounselorreviewNotEqualTo(Integer value) {
+            addCriterion("counselorReview <>", value, "counselorreview");
             return (Criteria) this;
         }
 
-        public Criteria andDreviewedGreaterThan(Integer value) {
-            addCriterion("Dreviewed >", value, "dreviewed");
+        public Criteria andCounselorreviewGreaterThan(Integer value) {
+            addCriterion("counselorReview >", value, "counselorreview");
             return (Criteria) this;
         }
 
-        public Criteria andDreviewedGreaterThanOrEqualTo(Integer value) {
-            addCriterion("Dreviewed >=", value, "dreviewed");
+        public Criteria andCounselorreviewGreaterThanOrEqualTo(Integer value) {
+            addCriterion("counselorReview >=", value, "counselorreview");
             return (Criteria) this;
         }
 
-        public Criteria andDreviewedLessThan(Integer value) {
-            addCriterion("Dreviewed <", value, "dreviewed");
+        public Criteria andCounselorreviewLessThan(Integer value) {
+            addCriterion("counselorReview <", value, "counselorreview");
             return (Criteria) this;
         }
 
-        public Criteria andDreviewedLessThanOrEqualTo(Integer value) {
-            addCriterion("Dreviewed <=", value, "dreviewed");
+        public Criteria andCounselorreviewLessThanOrEqualTo(Integer value) {
+            addCriterion("counselorReview <=", value, "counselorreview");
             return (Criteria) this;
         }
 
-        public Criteria andDreviewedIn(List<Integer> values) {
-            addCriterion("Dreviewed in", values, "dreviewed");
+        public Criteria andCounselorreviewIn(List<Integer> values) {
+            addCriterion("counselorReview in", values, "counselorreview");
             return (Criteria) this;
         }
 
-        public Criteria andDreviewedNotIn(List<Integer> values) {
-            addCriterion("Dreviewed not in", values, "dreviewed");
+        public Criteria andCounselorreviewNotIn(List<Integer> values) {
+            addCriterion("counselorReview not in", values, "counselorreview");
             return (Criteria) this;
         }
 
-        public Criteria andDreviewedBetween(Integer value1, Integer value2) {
-            addCriterion("Dreviewed between", value1, value2, "dreviewed");
+        public Criteria andCounselorreviewBetween(Integer value1, Integer value2) {
+            addCriterion("counselorReview between", value1, value2, "counselorreview");
             return (Criteria) this;
         }
 
-        public Criteria andDreviewedNotBetween(Integer value1, Integer value2) {
-            addCriterion("Dreviewed not between", value1, value2, "dreviewed");
+        public Criteria andCounselorreviewNotBetween(Integer value1, Integer value2) {
+            addCriterion("counselorReview not between", value1, value2, "counselorreview");
             return (Criteria) this;
         }
 
-        public Criteria andDreviewedremarksIsNull() {
-            addCriterion("DreviewedRemarks is null");
+        public Criteria andCounselorreviewremarksIsNull() {
+            addCriterion("counselorReviewRemarks is null");
             return (Criteria) this;
         }
 
-        public Criteria andDreviewedremarksIsNotNull() {
-            addCriterion("DreviewedRemarks is not null");
+        public Criteria andCounselorreviewremarksIsNotNull() {
+            addCriterion("counselorReviewRemarks is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDreviewedremarksEqualTo(String value) {
-            addCriterion("DreviewedRemarks =", value, "dreviewedremarks");
+        public Criteria andCounselorreviewremarksEqualTo(String value) {
+            addCriterion("counselorReviewRemarks =", value, "counselorreviewremarks");
             return (Criteria) this;
         }
 
-        public Criteria andDreviewedremarksNotEqualTo(String value) {
-            addCriterion("DreviewedRemarks <>", value, "dreviewedremarks");
+        public Criteria andCounselorreviewremarksNotEqualTo(String value) {
+            addCriterion("counselorReviewRemarks <>", value, "counselorreviewremarks");
             return (Criteria) this;
         }
 
-        public Criteria andDreviewedremarksGreaterThan(String value) {
-            addCriterion("DreviewedRemarks >", value, "dreviewedremarks");
+        public Criteria andCounselorreviewremarksGreaterThan(String value) {
+            addCriterion("counselorReviewRemarks >", value, "counselorreviewremarks");
             return (Criteria) this;
         }
 
-        public Criteria andDreviewedremarksGreaterThanOrEqualTo(String value) {
-            addCriterion("DreviewedRemarks >=", value, "dreviewedremarks");
+        public Criteria andCounselorreviewremarksGreaterThanOrEqualTo(String value) {
+            addCriterion("counselorReviewRemarks >=", value, "counselorreviewremarks");
             return (Criteria) this;
         }
 
-        public Criteria andDreviewedremarksLessThan(String value) {
-            addCriterion("DreviewedRemarks <", value, "dreviewedremarks");
+        public Criteria andCounselorreviewremarksLessThan(String value) {
+            addCriterion("counselorReviewRemarks <", value, "counselorreviewremarks");
             return (Criteria) this;
         }
 
-        public Criteria andDreviewedremarksLessThanOrEqualTo(String value) {
-            addCriterion("DreviewedRemarks <=", value, "dreviewedremarks");
+        public Criteria andCounselorreviewremarksLessThanOrEqualTo(String value) {
+            addCriterion("counselorReviewRemarks <=", value, "counselorreviewremarks");
             return (Criteria) this;
         }
 
-        public Criteria andDreviewedremarksLike(String value) {
-            addCriterion("DreviewedRemarks like", value, "dreviewedremarks");
+        public Criteria andCounselorreviewremarksLike(String value) {
+            addCriterion("counselorReviewRemarks like", value, "counselorreviewremarks");
             return (Criteria) this;
         }
 
-        public Criteria andDreviewedremarksNotLike(String value) {
-            addCriterion("DreviewedRemarks not like", value, "dreviewedremarks");
+        public Criteria andCounselorreviewremarksNotLike(String value) {
+            addCriterion("counselorReviewRemarks not like", value, "counselorreviewremarks");
             return (Criteria) this;
         }
 
-        public Criteria andDreviewedremarksIn(List<String> values) {
-            addCriterion("DreviewedRemarks in", values, "dreviewedremarks");
+        public Criteria andCounselorreviewremarksIn(List<String> values) {
+            addCriterion("counselorReviewRemarks in", values, "counselorreviewremarks");
             return (Criteria) this;
         }
 
-        public Criteria andDreviewedremarksNotIn(List<String> values) {
-            addCriterion("DreviewedRemarks not in", values, "dreviewedremarks");
+        public Criteria andCounselorreviewremarksNotIn(List<String> values) {
+            addCriterion("counselorReviewRemarks not in", values, "counselorreviewremarks");
             return (Criteria) this;
         }
 
-        public Criteria andDreviewedremarksBetween(String value1, String value2) {
-            addCriterion("DreviewedRemarks between", value1, value2, "dreviewedremarks");
+        public Criteria andCounselorreviewremarksBetween(String value1, String value2) {
+            addCriterion("counselorReviewRemarks between", value1, value2, "counselorreviewremarks");
             return (Criteria) this;
         }
 
-        public Criteria andDreviewedremarksNotBetween(String value1, String value2) {
-            addCriterion("DreviewedRemarks not between", value1, value2, "dreviewedremarks");
+        public Criteria andCounselorreviewremarksNotBetween(String value1, String value2) {
+            addCriterion("counselorReviewRemarks not between", value1, value2, "counselorreviewremarks");
             return (Criteria) this;
         }
 

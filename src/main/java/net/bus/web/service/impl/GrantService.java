@@ -7,10 +7,13 @@ import net.bus.web.repository.GrantRepository;
 import net.bus.web.repository.specification.GrantidCardSpecification;
 import net.bus.web.service.IApplicationRecordService;
 import net.bus.web.service.IGrantService;
+import net.bus.web.teacher.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by sky on 16/12/9.
@@ -59,4 +62,21 @@ public class GrantService implements IGrantService{
     public Grant getStudent(String idCard) {
         return _rootRepository.getGrant(new GrantidCardSpecification(idCard));
     }
+
+    //助学金查询
+    public Map<String, Object> getAllGrant(int page, int rows, String college, String profession, String classname, String sno, String sname, String admin) {
+        Map<String,Object> param = PageUtil.pageMap(page, rows);
+        param.put("college",college);
+        param.put("profession",profession);
+        param.put("classname",classname);
+        param.put("sno",sno);
+        param.put("sname",sname);
+        param.put("admin",admin);
+        List<Grant> list = _rootRepository.getGrant(param);
+        int total = _rootRepository.Count();
+        Map<String,Object> map = PageUtil.returnMap(list,total);
+        return map;
+    }
+
+
 }

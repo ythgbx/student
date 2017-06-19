@@ -17,9 +17,10 @@
                                 "url":"/page/poorlist"
                             },{
                                 "text":"助学金管理",
-                                "url":""
+                                "url":"/page/gran"
                             },{
-                                "text":"励志奖学金"
+                                "text":"励志奖学金",
+                                "url" : "",
                             }
                         ]
                     },
