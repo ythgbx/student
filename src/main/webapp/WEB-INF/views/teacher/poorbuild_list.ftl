@@ -3,7 +3,6 @@
 <@tablecss></@tablecss>
 <@css></@css>
 <body>
-<table></table>
 <div style="margin-bottom: 5px; margin-right: 0px;" id="tools">
     <label> <label>教学院:</label>
         <input name="college">
@@ -11,15 +10,16 @@
         <input name="profession">
         <label>班级:</label>
         <input name="classname">
-        <a href="#" type="query" onclick="obj.query();">查询</a>
     </label> <label style="padding-left: 100px;">
-    <label>查询:</label>
+    <label></label>
     <input name="searchterm">
 </label>
 
     <a href="#" class="easyui-linkbutton" iconCls="icon-log"
        plain="true" id="reset" onclick="obj.resetnew();">重置</a>
 
+    <label>审核状态</label>
+    <input name="examine"/>
 
 </div>
 <div id="term">
@@ -34,7 +34,7 @@
             <h1 align="center">湖北理工学院家庭经济困难学生申请认定(档案)表</h1><br>
             <form id="grant">
                 <input type="hidden" name="id" value="">
-                <table border="1" cellspacing="0" cellpadding="0" align="left" border-collapse="collapse">
+                <table border="1" cellspacing="0" cellpadding="0" align="left" border-collapse="collapse" id="ta">
                     <tbody>
                     <tr>
                         <td width="69" class="toptitle">

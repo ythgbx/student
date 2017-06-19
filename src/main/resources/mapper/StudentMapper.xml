@@ -123,7 +123,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="net.bus.web.model.Student" >
+  <insert id="insert" parameterType="net.bus.web.model.Student">
     insert into students (idCard, sno, sname, 
       usedName, sex, College, 
       birthday, profession, classname, 
