@@ -44,7 +44,7 @@ public class ApplicationRecordController {
        List<RecordDto> recordDtos= applicationRecordService.getall(user.getUsername());
         if (recordDtos.isEmpty()){
            mv.addObject("recordDtos",recordDtos);
-            mv.setViewName("");
+            mv.setViewName("applicationRecord");
         }
         return mv;
     }
