@@ -296,7 +296,3 @@
 </script>
 
 </#macro>
-
-<#macro tablecss>
-<link type="text/css" rel="stylesheet" href="/css/poortable.css"/>
-</#macro>

@@ -7,9 +7,6 @@
     <link rel="stylesheet" type="text/css" href="/easyui/themes/metro-blue/easyui.css"/>
     <link rel="stylesheet" type="text/css" href="/easyui/themes/icon.css" />
     <link type="text/css" rel="stylesheet" href="/css/poortable.css" />
-    <script>
-
-    </script>
 </head>
 </#macro>
 
