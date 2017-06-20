@@ -52,6 +52,8 @@ public class GrantService implements IGrantService{
         grant.setM3company(grantDto.getM3company());
         grant.setApplicationreasons(grantDto.getApplicationreasons());
         grant.setApplicationtime(new Date());
+        grant.setCounselorreview(0);
+        grant.setAdmin(0);
         if (_rootRepository.insertGrant(grant)>0){
             applicationRecordService.insert(RString.APPLICATION_GRANT,grant.getIdcard());
             return true;
