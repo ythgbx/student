@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="net.bus.web.mapper.GrantMapper" >
   <resultMap id="BaseResultMap" type="net.bus.web.model.Grant" >
-    <id column="no" property="no" jdbcType="BIGINT" />
+    <id column="id" property="id" jdbcType="BIGINT" />
     <result column="idCard" property="idcard" jdbcType="VARCHAR" />
     <result column="populationCount" property="populationcount" jdbcType="VARCHAR" />
     <result column="familyIncome" property="familyincome" jdbcType="VARCHAR" />
@@ -34,41 +34,37 @@
     <result column="ApplicationTime" property="applicationtime" jdbcType="DATE" />
   </resultMap>
 
-   <resultMap id="grantMap" type="net.bus.web.model.GrantPovo" extends="BaseResultMap">
-       <association property="student" javaType="net.bus.web.model.Student">
-           <id column="idCard" property="idcard" jdbcType="VARCHAR" />
-           <result column="sno" property="sno" jdbcType="VARCHAR" />
-           <result column="sname" property="sname" jdbcType="VARCHAR" />
-           <result column="usedName" property="usedname" jdbcType="VARCHAR" />
-           <result column="sex" property="sex" jdbcType="VARCHAR" />
-           <result column="College" property="college" jdbcType="VARCHAR" />
-           <result column="birthday" property="birthday" jdbcType="DATE" />
-           <result column="profession" property="profession" jdbcType="VARCHAR" />
-           <result column="classname" property="classname" jdbcType="VARCHAR" />
-           <result column="grade" property="grade" jdbcType="VARCHAR" />
-           <result column="level" property="level" jdbcType="CHAR" />
-           <result column="admissionTime" property="admissiontime" jdbcType="DATE" />
-           <result column="studyLength" property="studylength" jdbcType="CHAR" />
-           <result column="nationality" property="nationality" jdbcType="VARCHAR" />
-           <result column="political" property="political" jdbcType="VARCHAR" />
-           <result column="sroom" property="sroom" jdbcType="VARCHAR" />
-           <result column="address" property="address" jdbcType="VARCHAR" />
-           <result column="stel" property="stel" jdbcType="VARCHAR" />
-           <result column="schoolCard" property="schoolcard" jdbcType="VARCHAR" />
-           <result column="fname" property="fname" jdbcType="VARCHAR" />
-           <result column="ftel" property="ftel" jdbcType="VARCHAR" />
-           <result column="mname" property="mname" jdbcType="VARCHAR" />
-           <result column="mtel" property="mtel" jdbcType="VARCHAR" />
-           <result column="nativePlace" property="nativeplace" jdbcType="VARCHAR" />
-           <result column="img" property="img" jdbcType="VARCHAR" />
-           <result column="QQ" property="qq" jdbcType="VARCHAR" />
-           <result column="familyAccount" property="familyaccount" jdbcType="VARCHAR" />
-       </association>
-   </resultMap>
-
-
-
-
+  <resultMap id="grantMap" type="net.bus.web.model.GrantPovo" extends="BaseResultMap">
+    <association property="student" javaType="net.bus.web.model.Student">
+      <id column="idCard" property="idcard" jdbcType="VARCHAR" />
+      <result column="sno" property="sno" jdbcType="VARCHAR" />
+      <result column="sname" property="sname" jdbcType="VARCHAR" />
+      <result column="usedName" property="usedname" jdbcType="VARCHAR" />
+      <result column="sex" property="sex" jdbcType="VARCHAR" />
+      <result column="College" property="college" jdbcType="VARCHAR" />
+      <result column="birthday" property="birthday" jdbcType="DATE" />
+      <result column="profession" property="profession" jdbcType="VARCHAR" />
+      <result column="classname" property="classname" jdbcType="VARCHAR" />
+      <result column="grade" property="grade" jdbcType="VARCHAR" />
+      <result column="level" property="level" jdbcType="CHAR" />
+      <result column="admissionTime" property="admissiontime" jdbcType="DATE" />
+      <result column="studyLength" property="studylength" jdbcType="CHAR" />
+      <result column="nationality" property="nationality" jdbcType="VARCHAR" />
+      <result column="political" property="political" jdbcType="VARCHAR" />
+      <result column="sroom" property="sroom" jdbcType="VARCHAR" />
+      <result column="address" property="address" jdbcType="VARCHAR" />
+      <result column="stel" property="stel" jdbcType="VARCHAR" />
+      <result column="schoolCard" property="schoolcard" jdbcType="VARCHAR" />
+      <result column="fname" property="fname" jdbcType="VARCHAR" />
+      <result column="ftel" property="ftel" jdbcType="VARCHAR" />
+      <result column="mname" property="mname" jdbcType="VARCHAR" />
+      <result column="mtel" property="mtel" jdbcType="VARCHAR" />
+      <result column="nativePlace" property="nativeplace" jdbcType="VARCHAR" />
+      <result column="img" property="img" jdbcType="VARCHAR" />
+      <result column="QQ" property="qq" jdbcType="VARCHAR" />
+      <result column="familyAccount" property="familyaccount" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
 
   <sql id="Example_Where_Clause" >
     <where >
@@ -129,7 +125,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    no, idCard, populationCount, familyIncome, monthlyIncome, revenueSource, poorGrades, 
+    id, idCard, populationCount, familyIncome, monthlyIncome, revenueSource, poorGrades, 
     amounted, fundedPurpose, fundPurpose, bankAccount, m1name, m1age, m1Relations, m1Company, 
     m2name, m2age, m2Relations, m2Company, m3name, m3age, m3Relations, m3Company, applicationReasons, 
     Remarks, counselorReview, counselorReviewRemarks, admin, adminRemarks, ApplicationTime
@@ -152,11 +148,40 @@
     select 
     <include refid="Base_Column_List" />
     from grants
-    where no = #{no,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
   </select>
+
+  <!--联合查询助学金信息-->
+  <select id="selectGrant" resultMap="grantMap" parameterType="java.util.Map">
+    SELECT * FROM grants
+    INNER JOIN students
+    ON grants.`idcard`=students.`idCard`
+    AND grants.`counselorReview`=2
+    <if test="college!=null">
+      AND college=#{college}
+    </if>
+    <if test="profession!=null">
+      AND profession = #{profession}
+    </if>
+    <if test="classname!=null">
+      AND classname = #{classname}
+    </if>
+    <if test="sno!=null">
+      AND sno = #{sno}
+    </if>
+    <if test="sname!=null">
+      AND sname = #{sname}
+    </if>
+    <if test="admin!=null">
+      AND admin = #{admin}
+    </if>
+    LIMIT #{start},#{end}
+
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from grants
-    where no = #{no,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="net.bus.web.model.GrantExample" >
     delete from grants
@@ -165,7 +190,7 @@
     </if>
   </delete>
   <insert id="insert" parameterType="net.bus.web.model.Grant" >
-    insert into grants (no, idCard, populationCount, 
+    insert into grants (id, idCard, populationCount, 
       familyIncome, monthlyIncome, revenueSource, 
       poorGrades, amounted, fundedPurpose, 
       fundPurpose, bankAccount, m1name, 
@@ -176,7 +201,7 @@
       Remarks, counselorReview, counselorReviewRemarks, 
       admin, adminRemarks, ApplicationTime
       )
-    values (#{no,jdbcType=BIGINT}, #{idcard,jdbcType=VARCHAR}, #{populationcount,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT}, #{idcard,jdbcType=VARCHAR}, #{populationcount,jdbcType=VARCHAR}, 
       #{familyincome,jdbcType=VARCHAR}, #{monthlyincome,jdbcType=VARCHAR}, #{revenuesource,jdbcType=VARCHAR}, 
       #{poorgrades,jdbcType=VARCHAR}, #{amounted,jdbcType=VARCHAR}, #{fundedpurpose,jdbcType=VARCHAR}, 
       #{fundpurpose,jdbcType=VARCHAR}, #{bankaccount,jdbcType=VARCHAR}, #{m1name,jdbcType=VARCHAR}, 
@@ -191,8 +216,8 @@
   <insert id="insertSelective" parameterType="net.bus.web.model.Grant" >
     insert into grants
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="no != null" >
-        no,
+      <if test="id != null" >
+        id,
       </if>
       <if test="idcard != null" >
         idCard,
@@ -283,8 +308,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="no != null" >
-        #{no,jdbcType=BIGINT},
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
       </if>
       <if test="idcard != null" >
         #{idcard,jdbcType=VARCHAR},
@@ -384,8 +409,8 @@
   <update id="updateByExampleSelective" parameterType="map" >
     update grants
     <set >
-      <if test="record.no != null" >
-        no = #{record.no,jdbcType=BIGINT},
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
       </if>
       <if test="record.idcard != null" >
         idCard = #{record.idcard,jdbcType=VARCHAR},
@@ -481,7 +506,7 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update grants
-    set no = #{record.no,jdbcType=BIGINT},
+    set id = #{record.id,jdbcType=BIGINT},
       idCard = #{record.idcard,jdbcType=VARCHAR},
       populationCount = #{record.populationcount,jdbcType=VARCHAR},
       familyIncome = #{record.familyincome,jdbcType=VARCHAR},
@@ -606,7 +631,7 @@
         ApplicationTime = #{applicationtime,jdbcType=DATE},
       </if>
     </set>
-    where no = #{no,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="net.bus.web.model.Grant" >
     update grants
@@ -639,7 +664,7 @@
       admin = #{admin,jdbcType=INTEGER},
       adminRemarks = #{adminremarks,jdbcType=VARCHAR},
       ApplicationTime = #{applicationtime,jdbcType=DATE}
-    where no = #{no,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
   </update>
   <select resultMap="BaseResultMap" parameterType="net.bus.web.model.GrantExample" id="selectByExampleWithRowbounds" >
     select
@@ -655,34 +680,4 @@
       order by ${orderByClause}
     </if>
   </select>
-
-
-    <!--联合查询助学金信息-->
-    <select id="selectGrant" resultMap="grantMap" parameterType="java.util.Map">
-        SELECT * FROM grants
-        INNER JOIN students
-        ON grants.`idcard`=students.`idCard`
-        AND grants.`counselorReview`=2
-        <if test="college!=null">
-            AND college=#{college}
-        </if>
-        <if test="profession!=null">
-            AND profession = #{profession}
-        </if>
-        <if test="classname!=null">
-            AND classname = #{classname}
-        </if>
-        <if test="sno!=null">
-            AND sno = #{sno}
-        </if>
-        <if test="sname!=null">
-            AND sname = #{sname}
-        </if>
-        <if test="admin!=null">
-            AND admin = #{admin}
-        </if>
-        LIMIT #{start},#{end}
-
-    </select>
-
 </mapper>

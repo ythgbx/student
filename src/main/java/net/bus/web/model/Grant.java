@@ -3,7 +3,7 @@ package net.bus.web.model;
 import java.util.Date;
 
 public class Grant {
-    private Long no;
+    private Long id;
 
     private String idcard;
 
@@ -63,12 +63,12 @@ public class Grant {
 
     private Date applicationtime;
 
-    public Long getNo() {
-        return no;
+    public Long getId() {
+        return id;
     }
 
-    public void setNo(Long no) {
-        this.no = no;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getIdcard() {

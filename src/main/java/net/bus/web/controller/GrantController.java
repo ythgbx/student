@@ -65,23 +65,27 @@ public class GrantController {
         logger.info("url:/grant/application");
         BaseResult result = new BaseResult();
         Grant grant = service.getStudent(grantDto.getIdcard());
-        if (grant!=null){
-            Calendar a=Calendar.getInstance();
-            if(Util.TimeToString(grant.getApplicationtime()).substring(0,4).equals(String.valueOf(a.get(Calendar.YEAR)))){
-                result.setResult("error");
-                result.setContent("本年度已申请过！");
-            }else {
-                service.insert(grantDto);
-            }
+        try {
+            if (grant!=null){
+                Calendar a=Calendar.getInstance();
+                if(Util.TimeToString(grant.getApplicationtime()).substring(0,4).equals(String.valueOf(a.get(Calendar.YEAR)))){
+                    result.setResult("error");
+                    result.setContent("本年度已申请过！");
+                }else {
+                    service.insert(grantDto);
+                }
 
-        }else {
-            if (service.insert(grantDto)){
-                result.setResult("success");
-                result.setContent("申请成功！");
             }else {
-                result.setResult("error");
-                result.setContent("申请失败！");
+                if (service.insert(grantDto)){
+                    result.setResult("success");
+                    result.setContent("申请成功！");
+                }else {
+                    result.setResult("error");
+                    result.setContent("申请失败！");
+                }
             }
+        } catch (Exception e) {
+            result.setContent("申请失败！");
         }
         return result;
     }

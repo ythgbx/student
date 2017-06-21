@@ -132,63 +132,63 @@ public class GrantExample {
             addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
         }
 
-        public Criteria andNoIsNull() {
-            addCriterion("no is null");
+        public Criteria andIdIsNull() {
+            addCriterion("id is null");
             return (Criteria) this;
         }
 
-        public Criteria andNoIsNotNull() {
-            addCriterion("no is not null");
+        public Criteria andIdIsNotNull() {
+            addCriterion("id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andNoEqualTo(Long value) {
-            addCriterion("no =", value, "no");
+        public Criteria andIdEqualTo(Long value) {
+            addCriterion("id =", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andNoNotEqualTo(Long value) {
-            addCriterion("no <>", value, "no");
+        public Criteria andIdNotEqualTo(Long value) {
+            addCriterion("id <>", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andNoGreaterThan(Long value) {
-            addCriterion("no >", value, "no");
+        public Criteria andIdGreaterThan(Long value) {
+            addCriterion("id >", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andNoGreaterThanOrEqualTo(Long value) {
-            addCriterion("no >=", value, "no");
+        public Criteria andIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("id >=", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andNoLessThan(Long value) {
-            addCriterion("no <", value, "no");
+        public Criteria andIdLessThan(Long value) {
+            addCriterion("id <", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andNoLessThanOrEqualTo(Long value) {
-            addCriterion("no <=", value, "no");
+        public Criteria andIdLessThanOrEqualTo(Long value) {
+            addCriterion("id <=", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andNoIn(List<Long> values) {
-            addCriterion("no in", values, "no");
+        public Criteria andIdIn(List<Long> values) {
+            addCriterion("id in", values, "id");
             return (Criteria) this;
         }
 
-        public Criteria andNoNotIn(List<Long> values) {
-            addCriterion("no not in", values, "no");
+        public Criteria andIdNotIn(List<Long> values) {
+            addCriterion("id not in", values, "id");
             return (Criteria) this;
         }
 
-        public Criteria andNoBetween(Long value1, Long value2) {
-            addCriterion("no between", value1, value2, "no");
+        public Criteria andIdBetween(Long value1, Long value2) {
+            addCriterion("id between", value1, value2, "id");
             return (Criteria) this;
         }
 
-        public Criteria andNoNotBetween(Long value1, Long value2) {
-            addCriterion("no not between", value1, value2, "no");
+        public Criteria andIdNotBetween(Long value1, Long value2) {
+            addCriterion("id not between", value1, value2, "id");
             return (Criteria) this;
         }
 

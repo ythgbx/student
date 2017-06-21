@@ -42,7 +42,7 @@ public class ApplicationRecordController {
         ModelAndView mv = new ModelAndView();
         User user = (User) session.getAttribute(SessionContext.CURRENT_USER);
        List<RecordDto> recordDtos= applicationRecordService.getall(user.getUsername());
-        if (recordDtos.isEmpty()){
+        if (!recordDtos.isEmpty()){
            mv.addObject("recordDtos",recordDtos);
             mv.setViewName("applicationRecord");
         }

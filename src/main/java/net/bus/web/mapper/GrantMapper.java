@@ -24,7 +24,7 @@ public interface GrantMapper {
 
     List<Grant> selectByExample(GrantExample example);
 
-    Grant selectByPrimaryKey(Long no);
+    Grant selectByPrimaryKey(Long id);
 
     int updateByExampleSelective(@Param("record") Grant record, @Param("example") GrantExample example);
 
