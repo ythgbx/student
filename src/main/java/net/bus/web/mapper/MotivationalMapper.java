@@ -1,10 +1,13 @@
 package net.bus.web.mapper;
 
-import java.util.List;
+import net.bus.web.model.MotivationPovo;
 import net.bus.web.model.Motivational;
 import net.bus.web.model.MotivationalExample;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
+
+import java.util.List;
+import java.util.Map;
 
 public interface MotivationalMapper {
     int countByExample(MotivationalExample example);
@@ -30,4 +33,7 @@ public interface MotivationalMapper {
     int updateByPrimaryKeySelective(Motivational record);
 
     int updateByPrimaryKey(Motivational record);
+    
+//    查询励志奖学金
+    List<MotivationPovo> selectMotivation(Map map);
 }

@@ -2,6 +2,7 @@ package net.bus.web.mapper;
 
 import net.bus.web.model.Grant;
 import net.bus.web.model.GrantExample;
+import net.bus.web.model.GrantPovo;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
@@ -34,6 +35,6 @@ public interface GrantMapper {
     int updateByPrimaryKey(Grant record);
 
 //    查询贫困建档信息
-    List<Grant> selectGrant(Map map);
+    List<GrantPovo> selectGrant(Map map);
 
 }

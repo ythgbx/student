@@ -15,12 +15,12 @@ public class PageController {
 
     /**
      *
-     * @return
+     * @return 励志奖学金的页面
      */
     @RequestMapping(value = "/motivation",method = RequestMethod.GET)
     public ModelAndView motivation(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("");
+        modelAndView.setViewName("/teacher/motivation_list");
         return modelAndView;
     }
 
