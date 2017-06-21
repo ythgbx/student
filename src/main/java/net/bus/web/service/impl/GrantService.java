@@ -1,7 +1,7 @@
 package net.bus.web.service.impl;
 
 import net.bus.web.common.config.RString;
-import net.bus.web.controller.dto.StudentDetail;
+import net.bus.web.controller.dto.GrantDto;
 import net.bus.web.model.Grant;
 import net.bus.web.model.GrantPovo;
 import net.bus.web.repository.GrantRepository;
@@ -27,7 +27,7 @@ public class GrantService implements IGrantService{
     private IApplicationRecordService applicationRecordService;
 
 
-    public boolean insert(StudentDetail grantDto) {
+    public boolean insert(GrantDto grantDto) {
         Grant grant = new Grant();
         grant.setIdcard(grantDto.getIdcard());
         grant.setPopulationcount(grantDto.getPopulationcount());

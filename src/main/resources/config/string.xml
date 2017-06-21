@@ -10,8 +10,8 @@
     <bean class="net.bus.web.common.config.RString">
         <!-- 申请类型 -->
         <property name="APPLICATION_POOR" value="贫困建档申请"/>
-        <property name="APPLICATION_GRANT" value="国家助学金申请"/>
-        <property name="APPLICATION_MOTIVATIONAL" value="国家励志奖学金申请"/>
+        <property name="APPLICATION_GRANT" value="助学金申请"/>
+        <property name="APPLICATION_MOTIVATIONAL" value="贫困建档申请"/>
         <property name="AUDIT_COUNSELOR_TRUE" value="通过"/>
         <property name="AUDIT_COUNSELOR_FALSE" value="未通过"/>
         <property name="AUDIT_ADMIN_TRUE" value="通过"/>

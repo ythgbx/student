@@ -37,8 +37,7 @@
             editable: false,
             onSelect: function (record) {
                 var re = record;
-//                $(this).combobox('getValue')
-                var url = '/menu/getClassName?pcode=' + re.pname;
+                var url = '/menu/getClassName?pcode=' + $(this).combobox('getValue');
                 $('input[comboname="classname"]').combobox('clear');
                 $('input[comboname="classname"]').combobox('reload', url);
                 $('#new_table').datagrid('load', {
@@ -68,8 +67,7 @@
             //
             onSelect: function (record) {
                 var re = record;
-//                $(this).combobox('getValue');
-                var url = '/menu/getProfessional?code=' +re.cname;
+                var url = '/menu/getProfessional?code=' + $(this).combobox('getValue');
                 $('input[comboname="profession"]').combobox('clear');
                 $('input[comboname="classname"]').combobox('clear');
                 $('input[comboname="profession"]').combobox('reload', url);

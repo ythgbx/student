@@ -1,6 +1,6 @@
 package net.bus.web.service;
 
-import net.bus.web.controller.dto.StudentDetail;
+import net.bus.web.controller.dto.GrantDto;
 import net.bus.web.model.Grant;
 
 import java.util.Map;
@@ -10,7 +10,7 @@ import java.util.Map;
  */
 
 public interface IGrantService {
-    boolean insert(StudentDetail grantDto);
+    boolean insert(GrantDto grantDto);
 
     Grant getStudent(String idCard);
 
