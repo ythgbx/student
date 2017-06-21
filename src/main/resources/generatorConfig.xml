@@ -63,15 +63,7 @@
                         <!--enableCountByExample="true"-->
                         <!--enableUpdateByExample="true">-->
         <!--</table>-->
-        <table tableName="grants" domainObjectName="Grant"  enableSelectByPrimaryKey="true"
-               enableUpdateByPrimaryKey="true"
-               enableDeleteByPrimaryKey="true"
-               enableSelectByExample="true"
-               enableDeleteByExample="true"
-               enableCountByExample="true"
-               enableUpdateByExample="true">
-        </table>
-        <!--<table tableName="motivational" domainObjectName="Motivational"  enableSelectByPrimaryKey="true"-->
+        <!--<table tableName="grants" domainObjectName="Grant"  enableSelectByPrimaryKey="true"-->
                <!--enableUpdateByPrimaryKey="true"-->
                <!--enableDeleteByPrimaryKey="true"-->
                <!--enableSelectByExample="true"-->
@@ -79,6 +71,14 @@
                <!--enableCountByExample="true"-->
                <!--enableUpdateByExample="true">-->
         <!--</table>-->
+        <table tableName="motivational" domainObjectName="Motivational"  enableSelectByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true"
+               enableDeleteByPrimaryKey="true"
+               enableSelectByExample="true"
+               enableDeleteByExample="true"
+               enableCountByExample="true"
+               enableUpdateByExample="true">
+        </table>
         <!--<table tableName="college" domainObjectName="College"  enableSelectByPrimaryKey="true"-->
         <!--enableUpdateByPrimaryKey="true"-->
         <!--enableDeleteByPrimaryKey="true"-->

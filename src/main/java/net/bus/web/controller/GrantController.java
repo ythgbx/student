@@ -5,6 +5,7 @@ import net.bus.web.common.Util;
 import net.bus.web.controller.dto.BaseResult;
 import net.bus.web.controller.dto.GrantDto;
 import net.bus.web.controller.dto.IResult;
+import net.bus.web.controller.dto.StudentDetail;
 import net.bus.web.model.Grant;
 import net.bus.web.service.IGrantService;
 import net.bus.web.service.IUserService;
@@ -61,7 +62,7 @@ public class GrantController {
     @Auth(role = Auth.Role.USER)
     @ResponseBody
     @RequestMapping(value = "/application", method = RequestMethod.POST)
-    public IResult application(@RequestBody GrantDto grantDto){
+    public IResult application(@RequestBody StudentDetail grantDto){
         logger.info("url:/grant/application");
         BaseResult result = new BaseResult();
         Grant grant = service.getStudent(grantDto.getIdcard());

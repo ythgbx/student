@@ -5,6 +5,7 @@ import net.bus.web.common.Util;
 import net.bus.web.controller.dto.BaseResult;
 import net.bus.web.controller.dto.IResult;
 import net.bus.web.controller.dto.StudentDetail;
+import net.bus.web.model.Motivational;
 import net.bus.web.service.IMotivationalService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
