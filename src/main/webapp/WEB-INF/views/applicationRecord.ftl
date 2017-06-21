@@ -19,10 +19,10 @@
                     <#list recordDtos as record>
                         <tr class="tr">
                             <td class="td_center"><input type="checkbox"></td>
-                            <td>${record.type}</td>
-                            <td>${record.date}</td>
-                            <td>${record.counselor}</td>
-                            <td>${record.admin}</td>
+                            <td>${record.type!""}</td>
+                            <td>${record.date!""}</td>
+                            <td>${record.counselor!""}</td>
+                            <td>${record.admin!""}</td>
                             <td>${record.remark!""}</td>
                         </tr>
                     </#list>
