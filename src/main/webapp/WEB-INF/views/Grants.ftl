@@ -236,7 +236,7 @@
                 </tr>
                 <tr>
                     <td colspan="10" style="width:627px; text-align:justify;" >
-                        申请理由:<br />
+                        bankaccount:<br />
                         <#--<input type="text" class="messageone" name="applicationreasons" style="width:810px; height:150px; " />-->
                         <textarea name="applicationreasons" rows="10" cols="60" style="width:810px; height:150px; margin-left: 50px " ></textarea>
                         <pre style="font-size:14px">                                                                        </pre>

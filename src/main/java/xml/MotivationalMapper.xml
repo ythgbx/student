@@ -21,7 +21,7 @@
     <result column="counselorReviewRemarks" property="counselorreviewremarks" jdbcType="VARCHAR" />
     <result column="admin" property="admin" jdbcType="INTEGER" />
     <result column="adminRemarks" property="adminremarks" jdbcType="VARCHAR" />
-    <result column="ApplicationTime" property="applicationtime" jdbcType="TIMESTAMP" />
+    <result column="ApplicationTime" property="applicationtime" jdbcType="DATE" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -131,7 +131,7 @@
       #{amounted,jdbcType=VARCHAR}, #{fundedpurpose,jdbcType=VARCHAR}, #{fundpurpose,jdbcType=VARCHAR}, 
       #{bankaccount,jdbcType=VARCHAR}, #{applicationreasons,jdbcType=VARCHAR}, #{remarks,jdbcType=DATE}, 
       #{counselorreview,jdbcType=INTEGER}, #{counselorreviewremarks,jdbcType=VARCHAR}, 
-      #{admin,jdbcType=INTEGER}, #{adminremarks,jdbcType=VARCHAR}, #{applicationtime,jdbcType=TIMESTAMP}
+      #{admin,jdbcType=INTEGER}, #{adminremarks,jdbcType=VARCHAR}, #{applicationtime,jdbcType=DATE}
       )
   </insert>
   <insert id="insertSelective" parameterType="net.bus.web.model.Motivational" >
@@ -257,7 +257,7 @@
         #{adminremarks,jdbcType=VARCHAR},
       </if>
       <if test="applicationtime != null" >
-        #{applicationtime,jdbcType=TIMESTAMP},
+        #{applicationtime,jdbcType=DATE},
       </if>
     </trim>
   </insert>
@@ -328,7 +328,7 @@
         adminRemarks = #{record.adminremarks,jdbcType=VARCHAR},
       </if>
       <if test="record.applicationtime != null" >
-        ApplicationTime = #{record.applicationtime,jdbcType=TIMESTAMP},
+        ApplicationTime = #{record.applicationtime,jdbcType=DATE},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -356,7 +356,7 @@
       counselorReviewRemarks = #{record.counselorreviewremarks,jdbcType=VARCHAR},
       admin = #{record.admin,jdbcType=INTEGER},
       adminRemarks = #{record.adminremarks,jdbcType=VARCHAR},
-      ApplicationTime = #{record.applicationtime,jdbcType=TIMESTAMP}
+      ApplicationTime = #{record.applicationtime,jdbcType=DATE}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -419,7 +419,7 @@
         adminRemarks = #{adminremarks,jdbcType=VARCHAR},
       </if>
       <if test="applicationtime != null" >
-        ApplicationTime = #{applicationtime,jdbcType=TIMESTAMP},
+        ApplicationTime = #{applicationtime,jdbcType=DATE},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -444,7 +444,7 @@
       counselorReviewRemarks = #{counselorreviewremarks,jdbcType=VARCHAR},
       admin = #{admin,jdbcType=INTEGER},
       adminRemarks = #{adminremarks,jdbcType=VARCHAR},
-      ApplicationTime = #{applicationtime,jdbcType=TIMESTAMP}
+      ApplicationTime = #{applicationtime,jdbcType=DATE}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <select resultMap="BaseResultMap" parameterType="net.bus.web.model.MotivationalExample" id="selectByExampleWithRowbounds" >
