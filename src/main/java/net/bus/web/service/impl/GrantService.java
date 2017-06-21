@@ -1,8 +1,9 @@
 package net.bus.web.service.impl;
 
 import net.bus.web.common.config.RString;
-import net.bus.web.controller.dto.StudentDetail;
+import net.bus.web.controller.dto.GrantDto;
 import net.bus.web.model.Grant;
+import net.bus.web.model.GrantPovo;
 import net.bus.web.repository.GrantRepository;
 import net.bus.web.repository.specification.GrantidCardSpecification;
 import net.bus.web.service.IApplicationRecordService;
@@ -26,7 +27,7 @@ public class GrantService implements IGrantService{
     private IApplicationRecordService applicationRecordService;
 
 
-    public boolean insert(StudentDetail grantDto) {
+    public boolean insert(GrantDto grantDto) {
         Grant grant = new Grant();
         grant.setIdcard(grantDto.getIdcard());
         grant.setPopulationcount(grantDto.getPopulationcount());
@@ -74,7 +75,7 @@ public class GrantService implements IGrantService{
         param.put("sno",sno);
         param.put("sname",sname);
         param.put("admin",admin);
-        List<Grant> list = _rootRepository.getGrant(param);
+        List<GrantPovo> list = _rootRepository.getGrant(param);
         int total = _rootRepository.Count();
         Map<String,Object> map = PageUtil.returnMap(list,total);
         return map;

@@ -1,4 +1,4 @@
-<#macro poorbuildjs>
+<#macro motivationjs>
 <script>
     $(function () {
         var other = $('input[name="search"]').val();
@@ -80,7 +80,7 @@
 
 //	渲染table
         $("#new_table").datagrid({
-            url: '/puton/getinfo',
+            url: '/motivational/getmovational',
             pagination: true,
             pagePosition: 'bottom',
             singleSelect: true,

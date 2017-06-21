@@ -3,60 +3,62 @@ package net.bus.web.model;
 import java.util.Date;
 
 public class Motivational {
-    private Long id;
+    private String id;
 
-    private String idcard;
+    private Long no;
 
     private Integer ranking;
 
     private Integer tnumber;
 
-    private String populationcount;
+    private String level;
 
-    private String familyincome;
+    private String lastyearmoney;
 
-    private String monthlyincome;
+    private String useoffunds;
 
-    private String revenuesource;
-
-    private String poorgrades;
-
-    private String amounted;
-
-    private String fundedpurpose;
-
-    private String fundpurpose;
+    private String thisuse;
 
     private String bankaccount;
 
-    private String applicationreasons;
+    private String totalnum;
 
-    private Date remarks;
+    private String totalmoney;
 
-    private Integer counselorreview;
+    private String avemoney;
 
-    private String counselorreviewremarks;
+    private String esources;
 
-    private Integer admin;
+    private String application;
 
-    private String adminremarks;
+    private Date datetime;
 
-    private Date applicationtime;
+    private String dsuggest;
 
-    public Long getId() {
+    private Date ddatetime;
+
+    private Date sdatetime;
+
+    private String treviewed;
+
+    private String dtreviewed;
+
+    private String streviewed;
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getIdcard() {
-        return idcard;
+    public Long getNo() {
+        return no;
     }
 
-    public void setIdcard(String idcard) {
-        this.idcard = idcard;
+    public void setNo(Long no) {
+        this.no = no;
     }
 
     public Integer getRanking() {
@@ -75,68 +77,36 @@ public class Motivational {
         this.tnumber = tnumber;
     }
 
-    public String getPopulationcount() {
-        return populationcount;
+    public String getLevel() {
+        return level;
     }
 
-    public void setPopulationcount(String populationcount) {
-        this.populationcount = populationcount;
+    public void setLevel(String level) {
+        this.level = level;
     }
 
-    public String getFamilyincome() {
-        return familyincome;
+    public String getLastyearmoney() {
+        return lastyearmoney;
     }
 
-    public void setFamilyincome(String familyincome) {
-        this.familyincome = familyincome;
+    public void setLastyearmoney(String lastyearmoney) {
+        this.lastyearmoney = lastyearmoney;
     }
 
-    public String getMonthlyincome() {
-        return monthlyincome;
+    public String getUseoffunds() {
+        return useoffunds;
     }
 
-    public void setMonthlyincome(String monthlyincome) {
-        this.monthlyincome = monthlyincome;
+    public void setUseoffunds(String useoffunds) {
+        this.useoffunds = useoffunds;
     }
 
-    public String getRevenuesource() {
-        return revenuesource;
+    public String getThisuse() {
+        return thisuse;
     }
 
-    public void setRevenuesource(String revenuesource) {
-        this.revenuesource = revenuesource;
-    }
-
-    public String getPoorgrades() {
-        return poorgrades;
-    }
-
-    public void setPoorgrades(String poorgrades) {
-        this.poorgrades = poorgrades;
-    }
-
-    public String getAmounted() {
-        return amounted;
-    }
-
-    public void setAmounted(String amounted) {
-        this.amounted = amounted;
-    }
-
-    public String getFundedpurpose() {
-        return fundedpurpose;
-    }
-
-    public void setFundedpurpose(String fundedpurpose) {
-        this.fundedpurpose = fundedpurpose;
-    }
-
-    public String getFundpurpose() {
-        return fundpurpose;
-    }
-
-    public void setFundpurpose(String fundpurpose) {
-        this.fundpurpose = fundpurpose;
+    public void setThisuse(String thisuse) {
+        this.thisuse = thisuse;
     }
 
     public String getBankaccount() {
@@ -147,59 +117,99 @@ public class Motivational {
         this.bankaccount = bankaccount;
     }
 
-    public String getApplicationreasons() {
-        return applicationreasons;
+    public String getTotalnum() {
+        return totalnum;
     }
 
-    public void setApplicationreasons(String applicationreasons) {
-        this.applicationreasons = applicationreasons;
+    public void setTotalnum(String totalnum) {
+        this.totalnum = totalnum;
     }
 
-    public Date getRemarks() {
-        return remarks;
+    public String getTotalmoney() {
+        return totalmoney;
     }
 
-    public void setRemarks(Date remarks) {
-        this.remarks = remarks;
+    public void setTotalmoney(String totalmoney) {
+        this.totalmoney = totalmoney;
     }
 
-    public Integer getCounselorreview() {
-        return counselorreview;
+    public String getAvemoney() {
+        return avemoney;
     }
 
-    public void setCounselorreview(Integer counselorreview) {
-        this.counselorreview = counselorreview;
+    public void setAvemoney(String avemoney) {
+        this.avemoney = avemoney;
     }
 
-    public String getCounselorreviewremarks() {
-        return counselorreviewremarks;
+    public String getEsources() {
+        return esources;
     }
 
-    public void setCounselorreviewremarks(String counselorreviewremarks) {
-        this.counselorreviewremarks = counselorreviewremarks;
+    public void setEsources(String esources) {
+        this.esources = esources;
     }
 
-    public Integer getAdmin() {
-        return admin;
+    public String getApplication() {
+        return application;
     }
 
-    public void setAdmin(Integer admin) {
-        this.admin = admin;
+    public void setApplication(String application) {
+        this.application = application;
     }
 
-    public String getAdminremarks() {
-        return adminremarks;
+    public Date getDatetime() {
+        return datetime;
     }
 
-    public void setAdminremarks(String adminremarks) {
-        this.adminremarks = adminremarks;
+    public void setDatetime(Date datetime) {
+        this.datetime = datetime;
     }
 
-    public Date getApplicationtime() {
-        return applicationtime;
+    public String getDsuggest() {
+        return dsuggest;
     }
 
-    public void setApplicationtime(Date applicationtime) {
-        this.applicationtime = applicationtime;
+    public void setDsuggest(String dsuggest) {
+        this.dsuggest = dsuggest;
+    }
+
+    public Date getDdatetime() {
+        return ddatetime;
+    }
+
+    public void setDdatetime(Date ddatetime) {
+        this.ddatetime = ddatetime;
+    }
+
+    public Date getSdatetime() {
+        return sdatetime;
+    }
+
+    public void setSdatetime(Date sdatetime) {
+        this.sdatetime = sdatetime;
+    }
+
+    public String getTreviewed() {
+        return treviewed;
+    }
+
+    public void setTreviewed(String treviewed) {
+        this.treviewed = treviewed;
+    }
+
+    public String getDtreviewed() {
+        return dtreviewed;
+    }
+
+    public void setDtreviewed(String dtreviewed) {
+        this.dtreviewed = dtreviewed;
+    }
+
+    public String getStreviewed() {
+        return streviewed;
+    }
+
+    public void setStreviewed(String streviewed) {
+        this.streviewed = streviewed;
     }
 }

@@ -29,7 +29,6 @@
         <mapper resource="mapper/CollegeMapper.xml"/>
         <mapper resource="mapper/ProfessionalMapper.xml"/>
         <mapper resource="mapper/ApplicationRecordMapper.xml"/>
-        <mapper resource="mapper/MotivationalMapper.xml"/>
     </mappers>
 
 </configuration>
