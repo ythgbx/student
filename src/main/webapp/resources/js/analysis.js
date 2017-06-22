@@ -1,28 +1,37 @@
 $(function() {
 	obj = {
-		device : function() {
+        putre : function() {
 			var x = [];
 			var y = [];
-			$.getJSON('/poorBuild/statistics', function(json, textStatus) {
+			$.getJSON('/poorBuild/statistics?year=2017', function(json, textStatus) {
 				/*optional stuff to do after success */
 				for ( var n in json) {
-					x[n] = json[n].device;
-					y[n] = json[n].num;
+					x[n] = json[n].colleges;
+					y[n] = json[n].count;
 				}
 				console.log(x);
 				console.log(y)
 
 				$('.container').highcharts({
-
+					chart:{
+						type : "column"
+					},
 					title : {
-						text : "登录设备"
+						text : "建档申请"
 					},
 					xAxis : {
 						categories : x
 					},
+                    plotOptions:{
+                        series: {
+                            dataLabels: {
+                                enabled: true
+                            }
+                        }
+                    },
 					yAxis : {
 						title : {
-							text : '登录次数'
+							text : '数量'
 						},
 						min : 0,
 						plotLines : [ {
@@ -32,22 +41,23 @@ $(function() {
 						} ]
 					},
 					tooltip : {
-						valueSuffix : '次'
+						valueSuffix : '人'
 					},
 					legend : {
+						enabled : false,
 						layout : 'vertical',
 						align : 'right',
 						verticalAlign : 'middle',
 						borderWidth : 0
 					},
 					series : [ {
-						name : '登录',
+						name : '总数',
 						data : y
-					} ]
+					}]
 				});
 			});
 		},
-		city : function() {
+        grant : function() {
 			var x = [];
 			var y = [];
 			$.getJSON('logfo/countCity.do', function(json, textStatus) {
@@ -103,7 +113,7 @@ $(function() {
 				});
 			});
 		},
-		time : function() {
+        movacition : function() {
 			var x = [];
 			var y = [];
 			$.getJSON('logfo/countTime.do', function(json, textStatus) {

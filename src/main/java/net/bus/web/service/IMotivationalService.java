@@ -13,5 +13,5 @@ public interface IMotivationalService {
 
     Motivational getStudent(String idCard);
 
-    Map getMotivation(int page, int rows,String college,String profession,String classname,String sno,String sname,String admin);
+    Map<String,Object> getMotivation(int page, int rows,String college,String profession,String classname,String sno,String sname,String admin);
 }

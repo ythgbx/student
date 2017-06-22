@@ -36,11 +36,10 @@ public class MotivationalController {
     @Autowired
     private IMotivationalService service;
 
-    private IMotivationalService iMotivationalService;
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
-    @Auth (role = Auth.Role.USER)
+    @Auth (role = Auth.Role.STUDENT)
     @RequestMapping(value="/page" , method = RequestMethod.GET)
     public ModelAndView motivational(){
         logger.info("url:/motivational/page");
@@ -52,7 +51,7 @@ public class MotivationalController {
      * @param motivation
      * @return
      */
-    @Auth(role = Auth.Role.USER)
+    @Auth(role = Auth.Role.STUDENT)
     @ResponseBody
     @RequestMapping(value = "/application", method = RequestMethod.POST)
     public IResult application(@RequestBody StudentDetail motivation){
@@ -94,6 +93,7 @@ public class MotivationalController {
                                      @RequestParam(required = false) String sno,
                                      @RequestParam(required = false) String sname,
                                      @RequestParam(defaultValue = "0") String admin){
-        return iMotivationalService.getMotivation(page, rows, college, profession, classname, sno, sname, admin);
+
+        return service.getMotivation(page, rows, college, profession, classname, sno, sname, admin);
     }
 }

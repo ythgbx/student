@@ -30,7 +30,7 @@ public class FileUploadController {
     @Autowired
     private HttpServletRequest _request;
 
-    @Auth(role = Auth.Role.USER)
+    @Auth(role = Auth.Role.STUDENT)
     @ResponseBody
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     @ApiOperation(value = "文件上传", httpMethod = "POST", response = BaseResult.class, notes = "文件上传（文件查看路径为 your-website/upload/abc.png）")
