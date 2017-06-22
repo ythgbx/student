@@ -1,6 +1,7 @@
 package net.bus.web.service.impl;
 
 import net.bus.web.common.config.RString;
+import net.bus.web.model.DataStatistics;
 import net.bus.web.model.PoorBuild;
 import net.bus.web.repository.PoorBuildRepositiory;
 import net.bus.web.repository.specification.PoorBuildIdCardSpecification;
@@ -35,6 +36,10 @@ public class PoorBuildService implements IPoorBuildService{
 
     public PoorBuild getPoorBuildByIdCard(String idCard) {
         return _rootRepository.getPoorBuildByIdCard(new PoorBuildIdCardSpecification(idCard));
+    }
+
+    public List<DataStatistics> getNumPoor(Integer year) {
+        return _rootRepository.getCountPoor(year);
     }
 
     /**

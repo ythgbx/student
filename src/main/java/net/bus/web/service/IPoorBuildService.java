@@ -1,8 +1,10 @@
 package net.bus.web.service;
 
+import net.bus.web.model.DataStatistics;
 import net.bus.web.model.PoorBuild;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -11,7 +13,10 @@ import java.util.Map;
 @Service
 public interface IPoorBuildService {
     boolean insert(PoorBuild poorBuild);
+
     PoorBuild getPoorBuildByIdCard(String Idcard);
+
+    List<DataStatistics> getNumPoor(Integer year);
 
     //获取所有贫困生建档的信息
     Map<String,Object> getAllPoor(int page, int rows,String college,String profession,String classname,String sno,String sname,String admin);

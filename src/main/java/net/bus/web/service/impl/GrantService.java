@@ -3,6 +3,7 @@ package net.bus.web.service.impl;
 import net.bus.web.common.config.RString;
 import net.bus.web.controller.dto.GrantDto;
 import net.bus.web.controller.dto.StudentDetail;
+import net.bus.web.model.DataStatistics;
 import net.bus.web.model.Grant;
 import net.bus.web.model.GrantPovo;
 import net.bus.web.repository.GrantRepository;
@@ -65,6 +66,10 @@ public class GrantService implements IGrantService{
 
     public Grant getStudent(String idCard) {
         return _rootRepository.getGrant(new GrantidCardSpecification(idCard));
+    }
+
+    public List<DataStatistics> getNumPoor(Integer year) {
+        return _rootRepository.getNumPoor(year);
     }
 
     //助学金查询

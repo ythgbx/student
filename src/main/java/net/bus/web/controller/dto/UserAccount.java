@@ -7,6 +7,9 @@ public class UserAccount extends BaseResult{
     private String id;
     private String password;
     private String new_password;
+    private String username;
+    private String name;
+    private String bindcourse;
     private String idCard;
 
 
@@ -40,5 +43,29 @@ public class UserAccount extends BaseResult{
 
     public void setIdCard(String idCard) {
         this.idCard = idCard;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getBindcourse() {
+        return bindcourse;
+    }
+
+    public void setBindcourse(String bindcourse) {
+        this.bindcourse = bindcourse;
     }
 }

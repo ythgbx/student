@@ -1,6 +1,7 @@
 package net.bus.web.repository;
 
 import net.bus.web.mapper.GrantMapper;
+import net.bus.web.model.DataStatistics;
 import net.bus.web.model.Grant;
 import net.bus.web.model.GrantExample;
 import net.bus.web.model.GrantPovo;
@@ -93,6 +94,10 @@ public class GrantRepository {
 //助学金查询
     public List<GrantPovo> getGrant(Map map){
         return grantMapper.selectGrant(map);
+    }
+
+    public List<DataStatistics> getNumPoor(Integer year){
+        return grantMapper.getNumPoor(year);
     }
 
 

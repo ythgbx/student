@@ -6,6 +6,7 @@ import net.bus.web.controller.dto.BaseResult;
 import net.bus.web.controller.dto.GrantDto;
 import net.bus.web.controller.dto.IResult;
 import net.bus.web.controller.dto.StudentDetail;
+import net.bus.web.model.DataStatistics;
 import net.bus.web.model.Grant;
 import net.bus.web.service.IGrantService;
 import net.bus.web.service.IUserService;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -44,7 +46,7 @@ public class GrantController {
      * @param model
      * @return
      */
-    @Auth(role = Auth.Role.USER)
+    @Auth(role = Auth.Role.STUDENT)
     @RequestMapping(value="/page" , method = RequestMethod.GET)
     public ModelAndView index(Model model)
     {
@@ -59,7 +61,7 @@ public class GrantController {
      * @param grantDto
      * @return
      */
-    @Auth(role = Auth.Role.USER)
+    @Auth(role = Auth.Role.STUDENT)
     @ResponseBody
     @RequestMapping(value = "/application", method = RequestMethod.POST)
     public IResult application(@RequestBody StudentDetail grantDto){
@@ -90,36 +92,24 @@ public class GrantController {
         }
         return result;
     }
-//        if (grant!=null){
-//            result.setResult("failure");
-//            result.setContent("您已申请!");
-//        }else {
-//            User user = userService.getUser(grantDto.getId());
-//            user.setSchool(grantDto.getSchool());
-//            user.setDepartment(grantDto.getDepartment());
-//            user.setClasses(grantDto.getClasses());
-//            user.setId(grantDto.getId());
-//            user.setName(grantDto.getName());
-//            user.setSex(grantDto.getSex());
-//            user.setBirthdate(Util.StringToTime(grantDto.getBirthDate()));
-//            user.setImg(grantDto.getImg());
-//            user.setNation(grantDto.getNation());
-//            user.setPoliticalstatus(grantDto.getPoliticalStatus());
-//            user.setAdmissiondate(grantDto.getDatetime());
-//            user.setIdcard(grantDto.getIdCard());
-//            user.setTel(grantDto.getTel());
-//            user.setQq(grantDto.getQq());
-//            user.setResidence(grantDto.getResidence());
-//            user.setAddress(grantDto.getAddress());
-//            if (service.insert(grantDto)){
-//                result.setContent("申请成功!");
-//            }else {
-//                result.setContent("申请失败!");
-//            }
-//        }
-//
-//        return result;
-//    }
+
+    /**
+     * 获取各学院建档数量
+     * @param year
+     * @return
+     */
+    @Auth(role = Auth.Role.ADMIN)
+    @RequestMapping(value = "/statistics",method = RequestMethod.GET)
+    public @ResponseBody
+    List<DataStatistics> statistics(@RequestParam(required = false) Integer year){
+        logger.info("url:/poorBuild/statistics");
+        List<DataStatistics> lists = service.getNumPoor(year);
+        if (!lists.isEmpty()){
+            return lists;
+        }
+        return null;
+    }
+
 
     /**
      * @param page

@@ -1,5 +1,6 @@
 package net.bus.web.repository;
 
+import net.bus.web.model.DataStatistics;
 import net.bus.web.mapper.PoorBuildMapper;
 import net.bus.web.model.PoorBuild;
 import net.bus.web.model.PoorBuildExample;
@@ -91,11 +92,14 @@ public class PoorBuildRepositiory {
         return  poorBuildMapper.deleteByExample((PoorBuildExample) specification.createExample());
     }
 
-
     /**
      * 返回所有
      */
     public List getPoor(Map map){
         return poorBuildMapper.getAllPoorinfo(map);
+    }
+
+    public List<DataStatistics> getCountPoor(Integer year){
+        return poorBuildMapper.getCountPoor(year);
     }
 }

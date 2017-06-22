@@ -3,6 +3,7 @@ package net.bus.web.mapper;
 import java.util.List;
 import java.util.Map;
 
+import net.bus.web.model.DataStatistics;
 import net.bus.web.model.PoorBuild;
 import net.bus.web.model.PoorBuildExample;
 import net.bus.web.model.PoorPovo;
@@ -35,4 +36,6 @@ public interface PoorBuildMapper {
     int updateByPrimaryKey(PoorBuild record);
 
     List<PoorPovo> getAllPoorinfo(Map map);
+
+    List<DataStatistics> getCountPoor(Integer year);
 }

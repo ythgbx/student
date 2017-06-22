@@ -4,6 +4,7 @@ import net.bus.web.aspect.Auth;
 import net.bus.web.common.Util;
 import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.BaseResult;
+import net.bus.web.model.DataStatistics;
 import net.bus.web.controller.dto.IResult;
 import net.bus.web.controller.dto.PoorBuildDto;
 import net.bus.web.model.PoorBuild;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by sky on 16/12/6.
@@ -49,12 +51,22 @@ public class PoorBuildController {
         return mv;
     }
 
+    @RequestMapping(value="/data" , method = RequestMethod.GET)
+    public ModelAndView data(Model model)
+    {
+        ModelAndView mv =new ModelAndView();
+        mv.setViewName("/teacher/dataAnalysis");
+        return mv;
+    }
+
+
+
     /**
      * 贫困申请
      * @param poorBuildDto
      * @return
      */
-    @Auth(role = Auth.Role.USER)
+    @Auth(role = Auth.Role.STUDENT)
     @ResponseBody
     @RequestMapping(value = "/application",method = RequestMethod.POST)
     public IResult application(@RequestBody PoorBuildDto poorBuildDto)
@@ -148,6 +160,22 @@ public class PoorBuildController {
                 break;
         }
         return service.update(poorBuild);
+    }
+
+    /**
+     * 获取各学院助学金数量
+     * @param year
+     * @return
+     */
+    @Auth(role = Auth.Role.ADMIN)
+    @RequestMapping(value = "/statistics",method = RequestMethod.GET)
+    public @ResponseBody List<DataStatistics> statistics(@RequestParam(required = false) Integer year){
+        logger.info("url:/poorBuild/statistics");
+        List<DataStatistics> lists = service.getNumPoor(year);
+        if (!lists.isEmpty()){
+            return lists;
+        }
+        return null;
     }
 
 }

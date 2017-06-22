@@ -17,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -66,7 +68,7 @@ public class UserController {
         LoginResult result = new LoginResult();
         if(user!=null) {
             session.setAttribute(SessionContext.CURRENT_USER, user);
-            session.setAttribute(SessionContext.CURRENT_USER_ROLE, Auth.Role.USER);
+            session.setAttribute(SessionContext.CURRENT_USER_ROLE, Auth.Role.getRole(user.getRole()));
 
             result.setSession_id(session.getId());
             result.setResult("success");
@@ -81,7 +83,7 @@ public class UserController {
      * 用户退出
      * @return
      */
-    @Auth(role = Auth.Role.USER)
+    @Auth(role = Auth.Role.STUDENT)
     @ResponseBody
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public ModelAndView logout()
@@ -97,7 +99,7 @@ public class UserController {
      * @param model
      * @return
      */
-    @Auth(role = Auth.Role.USER)
+    @Auth(role = Auth.Role.STUDENT)
     @RequestMapping(value = "/main",method = RequestMethod.GET)
     public ModelAndView main(Model model){
         logger.info("url:/user");
@@ -121,7 +123,7 @@ public class UserController {
      * 获取用户信息
      * @return
      */
-    @Auth(role = Auth.Role.USER)
+    @Auth(role = Auth.Role.STUDENT)
     @ResponseBody
     @RequestMapping(value = "/getInfo",method = RequestMethod.GET)
     public IResult getInfo(){
@@ -135,12 +137,113 @@ public class UserController {
      * @param model
      * @return
      */
-    @Auth(role = Auth.Role.USER)
+    @Auth(role = Auth.Role.STUDENT)
     @RequestMapping(value = "/information",method = RequestMethod.GET)
     public ModelAndView information(Model model){
         logger.info("url:/information");
         return new ModelAndView("basic_Information");
     }
+
+    /**
+     * 查询所有辅导员用户
+     * @return
+     */
+    @Auth(role = Auth.Role.ADMIN)
+    @RequestMapping(value = "/listCounselor",method = RequestMethod.GET)
+    public @ResponseBody List<UserAccount> listCounselor(){
+        logger.info("url:/listCounselor");
+        BaseResult result = new BaseResult();
+        List<User> users = service.getAll(1);
+        List<UserAccount> accounts = new ArrayList<UserAccount>();
+        for (User users1:users){
+            UserAccount account = new UserAccount();
+            account.setUsername(users1.getUsername());
+            account.setPassword(users1.getPassword());
+            account.setBindcourse(users1.getBindcourse());
+            accounts.add(account);
+        }
+        return accounts;
+    }
+
+    /**
+     * 管理员添加辅导员用户
+     * @param account
+     * @return
+     */
+    @Auth(role = Auth.Role.ADMIN)
+    @RequestMapping(value = "/addCounselor",method = RequestMethod.POST)
+    public IResult addCounselor(@RequestBody UserAccount account){
+        logger.info("url:/user/addCounselor");
+        BaseResult result = new BaseResult();
+
+        User user =service.getUser(account.getUsername());
+        if (user!=null){
+            result.setContent("用户已存在！");
+        }else {
+            if (service.add(setUser(account))){
+                result.setContent("添加成功！");
+            }else {
+                result.setContent("添加失败！");
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 修改辅导员用户信息
+     * @param account
+     * @return
+     */
+    @Auth(role = Auth.Role.ADMIN)
+    @RequestMapping(value = "/updateCounselor",method = RequestMethod.POST)
+    public IResult updateCounselor(@RequestBody UserAccount account){
+        logger.info("url:/updateCounselor");
+        BaseResult result = new BaseResult();
+
+        User user =service.getUser(account.getUsername());
+        if (user!=null){
+            if (service.update(setUser(account))){
+                result.setContent("修改成功！");
+            }else {
+                result.setContent("修改失败！");
+            }
+        }else {
+            result.setContent("修改失败！");
+        }
+        return result;
+
+    }
+
+    /**
+     * 删除辅导员用户信息
+     * @param account
+     * @return
+     */
+    @Auth(role = Auth.Role.ADMIN)
+    @RequestMapping(value = "/delCounselor",method = RequestMethod.POST)
+    public IResult delCounselor(@RequestBody UserAccount account){
+        logger.info("url:/delCounselor");
+        BaseResult result = new BaseResult();
+        if (service.del(account.getUsername())){
+            result.setContent("删除成功！");
+        }else {
+            result.setContent("删除失败！");
+        }
+        return result;
+    }
+
+
+
+    public User setUser(UserAccount account){
+        User current = new User();
+        current.setUsername(account.getUsername());
+        current.setPassword(account.getPassword());
+        current.setName(account.getName());
+        current.setRole(1);
+        current.setBindcourse(account.getBindcourse());
+        return current;
+    }
+
 //
 //    /**
 //     * 修改用户信息

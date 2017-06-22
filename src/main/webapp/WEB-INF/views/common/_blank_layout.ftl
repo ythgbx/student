@@ -40,6 +40,12 @@
 </body>
 </html>
 </#macro>
+<#macro data>
+
+<script type="text/javascript" src="/js/analysis.js"></script>
+<script type="text/javascript" src="/js/highcharts"></script>
+
+</#macro>
 
 <#macro jquery>
 <script type="text/javascript" src="/js/jquery.min.js"></script>

@@ -73,6 +73,14 @@
     </association>
   </resultMap>
 
+  <resultMap id="poorNumMap" type="net.bus.web.model.DataStatistics">
+      <result column="college" property="colleges" jdbcType="VARCHAR" />
+    <result column="num" property="count" jdbcType="INTEGER" />
+  </resultMap>
+
+
+
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -151,6 +159,16 @@
     <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
+  </select>
+
+  <!--用于数据统计-->
+  <select id="getCountPoor" parameterType="java.lang.Integer" resultMap="poorNumMap">
+  SELECT College,COUNT(College) AS num FROM student.poorBuild
+INNER JOIN student.students
+ON student.students.idCard=student.poorBuild.idCard
+AND student.poorBuild.admin=2
+AND YEAR(student.poorBuild.applicationTime) =#{year}
+GROUP BY student.students.College
   </select>
 
   <!--联合查询出所有申请的信息 concounselorReview 辅导员审核通过的 -->

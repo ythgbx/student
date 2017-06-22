@@ -1,5 +1,6 @@
 package net.bus.web.mapper;
 
+import net.bus.web.model.DataStatistics;
 import net.bus.web.model.Grant;
 import net.bus.web.model.GrantExample;
 import net.bus.web.model.GrantPovo;
@@ -36,5 +37,7 @@ public interface GrantMapper {
 
 //    查询贫困建档信息
     List<GrantPovo> selectGrant(Map map);
+
+    List<DataStatistics> getNumPoor(Integer year);
 
 }

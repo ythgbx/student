@@ -46,7 +46,7 @@ public class StudentController {
      * @param model
      * @return
      */
-    @Auth(role = Auth.Role.USER)
+    @Auth(role = Auth.Role.STUDENT)
     @RequestMapping(value = "/information",method = RequestMethod.GET)
     public ModelAndView information(Model model){
         logger.info("url:/information");
@@ -57,7 +57,7 @@ public class StudentController {
      * 获取用户信息
      * @return
      */
-    @Auth(role = Auth.Role.USER)
+    @Auth(role = Auth.Role.STUDENT)
     @ResponseBody
     @RequestMapping(value = "/getInfo",method = RequestMethod.GET)
     public IResult getInfo(){
@@ -118,7 +118,7 @@ public class StudentController {
      * @param studentDetail
      * @return
      */
-    @Auth(role = Auth.Role.USER)
+    @Auth(role = Auth.Role.STUDENT)
     @ResponseBody
     @RequestMapping(value = "/updateInfo",method = RequestMethod.POST)
     public IResult perfectInfo(@RequestBody StudentDetail studentDetail){

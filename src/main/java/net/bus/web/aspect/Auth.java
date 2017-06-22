@@ -14,5 +14,29 @@ import java.lang.annotation.*;
 public @interface Auth {
     Role role() default Role.NONE;
 
-    public enum Role{ NONE, USER,BUS, ADMIN};
+    public enum Role{
+        NONE(-1), STUDENT(0),COUNSELOR(1), ADMIN(2);
+        private int index;
+
+        private Role(int index){
+            this.index = index;
+        }
+
+        public int getIndex() {
+            return index;
+        }
+
+        public void setIndex(int index) {
+            this.index = index;
+        }
+
+        public static Role getRole(int index){
+            for (Role role : Role.values()){
+                if (role.getIndex() == index){
+                    return role;
+                }
+            }
+            return NONE;
+        }
+    }
 }
