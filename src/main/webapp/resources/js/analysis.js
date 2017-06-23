@@ -60,16 +60,18 @@ $(function() {
         grant : function() {
 			var x = [];
 			var y = [];
-			$.getJSON('logfo/countCity.do', function(json, textStatus) {
+			var z = [];
+			$.getJSON('/grant/statistics?year=2017', function(json, textStatus) {
 				/*optional stuff to do after success */
 				for ( var n in json) {
-					x[n] = json[n].city;
-					y[n] = json[n].num;
+					x[n] = json[n].colleges;
+					y[n] = json[n].count;
+					z[n] = json[n].poorGrades;
 				}
 				console.log(x);
 				console.log(y)
 
-				$('#container').highcharts({
+				$('.container').highcharts({
 					chart:{
 						type : "column",
 					},
@@ -107,7 +109,7 @@ $(function() {
 						borderWidth : 0
 					},
 					series : [ {
-						name : '登录',
+						name : z,
 						data : y
 					} ]
 				});
@@ -116,28 +118,31 @@ $(function() {
         movacition : function() {
 			var x = [];
 			var y = [];
-			$.getJSON('logfo/countTime.do', function(json, textStatus) {
+			$.getJSON('/motivational/statistics?year=2017', function(json, textStatus) {
 				/*optional stuff to do after success */
 				for ( var n in json) {
-					x[n] = json[n].time;
-					y[n] = json[n].num;
+					x[n] = json[n].colleges;
+					y[n] = json[n].count;
 				}
 				console.log(x);
 				console.log(y)
 
-				$('#container').highcharts({
-
+				$('.container').highcharts({
+                    chart:{
+                        type : "column",
+                    },
+                    plotOptions:{
+                        series: {
+                            dataLabels: {
+                                enabled: true
+                            }
+                        }
+                    },
 					title : {
 						text : "登录时间"
 					},
 					xAxis : {
-						//type: 'datetime',                                                   
-						//tickPixelInterval: 10,
 						categories : x,
-						labels : {
-							format : '{value} 时'
-						}
-
 					},
 					yAxis : {
 						title : {
