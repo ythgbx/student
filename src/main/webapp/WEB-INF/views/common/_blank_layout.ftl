@@ -43,7 +43,7 @@
 <#macro data>
 
 <script type="text/javascript" src="/js/analysis.js"></script>
-<script type="text/javascript" src="/js/highcharts"></script>
+<script type="text/javascript" src="/js/highcharts.js"></script>
 
 </#macro>
 

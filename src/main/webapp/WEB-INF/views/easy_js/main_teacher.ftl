@@ -36,7 +36,8 @@
                             ],
                         },
                         {
-                            "text": "数据统计"
+                            "text": "数据统计",
+                            "url" : "/poorBuild/data",
                         }
                     ]
                 }, {

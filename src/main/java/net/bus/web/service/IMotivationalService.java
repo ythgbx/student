@@ -17,5 +17,6 @@ public interface IMotivationalService {
 
     List<DataStatistics> getNumMotivational(Integer year);
 
-    Map getMotivation(int page, int rows,String college,String profession,String classname,String sno,String sname,String admin);
+    Map<String,Object> getMotivation(int page, int rows,String college,String profession,String classname,String sno,String sname,String admin);
+
 }

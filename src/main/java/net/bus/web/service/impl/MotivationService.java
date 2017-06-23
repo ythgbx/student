@@ -5,8 +5,8 @@ import net.bus.web.controller.dto.StudentDetail;
 import net.bus.web.model.DataStatistics;
 import net.bus.web.model.Motivational;
 import net.bus.web.repository.MotivationRepository;
-import net.bus.web.repository.specification.IMotivation;
 import net.bus.web.repository.specification.MotivationIdCardSpecification;
+
 import net.bus.web.service.IApplicationRecordService;
 import net.bus.web.service.IMotivationalService;
 import net.bus.web.teacher.PageUtil;
@@ -60,7 +60,7 @@ public class MotivationService implements IMotivationalService{
         return _rootRepository.getNumMotivational(year);
     }
 
-    public Map getMotivation(int page, int rows, String college, String profession, String classname, String sno, String sname, String admin) {
+    public Map<String,Object> getMotivation(int page, int rows, String college, String profession, String classname, String sno, String sname, String admin) {
         Map<String,Object> param = PageUtil.pageMap(page, rows);
         param.put("college",college);
         param.put("profession",profession);

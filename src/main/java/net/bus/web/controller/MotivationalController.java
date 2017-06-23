@@ -38,7 +38,6 @@ public class MotivationalController {
     @Autowired
     private IMotivationalService service;
 
-    private IMotivationalService iMotivationalService;
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
@@ -114,6 +113,7 @@ public class MotivationalController {
                                      @RequestParam(required = false) String sno,
                                      @RequestParam(required = false) String sname,
                                      @RequestParam(defaultValue = "0") String admin){
-        return iMotivationalService.getMotivation(page, rows, college, profession, classname, sno, sname, admin);
+
+        return service.getMotivation(page, rows, college, profession, classname, sno, sname, admin);
     }
 }

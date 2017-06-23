@@ -3,7 +3,6 @@ package net.bus.web.controller;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 import net.bus.web.aspect.Auth;
-import net.bus.web.common.config.RString;
 import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.*;
 import net.bus.web.model.User;
@@ -12,7 +11,10 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -64,6 +66,7 @@ public class UserController {
     public IResult login(@ApiParam(name = "login", value = "登陆登录")@RequestBody Login login)
     {
         logger.info("url:/user/checkLogin");
+
         User user = service.loginCheck(login.getUserName(),login.getPassword(),login.getRole());
         LoginResult result = new LoginResult();
         if(user!=null) {
