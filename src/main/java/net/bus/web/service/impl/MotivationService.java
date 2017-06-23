@@ -2,9 +2,11 @@ package net.bus.web.service.impl;
 
 import net.bus.web.common.config.RString;
 import net.bus.web.controller.dto.StudentDetail;
+import net.bus.web.model.DataStatistics;
 import net.bus.web.model.Motivational;
 import net.bus.web.repository.MotivationRepository;
 import net.bus.web.repository.specification.IMotivation;
+import net.bus.web.repository.specification.MotivationIdCardSpecification;
 import net.bus.web.service.IApplicationRecordService;
 import net.bus.web.service.IMotivationalService;
 import net.bus.web.teacher.PageUtil;
@@ -51,7 +53,11 @@ public class MotivationService implements IMotivationalService{
     }
 
     public Motivational getStudent(String idCard) {
-        return null;
+        return _rootRepository.getStudent(new MotivationIdCardSpecification(idCard));
+    }
+
+    public List<DataStatistics> getNumMotivational(Integer year) {
+        return _rootRepository.getNumMotivational(year);
     }
 
     public Map getMotivation(int page, int rows, String college, String profession, String classname, String sno, String sname, String admin) {

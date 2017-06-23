@@ -103,7 +103,7 @@ public class GrantController {
     public @ResponseBody
     List<DataStatistics> statistics(@RequestParam(required = false) Integer year){
         logger.info("url:/poorBuild/statistics");
-        List<DataStatistics> lists = service.getNumPoor(year);
+        List<DataStatistics> lists = service.getNumGrant(year);
         if (!lists.isEmpty()){
             return lists;
         }

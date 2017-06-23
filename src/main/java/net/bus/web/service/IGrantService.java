@@ -17,7 +17,7 @@ public interface IGrantService {
 
     Grant getStudent(String idCard);
 
-    List<DataStatistics> getNumPoor(Integer year);
+    List<DataStatistics> getNumGrant(Integer year);
 
     Map<String,Object> getAllGrant(int page, int rows,String college,String profession,String classname,String sno,String sname,String admin);
 }

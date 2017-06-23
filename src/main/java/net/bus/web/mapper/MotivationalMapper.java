@@ -3,6 +3,7 @@ package net.bus.web.mapper;
 import java.util.List;
 import java.util.Map;
 
+import net.bus.web.model.DataStatistics;
 import net.bus.web.model.MotivationPovo;
 import net.bus.web.model.Motivational;
 import net.bus.web.model.MotivationalExample;
@@ -36,4 +37,6 @@ public interface MotivationalMapper {
 
     //    查询励志奖学金
     List<MotivationPovo> selectMotivation(Map map);
+
+    List<DataStatistics> getCountMotivational(Integer year);
 }

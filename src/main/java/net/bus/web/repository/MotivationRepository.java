@@ -1,6 +1,7 @@
 package net.bus.web.repository;
 
 import net.bus.web.mapper.MotivationalMapper;
+import net.bus.web.model.DataStatistics;
 import net.bus.web.model.MotivationPovo;
 import net.bus.web.model.Motivational;
 import net.bus.web.model.MotivationalExample;
@@ -94,6 +95,10 @@ public class MotivationRepository {
 
     public List<MotivationPovo> getMotivation(Map map) {
         return mapper.selectMotivation(map);
+    }
+
+    public List<DataStatistics> getNumMotivational(Integer year){
+        return mapper.getCountMotivational(year);
     }
 
 

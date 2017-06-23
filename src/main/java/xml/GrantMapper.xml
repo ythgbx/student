@@ -33,47 +33,6 @@
     <result column="adminRemarks" property="adminremarks" jdbcType="VARCHAR" />
     <result column="ApplicationTime" property="applicationtime" jdbcType="DATE" />
   </resultMap>
-
-
-  <resultMap id="grantMap" type="net.bus.web.model.GrantPovo" extends="BaseResultMap">
-    <association property="student" javaType="net.bus.web.model.Student">
-      <id column="idCard" property="idcard" jdbcType="VARCHAR" />
-      <result column="sno" property="sno" jdbcType="VARCHAR" />
-      <result column="sname" property="sname" jdbcType="VARCHAR" />
-      <result column="usedName" property="usedname" jdbcType="VARCHAR" />
-      <result column="sex" property="sex" jdbcType="VARCHAR" />
-      <result column="College" property="college" jdbcType="VARCHAR" />
-      <result column="birthday" property="birthday" jdbcType="DATE" />
-      <result column="profession" property="profession" jdbcType="VARCHAR" />
-      <result column="classname" property="classname" jdbcType="VARCHAR" />
-      <result column="grade" property="grade" jdbcType="VARCHAR" />
-      <result column="level" property="level" jdbcType="CHAR" />
-      <result column="admissionTime" property="admissiontime" jdbcType="DATE" />
-      <result column="studyLength" property="studylength" jdbcType="CHAR" />
-      <result column="nationality" property="nationality" jdbcType="VARCHAR" />
-      <result column="political" property="political" jdbcType="VARCHAR" />
-      <result column="sroom" property="sroom" jdbcType="VARCHAR" />
-      <result column="address" property="address" jdbcType="VARCHAR" />
-      <result column="stel" property="stel" jdbcType="VARCHAR" />
-      <result column="schoolCard" property="schoolcard" jdbcType="VARCHAR" />
-      <result column="fname" property="fname" jdbcType="VARCHAR" />
-      <result column="ftel" property="ftel" jdbcType="VARCHAR" />
-      <result column="mname" property="mname" jdbcType="VARCHAR" />
-      <result column="mtel" property="mtel" jdbcType="VARCHAR" />
-      <result column="nativePlace" property="nativeplace" jdbcType="VARCHAR" />
-      <result column="img" property="img" jdbcType="VARCHAR" />
-      <result column="QQ" property="qq" jdbcType="VARCHAR" />
-      <result column="familyAccount" property="familyaccount" jdbcType="VARCHAR" />
-    </association>
-  </resultMap>
-
-  <resultMap id="grantNumMap" type="net.bus.web.model.DataStatistics">
-    <result column="college" property="colleges" jdbcType="VARCHAR" />
-    <result column="num" property="count" jdbcType="INTEGER" />
-    <result column="poorGrades" property="poorGrades" jdbcType="VARCHAR"/>
-  </resultMap>
-
-
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -158,50 +117,6 @@
     from grants
     where id = #{id,jdbcType=BIGINT}
   </select>
-
-  <!--用于数据统计-->
-  <select id="getCountGrant" parameterType="java.lang.Integer" resultMap="grantNumMap">
-   SELECT College,COUNT(College) AS num,poorGrades FROM student.grants
-
-    INNER JOIN student.students
-
-    ON student.students.idCard=student.grants.idCard
-
-    AND student.grants.admin=2
-
-    AND YEAR(student.grants.applicationTime) =#{year}
-
-    GROUP BY student.students.College,poorGrades
-  </select>
-
-  <!--联合查询助学金信息-->
-  <select id="selectGrant" resultMap="grantMap" parameterType="java.util.Map">
-    SELECT * FROM grants
-    INNER JOIN students
-    ON grants.`idcard`=students.`idCard`
-    AND grants.`counselorReview`=2
-    <if test="college!=null">
-      AND college=#{college}
-    </if>
-    <if test="profession!=null">
-      AND profession = #{profession}
-    </if>
-    <if test="classname!=null">
-      AND classname = #{classname}
-    </if>
-    <if test="sno!=null">
-      AND sno = #{sno}
-    </if>
-    <if test="sname!=null">
-      AND sname = #{sname}
-    </if>
-    <if test="admin!=null">
-      AND admin = #{admin}
-    </if>
-    LIMIT #{start},#{end}
-
-  </select>
-
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from grants
     where id = #{id,jdbcType=BIGINT}

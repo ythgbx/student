@@ -5,6 +5,7 @@ import net.bus.web.common.Util;
 import net.bus.web.controller.dto.BaseResult;
 import net.bus.web.controller.dto.IResult;
 import net.bus.web.controller.dto.StudentDetail;
+import net.bus.web.model.DataStatistics;
 import net.bus.web.model.Motivational;
 import net.bus.web.service.IMotivationalService;
 import org.apache.log4j.Logger;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,7 +42,7 @@ public class MotivationalController {
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
-    @Auth (role = Auth.Role.USER)
+    @Auth (role = Auth.Role.STUDENT)
     @RequestMapping(value="/page" , method = RequestMethod.GET)
     public ModelAndView motivational(){
         logger.info("url:/motivational/page");
@@ -52,7 +54,7 @@ public class MotivationalController {
      * @param motivation
      * @return
      */
-    @Auth(role = Auth.Role.USER)
+    @Auth(role = Auth.Role.STUDENT)
     @ResponseBody
     @RequestMapping(value = "/application", method = RequestMethod.POST)
     public IResult application(@RequestBody StudentDetail motivation){
@@ -83,6 +85,24 @@ public class MotivationalController {
         }
         return result;
     }
+
+    /**
+     * 获取各学院助学金数量
+     * @param year
+     * @return
+     */
+    @Auth(role = Auth.Role.ADMIN)
+    @RequestMapping(value = "/statistics",method = RequestMethod.GET)
+    public @ResponseBody
+    List<DataStatistics> statistics(@RequestParam(required = false) Integer year){
+        logger.info("url:/poorBuild/statistics");
+        List<DataStatistics> lists = service.getNumMotivational(year);
+        if (!lists.isEmpty()){
+            return lists;
+        }
+        return null;
+    }
+
 
 
     @RequestMapping(value = "/getmovational",method = RequestMethod.POST)

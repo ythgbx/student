@@ -38,6 +38,6 @@ public interface GrantMapper {
 //    查询贫困建档信息
     List<GrantPovo> selectGrant(Map map);
 
-    List<DataStatistics> getNumPoor(Integer year);
+    List<DataStatistics> getCountGrant(Integer year);
 
 }

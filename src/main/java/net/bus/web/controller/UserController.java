@@ -296,76 +296,72 @@ public class UserController {
 //
 //
 //
-//    /**
-//     * 修改密码
-//     * @param account
-//     * @return
-//     */
-//    @Auth(role = Auth.Role.USER)
-//    @ResponseBody
-//    @RequestMapping(value = "/modify/password", method = RequestMethod.PUT)
-//    @ApiOperation(value = "密码修改", httpMethod = "PUT", response = BaseResult.class, notes = "密码修改")
-//    public IResult modifyPassword(@ApiParam(required = true, name = "account",
-//            value = "用户账户请求-用户名+原密码+新密码")@RequestBody UserAccount account)
-//    {
-//        BaseResult result = new BaseResult();
-//        try {
-//            User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
-//            if(currentUser.getId().equals(account.getId())&&account.getPassword()!=null&&currentUser.getPassword().equals(account.getPassword())){
-//
-//                service.setAccount(currentUser, currentUser.getId(), account.getNew_password());
-//
-//                session.setAttribute(SessionContext.CURRENT_USER, currentUser);
-//
-//                result.setResult("success");
-//                result.setContent("密码修改成功!");
-//            }
-//            else{
-//                result.setResult("failure");
-//                result.setContent(RString.MODIFY_PASSWORD_FAILED);
-//            }
-//        }catch (Exception ex){
-//            result.setResult("error");
-//            result.setError(ex.getMessage());
-//        }
-//        return result;
-//    }
-//
-//    /**
-//     * 找回密码
-//     * @param account
-//     * @return
-//     */
-//    @Auth(role = Auth.Role.NONE)
-//    @ResponseBody
-//    @RequestMapping(value = "/retrieve/password", method = RequestMethod.PUT)
-//    @ApiOperation(value = "密码找回", httpMethod = "PUT", response = BaseResult.class, notes = "密码找回")
-//    public IResult retrievePassword(@ApiParam(required = true, name = "account", value = "用户账户请求-手机号+身份证号+新密码")
-//                                        @RequestBody UserAccount account)
-//    {
-//        BaseResult result = new BaseResult();
-//        try {
-//            User retrieveUser = service.getUser(account.getId());
-//            if (retrieveUser!=null){
-//                if (retrieveUser.getIdcard().equals(account.getIdCard())){
-//                    service.setAccount(retrieveUser,retrieveUser.getId(),account.getNew_password());
-//                    result.setResult("success");
-//                    result.setContent("密码修改成功请从新登录!");
-//                }else {
-//                    result.setResult("error");
-//                    result.setContent("身份证号不正确!");
-//                }
-//            }
-//            else{
-//                result.setResult("error");
-//                result.setContent("用户名不正确!");
-//            }
-//        }catch (Exception ex){
-//            result.setResult("error");
-//            result.setError(ex.getMessage());
-//        }
-//        return result;
-//    }
+    /**
+     * 修改密码
+     * @param account
+     * @return
+     */
+    @Auth(role = Auth.Role.NONE)
+    @ResponseBody
+    @RequestMapping(value = "/modify/password", method = RequestMethod.PUT)
+    public IResult modifyPassword(@RequestBody UserAccount account)
+    {
+        BaseResult result = new BaseResult();
+        try {
+            User currentUser = (User)session.getAttribute(SessionContext.CURRENT_USER);
+            if(currentUser.getUsername().equals(account.getId())&&account.getPassword()!=null&&currentUser.getPassword().equals(account.getPassword())){
+
+                service.setAccount(currentUser, currentUser.getUsername(), account.getNew_password());
+
+                session.setAttribute(SessionContext.CURRENT_USER, currentUser);
+
+                result.setResult("success");
+                result.setContent("密码修改成功!");
+            }
+            else{
+                result.setResult("failure");
+                result.setContent("密码修改失败！");
+            }
+        }catch (Exception ex){
+            result.setResult("error");
+            result.setError(ex.getMessage());
+        }
+        return result;
+    }
+
+    /**
+     * 找回密码
+     * @param account
+     * @return
+     */
+    @Auth(role = Auth.Role.NONE)
+    @ResponseBody
+    @RequestMapping(value = "/retrieve/password", method = RequestMethod.PUT)
+    public IResult retrievePassword(@RequestBody UserAccount account)
+    {
+        BaseResult result = new BaseResult();
+        try {
+            User retrieveUser = service.getUser(account.getId());
+            if (retrieveUser!=null){
+                if (retrieveUser.getUsername().equals(account.getIdCard())){
+                    service.setAccount(retrieveUser,retrieveUser.getUsername(),account.getNew_password());
+                    result.setResult("success");
+                    result.setContent("密码修改成功请从新登录!");
+                }else {
+                    result.setResult("error");
+                    result.setContent("身份证号不正确!");
+                }
+            }
+            else{
+                result.setResult("error");
+                result.setContent("用户名不正确!");
+            }
+        }catch (Exception ex){
+            result.setResult("error");
+            result.setError(ex.getMessage());
+        }
+        return result;
+    }
 
 
 }

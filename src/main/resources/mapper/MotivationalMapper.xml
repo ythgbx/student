@@ -56,6 +56,11 @@
     </association>
   </resultMap>
 
+  <resultMap id="motivationalNumMap" type="net.bus.web.model.DataStatistics">
+    <result column="college" property="colleges" jdbcType="VARCHAR" />
+    <result column="num" property="count" jdbcType="INTEGER" />
+  </resultMap>
+
 
   <sql id="Example_Where_Clause" >
     <where >
@@ -139,6 +144,16 @@
     <include refid="Base_Column_List" />
     from motivational
     where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <!--用于数据统计-->
+  <select id="getCountMotivational" parameterType="java.lang.Integer" resultMap="motivationalNumMap">
+    SELECT College,COUNT(College) AS num FROM student.motivational
+    INNER JOIN student.students
+    ON student.students.idCard=student.motivational.idCard
+    AND student.motivational.admin=2
+    AND YEAR(student.motivational.applicationTime) =#{year}
+    GROUP BY student.students.College
   </select>
 
   <!--联合查询励志奖学金 -->

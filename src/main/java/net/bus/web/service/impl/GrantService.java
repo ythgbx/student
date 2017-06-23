@@ -68,8 +68,8 @@ public class GrantService implements IGrantService{
         return _rootRepository.getGrant(new GrantidCardSpecification(idCard));
     }
 
-    public List<DataStatistics> getNumPoor(Integer year) {
-        return _rootRepository.getNumPoor(year);
+    public List<DataStatistics> getNumGrant(Integer year) {
+        return _rootRepository.getNumGrant(year);
     }
 
     //助学金查询

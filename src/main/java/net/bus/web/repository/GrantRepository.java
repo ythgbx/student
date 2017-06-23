@@ -96,8 +96,8 @@ public class GrantRepository {
         return grantMapper.selectGrant(map);
     }
 
-    public List<DataStatistics> getNumPoor(Integer year){
-        return grantMapper.getNumPoor(year);
+    public List<DataStatistics> getNumGrant(Integer year){
+        return grantMapper.getCountGrant(year);
     }
 
 

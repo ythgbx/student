@@ -6,6 +6,15 @@ package net.bus.web.model;
 public class DataStatistics {
     private String colleges;
     private Integer count;
+    private String poorGrades;
+
+    public String getPoorGrades() {
+        return poorGrades;
+    }
+
+    public void setPoorGrades(String poorGrades) {
+        this.poorGrades = poorGrades;
+    }
 
     public String getColleges() {
         return colleges;
