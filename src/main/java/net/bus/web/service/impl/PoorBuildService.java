@@ -59,7 +59,7 @@ public class PoorBuildService implements IPoorBuildService{
         param.put("sname",sname);
         param.put("admin",admin);
         List list = _rootRepository.getPoor(param);
-        int total = _rootRepository.Count();
+        int total = _rootRepository.CountByExample(param);
         Map<String,Object> map = PageUtil.returnMap(list,total);
         return map;
     }

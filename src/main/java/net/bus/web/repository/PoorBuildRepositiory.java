@@ -79,12 +79,10 @@ public class PoorBuildRepositiory {
         return poorBuildMapper.updateByPrimaryKeySelective(student);
     }
 
-    public int Count(){
-        return poorBuildMapper.countByExample(null);
-    }
 
-    public int CountByExample(ISpecification specification){
-        return poorBuildMapper.countByExample((PoorBuildExample)specification.createExample());
+
+    public int CountByExample(Map map){
+        return poorBuildMapper.countByExample(map);
     }
 
 

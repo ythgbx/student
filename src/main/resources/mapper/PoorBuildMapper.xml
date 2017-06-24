@@ -161,19 +161,8 @@
     </if>
   </select>
 
-  <!--用于数据统计-->
-  <select id="getCountPoor" parameterType="java.lang.Integer" resultMap="poorNumMap">
-  SELECT College,COUNT(College) AS num FROM student.poorBuild
-INNER JOIN student.students
-ON student.students.idCard=student.poorBuild.idCard
-AND student.poorBuild.admin=2
-AND YEAR(student.poorBuild.applicationTime) =#{year}
-GROUP BY student.students.College
-  </select>
-
-  <!--联合查询出所有申请的信息 concounselorReview 辅导员审核通过的 -->
-  <select id="getAllPoorinfo" parameterType="java.util.Map" resultMap="poorResultMap">
-    SELECT * FROM poorBuild
+  <!--公用的sql-->
+  <sql id="share_sql">
     INNER JOIN students
     ON poorBuild.`idcard`=students.`idCard`
     AND poorBuild.`counselorReview`=2
@@ -190,11 +179,33 @@ GROUP BY student.students.College
       AND sno = #{sno}
     </if>
     <if test="sname!=null">
-     AND sname = #{sname}
+      AND sname = #{sname}
     </if>
     <if test="admin!=null">
       AND admin = #{admin}
     </if>
+  </sql>
+  <!--用于数据统计-->
+  <select id="getCountPoor" parameterType="java.lang.Integer" resultMap="poorNumMap">
+  SELECT College,COUNT(College) AS num FROM student.poorBuild
+INNER JOIN student.students
+ON student.students.idCard=student.poorBuild.idCard
+AND student.poorBuild.admin=2
+AND YEAR(student.poorBuild.applicationTime) =#{year}
+GROUP BY student.students.College
+  </select>
+
+  <!--查询数量-->
+  <select id="countByExample" parameterType="java.util.Map" resultType="java.lang.Integer" >
+    select count(*) from poorBuild
+    <include refid="share_sql"/>
+  </select>
+
+
+  <!--联合查询出所有申请的信息 concounselorReview 辅导员审核通过的 -->
+  <select id="getAllPoorinfo" parameterType="java.util.Map" resultMap="poorResultMap">
+    SELECT * FROM poorBuild
+    <include refid="share_sql"/>
     LIMIT #{start},#{end}
   </select>
 
@@ -471,12 +482,9 @@ GROUP BY student.students.College
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="net.bus.web.model.PoorBuildExample" resultType="java.lang.Integer" >
-    select count(*) from poorBuild
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
+
+
+
   <update id="updateByExampleSelective" parameterType="map" >
     update poorBuild
     <set >

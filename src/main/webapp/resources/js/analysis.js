@@ -89,7 +89,8 @@ $(function() {
 						text : "助学金"
 					},
 					xAxis : {
-						categories : x
+						categories : x,
+                        crosshair: true,
 					},
 					yAxis : {
 						title : {

@@ -12,6 +12,7 @@ import java.util.Map;
  */
 @Service
 public interface IPoorBuildService {
+
     boolean insert(PoorBuild poorBuild);
 
     PoorBuild getPoorBuildByIdCard(String Idcard);

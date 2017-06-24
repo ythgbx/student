@@ -1,8 +1,5 @@
 package net.bus.web.mapper;
 
-import java.util.List;
-import java.util.Map;
-
 import net.bus.web.model.DataStatistics;
 import net.bus.web.model.PoorBuild;
 import net.bus.web.model.PoorBuildExample;
@@ -10,8 +7,11 @@ import net.bus.web.model.PoorPovo;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
+import java.util.List;
+import java.util.Map;
+
 public interface PoorBuildMapper {
-    int countByExample(PoorBuildExample example);
+    int countByExample(Map map);
 
     int deleteByExample(PoorBuildExample example);
 
@@ -35,7 +35,9 @@ public interface PoorBuildMapper {
 
     int updateByPrimaryKey(PoorBuild record);
 
+    //建档信息
     List<PoorPovo> getAllPoorinfo(Map map);
 
+    //图表数据
     List<DataStatistics> getCountPoor(Integer year);
 }
