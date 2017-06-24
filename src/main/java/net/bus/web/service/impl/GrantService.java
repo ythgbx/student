@@ -1,7 +1,6 @@
 package net.bus.web.service.impl;
 
 import net.bus.web.common.config.RString;
-import net.bus.web.controller.dto.GrantDto;
 import net.bus.web.controller.dto.StudentDetail;
 import net.bus.web.model.DataStatistics;
 import net.bus.web.model.Grant;
@@ -71,6 +70,7 @@ public class GrantService implements IGrantService{
     public List<DataStatistics> getNumGrant(Integer year) {
         return _rootRepository.getNumGrant(year);
     }
+
 
     //助学金查询
     public Map<String, Object> getAllGrant(int page, int rows, String college, String profession, String classname, String sno, String sname, String admin) {

@@ -1,19 +1,29 @@
 package net.bus.web.model;
 
+import java.io.Serializable;
+
 /**
  * Created by yth on 2017/6/22.
  */
-public class DataStatistics {
-    private String colleges;
-    private Integer count;
-    private String poorGrades;
+public class DataStatistics implements Serializable{
 
-    public String getPoorGrades() {
-        return poorGrades;
+    private String colleges;
+
+    private Integer count;
+
+    private Integer commonly;
+
+    private Integer general;
+
+    private Integer special;
+
+
+    public Integer getCount() {
+        return count;
     }
 
-    public void setPoorGrades(String poorGrades) {
-        this.poorGrades = poorGrades;
+    public void setCount(Integer count) {
+        this.count = count;
     }
 
     public String getColleges() {
@@ -24,11 +34,27 @@ public class DataStatistics {
         this.colleges = colleges;
     }
 
-    public Integer getCount() {
-        return count;
+    public Integer getCommonly() {
+        return commonly;
     }
 
-    public void setCount(Integer count) {
-        this.count = count;
+    public void setCommonly(Integer commonly) {
+        this.commonly = commonly;
+    }
+
+    public Integer getGeneral() {
+        return general;
+    }
+
+    public void setGeneral(Integer general) {
+        this.general = general;
+    }
+
+    public Integer getSpecial() {
+        return special;
+    }
+
+    public void setSpecial(Integer special) {
+        this.special = special;
     }
 }

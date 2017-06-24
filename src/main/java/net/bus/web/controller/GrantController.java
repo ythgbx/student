@@ -3,7 +3,6 @@ package net.bus.web.controller;
 import net.bus.web.aspect.Auth;
 import net.bus.web.common.Util;
 import net.bus.web.controller.dto.BaseResult;
-import net.bus.web.controller.dto.GrantDto;
 import net.bus.web.controller.dto.IResult;
 import net.bus.web.controller.dto.StudentDetail;
 import net.bus.web.model.DataStatistics;
@@ -103,9 +102,9 @@ public class GrantController {
     public @ResponseBody
     List<DataStatistics> statistics(@RequestParam(required = false) Integer year){
         logger.info("url:/poorBuild/statistics");
-        List<DataStatistics> lists = service.getNumGrant(year);
-        if (!lists.isEmpty()){
-            return lists;
+        List<DataStatistics> result = service.getNumGrant(year);
+        if (!result.isEmpty()){
+            return result;
         }
         return null;
     }

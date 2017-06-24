@@ -10,7 +10,7 @@ $(function() {
 					y[n] = json[n].count;
 				}
 				console.log(x);
-				console.log(y)
+				console.log(y);
 
 				$('.container').highcharts({
 					chart:{
@@ -31,7 +31,7 @@ $(function() {
                     },
 					yAxis : {
 						title : {
-							text : '数量'
+							text : '人数'
 						},
 						min : 0,
 						plotLines : [ {
@@ -51,7 +51,7 @@ $(function() {
 						borderWidth : 0
 					},
 					series : [ {
-						name : '总数',
+						name : '建档',
 						data : y
 					}]
 				});
@@ -59,17 +59,20 @@ $(function() {
 		},
         grant : function() {
 			var x = [];
-			var y = [];
-			var z = [];
+			var commonly = [];
+			var general = [];
+			var special = [];
 			$.getJSON('/grant/statistics?year=2017', function(json, textStatus) {
 				/*optional stuff to do after success */
-				for ( var n in json) {
-					x[n] = json[n].colleges;
-					y[n] = json[n].count;
-					z[n] = json[n].poorGrades;
-				}
-				console.log(x);
-				console.log(y)
+                for ( var n in json) {
+                	x.push(json[n].colleges);
+                    commonly.push(json[n].commonly);
+                    general.push(json[n].general);
+                    special.push(json[n].special);
+
+                }
+
+
 
 				$('.container').highcharts({
 					chart:{
@@ -83,14 +86,14 @@ $(function() {
 				        }
 					},
 					title : {
-						text : "登录地点"
+						text : "助学金"
 					},
 					xAxis : {
 						categories : x
 					},
 					yAxis : {
 						title : {
-							text : '登录次数'
+							text : '人数'
 						},
 						min : 0,
 						plotLines : [ {
@@ -100,7 +103,7 @@ $(function() {
 						} ]
 					},
 					tooltip : {
-						valueSuffix : '次'
+						valueSuffix : '人'
 					},
 					legend : {
 						layout : 'vertical',
@@ -109,9 +112,15 @@ $(function() {
 						borderWidth : 0
 					},
 					series : [ {
-						name : z,
-						data : y
-					} ]
+						name : "困难",
+						data : commonly
+					},{
+					    name : "一般困难",
+                        data : general
+                    },{
+					    name : "特别困难",
+                        data : special
+                    } ]
 				});
 			});
 		},
@@ -139,14 +148,14 @@ $(function() {
                         }
                     },
 					title : {
-						text : "登录时间"
+						text : "励志奖学金"
 					},
 					xAxis : {
-						categories : x,
+						categories : x
 					},
 					yAxis : {
 						title : {
-							text : '登录次数'
+							text : '人数'
 						},
 						min : 0,
 						plotLines : [ {
@@ -156,16 +165,17 @@ $(function() {
 						} ]
 					},
 					tooltip : {
-						valueSuffix : '次'
+						valueSuffix : '人'
 					},
 					legend : {
+                        enabled : false,
 						layout : 'vertical',
 						align : 'right',
 						verticalAlign : 'middle',
 						borderWidth : 0
 					},
 					series : [ {
-						name : '登录',
+						name : '励志奖学金',
 						data : y
 					} ]
 				});

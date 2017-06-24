@@ -69,8 +69,9 @@
 
   <resultMap id="grantNumMap" type="net.bus.web.model.DataStatistics">
     <result column="college" property="colleges" jdbcType="VARCHAR" />
-    <result column="num" property="count" jdbcType="INTEGER" />
-    <result column="poorGrades" property="poorGrades" jdbcType="VARCHAR"/>
+    <result column="commonly" property="commonly" jdbcType="INTEGER" />
+    <result column="general" property="general" jdbcType="INTEGER"/>
+    <result column="special" property="special" jdbcType="INTEGER"/>
   </resultMap>
 
 
@@ -161,17 +162,17 @@
 
   <!--用于数据统计-->
   <select id="getCountGrant" parameterType="java.lang.Integer" resultMap="grantNumMap">
-   SELECT College,COUNT(College) AS num,poorGrades FROM student.grants
-
+    SELECT College,
+    SUM(CASE WHEN poorGrades="困难" THEN num ELSE 0 END) AS "commonly",
+    SUM(CASE WHEN poorGrades="一般困难" THEN num ELSE 0 END) AS "general",
+    SUM(CASE WHEN poorGrades="特别困难" THEN num ELSE 0 END) AS "special"
+    FROM
+    (SELECT College,poorGrades,COUNT(poorGrades) AS num FROM student.grants
     INNER JOIN student.students
-
     ON student.students.idCard=student.grants.idCard
-
     AND student.grants.admin=2
-
     AND YEAR(student.grants.applicationTime) =#{year}
-
-    GROUP BY student.students.College,poorGrades
+    GROUP BY college,poorGrades) a GROUP BY college
   </select>
 
   <!--联合查询助学金信息-->
