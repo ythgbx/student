@@ -5,7 +5,9 @@ import com.wordnik.swagger.annotations.ApiParam;
 import net.bus.web.aspect.Auth;
 import net.bus.web.context.SessionContext;
 import net.bus.web.controller.dto.*;
+import net.bus.web.model.Student;
 import net.bus.web.model.User;
+import net.bus.web.service.IStudentService;
 import net.bus.web.service.IUserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,9 @@ public class UserController {
     private IUserService service;
     @Autowired
     private HttpSession session;
+
+    @Autowired
+    private IStudentService studentService;
     @Autowired
     private HttpServletRequest _request;
 
@@ -66,13 +71,21 @@ public class UserController {
     public IResult login(@ApiParam(name = "login", value = "登陆登录")@RequestBody Login login)
     {
         logger.info("url:/user/checkLogin");
-
-        User user = service.loginCheck(login.getUserName(),login.getPassword(),login.getRole());
+        User user;
+        if(Integer.parseInt(login.getRole())==0){
+            Student student = studentService.getStudent(login.getUserName());
+            user = new User();
+            user.setUsername(student.getIdcard());
+            user.setName(student.getSname());
+            user.setPassword(student.getPassword());
+            user.setRole(0);
+        }else {
+          user  = service.loginCheck(login.getUserName(),login.getPassword(),login.getRole());
+        }
         LoginResult result = new LoginResult();
         if(user!=null) {
             session.setAttribute(SessionContext.CURRENT_USER, user);
             session.setAttribute(SessionContext.CURRENT_USER_ROLE, Auth.Role.getRole(user.getRole()));
-
             result.setSession_id(session.getId());
             result.setResult("success");
         }else{

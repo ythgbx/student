@@ -29,6 +29,7 @@
     <result column="img" property="img" jdbcType="VARCHAR" />
     <result column="QQ" property="qq" jdbcType="VARCHAR" />
     <result column="familyAccount" property="familyaccount" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -91,7 +92,7 @@
   <sql id="Base_Column_List" >
     idCard, sno, sname, usedName, sex, College, birthday, profession, classname, grade, 
     level, admissionTime, studyLength, nationality, political, sroom, address, stel, 
-    schoolCard, fname, ftel, mname, mtel, nativePlace, img, QQ, familyAccount
+    schoolCard, fname, ftel, mname, mtel, nativePlace, img, QQ, familyAccount, password
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="net.bus.web.model.StudentExample" >
     select
@@ -123,7 +124,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="net.bus.web.model.Student">
+  <insert id="insert" parameterType="net.bus.web.model.Student" >
     insert into students (idCard, sno, sname, 
       usedName, sex, College, 
       birthday, profession, classname, 
@@ -132,8 +133,8 @@
       sroom, address, stel, 
       schoolCard, fname, ftel, 
       mname, mtel, nativePlace, 
-      img, QQ, familyAccount
-      )
+      img, QQ, familyAccount, 
+      password)
     values (#{idcard,jdbcType=VARCHAR}, #{sno,jdbcType=VARCHAR}, #{sname,jdbcType=VARCHAR}, 
       #{usedname,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{college,jdbcType=VARCHAR}, 
       #{birthday,jdbcType=DATE}, #{profession,jdbcType=VARCHAR}, #{classname,jdbcType=VARCHAR}, 
@@ -142,8 +143,8 @@
       #{sroom,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{stel,jdbcType=VARCHAR}, 
       #{schoolcard,jdbcType=VARCHAR}, #{fname,jdbcType=VARCHAR}, #{ftel,jdbcType=VARCHAR}, 
       #{mname,jdbcType=VARCHAR}, #{mtel,jdbcType=VARCHAR}, #{nativeplace,jdbcType=VARCHAR}, 
-      #{img,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{familyaccount,jdbcType=VARCHAR}
-      )
+      #{img,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{familyaccount,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="net.bus.web.model.Student" >
     insert into students
@@ -229,6 +230,9 @@
       <if test="familyaccount != null" >
         familyAccount,
       </if>
+      <if test="password != null" >
+        password,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="idcard != null" >
@@ -311,6 +315,9 @@
       </if>
       <if test="familyaccount != null" >
         #{familyaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -404,6 +411,9 @@
       <if test="record.familyaccount != null" >
         familyAccount = #{record.familyaccount,jdbcType=VARCHAR},
       </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -437,7 +447,8 @@
       nativePlace = #{record.nativeplace,jdbcType=VARCHAR},
       img = #{record.img,jdbcType=VARCHAR},
       QQ = #{record.qq,jdbcType=VARCHAR},
-      familyAccount = #{record.familyaccount,jdbcType=VARCHAR}
+      familyAccount = #{record.familyaccount,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -523,6 +534,9 @@
       <if test="familyaccount != null" >
         familyAccount = #{familyaccount,jdbcType=VARCHAR},
       </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
     </set>
     where idCard = #{idcard,jdbcType=VARCHAR}
   </update>
@@ -553,7 +567,8 @@
       nativePlace = #{nativeplace,jdbcType=VARCHAR},
       img = #{img,jdbcType=VARCHAR},
       QQ = #{qq,jdbcType=VARCHAR},
-      familyAccount = #{familyaccount,jdbcType=VARCHAR}
+      familyAccount = #{familyaccount,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR}
     where idCard = #{idcard,jdbcType=VARCHAR}
   </update>
   <select resultMap="BaseResultMap" parameterType="net.bus.web.model.StudentExample" id="selectByExampleWithRowbounds" >

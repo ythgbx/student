@@ -10,10 +10,17 @@ import java.util.List;
  */
 public interface IStudentService {
     Student getStudent(String username);
+
     List<Student> getAllStudents(int page, int limit);
+
     public List<Student> getAllStudentsByExample(ISpecification specification, int page, int limit);
 
     //得到学生的总数
     public int getCount();
+
     Boolean update(Student student);
+
+    Student loginCheck(String username,String password);
+
+
 }

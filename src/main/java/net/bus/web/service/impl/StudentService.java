@@ -33,6 +33,15 @@ class StudentService implements IStudentService{
         return false;
     }
 
+    public Student loginCheck(String username, String password) {
+        Student student = _rootRepository.getStudent(username);
+        if (student == null){
+            return null;
+        }else if ((student.getPassword()).toString().equals(password)){
+            return student;
+        }
+        return null;
+    }
 
 
     public List<Student> getAllStudents(int page,int limit){
