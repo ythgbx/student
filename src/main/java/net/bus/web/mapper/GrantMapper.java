@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface GrantMapper {
-    int countByExample(GrantExample example);
+    int countByExample(Map map);
 
     int deleteByExample(GrantExample example);
 

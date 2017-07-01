@@ -80,13 +80,10 @@ public class MotivationRepository {
         return mapper.updateByPrimaryKeySelective(motivational);
     }
 
-    public int Count(){
-        return mapper.countByExample(null);
+    public int Count(Map map){
+        return mapper.countByExample(map);
     }
 
-    public int CountByExample(ISpecification specification){
-        return mapper.countByExample((MotivationalExample)specification.createExample());
-    }
 
 
     public int deleteByExample(ISpecification specification){

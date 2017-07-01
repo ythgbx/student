@@ -75,13 +75,11 @@ public class GrantRepository {
         return grantMapper.updateByPrimaryKey(grant);
     }
 
-    public int Count(){
-        return grantMapper.countByExample(null);
+    public int Count(Map map){
+        return grantMapper.countByExample(map);
     }
 
-    public int CountByExample(ISpecification specification){
-        return grantMapper.countByExample((GrantExample)specification.createExample());
-    }
+
 
 //    public int deleteByPrimaryKey(String id){
 //        return  grantMapper.deleteByPrimaryKey(id);

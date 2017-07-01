@@ -1,8 +1,5 @@
 package net.bus.web.mapper;
 
-import java.util.List;
-import java.util.Map;
-
 import net.bus.web.model.DataStatistics;
 import net.bus.web.model.MotivationPovo;
 import net.bus.web.model.Motivational;
@@ -10,8 +7,11 @@ import net.bus.web.model.MotivationalExample;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
+import java.util.List;
+import java.util.Map;
+
 public interface MotivationalMapper {
-    int countByExample(MotivationalExample example);
+    int countByExample(Map map);
 
     int deleteByExample(MotivationalExample example);
 

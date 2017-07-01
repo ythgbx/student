@@ -156,9 +156,7 @@
     GROUP BY student.students.College
   </select>
 
-  <!--联合查询励志奖学金 -->
-  <select id="selectMotivation" resultMap="motivationMap" parameterType="java.util.Map">
-    SELECT * FROM student.`motivational`
+  <sql id="share_sql">
     INNER JOIN student.`students`
     ON motivational.`idCard`=students.`idCard`
     AND motivational.`counselorReview`=2
@@ -180,6 +178,21 @@
     <if test="admin!=null">
       AND admin = #{admin}
     </if>
+  </sql>
+
+
+<!--查询数量-->
+  <select id="countByExample" parameterType="java.util.Map" resultType="java.lang.Integer" >
+    select count(*) from motivational
+    <include refid="share_sql"/>
+  </select>
+
+
+
+  <!--联合查询励志奖学金 -->
+  <select id="selectMotivation" resultMap="motivationMap" parameterType="java.util.Map">
+    SELECT * FROM student.`motivational`
+    <include refid="share_sql"/>
     LIMIT #{start},#{end}
   </select>
 
@@ -338,12 +351,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="net.bus.web.model.MotivationalExample" resultType="java.lang.Integer" >
-    select count(*) from motivational
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
+
   <update id="updateByExampleSelective" parameterType="map" >
     update motivational
     <set >

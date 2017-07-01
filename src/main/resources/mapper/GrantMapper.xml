@@ -175,9 +175,8 @@
     GROUP BY college,poorGrades) a GROUP BY college
   </select>
 
-  <!--联合查询助学金信息-->
-  <select id="selectGrant" resultMap="grantMap" parameterType="java.util.Map">
-    SELECT * FROM grants
+
+  <sql id="share_sql">
     INNER JOIN students
     ON grants.`idcard`=students.`idCard`
     AND grants.`counselorReview`=2
@@ -199,6 +198,21 @@
     <if test="admin!=null">
       AND admin = #{admin}
     </if>
+  </sql>
+
+  <!--查询数量-->
+  <select id="countByExample" parameterType="java.util.Map" resultType="java.lang.Integer" >
+    select count(*) from grants
+    <include refid="share_sql"/>
+
+  </select>
+
+
+
+  <!--联合查询助学金信息-->
+  <select id="selectGrant" resultMap="grantMap" parameterType="java.util.Map">
+    SELECT * FROM grants
+    <include refid="share_sql"/>
     LIMIT #{start},#{end}
 
   </select>
@@ -424,12 +438,10 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="net.bus.web.model.GrantExample" resultType="java.lang.Integer" >
-    select count(*) from grants
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
+
+
+
+
   <update id="updateByExampleSelective" parameterType="map" >
     update grants
     <set >

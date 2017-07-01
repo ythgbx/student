@@ -82,7 +82,7 @@ public class GrantService implements IGrantService{
         param.put("sname",sname);
         param.put("admin",admin);
         List<GrantPovo> list = _rootRepository.getGrant(param);
-        int total = _rootRepository.Count();
+        int total = _rootRepository.Count(param);
         Map<String,Object> map = PageUtil.returnMap(list,total);
         return map;
     }

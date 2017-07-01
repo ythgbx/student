@@ -69,7 +69,7 @@ public class MotivationService implements IMotivationalService{
         param.put("sname",sname);
         param.put("admin",admin);
         List list = _rootRepository.getMotivation(param);
-        int total = _rootRepository.Count();
+        int total = _rootRepository.Count(param);
         Map<String,Object> map = PageUtil.returnMap(list,total);
         return map;
     }
