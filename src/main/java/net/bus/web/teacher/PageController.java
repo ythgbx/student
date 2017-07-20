@@ -60,4 +60,17 @@ public class PageController {
         modelAndView.setViewName("/teacher/poorbuild_list");
         return modelAndView;
     }
+
+
+    /**
+     *
+     * @return 管理员管理用户界面
+     */
+    @RequestMapping(value = "adminConuser",method = RequestMethod.GET)
+    public ModelAndView user(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/teacher/adminConuser");
+        return modelAndView;
+    }
+
 }

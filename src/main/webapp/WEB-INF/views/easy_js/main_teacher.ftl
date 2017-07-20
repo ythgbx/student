@@ -44,6 +44,7 @@
                     "id": 3,
                     "text": "用户管理",
                     "iconCls" : "icon-add",
+                    "url" : "/page/adminConuser",
                 }
             ],
             lines: false,
